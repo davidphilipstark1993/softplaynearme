@@ -1,0 +1,206 @@
+/**
+ * Venue and City configuration for Soft Play Near Me
+ * Single source of truth for all soft play centre directory pages
+ */
+
+export interface CityConfig {
+  slug: string
+  name: string
+  county: string
+  metaTitle: string
+  metaDescription: string
+  h1: string
+  intro: string
+  nearbyAreas: string[]
+  faqs: {
+    question: string
+    answer: string
+  }[]
+}
+
+export interface FilterConfig {
+  slug: string
+  name: string
+  dbColumn: string
+  metaTitleTemplate: string
+  metaDescriptionTemplate: string
+  h1Template: string
+  introTemplate: string
+}
+
+// Available amenity filters
+export const filters: FilterConfig[] = [
+  {
+    slug: 'toddler',
+    name: 'Toddler Friendly',
+    dbColumn: 'toddler_area',
+    metaTitleTemplate: 'Toddler Soft Play in {city} | Under 3s & Baby Friendly',
+    metaDescriptionTemplate: 'Find toddler-friendly soft play centres in {city} with dedicated baby and under 3s areas. Safe play spaces for your little ones.',
+    h1Template: 'Toddler Soft Play in {city}',
+    introTemplate: 'Looking for soft play suitable for babies and toddlers in {city}? These venues have dedicated areas for under 3s with age-appropriate equipment.',
+  },
+  {
+    slug: 'birthday-parties',
+    name: 'Birthday Parties',
+    dbColumn: 'parties',
+    metaTitleTemplate: 'Soft Play Birthday Parties in {city} | Party Venues',
+    metaDescriptionTemplate: 'Book the perfect soft play birthday party in {city}. Compare venues with party packages, food options, and private hire.',
+    h1Template: 'Soft Play Birthday Parties in {city}',
+    introTemplate: 'Planning a birthday party in {city}? These soft play centres offer party packages, dedicated party rooms, and catering options.',
+  },
+  {
+    slug: 'sen-friendly',
+    name: 'SEN Friendly',
+    dbColumn: 'sen_friendly',
+    metaTitleTemplate: 'SEN Friendly Soft Play in {city} | Sensory Friendly Venues',
+    metaDescriptionTemplate: 'Find SEN-friendly soft play centres in {city} with quiet sessions, sensory rooms, and trained staff for children with additional needs.',
+    h1Template: 'SEN Friendly Soft Play in {city}',
+    introTemplate: 'These soft play centres in {city} cater to children with special educational needs and disabilities, offering quieter sessions and sensory-friendly facilities.',
+  },
+  {
+    slug: 'open-now',
+    name: 'Open Now',
+    dbColumn: null, // Computed from opening_hours
+    metaTitleTemplate: 'Soft Play Open Now in {city} | Open Today',
+    metaDescriptionTemplate: 'Find soft play centres open right now in {city}. Check opening times and visit today.',
+    h1Template: 'Soft Play Open Now in {city}',
+    introTemplate: 'Looking for somewhere to take the kids right now? Here are soft play centres currently open in {city}.',
+  },
+]
+
+// City configurations
+export const cities: CityConfig[] = [
+  {
+    slug: 'hull',
+    name: 'Hull',
+    county: 'East Yorkshire',
+    metaTitle: 'Soft Play in Hull | Best Soft Play Centres Near You',
+    metaDescription: 'Find the best soft play centres in Hull. Compare venues, check opening times, and find toddler-friendly play areas across Hull and East Yorkshire.',
+    h1: 'Soft Play Centres in Hull',
+    intro: 'Discover the best soft play centres in Hull and East Yorkshire. From toddler-friendly play areas to full-size adventure zones, find the perfect indoor play venue for your family.',
+    nearbyAreas: ['Beverley', 'Hessle', 'Cottingham', 'Anlaby', 'Willerby', 'Brough'],
+    faqs: [
+      {
+        question: 'What is the best soft play in Hull?',
+        answer: 'Hull has several excellent soft play centres catering to different age groups. The best choice depends on your children\'s ages and what facilities you need. Use our filters to find venues with cafes, party rooms, or dedicated toddler areas.',
+      },
+      {
+        question: 'How much does soft play cost in Hull?',
+        answer: 'Soft play prices in Hull typically range from £4-8 per child for a standard session. Many venues offer discounts for siblings, under 1s often go free, and off-peak sessions can be cheaper. Party packages start from around £10-15 per child.',
+      },
+      {
+        question: 'Are there soft play centres with SEN sessions in Hull?',
+        answer: 'Yes, several soft play centres in Hull offer dedicated SEN sessions with reduced numbers, lower music/lighting, and additional support. Check individual venue pages for their SEN provision and session times.',
+      },
+      {
+        question: 'Can I book soft play birthday parties in Hull?',
+        answer: 'Most soft play centres in Hull offer birthday party packages including exclusive use of party rooms, food, and dedicated play time. Packages typically include invitations, party bags, and a host. Book early as weekends fill up quickly.',
+      },
+    ],
+  },
+  {
+    slug: 'beverley',
+    name: 'Beverley',
+    county: 'East Yorkshire',
+    metaTitle: 'Soft Play in Beverley | Indoor Play Centres East Yorkshire',
+    metaDescription: 'Find soft play centres in Beverley, East Yorkshire. Compare indoor play venues, check opening times, and find activities for kids of all ages.',
+    h1: 'Soft Play Centres in Beverley',
+    intro: 'Looking for indoor play in Beverley? Browse our guide to soft play centres in the area, perfect for rainy days and birthday parties.',
+    nearbyAreas: ['Hull', 'Cottingham', 'Market Weighton', 'Driffield'],
+    faqs: [
+      {
+        question: 'Are there soft play centres in Beverley?',
+        answer: 'While Beverley has some indoor play options, many families also visit nearby soft play centres in Hull and Cottingham which are just a short drive away. Our directory shows all venues within easy reach.',
+      },
+      {
+        question: 'What age is soft play suitable for?',
+        answer: 'Most soft play centres welcome children from babies up to around 11-12 years old. Many have separate areas for under 3s/4s to ensure toddlers can play safely away from older children.',
+      },
+    ],
+  },
+  {
+    slug: 'york',
+    name: 'York',
+    county: 'North Yorkshire',
+    metaTitle: 'Soft Play in York | Best Indoor Play Centres',
+    metaDescription: 'Find the best soft play centres in York. Compare indoor play venues with cafes, party facilities, and toddler areas across York and North Yorkshire.',
+    h1: 'Soft Play Centres in York',
+    intro: 'Discover indoor play centres in York perfect for families. From adventure play to toddler zones, find soft play venues with great facilities.',
+    nearbyAreas: ['Tadcaster', 'Selby', 'Malton', 'Easingwold', 'Pocklington'],
+    faqs: [
+      {
+        question: 'What are the best soft play centres in York?',
+        answer: 'York has a good selection of soft play venues ranging from large adventure centres to smaller, more intimate play spaces. Browse our listings to compare facilities, prices, and reviews.',
+      },
+      {
+        question: 'Do soft play centres in York have cafes?',
+        answer: 'Most soft play centres in York have on-site cafes serving hot and cold drinks, snacks, and meals. Some also offer free WiFi so parents can work while children play.',
+      },
+    ],
+  },
+  {
+    slug: 'leeds',
+    name: 'Leeds',
+    county: 'West Yorkshire',
+    metaTitle: 'Soft Play in Leeds | Indoor Play Centres West Yorkshire',
+    metaDescription: 'Find soft play centres in Leeds and West Yorkshire. Compare venues with adventure play, toddler areas, and birthday party packages.',
+    h1: 'Soft Play Centres in Leeds',
+    intro: 'Looking for soft play in Leeds? Browse our comprehensive guide to indoor play centres across Leeds and West Yorkshire.',
+    nearbyAreas: ['Bradford', 'Wakefield', 'Huddersfield', 'Harrogate', 'Wetherby'],
+    faqs: [
+      {
+        question: 'How many soft play centres are there in Leeds?',
+        answer: 'Leeds and the surrounding area has numerous soft play options, from large chains to independent venues. Use our directory to find the one that best suits your needs.',
+      },
+    ],
+  },
+  {
+    slug: 'sheffield',
+    name: 'Sheffield',
+    county: 'South Yorkshire',
+    metaTitle: 'Soft Play in Sheffield | Indoor Play Centres South Yorkshire',
+    metaDescription: 'Find the best soft play centres in Sheffield. Compare indoor play venues, check facilities, and book birthday parties across South Yorkshire.',
+    h1: 'Soft Play Centres in Sheffield',
+    intro: 'Discover soft play centres in Sheffield perfect for all ages. From toddler play to adventure zones, find indoor fun for your family.',
+    nearbyAreas: ['Rotherham', 'Barnsley', 'Doncaster', 'Chesterfield'],
+    faqs: [
+      {
+        question: 'What soft play options are there in Sheffield?',
+        answer: 'Sheffield has a variety of soft play centres catering to different ages and preferences. Our directory helps you compare facilities, prices, and locations.',
+      },
+    ],
+  },
+]
+
+/**
+ * Get all city slugs for static generation
+ */
+export function getAllCitySlugs(): string[] {
+  return cities.map((city) => city.slug)
+}
+
+/**
+ * Get city config by slug
+ */
+export function getCityBySlug(slug: string): CityConfig | undefined {
+  return cities.find((city) => city.slug === slug)
+}
+
+/**
+ * Get filter config by slug
+ */
+export function getFilterBySlug(slug: string): FilterConfig | undefined {
+  return filters.find((filter) => filter.slug === slug)
+}
+
+/**
+ * Get nearby cities
+ */
+export function getNearbyCities(citySlug: string): CityConfig[] {
+  const city = getCityBySlug(citySlug)
+  if (!city) return []
+
+  return city.nearbyAreas
+    .map((area) => cities.find((c) => c.name.toLowerCase() === area.toLowerCase()))
+    .filter((c): c is CityConfig => c !== undefined)
+}
