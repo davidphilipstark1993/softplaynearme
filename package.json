@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "scrape:hull": "node scripts/scrape-hull-softplay.mjs",
+    "import:hull": "node scripts/import-softplay-to-neon.mjs",
+    "db:setup": "node scripts/setupDatabase.js",
+    "db:seed": "node scripts/seedHullVenues.js"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",
