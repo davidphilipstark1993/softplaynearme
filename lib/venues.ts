@@ -170,6 +170,26 @@ export const cities: CityConfig[] = [
       },
     ],
   },
+  {
+    slug: 'bridlington',
+    name: 'Bridlington',
+    county: 'East Yorkshire',
+    metaTitle: 'Soft Play in Bridlington | Indoor Play Centres East Yorkshire',
+    metaDescription: 'Find soft play centres in Bridlington. Browse indoor play venues, check facilities, and find activities for kids of all ages on the East Yorkshire coast.',
+    h1: 'Soft Play Centres in Bridlington',
+    intro: 'Looking for indoor play in Bridlington? Browse our guide to soft play centres in the area, perfect for rainy days at the seaside and birthday parties.',
+    nearbyAreas: ['Hull', 'Beverley', 'Driffield', 'Scarborough'],
+    faqs: [
+      {
+        question: 'Are there soft play centres in Bridlington?',
+        answer: 'Bridlington has indoor play options for families visiting the coast. Our directory shows all venues in the area including nearby options in Hull and Beverley.',
+      },
+      {
+        question: 'What is there to do with kids in Bridlington when it rains?',
+        answer: 'Soft play centres are perfect for rainy days in Bridlington. Many venues have cafes where parents can relax while children play safely indoors.',
+      },
+    ],
+  },
 ]
 
 /**
