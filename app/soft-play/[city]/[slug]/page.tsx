@@ -8,9 +8,13 @@ import {
   Star,
   ChevronRight,
   Home,
+  Phone,
+  Globe,
+  Navigation,
 } from 'lucide-react'
 import type { Metadata } from 'next'
 import { getPool } from '@/lib/pool'
+import { getStaticVenue, getStaticTownBySlug, type StaticVenue } from '@/lib/staticVenues'
 
 // Import new venue components
 import { PhotoGallery } from '@/components/venue/PhotoGallery'
@@ -93,6 +97,7 @@ interface Photo {
 }
 
 async function getVenue(citySlug: string, slug: string): Promise<Venue | null> {
+  // Try database first
   try {
     const pool = getPool()
     const client = await pool.connect()
@@ -101,14 +106,51 @@ async function getVenue(citySlug: string, slug: string): Promise<Venue | null> {
         'SELECT * FROM venues WHERE city_slug = $1 AND slug = $2',
         [citySlug, slug]
       )
-      return result.rows[0] || null
+      if (result.rows[0]) {
+        return result.rows[0]
+      }
     } finally {
       client.release()
     }
   } catch (error) {
-    console.error('Error fetching venue:', error)
-    return null
+    console.error('Database unavailable, falling back to static data:', error)
   }
+
+  // Fall back to static data
+  const staticVenue = getStaticVenue(citySlug, slug)
+  if (staticVenue) {
+    return staticToVenue(staticVenue)
+  }
+
+  return null
+}
+
+/**
+ * Convert static venue to database venue format
+ */
+function staticToVenue(sv: StaticVenue): Venue {
+  return {
+    id: 0,
+    name: sv.name,
+    slug: sv.slug,
+    city_slug: sv.townSlug,
+    address: sv.address,
+    postcode: sv.postcode,
+    phone: sv.phone || undefined,
+    website: sv.website || undefined,
+    description: sv.notes || undefined,
+    cafe: false,
+    parking: false,
+    parties: false,
+    toddler_area: false,
+    baby_area: false,
+    sen_friendly: false,
+    wheelchair_access: false,
+    free_wifi: false,
+    // Store maps URL for static venues
+    _mapsUrl: sv.mapsUrl,
+    _isStatic: true,
+  } as Venue & { _mapsUrl?: string; _isStatic?: boolean }
 }
 
 async function getReviews(venueId: number): Promise<Review[]> {
@@ -200,13 +242,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { city, slug } = await params
   const venue = await getVenue(city, slug)
   const cityConfig = getCityBySlug(city)
+  const staticTown = getStaticTownBySlug(city)
 
-  if (!venue || !cityConfig) {
+  if (!venue) {
     return { title: 'Venue Not Found | Soft Play Near Me' }
   }
 
-  const title = `${venue.name} | Soft Play in ${cityConfig.name}`
-  const description = venue.description || `Visit ${venue.name} soft play centre in ${cityConfig.name}. Check opening times, facilities, and reviews.`
+  const cityName = cityConfig?.name || staticTown?.name || city
+  const title = `${venue.name} | Soft Play in ${cityName}`
+  const description = venue.description || `Visit ${venue.name} soft play centre in ${cityName}. Check opening times, facilities, and reviews.`
 
   return {
     title,
@@ -228,10 +272,16 @@ export default async function VenuePage({ params }: PageProps) {
   const { city, slug } = await params
   const venue = await getVenue(city, slug)
   const cityConfig = getCityBySlug(city)
+  const staticTown = getStaticTownBySlug(city)
 
-  if (!venue || !cityConfig) {
+  if (!venue) {
     notFound()
   }
+
+  // Get city name from config or static data
+  const cityName = cityConfig?.name || staticTown?.name || city
+  const isStaticVenue = (venue as any)._isStatic === true
+  const staticMapsUrl = (venue as any)._mapsUrl as string | undefined
 
   // Fetch all related data in parallel
   const [reviews, pricing, sessions, photos] = await Promise.all([
@@ -254,7 +304,7 @@ export default async function VenuePage({ params }: PageProps) {
     address: {
       '@type': 'PostalAddress',
       streetAddress: venue.address,
-      addressLocality: cityConfig.name,
+      addressLocality: cityName,
       postalCode: venue.postcode,
       addressCountry: 'GB',
     },
@@ -297,7 +347,7 @@ export default async function VenuePage({ params }: PageProps) {
       {
         '@type': 'ListItem',
         position: 2,
-        name: `Soft Play in ${cityConfig.name}`,
+        name: `Soft Play in ${cityName}`,
         item: `https://www.softplaynearme.co.uk/soft-play/${city}`,
       },
       {
@@ -329,7 +379,7 @@ export default async function VenuePage({ params }: PageProps) {
             </Link>
             <div className="flex gap-4">
               <Link href={`/soft-play/${city}`}>
-                <Button variant="ghost">Back to {cityConfig.name}</Button>
+                <Button variant="ghost">Back to {cityName}</Button>
               </Link>
             </div>
           </div>
@@ -345,7 +395,7 @@ export default async function VenuePage({ params }: PageProps) {
               </Link>
               <ChevronRight className="w-4 h-4" />
               <Link href={`/soft-play/${city}`} className="hover:text-purple-600">
-                {cityConfig.name}
+                {cityName}
               </Link>
               <ChevronRight className="w-4 h-4" />
               <span className="text-slate-900 truncate">{venue.name}</span>

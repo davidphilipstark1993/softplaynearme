@@ -7,6 +7,7 @@ import { getCityBySlug, getAllCitySlugs, getNearbyCities, filters } from '@/lib/
 import { MapPin, Clock, Star, Coffee, Car, Baby, PartyPopper, Heart, ChevronRight, Phone, Globe } from 'lucide-react'
 import type { Metadata } from 'next'
 import { getPool } from '@/lib/pool'
+import { getStaticVenuesByTown, getStaticTownBySlug, getAllStaticTownSlugs, type StaticVenue } from '@/lib/staticVenues'
 
 interface PageProps {
   params: Promise<{ city: string }>
@@ -14,16 +15,42 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const slugs = getAllCitySlugs()
-  return slugs.map((city) => ({ city }))
+  // Combine database cities with static JSON towns
+  const dbSlugs = getAllCitySlugs()
+  const staticSlugs = getAllStaticTownSlugs()
+  const allSlugs = [...new Set([...dbSlugs, ...staticSlugs])]
+  return allSlugs.map((city) => ({ city }))
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { city } = await params
   const cityConfig = getCityBySlug(city)
 
+  // Check static data if no city config
   if (!cityConfig) {
-    return { title: 'City Not Found | Soft Play Near Me' }
+    const staticTown = getStaticTownBySlug(city)
+    if (!staticTown) {
+      return { title: 'City Not Found | Soft Play Near Me' }
+    }
+
+    // Generate metadata for static town
+    const title = `Soft Play in ${staticTown.name} | Soft Play Near Me`
+    const description = `Find soft play centres in ${staticTown.name}. Browse local indoor play venues, check facilities, and plan your visit.`
+
+    return {
+      title,
+      description,
+      openGraph: {
+        title,
+        description,
+        url: `https://www.softplaynearme.co.uk/soft-play/${city}`,
+        type: 'website',
+        siteName: 'Soft Play Near Me',
+      },
+      alternates: {
+        canonical: `https://www.softplaynearme.co.uk/soft-play/${city}`,
+      },
+    }
   }
 
   return {
@@ -43,7 +70,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 }
 
 interface Venue {
-  id: number
+  id?: number
   name: string
   slug: string
   address: string
@@ -51,17 +78,45 @@ interface Venue {
   phone?: string
   website?: string
   description?: string
-  cafe: boolean
-  parking: boolean
-  parties: boolean
-  toddler_area: boolean
-  baby_area: boolean
-  sen_friendly: boolean
+  cafe?: boolean
+  parking?: boolean
+  parties?: boolean
+  toddler_area?: boolean
+  baby_area?: boolean
+  sen_friendly?: boolean
   avg_rating?: number
   review_count?: number
+  // Static venue fields
+  mapsUrl?: string
+  notes?: string
+  isStatic?: boolean
+}
+
+/**
+ * Convert static venue to display venue format
+ */
+function staticToDisplayVenue(sv: StaticVenue): Venue {
+  return {
+    name: sv.name,
+    slug: sv.slug,
+    address: sv.address,
+    postcode: sv.postcode,
+    phone: sv.phone || undefined,
+    website: sv.website || undefined,
+    description: sv.notes || undefined,
+    mapsUrl: sv.mapsUrl || undefined,
+    cafe: false,
+    parking: false,
+    parties: false,
+    toddler_area: false,
+    baby_area: false,
+    sen_friendly: false,
+    isStatic: true
+  }
 }
 
 async function getVenues(citySlug: string, filter?: string, search?: string): Promise<Venue[]> {
+  // Try database first
   try {
     const pool = getPool()
     const client = await pool.connect()
@@ -99,27 +154,54 @@ async function getVenues(citySlug: string, filter?: string, search?: string): Pr
       query += ` GROUP BY v.id ORDER BY avg_rating DESC, review_count DESC, v.name ASC`
 
       const result = await client.query(query, params)
-      return result.rows
+
+      // If database has results, return them
+      if (result.rows.length > 0) {
+        return result.rows
+      }
     } finally {
       client.release()
     }
   } catch (error) {
-    console.error('Error fetching venues:', error)
-    return []
+    console.error('Database unavailable, falling back to static data:', error)
   }
+
+  // Fall back to static JSON data
+  const staticVenues = getStaticVenuesByTown(citySlug)
+  let venues = staticVenues.map(staticToDisplayVenue)
+
+  // Apply search filter to static data
+  if (search) {
+    const searchLower = search.toLowerCase()
+    venues = venues.filter(v =>
+      v.name.toLowerCase().includes(searchLower) ||
+      (v.description && v.description.toLowerCase().includes(searchLower))
+    )
+  }
+
+  return venues
 }
 
 export default async function CityPage({ params, searchParams }: PageProps) {
   const { city } = await params
   const { filter, search } = await searchParams
   const cityConfig = getCityBySlug(city)
+  const staticTown = getStaticTownBySlug(city)
 
-  if (!cityConfig) {
+  // Must have either city config or static town data
+  if (!cityConfig && !staticTown) {
     notFound()
   }
 
+  // Use city config values or generate from static town
+  const displayName = cityConfig?.name || staticTown?.name || city
+  const h1 = cityConfig?.h1 || `Soft Play in ${displayName}`
+  const intro = cityConfig?.intro || `Discover soft play centres in ${displayName}. Browse venues, check facilities, and find the perfect place for your family.`
+  const faqs = cityConfig?.faqs || []
+  const nearbyAreas = cityConfig?.nearbyAreas || []
+
   const venues = await getVenues(city, filter, search)
-  const nearbyCities = getNearbyCities(city)
+  const nearbyCities = cityConfig ? getNearbyCities(city) : []
 
   // Breadcrumb schema
   const breadcrumbSchema = {
@@ -135,17 +217,17 @@ export default async function CityPage({ params, searchParams }: PageProps) {
       {
         '@type': 'ListItem',
         position: 2,
-        name: `Soft Play in ${cityConfig.name}`,
+        name: `Soft Play in ${displayName}`,
         item: `https://www.softplaynearme.co.uk/soft-play/${city}`,
       },
     ],
   }
 
   // FAQ schema
-  const faqSchema = cityConfig.faqs.length > 0 ? {
+  const faqSchema = faqs.length > 0 ? {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: cityConfig.faqs.map((faq) => ({
+    mainEntity: faqs.map((faq) => ({
       '@type': 'Question',
       name: faq.question,
       acceptedAnswer: {
@@ -195,7 +277,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
             <nav className="flex items-center gap-2 text-sm text-slate-600">
               <Link href="/" className="hover:text-purple-600">Home</Link>
               <ChevronRight className="w-4 h-4" />
-              <span className="text-slate-900">Soft Play in {cityConfig.name}</span>
+              <span className="text-slate-900">Soft Play in {displayName}</span>
             </nav>
           </div>
         </div>
@@ -203,8 +285,8 @@ export default async function CityPage({ params, searchParams }: PageProps) {
         {/* Hero */}
         <div className="bg-gradient-to-br from-purple-600 to-pink-500 text-white py-12 px-4">
           <div className="max-w-7xl mx-auto">
-            <h1 className="text-3xl md:text-4xl font-bold mb-4">{cityConfig.h1}</h1>
-            <p className="text-purple-100 text-lg max-w-3xl">{cityConfig.intro}</p>
+            <h1 className="text-3xl md:text-4xl font-bold mb-4">{h1}</h1>
+            <p className="text-purple-100 text-lg max-w-3xl">{intro}</p>
           </div>
         </div>
 
@@ -239,7 +321,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
             <div className="text-center py-16">
               <div className="text-slate-400 text-6xl mb-4">🎈</div>
               <h3 className="text-xl font-semibold text-slate-700 mb-2">No venues found yet</h3>
-              <p className="text-slate-500 mb-6">We're still building our directory for {cityConfig.name}.</p>
+              <p className="text-slate-500 mb-6">We're still building our directory for {displayName}.</p>
               <Link href="/add-venue">
                 <Button className="bg-purple-600 hover:bg-purple-700">Add a Venue</Button>
               </Link>
@@ -319,7 +401,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
             <div className="mt-12">
               <h2 className="text-xl font-semibold mb-4">Nearby Areas</h2>
               <div className="flex flex-wrap gap-2">
-                {cityConfig.nearbyAreas.map((area) => {
+                {nearbyAreas.map((area) => {
                   const nearbyCity = nearbyCities.find(c => c.name === area)
                   if (nearbyCity) {
                     return (
@@ -341,11 +423,11 @@ export default async function CityPage({ params, searchParams }: PageProps) {
           )}
 
           {/* FAQs */}
-          {cityConfig.faqs.length > 0 && (
+          {faqs.length > 0 && (
             <div className="mt-12">
               <h2 className="text-xl font-semibold mb-6">Frequently Asked Questions</h2>
               <div className="space-y-4">
-                {cityConfig.faqs.map((faq, index) => (
+                {faqs.map((faq, index) => (
                   <div key={index} className="bg-white p-6 rounded-lg border border-slate-200">
                     <h3 className="font-semibold text-lg mb-2">{faq.question}</h3>
                     <p className="text-slate-600">{faq.answer}</p>
