@@ -1,47 +1,22 @@
 [
   {
-    "name": "Anlaby",
-    "slug": "anlaby",
-    "venueCount": 1
-  },
-  {
-    "name": "Beverley",
-    "slug": "beverley",
-    "venueCount": 1
-  },
-  {
     "name": "Bridlington",
     "slug": "bridlington",
-    "venueCount": 1
-  },
-  {
-    "name": "Cottingham",
-    "slug": "cottingham",
-    "venueCount": 1
-  },
-  {
-    "name": "Hessle",
-    "slug": "hessle",
-    "venueCount": 1
+    "venueCount": 7
   },
   {
     "name": "Hull",
     "slug": "hull",
-    "venueCount": 2
+    "venueCount": 64
   },
   {
     "name": "Leeds",
     "slug": "leeds",
-    "venueCount": 1
-  },
-  {
-    "name": "Sheffield",
-    "slug": "sheffield",
-    "venueCount": 1
+    "venueCount": 73
   },
   {
     "name": "York",
     "slug": "york",
-    "venueCount": 1
+    "venueCount": 92
   }
 ]
