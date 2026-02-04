@@ -1,12 +1,25 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Button } from '@/components/ui/button'
-import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { getCityBySlug } from '@/lib/venues'
-import { MapPin, Clock, Star, Coffee, Car, Baby, PartyPopper, Heart, ChevronRight, Phone, Globe, Accessibility, Wifi } from 'lucide-react'
+import {
+  MapPin,
+  Star,
+  ChevronRight,
+  Home,
+} from 'lucide-react'
 import type { Metadata } from 'next'
 import { getPool } from '@/lib/pool'
+
+// Import new venue components
+import { PhotoGallery } from '@/components/venue/PhotoGallery'
+import { PricingTable } from '@/components/venue/PricingTable'
+import { OpeningHours } from '@/components/venue/OpeningHours'
+import { VenueMap } from '@/components/venue/VenueMap'
+import { FacilitiesGrid, FacilitiesBadges } from '@/components/venue/FacilitiesGrid'
+import { SpecialSessions } from '@/components/venue/SpecialSessions'
+import { CTAButtons } from '@/components/venue/CTAButtons'
 
 interface PageProps {
   params: Promise<{ city: string; slug: string }>
@@ -25,8 +38,13 @@ interface Venue {
   website?: string
   booking_url?: string
   description?: string
-  opening_hours?: Record<string, { open: string; close: string }>
+  opening_hours?: Record<string, string>
   price_range?: string
+  price_from?: number
+  price_to?: number
+  facilities?: Record<string, boolean>
+  google_place_id?: string
+  featured?: boolean
   cafe: boolean
   parking: boolean
   parties: boolean
@@ -46,6 +64,32 @@ interface Review {
   rating: number
   comment: string
   created_at: string
+}
+
+interface PricingItem {
+  id: number
+  price_type: string
+  age_group: string
+  price: number
+  duration_minutes: number
+  notes: string
+}
+
+interface Session {
+  id: number
+  session_type: string
+  day_of_week: number
+  start_time: string
+  end_time: string
+  description: string
+  booking_required: boolean
+}
+
+interface Photo {
+  id: number
+  url: string
+  alt_text: string
+  is_primary: boolean
 }
 
 async function getVenue(citySlug: string, slug: string): Promise<Venue | null> {
@@ -86,6 +130,72 @@ async function getReviews(venueId: number): Promise<Review[]> {
   }
 }
 
+async function getPricing(venueId: number): Promise<PricingItem[]> {
+  try {
+    const pool = getPool()
+    const client = await pool.connect()
+    try {
+      const result = await client.query(
+        'SELECT * FROM venue_pricing WHERE venue_id = $1 ORDER BY price_type, age_group',
+        [venueId]
+      )
+      return result.rows
+    } catch (error) {
+      // Table might not exist yet
+      return []
+    } finally {
+      client.release()
+    }
+  } catch (error) {
+    console.error('Error fetching pricing:', error)
+    return []
+  }
+}
+
+async function getSessions(venueId: number): Promise<Session[]> {
+  try {
+    const pool = getPool()
+    const client = await pool.connect()
+    try {
+      const result = await client.query(
+        'SELECT * FROM venue_sessions WHERE venue_id = $1 ORDER BY session_type, day_of_week',
+        [venueId]
+      )
+      return result.rows
+    } catch (error) {
+      // Table might not exist yet
+      return []
+    } finally {
+      client.release()
+    }
+  } catch (error) {
+    console.error('Error fetching sessions:', error)
+    return []
+  }
+}
+
+async function getPhotos(venueId: number): Promise<Photo[]> {
+  try {
+    const pool = getPool()
+    const client = await pool.connect()
+    try {
+      const result = await client.query(
+        'SELECT * FROM venue_photos WHERE venue_id = $1 ORDER BY is_primary DESC, display_order ASC',
+        [venueId]
+      )
+      return result.rows
+    } catch (error) {
+      // Table might not exist yet
+      return []
+    } finally {
+      client.release()
+    }
+  } catch (error) {
+    console.error('Error fetching photos:', error)
+    return []
+  }
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { city, slug } = await params
   const venue = await getVenue(city, slug)
@@ -105,7 +215,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title,
       description,
       url: `https://www.softplaynearme.co.uk/soft-play/${city}/${slug}`,
-      type: 'place',
+      type: 'website',
       siteName: 'Soft Play Near Me',
     },
     alternates: {
@@ -123,7 +233,14 @@ export default async function VenuePage({ params }: PageProps) {
     notFound()
   }
 
-  const reviews = await getReviews(venue.id)
+  // Fetch all related data in parallel
+  const [reviews, pricing, sessions, photos] = await Promise.all([
+    getReviews(venue.id),
+    getPricing(venue.id),
+    getSessions(venue.id),
+    getPhotos(venue.id),
+  ])
+
   const avgRating = reviews.length > 0
     ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
     : 0
@@ -158,6 +275,11 @@ export default async function VenuePage({ params }: PageProps) {
         bestRating: 5,
         worstRating: 1,
       },
+    }),
+    ...(venue.price_from && {
+      priceRange: venue.price_to
+        ? `£${venue.price_from} - £${venue.price_to}`
+        : `From £${venue.price_from}`,
     }),
   }
 
@@ -203,7 +325,6 @@ export default async function VenuePage({ params }: PageProps) {
         <nav className="bg-white border-b border-slate-200 sticky top-0 z-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <Link href="/" className="flex items-center gap-2">
-              <div className="text-2xl">🎈</div>
               <span className="font-bold text-xl text-purple-600">Soft Play Near Me</span>
             </Link>
             <div className="flex gap-4">
@@ -218,10 +339,13 @@ export default async function VenuePage({ params }: PageProps) {
         <div className="bg-white border-b border-slate-100">
           <div className="max-w-7xl mx-auto px-4 py-3">
             <nav className="flex items-center gap-2 text-sm text-slate-600">
-              <Link href="/" className="hover:text-purple-600">Home</Link>
+              <Link href="/" className="hover:text-purple-600 flex items-center gap-1">
+                <Home className="w-4 h-4" />
+                Home
+              </Link>
               <ChevronRight className="w-4 h-4" />
               <Link href={`/soft-play/${city}`} className="hover:text-purple-600">
-                Soft Play in {cityConfig.name}
+                {cityConfig.name}
               </Link>
               <ChevronRight className="w-4 h-4" />
               <span className="text-slate-900 truncate">{venue.name}</span>
@@ -229,97 +353,134 @@ export default async function VenuePage({ params }: PageProps) {
           </div>
         </div>
 
-        {/* Main Content */}
-        <main className="max-w-7xl mx-auto px-4 py-8">
-          <div className="grid lg:grid-cols-3 gap-8">
-            {/* Main Column */}
-            <div className="lg:col-span-2">
-              {/* Header */}
-              <div className="bg-white rounded-lg border border-slate-200 p-6 mb-6">
-                <div className="flex justify-between items-start mb-4">
-                  <h1 className="text-3xl font-bold text-slate-900">{venue.name}</h1>
-                  {reviews.length > 0 && (
-                    <div className="flex items-center gap-1 bg-purple-50 px-3 py-2 rounded-lg">
-                      <Star className="w-5 h-5 text-purple-600 fill-current" />
-                      <span className="font-bold text-purple-700 text-lg">{avgRating.toFixed(1)}</span>
-                      <span className="text-slate-500 text-sm">({reviews.length})</span>
-                    </div>
+        {/* Hero Section with primary photo */}
+        <div className="bg-gradient-to-b from-purple-600 to-purple-700 py-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="text-white">
+                <div className="flex items-center gap-2 mb-2">
+                  {venue.featured && (
+                    <Badge className="bg-yellow-400 text-yellow-900">Featured</Badge>
                   )}
                 </div>
-
-                <div className="flex items-center gap-2 text-slate-600 mb-4">
-                  <MapPin className="w-5 h-5 text-slate-400" />
+                <h1 className="text-3xl md:text-4xl font-bold mb-2">{venue.name}</h1>
+                <div className="flex items-center gap-2 text-purple-100">
+                  <MapPin className="w-5 h-5" />
                   <span>{venue.address}, {venue.postcode}</span>
                 </div>
-
-                {/* Feature badges */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {venue.toddler_area && (
-                    <Badge className="bg-purple-100 text-purple-700 border-purple-200">
-                      <Baby className="w-3 h-3 mr-1" /> Toddler Area
-                    </Badge>
-                  )}
-                  {venue.baby_area && (
-                    <Badge className="bg-pink-100 text-pink-700 border-pink-200">
-                      <Baby className="w-3 h-3 mr-1" /> Baby Area
-                    </Badge>
-                  )}
-                  {venue.parties && (
-                    <Badge className="bg-orange-100 text-orange-700 border-orange-200">
-                      <PartyPopper className="w-3 h-3 mr-1" /> Birthday Parties
-                    </Badge>
-                  )}
-                  {venue.cafe && (
-                    <Badge className="bg-amber-100 text-amber-700 border-amber-200">
-                      <Coffee className="w-3 h-3 mr-1" /> Cafe
-                    </Badge>
-                  )}
-                  {venue.parking && (
-                    <Badge className="bg-blue-100 text-blue-700 border-blue-200">
-                      <Car className="w-3 h-3 mr-1" /> Free Parking
-                    </Badge>
-                  )}
-                  {venue.sen_friendly && (
-                    <Badge className="bg-green-100 text-green-700 border-green-200">
-                      <Heart className="w-3 h-3 mr-1" /> SEN Friendly
-                    </Badge>
-                  )}
-                  {venue.wheelchair_access && (
-                    <Badge className="bg-teal-100 text-teal-700 border-teal-200">
-                      <Accessibility className="w-3 h-3 mr-1" /> Wheelchair Access
-                    </Badge>
-                  )}
-                  {venue.free_wifi && (
-                    <Badge className="bg-slate-100 text-slate-700 border-slate-200">
-                      <Wifi className="w-3 h-3 mr-1" /> Free WiFi
-                    </Badge>
-                  )}
-                </div>
-
-                {venue.description && (
-                  <div>
-                    <h2 className="font-semibold text-lg mb-2">About</h2>
-                    <p className="text-slate-600 whitespace-pre-wrap">{venue.description}</p>
+                {reviews.length > 0 && (
+                  <div className="flex items-center gap-2 mt-3">
+                    <div className="flex">
+                      {[...Array(5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className={`w-5 h-5 ${
+                            i < Math.round(avgRating)
+                              ? 'text-yellow-400 fill-current'
+                              : 'text-purple-300'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                    <span className="font-semibold">{avgRating.toFixed(1)}</span>
+                    <span className="text-purple-200">({reviews.length} reviews)</span>
                   </div>
                 )}
               </div>
+              <div className="flex-shrink-0">
+                <CTAButtons
+                  name={venue.name}
+                  address={venue.address}
+                  postcode={venue.postcode}
+                  lat={venue.lat}
+                  lng={venue.lng}
+                  phone={venue.phone}
+                  website={venue.website}
+                  bookingUrl={venue.booking_url}
+                  googlePlaceId={venue.google_place_id}
+                  compact
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Photo Gallery */}
+        {photos.length > 0 && (
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-4 relative z-10">
+            <PhotoGallery photos={photos} venueName={venue.name} />
+          </div>
+        )}
+
+        {/* Main Content */}
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="grid lg:grid-cols-3 gap-8">
+            {/* Main Column */}
+            <div className="lg:col-span-2 space-y-6">
+              {/* Quick features */}
+              <FacilitiesBadges
+                facilities={venue.facilities}
+                cafe={venue.cafe}
+                parking={venue.parking}
+                parties={venue.parties}
+                toddlerArea={venue.toddler_area}
+                senFriendly={venue.sen_friendly}
+                wheelchairAccess={venue.wheelchair_access}
+              />
+
+              {/* About */}
+              {venue.description && (
+                <div className="bg-white rounded-lg border border-slate-200 p-6">
+                  <h2 className="font-semibold text-lg mb-3">About {venue.name}</h2>
+                  <p className="text-slate-600 whitespace-pre-wrap leading-relaxed">
+                    {venue.description}
+                  </p>
+                </div>
+              )}
+
+              {/* Facilities Grid */}
+              <FacilitiesGrid
+                facilities={venue.facilities}
+                cafe={venue.cafe}
+                parking={venue.parking}
+                parties={venue.parties}
+                toddlerArea={venue.toddler_area}
+                babyArea={venue.baby_area}
+                senFriendly={venue.sen_friendly}
+                wheelchairAccess={venue.wheelchair_access}
+                freeWifi={venue.free_wifi}
+              />
+
+              {/* Special Sessions */}
+              {sessions.length > 0 && <SpecialSessions sessions={sessions} />}
 
               {/* Reviews Section */}
               <div className="bg-white rounded-lg border border-slate-200 p-6">
-                <h2 className="font-semibold text-lg mb-4">Reviews</h2>
+                <h2 className="font-semibold text-lg mb-4">
+                  Reviews {reviews.length > 0 && `(${reviews.length})`}
+                </h2>
                 {reviews.length === 0 ? (
-                  <p className="text-slate-500 text-center py-8">No reviews yet. Be the first to review!</p>
+                  <p className="text-slate-500 text-center py-8">
+                    No reviews yet. Be the first to review!
+                  </p>
                 ) : (
                   <div className="space-y-4">
                     {reviews.map((review) => (
-                      <div key={review.id} className="border-b border-slate-100 pb-4 last:border-0">
+                      <div
+                        key={review.id}
+                        className="border-b border-slate-100 pb-4 last:border-0"
+                      >
                         <div className="flex justify-between items-center mb-2">
                           <span className="font-semibold">{review.reviewer_name}</span>
                           <div className="flex">
                             {[...Array(5)].map((_, i) => (
                               <Star
                                 key={i}
-                                className={`w-4 h-4 ${i < review.rating ? 'text-yellow-400 fill-current' : 'text-slate-200'}`}
+                                className={`w-4 h-4 ${
+                                  i < review.rating
+                                    ? 'text-yellow-400 fill-current'
+                                    : 'text-slate-200'
+                                }`}
                               />
                             ))}
                           </div>
@@ -340,95 +501,42 @@ export default async function VenuePage({ params }: PageProps) {
             </div>
 
             {/* Sidebar */}
-            <div className="lg:col-span-1">
-              {/* Contact Card */}
-              <Card className="p-6 mb-6">
-                <h3 className="font-semibold text-lg mb-4">Contact & Visit</h3>
-                <div className="space-y-3">
-                  {venue.phone && (
-                    <a
-                      href={`tel:${venue.phone}`}
-                      className="flex items-center gap-3 text-slate-600 hover:text-purple-600"
-                    >
-                      <Phone className="w-5 h-5" />
-                      {venue.phone}
-                    </a>
-                  )}
-                  {venue.website && (
-                    <a
-                      href={venue.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-3 text-slate-600 hover:text-purple-600"
-                    >
-                      <Globe className="w-5 h-5" />
-                      Visit Website
-                    </a>
-                  )}
-                  <div className="flex items-start gap-3 text-slate-600">
-                    <MapPin className="w-5 h-5 mt-0.5" />
-                    <div>
-                      <p>{venue.address}</p>
-                      <p>{venue.postcode}</p>
-                    </div>
-                  </div>
-                </div>
+            <div className="lg:col-span-1 space-y-6">
+              {/* Sticky sidebar wrapper */}
+              <div className="lg:sticky lg:top-24 space-y-6">
+                {/* Map */}
+                <VenueMap
+                  name={venue.name}
+                  address={venue.address}
+                  postcode={venue.postcode}
+                  lat={venue.lat ?? null}
+                  lng={venue.lng ?? null}
+                  googlePlaceId={venue.google_place_id}
+                />
 
-                {venue.booking_url && (
-                  <a href={venue.booking_url} target="_blank" rel="noopener noreferrer">
-                    <Button className="w-full mt-4 bg-purple-600 hover:bg-purple-700">
-                      Book Now
-                    </Button>
-                  </a>
-                )}
+                {/* CTA Buttons (full version for sidebar) */}
+                <CTAButtons
+                  name={venue.name}
+                  address={venue.address}
+                  postcode={venue.postcode}
+                  lat={venue.lat}
+                  lng={venue.lng}
+                  phone={venue.phone}
+                  website={venue.website}
+                  bookingUrl={venue.booking_url}
+                  googlePlaceId={venue.google_place_id}
+                />
 
-                {venue.lat && venue.lng && (
-                  <a
-                    href={`https://www.google.com/maps/search/?api=1&query=${venue.lat},${venue.lng}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Button variant="outline" className="w-full mt-2">
-                      Get Directions
-                    </Button>
-                  </a>
-                )}
-              </Card>
+                {/* Pricing */}
+                <PricingTable
+                  pricing={pricing}
+                  priceFrom={venue.price_from}
+                  priceTo={venue.price_to}
+                />
 
-              {/* Opening Hours */}
-              {venue.opening_hours && (
-                <Card className="p-6 mb-6">
-                  <h3 className="font-semibold text-lg mb-4 flex items-center gap-2">
-                    <Clock className="w-5 h-5" />
-                    Opening Hours
-                  </h3>
-                  <div className="space-y-2 text-sm">
-                    {['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'].map((day) => {
-                      const hours = venue.opening_hours?.[day]
-                      const isToday = new Date().toLocaleDateString('en-GB', { weekday: 'long' }).toLowerCase() === day
-                      return (
-                        <div
-                          key={day}
-                          className={`flex justify-between ${isToday ? 'font-semibold text-purple-600' : 'text-slate-600'}`}
-                        >
-                          <span className="capitalize">{day}</span>
-                          <span>
-                            {hours?.open === 'closed' ? 'Closed' : hours ? `${hours.open} - ${hours.close}` : '-'}
-                          </span>
-                        </div>
-                      )
-                    })}
-                  </div>
-                </Card>
-              )}
-
-              {/* Price Range */}
-              {venue.price_range && (
-                <Card className="p-6">
-                  <h3 className="font-semibold text-lg mb-2">Price Range</h3>
-                  <p className="text-slate-600">{venue.price_range}</p>
-                </Card>
-              )}
+                {/* Opening Hours */}
+                <OpeningHours hours={venue.opening_hours ?? null} />
+              </div>
             </div>
           </div>
         </main>

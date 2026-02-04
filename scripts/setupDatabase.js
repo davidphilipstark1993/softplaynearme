@@ -41,6 +41,11 @@ async function setupDatabase() {
         last_verified_at TIMESTAMP,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        facilities JSONB DEFAULT '{}',
+        price_from DECIMAL(6,2),
+        price_to DECIMAL(6,2),
+        google_place_id VARCHAR(255),
+        featured BOOLEAN DEFAULT false,
         UNIQUE(city_slug, slug)
       );
     `)
@@ -61,10 +66,59 @@ async function setupDatabase() {
     `)
     console.log('Reviews table created!')
 
+    // Create venue_pricing table
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS venue_pricing (
+        id SERIAL PRIMARY KEY,
+        venue_id INTEGER REFERENCES venues(id) ON DELETE CASCADE,
+        price_type VARCHAR(50),
+        age_group VARCHAR(50),
+        price DECIMAL(6,2),
+        duration_minutes INTEGER,
+        notes TEXT,
+        created_at TIMESTAMP DEFAULT NOW()
+      );
+    `)
+    console.log('Venue pricing table created!')
+
+    // Create venue_sessions table
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS venue_sessions (
+        id SERIAL PRIMARY KEY,
+        venue_id INTEGER REFERENCES venues(id) ON DELETE CASCADE,
+        session_type VARCHAR(50),
+        day_of_week INTEGER,
+        start_time TIME,
+        end_time TIME,
+        description TEXT,
+        booking_required BOOLEAN DEFAULT false
+      );
+    `)
+    console.log('Venue sessions table created!')
+
+    // Create venue_photos table
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS venue_photos (
+        id SERIAL PRIMARY KEY,
+        venue_id INTEGER REFERENCES venues(id) ON DELETE CASCADE,
+        url VARCHAR(500),
+        alt_text VARCHAR(255),
+        is_primary BOOLEAN DEFAULT false,
+        display_order INTEGER DEFAULT 0,
+        created_at TIMESTAMP DEFAULT NOW()
+      );
+    `)
+    console.log('Venue photos table created!')
+
     // Create indexes
     await client.query(`CREATE INDEX IF NOT EXISTS idx_venues_city_slug ON venues(city_slug);`)
     await client.query(`CREATE INDEX IF NOT EXISTS idx_venues_slug ON venues(slug);`)
     await client.query(`CREATE INDEX IF NOT EXISTS idx_reviews_venue_id ON reviews(venue_id);`)
+    await client.query(`CREATE INDEX IF NOT EXISTS idx_venue_pricing_venue_id ON venue_pricing(venue_id);`)
+    await client.query(`CREATE INDEX IF NOT EXISTS idx_venue_sessions_venue_id ON venue_sessions(venue_id);`)
+    await client.query(`CREATE INDEX IF NOT EXISTS idx_venue_photos_venue_id ON venue_photos(venue_id);`)
+    await client.query(`CREATE INDEX IF NOT EXISTS idx_venues_lat_lng ON venues(lat, lng);`)
+    await client.query(`CREATE INDEX IF NOT EXISTS idx_venues_featured ON venues(featured);`)
     console.log('Indexes created!')
 
     console.log('\nDatabase setup complete!')

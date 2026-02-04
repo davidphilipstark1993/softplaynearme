@@ -1,32 +1,41 @@
-'use client';
+'use client'
 
-import { useState } from 'react';
-import { Search, MapPin, Clock, Baby, PartyPopper, Heart, Coffee, Car, Accessibility } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Card } from '@/components/ui/card';
-import Link from 'next/link';
-import { cities } from '@/lib/venues';
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { Search, MapPin, Clock, Baby, PartyPopper, Heart, Coffee, Car } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
+import Link from 'next/link'
+import { cities } from '@/lib/venues'
+import { SearchForm } from '@/components/search/SearchForm'
+import { isValidUKPostcode } from '@/lib/geo'
 
 export default function Home() {
-  const [searchTerm, setSearchTerm] = useState('');
+  const router = useRouter()
+  const [searchTerm, setSearchTerm] = useState('')
 
   const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
     if (searchTerm.trim()) {
+      // Check if it's a postcode
+      if (isValidUKPostcode(searchTerm.trim())) {
+        router.push(`/search?q=${encodeURIComponent(searchTerm.trim())}&radius=10`)
+        return
+      }
+
       // Try to find a matching city
       const cityMatch = cities.find(
         c => c.name.toLowerCase() === searchTerm.toLowerCase() ||
              c.slug === searchTerm.toLowerCase()
-      );
+      )
       if (cityMatch) {
-        window.location.href = `/soft-play/${cityMatch.slug}`;
+        router.push(`/soft-play/${cityMatch.slug}`)
       } else {
-        // Default to search in Hull for now
-        window.location.href = `/soft-play/hull?search=${encodeURIComponent(searchTerm)}`;
+        // Try postcode search
+        router.push(`/search?q=${encodeURIComponent(searchTerm.trim())}&radius=10`)
       }
     }
-  };
+  }
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
@@ -34,11 +43,10 @@ export default function Home() {
       <nav className="bg-white border-b border-slate-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <div className="text-2xl">🎈</div>
             <span className="font-bold text-xl text-purple-600">Soft Play Near Me</span>
           </Link>
-          <div className="flex gap-4">
-            <Link href="/soft-play/hull">
+          <div className="hidden sm:flex gap-4">
+            <Link href="/search">
               <Button variant="ghost">Find Soft Play</Button>
             </Link>
             <Link href="/about">
@@ -54,28 +62,30 @@ export default function Home() {
       </nav>
 
       {/* Hero */}
-      <div className="bg-gradient-to-br from-purple-600 via-purple-500 to-pink-500 text-white py-20 px-4">
+      <div className="bg-gradient-to-br from-purple-600 via-purple-500 to-pink-500 text-white py-16 sm:py-20 px-4">
         <div className="max-w-3xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">Find the Best Soft Play Centres Near You</h1>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
+            Find the Best Soft Play Centres Near You
+          </h1>
           <p className="text-purple-100 text-lg mb-8">
             Discover indoor play centres across the UK. Compare venues, check opening times, and find the perfect place for your family.
           </p>
 
-          <form onSubmit={handleSearch} className="flex gap-2 max-w-xl mx-auto bg-white p-2 rounded-lg shadow-lg">
-            <Search className="text-slate-400 w-6 h-6 my-auto ml-2" />
-            <Input
-              className="border-0 focus-visible:ring-0 text-slate-900 placeholder:text-slate-400 h-12 text-lg"
-              placeholder="Enter your city or town..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+          {/* Enhanced Search Form */}
+          <div className="bg-white rounded-xl p-4 shadow-lg max-w-2xl mx-auto">
+            <SearchForm
+              showRadius={true}
+              defaultRadius={10}
             />
-            <Button type="submit" className="bg-purple-600 hover:bg-purple-700 h-12 px-6">
-              Search
-            </Button>
-          </form>
+          </div>
 
-          <p className="text-purple-200 text-sm mt-4">
-            Popular: <Link href="/soft-play/hull" className="underline hover:text-white">Hull</Link> · <Link href="/soft-play/york" className="underline hover:text-white">York</Link> · <Link href="/soft-play/leeds" className="underline hover:text-white">Leeds</Link> · <Link href="/soft-play/sheffield" className="underline hover:text-white">Sheffield</Link>
+          {/* Quick city links */}
+          <p className="text-purple-200 text-sm mt-6">
+            Popular:{' '}
+            <Link href="/soft-play/hull" className="underline hover:text-white">Hull</Link> ·{' '}
+            <Link href="/soft-play/york" className="underline hover:text-white">York</Link> ·{' '}
+            <Link href="/soft-play/leeds" className="underline hover:text-white">Leeds</Link> ·{' '}
+            <Link href="/soft-play/sheffield" className="underline hover:text-white">Sheffield</Link>
           </p>
         </div>
       </div>
@@ -86,37 +96,37 @@ export default function Home() {
           <h2 className="text-2xl font-bold text-slate-900 mb-2 text-center">What are you looking for?</h2>
           <p className="text-slate-600 text-center mb-8">Filter by what matters most to your family</p>
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-            <Link href="/soft-play/hull/open-now" className="group">
+            <Link href="/search?filters=open_now" className="group">
               <Card className="p-4 text-center hover:shadow-lg hover:border-purple-300 transition-all">
                 <Clock className="w-8 h-8 mx-auto mb-2 text-purple-600" />
                 <h3 className="font-semibold text-slate-900 group-hover:text-purple-600">Open Now</h3>
               </Card>
             </Link>
-            <Link href="/soft-play/hull/toddler" className="group">
+            <Link href="/search?filters=toddler" className="group">
               <Card className="p-4 text-center hover:shadow-lg hover:border-purple-300 transition-all">
                 <Baby className="w-8 h-8 mx-auto mb-2 text-purple-600" />
                 <h3 className="font-semibold text-slate-900 group-hover:text-purple-600">Toddler Friendly</h3>
               </Card>
             </Link>
-            <Link href="/soft-play/hull/birthday-parties" className="group">
+            <Link href="/search?filters=parties" className="group">
               <Card className="p-4 text-center hover:shadow-lg hover:border-purple-300 transition-all">
                 <PartyPopper className="w-8 h-8 mx-auto mb-2 text-purple-600" />
                 <h3 className="font-semibold text-slate-900 group-hover:text-purple-600">Birthday Parties</h3>
               </Card>
             </Link>
-            <Link href="/soft-play/hull/sen-friendly" className="group">
+            <Link href="/search?filters=sen" className="group">
               <Card className="p-4 text-center hover:shadow-lg hover:border-purple-300 transition-all">
                 <Heart className="w-8 h-8 mx-auto mb-2 text-purple-600" />
                 <h3 className="font-semibold text-slate-900 group-hover:text-purple-600">SEN Friendly</h3>
               </Card>
             </Link>
-            <Link href="/soft-play/hull?filter=cafe" className="group">
+            <Link href="/search?filters=cafe" className="group">
               <Card className="p-4 text-center hover:shadow-lg hover:border-purple-300 transition-all">
                 <Coffee className="w-8 h-8 mx-auto mb-2 text-purple-600" />
                 <h3 className="font-semibold text-slate-900 group-hover:text-purple-600">Has Cafe</h3>
               </Card>
             </Link>
-            <Link href="/soft-play/hull?filter=parking" className="group">
+            <Link href="/search?filters=parking" className="group">
               <Card className="p-4 text-center hover:shadow-lg hover:border-purple-300 transition-all">
                 <Car className="w-8 h-8 mx-auto mb-2 text-purple-600" />
                 <h3 className="font-semibold text-slate-900 group-hover:text-purple-600">Free Parking</h3>
@@ -155,7 +165,7 @@ export default function Home() {
                 <Search className="w-8 h-8 text-purple-600" />
               </div>
               <h3 className="font-semibold text-lg mb-2">Easy to Search</h3>
-              <p className="text-slate-600">Find soft play centres by location, facilities, or special features like SEN sessions and toddler areas.</p>
+              <p className="text-slate-600">Find soft play centres by postcode or location. Filter by facilities, distance, and special features.</p>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -206,10 +216,9 @@ export default function Home() {
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <div className="text-2xl">🎈</div>
                 <span className="font-bold text-lg text-white">Soft Play Near Me</span>
               </div>
-              <p className="text-sm">Helping UK families find the best soft play centres since 2026.</p>
+              <p className="text-sm">Helping UK families find the best soft play centres since 2025.</p>
             </div>
             <div>
               <h4 className="font-semibold text-white mb-4">Popular Cities</h4>
@@ -223,9 +232,9 @@ export default function Home() {
             <div>
               <h4 className="font-semibold text-white mb-4">Quick Links</h4>
               <ul className="space-y-2 text-sm">
-                <li><Link href="/soft-play/hull/toddler" className="hover:text-white">Toddler Soft Play</Link></li>
-                <li><Link href="/soft-play/hull/birthday-parties" className="hover:text-white">Birthday Parties</Link></li>
-                <li><Link href="/soft-play/hull/sen-friendly" className="hover:text-white">SEN Friendly</Link></li>
+                <li><Link href="/search?filters=toddler" className="hover:text-white">Toddler Soft Play</Link></li>
+                <li><Link href="/search?filters=parties" className="hover:text-white">Birthday Parties</Link></li>
+                <li><Link href="/search?filters=sen" className="hover:text-white">SEN Friendly</Link></li>
                 <li><Link href="/add-venue" className="hover:text-white">Add Your Venue</Link></li>
               </ul>
             </div>
@@ -244,5 +253,5 @@ export default function Home() {
         </div>
       </footer>
     </div>
-  );
+  )
 }

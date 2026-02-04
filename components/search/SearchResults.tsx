@@ -1,0 +1,245 @@
+import Link from 'next/link'
+import { Card, CardContent } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import {
+  MapPin,
+  Star,
+  Coffee,
+  Car,
+  Cake,
+  Baby,
+  Heart,
+  Accessibility,
+  Navigation,
+} from 'lucide-react'
+import { formatDistance } from '@/lib/geo'
+import { cn } from '@/lib/utils'
+
+interface VenueResult {
+  id: number
+  name: string
+  slug: string
+  city_slug: string
+  address: string
+  postcode: string
+  description: string | null
+  price_from: number | null
+  price_to: number | null
+  price_range: string | null
+  cafe: boolean
+  parking: boolean
+  parties: boolean
+  toddler_area: boolean
+  sen_friendly: boolean
+  wheelchair_access: boolean
+  avg_rating: number | null
+  review_count: number
+  distance?: number
+}
+
+interface SearchResultsProps {
+  venues: VenueResult[]
+  isLoading?: boolean
+  showDistance?: boolean
+  className?: string
+}
+
+const FEATURE_BADGES = [
+  { key: 'toddler_area', label: 'Toddler', icon: Baby },
+  { key: 'parties', label: 'Parties', icon: Cake },
+  { key: 'cafe', label: 'Cafe', icon: Coffee },
+  { key: 'parking', label: 'Parking', icon: Car },
+  { key: 'sen_friendly', label: 'SEN', icon: Heart },
+  { key: 'wheelchair_access', label: 'Accessible', icon: Accessibility },
+]
+
+function VenueCard({
+  venue,
+  showDistance,
+}: {
+  venue: VenueResult
+  showDistance: boolean
+}) {
+  const activeFeatures = FEATURE_BADGES.filter(
+    (f) => venue[f.key as keyof VenueResult]
+  ).slice(0, 4)
+
+  const priceDisplay =
+    venue.price_from && venue.price_to
+      ? `£${Number(venue.price_from).toFixed(0)} - £${Number(venue.price_to).toFixed(0)}`
+      : venue.price_from
+        ? `From £${Number(venue.price_from).toFixed(0)}`
+        : venue.price_range || null
+
+  return (
+    <Card className="hover:shadow-md transition-shadow">
+      <CardContent className="p-4 sm:p-6">
+        <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+          {/* Main content */}
+          <div className="flex-1 min-w-0">
+            {/* Header */}
+            <div className="flex items-start justify-between gap-2 mb-2">
+              <Link
+                href={`/soft-play/${venue.city_slug}/${venue.slug}`}
+                className="hover:text-purple-600 transition-colors"
+              >
+                <h3 className="font-semibold text-lg leading-tight">{venue.name}</h3>
+              </Link>
+              {venue.avg_rating && (
+                <div className="flex items-center gap-1 text-sm flex-shrink-0">
+                  <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                  <span className="font-medium">{Number(venue.avg_rating).toFixed(1)}</span>
+                  <span className="text-muted-foreground">
+                    ({venue.review_count})
+                  </span>
+                </div>
+              )}
+            </div>
+
+            {/* Location */}
+            <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
+              <MapPin className="h-4 w-4 flex-shrink-0" />
+              <span>{venue.postcode}</span>
+              {showDistance && venue.distance !== undefined && (
+                <Badge variant="secondary" className="ml-auto">
+                  {formatDistance(venue.distance)}
+                </Badge>
+              )}
+            </div>
+
+            {/* Description */}
+            {venue.description && (
+              <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
+                {venue.description}
+              </p>
+            )}
+
+            {/* Features */}
+            <div className="flex flex-wrap gap-1.5">
+              {activeFeatures.map((feature) => {
+                const Icon = feature.icon
+                return (
+                  <span
+                    key={feature.key}
+                    className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-muted text-xs font-medium"
+                  >
+                    <Icon className="h-3 w-3" />
+                    {feature.label}
+                  </span>
+                )
+              })}
+            </div>
+          </div>
+
+          {/* Right side - Price and CTA */}
+          <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-start gap-2 sm:gap-3 sm:ml-4">
+            {priceDisplay && (
+              <div className="text-right">
+                <p className="text-lg font-bold text-purple-600">{priceDisplay}</p>
+                <p className="text-xs text-muted-foreground">per child</p>
+              </div>
+            )}
+            <div className="flex gap-2">
+              {showDistance && venue.distance !== undefined && (
+                <Button variant="outline" size="sm" asChild>
+                  <a
+                    href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${venue.address}, ${venue.postcode}`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Navigation className="h-4 w-4" />
+                  </a>
+                </Button>
+              )}
+              <Button size="sm" asChild>
+                <Link href={`/soft-play/${venue.city_slug}/${venue.slug}`}>
+                  View Details
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
+
+// Loading skeleton
+function VenueCardSkeleton() {
+  return (
+    <Card>
+      <CardContent className="p-4 sm:p-6">
+        <div className="animate-pulse space-y-3">
+          <div className="flex justify-between">
+            <div className="h-6 bg-muted rounded w-1/3" />
+            <div className="h-5 bg-muted rounded w-16" />
+          </div>
+          <div className="h-4 bg-muted rounded w-1/4" />
+          <div className="h-4 bg-muted rounded w-full" />
+          <div className="h-4 bg-muted rounded w-2/3" />
+          <div className="flex gap-2">
+            <div className="h-6 bg-muted rounded w-16" />
+            <div className="h-6 bg-muted rounded w-16" />
+            <div className="h-6 bg-muted rounded w-16" />
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
+
+// No results state
+function NoResults({ searchTerm }: { searchTerm?: string }) {
+  return (
+    <Card>
+      <CardContent className="py-12 text-center">
+        <MapPin className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+        <h3 className="text-lg font-semibold mb-2">No venues found</h3>
+        <p className="text-muted-foreground mb-4">
+          {searchTerm
+            ? `We couldn't find any soft play venues near "${searchTerm}".`
+            : "We couldn't find any soft play venues matching your search."}
+        </p>
+        <p className="text-sm text-muted-foreground">
+          Try adjusting your filters, increasing the search radius, or searching a different location.
+        </p>
+      </CardContent>
+    </Card>
+  )
+}
+
+export function SearchResults({
+  venues,
+  isLoading = false,
+  showDistance = false,
+  className,
+}: SearchResultsProps) {
+  if (isLoading) {
+    return (
+      <div className={cn('space-y-4', className)}>
+        {[...Array(3)].map((_, i) => (
+          <VenueCardSkeleton key={i} />
+        ))}
+      </div>
+    )
+  }
+
+  if (venues.length === 0) {
+    return <NoResults />
+  }
+
+  return (
+    <div className={cn('space-y-4', className)}>
+      {/* Results count */}
+      <p className="text-sm text-muted-foreground">
+        {venues.length} venue{venues.length !== 1 ? 's' : ''} found
+      </p>
+
+      {/* Venue list */}
+      {venues.map((venue) => (
+        <VenueCard key={venue.id} venue={venue} showDistance={showDistance} />
+      ))}
+    </div>
+  )
+}

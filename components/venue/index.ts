@@ -1,0 +1,7 @@
+export { PhotoGallery } from './PhotoGallery'
+export { PricingTable } from './PricingTable'
+export { OpeningHours } from './OpeningHours'
+export { VenueMap } from './VenueMap'
+export { FacilitiesGrid, FacilitiesBadges } from './FacilitiesGrid'
+export { SpecialSessions } from './SpecialSessions'
+export { CTAButtons } from './CTAButtons'
