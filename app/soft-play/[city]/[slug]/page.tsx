@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card } from '@/components/ui/card'
-import { getCityBySlug } from '@/lib/venues'
+import { getCityBySlug, getAllCitySlugs } from '@/lib/venues'
 import {
   MapPin,
   Star,
@@ -11,10 +11,12 @@ import {
 } from 'lucide-react'
 import type { Metadata } from 'next'
 import { getPool } from '@/lib/pool'
-import { getStaticVenue, getStaticTownBySlug, getStaticVenuesByTown, type StaticVenue } from '@/lib/staticVenues'
+import { getStaticVenue, getStaticTownBySlug, getStaticVenuesByTown, getAllStaticTownSlugs, type StaticVenue } from '@/lib/staticVenues'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
+import { buildLocalBusinessSchema, buildBreadcrumbSchema } from '@/lib/schema'
+import { JsonLd } from '@/components/seo/JsonLd'
 
 import { PhotoGallery } from '@/components/venue/PhotoGallery'
 import { PricingTable } from '@/components/venue/PricingTable'
@@ -224,6 +226,43 @@ async function getPhotos(venueId: number): Promise<Photo[]> {
   }
 }
 
+/** Pre-render venue pages from static data */
+export async function generateStaticParams() {
+  const params: { city: string; slug: string }[] = []
+
+  // From DB
+  try {
+    const pool = getPool()
+    const client = await pool.connect()
+    try {
+      const result = await client.query('SELECT city_slug, slug FROM venues')
+      for (const row of result.rows) {
+        params.push({ city: row.city_slug, slug: row.slug })
+      }
+    } finally {
+      client.release()
+    }
+  } catch {
+    // DB unavailable – use static data below
+  }
+
+  // From static JSON (deduplicated)
+  const seen = new Set(params.map((p) => `${p.city}/${p.slug}`))
+  const allTowns = getAllStaticTownSlugs()
+  for (const townSlug of allTowns) {
+    const venues = getStaticVenuesByTown(townSlug)
+    for (const v of venues) {
+      const key = `${townSlug}/${v.slug}`
+      if (!seen.has(key)) {
+        params.push({ city: townSlug, slug: v.slug })
+        seen.add(key)
+      }
+    }
+  }
+
+  return params
+}
+
 /** Get nearby venues in the same city (excluding this one) */
 async function getNearbyVenues(citySlug: string, excludeSlug: string): Promise<{ name: string; slug: string; postcode: string }[]> {
   try {
@@ -260,7 +299,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const cityName = cityConfig?.name || staticTown?.name || city
-  const title = `${venue.name} Soft Play in ${cityName} | Opening Times, Prices, Directions`
+  const title = `${venue.name} - Soft Play in ${cityName}`
   const description = venue.description
     || `Visit ${venue.name} soft play centre in ${cityName}. Check opening times, facilities, prices, and get directions.`
 
@@ -312,80 +351,40 @@ export default async function VenuePage({ params }: PageProps) {
     ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
     : 0
 
-  // LocalBusiness schema
-  const localBusinessSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'SportsActivityLocation',
+  const baseUrl = 'https://www.softplaynearme.co.uk'
+
+  // LocalBusiness schema – uses reusable builder from lib/schema.ts
+  const localBusinessSchema = buildLocalBusinessSchema({
     name: venue.name,
     description: venue.description,
-    address: {
-      '@type': 'PostalAddress',
-      streetAddress: venue.address,
-      addressLocality: cityName,
-      postalCode: venue.postcode,
-      addressCountry: 'GB',
-    },
-    ...(venue.phone && { telephone: venue.phone }),
-    ...(venue.website && { url: venue.website }),
-    ...(venue.lat && venue.lng && {
-      geo: {
-        '@type': 'GeoCoordinates',
-        latitude: venue.lat,
-        longitude: venue.lng,
-      },
-    }),
-    ...(reviews.length > 0 && {
-      aggregateRating: {
-        '@type': 'AggregateRating',
-        ratingValue: avgRating.toFixed(1),
-        reviewCount: reviews.length,
-        bestRating: 5,
-        worstRating: 1,
-      },
-    }),
-    ...(venue.price_from && {
-      priceRange: venue.price_to
-        ? `\u00A3${venue.price_from} - \u00A3${venue.price_to}`
-        : `From \u00A3${venue.price_from}`,
-    }),
-  }
+    address: venue.address,
+    city: cityName,
+    postcode: venue.postcode,
+    phone: venue.phone,
+    website: venue.website,
+    lat: venue.lat,
+    lng: venue.lng,
+    openingHours: venue.opening_hours,
+    priceFrom: venue.price_from,
+    priceTo: venue.price_to,
+    avgRating: avgRating > 0 ? avgRating : undefined,
+    reviewCount: reviews.length > 0 ? reviews.length : undefined,
+    imageUrl: photos.length > 0 ? photos[0].url : undefined,
+    citySlug: city,
+    venueSlug: slug,
+  })
 
-  // Breadcrumb schema
-  const breadcrumbSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: 'https://www.softplaynearme.co.uk',
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: `Soft Play in ${cityName}`,
-        item: `https://www.softplaynearme.co.uk/soft-play/${city}`,
-      },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: venue.name,
-        item: `https://www.softplaynearme.co.uk/soft-play/${city}/${slug}`,
-      },
-    ],
-  }
+  // Breadcrumb schema – uses reusable builder
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: 'Home', url: baseUrl },
+    { name: `Soft Play in ${cityName}`, url: `${baseUrl}/soft-play/${city}` },
+    { name: venue.name, url: `${baseUrl}/soft-play/${city}/${slug}` },
+  ])
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
+      <JsonLd data={localBusinessSchema} />
+      <JsonLd data={breadcrumbSchema} />
 
       <div className="min-h-screen bg-slate-50">
         <Header backLink={{ href: `/soft-play/${city}`, label: cityName }} />

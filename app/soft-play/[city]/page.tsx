@@ -11,6 +11,8 @@ import { getStaticVenuesByTown, getStaticTownBySlug, getAllStaticTownSlugs, type
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
+import { buildBreadcrumbSchema, buildFAQSchema } from '@/lib/schema'
+import { JsonLd } from '@/components/seo/JsonLd'
 
 interface PageProps {
   params: Promise<{ city: string }>
@@ -34,8 +36,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       return { title: 'City Not Found | Soft Play Near Me' }
     }
 
-    const title = `Soft Play Near ${staticTown.name} | Indoor Play Centres & Kids Activities`
-    const description = `Find the best soft play centres near ${staticTown.name}. Browse local indoor play venues, check facilities, opening times, and plan your visit.`
+    const title = `Soft Play in ${staticTown.name}`
+    const description = `Find the best soft play centres in ${staticTown.name}. Browse local indoor play venues, check facilities, opening times, and plan your visit.`
 
     return {
       title,
@@ -197,56 +199,21 @@ export default async function CityPage({ params, searchParams }: PageProps) {
   const venues = await getVenues(city, filter, search)
   const nearbyCities = cityConfig ? getNearbyCities(city) : []
 
-  // Breadcrumb schema
-  const breadcrumbItems = [
-    ...(county ? [{ '@type': 'ListItem' as const, position: 2, name: county }] : []),
-    {
-      '@type': 'ListItem' as const,
-      position: county ? 3 : 2,
-      name: `Soft Play in ${displayName}`,
-      item: `https://www.softplaynearme.co.uk/soft-play/${city}`,
-    },
-  ]
+  const baseUrl = 'https://www.softplaynearme.co.uk'
 
-  const breadcrumbSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: 'https://www.softplaynearme.co.uk',
-      },
-      ...breadcrumbItems,
-    ],
-  }
+  // Use reusable schema builders from lib/schema.ts
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: 'Home', url: baseUrl },
+    ...(county ? [{ name: county }] : []),
+    { name: `Soft Play in ${displayName}`, url: `${baseUrl}/soft-play/${city}` },
+  ])
 
-  const faqSchema = faqs.length > 0 ? {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqs.map((faq) => ({
-      '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: faq.answer,
-      },
-    })),
-  } : null
+  const faqSchema = buildFAQSchema(faqs)
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-      {faqSchema && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-        />
-      )}
+      <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={faqSchema} />
 
       <div className="min-h-screen bg-slate-50">
         <Header />

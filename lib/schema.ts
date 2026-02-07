@@ -1,0 +1,224 @@
+/**
+ * Reusable Schema.org structured data builders for SEO.
+ *
+ * Generates JSON-LD objects that can be injected into any page via
+ * <script type="application/ld+json">.
+ */
+
+// ── Day-name map for Schema.org openingHoursSpecification ──────────────
+const SCHEMA_DAYS: Record<string, string> = {
+  monday: 'https://schema.org/Monday',
+  tuesday: 'https://schema.org/Tuesday',
+  wednesday: 'https://schema.org/Wednesday',
+  thursday: 'https://schema.org/Thursday',
+  friday: 'https://schema.org/Friday',
+  saturday: 'https://schema.org/Saturday',
+  sunday: 'https://schema.org/Sunday',
+}
+
+/**
+ * Parse a human-readable hours string like "9:00am - 6:00pm" or "09:00 - 18:00"
+ * into { opens: "09:00", closes: "18:00" } (24-hour ISO format).
+ * Returns null for "Closed" or unparseable strings.
+ */
+function parseHoursString(raw: string): { opens: string; closes: string } | null {
+  if (!raw || raw.toLowerCase() === 'closed') return null
+
+  const match = raw.match(
+    /(\d{1,2}):?(\d{2})?\s*(am|pm)?\s*[-–]\s*(\d{1,2}):?(\d{2})?\s*(am|pm)?/i
+  )
+  if (!match) return null
+
+  let openH = parseInt(match[1], 10)
+  const openM = parseInt(match[2] || '0', 10)
+  const openP = match[3]?.toLowerCase()
+
+  let closeH = parseInt(match[4], 10)
+  const closeM = parseInt(match[5] || '0', 10)
+  const closeP = match[6]?.toLowerCase()
+
+  if (openP === 'pm' && openH !== 12) openH += 12
+  if (openP === 'am' && openH === 12) openH = 0
+  if (closeP === 'pm' && closeH !== 12) closeH += 12
+  if (closeP === 'am' && closeH === 12) closeH = 0
+
+  const pad = (n: number) => n.toString().padStart(2, '0')
+  return {
+    opens: `${pad(openH)}:${pad(openM)}`,
+    closes: `${pad(closeH)}:${pad(closeM)}`,
+  }
+}
+
+// ── Public interfaces ──────────────────────────────────────────────────
+
+export interface LocalBusinessSchemaInput {
+  name: string
+  description?: string
+  address: string
+  city: string
+  postcode: string
+  phone?: string
+  website?: string
+  lat?: number
+  lng?: number
+  openingHours?: Record<string, string> | null
+  priceFrom?: number
+  priceTo?: number
+  avgRating?: number
+  reviewCount?: number
+  imageUrl?: string
+  citySlug: string
+  venueSlug: string
+}
+
+/**
+ * Build a complete Schema.org LocalBusiness / SportsActivityLocation
+ * JSON-LD object from venue data.
+ *
+ * Usage:
+ *   const schema = buildLocalBusinessSchema({ ...venue data })
+ *   <script type="application/ld+json"
+ *     dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+ *   />
+ */
+export function buildLocalBusinessSchema(input: LocalBusinessSchemaInput) {
+  const venueUrl = `https://www.softplaynearme.co.uk/soft-play/${input.citySlug}/${input.venueSlug}`
+
+  // Build openingHoursSpecification from the hours map
+  const openingHoursSpec: any[] = []
+  if (input.openingHours) {
+    for (const [day, raw] of Object.entries(input.openingHours)) {
+      const schemaDay = SCHEMA_DAYS[day.toLowerCase()]
+      if (!schemaDay) continue
+
+      const parsed = parseHoursString(raw)
+      if (parsed) {
+        openingHoursSpec.push({
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: schemaDay,
+          opens: parsed.opens,
+          closes: parsed.closes,
+        })
+      }
+    }
+  }
+
+  const schema: Record<string, any> = {
+    '@context': 'https://schema.org',
+    '@type': 'SportsActivityLocation',
+    '@id': `${venueUrl}#business`,
+    name: input.name,
+    url: venueUrl,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: input.address,
+      addressLocality: input.city,
+      postalCode: input.postcode,
+      addressCountry: 'GB',
+    },
+  }
+
+  if (input.description) {
+    schema.description = input.description
+  }
+
+  if (input.phone) {
+    schema.telephone = input.phone
+  }
+
+  if (input.website) {
+    schema.sameAs = [input.website]
+  }
+
+  if (input.lat && input.lng) {
+    schema.geo = {
+      '@type': 'GeoCoordinates',
+      latitude: input.lat,
+      longitude: input.lng,
+    }
+  }
+
+  if (openingHoursSpec.length > 0) {
+    schema.openingHoursSpecification = openingHoursSpec
+  }
+
+  if (input.priceFrom) {
+    schema.priceRange = input.priceTo
+      ? `\u00A3${input.priceFrom} - \u00A3${input.priceTo}`
+      : `From \u00A3${input.priceFrom}`
+  }
+
+  if (input.avgRating && input.reviewCount && input.reviewCount > 0) {
+    schema.aggregateRating = {
+      '@type': 'AggregateRating',
+      ratingValue: input.avgRating.toFixed(1),
+      reviewCount: input.reviewCount,
+      bestRating: 5,
+      worstRating: 1,
+    }
+  }
+
+  if (input.imageUrl) {
+    schema.image = input.imageUrl
+  }
+
+  return schema
+}
+
+// ── Breadcrumb schema builder ──────────────────────────────────────────
+
+export interface BreadcrumbSchemaItem {
+  name: string
+  url?: string
+}
+
+/**
+ * Build a Schema.org BreadcrumbList JSON-LD object.
+ *
+ * Usage:
+ *   const schema = buildBreadcrumbSchema([
+ *     { name: 'Home', url: 'https://www.softplaynearme.co.uk' },
+ *     { name: 'Hull', url: 'https://www.softplaynearme.co.uk/soft-play/hull' },
+ *     { name: 'Venue Name' },
+ *   ])
+ */
+export function buildBreadcrumbSchema(items: BreadcrumbSchemaItem[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: item.name,
+      ...(item.url && { item: item.url }),
+    })),
+  }
+}
+
+// ── FAQ schema builder ─────────────────────────────────────────────────
+
+export interface FAQItem {
+  question: string
+  answer: string
+}
+
+/**
+ * Build a Schema.org FAQPage JSON-LD object.
+ * Returns null if the list is empty.
+ */
+export function buildFAQSchema(faqs: FAQItem[]) {
+  if (faqs.length === 0) return null
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  }
+}
