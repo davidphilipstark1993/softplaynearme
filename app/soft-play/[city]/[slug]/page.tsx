@@ -2,21 +2,20 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
+import { Card } from '@/components/ui/card'
 import { getCityBySlug } from '@/lib/venues'
 import {
   MapPin,
   Star,
-  ChevronRight,
-  Home,
-  Phone,
-  Globe,
   Navigation,
 } from 'lucide-react'
 import type { Metadata } from 'next'
 import { getPool } from '@/lib/pool'
-import { getStaticVenue, getStaticTownBySlug, type StaticVenue } from '@/lib/staticVenues'
+import { getStaticVenue, getStaticTownBySlug, getStaticVenuesByTown, type StaticVenue } from '@/lib/staticVenues'
+import { Header } from '@/components/layout/Header'
+import { Footer } from '@/components/layout/Footer'
+import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 
-// Import new venue components
 import { PhotoGallery } from '@/components/venue/PhotoGallery'
 import { PricingTable } from '@/components/venue/PricingTable'
 import { OpeningHours } from '@/components/venue/OpeningHours'
@@ -97,7 +96,6 @@ interface Photo {
 }
 
 async function getVenue(citySlug: string, slug: string): Promise<Venue | null> {
-  // Try database first
   try {
     const pool = getPool()
     const client = await pool.connect()
@@ -116,7 +114,6 @@ async function getVenue(citySlug: string, slug: string): Promise<Venue | null> {
     console.error('Database unavailable, falling back to static data:', error)
   }
 
-  // Fall back to static data
   const staticVenue = getStaticVenue(citySlug, slug)
   if (staticVenue) {
     return staticToVenue(staticVenue)
@@ -125,9 +122,6 @@ async function getVenue(citySlug: string, slug: string): Promise<Venue | null> {
   return null
 }
 
-/**
- * Convert static venue to database venue format
- */
 function staticToVenue(sv: StaticVenue): Venue {
   return {
     id: 0,
@@ -147,7 +141,6 @@ function staticToVenue(sv: StaticVenue): Venue {
     sen_friendly: false,
     wheelchair_access: false,
     free_wifi: false,
-    // Store maps URL for static venues
     _mapsUrl: sv.mapsUrl,
     _isStatic: true,
   } as Venue & { _mapsUrl?: string; _isStatic?: boolean }
@@ -167,7 +160,6 @@ async function getReviews(venueId: number): Promise<Review[]> {
       client.release()
     }
   } catch (error) {
-    console.error('Error fetching reviews:', error)
     return []
   }
 }
@@ -182,14 +174,12 @@ async function getPricing(venueId: number): Promise<PricingItem[]> {
         [venueId]
       )
       return result.rows
-    } catch (error) {
-      // Table might not exist yet
+    } catch {
       return []
     } finally {
       client.release()
     }
-  } catch (error) {
-    console.error('Error fetching pricing:', error)
+  } catch {
     return []
   }
 }
@@ -204,14 +194,12 @@ async function getSessions(venueId: number): Promise<Session[]> {
         [venueId]
       )
       return result.rows
-    } catch (error) {
-      // Table might not exist yet
+    } catch {
       return []
     } finally {
       client.release()
     }
-  } catch (error) {
-    console.error('Error fetching sessions:', error)
+  } catch {
     return []
   }
 }
@@ -226,16 +214,39 @@ async function getPhotos(venueId: number): Promise<Photo[]> {
         [venueId]
       )
       return result.rows
-    } catch (error) {
-      // Table might not exist yet
+    } catch {
       return []
     } finally {
       client.release()
     }
-  } catch (error) {
-    console.error('Error fetching photos:', error)
+  } catch {
     return []
   }
+}
+
+/** Get nearby venues in the same city (excluding this one) */
+async function getNearbyVenues(citySlug: string, excludeSlug: string): Promise<{ name: string; slug: string; postcode: string }[]> {
+  try {
+    const pool = getPool()
+    const client = await pool.connect()
+    try {
+      const result = await client.query(
+        'SELECT name, slug, postcode FROM venues WHERE city_slug = $1 AND slug != $2 ORDER BY name LIMIT 6',
+        [citySlug, excludeSlug]
+      )
+      if (result.rows.length > 0) return result.rows
+    } finally {
+      client.release()
+    }
+  } catch {
+    // Fall through to static
+  }
+
+  const staticVenues = getStaticVenuesByTown(citySlug)
+  return staticVenues
+    .filter(v => v.slug !== excludeSlug)
+    .slice(0, 6)
+    .map(v => ({ name: v.name, slug: v.slug, postcode: v.postcode }))
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -249,8 +260,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const cityName = cityConfig?.name || staticTown?.name || city
-  const title = `${venue.name} | Soft Play in ${cityName}`
-  const description = venue.description || `Visit ${venue.name} soft play centre in ${cityName}. Check opening times, facilities, and reviews.`
+  const title = `${venue.name} Soft Play in ${cityName} | Opening Times, Prices, Directions`
+  const description = venue.description
+    || `Visit ${venue.name} soft play centre in ${cityName}. Check opening times, facilities, prices, and get directions.`
 
   return {
     title,
@@ -261,6 +273,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url: `https://www.softplaynearme.co.uk/soft-play/${city}/${slug}`,
       type: 'website',
       siteName: 'Soft Play Near Me',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
     },
     alternates: {
       canonical: `https://www.softplaynearme.co.uk/soft-play/${city}/${slug}`,
@@ -278,17 +295,17 @@ export default async function VenuePage({ params }: PageProps) {
     notFound()
   }
 
-  // Get city name from config or static data
   const cityName = cityConfig?.name || staticTown?.name || city
+  const county = cityConfig?.county || ''
   const isStaticVenue = (venue as any)._isStatic === true
-  const staticMapsUrl = (venue as any)._mapsUrl as string | undefined
 
   // Fetch all related data in parallel
-  const [reviews, pricing, sessions, photos] = await Promise.all([
+  const [reviews, pricing, sessions, photos, nearbyVenues] = await Promise.all([
     getReviews(venue.id),
     getPricing(venue.id),
     getSessions(venue.id),
     getPhotos(venue.id),
+    getNearbyVenues(city, slug),
   ])
 
   const avgRating = reviews.length > 0
@@ -328,8 +345,8 @@ export default async function VenuePage({ params }: PageProps) {
     }),
     ...(venue.price_from && {
       priceRange: venue.price_to
-        ? `£${venue.price_from} - £${venue.price_to}`
-        : `From £${venue.price_from}`,
+        ? `\u00A3${venue.price_from} - \u00A3${venue.price_to}`
+        : `From \u00A3${venue.price_from}`,
     }),
   }
 
@@ -371,49 +388,25 @@ export default async function VenuePage({ params }: PageProps) {
       />
 
       <div className="min-h-screen bg-slate-50">
-        {/* Navbar */}
-        <nav className="bg-white border-b border-slate-200 sticky top-0 z-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-2">
-              <span className="font-bold text-xl text-purple-600">Soft Play Near Me</span>
-            </Link>
-            <div className="flex gap-4">
-              <Link href={`/soft-play/${city}`}>
-                <Button variant="ghost">Back to {cityName}</Button>
-              </Link>
-            </div>
-          </div>
-        </nav>
+        <Header backLink={{ href: `/soft-play/${city}`, label: cityName }} />
 
-        {/* Breadcrumbs */}
-        <div className="bg-white border-b border-slate-100">
-          <div className="max-w-7xl mx-auto px-4 py-3">
-            <nav className="flex items-center gap-2 text-sm text-slate-600">
-              <Link href="/" className="hover:text-purple-600 flex items-center gap-1">
-                <Home className="w-4 h-4" />
-                Home
-              </Link>
-              <ChevronRight className="w-4 h-4" />
-              <Link href={`/soft-play/${city}`} className="hover:text-purple-600">
-                {cityName}
-              </Link>
-              <ChevronRight className="w-4 h-4" />
-              <span className="text-slate-900 truncate">{venue.name}</span>
-            </nav>
-          </div>
-        </div>
+        <Breadcrumbs items={[
+          ...(county ? [{ label: county }] : []),
+          { label: cityName, href: `/soft-play/${city}` },
+          { label: venue.name },
+        ]} />
 
-        {/* Hero Section with primary photo */}
+        {/* Hero Section */}
         <div className="bg-gradient-to-b from-purple-600 to-purple-700 py-8">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="text-white">
-                <div className="flex items-center gap-2 mb-2">
-                  {venue.featured && (
-                    <Badge className="bg-yellow-400 text-yellow-900">Featured</Badge>
-                  )}
-                </div>
-                <h1 className="text-3xl md:text-4xl font-bold mb-2">{venue.name}</h1>
+                {venue.featured && (
+                  <Badge className="bg-yellow-400 text-yellow-900 mb-2">Featured</Badge>
+                )}
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
+                  Soft Play in {cityName}: {venue.name}
+                </h1>
                 <div className="flex items-center gap-2 text-purple-100">
                   <MapPin className="w-5 h-5" />
                   <span>{venue.address}, {venue.postcode}</span>
@@ -548,11 +541,39 @@ export default async function VenuePage({ params }: PageProps) {
                   </div>
                 )}
               </div>
+
+              {/* Nearby Venues */}
+              {nearbyVenues.length > 0 && (
+                <div className="bg-white rounded-lg border border-slate-200 p-6">
+                  <h2 className="font-semibold text-lg mb-4">Nearby Soft Play in {cityName}</h2>
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    {nearbyVenues.map((nv) => (
+                      <Link
+                        key={nv.slug}
+                        href={`/soft-play/${city}/${nv.slug}`}
+                        className="flex items-center gap-3 p-3 rounded-lg border border-slate-100 hover:border-purple-300 hover:bg-purple-50 transition-colors"
+                      >
+                        <MapPin className="w-4 h-4 text-purple-500 flex-shrink-0" />
+                        <div className="min-w-0">
+                          <p className="font-medium text-sm truncate">{nv.name}</p>
+                          <p className="text-xs text-slate-500">{nv.postcode}</p>
+                        </div>
+                        <Navigation className="w-3.5 h-3.5 text-slate-400 ml-auto flex-shrink-0" />
+                      </Link>
+                    ))}
+                  </div>
+                  <Link
+                    href={`/soft-play/${city}`}
+                    className="block text-center text-sm text-purple-600 hover:text-purple-700 font-medium mt-4"
+                  >
+                    View all venues in {cityName}
+                  </Link>
+                </div>
+              )}
             </div>
 
             {/* Sidebar */}
             <div className="lg:col-span-1 space-y-6">
-              {/* Sticky sidebar wrapper */}
               <div className="lg:sticky lg:top-24 space-y-6">
                 {/* Map */}
                 <VenueMap
@@ -591,12 +612,7 @@ export default async function VenuePage({ params }: PageProps) {
           </div>
         </main>
 
-        {/* Footer */}
-        <footer className="bg-slate-900 text-slate-400 py-8 px-4 mt-12">
-          <div className="max-w-7xl mx-auto text-center">
-            <p>&copy; {new Date().getFullYear()} Soft Play Near Me. All rights reserved.</p>
-          </div>
-        </footer>
+        <Footer minimal />
       </div>
     </>
   )

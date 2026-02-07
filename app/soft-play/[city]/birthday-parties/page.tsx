@@ -4,9 +4,12 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { getCityBySlug, getAllCitySlugs, getFilterBySlug } from '@/lib/venues'
-import { MapPin, Star, Coffee, Car, Baby, PartyPopper, Heart, ChevronRight } from 'lucide-react'
+import { MapPin, Star, Coffee, Baby, PartyPopper } from 'lucide-react'
 import type { Metadata } from 'next'
 import { getPool } from '@/lib/pool'
+import { Header } from '@/components/layout/Header'
+import { Footer } from '@/components/layout/Footer'
+import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 
 interface PageProps {
   params: Promise<{ city: string }>
@@ -83,26 +86,8 @@ export default async function BirthdayPartiesPage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <nav className="bg-white border-b border-slate-200 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="text-2xl">🎈</div>
-            <span className="font-bold text-xl text-purple-600">Soft Play Near Me</span>
-          </Link>
-        </div>
-      </nav>
-
-      <div className="bg-white border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 py-3">
-          <nav className="flex items-center gap-2 text-sm text-slate-600">
-            <Link href="/" className="hover:text-purple-600">Home</Link>
-            <ChevronRight className="w-4 h-4" />
-            <Link href={`/soft-play/${city}`} className="hover:text-purple-600">Soft Play in {cityConfig.name}</Link>
-            <ChevronRight className="w-4 h-4" />
-            <span className="text-slate-900">{filterConfig.name}</span>
-          </nav>
-        </div>
-      </div>
+      <Header />
+      <Breadcrumbs items={[{ label: cityConfig.name, href: '/soft-play/' + city }, { label: filterConfig.name }]} />
 
       <div className="bg-gradient-to-br from-purple-600 to-pink-500 text-white py-12 px-4">
         <div className="max-w-7xl mx-auto">
@@ -154,9 +139,7 @@ export default async function BirthdayPartiesPage({ params }: PageProps) {
         )}
       </main>
 
-      <footer className="bg-slate-900 text-slate-400 py-8 px-4 mt-12">
-        <div className="max-w-7xl mx-auto text-center"><p>&copy; {new Date().getFullYear()} Soft Play Near Me.</p></div>
-      </footer>
+      <Footer minimal />
     </div>
   )
 }

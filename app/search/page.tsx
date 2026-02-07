@@ -5,7 +5,9 @@ import { geocodePostcode, parseRadius, formatPostcode, isValidUKPostcode } from 
 import { SearchForm } from '@/components/search/SearchForm'
 import { SearchResults } from '@/components/search/SearchResults'
 import { SearchFilters } from './SearchFilters'
-import { ChevronRight, Home } from 'lucide-react'
+import { Header } from '@/components/layout/Header'
+import { Footer } from '@/components/layout/Footer'
+import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 
 interface SearchPageProps {
   searchParams: Promise<{
@@ -24,14 +26,20 @@ export async function generateMetadata({ searchParams }: SearchPageProps): Promi
 
   if (query) {
     return {
-      title: `Soft Play Near ${query} | Find Local Soft Play Centres`,
+      title: `Soft Play Near ${query} | Find Local Indoor Play Centres`,
       description: `Discover the best soft play centres near ${query}. Find venues with cafes, toddler areas, birthday parties, and more.`,
+      alternates: {
+        canonical: 'https://www.softplaynearme.co.uk/search',
+      },
     }
   }
 
   return {
     title: 'Search Soft Play Centres | Soft Play Near Me',
     description: 'Search for soft play centres near you. Filter by facilities, distance, and more to find the perfect venue for your family.',
+    alternates: {
+      canonical: 'https://www.softplaynearme.co.uk/search',
+    },
   }
 }
 
@@ -49,7 +57,6 @@ async function searchVenues(
     const params: (number | string)[] = [lat, lng]
     const where: string[] = []
 
-    // Bounding box for initial filtering
     const latDegPerMile = 1 / 69.0
     const lngDegPerMile = 1 / (69.0 * Math.cos((lat * Math.PI) / 180))
     const minLat = lat - radius * latDegPerMile
@@ -60,7 +67,6 @@ async function searchVenues(
     where.push(`v.lat BETWEEN ${minLat} AND ${maxLat}`)
     where.push(`v.lng BETWEEN ${minLng} AND ${maxLng}`)
 
-    // Apply filters
     for (const f of filters) {
       if (f === 'toddler') where.push('v.toddler_area = true')
       else if (f === 'parties') where.push('v.parties = true')
@@ -72,7 +78,6 @@ async function searchVenues(
 
     const whereSql = where.length ? `WHERE ${where.join(' AND ')}` : ''
 
-    // Sorting
     let orderBy = 'distance ASC NULLS LAST'
     if (sort === 'rating') {
       orderBy = 'avg_rating DESC, review_count DESC, distance ASC'
@@ -110,7 +115,6 @@ async function searchVenues(
 
     const result = await client.query(sql, params)
 
-    // Apply open_now filter if present (requires parsing opening hours)
     let venues = result.rows
     if (filters.includes('open_now')) {
       const { isOpenNow } = await import('@/lib/utils')
@@ -143,13 +147,11 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   let locationName: string | null = null
   let geocodeError: string | null = null
 
-  // Get coordinates from params or geocode postcode
   if (latParam && lngParam) {
     lat = parseFloat(latParam)
     lng = parseFloat(lngParam)
     locationName = 'Your location'
   } else if (query) {
-    // Check if it's a postcode
     if (isValidUKPostcode(query)) {
       const result = await geocodePostcode(query)
       if (result.error) {
@@ -160,47 +162,23 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
         locationName = formatPostcode(query)
       }
     } else {
-      // Treat as city/area name - search by text
       locationName = query
     }
   }
 
-  // Search for venues if we have coordinates
   let venues: any[] = []
   if (lat && lng) {
     venues = await searchVenues(lat, lng, radius, filters, sortParam)
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white border-b sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <Link href="/" className="text-2xl font-bold text-purple-600">
-            Soft Play Near Me
-          </Link>
-        </div>
-      </header>
+    <div className="min-h-screen bg-slate-50">
+      <Header />
 
-      {/* Breadcrumb */}
-      <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-          <nav className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Link href="/" className="hover:text-foreground flex items-center gap-1">
-              <Home className="h-4 w-4" />
-              Home
-            </Link>
-            <ChevronRight className="h-4 w-4" />
-            <span className="text-foreground">Search</span>
-            {locationName && (
-              <>
-                <ChevronRight className="h-4 w-4" />
-                <span className="text-foreground">{locationName}</span>
-              </>
-            )}
-          </nav>
-        </div>
-      </div>
+      <Breadcrumbs items={[
+        { label: 'Search' },
+        ...(locationName ? [{ label: locationName }] : []),
+      ]} />
 
       {/* Search form */}
       <div className="bg-gradient-to-b from-purple-600 to-purple-700 py-8">
@@ -236,16 +214,16 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 
         {(lat && lng) || venues.length > 0 ? (
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            {/* Filters sidebar */}
             <aside className="lg:col-span-1">
-              <SearchFilters
-                selectedFilters={filters}
-                selectedSort={sortParam}
-                hasLocation={!!(lat && lng)}
-              />
+              <div className="lg:sticky lg:top-24">
+                <SearchFilters
+                  selectedFilters={filters}
+                  selectedSort={sortParam}
+                  hasLocation={!!(lat && lng)}
+                />
+              </div>
             </aside>
 
-            {/* Results */}
             <div className="lg:col-span-3">
               <SearchResults
                 venues={venues}
@@ -258,19 +236,14 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
             <h2 className="text-xl font-semibold mb-4">
               Enter a postcode to find soft play centres near you
             </h2>
-            <p className="text-muted-foreground">
+            <p className="text-slate-500">
               Or use your current location for automatic search
             </p>
           </div>
         ) : null}
       </main>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-gray-400 py-8 mt-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p>&copy; {new Date().getFullYear()} Soft Play Near Me. All rights reserved.</p>
-        </div>
-      </footer>
+      <Footer minimal />
     </div>
   )
 }
