@@ -1,10 +1,15 @@
 import { MetadataRoute } from 'next'
 import { getAllCitySlugs, filters } from '@/lib/venues'
 import { getPool } from '@/lib/pool'
+import { getAllStaticTownSlugs, getStaticVenuesByTown } from '@/lib/staticVenues'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://www.softplaynearme.co.uk'
-  const cities = getAllCitySlugs()
+
+  // Combine DB city slugs with static town slugs
+  const dbCities = getAllCitySlugs()
+  const staticTowns = getAllStaticTownSlugs()
+  const allCities = [...new Set([...dbCities, ...staticTowns])]
 
   const sitemap: MetadataRoute.Sitemap = [
     {
@@ -13,10 +18,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly',
       priority: 1,
     },
+    {
+      url: `${baseUrl}/search`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
   ]
 
-  // Add city pages
-  for (const city of cities) {
+  // Add city pages + filter pages
+  for (const city of allCities) {
     sitemap.push({
       url: `${baseUrl}/soft-play/${city}`,
       lastModified: new Date(),
@@ -24,7 +35,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     })
 
-    // Add filter pages for each city
     for (const filter of filters) {
       sitemap.push({
         url: `${baseUrl}/soft-play/${city}/${filter.slug}`,
@@ -35,13 +45,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
-  // Add individual venue pages
+  // Add individual venue pages from database
+  const addedVenueSlugs = new Set<string>()
   try {
     const pool = getPool()
     const client = await pool.connect()
     try {
       const result = await client.query('SELECT city_slug, slug, updated_at FROM venues')
       for (const venue of result.rows) {
+        const key = `${venue.city_slug}/${venue.slug}`
+        addedVenueSlugs.add(key)
         sitemap.push({
           url: `${baseUrl}/soft-play/${venue.city_slug}/${venue.slug}`,
           lastModified: venue.updated_at || new Date(),
@@ -52,8 +65,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     } finally {
       client.release()
     }
-  } catch (error) {
-    console.error('Error fetching venues for sitemap:', error)
+  } catch {
+    // DB unavailable - will use static data below
+  }
+
+  // Add venue pages from static data (if not already added from DB)
+  for (const townSlug of staticTowns) {
+    const venues = getStaticVenuesByTown(townSlug)
+    for (const venue of venues) {
+      const key = `${townSlug}/${venue.slug}`
+      if (!addedVenueSlugs.has(key)) {
+        sitemap.push({
+          url: `${baseUrl}/soft-play/${townSlug}/${venue.slug}`,
+          lastModified: new Date(),
+          changeFrequency: 'weekly',
+          priority: 0.7,
+        })
+      }
+    }
   }
 
   return sitemap

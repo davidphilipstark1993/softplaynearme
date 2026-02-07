@@ -1,11 +1,20 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import "./globals.css";
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#9333ea",
+};
+
 export const metadata: Metadata = {
-  title: "Soft Play Near Me | Find Soft Play Centres Across the UK",
-  description: "Find the best soft play centres near you. Compare indoor play venues, check opening times, and discover toddler-friendly play areas across the UK.",
-  keywords: ["soft play near me", "soft play centres", "indoor play", "toddler soft play", "soft play birthday parties", "SEN soft play"],
+  title: {
+    default: "Soft Play Near Me | Find Soft Play Centres Across the UK",
+    template: "%s | Soft Play Near Me",
+  },
+  description: "Find the best soft play centres near you. Compare indoor play venues, check opening times, prices, and discover toddler-friendly play areas across the UK.",
+  keywords: ["soft play near me", "soft play centres", "indoor play", "toddler soft play", "soft play birthday parties", "SEN soft play", "indoor play centres UK"],
   authors: [{ name: "Soft Play Near Me" }],
   creator: "Soft Play Near Me",
   metadataBase: new URL("https://www.softplaynearme.co.uk"),
@@ -84,7 +93,7 @@ const websiteSchema = {
     "@type": "SearchAction",
     target: {
       "@type": "EntryPoint",
-      urlTemplate: "https://www.softplaynearme.co.uk/soft-play/{search_term_string}"
+      urlTemplate: "https://www.softplaynearme.co.uk/search?q={search_term_string}"
     },
     "query-input": "required name=search_term_string"
   }
@@ -99,6 +108,9 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
+        {/* Preconnect to external services */}
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://api.postcodes.io" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
@@ -108,8 +120,8 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
         />
       </head>
-      <body>
-        {/* Google Analytics */}
+      <body className="antialiased">
+        {/* Google Analytics with enhanced event tracking */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-LELV01QR3Z"
           strategy="afterInteractive"
@@ -120,6 +132,19 @@ export default function RootLayout({
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-LELV01QR3Z');
+
+            // Track outbound clicks (directions, venue websites)
+            document.addEventListener('click', function(e) {
+              var link = e.target.closest('a[target="_blank"]');
+              if (link) {
+                var href = link.getAttribute('href') || '';
+                if (href.includes('google.com/maps')) {
+                  gtag('event', 'directions_click', { url: href });
+                } else if (href && !href.includes('softplaynearme.co.uk')) {
+                  gtag('event', 'outbound_click', { url: href });
+                }
+              }
+            });
           `}
         </Script>
         {children}

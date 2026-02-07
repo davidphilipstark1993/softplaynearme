@@ -65,4 +65,23 @@
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
   }
+  /* Reduce CLS: reserve space for images */
+  img {
+    height: auto;
+    max-width: 100%;
+  }
+  /* Smooth scroll for anchor links */
+  html {
+    scroll-behavior: smooth;
+  }
+  /* Improve tap targets on mobile */
+  a, button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  /* Exception for inline/badge elements */
+  .inline-flex, [class*="badge"], nav a, nav button {
+    min-height: auto;
+    min-width: auto;
+  }
 }
