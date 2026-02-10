@@ -1,15 +1,13 @@
-'use client'
-
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { Search, MapPin, Clock, Baby, PartyPopper, Heart, Coffee, Car } from 'lucide-react'
+import { Search, MapPin, Clock, Baby, PartyPopper, Heart, Coffee, Car, CheckCircle2 } from 'lucide-react'
 import { Card } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { cities } from '@/lib/venues'
-import { SearchForm } from '@/components/search/SearchForm'
-import { isValidUKPostcode } from '@/lib/geo'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
+import { SearchHero } from '@/components/home/SearchHero'
+import { buildFAQSchema } from '@/lib/schema'
+import { JsonLd } from '@/components/seo/JsonLd'
 
 const HOME_FAQS = [
   {
@@ -28,53 +26,22 @@ const HOME_FAQS = [
     question: 'Can I book a birthday party at soft play?',
     answer: 'Yes! Most soft play centres offer birthday party packages including dedicated party rooms, food, and play time. Packages usually include invitations and party bags. Book early as weekends fill up quickly.',
   },
+  {
+    question: 'Do I need to book soft play in advance?',
+    answer: 'For general play sessions, most venues operate on a walk-in basis. However, some larger centres now offer timed sessions during busy periods. Birthday parties always need to be booked in advance.',
+  },
+  {
+    question: 'Are soft play centres suitable for babies?',
+    answer: 'Yes, many soft play centres have dedicated baby areas with soft mats, sensory toys, and mirrors. Babies under 12 months are often free. Look for venues with a separate under-2s or under-3s section.',
+  },
 ]
 
-// FAQPage schema for SEO
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: HOME_FAQS.map((faq) => ({
-    '@type': 'Question',
-    name: faq.question,
-    acceptedAnswer: {
-      '@type': 'Answer',
-      text: faq.answer,
-    },
-  })),
-}
+const faqSchema = buildFAQSchema(HOME_FAQS)
 
 export default function Home() {
-  const router = useRouter()
-  const [searchTerm, setSearchTerm] = useState('')
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (searchTerm.trim()) {
-      if (isValidUKPostcode(searchTerm.trim())) {
-        router.push(`/search?q=${encodeURIComponent(searchTerm.trim())}&radius=10`)
-        return
-      }
-
-      const cityMatch = cities.find(
-        c => c.name.toLowerCase() === searchTerm.toLowerCase() ||
-             c.slug === searchTerm.toLowerCase()
-      )
-      if (cityMatch) {
-        router.push(`/soft-play/${cityMatch.slug}`)
-      } else {
-        router.push(`/search?q=${encodeURIComponent(searchTerm.trim())}&radius=10`)
-      }
-    }
-  }
-
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
-      {/* FAQ Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
+      <JsonLd data={faqSchema} />
 
       <Header />
 
@@ -88,9 +55,7 @@ export default function Home() {
             Discover indoor play centres across the UK. Compare venues, check opening times, and find the perfect place for your family.
           </p>
 
-          <div className="bg-white rounded-xl p-4 shadow-lg max-w-2xl mx-auto">
-            <SearchForm showRadius={true} defaultRadius={10} />
-          </div>
+          <SearchHero />
 
           <p className="text-purple-200 text-sm mt-6">
             Popular:{' '}
@@ -131,6 +96,57 @@ export default function Home() {
         </div>
       </div>
 
+      {/* How It Works */}
+      <div className="py-16 px-4 bg-white border-b border-slate-200">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-2xl font-bold text-slate-900 mb-8 text-center">How It Works</h2>
+          <div className="grid md:grid-cols-2 gap-12">
+            {/* For Parents */}
+            <div>
+              <h3 className="text-xl font-semibold text-purple-600 mb-6">For Parents</h3>
+              <ol className="space-y-5">
+                {[
+                  { step: '1', title: 'Search by location', desc: 'Enter your postcode or city to find venues nearby' },
+                  { step: '2', title: 'Compare venues', desc: 'Check facilities, prices, opening times, and reviews' },
+                  { step: '3', title: 'Visit and enjoy', desc: 'Get directions, call ahead, or just turn up and play' },
+                ].map(({ step, title, desc }) => (
+                  <li key={step} className="flex gap-3">
+                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-purple-100 text-purple-600 font-bold flex items-center justify-center text-sm">
+                      {step}
+                    </span>
+                    <div>
+                      <p className="font-semibold">{title}</p>
+                      <p className="text-sm text-slate-600">{desc}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+            {/* For Venue Owners */}
+            <div>
+              <h3 className="text-xl font-semibold text-green-600 mb-6">For Venue Owners</h3>
+              <ol className="space-y-5">
+                {[
+                  { step: '1', title: 'Find your venue', desc: 'Search for your soft play centre in our directory' },
+                  { step: '2', title: 'Claim your listing', desc: 'Email us to verify you\'re the owner \u2014 it\'s completely free' },
+                  { step: '3', title: 'Manage your profile', desc: 'Update hours, add photos, and highlight your facilities' },
+                ].map(({ step, title, desc }) => (
+                  <li key={step} className="flex gap-3">
+                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-green-100 text-green-600 font-bold flex items-center justify-center text-sm">
+                      {step}
+                    </span>
+                    <div>
+                      <p className="font-semibold">{title}</p>
+                      <p className="text-sm text-slate-600">{desc}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Browse by City */}
       <div className="py-16 px-4">
         <div className="max-w-7xl mx-auto">
@@ -147,6 +163,32 @@ export default function Home() {
               </Link>
             ))}
           </div>
+        </div>
+      </div>
+
+      {/* Venue Owners CTA */}
+      <div className="bg-green-50 py-16 px-4 border-y border-green-100">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-2xl font-bold text-green-800 mb-4">
+            Venue Owners: Claim Your Free Profile
+          </h2>
+          <p className="text-green-700 mb-6 max-w-xl mx-auto">
+            Join soft play centres already listed on our directory. Update your information,
+            add photos, and help families find your venue. Always free.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3 mb-6 text-sm text-green-700">
+            {['Free to claim', 'UK-wide directory', 'Updated by owners'].map((item) => (
+              <span key={item} className="flex items-center gap-1.5">
+                <CheckCircle2 className="w-4 h-4 text-green-600" />
+                {item}
+              </span>
+            ))}
+          </div>
+          <Button asChild className="bg-green-600 hover:bg-green-700">
+            <a href="mailto:info@softplaynearme.co.uk?subject=Claim%20My%20Venue">
+              Claim Your Venue (Free)
+            </a>
+          </Button>
         </div>
       </div>
 
@@ -172,8 +214,37 @@ export default function Home() {
         </div>
       </div>
 
-      {/* FAQ Section */}
+      {/* SEO Content Block */}
       <div className="py-16 px-4">
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-2xl font-bold text-slate-900 mb-6 text-center">
+            Your Complete Guide to Soft Play in the UK
+          </h2>
+          <div className="space-y-4 text-slate-600 leading-relaxed">
+            <p>
+              Soft play centres have become one of the most popular indoor activities for families across the UK, and for good reason. They offer children a safe, supervised environment to climb, slide, bounce, and explore — whatever the weather. For parents, they provide a chance to relax with a coffee while the kids burn off energy.
+            </p>
+            <p>
+              Whether you are looking for <Link href="/soft-play/hull" className="text-purple-600 hover:underline">soft play in Hull</Link>, <Link href="/soft-play/leeds" className="text-purple-600 hover:underline">indoor play centres in Leeds</Link>, <Link href="/soft-play/york" className="text-purple-600 hover:underline">family venues in York</Link>, or <Link href="/soft-play/sheffield" className="text-purple-600 hover:underline">play areas in Sheffield</Link>, our directory helps you compare your options in one place. Every listing includes the venue's address, contact details, facilities, and directions.
+            </p>
+            <p>
+              Most modern soft play centres cater to a wide range of ages. Dedicated baby areas with sensory toys and soft mats are perfect for under-1s, while toddler zones with gentle slides and ball pits suit children up to around three or four years old. Older children can enjoy multi-level climbing frames, zip lines, and adventure courses. Many venues also offer <Link href="/search?filters=parties" className="text-purple-600 hover:underline">birthday party packages</Link> with private rooms and catering.
+            </p>
+            <p>
+              Accessibility is increasingly important to families, and a growing number of venues now run <Link href="/search?filters=sen" className="text-purple-600 hover:underline">SEN-friendly sessions</Link> with reduced noise, lower lighting, and smaller group sizes. These quieter sessions give children with additional needs the chance to play in a more comfortable environment.
+            </p>
+            <p>
+              Soft Play Near Me was created to help families find the right venue quickly and easily. We focus on accurate, up-to-date information so you can check opening times, compare facilities, and plan your visit with confidence. Venue owners can claim their listing for free to manage their profile, add photos, and keep their information current.
+            </p>
+            <p>
+              Browse our <Link href="/search" className="text-purple-600 hover:underline">full search</Link> to find soft play centres near your postcode, or explore by location using the links above. From <Link href="/search?filters=toddler" className="text-purple-600 hover:underline">toddler-friendly venues</Link> to centres with cafes and free parking, we make it simple to find the perfect indoor play destination for your family.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* FAQ Section */}
+      <div className="py-16 px-4 bg-slate-100">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-2xl font-bold text-slate-900 mb-8 text-center">Frequently Asked Questions</h2>
           <div className="space-y-6">
