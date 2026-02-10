@@ -28,9 +28,13 @@ export async function generateStaticParams() {
   return allSlugs.map((city) => ({ city }))
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: PageProps): Promise<Metadata> {
   const { city } = await params
+  const { filter, search } = await searchParams
   const cityConfig = getCityBySlug(city)
+
+  // Prevent indexing of filtered / searched variations
+  const noindex = !!(filter || search)
 
   if (!cityConfig) {
     const staticTown = getStaticTownBySlug(city)
@@ -46,6 +50,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return {
       title,
       description,
+      ...(noindex && { robots: { index: false, follow: true } }),
       openGraph: {
         title,
         description,
@@ -70,6 +75,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   return {
     title: generated.metaTitle,
     description: generated.metaDescription,
+    ...(noindex && { robots: { index: false, follow: true } }),
     openGraph: {
       title: generated.metaTitle,
       description: generated.metaDescription,
