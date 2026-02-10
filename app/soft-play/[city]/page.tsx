@@ -13,6 +13,8 @@ import { Footer } from '@/components/layout/Footer'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 import { buildBreadcrumbSchema, buildFAQSchema } from '@/lib/schema'
 import { JsonLd } from '@/components/seo/JsonLd'
+import { getLocationContent } from '@/lib/locationContent'
+import { LocationIntro } from '@/components/location/LocationIntro'
 
 interface PageProps {
   params: Promise<{ city: string }>
@@ -36,8 +38,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       return { title: 'City Not Found | Soft Play Near Me' }
     }
 
-    const title = `Soft Play in ${staticTown.name}`
-    const description = `Find the best soft play centres in ${staticTown.name}. Browse local indoor play venues, check facilities, opening times, and plan your visit.`
+    // Use content generator for unique meta titles/descriptions
+    const generated = getLocationContent(city, undefined, staticTown)
+    const title = generated.metaTitle
+    const description = generated.metaDescription
 
     return {
       title,
@@ -60,20 +64,23 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     }
   }
 
+  // Use content generator for richer meta if hand-written is thin
+  const generated = getLocationContent(city, cityConfig, null)
+
   return {
-    title: cityConfig.metaTitle,
-    description: cityConfig.metaDescription,
+    title: generated.metaTitle,
+    description: generated.metaDescription,
     openGraph: {
-      title: cityConfig.metaTitle,
-      description: cityConfig.metaDescription,
+      title: generated.metaTitle,
+      description: generated.metaDescription,
       url: `https://www.softplaynearme.co.uk/soft-play/${city}`,
       type: 'website',
       siteName: 'Soft Play Near Me',
     },
     twitter: {
       card: 'summary_large_image',
-      title: cityConfig.metaTitle,
-      description: cityConfig.metaDescription,
+      title: generated.metaTitle,
+      description: generated.metaDescription,
     },
     alternates: {
       canonical: `https://www.softplaynearme.co.uk/soft-play/${city}`,
@@ -191,13 +198,14 @@ export default async function CityPage({ params, searchParams }: PageProps) {
 
   const displayName = cityConfig?.name || staticTown?.name || city
   const county = cityConfig?.county || ''
-  const h1 = cityConfig?.h1 || `Soft Play in ${displayName}`
-  const intro = cityConfig?.intro || `Discover soft play centres in ${displayName}. Browse venues, check facilities, and find the perfect place for your family.`
-  const faqs = cityConfig?.faqs || []
   const nearbyAreas = cityConfig?.nearbyAreas || []
 
   const venues = await getVenues(city, filter, search)
   const nearbyCities = cityConfig ? getNearbyCities(city) : []
+
+  // Use content generator for rich intros and FAQs
+  const locationContent = getLocationContent(city, cityConfig, staticTown, venues.length)
+  const { h1, intro, faqs } = locationContent
 
   const baseUrl = 'https://www.softplaynearme.co.uk'
 
@@ -227,7 +235,9 @@ export default async function CityPage({ params, searchParams }: PageProps) {
         <div className="bg-gradient-to-br from-purple-600 to-pink-500 text-white py-10 sm:py-12 px-4">
           <div className="max-w-7xl mx-auto">
             <h1 className="text-3xl md:text-4xl font-bold mb-3">{h1}</h1>
-            <p className="text-purple-100 text-lg max-w-3xl">{intro}</p>
+            <p className="text-purple-100 text-lg max-w-3xl">
+              Find and compare soft play centres in {displayName}{county ? `, ${county}` : ''}. Browse venues, check facilities, and plan your visit.
+            </p>
           </div>
         </div>
 
@@ -357,6 +367,20 @@ export default async function CityPage({ params, searchParams }: PageProps) {
             </div>
           )}
 
+          {/* Category Links */}
+          <div className="mt-12">
+            <h2 className="text-xl font-semibold mb-4">Browse by Category in {displayName}</h2>
+            <div className="flex flex-wrap gap-2">
+              {filters.map((f) => (
+                <Link key={f.slug} href={`/soft-play/${city}/${f.slug}`}>
+                  <Badge variant="outline" className="hover:bg-purple-50 hover:border-purple-300 cursor-pointer py-1.5 px-3">
+                    {f.name} in {displayName}
+                  </Badge>
+                </Link>
+              ))}
+            </div>
+          </div>
+
           {/* Nearby Areas */}
           {(nearbyCities.length > 0 || nearbyAreas.length > 0) && (
             <div className="mt-12">
@@ -382,6 +406,9 @@ export default async function CityPage({ params, searchParams }: PageProps) {
               </div>
             </div>
           )}
+
+          {/* Location Intro (SEO content) */}
+          <LocationIntro content={intro} locationName={displayName} />
 
           {/* FAQs */}
           {faqs.length > 0 && (
