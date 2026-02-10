@@ -2,12 +2,16 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Card } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { getCityBySlug, getAllCitySlugs } from '@/lib/venues'
 import {
   MapPin,
   Star,
   Navigation,
+  Camera,
+  Clock,
+  Phone,
+  CheckCircle2,
 } from 'lucide-react'
 import type { Metadata } from 'next'
 import { getPool } from '@/lib/pool'
@@ -447,10 +451,25 @@ export default async function VenuePage({ params }: PageProps) {
           </div>
         </div>
 
-        {/* Photo Gallery */}
-        {photos.length > 0 && (
+        {/* Photo Gallery / Placeholder */}
+        {photos.length > 0 ? (
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-4 relative z-10">
             <PhotoGallery photos={photos} venueName={venue.name} />
+          </div>
+        ) : (
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div className="bg-slate-100 border-2 border-dashed border-slate-300 rounded-xl p-8 text-center">
+              <Camera className="w-12 h-12 mx-auto text-slate-400 mb-3" />
+              <h3 className="font-semibold text-slate-700 mb-2">No photos yet</h3>
+              <p className="text-sm text-slate-500 mb-4">
+                Are you the owner of {venue.name}? Add photos to help families choose your venue.
+              </p>
+              <Button variant="outline" asChild>
+                <a href={`mailto:info@softplaynearme.co.uk?subject=Photos%20for%20${encodeURIComponent(venue.name)}`}>
+                  Submit Photos
+                </a>
+              </Button>
+            </div>
           </div>
         )}
 
@@ -477,6 +496,17 @@ export default async function VenuePage({ params }: PageProps) {
                   <p className="text-slate-600 whitespace-pre-wrap leading-relaxed">
                     {venue.description}
                   </p>
+                  <div className="mt-4 pt-4 border-t border-slate-100">
+                    <p className="text-sm text-slate-500">
+                      Is this information correct?{' '}
+                      <a
+                        href={`mailto:info@softplaynearme.co.uk?subject=Update%20for%20${encodeURIComponent(venue.name)}`}
+                        className="text-purple-600 hover:text-purple-700 underline"
+                      >
+                        Send us updates
+                      </a>
+                    </p>
+                  </div>
                 </div>
               )}
 
@@ -569,6 +599,40 @@ export default async function VenuePage({ params }: PageProps) {
                   </Link>
                 </div>
               )}
+
+              {/* Venue Owner Section */}
+              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg border border-green-200 p-6">
+                <h2 className="font-semibold text-lg text-green-800 mb-3">
+                  Venue Owners: Manage Your Listing
+                </h2>
+                <p className="text-sm text-green-700 mb-4">
+                  Soft Play Near Me helps thousands of parents find venues like yours every month.
+                  Claim your free listing to:
+                </p>
+                <ul className="text-sm text-green-700 space-y-2 mb-4">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-green-600 flex-shrink-0" />
+                    Update opening hours and pricing
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-green-600 flex-shrink-0" />
+                    Add photos and descriptions
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-green-600 flex-shrink-0" />
+                    Highlight special sessions (SEN, toddler, parties)
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-green-600 flex-shrink-0" />
+                    Respond to reviews
+                  </li>
+                </ul>
+                <Button asChild className="bg-green-600 hover:bg-green-700">
+                  <a href={`mailto:info@softplaynearme.co.uk?subject=Claim%20Venue:%20${encodeURIComponent(venue.name)}&body=I%20am%20the%20owner/manager%20of%20${encodeURIComponent(venue.name)}%20and%20would%20like%20to%20claim%20this%20listing.`}>
+                    Claim Your Free Listing
+                  </a>
+                </Button>
+              </div>
             </div>
 
             {/* Sidebar */}
@@ -605,7 +669,52 @@ export default async function VenuePage({ params }: PageProps) {
                 />
 
                 {/* Opening Hours */}
-                <OpeningHours hours={venue.opening_hours ?? null} />
+                {venue.opening_hours ? (
+                  <OpeningHours hours={venue.opening_hours} />
+                ) : (
+                  <Card>
+                    <CardHeader className="pb-4">
+                      <CardTitle className="flex items-center gap-2 text-lg">
+                        <Clock className="h-5 w-5 text-purple-600" />
+                        Opening Hours
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm text-slate-500 mb-3">
+                        Opening hours not yet confirmed. Contact the venue directly to check times.
+                      </p>
+                      {venue.phone && (
+                        <Button variant="outline" size="sm" asChild>
+                          <a href={`tel:${venue.phone.replace(/\s/g, '')}`}>
+                            <Phone className="h-4 w-4" />
+                            Call to Check
+                          </a>
+                        </Button>
+                      )}
+                    </CardContent>
+                  </Card>
+                )}
+
+                {/* Claim Venue CTA */}
+                <Card className="border-green-200 bg-green-50">
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-lg text-green-800">Own this venue?</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <p className="text-sm text-green-700">
+                      Claim your free listing to update information, add photos,
+                      and manage your venue profile.
+                    </p>
+                    <Button asChild className="w-full bg-green-600 hover:bg-green-700">
+                      <a href={`mailto:info@softplaynearme.co.uk?subject=Claim%20Venue:%20${encodeURIComponent(venue.name)}&body=I%20am%20the%20owner/manager%20of%20${encodeURIComponent(venue.name)}%20and%20would%20like%20to%20claim%20this%20listing.`}>
+                        Claim This Venue (Free)
+                      </a>
+                    </Button>
+                    <p className="text-xs text-green-600 text-center">
+                      No cost, no obligation
+                    </p>
+                  </CardContent>
+                </Card>
               </div>
             </div>
           </div>
