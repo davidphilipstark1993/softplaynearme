@@ -1,0 +1,128 @@
+[
+  {
+    "slug": "hull",
+    "name": "Hull",
+    "county": "East Yorkshire",
+    "region": "Yorkshire",
+    "metaTitle": "Soft Play in Hull",
+    "metaDescription": "Find the best soft play centres in Hull. Compare venues, check opening times, and find toddler-friendly play areas across Hull and East Yorkshire.",
+    "h1": "Soft Play Centres in Hull",
+    "intro": "Discover the best soft play centres in Hull and East Yorkshire. From toddler-friendly play areas to full-size adventure zones, find the perfect indoor play venue for your family.",
+    "nearbyAreas": ["Beverley", "Hessle", "Cottingham", "Anlaby", "Willerby", "Brough"],
+    "faqs": [
+      {
+        "question": "What is the best soft play in Hull?",
+        "answer": "Hull has several excellent soft play centres catering to different age groups. The best choice depends on your children's ages and what facilities you need. Use our filters to find venues with cafes, party rooms, or dedicated toddler areas."
+      },
+      {
+        "question": "How much does soft play cost in Hull?",
+        "answer": "Soft play prices in Hull typically range from £4-8 per child for a standard session. Many venues offer discounts for siblings, under 1s often go free, and off-peak sessions can be cheaper. Party packages start from around £10-15 per child."
+      },
+      {
+        "question": "Are there soft play centres with SEN sessions in Hull?",
+        "answer": "Yes, several soft play centres in Hull offer dedicated SEN sessions with reduced numbers, lower music/lighting, and additional support. Check individual venue pages for their SEN provision and session times."
+      },
+      {
+        "question": "Can I book soft play birthday parties in Hull?",
+        "answer": "Most soft play centres in Hull offer birthday party packages including exclusive use of party rooms, food, and dedicated play time. Packages typically include invitations, party bags, and a host. Book early as weekends fill up quickly."
+      }
+    ]
+  },
+  {
+    "slug": "beverley",
+    "name": "Beverley",
+    "county": "East Yorkshire",
+    "region": "Yorkshire",
+    "metaTitle": "Soft Play in Beverley",
+    "metaDescription": "Find soft play centres in Beverley, East Yorkshire. Compare indoor play venues, check opening times, and find activities for kids of all ages.",
+    "h1": "Soft Play Centres in Beverley",
+    "intro": "Looking for indoor play in Beverley? Browse our guide to soft play centres in the area, perfect for rainy days and birthday parties.",
+    "nearbyAreas": ["Hull", "Cottingham", "Market Weighton", "Driffield"],
+    "faqs": [
+      {
+        "question": "Are there soft play centres in Beverley?",
+        "answer": "While Beverley has some indoor play options, many families also visit nearby soft play centres in Hull and Cottingham which are just a short drive away. Our directory shows all venues within easy reach."
+      },
+      {
+        "question": "What age is soft play suitable for?",
+        "answer": "Most soft play centres welcome children from babies up to around 11-12 years old. Many have separate areas for under 3s/4s to ensure toddlers can play safely away from older children."
+      }
+    ]
+  },
+  {
+    "slug": "york",
+    "name": "York",
+    "county": "North Yorkshire",
+    "region": "Yorkshire",
+    "metaTitle": "Soft Play in York",
+    "metaDescription": "Find the best soft play centres in York. Compare indoor play venues with cafes, party facilities, and toddler areas across York and North Yorkshire.",
+    "h1": "Soft Play Centres in York",
+    "intro": "Discover indoor play centres in York perfect for families. From adventure play to toddler zones, find soft play venues with great facilities.",
+    "nearbyAreas": ["Tadcaster", "Selby", "Malton", "Easingwold", "Pocklington"],
+    "faqs": [
+      {
+        "question": "What are the best soft play centres in York?",
+        "answer": "York has a good selection of soft play venues ranging from large adventure centres to smaller, more intimate play spaces. Browse our listings to compare facilities, prices, and reviews."
+      },
+      {
+        "question": "Do soft play centres in York have cafes?",
+        "answer": "Most soft play centres in York have on-site cafes serving hot and cold drinks, snacks, and meals. Some also offer free WiFi so parents can work while children play."
+      }
+    ]
+  },
+  {
+    "slug": "leeds",
+    "name": "Leeds",
+    "county": "West Yorkshire",
+    "region": "Yorkshire",
+    "metaTitle": "Soft Play in Leeds",
+    "metaDescription": "Find soft play centres in Leeds and West Yorkshire. Compare venues with adventure play, toddler areas, and birthday party packages.",
+    "h1": "Soft Play Centres in Leeds",
+    "intro": "Looking for soft play in Leeds? Browse our comprehensive guide to indoor play centres across Leeds and West Yorkshire.",
+    "nearbyAreas": ["Bradford", "Wakefield", "Huddersfield", "Harrogate", "Wetherby"],
+    "faqs": [
+      {
+        "question": "How many soft play centres are there in Leeds?",
+        "answer": "Leeds and the surrounding area has numerous soft play options, from large chains to independent venues. Use our directory to find the one that best suits your needs."
+      }
+    ]
+  },
+  {
+    "slug": "sheffield",
+    "name": "Sheffield",
+    "county": "South Yorkshire",
+    "region": "Yorkshire",
+    "metaTitle": "Soft Play in Sheffield",
+    "metaDescription": "Find the best soft play centres in Sheffield. Compare indoor play venues, check facilities, and book birthday parties across South Yorkshire.",
+    "h1": "Soft Play Centres in Sheffield",
+    "intro": "Discover soft play centres in Sheffield perfect for all ages. From toddler play to adventure zones, find indoor fun for your family.",
+    "nearbyAreas": ["Rotherham", "Barnsley", "Doncaster", "Chesterfield"],
+    "faqs": [
+      {
+        "question": "What soft play options are there in Sheffield?",
+        "answer": "Sheffield has a variety of soft play centres catering to different ages and preferences. Our directory helps you compare facilities, prices, and locations."
+      }
+    ]
+  },
+  {
+    "slug": "bridlington",
+    "name": "Bridlington",
+    "county": "East Yorkshire",
+    "region": "Yorkshire",
+    "metaTitle": "Soft Play in Bridlington",
+    "metaDescription": "Find soft play centres in Bridlington. Browse indoor play venues, check facilities, and find activities for kids of all ages on the East Yorkshire coast.",
+    "h1": "Soft Play Centres in Bridlington",
+    "intro": "Looking for indoor play in Bridlington? Browse our guide to soft play centres in the area, perfect for rainy days at the seaside and birthday parties.",
+    "nearbyAreas": ["Hull", "Beverley", "Driffield", "Scarborough"],
+    "faqs": [
+      {
+        "question": "Are there soft play centres in Bridlington?",
+        "answer": "Bridlington has indoor play options for families visiting the coast. Our directory shows all venues in the area including nearby options in Hull and Beverley."
+      },
+      {
+        "question": "What is there to do with kids in Bridlington when it rains?",
+        "answer": "Soft play centres are perfect for rainy days in Bridlington. Many venues have cafes where parents can relax while children play safely indoors."
+      }
+    ]
+  }
+]
