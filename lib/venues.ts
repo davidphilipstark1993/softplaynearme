@@ -7,6 +7,7 @@ export interface CityConfig {
   slug: string
   name: string
   county: string
+  region?: string
   metaTitle: string
   metaDescription: string
   h1: string
@@ -16,6 +17,25 @@ export interface CityConfig {
     question: string
     answer: string
   }[]
+}
+
+/**
+ * Region lookup — maps counties to broader regions for content generation
+ */
+export const REGIONS: { region: string; counties: string[] }[] = [
+  { region: 'Yorkshire', counties: ['East Yorkshire', 'North Yorkshire', 'West Yorkshire', 'South Yorkshire'] },
+  { region: 'North East', counties: ['County Durham', 'Northumberland', 'Tyne and Wear'] },
+  { region: 'North West', counties: ['Greater Manchester', 'Merseyside', 'Lancashire', 'Cheshire', 'Cumbria'] },
+  { region: 'East Midlands', counties: ['Derbyshire', 'Nottinghamshire', 'Leicestershire', 'Lincolnshire', 'Northamptonshire'] },
+  { region: 'West Midlands', counties: ['West Midlands', 'Staffordshire', 'Warwickshire', 'Worcestershire', 'Shropshire'] },
+  { region: 'South East', counties: ['Kent', 'Surrey', 'Sussex', 'Hampshire', 'Berkshire', 'Oxfordshire', 'Buckinghamshire'] },
+  { region: 'South West', counties: ['Devon', 'Cornwall', 'Somerset', 'Dorset', 'Gloucestershire', 'Wiltshire', 'Bristol'] },
+  { region: 'East of England', counties: ['Norfolk', 'Suffolk', 'Essex', 'Cambridgeshire', 'Hertfordshire', 'Bedfordshire'] },
+  { region: 'London', counties: ['Greater London'] },
+]
+
+export function getRegionForCounty(county: string): string | undefined {
+  return REGIONS.find(r => r.counties.includes(county))?.region
 }
 
 export interface FilterConfig {
@@ -74,6 +94,7 @@ export const cities: CityConfig[] = [
     slug: 'hull',
     name: 'Hull',
     county: 'East Yorkshire',
+    region: 'Yorkshire',
     metaTitle: 'Soft Play in Hull',
     metaDescription: 'Find the best soft play centres in Hull. Compare venues, check opening times, and find toddler-friendly play areas across Hull and East Yorkshire.',
     h1: 'Soft Play Centres in Hull',
@@ -102,6 +123,7 @@ export const cities: CityConfig[] = [
     slug: 'beverley',
     name: 'Beverley',
     county: 'East Yorkshire',
+    region: 'Yorkshire',
     metaTitle: 'Soft Play in Beverley',
     metaDescription: 'Find soft play centres in Beverley, East Yorkshire. Compare indoor play venues, check opening times, and find activities for kids of all ages.',
     h1: 'Soft Play Centres in Beverley',
@@ -122,6 +144,7 @@ export const cities: CityConfig[] = [
     slug: 'york',
     name: 'York',
     county: 'North Yorkshire',
+    region: 'Yorkshire',
     metaTitle: 'Soft Play in York',
     metaDescription: 'Find the best soft play centres in York. Compare indoor play venues with cafes, party facilities, and toddler areas across York and North Yorkshire.',
     h1: 'Soft Play Centres in York',
@@ -142,6 +165,7 @@ export const cities: CityConfig[] = [
     slug: 'leeds',
     name: 'Leeds',
     county: 'West Yorkshire',
+    region: 'Yorkshire',
     metaTitle: 'Soft Play in Leeds',
     metaDescription: 'Find soft play centres in Leeds and West Yorkshire. Compare venues with adventure play, toddler areas, and birthday party packages.',
     h1: 'Soft Play Centres in Leeds',
@@ -158,6 +182,7 @@ export const cities: CityConfig[] = [
     slug: 'sheffield',
     name: 'Sheffield',
     county: 'South Yorkshire',
+    region: 'Yorkshire',
     metaTitle: 'Soft Play in Sheffield',
     metaDescription: 'Find the best soft play centres in Sheffield. Compare indoor play venues, check facilities, and book birthday parties across South Yorkshire.',
     h1: 'Soft Play Centres in Sheffield',
@@ -174,6 +199,7 @@ export const cities: CityConfig[] = [
     slug: 'bridlington',
     name: 'Bridlington',
     county: 'East Yorkshire',
+    region: 'Yorkshire',
     metaTitle: 'Soft Play in Bridlington',
     metaDescription: 'Find soft play centres in Bridlington. Browse indoor play venues, check facilities, and find activities for kids of all ages on the East Yorkshire coast.',
     h1: 'Soft Play Centres in Bridlington',
