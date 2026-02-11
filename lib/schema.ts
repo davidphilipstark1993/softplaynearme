@@ -21,8 +21,16 @@ const SCHEMA_DAYS: Record<string, string> = {
  * into { opens: "09:00", closes: "18:00" } (24-hour ISO format).
  * Returns null for "Closed" or unparseable strings.
  */
-function parseHoursString(raw: string): { opens: string; closes: string } | null {
-  if (!raw || raw.toLowerCase() === 'closed') return null
+function parseHoursString(raw: string | { open: string; close: string }): { opens: string; closes: string } | null {
+  // Handle object format from database: { open: "09:30", close: "17:00" }
+  if (typeof raw === 'object' && raw !== null && 'open' in raw && 'close' in raw) {
+    if (raw.open === 'closed' || raw.close === 'closed') return null
+    const pad = (s: string) => s.padStart(5, '0') // ensure "9:00" → "09:00"
+    return { opens: pad(raw.open), closes: pad(raw.close) }
+  }
+
+  if (!raw || typeof raw !== 'string') return null
+  if (raw.toLowerCase() === 'closed') return null
 
   const match = raw.match(
     /(\d{1,2}):?(\d{2})?\s*(am|pm)?\s*[-–]\s*(\d{1,2}):?(\d{2})?\s*(am|pm)?/i
@@ -61,7 +69,7 @@ export interface LocalBusinessSchemaInput {
   website?: string
   lat?: number
   lng?: number
-  openingHours?: Record<string, string> | null
+  openingHours?: Record<string, string | { open: string; close: string }> | null
   priceFrom?: number
   priceTo?: number
   avgRating?: number
