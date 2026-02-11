@@ -16,12 +16,11 @@ export function getPool(): Pool {
 
   const pool = new Pool({
     connectionString,
-    ssl: { rejectUnauthorized: false }
+    ssl: { rejectUnauthorized: false },
+    max: 3,
   })
 
-  if (process.env.NODE_ENV !== 'production') {
-    global.__pgPool = pool
-  }
+  global.__pgPool = pool
 
   return pool
 }
