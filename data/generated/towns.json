@@ -15,6 +15,11 @@
     "venueCount": 73
   },
   {
+    "name": "Sheffield",
+    "slug": "sheffield",
+    "venueCount": 120
+  },
+  {
     "name": "York",
     "slug": "york",
     "venueCount": 92
