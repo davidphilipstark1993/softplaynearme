@@ -3,13 +3,34 @@ import { Badge } from '@/components/ui/badge'
 import { Clock } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
+interface OpeningHoursObject {
+  open: string
+  close: string
+}
+
+type OpeningHoursValue = string | OpeningHoursObject
+
 interface OpeningHoursData {
-  [key: string]: string
+  [key: string]: OpeningHoursValue
 }
 
 interface OpeningHoursProps {
   hours: OpeningHoursData | null
   className?: string
+}
+
+/**
+ * Normalize an opening hours value to a display string.
+ * Handles both plain strings ("9:00am - 5:00pm") and objects ({ open: "09:30", close: "17:00" }).
+ */
+function normalizeHoursValue(value: OpeningHoursValue | undefined): string | undefined {
+  if (value === undefined || value === null) return undefined
+  if (typeof value === 'string') return value
+  if (typeof value === 'object' && value.open && value.close) {
+    if (value.open === 'closed' || value.close === 'closed') return 'closed'
+    return `${value.open} - ${value.close}`
+  }
+  return undefined
 }
 
 const DAYS = [
@@ -31,7 +52,7 @@ function isOpenNow(hours: OpeningHoursData | null): boolean {
   if (!hours) return false
 
   const todayKey = getTodayKey()
-  const todayHours = hours[todayKey]
+  const todayHours = normalizeHoursValue(hours[todayKey])
 
   if (!todayHours || todayHours.toLowerCase() === 'closed') {
     return false
@@ -65,7 +86,8 @@ function isOpenNow(hours: OpeningHoursData | null): boolean {
   return currentMinutes >= openMinutes && currentMinutes < closeMinutes
 }
 
-function formatHours(hours: string): string {
+function formatHours(value: OpeningHoursValue | undefined): string {
+  const hours = normalizeHoursValue(value)
   if (!hours || hours.toLowerCase() === 'closed') {
     return 'Closed'
   }
@@ -102,7 +124,8 @@ export function OpeningHours({ hours, className }: OpeningHoursProps) {
         <ul className="space-y-2">
           {DAYS.map(({ key, label }) => {
             const isToday = key === todayKey
-            const dayHours = hours[key]
+            const dayHoursRaw = hours[key]
+            const dayHours = normalizeHoursValue(dayHoursRaw)
 
             return (
               <li
@@ -128,7 +151,7 @@ export function OpeningHours({ hours, className }: OpeningHoursProps) {
                         : ''
                   )}
                 >
-                  {formatHours(dayHours)}
+                  {formatHours(dayHoursRaw)}
                 </span>
               </li>
             )
