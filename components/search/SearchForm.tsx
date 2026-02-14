@@ -221,7 +221,7 @@ export function SearchForm({
 
   if (compact) {
     return (
-      <form onSubmit={handleSubmit} className={cn('flex gap-2', className)}>
+      <form onSubmit={handleSubmit} className={cn('flex gap-2 text-slate-900', className)}>
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
@@ -233,7 +233,7 @@ export function SearchForm({
             className={cn('pl-10', readableInputClasses)}
           />
         </div>
-        <Button type="submit">
+        <Button type="submit" className="text-slate-900">
           Search
         </Button>
       </form>
@@ -241,7 +241,7 @@ export function SearchForm({
   }
 
   return (
-    <form onSubmit={handleSubmit} className={cn('space-y-4', className)}>
+    <form onSubmit={handleSubmit} className={cn('space-y-4 text-slate-900', className)}>
       <div className="flex flex-col sm:flex-row gap-3">
         {/* Postcode/city input with autocomplete */}
         <div className="relative flex-1">
@@ -275,7 +275,7 @@ export function SearchForm({
           variant="outline"
           onClick={handleGeolocation}
           disabled={isLocating}
-          className="h-12 whitespace-nowrap"
+          className="h-12 whitespace-nowrap text-slate-900 border-slate-300"
         >
           {isLocating ? (
             <Loader2 className="h-4 w-4 animate-spin" />
@@ -288,7 +288,7 @@ export function SearchForm({
         </Button>
 
         {/* Search button */}
-        <Button type="submit" size="lg" className="h-12">
+        <Button type="submit" size="lg" className="h-12 bg-slate-100 text-slate-900 hover:bg-slate-200">
           <Search className="h-4 w-4 sm:mr-2" />
           <span className="hidden sm:inline">Search</span>
         </Button>
@@ -297,7 +297,7 @@ export function SearchForm({
       {/* Radius selection */}
       {showRadius && (
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-sm text-muted-foreground">Within:</span>
+          <span className="text-sm text-slate-700">Within:</span>
           {RADIUS_OPTIONS.map((option) => (
             <button
               key={option.value}
@@ -306,8 +306,8 @@ export function SearchForm({
               className={cn(
                 'px-3 py-1.5 rounded-full text-sm font-medium transition-colors',
                 radius === option.value
-                  ? 'bg-purple-600 text-white'
-                  : 'bg-muted hover:bg-muted/80 text-foreground'
+                  ? 'bg-purple-100 text-slate-900 border border-purple-300'
+                  : 'bg-slate-100 hover:bg-slate-200 text-slate-900 border border-slate-200'
               )}
             >
               {option.label}
