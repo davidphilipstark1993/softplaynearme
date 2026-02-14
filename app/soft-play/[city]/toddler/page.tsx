@@ -10,6 +10,8 @@ import { getPool } from '@/lib/pool'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
+import { buildBreadcrumbSchema, buildFAQSchema } from '@/lib/schema'
+import { JsonLd } from '@/components/seo/JsonLd'
 
 interface PageProps {
   params: Promise<{ city: string }>
@@ -91,6 +93,27 @@ async function getVenues(citySlug: string): Promise<Venue[]> {
   }
 }
 
+function getToddlerFAQs(cityName: string) {
+  return [
+    {
+      question: `What age is the toddler area for at soft play in ${cityName}?`,
+      answer: `Toddler areas at soft play centres in ${cityName} are typically designed for children under 3 or under 4 years old. These sections feature age-appropriate equipment including soft mats, gentle slides, ball pits, and sensory toys in a calmer, separated area.`,
+    },
+    {
+      question: `Are babies welcome at soft play in ${cityName}?`,
+      answer: `Yes, most soft play centres in ${cityName} welcome babies. Many have dedicated baby areas with soft textures, mirrors, and sensory toys. Babies under 12 months usually enter free. Look for venues with specific baby or under-1s sections.`,
+    },
+    {
+      question: `Do toddler soft play centres in ${cityName} have cafes?`,
+      answer: `Most toddler-friendly soft play venues in ${cityName} have on-site cafes serving hot drinks, snacks, and children's meals. Many offer baby-friendly options and high chairs. Some venues also allow you to bring your own food and drinks.`,
+    },
+    {
+      question: `When is the best time to visit toddler soft play in ${cityName}?`,
+      answer: `Weekday mornings are the best time for toddler soft play in ${cityName}. Some venues run dedicated toddler-only sessions, usually on Tuesday to Thursday mornings, which are quieter and calmer. Avoid weekends and school holidays if your child prefers a less busy environment.`,
+    },
+  ]
+}
+
 export default async function ToddlerPage({ params }: PageProps) {
   const { city } = await params
   const cityConfig = getCityBySlug(city)
@@ -105,19 +128,20 @@ export default async function ToddlerPage({ params }: PageProps) {
   const h1 = filterConfig.h1Template.replace('{city}', cityConfig.name)
   const intro = filterConfig.introTemplate.replace('{city}', cityConfig.name)
 
-  const breadcrumbSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.softplaynearme.co.uk' },
-      { '@type': 'ListItem', position: 2, name: `Soft Play in ${cityConfig.name}`, item: `https://www.softplaynearme.co.uk/soft-play/${city}` },
-      { '@type': 'ListItem', position: 3, name: filterConfig.name, item: `https://www.softplaynearme.co.uk/soft-play/${city}/${FILTER_SLUG}` },
-    ],
-  }
+  const baseUrl = 'https://www.softplaynearme.co.uk'
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: 'Home', url: baseUrl },
+    { name: `Soft Play in ${cityConfig.name}`, url: `${baseUrl}/soft-play/${city}` },
+    { name: 'Toddler Friendly', url: `${baseUrl}/soft-play/${city}/${FILTER_SLUG}` },
+  ])
+
+  const faqs = getToddlerFAQs(cityConfig.name)
+  const faqSchema = buildFAQSchema(faqs)
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={faqSchema} />
 
       <div className="min-h-screen bg-slate-50">
         <Header />
@@ -140,7 +164,7 @@ export default async function ToddlerPage({ params }: PageProps) {
 
           {venues.length === 0 ? (
             <div className="text-center py-16">
-              <div className="text-slate-400 text-6xl mb-4">👶</div>
+              <Baby className="w-16 h-16 mx-auto text-slate-300 mb-4" />
               <h3 className="text-xl font-semibold text-slate-700 mb-2">No toddler-friendly venues found yet</h3>
               <p className="text-slate-500 mb-6">Check back soon or view all venues in {cityConfig.name}.</p>
               <Link href={`/soft-play/${city}`}>
@@ -169,7 +193,7 @@ export default async function ToddlerPage({ params }: PageProps) {
                         {venue.postcode}
                       </div>
                       <div className="flex flex-wrap gap-2">
-                        <Badge variant="outline" className="text-xs bg-purple-50">
+                        <Badge variant="outline" className="text-xs bg-blue-50 border-blue-200 text-blue-700">
                           <Baby className="w-3 h-3 mr-1" /> Toddler Area
                         </Badge>
                         {venue.cafe && <Badge variant="outline" className="text-xs"><Coffee className="w-3 h-3 mr-1" /> Cafe</Badge>}
@@ -182,6 +206,21 @@ export default async function ToddlerPage({ params }: PageProps) {
                   </Card>
                 </Link>
               ))}
+            </div>
+          )}
+
+          {/* FAQs */}
+          {faqs.length > 0 && (
+            <div className="mt-12">
+              <h2 className="text-xl font-semibold mb-6">Toddler Soft Play FAQs</h2>
+              <div className="space-y-4">
+                {faqs.map((faq, index) => (
+                  <div key={index} className="bg-white p-6 rounded-lg border border-slate-200">
+                    <h3 className="font-semibold text-lg mb-2">{faq.question}</h3>
+                    <p className="text-slate-600">{faq.answer}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
         </main>
