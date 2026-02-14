@@ -353,6 +353,7 @@ export default async function VenuePage({ params }: PageProps) {
   const venue = await getVenue(city, slug)
   const cityConfig = getCityBySlug(city)
   const staticTown = getStaticTownBySlug(city)
+  const relatedCities = cityConfig ? getNearbyCities(city).slice(0, 6) : []
 
   if (!venue) {
     notFound()
