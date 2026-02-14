@@ -125,14 +125,20 @@ export default function RootLayout({
             gtag('js', new Date());
             gtag('config', 'G-LELV01QR3Z');
 
-            // Track outbound clicks (directions, venue websites)
+            // Track outbound clicks (directions, venue websites, phone calls)
             document.addEventListener('click', function(e) {
-              var link = e.target.closest('a[target="_blank"]');
-              if (link) {
-                var href = link.getAttribute('href') || '';
+              var link = e.target.closest('a');
+              if (!link) return;
+              var href = link.getAttribute('href') || '';
+
+              if (href.startsWith('tel:')) {
+                gtag('event', 'phone_click', { phone: href.replace('tel:', '') });
+              } else if (href.startsWith('mailto:')) {
+                gtag('event', 'email_click', { email: href.replace('mailto:', '').split('?')[0] });
+              } else if (link.target === '_blank') {
                 if (href.includes('google.com/maps')) {
                   gtag('event', 'directions_click', { url: href });
-                } else if (href && !href.includes('softplaynearme.co.uk')) {
+                } else if (!href.includes('softplaynearme.co.uk')) {
                   gtag('event', 'outbound_click', { url: href });
                 }
               }

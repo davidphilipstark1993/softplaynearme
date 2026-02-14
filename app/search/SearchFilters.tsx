@@ -51,10 +51,19 @@ export function SearchFilters({
   )
 
   const handleFilterChange = (filters: string[]) => {
+    // Track filter usage
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      ;(window as any).gtag('event', 'filter_applied', {
+        filters: filters.join(','),
+      })
+    }
     updateUrl(filters, selectedSort)
   }
 
   const handleSortChange = (sort: SortOption) => {
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      ;(window as any).gtag('event', 'sort_changed', { sort_by: sort })
+    }
     updateUrl(selectedFilters, sort)
   }
 
