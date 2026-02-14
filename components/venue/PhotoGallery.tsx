@@ -71,7 +71,7 @@ export function PhotoGallery({ photos, venueName }: PhotoGalleryProps) {
               fill
               className="object-cover transition-transform duration-300 group-hover:scale-105"
               sizes={index === 0 ? '(max-width: 768px) 100vw, 50vw' : '(max-width: 768px) 50vw, 25vw'}
-              loading={index < 4 ? 'eager' : 'lazy'}
+              priority={index === 0}
             />
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
             {index === 7 && photos.length > 8 && (
