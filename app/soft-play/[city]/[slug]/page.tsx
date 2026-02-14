@@ -303,9 +303,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const cityName = cityConfig?.name || staticTown?.name || city
-  const title = `${venue.name} - Soft Play in ${cityName}`
+  const title = `${venue.name} | Soft Play in ${cityName}`
+  const features = [
+    venue.toddler_area && 'toddler area',
+    venue.parties && 'birthday parties',
+    venue.cafe && 'cafe',
+    venue.sen_friendly && 'SEN friendly',
+  ].filter(Boolean)
+  const featureText = features.length > 0 ? ` Features: ${features.join(', ')}.` : ''
   const description = venue.description
-    || `Visit ${venue.name} soft play centre in ${cityName}. Check opening times, facilities, prices, and get directions.`
+    || `Visit ${venue.name} soft play centre in ${cityName}. Check opening times, facilities, prices, and get directions.${featureText}`
 
   return {
     title,
@@ -408,7 +415,7 @@ export default async function VenuePage({ params }: PageProps) {
                   <Badge className="bg-yellow-400 text-yellow-900 mb-2">Featured</Badge>
                 )}
                 <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
-                  Soft Play in {cityName}: {venue.name}
+                  {venue.name} <span className="text-purple-200 font-normal text-xl sm:text-2xl md:text-3xl">| Soft Play in {cityName}</span>
                 </h1>
                 <div className="flex items-center gap-2 text-purple-100">
                   <MapPin className="w-5 h-5" />
