@@ -28,20 +28,13 @@ export const metadata: Metadata = {
     siteName: "Soft Play Near Me",
     title: "Soft Play Near Me | Find Soft Play Centres Across the UK",
     description: "Find the best soft play centres near you. Compare indoor play venues, check opening times, and discover toddler-friendly play areas.",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Soft Play Near Me - Find Indoor Play Centres",
-      },
-    ],
+    images: ["/opengraph-image"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Soft Play Near Me | Find Soft Play Centres",
     description: "Find the best soft play centres near you. Compare venues, check opening times, and book birthday parties.",
-    images: ["/og-image.png"],
+    images: ["/opengraph-image"],
   },
   robots: {
     index: true,
@@ -107,7 +100,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
         {/* Preconnect to external services */}
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://api.postcodes.io" />
