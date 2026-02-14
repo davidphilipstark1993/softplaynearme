@@ -21,6 +21,8 @@ import { Footer } from '@/components/layout/Footer'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 import { buildLocalBusinessSchema, buildBreadcrumbSchema } from '@/lib/schema'
 import { JsonLd } from '@/components/seo/JsonLd'
+import { getStoredReviews } from '@/lib/reviewsStore'
+import { ReviewSection } from '@/components/venue/ReviewSection'
 
 import { PhotoGallery } from '@/components/venue/PhotoGallery'
 import { PricingTable } from '@/components/venue/PricingTable'
@@ -152,7 +154,14 @@ function staticToVenue(sv: StaticVenue): Venue {
   } as Venue & { _mapsUrl?: string; _isStatic?: boolean }
 }
 
-async function getReviews(venueId: number): Promise<Review[]> {
+async function getReviews(venueId: number, citySlug: string, venueSlug: string): Promise<Review[]> {
+  const storedFallback = async () =>
+    (await getStoredReviews({
+      venueId: venueId > 0 ? venueId : undefined,
+      citySlug,
+      venueSlug,
+    })) as Review[]
+
   try {
     const pool = getPool()
     const client = await pool.connect()
@@ -161,12 +170,13 @@ async function getReviews(venueId: number): Promise<Review[]> {
         'SELECT * FROM reviews WHERE venue_id = $1 AND approved = true ORDER BY created_at DESC',
         [venueId]
       )
-      return result.rows
+      if (result.rows.length > 0) return result.rows
+      return storedFallback()
     } finally {
       client.release()
     }
-  } catch (error) {
-    return []
+  } catch {
+    return storedFallback()
   }
 }
 
@@ -353,7 +363,7 @@ export default async function VenuePage({ params }: PageProps) {
 
   // Fetch all related data in parallel
   const [reviews, pricing, sessions, photos, nearbyVenues] = await Promise.all([
-    getReviews(venue.id),
+    getReviews(venue.id, city, slug),
     getPricing(venue.id),
     getSessions(venue.id),
     getPhotos(venue.id),
@@ -547,50 +557,12 @@ export default async function VenuePage({ params }: PageProps) {
               {/* Special Sessions */}
               {sessions.length > 0 && <SpecialSessions sessions={sessions} />}
 
-              {/* Reviews Section */}
-              <div className="bg-white rounded-lg border border-slate-200 p-6">
-                <h2 className="font-semibold text-lg mb-4">
-                  Reviews {reviews.length > 0 && `(${reviews.length})`}
-                </h2>
-                {reviews.length === 0 ? (
-                  <p className="text-slate-500 text-center py-8">
-                    No reviews yet. Be the first to review!
-                  </p>
-                ) : (
-                  <div className="space-y-4">
-                    {reviews.map((review) => (
-                      <div
-                        key={review.id}
-                        className="border-b border-slate-100 pb-4 last:border-0"
-                      >
-                        <div className="flex justify-between items-center mb-2">
-                          <span className="font-semibold">{review.reviewer_name}</span>
-                          <div className="flex">
-                            {[...Array(5)].map((_, i) => (
-                              <Star
-                                key={i}
-                                className={`w-4 h-4 ${
-                                  i < review.rating
-                                    ? 'text-yellow-400 fill-current'
-                                    : 'text-slate-200'
-                                }`}
-                              />
-                            ))}
-                          </div>
-                        </div>
-                        <p className="text-slate-600 text-sm">{review.comment}</p>
-                        <p className="text-slate-400 text-xs mt-2">
-                          {new Date(review.created_at).toLocaleDateString('en-GB', {
-                            day: 'numeric',
-                            month: 'long',
-                            year: 'numeric',
-                          })}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
+              <ReviewSection
+                initialReviews={reviews}
+                venueId={venue.id}
+                citySlug={city}
+                venueSlug={slug}
+              />
 
               {/* Nearby Venues */}
               {nearbyVenues.length > 0 && (
