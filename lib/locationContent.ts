@@ -30,6 +30,10 @@ export interface GeneratedLocationContent {
   h1: string
 }
 
+function getWordCount(text: string): number {
+  return text.trim().split(/\s+/).filter(Boolean).length
+}
+
 // ── Deterministic hash + seeded picker ─────────────────────────────────
 
 /**
@@ -376,28 +380,11 @@ export function getLocationContent(
   staticTown: { name: string; slug: string } | null,
   venueCount?: number
 ): GeneratedLocationContent {
-  // If there's a city config with substantial hand-written content, use it
-  if (
-    cityConfig &&
-    cityConfig.intro.length > 100 &&
-    cityConfig.faqs.length >= 4
-  ) {
-    return {
-      intro: cityConfig.intro,
-      faqs: cityConfig.faqs,
-      metaTitle: cityConfig.metaTitle,
-      metaDescription: cityConfig.metaDescription,
-      h1: cityConfig.h1,
-    }
-  }
-
-  // Otherwise generate content
   const name = cityConfig?.name || staticTown?.name || slug
   const county = cityConfig?.county || ''
   const region = cityConfig?.region || (county ? getRegionForCounty(county) : undefined)
   const nearbyAreas = cityConfig?.nearbyAreas || []
-
-  return generateLocationContent({
+  const generated = generateLocationContent({
     slug,
     name,
     county,
@@ -405,4 +392,26 @@ export function getLocationContent(
     nearbyAreas,
     venueCount,
   })
+
+  // Use hand-written content only when it meets indexable depth requirements.
+  if (
+    cityConfig &&
+    getWordCount(cityConfig.intro) >= 300 &&
+    cityConfig.faqs.length >= 8
+  ) {
+    return {
+      intro: cityConfig.intro,
+      faqs: cityConfig.faqs.slice(0, 8),
+      metaTitle: cityConfig.metaTitle,
+      metaDescription: cityConfig.metaDescription,
+      h1: `Soft Play in ${name}`,
+    }
+  }
+
+  return {
+    ...generated,
+    h1: `Soft Play in ${name}`,
+    metaTitle: `Soft play in ${name} - indoor play centres near you`,
+    metaDescription: `Find soft play in ${name}. Compare indoor play centres near you, including toddler zones, parties, SEN-friendly sessions, opening times, and directions.`,
+  }
 }
