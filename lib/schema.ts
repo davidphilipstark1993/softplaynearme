@@ -230,3 +230,39 @@ export function buildFAQSchema(faqs: FAQItem[]) {
     })),
   }
 }
+
+// ── ItemList schema builder ────────────────────────────────────────────
+
+export interface ItemListVenue {
+  name: string
+  slug: string
+  citySlug: string
+  address?: string
+  postcode?: string
+}
+
+/**
+ * Build a Schema.org ItemList JSON-LD object for a list of venues.
+ * Used on city/town pages to give Google structured listing data.
+ */
+export function buildItemListSchema(
+  venues: ItemListVenue[],
+  listName: string
+) {
+  if (venues.length === 0) return null
+
+  const baseUrl = 'https://www.softplaynearme.co.uk'
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: listName,
+    numberOfItems: venues.length,
+    itemListElement: venues.map((venue, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: venue.name,
+      url: `${baseUrl}/soft-play/${venue.citySlug}/${venue.slug}`,
+    })),
+  }
+}

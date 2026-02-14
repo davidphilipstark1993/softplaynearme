@@ -11,7 +11,7 @@ import { getStaticVenuesByTown, getStaticTownBySlug, getAllStaticTownSlugs, type
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
-import { buildBreadcrumbSchema, buildFAQSchema } from '@/lib/schema'
+import { buildBreadcrumbSchema, buildFAQSchema, buildItemListSchema } from '@/lib/schema'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { getLocationContent } from '@/lib/locationContent'
 import { LocationIntro } from '@/components/location/LocationIntro'
@@ -224,10 +224,16 @@ export default async function CityPage({ params, searchParams }: PageProps) {
 
   const faqSchema = buildFAQSchema(faqs)
 
+  const itemListSchema = buildItemListSchema(
+    venues.map(v => ({ name: v.name, slug: v.slug, citySlug: city })),
+    `Soft Play Centres in ${displayName}`
+  )
+
   return (
     <>
       <JsonLd data={breadcrumbSchema} />
       <JsonLd data={faqSchema} />
+      <JsonLd data={itemListSchema} />
 
       <div className="min-h-screen bg-slate-50">
         <Header />
