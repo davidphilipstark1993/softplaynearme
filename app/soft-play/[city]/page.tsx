@@ -286,7 +286,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
             <div className="text-center py-16">
               <MapPin className="w-12 h-12 mx-auto text-slate-300 mb-4" />
               <h3 className="text-xl font-semibold text-slate-700 mb-2">No venues found yet</h3>
-              <p className="text-slate-500 mb-6">We're still building our directory for {displayName}.</p>
+              <p className="text-slate-500 mb-6">We&apos;re still building our directory for {displayName}.</p>
               <Link href="/add-venue">
                 <Button className="bg-purple-600 hover:bg-purple-700">Add a Venue</Button>
               </Link>

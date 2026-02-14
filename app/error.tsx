@@ -21,6 +21,7 @@ export default function Error({
             Try again
           </Button>
           <Button variant="outline" asChild>
+            {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- Error boundary can't use <Link> (router may be broken) */}
             <a href="/">Go home</a>
           </Button>
         </div>

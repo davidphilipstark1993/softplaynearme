@@ -14,7 +14,7 @@ export default function SoftPlayNotFound() {
           <h1 className="text-6xl font-bold text-purple-600 mb-4">404</h1>
           <h2 className="text-2xl font-bold text-slate-900 mb-4">Venue or Location Not Found</h2>
           <p className="text-slate-600 mb-8">
-            We couldn't find that soft play listing. It may have been removed or the URL might be incorrect. Try searching or browse one of our popular locations below.
+            We couldn&apos;t find that soft play listing. It may have been removed or the URL might be incorrect. Try searching or browse one of our popular locations below.
           </p>
           <div className="flex gap-4 justify-center mb-10">
             <Link href="/">
