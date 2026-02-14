@@ -496,6 +496,13 @@ export default async function VenuePage({ params }: PageProps) {
                 wheelchairAccess={venue.wheelchair_access}
               />
 
+              {/* Last updated (shown when no description section) */}
+              {!venue.description && venue.last_verified_at && (
+                <p className="text-xs text-slate-400">
+                  Listing last updated: {new Date(venue.last_verified_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+                </p>
+              )}
+
               {/* About */}
               {venue.description && (
                 <div className="bg-white rounded-lg border border-slate-200 p-6">
@@ -503,7 +510,7 @@ export default async function VenuePage({ params }: PageProps) {
                   <p className="text-slate-600 whitespace-pre-wrap leading-relaxed">
                     {venue.description}
                   </p>
-                  <div className="mt-4 pt-4 border-t border-slate-100">
+                  <div className="mt-4 pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2">
                     <p className="text-sm text-slate-500">
                       Is this information correct?{' '}
                       <a
@@ -513,6 +520,11 @@ export default async function VenuePage({ params }: PageProps) {
                         Send us updates
                       </a>
                     </p>
+                    {venue.last_verified_at && (
+                      <p className="text-xs text-slate-400">
+                        Last updated: {new Date(venue.last_verified_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+                      </p>
+                    )}
                   </div>
                 </div>
               )}
