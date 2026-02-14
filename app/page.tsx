@@ -9,6 +9,7 @@ import { Footer } from '@/components/layout/Footer'
 import { SearchHero } from '@/components/home/SearchHero'
 import { buildFAQSchema } from '@/lib/schema'
 import { JsonLd } from '@/components/seo/JsonLd'
+import { blogPosts } from '@/lib/blogPosts'
 
 const HOME_FAQS = [
   {
@@ -196,6 +197,32 @@ export default function Home() {
               Claim Your Venue (Free)
             </a>
           </Button>
+        </div>
+      </div>
+
+      {/* Blog Links */}
+      <div className="py-16 px-4 bg-white border-y border-slate-200">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-end justify-between gap-4 mb-8">
+            <div>
+              <h2 className="text-2xl font-bold text-slate-900">From the Soft Play Blog</h2>
+              <p className="text-slate-600 mt-2">Planning tips, toddler guides, and venue ideas.</p>
+            </div>
+            <Link href="/blog" className="text-sm font-semibold text-purple-700 hover:underline">
+              View all posts
+            </Link>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-4">
+            {blogPosts.slice(0, 3).map((post) => (
+              <Link key={post.slug} href={`/blog/${post.slug}`} className="group">
+                <Card className="h-full p-5 border-slate-200 hover:border-purple-300 hover:shadow-md transition-all">
+                  <h3 className="font-semibold text-slate-900 group-hover:text-purple-700">{post.title}</h3>
+                  <p className="text-sm text-slate-600 mt-2">{post.excerpt}</p>
+                </Card>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
 

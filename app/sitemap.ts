@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next'
 import { getAllCitySlugs, filters } from '@/lib/venues'
 import { getPool } from '@/lib/pool'
 import { getAllStaticTownSlugs, getStaticVenuesByTown } from '@/lib/staticVenues'
+import { blogPosts } from '@/lib/blogPosts'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://www.softplaynearme.co.uk'
@@ -48,7 +49,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'yearly',
       priority: 0.3,
     },
+    {
+      url: `${baseUrl}/blog`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    },
   ]
+
+  for (const post of blogPosts) {
+    sitemap.push({
+      url: `${baseUrl}/blog/${post.slug}`,
+      lastModified: new Date(post.dateModified),
+      changeFrequency: 'monthly',
+      priority: 0.6,
+    })
+  }
 
   // Add city pages + filter pages
   for (const city of allCities) {
