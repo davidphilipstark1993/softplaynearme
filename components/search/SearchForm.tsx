@@ -41,6 +41,10 @@ export function SearchForm({
   showRadius = true,
   compact = false,
 }: SearchFormProps) {
+  const readableInputClasses =
+    'bg-white border border-slate-200 text-slate-900 placeholder:text-slate-500 focus-visible:border-purple-500 focus-visible:ring-2 focus-visible:ring-purple-500/40 ' +
+    '[&:-webkit-autofill]:[-webkit-text-fill-color:#0f172a] [&:-webkit-autofill]:[box-shadow:0_0_0px_1000px_white_inset] [&:-webkit-autofill:hover]:[-webkit-text-fill-color:#0f172a] [&:-webkit-autofill:focus]:[-webkit-text-fill-color:#0f172a]'
+
   const router = useRouter()
   const [postcode, setPostcode] = useState(defaultValue)
   const [radius, setRadius] = useState(defaultRadius)
@@ -226,7 +230,7 @@ export function SearchForm({
             placeholder="Enter postcode..."
             value={postcode}
             onChange={(e) => setPostcode(e.target.value)}
-            className="pl-10"
+            className={cn('pl-10', readableInputClasses)}
           />
         </div>
         <Button type="submit">
@@ -256,7 +260,7 @@ export function SearchForm({
               if (suggestions.length > 0) setShowSuggestions(true)
             }}
             onKeyDown={handleKeyDown}
-            className="pl-11 h-12 text-base"
+            className={cn('pl-11 h-12 text-base', readableInputClasses)}
             aria-label="Search by postcode or city"
             aria-expanded={showSuggestions}
             aria-autocomplete="list"
