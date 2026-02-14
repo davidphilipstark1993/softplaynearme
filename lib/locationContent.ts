@@ -9,7 +9,7 @@
  */
 
 import type { CityConfig } from './venues'
-import { getRegionForCounty } from './venues'
+import { getRegionForCounty, getCityBySlug, cities } from './venues'
 
 // ── Types ──────────────────────────────────────────────────────────────
 
@@ -134,31 +134,31 @@ const INTRO_P3: string[] = [
 ]
 
 const INTRO_P4: string[] = [
-  `Many soft play centres in {name} run dedicated SEN-friendly sessions with reduced noise, lower lighting, and fewer children. These sessions are invaluable for families with children who have additional needs. If SEN provision is important to you, use our filters to find venues that offer it.`,
+  `Many soft play centres in {name} run dedicated [SEN-friendly sessions](/soft-play/{slug}/sen-friendly) with reduced noise, lower lighting, and fewer children. These sessions are invaluable for families with children who have additional needs. If SEN provision is important to you, use our filters to find venues that offer it.`,
 
-  `Birthday parties are one of the most popular reasons to visit soft play in {name}. Most venues offer packages that include exclusive use of a party room, food, and dedicated play time. Some also provide party bags, invitations, and a host to help things run smoothly. Book well in advance for weekend slots.`,
+  `[Birthday parties](/soft-play/{slug}/birthday-parties) are one of the most popular reasons to visit soft play in {name}. Most venues offer packages that include exclusive use of a party room, food, and dedicated play time. Some also provide party bags, invitations, and a host to help things run smoothly. Book well in advance for weekend slots.`,
 
-  `If you have a toddler, you'll be pleased to know that many soft play centres in {name} have dedicated under-3s or under-4s areas. These sections feature age-appropriate equipment, softer surfaces, and a calmer atmosphere. Some venues also run specific toddler sessions during quieter weekday mornings.`,
+  `If you have a toddler, you'll be pleased to know that many soft play centres in {name} have dedicated under-3s or under-4s areas. Browse our [toddler-friendly venues in {name}](/soft-play/{slug}/toddler) for sections with age-appropriate equipment, softer surfaces, and a calmer atmosphere. Some venues also run specific toddler sessions during quieter weekday mornings.`,
 
   `For families with children across different age groups, finding a soft play in {name} that keeps everyone happy can be a challenge. Look for venues with clearly separated age zones — this way, toddlers can explore safely while older children enjoy the bigger frames and slides.`,
 
-  `Accessibility matters, and several soft play venues in {name} have made real efforts to be inclusive. From wheelchair-accessible facilities and accessible toilets to sensory rooms and quiet sessions, the options are improving. Our directory highlights venues with SEN and accessibility features so you can plan with confidence.`,
+  `Accessibility matters, and several soft play venues in {name} have made real efforts to be inclusive. From wheelchair-accessible facilities and accessible toilets to sensory rooms and quiet sessions, the options are improving. Browse [SEN-friendly venues in {name}](/soft-play/{slug}/sen-friendly) to plan with confidence.`,
 
-  `If you're visiting {name} during school holidays, soft play centres can be a lifesaver. Many venues run special holiday activities, themed sessions, and extended opening hours. It's worth booking ahead during half-terms and summer holidays, as popular venues get busy quickly.`,
+  `If you're visiting {name} during school holidays, soft play centres can be a lifesaver. Many venues run special holiday activities, themed sessions, and extended opening hours. Check which venues are [open now in {name}](/soft-play/{slug}/open-now) or book ahead during half-terms and summer holidays, as popular venues get busy quickly.`,
 ]
 
 const INTRO_P5: string[] = [
-  `Beyond {name} itself, families in {county} also have options in nearby towns including {nearbyList}. Our directory covers venues across the wider area, so you can find soft play wherever you are. Use the search or browse by location to explore what's nearby.`,
+  `Beyond {name} itself, families in {county} also have options in nearby towns including {nearbyLinks}. Our directory covers venues across the wider area, so you can find soft play wherever you are. [Search by postcode](/search) or browse by location to explore what's nearby.`,
 
-  `If you can't find exactly what you're looking for in {name}, don't worry — there are also soft play options in nearby {nearbyList}. The wider {county} area has a good spread of venues, and many are just a short drive away. Browse our nearby area links below to expand your search.`,
+  `If you can't find exactly what you're looking for in {name}, don't worry — there are also soft play options in nearby areas like {nearbyLinks}. The wider {county} area has a good spread of venues, and many are just a short drive away. Browse our nearby area links below to expand your search.`,
 
-  `We're continually updating our listings for {name} and the surrounding {county} area. If you know of a venue we've missed, or if you're a venue owner and want to update your information, we'd love to hear from you. Our aim is to be the most complete and accurate guide to soft play in {name}.`,
+  `We're continually updating our listings for {name} and the surrounding {county} area. If you know of a venue we've missed, or if you're a venue owner and want to update your information, we'd love to hear from you. Our aim is to be the most complete and accurate guide to [soft play in {name}](/soft-play/{slug}).`,
 
-  `{name} is well-positioned for families who want to explore different soft play venues across {county}. With options in {nearbyList}, you could try a different venue each week. Each one has its own character and specialities, so it's worth visiting a few to find your family's favourite.`,
+  `{name} is well-positioned for families who want to explore different soft play venues across {county}. With options in {nearbyLinks}, you could try a different venue each week. Each one has its own character and specialities, so it's worth visiting a few to find your family's favourite.`,
 
   `Our {name} soft play guide is updated regularly with new venues, changed opening times, and updated facilities. We work with local venue owners to keep information accurate. If you're a venue owner in {name} or {county}, you can claim your listing for free and manage your own profile.`,
 
-  `Choosing the right soft play in {name} depends on what your family needs. Some parents prioritise a good cafe and comfortable seating, others want the biggest climbing frame. Use our filters and venue pages to compare what matters most to you across all the options in {county}.`,
+  `Choosing the right soft play in {name} depends on what your family needs. Some parents prioritise a good cafe and comfortable seating, others want the biggest climbing frame. [Search for venues near you](/search) and use our filters to compare what matters most to you across all the options in {county}.`,
 ]
 
 // ── FAQ templates ──────────────────────────────────────────────────────
@@ -308,11 +308,24 @@ export function generateLocationContent(
     ? nearbyAreas.slice(0, 4).join(', ')
     : 'the surrounding area'
 
+  // Build nearby links with markdown syntax for areas that have city pages
+  const cityNames = new Map(cities.map(c => [c.name.toLowerCase(), c.slug]))
+  const nearbyLinks = nearbyAreas.length > 0
+    ? nearbyAreas.slice(0, 4).map(area => {
+        const areaSlug = cityNames.get(area.toLowerCase())
+        return areaSlug
+          ? `[${area}](/soft-play/${areaSlug})`
+          : area
+      }).join(', ')
+    : 'the surrounding area'
+
   const vars: Record<string, string> = {
     name,
+    slug,
     county,
     region,
     nearbyList,
+    nearbyLinks,
     venueCount: venueCount ? String(venueCount) : 'several',
   }
 
