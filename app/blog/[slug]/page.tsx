@@ -81,7 +81,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd).replace(/</g, '\\u003c') }}
       />
 
-      <article className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+      <article className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
         <p className="text-sm font-medium text-slate-600">Soft Play Near Me Blog</p>
         <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">{post.title}</h1>
         <p className="mt-4 text-lg text-slate-700">{post.excerpt}</p>
