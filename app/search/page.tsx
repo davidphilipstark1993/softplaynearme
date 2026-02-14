@@ -25,21 +25,25 @@ export async function generateMetadata({ searchParams }: SearchPageProps): Promi
   const query = params.q
 
   if (query) {
+    const title = `Soft Play Near ${query} | Find Local Indoor Play Centres`
+    const description = `Discover the best soft play centres near ${query}. Find venues with cafes, toddler areas, birthday parties, and more.`
     return {
-      title: `Soft Play Near ${query} | Find Local Indoor Play Centres`,
-      description: `Discover the best soft play centres near ${query}. Find venues with cafes, toddler areas, birthday parties, and more.`,
-      alternates: {
-        canonical: 'https://www.softplaynearme.co.uk/search',
-      },
+      title,
+      description,
+      openGraph: { title, description, url: 'https://www.softplaynearme.co.uk/search', type: 'website', siteName: 'Soft Play Near Me' },
+      twitter: { card: 'summary_large_image', title, description },
+      alternates: { canonical: 'https://www.softplaynearme.co.uk/search' },
     }
   }
 
+  const title = 'Search Soft Play Centres | Soft Play Near Me'
+  const description = 'Search for soft play centres near you. Filter by facilities, distance, and more to find the perfect venue for your family.'
   return {
-    title: 'Search Soft Play Centres | Soft Play Near Me',
-    description: 'Search for soft play centres near you. Filter by facilities, distance, and more to find the perfect venue for your family.',
-    alternates: {
-      canonical: 'https://www.softplaynearme.co.uk/search',
-    },
+    title,
+    description,
+    openGraph: { title, description, url: 'https://www.softplaynearme.co.uk/search', type: 'website', siteName: 'Soft Play Near Me' },
+    twitter: { card: 'summary_large_image', title, description },
+    alternates: { canonical: 'https://www.softplaynearme.co.uk/search' },
   }
 }
 
