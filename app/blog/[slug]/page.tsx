@@ -97,8 +97,8 @@ export default async function BlogPostPage({ params }: PageProps) {
           </span>
         </div>
 
-        <div
-          className="prose prose-slate mt-10 max-w-none"
+        <article
+          className="prose prose-lg prose-slate mt-10 max-w-none"
           dangerouslySetInnerHTML={{ __html: post.contentHtml }}
         />
 
