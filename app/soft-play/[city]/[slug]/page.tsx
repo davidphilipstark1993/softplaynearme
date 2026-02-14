@@ -323,11 +323,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       url: `https://www.softplaynearme.co.uk/soft-play/${city}/${slug}`,
       type: 'website',
       siteName: 'Soft Play Near Me',
+      images: ['/opengraph-image'],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
+      images: ['/opengraph-image'],
     },
     alternates: {
       canonical: `https://www.softplaynearme.co.uk/soft-play/${city}/${slug}`,
