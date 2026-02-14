@@ -293,25 +293,44 @@ export default async function CityPage({ params, searchParams }: PageProps) {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {venues.map((venue) => (
+              {venues.map((venue, index) => {
+                const hasFeatures = venue.toddler_area || venue.parties || venue.cafe || venue.parking || venue.sen_friendly
+                return (
                 <Card key={venue.slug} className="group hover:shadow-lg transition-all duration-200 border-slate-200 overflow-hidden h-full flex flex-col">
-                  <div className="p-5 flex-1">
-                    {/* Header row: name + rating */}
-                    <div className="flex justify-between items-start gap-2 mb-2">
-                      <Link href={`/soft-play/${city}/${venue.slug}`} className="hover:text-purple-600 transition-colors min-w-0">
-                        <h3 className="text-lg font-bold leading-tight line-clamp-2">
-                          {venue.name}
-                        </h3>
-                      </Link>
-                      {venue.review_count && venue.review_count > 0 ? (
-                        <div className="flex items-center gap-1 bg-purple-50 px-2 py-1 rounded text-purple-700 font-bold text-sm flex-shrink-0">
-                          <Star className="w-3.5 h-3.5 fill-current" />
-                          {Number(venue.avg_rating || 0).toFixed(1)}
-                        </div>
-                      ) : (
-                        <Badge variant="secondary" className="flex-shrink-0">New</Badge>
-                      )}
+                  {/* Gradient thumbnail banner */}
+                  <Link href={`/soft-play/${city}/${venue.slug}`} className="block" tabIndex={-1} aria-hidden="true">
+                    <div
+                      className="h-28 relative overflow-hidden"
+                      style={{
+                        background: `linear-gradient(135deg, hsl(${(index * 47 + 262) % 360}, 70%, 55%), hsl(${(index * 47 + 320) % 360}, 60%, 50%))`,
+                      }}
+                    >
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-white/20 text-6xl font-bold select-none">
+                          {venue.name.charAt(0)}
+                        </span>
+                      </div>
+                      {/* Rating overlay */}
+                      <div className="absolute top-3 right-3">
+                        {venue.review_count && venue.review_count > 0 ? (
+                          <div className="flex items-center gap-1 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full text-purple-700 font-bold text-sm shadow-sm">
+                            <Star className="w-3.5 h-3.5 fill-current" />
+                            {Number(venue.avg_rating || 0).toFixed(1)}
+                          </div>
+                        ) : (
+                          <Badge className="bg-white/90 text-slate-600 backdrop-blur-sm shadow-sm">New</Badge>
+                        )}
+                      </div>
                     </div>
+                  </Link>
+
+                  <div className="p-5 flex-1 flex flex-col">
+                    {/* Venue name */}
+                    <Link href={`/soft-play/${city}/${venue.slug}`} className="hover:text-purple-600 transition-colors">
+                      <h3 className="text-lg font-bold leading-tight line-clamp-2 mb-2">
+                        {venue.name}
+                      </h3>
+                    </Link>
 
                     {/* Location */}
                     <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">
@@ -325,33 +344,35 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                     )}
 
                     {/* Feature badges */}
-                    <div className="flex flex-wrap gap-1.5">
-                      {venue.toddler_area && (
-                        <Badge variant="outline" className="text-xs gap-1">
-                          <Baby className="w-3 h-3" /> Toddler
-                        </Badge>
-                      )}
-                      {venue.parties && (
-                        <Badge variant="outline" className="text-xs gap-1">
-                          <PartyPopper className="w-3 h-3" /> Parties
-                        </Badge>
-                      )}
-                      {venue.cafe && (
-                        <Badge variant="outline" className="text-xs gap-1">
-                          <Coffee className="w-3 h-3" /> Cafe
-                        </Badge>
-                      )}
-                      {venue.parking && (
-                        <Badge variant="outline" className="text-xs gap-1">
-                          <Car className="w-3 h-3" /> Parking
-                        </Badge>
-                      )}
-                      {venue.sen_friendly && (
-                        <Badge variant="outline" className="text-xs gap-1">
-                          <Heart className="w-3 h-3" /> SEN
-                        </Badge>
-                      )}
-                    </div>
+                    {hasFeatures && (
+                      <div className="flex flex-wrap gap-1.5 mt-auto pt-2">
+                        {venue.toddler_area && (
+                          <Badge variant="outline" className="text-xs gap-1 border-blue-200 text-blue-700 bg-blue-50">
+                            <Baby className="w-3 h-3" /> Toddler
+                          </Badge>
+                        )}
+                        {venue.parties && (
+                          <Badge variant="outline" className="text-xs gap-1 border-pink-200 text-pink-700 bg-pink-50">
+                            <PartyPopper className="w-3 h-3" /> Parties
+                          </Badge>
+                        )}
+                        {venue.sen_friendly && (
+                          <Badge variant="outline" className="text-xs gap-1 border-green-200 text-green-700 bg-green-50">
+                            <Heart className="w-3 h-3" /> SEN
+                          </Badge>
+                        )}
+                        {venue.cafe && (
+                          <Badge variant="outline" className="text-xs gap-1">
+                            <Coffee className="w-3 h-3" /> Cafe
+                          </Badge>
+                        )}
+                        {venue.parking && (
+                          <Badge variant="outline" className="text-xs gap-1">
+                            <Car className="w-3 h-3" /> Parking
+                          </Badge>
+                        )}
+                      </div>
+                    )}
                   </div>
 
                   {/* CTA footer */}
@@ -361,6 +382,18 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                         View Details
                       </Link>
                     </Button>
+                    {venue.website && (
+                      <Button variant="outline" size="sm" asChild>
+                        <a
+                          href={venue.website}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`Visit ${venue.name} website`}
+                        >
+                          <Globe className="w-4 h-4" />
+                        </a>
+                      </Button>
+                    )}
                     {(venue.mapsUrl || venue.address) && (
                       <Button variant="outline" size="sm" asChild>
                         <a
@@ -375,7 +408,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                     )}
                   </div>
                 </Card>
-              ))}
+              )})}
             </div>
           )}
 
