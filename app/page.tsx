@@ -3,6 +3,7 @@ import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { cities } from '@/lib/venues'
+import { getStaticVenuesByTown } from '@/lib/staticVenues'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { SearchHero } from '@/components/home/SearchHero'
@@ -153,15 +154,21 @@ export default function Home() {
           <h2 className="text-2xl font-bold text-slate-900 mb-2 text-center">Browse by Location</h2>
           <p className="text-slate-600 text-center mb-8">Find soft play centres in your area</p>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {cities.map((city) => (
-              <Link key={city.slug} href={`/soft-play/${city.slug}`} className="group">
-                <Card className="p-6 text-center hover:shadow-lg hover:border-purple-300 transition-all">
-                  <MapPin className="w-6 h-6 mx-auto mb-2 text-purple-500" />
-                  <h3 className="font-semibold text-slate-900 group-hover:text-purple-600">{city.name}</h3>
-                  <p className="text-sm text-slate-500">{city.county}</p>
-                </Card>
-              </Link>
-            ))}
+            {cities.map((city) => {
+              const venueCount = getStaticVenuesByTown(city.slug).length
+              return (
+                <Link key={city.slug} href={`/soft-play/${city.slug}`} className="group">
+                  <Card className="p-6 text-center hover:shadow-lg hover:border-purple-300 transition-all">
+                    <MapPin className="w-6 h-6 mx-auto mb-2 text-purple-500" />
+                    <h3 className="font-semibold text-slate-900 group-hover:text-purple-600">{city.name}</h3>
+                    <p className="text-sm text-slate-500">{city.county}</p>
+                    {venueCount > 0 && (
+                      <p className="text-xs text-purple-600 font-medium mt-1">{venueCount} {venueCount === 1 ? 'venue' : 'venues'}</p>
+                    )}
+                  </Card>
+                </Link>
+              )
+            })}
           </div>
         </div>
       </div>
