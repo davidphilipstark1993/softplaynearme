@@ -78,14 +78,25 @@ export function SearchFilters({
         />
       </div>
 
-      {/* Filter panel */}
-      <FilterPanel
-        filters={FILTER_OPTIONS}
-        selectedFilters={selectedFilters}
-        onFilterChange={handleFilterChange}
-        collapsible={false}
-        defaultExpanded={true}
-      />
+      {/* Filter panel — collapsible on mobile, expanded on desktop */}
+      <div className="lg:hidden">
+        <FilterPanel
+          filters={FILTER_OPTIONS}
+          selectedFilters={selectedFilters}
+          onFilterChange={handleFilterChange}
+          collapsible={true}
+          defaultExpanded={false}
+        />
+      </div>
+      <div className="hidden lg:block">
+        <FilterPanel
+          filters={FILTER_OPTIONS}
+          selectedFilters={selectedFilters}
+          onFilterChange={handleFilterChange}
+          collapsible={false}
+          defaultExpanded={true}
+        />
+      </div>
     </div>
   )
 }

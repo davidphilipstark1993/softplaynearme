@@ -218,7 +218,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 
         {(lat && lng) || venues.length > 0 ? (
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            <aside className="lg:col-span-1">
+            <aside className="lg:col-span-1 order-2 lg:order-1">
               <div className="lg:sticky lg:top-24">
                 <SearchFilters
                   selectedFilters={filters}
@@ -228,7 +228,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
               </div>
             </aside>
 
-            <div className="lg:col-span-3">
+            <div className="lg:col-span-3 order-1 lg:order-2">
               <SearchResults
                 venues={venues}
                 showDistance={!!(lat && lng)}
