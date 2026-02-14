@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { getCityBySlug, getAllCitySlugs } from '@/lib/venues'
+import { getCityBySlug, getAllCitySlugs, getNearbyCities } from '@/lib/venues'
 import {
   MapPin,
   Star,
@@ -307,6 +307,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const venue = await getVenue(city, slug)
   const cityConfig = getCityBySlug(city)
   const staticTown = getStaticTownBySlug(city)
+  const relatedCities = cityConfig ? getNearbyCities(city).slice(0, 6) : []
 
   if (!venue) {
     return { title: 'Venue Not Found | Soft Play Near Me' }
@@ -590,6 +591,23 @@ export default async function VenuePage({ params }: PageProps) {
                   >
                     View all venues in {cityName}
                   </Link>
+                </div>
+              )}
+
+              {relatedCities.length > 0 && (
+                <div className="bg-white rounded-lg border border-slate-200 p-6">
+                  <h2 className="font-semibold text-lg mb-4">Explore Nearby Cities</h2>
+                  <div className="flex flex-wrap gap-2">
+                    {relatedCities.map((relatedCity) => (
+                      <Link
+                        key={relatedCity.slug}
+                        href={`/soft-play/${relatedCity.slug}`}
+                        className="inline-flex items-center rounded-full border border-slate-200 px-3 py-1.5 text-sm text-slate-700 hover:border-purple-300 hover:bg-purple-50 hover:text-purple-700 transition-colors"
+                      >
+                        Soft Play in {relatedCity.name}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               )}
 

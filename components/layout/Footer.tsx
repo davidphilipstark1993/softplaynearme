@@ -7,6 +7,11 @@ interface FooterProps {
 }
 
 export function Footer({ minimal = false }: FooterProps) {
+  const majorCitySlugs = ['london', 'manchester', 'leeds', 'sheffield', 'york', 'hull']
+  const majorCities = majorCitySlugs
+    .map((slug) => cities.find((city) => city.slug === slug))
+    .filter((city): city is (typeof cities)[number] => !!city)
+
   if (minimal) {
     return (
       <footer className="bg-slate-900 text-slate-400 py-8 px-4 mt-12">
@@ -30,7 +35,7 @@ export function Footer({ minimal = false }: FooterProps) {
           <div>
             <h4 className="font-semibold text-white mb-4">Popular Cities</h4>
             <ul className="space-y-2 text-sm">
-              {cities.slice(0, 6).map((city) => (
+              {majorCities.map((city) => (
                 <li key={city.slug}>
                   <Link href={`/soft-play/${city.slug}`} className="hover:text-white transition-colors">
                     {city.name}
@@ -46,6 +51,7 @@ export function Footer({ minimal = false }: FooterProps) {
               <li><Link href="/search?filters=toddler" className="hover:text-white transition-colors">Toddler Soft Play</Link></li>
               <li><Link href="/search?filters=parties" className="hover:text-white transition-colors">Birthday Parties</Link></li>
               <li><Link href="/search?filters=sen" className="hover:text-white transition-colors">SEN Friendly</Link></li>
+              <li><Link href="/blog" className="hover:text-white transition-colors">Soft Play Blog</Link></li>
               <li><Link href="/add-venue" className="hover:text-white transition-colors">Add Your Venue</Link></li>
             </ul>
           </div>

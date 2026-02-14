@@ -27,6 +27,11 @@ export function Header({ backLink }: HeaderProps) {
                   Find Soft Play
                 </Button>
               </Link>
+              <Link href="/blog">
+                <Button variant="ghost" size="sm">
+                  Blog
+                </Button>
+              </Link>
               <Link href="/add-venue">
                 <Button size="sm" className="bg-purple-600 text-white hover:bg-purple-700">
                   Add Venue
