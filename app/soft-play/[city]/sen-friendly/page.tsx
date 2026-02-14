@@ -126,7 +126,7 @@ export default async function SENFriendlyPage({ params }: PageProps) {
         )}
       </main>
 
-      <Footer minimal />
+      <Footer />
     </div>
   )
 }

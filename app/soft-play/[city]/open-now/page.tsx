@@ -130,7 +130,7 @@ export default async function OpenNowPage({ params }: PageProps) {
         )}
       </main>
 
-      <Footer minimal />
+      <Footer />
     </div>
   )
 }

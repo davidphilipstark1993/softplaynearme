@@ -432,7 +432,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
           )}
         </main>
 
-        <Footer minimal />
+        <Footer />
       </div>
     </>
   )

@@ -243,7 +243,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
         ) : null}
       </main>
 
-      <Footer minimal />
+      <Footer />
     </div>
   )
 }

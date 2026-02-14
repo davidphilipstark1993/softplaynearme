@@ -720,7 +720,7 @@ export default async function VenuePage({ params }: PageProps) {
           </div>
         </main>
 
-        <Footer minimal />
+        <Footer />
       </div>
     </>
   )

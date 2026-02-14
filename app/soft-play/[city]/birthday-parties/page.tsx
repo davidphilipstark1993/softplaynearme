@@ -139,7 +139,7 @@ export default async function BirthdayPartiesPage({ params }: PageProps) {
         )}
       </main>
 
-      <Footer minimal />
+      <Footer />
     </div>
   )
 }

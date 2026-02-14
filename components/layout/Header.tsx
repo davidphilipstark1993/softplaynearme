@@ -23,7 +23,7 @@ export function Header({ backLink }: HeaderProps) {
           ) : (
             <>
               <Link href="/search">
-                <Button variant="ghost" size="sm" className="hidden sm:inline-flex">
+                <Button variant="ghost" size="sm">
                   Find Soft Play
                 </Button>
               </Link>

@@ -186,7 +186,7 @@ export default async function ToddlerPage({ params }: PageProps) {
           )}
         </main>
 
-        <Footer minimal />
+        <Footer />
       </div>
     </>
   )
