@@ -100,8 +100,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Preconnect to external services */}
-        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        {/* Preconnect to external services for faster loading */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://api.postcodes.io" />
         <script
           type="application/ld+json"
