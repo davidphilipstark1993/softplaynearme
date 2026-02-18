@@ -124,5 +124,227 @@
         "answer": "Soft play centres are perfect for rainy days in Bridlington. Many venues have cafes where parents can relax while children play safely indoors."
       }
     ]
+  },
+  {
+    "slug": "bournemouth",
+    "name": "Bournemouth",
+    "county": "Dorset",
+    "region": "South West",
+    "metaTitle": "Soft Play in Bournemouth",
+    "metaDescription": "Find the best soft play centres in Bournemouth. Compare indoor play venues with toddler areas, party rooms, and cafes across Bournemouth and Dorset.",
+    "h1": "Soft Play Centres in Bournemouth",
+    "intro": "Discover soft play centres in Bournemouth and the surrounding Dorset area. From toddler-friendly play cafes to large adventure play frames, find the perfect indoor play venue for your family.",
+    "nearbyAreas": ["Poole", "Christchurch", "Wimborne", "Wareham", "Ferndown"],
+    "faqs": [
+      {
+        "question": "What are the best soft play centres in Bournemouth?",
+        "answer": "Bournemouth has a good range of soft play venues from small play cafes to larger adventure centres. Use our filters to find venues with the facilities that matter most to your family."
+      },
+      {
+        "question": "How much does soft play cost in Bournemouth?",
+        "answer": "Soft play prices in Bournemouth typically range from £5-10 per child for a standard session. Off-peak and weekday sessions are often cheaper, and many venues offer sibling discounts."
+      },
+      {
+        "question": "Are there soft play birthday party venues in Bournemouth?",
+        "answer": "Yes, many soft play centres in Bournemouth offer birthday party packages including private rooms, food, and dedicated play time. Book early as weekends fill up quickly."
+      }
+    ]
+  },
+  {
+    "slug": "brighton",
+    "name": "Brighton",
+    "county": "East Sussex",
+    "region": "South East",
+    "metaTitle": "Soft Play in Brighton",
+    "metaDescription": "Find soft play centres in Brighton and East Sussex. Compare indoor play venues with toddler zones, adventure play, and birthday party packages.",
+    "h1": "Soft Play Centres in Brighton",
+    "intro": "Looking for soft play in Brighton? Browse our guide to indoor play centres across Brighton, Hove, and East Sussex — perfect for rainy days and birthday parties.",
+    "nearbyAreas": ["Hove", "Worthing", "Lewes", "Burgess Hill", "Haywards Heath", "Shoreham"],
+    "faqs": [
+      {
+        "question": "What soft play options are there in Brighton?",
+        "answer": "Brighton has a variety of soft play venues from role-play villages to large adventure centres. Our directory helps you compare facilities, prices, and locations across the city."
+      },
+      {
+        "question": "Are there toddler-friendly soft play centres in Brighton?",
+        "answer": "Yes, many Brighton soft play centres have dedicated under-3 areas with mini slides, soft shapes, and sensory toys. Weekday mornings are usually the quietest times for toddlers."
+      }
+    ]
+  },
+  {
+    "slug": "cardiff",
+    "name": "Cardiff",
+    "county": "South Glamorgan",
+    "region": "Wales",
+    "metaTitle": "Soft Play in Cardiff",
+    "metaDescription": "Find the best soft play centres in Cardiff. Compare indoor play venues with toddler areas, party rooms, and cafes across Cardiff and South Wales.",
+    "h1": "Soft Play Centres in Cardiff",
+    "intro": "Discover soft play centres in Cardiff and South Wales. From toddler play cafes to multi-level adventure frames, find the perfect indoor play venue for your family.",
+    "nearbyAreas": ["Newport", "Barry", "Caerphilly", "Pontypridd", "Bridgend", "Penarth"],
+    "faqs": [
+      {
+        "question": "What are the best soft play centres in Cardiff?",
+        "answer": "Cardiff has an excellent range of soft play venues across the city and surrounding areas. Use our filters to find venues with party rooms, toddler zones, or SEN-friendly sessions."
+      },
+      {
+        "question": "How much does soft play cost in Cardiff?",
+        "answer": "Soft play sessions in Cardiff typically cost between £4-10 per child depending on the venue and peak times. Many centres offer discounts for siblings and under-1s often go free."
+      },
+      {
+        "question": "Are there SEN-friendly soft play centres in Cardiff?",
+        "answer": "Yes, several soft play centres in Cardiff offer dedicated SEN sessions with reduced capacity, lower noise levels, and supportive staff. Check individual venue pages for session times."
+      }
+    ]
+  },
+  {
+    "slug": "colchester",
+    "name": "Colchester",
+    "county": "Essex",
+    "region": "East of England",
+    "metaTitle": "Soft Play in Colchester",
+    "metaDescription": "Find soft play centres in Colchester and Essex. Compare indoor play venues with adventure play, toddler areas, and birthday party packages.",
+    "h1": "Soft Play Centres in Colchester",
+    "intro": "Looking for soft play in Colchester? Browse our guide to indoor play centres across Colchester and Essex, perfect for rainy days and family fun.",
+    "nearbyAreas": ["Chelmsford", "Ipswich", "Braintree", "Clacton", "Witham", "Basildon"],
+    "faqs": [
+      {
+        "question": "What soft play centres are there in Colchester?",
+        "answer": "Colchester and the surrounding Essex area has a good selection of indoor play venues from large adventure centres to smaller play cafes. Browse our listings to compare facilities and prices."
+      },
+      {
+        "question": "Are there soft play centres near Colchester with parking?",
+        "answer": "Most soft play centres around Colchester have free on-site parking. Use our directory to check individual venue facilities before you visit."
+      }
+    ]
+  },
+  {
+    "slug": "hastings",
+    "name": "Hastings",
+    "county": "East Sussex",
+    "region": "South East",
+    "metaTitle": "Soft Play in Hastings",
+    "metaDescription": "Find soft play centres in Hastings and East Sussex. Compare indoor play venues, check facilities, and find activities for kids of all ages.",
+    "h1": "Soft Play Centres in Hastings",
+    "intro": "Discover soft play centres in Hastings and across East Sussex. From toddler-friendly play areas to adventure zones, find indoor fun for your family.",
+    "nearbyAreas": ["Eastbourne", "Bexhill", "Battle", "Lewes", "Hailsham"],
+    "faqs": [
+      {
+        "question": "What soft play options are there in Hastings?",
+        "answer": "Hastings and the surrounding East Sussex coast has several indoor play venues perfect for families. Our directory helps you find the best option for your children's ages."
+      },
+      {
+        "question": "What is there to do with kids in Hastings when it rains?",
+        "answer": "Soft play centres are ideal for rainy days in Hastings. Many venues have cafes where parents can relax while children play safely indoors."
+      }
+    ]
+  },
+  {
+    "slug": "ipswich",
+    "name": "Ipswich",
+    "county": "Suffolk",
+    "region": "East of England",
+    "metaTitle": "Soft Play in Ipswich",
+    "metaDescription": "Find soft play centres in Ipswich and Suffolk. Compare indoor play venues with toddler zones, adventure play, and birthday party packages.",
+    "h1": "Soft Play Centres in Ipswich",
+    "intro": "Looking for soft play in Ipswich? Browse our guide to indoor play centres across Ipswich and Suffolk, ideal for family days out and birthday parties.",
+    "nearbyAreas": ["Colchester", "Felixstowe", "Stowmarket", "Woodbridge", "Bury St Edmunds"],
+    "faqs": [
+      {
+        "question": "Are there soft play centres in Ipswich?",
+        "answer": "Yes, Ipswich and the surrounding Suffolk area has a range of indoor play venues. Our directory shows all options including nearby centres in Colchester and further afield."
+      },
+      {
+        "question": "Do soft play centres in Ipswich do birthday parties?",
+        "answer": "Many soft play centres in the Ipswich area offer birthday party packages with private rooms, food, and play sessions. Book early as weekends are popular."
+      }
+    ]
+  },
+  {
+    "slug": "norwich",
+    "name": "Norwich",
+    "county": "Norfolk",
+    "region": "East of England",
+    "metaTitle": "Soft Play in Norwich",
+    "metaDescription": "Find the best soft play centres in Norwich. Compare indoor play venues with toddler areas, cafes, and party facilities across Norwich and Norfolk.",
+    "h1": "Soft Play Centres in Norwich",
+    "intro": "Discover soft play centres in Norwich and Norfolk. From adventure play frames to toddler zones and role-play villages, find the perfect indoor play venue for your family.",
+    "nearbyAreas": ["Great Yarmouth", "Lowestoft", "Dereham", "Wymondham", "Attleborough"],
+    "faqs": [
+      {
+        "question": "What are the best soft play centres in Norwich?",
+        "answer": "Norwich has a good variety of soft play venues from large centres with multi-level frames to smaller play cafes. Use our filters to find venues with the facilities your family needs."
+      },
+      {
+        "question": "How much does soft play cost in Norwich?",
+        "answer": "Soft play prices in Norwich typically range from £5-10 per child. Off-peak weekday sessions are usually cheaper and many venues offer sibling discounts."
+      }
+    ]
+  },
+  {
+    "slug": "portsmouth",
+    "name": "Portsmouth",
+    "county": "Hampshire",
+    "region": "South East",
+    "metaTitle": "Soft Play in Portsmouth",
+    "metaDescription": "Find soft play centres in Portsmouth and Hampshire. Compare indoor play venues with adventure play, toddler zones, and birthday party packages.",
+    "h1": "Soft Play Centres in Portsmouth",
+    "intro": "Looking for soft play in Portsmouth? Browse our guide to indoor play centres across Portsmouth, Gosport, Fareham, and Hampshire — great for rainy days and family fun.",
+    "nearbyAreas": ["Gosport", "Fareham", "Havant", "Southampton", "Waterlooville", "Horndean"],
+    "faqs": [
+      {
+        "question": "What soft play centres are there in Portsmouth?",
+        "answer": "Portsmouth and the surrounding Hampshire area has an excellent range of soft play venues from role-play villages to large adventure centres. Browse our listings to compare facilities."
+      },
+      {
+        "question": "Are there toddler-friendly soft play centres in Portsmouth?",
+        "answer": "Yes, many Portsmouth soft play centres have dedicated toddler and baby areas. Weekday morning sessions are often the best time for younger children."
+      }
+    ]
+  },
+  {
+    "slug": "southend",
+    "name": "Southend",
+    "county": "Essex",
+    "region": "East of England",
+    "metaTitle": "Soft Play in Southend",
+    "metaDescription": "Find soft play centres in Southend-on-Sea and Essex. Compare indoor play venues, check facilities, and find activities for kids of all ages.",
+    "h1": "Soft Play Centres in Southend",
+    "intro": "Discover soft play centres in Southend-on-Sea and the surrounding Essex area. From adventure play to toddler zones, find the perfect indoor activity for your family.",
+    "nearbyAreas": ["Rayleigh", "Rochford", "Basildon", "Canvey Island", "Leigh-on-Sea"],
+    "faqs": [
+      {
+        "question": "What soft play options are there in Southend?",
+        "answer": "Southend and the surrounding area has a range of indoor play venues for families. Our directory helps you compare facilities, prices, and locations."
+      },
+      {
+        "question": "What is there to do with kids in Southend when it rains?",
+        "answer": "Soft play centres are perfect for rainy days in Southend. Many venues have cafes for parents and play areas suitable for babies through to older children."
+      }
+    ]
+  },
+  {
+    "slug": "swansea",
+    "name": "Swansea",
+    "county": "West Glamorgan",
+    "region": "Wales",
+    "metaTitle": "Soft Play in Swansea",
+    "metaDescription": "Find the best soft play centres in Swansea. Compare indoor play venues with toddler areas, party rooms, and cafes across Swansea and West Wales.",
+    "h1": "Soft Play Centres in Swansea",
+    "intro": "Discover soft play centres in Swansea and West Wales. From toddler play areas to multi-level adventure frames, find indoor fun for the whole family.",
+    "nearbyAreas": ["Neath", "Port Talbot", "Llanelli", "Carmarthen", "Bridgend"],
+    "faqs": [
+      {
+        "question": "What are the best soft play centres in Swansea?",
+        "answer": "Swansea has a variety of soft play options from large play centres to smaller play cafes. Use our directory to compare venues and find the best fit for your family."
+      },
+      {
+        "question": "How much does soft play cost in Swansea?",
+        "answer": "Soft play prices in Swansea typically range from £4-9 per child. Off-peak weekday sessions are usually cheaper, and many venues offer sibling discounts."
+      },
+      {
+        "question": "Are there SEN-friendly soft play centres in Swansea?",
+        "answer": "Some venues in the Swansea area offer quieter or SEN-friendly sessions with reduced capacity and calmer environments. Check individual venue pages for details."
+      }
+    ]
   }
 ]
