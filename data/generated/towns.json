@@ -1,8 +1,38 @@
 [
   {
+    "name": "Bournemouth",
+    "slug": "bournemouth",
+    "venueCount": 33
+  },
+  {
     "name": "Bridlington",
     "slug": "bridlington",
     "venueCount": 7
+  },
+  {
+    "name": "Brighton",
+    "slug": "brighton",
+    "venueCount": 27
+  },
+  {
+    "name": "Cardiff",
+    "slug": "cardiff",
+    "venueCount": 42
+  },
+  {
+    "name": "Colchester",
+    "slug": "colchester",
+    "venueCount": 32
+  },
+  {
+    "name": "Hastings",
+    "slug": "hastings",
+    "venueCount": 27
+  },
+  {
+    "name": "Huddersfield",
+    "slug": "huddersfield",
+    "venueCount": 12
   },
   {
     "name": "Hull",
@@ -10,14 +40,39 @@
     "venueCount": 64
   },
   {
+    "name": "Ipswich",
+    "slug": "ipswich",
+    "venueCount": 16
+  },
+  {
     "name": "Leeds",
     "slug": "leeds",
     "venueCount": 73
   },
   {
+    "name": "Norwich",
+    "slug": "norwich",
+    "venueCount": 30
+  },
+  {
+    "name": "Portsmouth",
+    "slug": "portsmouth",
+    "venueCount": 36
+  },
+  {
     "name": "Sheffield",
     "slug": "sheffield",
     "venueCount": 120
+  },
+  {
+    "name": "Southend",
+    "slug": "southend",
+    "venueCount": 23
+  },
+  {
+    "name": "Swansea",
+    "slug": "swansea",
+    "venueCount": 35
   },
   {
     "name": "York",
