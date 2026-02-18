@@ -324,6 +324,160 @@ export const posts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: 'best-soft-play-in-london',
+    title: 'Best Soft Play in London (2026 Parent Guide)',
+    city: 'London',
+    excerpt:
+      'Discover the best soft play in London for babies, toddlers and older kids — plus birthday venues, quiet sessions and money-saving tips across the capital.',
+    publishedAt: '2026-02-17T00:00:00.000Z',
+    updatedAt: '2026-02-17T00:00:00.000Z',
+    datePublished: '2026-02-17T00:00:00.000Z',
+    dateModified: '2026-02-17T00:00:00.000Z',
+    contentHtml: `<p>Looking for the <strong>best soft play in London</strong>? Whether you're planning a toddler day out, searching for baby-friendly sessions, or organising a birthday party, London has an incredible range of indoor soft play centres across every borough.</p>
+
+<p>From North London to South London, East to West, you'll find everything from small toddler cafés to huge multi-level adventure play frames.</p>
+
+<p>Browse soft play venues near you: <a href="/london">/london</a></p>
+
+<h2>Why families love soft play in London</h2>
+<p>Soft play in London is popular because it offers safe indoor fun year-round, dedicated baby and toddler zones, multi-level play structures, and café seating for parents. With unpredictable UK weather, indoor soft play is one of the easiest ways to keep children active and entertained.</p>
+<ul>
+  <li>Safe indoor fun year-round</li>
+  <li>Dedicated baby and toddler zones</li>
+  <li>Big adventure play frames for older kids</li>
+  <li>Birthday party packages</li>
+  <li>Cafés and parent seating areas</li>
+  <li>Great rainy day entertainment</li>
+</ul>
+
+<h2>Best soft play in London: what to look for</h2>
+<p>When choosing the <strong>best soft play in London</strong>, look for:</p>
+<ul>
+  <li><strong>Age separation</strong> (baby/toddler areas away from older children)</li>
+  <li><strong>Cleanliness and maintenance</strong></li>
+  <li><strong>Clear visibility</strong> so you can supervise easily</li>
+  <li><strong>Seating and café options</strong></li>
+  <li><strong>Party availability</strong> if you're planning a celebration</li>
+  <li><strong>Quiet/SEN sessions</strong> for calmer play</li>
+</ul>
+<p>Start exploring: <a href="/london">/london</a> • Toddlers: <a href="/london?filter=toddler">/london?filter=toddler</a></p>
+
+<h2>Toddler soft play in London (1–3 years)</h2>
+<p>If you're searching for <strong>toddler soft play London</strong>, prioritise venues with dedicated under-3 zones. These areas usually include mini slides, soft tunnels, ball pits, role-play corners and sensory features. Weekday mornings are often the quietest time for toddlers.</p>
+<ul>
+  <li>Mini slides and soft climbing</li>
+  <li>Soft tunnels and crawl spaces</li>
+  <li>Ball pits and padded shapes</li>
+  <li>Role-play corners</li>
+  <li>Calmer weekday sessions</li>
+</ul>
+<p>Browse toddler-friendly venues: <a href="/london?filter=toddler">/london?filter=toddler</a></p>
+
+<h2>Baby soft play in London (under 1s)</h2>
+<p>Many London soft play centres run baby sessions designed for crawlers, early walkers, and sensory exploration. Look for padded flooring, low-height equipment, baby-only sessions, and comfortable seating for feeding and breaks.</p>
+<ul>
+  <li>Padded floors and low equipment</li>
+  <li>Baby-only / under-1 sessions</li>
+  <li>Sensory toys and soft mats</li>
+  <li>Comfortable seating for parents</li>
+</ul>
+
+<h2>Soft play birthday parties in London</h2>
+<p>Planning a birthday? London has excellent <strong>soft play birthday party</strong> venues across the city. Most party packages include reserved or private party rooms, timed play sessions, food and drink packages, and a party host.</p>
+<ul>
+  <li>Reserved or private party rooms</li>
+  <li>Timed play sessions</li>
+  <li>Food and drink packages</li>
+  <li>Party hosts and add-ons</li>
+</ul>
+<p>Explore party venues: <a href="/london?filter=parties">/london?filter=parties</a></p>
+
+<p>Venue placeholders (replace with real ones):</p>
+<ul>
+  <li><a href="/london/example-venue-1">/london/example-venue-1</a></li>
+  <li><a href="/london/example-venue-2">/london/example-venue-2</a></li>
+  <li><a href="/london/example-venue-3">/london/example-venue-3</a></li>
+  <li><a href="/london/example-venue-4">/london/example-venue-4</a></li>
+</ul>
+
+<h2>Cheap soft play in London: money-saving tips</h2>
+<p>Looking for <strong>cheap soft play London</strong>? Prices vary across boroughs, but you can save money by visiting off-peak, checking sibling discounts, and using memberships if you go regularly.</p>
+<ul>
+  <li>Visit weekday mornings</li>
+  <li>Avoid peak weekend times</li>
+  <li>Check sibling/multi-child discounts</li>
+  <li>Look for memberships or loyalty schemes</li>
+  <li>Book parties early</li>
+</ul>
+
+<h2>SEN-friendly / autism-friendly soft play in London</h2>
+<p>London has a growing number of SEN-friendly sessions. These may include reduced capacity, lower music volume, softer lighting, predictable session times and supportive staff.</p>
+<ul>
+  <li>Reduced capacity sessions</li>
+  <li>Lower music volume</li>
+  <li>Softer lighting</li>
+  <li>Clear session times</li>
+  <li>Staff awareness and support</li>
+</ul>
+
+<h2>Local tips: parking, cafés, quieter times & what to bring</h2>
+<ul>
+  <li><strong>Quieter times:</strong> weekday mornings are best for toddlers</li>
+  <li><strong>Bring socks:</strong> required at most venues</li>
+  <li><strong>Spare clothes:</strong> especially for younger children</li>
+  <li><strong>Transport:</strong> some central venues have limited parking</li>
+  <li><strong>Café tip:</strong> check allergy-friendly options in advance</li>
+</ul>
+
+<h2>More soft play near London</h2>
+<p>If you're willing to travel slightly outside central London, you may also find excellent options in nearby areas:</p>
+<ul>
+  <li><a href="/croydon">/croydon</a></li>
+  <li><a href="/watford">/watford</a></li>
+  <li><a href="/romford">/romford</a></li>
+  <li><a href="/kingston">/kingston</a></li>
+</ul>
+
+<h2>FAQs – Soft play in London</h2>
+
+<h3>What is the best soft play in London?</h3>
+<p>The best soft play in London depends on your child's age, your location and whether you need toddler zones, party facilities or quieter sessions.</p>
+
+<h3>Are there toddler-only sessions in London?</h3>
+<p>Yes, many London soft play centres offer weekday toddler sessions with reduced numbers and smaller play areas.</p>
+
+<h3>How much does soft play cost in London?</h3>
+<p>Prices vary widely by borough, but most sessions cost between £5–£12 per child depending on peak or off-peak times.</p>
+
+<h3>Which soft play centres in London do birthday parties?</h3>
+<p>Many venues across London offer birthday party packages including private rooms, food and a party host.</p>
+
+<h3>Are there SEN-friendly or quiet soft play sessions in London?</h3>
+<p>Yes, several venues offer quiet or SEN-friendly sessions with lower capacity and calmer environments.</p>`,
+    faq: [
+      {
+        q: 'What is the best soft play in London?',
+        a: 'The best soft play in London depends on your child\u2019s age, your location and whether you need toddler zones, party facilities or quieter sessions.',
+      },
+      {
+        q: 'Are there toddler-only sessions in London?',
+        a: 'Yes, many London soft play centres offer weekday toddler sessions with reduced numbers and smaller play areas.',
+      },
+      {
+        q: 'How much does soft play cost in London?',
+        a: 'Prices vary widely by borough, but most sessions cost between \u00a35\u2013\u00a312 per child depending on peak or off-peak times.',
+      },
+      {
+        q: 'Which soft play centres in London do birthday parties?',
+        a: 'Many venues across London offer birthday party packages including private rooms, food and a party host.',
+      },
+      {
+        q: 'Are there SEN-friendly or quiet soft play sessions in London?',
+        a: 'Yes, several venues offer quiet or SEN-friendly sessions with lower capacity and calmer environments.',
+      },
+    ],
+  },
 ]
 
 export const blogPosts: BlogPost[] = posts
