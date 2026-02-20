@@ -2843,6 +2843,137 @@ export const posts: BlogPost[] = [
       { q: 'Are there SEN-friendly or quiet soft play sessions in Huddersfield?', a: 'Yes, several venues offer quiet or SEN-friendly sessions with lower capacity, reduced noise and calmer environments.' },
     ],
   },
+  {
+    slug: 'best-soft-play-in-york',
+    title: 'Best Soft Play in York (2026 Parent Guide)',
+    city: 'York',
+    excerpt:
+      'Find the best soft play in York for babies, toddlers and older kids — plus birthday party venues, SEN-friendly sessions and money-saving tips for North Yorkshire families.',
+    publishedAt: '2026-02-20T00:00:00.000Z',
+    updatedAt: '2026-02-20T00:00:00.000Z',
+    datePublished: '2026-02-20T00:00:00.000Z',
+    dateModified: '2026-02-20T00:00:00.000Z',
+    contentHtml: `<p>Looking for the <strong>best soft play in York</strong>? Whether you're planning a toddler day out, searching for baby-friendly sessions, or booking a birthday party, York and North Yorkshire have a brilliant range of indoor soft play centres for every age group.</p>
+
+<p>From the city centre to Haxby, Strensall, Poppleton and further afield towards Tadcaster, Selby and Malton, you'll find everything from cosy toddler play cafés to large multi-level adventure frames.</p>
+
+<p>Browse soft play venues near you: <a href="/york">/york</a></p>
+
+<h2>Why families love soft play in York</h2>
+<p>Soft play is hugely popular with York families. It provides a safe indoor space for kids to climb, slide and burn off energy — perfect for rainy days, school holidays and weekends when you need a reliable plan.</p>
+<ul>
+  <li>Indoor fun all year round — whatever the weather</li>
+  <li>Dedicated baby and toddler zones</li>
+  <li>Large adventure play frames for older kids</li>
+  <li>Birthday party packages at most venues</li>
+  <li>Cafés and comfortable parent seating</li>
+  <li>Great school holiday and weekend activity</li>
+</ul>
+
+<h2>Best soft play in York: what to look for</h2>
+<p>When choosing the <strong>best soft play in York</strong>, consider:</p>
+<ul>
+  <li><strong>Age separation</strong> (baby/toddler areas away from older children)</li>
+  <li><strong>Cleanliness and maintenance</strong></li>
+  <li><strong>Clear visibility</strong> so you can supervise easily</li>
+  <li><strong>Seating and café quality</strong></li>
+  <li><strong>Party availability</strong> if you're planning a celebration</li>
+  <li><strong>Quiet/SEN sessions</strong> for calmer play</li>
+</ul>
+<p>Start exploring: <a href="/york">/york</a> • Toddlers: <a href="/york?filter=toddler">/york?filter=toddler</a></p>
+
+<h2>Toddler soft play in York (1–3 years)</h2>
+<p>If you're searching for <strong>toddler soft play York</strong>, look for venues with dedicated under-3 zones. These areas typically have mini slides, soft tunnels, ball pits, role-play corners and sensory features — all designed so little ones can play safely away from bigger kids.</p>
+<ul>
+  <li>Mini slides and soft climbing frames</li>
+  <li>Soft tunnels and crawl spaces</li>
+  <li>Ball pits and padded shapes</li>
+  <li>Role-play corners (kitchens, shops, cars)</li>
+  <li>Calmer weekday morning sessions</li>
+</ul>
+<p>Browse toddler-friendly venues: <a href="/york?filter=toddler">/york?filter=toddler</a></p>
+
+<h2>Baby soft play in York (under 1s)</h2>
+<p>Many York soft play centres run dedicated baby sessions for crawlers, early walkers and sensory exploration. These are ideal once your baby can sit or crawl confidently.</p>
+<ul>
+  <li>Padded floors and low-height equipment</li>
+  <li>Baby-only / under-1 sessions</li>
+  <li>Sensory toys and soft mats</li>
+  <li>Comfortable seating for parents and feeding</li>
+</ul>
+
+<h2>Soft play birthday parties in York</h2>
+<p>Planning a birthday? York has excellent <strong>soft play birthday party</strong> venues across the city and North Yorkshire. Most party packages include a private or reserved room, timed play sessions, food and drink, and a party host.</p>
+<ul>
+  <li>Reserved or private party rooms</li>
+  <li>Timed play sessions</li>
+  <li>Food and drink packages</li>
+  <li>Party hosts and add-ons</li>
+</ul>
+<p>Explore party venues: <a href="/york?filter=parties">/york?filter=parties</a></p>
+
+<h2>Cheap soft play in York: money-saving tips</h2>
+<p>Looking for <strong>cheap soft play York</strong>? Prices vary across North Yorkshire, but there are easy ways to keep costs down.</p>
+<ul>
+  <li>Visit weekday mornings or early afternoons</li>
+  <li>Avoid peak weekend and school holiday times</li>
+  <li>Check sibling and multi-child discounts</li>
+  <li>Look for memberships or loyalty schemes</li>
+  <li>Book birthday parties early for better rates</li>
+</ul>
+
+<h2>SEN-friendly / autism-friendly soft play in York</h2>
+<p>York has a growing number of SEN-friendly soft play sessions. These typically feature reduced capacity, lower music volume, softer lighting, predictable session times and supportive staff.</p>
+<ul>
+  <li>Reduced capacity sessions</li>
+  <li>Lower music volume</li>
+  <li>Softer lighting</li>
+  <li>Clear session times</li>
+  <li>Staff awareness and support</li>
+</ul>
+
+<h2>Local tips: parking, cafés, quieter times & what to bring</h2>
+<ul>
+  <li><strong>Quieter times:</strong> weekday mornings are best for toddlers</li>
+  <li><strong>Bring socks:</strong> required at most venues</li>
+  <li><strong>Spare clothes:</strong> especially for younger children</li>
+  <li><strong>Parking:</strong> suburban venues usually have free parking; city centre can be tricky</li>
+  <li><strong>Café tip:</strong> check allergy-friendly options in advance</li>
+</ul>
+
+<h2>More soft play near York</h2>
+<p>If you're happy to travel slightly outside York, there are excellent options in nearby areas:</p>
+<ul>
+  <li><a href="/tadcaster">/tadcaster</a></li>
+  <li><a href="/selby">/selby</a></li>
+  <li><a href="/malton">/malton</a></li>
+  <li><a href="/harrogate">/harrogate</a></li>
+</ul>
+
+<h2>FAQs – Soft play in York</h2>
+
+<h3>What is the best soft play in York?</h3>
+<p>The best soft play in York depends on your child's age, your location and whether you need toddler zones, party facilities or quieter sessions.</p>
+
+<h3>Are there toddler-only sessions in York?</h3>
+<p>Yes, many York soft play centres offer weekday toddler sessions with reduced numbers and dedicated under-3 areas.</p>
+
+<h3>How much does soft play cost in York?</h3>
+<p>Prices vary across North Yorkshire, but most sessions cost between £5–£10 per child depending on peak or off-peak times.</p>
+
+<h3>Which soft play centres in York do birthday parties?</h3>
+<p>Many venues across York offer birthday party packages including private rooms, food and a party host.</p>
+
+<h3>Are there SEN-friendly or quiet soft play sessions in York?</h3>
+<p>Yes, several venues offer quiet or SEN-friendly sessions with lower capacity, reduced noise and calmer environments.</p>`,
+    faq: [
+      { q: 'What is the best soft play in York?', a: 'The best soft play in York depends on your child\u2019s age, your location and whether you need toddler zones, party facilities or quieter sessions.' },
+      { q: 'Are there toddler-only sessions in York?', a: 'Yes, many York soft play centres offer weekday toddler sessions with reduced numbers and dedicated under-3 areas.' },
+      { q: 'How much does soft play cost in York?', a: 'Prices vary across North Yorkshire, but most sessions cost between \u00a35\u2013\u00a310 per child depending on peak or off-peak times.' },
+      { q: 'Which soft play centres in York do birthday parties?', a: 'Many venues across York offer birthday party packages including private rooms, food and a party host.' },
+      { q: 'Are there SEN-friendly or quiet soft play sessions in York?', a: 'Yes, several venues offer quiet or SEN-friendly sessions with lower capacity, reduced noise and calmer environments.' },
+    ],
+  },
 ]
 
 export const blogPosts: BlogPost[] = posts
