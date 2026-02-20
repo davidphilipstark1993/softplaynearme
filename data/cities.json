@@ -346,5 +346,34 @@
         "answer": "Some venues in the Swansea area offer quieter or SEN-friendly sessions with reduced capacity and calmer environments. Check individual venue pages for details."
       }
     ]
+  },
+  {
+    "slug": "huddersfield",
+    "name": "Huddersfield",
+    "county": "West Yorkshire",
+    "region": "Yorkshire",
+    "metaTitle": "Soft Play in Huddersfield",
+    "metaDescription": "Find the best soft play centres in Huddersfield. Compare indoor play venues with toddler areas, party rooms, and cafes across Huddersfield and West Yorkshire.",
+    "h1": "Soft Play Centres in Huddersfield",
+    "intro": "Discover soft play centres in Huddersfield and the surrounding West Yorkshire area. From toddler-friendly play cafes to large adventure play frames, find the perfect indoor play venue for your family.",
+    "nearbyAreas": ["Leeds", "Bradford", "Halifax", "Wakefield", "Dewsbury", "Holmfirth"],
+    "faqs": [
+      {
+        "question": "What are the best soft play centres in Huddersfield?",
+        "answer": "Huddersfield has a good range of soft play venues from inclusive play centres to large adventure frames. Use our filters to find venues with the facilities that matter most to your family."
+      },
+      {
+        "question": "How much does soft play cost in Huddersfield?",
+        "answer": "Soft play prices in Huddersfield typically range from £4-9 per child for a standard session. Off-peak and weekday sessions are often cheaper, and many venues offer sibling discounts."
+      },
+      {
+        "question": "Are there SEN-friendly soft play centres in Huddersfield?",
+        "answer": "Yes, some soft play centres in Huddersfield offer dedicated SEN-friendly sessions with reduced capacity, lower noise levels, and supportive staff. Check individual venue pages for session times."
+      },
+      {
+        "question": "Can I book soft play birthday parties in Huddersfield?",
+        "answer": "Most soft play centres in Huddersfield offer birthday party packages including private rooms, food, and dedicated play time. Book early as weekends fill up quickly."
+      }
+    ]
   }
 ]
