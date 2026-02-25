@@ -433,5 +433,34 @@
         "answer": "Most soft play centres in Glasgow offer birthday party packages including exclusive use of party rooms, food, and dedicated play time. Packages typically include invitations, party bags, and a host. Book early as weekends fill up quickly."
       }
     ]
+  },
+  {
+    "slug": "aberdeen",
+    "name": "Aberdeen",
+    "county": "City of Aberdeen",
+    "region": "Scotland",
+    "metaTitle": "Soft Play in Aberdeen",
+    "metaDescription": "Find the best soft play centres in Aberdeen. Compare venues, check opening times, and find toddler-friendly play areas across Aberdeen and Aberdeenshire.",
+    "h1": "Soft Play Centres in Aberdeen",
+    "intro": "Discover the best soft play centres in Aberdeen and Aberdeenshire. From toddler-friendly play areas to large adventure zones, find the perfect indoor play venue for your family whatever the weather.",
+    "nearbyAreas": ["Westhill", "Stonehaven", "Inverurie", "Portlethen", "Dyce", "Bridge of Don"],
+    "faqs": [
+      {
+        "question": "What is the best soft play in Aberdeen?",
+        "answer": "Aberdeen has a good range of soft play centres catering to different age groups. The best choice depends on your children's ages and what facilities you need. Use our filters to find venues with cafés, party rooms, or dedicated toddler areas."
+      },
+      {
+        "question": "How much does soft play cost in Aberdeen?",
+        "answer": "Soft play prices in Aberdeen typically range from £5-10 per child for a standard session. Many venues offer discounts for siblings, under 1s often go free, and off-peak sessions can be cheaper. Party packages start from around £10-16 per child."
+      },
+      {
+        "question": "Are there SEN-friendly soft play centres in Aberdeen?",
+        "answer": "Yes, some soft play centres in Aberdeen offer dedicated SEN-friendly sessions with reduced capacity, lower noise and lighting levels, and additional support. Check individual venue pages for session times."
+      },
+      {
+        "question": "Can I book soft play birthday parties in Aberdeen?",
+        "answer": "Most soft play centres in Aberdeen offer birthday party packages including exclusive use of party rooms, food, and dedicated play time. Packages typically include invitations, party bags, and a host. Book early as weekends fill up quickly."
+      }
+    ]
   }
 ]
