@@ -3064,6 +3064,96 @@ export const posts: BlogPost[] = [
       { q: 'Are there SEN-friendly or quiet soft play sessions in Edinburgh?', a: 'Yes, several venues offer quiet or SEN-friendly sessions with lower capacity, reduced noise and calmer environments.' },
     ],
   },
+  {
+    slug: 'best-soft-play-in-glasgow',
+    title: 'Best Soft Play in Glasgow (2026 Parent Guide)',
+    city: 'Glasgow',
+    excerpt:
+      'Discover the best soft play in Glasgow for babies, toddlers and older children — plus birthday party venues, budget-friendly tips and trusted local play recommendations for families in 2026.',
+    publishedAt: '2026-02-25T00:00:00.000Z',
+    updatedAt: '2026-02-25T00:00:00.000Z',
+    datePublished: '2026-02-25T00:00:00.000Z',
+    dateModified: '2026-02-25T00:00:00.000Z',
+    contentHtml: `<p>Looking for the <strong>best soft play in Glasgow</strong>? Whether you're planning a toddler day out, booking a birthday party, or searching for rainy day activities, Glasgow has a brilliant range of indoor play centres with toddler zones, cafés and party packages.</p>
+
+<p>This 2026 parent guide covers:</p>
+<ul>
+  <li><strong>Toddler soft play in Glasgow</strong> (1–3 years)</li>
+  <li><strong>Baby soft play</strong> sessions (under 1s)</li>
+  <li><strong>Cheap soft play in Glasgow</strong> (money-saving tips)</li>
+  <li><strong>Soft play birthday parties</strong> in Glasgow</li>
+  <li><strong>SEN-friendly / quiet sessions</strong></li>
+</ul>
+
+<p>Browse all local options here: <a href="/glasgow">/glasgow</a></p>
+
+<h2>Why families love soft play in Glasgow</h2>
+<p>Glasgow is Scotland's largest city with no shortage of family-friendly venues. With unpredictable weather year-round, soft play centres are a lifeline for parents looking to keep kids entertained and active indoors. From small community centres to large multi-level adventure play warehouses, Glasgow has something for every age group and budget.</p>
+<ul>
+  <li>Indoor fun whatever the weather</li>
+  <li>Dedicated toddler and baby zones at many venues</li>
+  <li>On-site cafés where parents can relax</li>
+  <li>Birthday party packages with private rooms</li>
+  <li>Weekday deals and off-peak pricing</li>
+</ul>
+
+<h2>Toddler soft play in Glasgow (ages 1–3)</h2>
+<p>Many Glasgow soft play centres have separate toddler areas with age-appropriate equipment including mini slides, ball pits and soft climbing structures. Some venues run dedicated toddler sessions during weekday mornings when the play areas are quieter and calmer.</p>
+<p>Look for venues that offer enclosed toddler zones away from older children, giving little ones a safe space to explore and build confidence.</p>
+
+<h2>Baby soft play in Glasgow (under 1s)</h2>
+<p>Several Glasgow venues offer baby-friendly sessions or dedicated sensory areas for under-1s. These typically feature soft mats, mirrors, textured toys and gentle music — perfect for tummy time and early development.</p>
+<p>Baby sessions are often free or heavily discounted, and they're a great way for new parents to get out of the house and meet other families.</p>
+
+<h2>Cheap soft play in Glasgow</h2>
+<p>Soft play doesn't have to break the bank. Here are some tips for saving money in Glasgow:</p>
+<ul>
+  <li><strong>Off-peak sessions:</strong> Visit during weekday mornings for lower prices</li>
+  <li><strong>Loyalty cards:</strong> Many venues offer stamp cards or membership discounts</li>
+  <li><strong>Multi-child deals:</strong> Ask about sibling discounts at the door</li>
+  <li><strong>Pack your own snacks:</strong> Some venues allow outside food and drinks</li>
+  <li><strong>School holiday offers:</strong> Look for special deals during half terms</li>
+</ul>
+
+<h2>Soft play birthday parties in Glasgow</h2>
+<p>Most Glasgow soft play centres offer birthday party packages that include exclusive use of a party room, food for children and guests, and a dedicated party host. Some venues also provide themed decorations, party bags and cake.</p>
+<p>Book well in advance — especially for weekend slots during school holidays — and always check what's included in the price before confirming.</p>
+
+<h2>SEN-friendly and quiet sessions</h2>
+<p>A growing number of Glasgow venues now offer SEN-friendly or quiet sessions designed for children with additional needs. These sessions typically feature reduced capacity, lower music volume, dimmed lighting and a calmer atmosphere.</p>
+<p>If your child has specific sensory needs, call ahead to ask about accessibility features and whether staff have received additional training.</p>
+
+<h2>Tips for visiting soft play in Glasgow</h2>
+<ul>
+  <li>Bring socks for children and adults (most venues require them)</li>
+  <li>Arrive early at weekends to avoid queues</li>
+  <li>Check age restrictions for each play zone before visiting</li>
+  <li>Look for venues with free parking or good public transport links — Glasgow's subway and bus network makes many venues easy to reach</li>
+  <li>Book online where possible for guaranteed entry during busy periods</li>
+</ul>
+
+<h3>What is the best soft play in Glasgow?</h3>
+<p>The best soft play in Glasgow depends on your child's age, your location and whether you need toddler zones, party facilities or quieter sessions.</p>
+
+<h3>Are there toddler-only sessions in Glasgow?</h3>
+<p>Yes, many Glasgow soft play centres offer weekday toddler sessions with reduced numbers and dedicated under-3 areas.</p>
+
+<h3>How much does soft play cost in Glasgow?</h3>
+<p>Prices vary across Glasgow, but most sessions cost between £5–£12 per child depending on peak or off-peak times and the size of the venue.</p>
+
+<h3>Which soft play centres in Glasgow do birthday parties?</h3>
+<p>Many venues across Glasgow offer birthday party packages including private rooms, food and a party host.</p>
+
+<h3>Are there SEN-friendly or quiet soft play sessions in Glasgow?</h3>
+<p>Yes, several venues offer quiet or SEN-friendly sessions with lower capacity, reduced noise and calmer environments.</p>`,
+    faq: [
+      { q: 'What is the best soft play in Glasgow?', a: 'The best soft play in Glasgow depends on your child\u2019s age, your location and whether you need toddler zones, party facilities or quieter sessions.' },
+      { q: 'Are there toddler-only sessions in Glasgow?', a: 'Yes, many Glasgow soft play centres offer weekday toddler sessions with reduced numbers and dedicated under-3 areas.' },
+      { q: 'How much does soft play cost in Glasgow?', a: 'Prices vary across Glasgow, but most sessions cost between \u00a35\u2013\u00a312 per child depending on peak or off-peak times and the size of the venue.' },
+      { q: 'Which soft play centres in Glasgow do birthday parties?', a: 'Many venues across Glasgow offer birthday party packages including private rooms, food and a party host.' },
+      { q: 'Are there SEN-friendly or quiet soft play sessions in Glasgow?', a: 'Yes, several venues offer quiet or SEN-friendly sessions with lower capacity, reduced noise and calmer environments.' },
+    ],
+  },
 ]
 
 export const blogPosts: BlogPost[] = posts
