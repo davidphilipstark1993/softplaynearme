@@ -491,5 +491,34 @@
         "answer": "Most soft play centres in Dundee offer birthday party packages including exclusive use of party rooms, food, and dedicated play time. Packages typically include invitations, party bags, and a host. Book early as weekends fill up quickly."
       }
     ]
+  },
+  {
+    "slug": "inverness",
+    "name": "Inverness",
+    "county": "Highland",
+    "region": "Scotland",
+    "metaTitle": "Soft Play in Inverness",
+    "metaDescription": "Find the best soft play centres in Inverness. Compare venues, check opening times, and find toddler-friendly play areas across Inverness and the Highlands.",
+    "h1": "Soft Play Centres in Inverness",
+    "intro": "Discover the best soft play centres in Inverness and the Highlands. From toddler-friendly play areas to adventure zones, find the perfect indoor play venue for your family whatever the weather.",
+    "nearbyAreas": ["Nairn", "Dingwall", "Beauly", "Aviemore", "Elgin", "Fort William"],
+    "faqs": [
+      {
+        "question": "What is the best soft play in Inverness?",
+        "answer": "Inverness has a growing range of soft play centres catering to different age groups. The best choice depends on your children's ages and what facilities you need. Use our filters to find venues with cafés, party rooms, or dedicated toddler areas."
+      },
+      {
+        "question": "How much does soft play cost in Inverness?",
+        "answer": "Soft play prices in Inverness typically range from £4-9 per child for a standard session. Many venues offer discounts for siblings, under 1s often go free, and off-peak sessions can be cheaper. Party packages start from around £10-15 per child."
+      },
+      {
+        "question": "Are there SEN-friendly soft play centres in Inverness?",
+        "answer": "Yes, some soft play centres in Inverness offer SEN-friendly sessions with reduced capacity, lower noise and lighting levels, and additional support. Check individual venue pages for session times."
+      },
+      {
+        "question": "Can I book soft play birthday parties in Inverness?",
+        "answer": "Several soft play centres in Inverness offer birthday party packages including party rooms, food, and dedicated play time. Book early as weekends fill up quickly."
+      }
+    ]
   }
 ]
