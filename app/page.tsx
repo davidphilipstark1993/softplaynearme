@@ -2,11 +2,13 @@ import { Search, MapPin, Clock, Baby, PartyPopper, Heart, Coffee, Car, CheckCirc
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import Image from 'next/image'
 import { cities } from '@/lib/venues'
 import { getStaticVenuesByTown } from '@/lib/staticVenues'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { SearchHero } from '@/components/home/SearchHero'
+import { HeroCarousel } from '@/components/home/HeroCarousel'
 import { buildFAQSchema } from '@/lib/schema'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { blogPosts } from '@/lib/blogPosts'
@@ -41,6 +43,15 @@ const HOME_FAQS = [
 const faqSchema = buildFAQSchema(HOME_FAQS)
 
 export default function Home() {
+  const cityVisuals: Record<string, string> = {
+    hull: 'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=900&q=80',
+    york: 'https://images.unsplash.com/photo-1624119841587-fb82e55f45f0?auto=format&fit=crop&w=900&q=80',
+    leeds: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=900&q=80',
+    sheffield: 'https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=900&q=80',
+    brighton: 'https://images.unsplash.com/photo-1559599238-308793637427?auto=format&fit=crop&w=900&q=80',
+    bournemouth: 'https://images.unsplash.com/photo-1455729552865-3658a5d39692?auto=format&fit=crop&w=900&q=80',
+  }
+
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
       <JsonLd data={faqSchema} />
@@ -48,8 +59,9 @@ export default function Home() {
       <Header />
 
       {/* Hero */}
-      <div className="bg-gradient-to-br from-purple-600 via-purple-500 to-pink-500 text-white py-16 sm:py-20 px-4">
-        <div className="max-w-3xl mx-auto text-center">
+      <div className="bg-gradient-to-br from-purple-600 via-purple-500 to-pink-500 text-white py-12 sm:py-16 px-4">
+        <div className="max-w-7xl mx-auto grid gap-8 lg:grid-cols-2 lg:items-center">
+          <div className="text-center lg:text-left">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
             Find the Best Soft Play Centres Near You
           </h1>
@@ -57,19 +69,24 @@ export default function Home() {
             Discover indoor play centres across the UK. Compare venues, check opening times, and find the perfect place for your family.
           </p>
 
-          <SearchHero />
+            <SearchHero />
 
-          <p className="text-purple-200 text-sm mt-6">
-            Popular:{' '}
-            {cities.slice(0, 4).map((city, i) => (
-              <span key={city.slug}>
-                {i > 0 && ' \u00B7 '}
-                <Link href={`/soft-play/${city.slug}`} className="underline hover:text-white">
-                  {city.name}
-                </Link>
-              </span>
-            ))}
-          </p>
+            <p className="text-purple-100 text-sm mt-6">
+              Trusted by families searching thousands of local play options each month.
+            </p>
+            <p className="text-purple-200 text-sm mt-2">
+              Popular:{' '}
+              {cities.slice(0, 5).map((city, i) => (
+                <span key={city.slug}>
+                  {i > 0 && ' \u00B7 '}
+                  <Link href={`/soft-play/${city.slug}`} className="underline hover:text-white">
+                    {city.name}
+                  </Link>
+                </span>
+              ))}
+            </p>
+          </div>
+          <HeroCarousel />
         </div>
       </div>
 
@@ -157,14 +174,27 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {cities.map((city) => {
               const venueCount = getStaticVenuesByTown(city.slug).length
+              const cityImage = cityVisuals[city.slug] || 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=900&q=80'
               return (
                 <Link key={city.slug} href={`/soft-play/${city.slug}`} className="group">
-                  <Card className="p-6 text-center hover:shadow-lg hover:border-purple-300 transition-all">
-                    <MapPin className="w-6 h-6 mx-auto mb-2 text-purple-500" />
-                    <h3 className="font-semibold text-slate-900 group-hover:text-purple-600">{city.name}</h3>
-                    <p className="text-sm text-slate-500">{city.county}</p>
+                  <Card className="overflow-hidden text-center hover:shadow-lg hover:border-purple-300 transition-all">
+                    <div className="relative h-24 w-full">
+                      <Image
+                        src={cityImage}
+                        alt={`Families looking for soft play in ${city.name}`}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        sizes="(max-width: 768px) 50vw, 16vw"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/45 to-black/5" />
+                    </div>
+                    <div className="p-4">
+                      <MapPin className="w-5 h-5 mx-auto mb-1.5 text-purple-500" />
+                      <h3 className="font-semibold text-slate-900 group-hover:text-purple-600">{city.name}</h3>
+                      <p className="text-xs text-slate-500">{city.county}</p>
+                    </div>
                     {venueCount > 0 && (
-                      <p className="text-xs text-purple-600 font-medium mt-1">{venueCount} {venueCount === 1 ? 'venue' : 'venues'}</p>
+                      <p className="text-xs text-purple-600 font-medium pb-4">{venueCount} {venueCount === 1 ? 'venue' : 'venues'}</p>
                     )}
                   </Card>
                 </Link>
@@ -197,6 +227,24 @@ export default function Home() {
               Claim Your Venue (Free)
             </a>
           </Button>
+        </div>
+      </div>
+
+      {/* Trust signals */}
+      <div className="py-10 px-4 bg-white border-b border-slate-200">
+        <div className="max-w-7xl mx-auto grid gap-4 sm:grid-cols-3 text-center">
+          <Card className="p-5 border-slate-200">
+            <p className="text-2xl font-bold text-purple-700">{cities.length}+</p>
+            <p className="text-sm text-slate-600">UK locations indexed</p>
+          </Card>
+          <Card className="p-5 border-slate-200">
+            <p className="text-2xl font-bold text-purple-700">1,000+</p>
+            <p className="text-sm text-slate-600">venues and listings</p>
+          </Card>
+          <Card className="p-5 border-slate-200">
+            <p className="text-2xl font-bold text-purple-700">2025</p>
+            <p className="text-sm text-slate-600">helping UK families since</p>
+          </Card>
         </div>
       </div>
 

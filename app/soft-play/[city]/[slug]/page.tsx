@@ -66,6 +66,10 @@ interface Venue {
   free_wifi: boolean
   age_ranges?: string[]
   images?: string[]
+  main_image_url?: string
+  has_under_1s?: boolean
+  has_outdoor_play?: boolean
+  has_party_rooms?: boolean
   last_verified_at?: string
 }
 
@@ -377,6 +381,11 @@ export default async function VenuePage({ params }: PageProps) {
     : 0
 
   const baseUrl = 'https://www.softplaynearme.co.uk'
+  const galleryPhotos = photos.length > 0
+    ? photos
+    : venue.main_image_url
+      ? [{ id: 0, url: venue.main_image_url, alt_text: `${venue.name} soft play area`, is_primary: true }]
+      : []
 
   // LocalBusiness schema – uses reusable builder from lib/schema.ts
   const localBusinessSchema = buildLocalBusinessSchema({
@@ -394,7 +403,7 @@ export default async function VenuePage({ params }: PageProps) {
     priceTo: venue.price_to,
     avgRating: avgRating > 0 ? avgRating : undefined,
     reviewCount: reviews.length > 0 ? reviews.length : undefined,
-    imageUrl: photos.length > 0 ? photos[0].url : undefined,
+    imageUrl: galleryPhotos.length > 0 ? galleryPhotos[0].url : undefined,
     citySlug: city,
     venueSlug: slug,
   })
@@ -406,10 +415,42 @@ export default async function VenuePage({ params }: PageProps) {
     { name: venue.name, url: `${baseUrl}/soft-play/${city}/${slug}` },
   ])
 
+  const reviewSchema =
+    reviews.length > 0
+      ? {
+          '@context': 'https://schema.org',
+          '@type': 'LocalBusiness',
+          name: venue.name,
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: avgRating.toFixed(1),
+            reviewCount: reviews.length,
+            bestRating: 5,
+            worstRating: 1,
+          },
+          review: reviews.slice(0, 10).map((review) => ({
+            '@type': 'Review',
+            author: {
+              '@type': 'Person',
+              name: review.reviewer_name,
+            },
+            datePublished: review.created_at,
+            reviewBody: review.comment,
+            reviewRating: {
+              '@type': 'Rating',
+              ratingValue: review.rating,
+              bestRating: 5,
+              worstRating: 1,
+            },
+          })),
+        }
+      : null
+
   return (
     <>
       <JsonLd data={localBusinessSchema} />
       <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={reviewSchema} />
 
       <div className="min-h-screen bg-slate-50">
         <Header backLink={{ href: `/soft-play/${city}`, label: cityName }} />
@@ -473,9 +514,9 @@ export default async function VenuePage({ params }: PageProps) {
         </div>
 
         {/* Photo Gallery / Placeholder */}
-        {photos.length > 0 ? (
+        {galleryPhotos.length > 0 ? (
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-4 relative z-10">
-            <PhotoGallery photos={photos} venueName={venue.name} />
+            <PhotoGallery photos={galleryPhotos} venueName={venue.name} />
           </div>
         ) : (
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -640,9 +681,9 @@ export default async function VenuePage({ params }: PageProps) {
                   </li>
                 </ul>
                 <Button asChild className="bg-green-600 hover:bg-green-700">
-                  <a href={`mailto:info@softplaynearme.co.uk?subject=Claim%20Venue:%20${encodeURIComponent(venue.name)}&body=I%20am%20the%20owner/manager%20of%20${encodeURIComponent(venue.name)}%20and%20would%20like%20to%20claim%20this%20listing.`}>
+                  <Link href={`/add-venue?venue=${encodeURIComponent(venue.name)}`}>
                     Claim Your Free Listing
-                  </a>
+                  </Link>
                 </Button>
               </div>
             </div>
@@ -718,9 +759,9 @@ export default async function VenuePage({ params }: PageProps) {
                       and manage your venue profile.
                     </p>
                     <Button asChild className="w-full bg-green-600 hover:bg-green-700">
-                      <a href={`mailto:info@softplaynearme.co.uk?subject=Claim%20Venue:%20${encodeURIComponent(venue.name)}&body=I%20am%20the%20owner/manager%20of%20${encodeURIComponent(venue.name)}%20and%20would%20like%20to%20claim%20this%20listing.`}>
+                      <Link href={`/add-venue?venue=${encodeURIComponent(venue.name)}`}>
                         Claim This Venue (Free)
-                      </a>
+                      </Link>
                     </Button>
                     <p className="text-xs text-green-600 text-center">
                       No cost, no obligation

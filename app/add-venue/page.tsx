@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
-import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { CheckCircle2, Mail, MapPin, Phone, Globe } from 'lucide-react'
+import { CheckCircle2, MapPin, Phone, Globe } from 'lucide-react'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
+import { ClaimVenueForm } from '@/components/forms/ClaimVenueForm'
 
 export const metadata: Metadata = {
   title: 'Add Your Venue | Soft Play Near Me',
@@ -12,7 +12,12 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://www.softplaynearme.co.uk/add-venue' },
 }
 
-export default function AddVenuePage() {
+interface AddVenuePageProps {
+  searchParams: Promise<{ venue?: string }>
+}
+
+export default async function AddVenuePage({ searchParams }: AddVenuePageProps) {
+  const { venue } = await searchParams
   return (
     <div className="min-h-screen bg-slate-50">
       <Header />
@@ -49,9 +54,9 @@ export default function AddVenuePage() {
         </Card>
 
         <Card className="p-8 mb-8">
-          <h2 className="text-xl font-semibold mb-4">How to add your venue</h2>
+          <h2 className="text-xl font-semibold mb-4">Claim or Add Your Venue</h2>
           <p className="text-slate-600 mb-6">
-            Send us an email with the following details and we&apos;ll create your listing within 48 hours:
+            Submit this quick form and our team will review your listing claim or new venue request.
           </p>
           <ul className="space-y-3 text-slate-700 mb-8">
             <li className="flex items-center gap-2">
@@ -71,12 +76,7 @@ export default function AddVenuePage() {
               Facilities (cafe, parking, toddler area, SEN sessions, parties, etc.)
             </li>
           </ul>
-          <Button asChild size="lg" className="w-full bg-green-600 hover:bg-green-700">
-            <a href="mailto:info@softplaynearme.co.uk?subject=Add%20My%20Venue&body=Venue%20name:%0AAddress:%0APostcode:%0APhone:%0AWebsite:%0AFacilities:%0A">
-              <Mail className="w-5 h-5 mr-2" />
-              Email Us Your Details
-            </a>
-          </Button>
+          <ClaimVenueForm prefilledVenue={venue || ''} />
         </Card>
 
         <div className="text-center text-sm text-slate-500">

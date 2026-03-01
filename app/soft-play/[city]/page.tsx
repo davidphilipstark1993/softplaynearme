@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -104,6 +105,7 @@ interface Venue {
   slug: string
   address: string
   postcode: string
+  main_image_url?: string | null
   phone?: string
   website?: string
   description?: string
@@ -299,21 +301,37 @@ export default async function CityPage({ params, searchParams }: PageProps) {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {venues.map((venue, index) => {
                 const hasFeatures = venue.toddler_area || venue.parties || venue.cafe || venue.parking || venue.sen_friendly
+                const displayImage = venue.main_image_url && venue.main_image_url.trim().length > 0 ? venue.main_image_url : null
                 return (
                 <Card key={venue.slug} className="group hover:shadow-lg transition-all duration-200 border-slate-200 overflow-hidden h-full flex flex-col">
-                  {/* Gradient thumbnail banner */}
+                  {/* Venue thumbnail banner */}
                   <Link href={`/soft-play/${city}/${venue.slug}`} className="block" tabIndex={-1} aria-hidden="true">
-                    <div
-                      className="h-28 relative overflow-hidden"
-                      style={{
-                        background: `linear-gradient(135deg, hsl(${(index * 47 + 262) % 360}, 70%, 55%), hsl(${(index * 47 + 320) % 360}, 60%, 50%))`,
-                      }}
-                    >
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <span className="text-white/20 text-6xl font-bold select-none">
-                          {venue.name.charAt(0)}
-                        </span>
-                      </div>
+                    <div className="h-36 relative overflow-hidden bg-slate-100">
+                      {displayImage ? (
+                        <Image
+                          src={displayImage}
+                          alt={`${venue.name} soft play venue`}
+                          fill
+                          loading="lazy"
+                          className="object-cover transition-transform duration-300 group-hover:scale-105"
+                          sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 100vw"
+                        />
+                      ) : (
+                        <div
+                          className="absolute inset-0"
+                          style={{
+                            background: `linear-gradient(135deg, hsl(${(index * 47 + 262) % 360}, 70%, 55%), hsl(${(index * 47 + 320) % 360}, 60%, 50%))`,
+                          }}
+                        >
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <span className="text-white/20 text-6xl font-bold select-none">
+                              {venue.name.charAt(0)}
+                            </span>
+                          </div>
+                        </div>
+                      )}
+
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/0 to-black/0" />
                       {/* Rating overlay */}
                       <div className="absolute top-3 right-3">
                         {venue.review_count && venue.review_count > 0 ? (

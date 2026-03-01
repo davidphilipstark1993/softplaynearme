@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -36,6 +37,7 @@ interface VenueResult {
   avg_rating: number | null
   review_count: number
   distance?: number
+  main_image_url?: string | null
 }
 
 interface SearchResultsProps {
@@ -76,6 +78,21 @@ function VenueCard({
     <Card className="hover:shadow-md transition-shadow">
       <CardContent className="p-4 sm:p-6">
         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+          <div className="relative h-28 w-full overflow-hidden rounded-lg bg-slate-100 sm:h-24 sm:w-36 sm:flex-shrink-0">
+            {venue.main_image_url ? (
+              <Image
+                src={venue.main_image_url}
+                alt={`${venue.name} soft play venue`}
+                fill
+                loading="lazy"
+                className="object-cover"
+                sizes="(max-width: 640px) 100vw, 144px"
+              />
+            ) : (
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-100 to-pink-100" />
+            )}
+          </div>
+
           {/* Main content */}
           <div className="flex-1 min-w-0">
             {/* Header */}
@@ -231,6 +248,26 @@ export function SearchResults({
 
   return (
     <div className={cn('space-y-4', className)}>
+      {/* Quick map context */}
+      {venues[0] && (
+        <Card>
+          <CardContent className="p-3">
+            <div className="aspect-[16/6] w-full overflow-hidden rounded-lg border border-slate-200">
+              <iframe
+                title="Search results map"
+                src={`https://maps.google.com/maps?q=${encodeURIComponent(
+                  `${venues[0].address || ''}, ${venues[0].postcode || ''}`
+                )}&z=11&output=embed`}
+                width="100%"
+                height="100%"
+                loading="lazy"
+                style={{ border: 0 }}
+              />
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
       {/* Results count */}
       <p className="text-sm text-muted-foreground">
         {venues.length} venue{venues.length !== 1 ? 's' : ''} found

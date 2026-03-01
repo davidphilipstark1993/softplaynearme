@@ -73,8 +73,10 @@ async function searchVenues(
 
     for (const f of filters) {
       if (f === 'toddler') where.push('v.toddler_area = true')
+      else if (f === 'under_1s') where.push('v.has_under_1s = true')
       else if (f === 'parties') where.push('v.parties = true')
       else if (f === 'sen') where.push('v.sen_friendly = true')
+      else if (f === 'outdoor') where.push('v.has_outdoor_play = true')
       else if (f === 'cafe') where.push('v.cafe = true')
       else if (f === 'parking') where.push('v.parking = true')
       else if (f === 'wheelchair') where.push('v.wheelchair_access = true')

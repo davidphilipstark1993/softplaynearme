@@ -28,7 +28,15 @@ export default function BlogIndexPage() {
   return (
     <main className="min-h-screen bg-slate-50">
       <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Soft Play Blog</h1>
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Soft Play Blog</h1>
+          <Link
+            href="/"
+            className="inline-flex items-center rounded-md border border-purple-300 bg-purple-600 px-4 py-2 text-sm font-medium text-white hover:bg-purple-700"
+          >
+            Home
+          </Link>
+        </div>
         <p className="mt-3 text-base text-slate-700 sm:text-lg">
           Local city guides and practical planning tips for families searching for the best soft play near them.
         </p>
@@ -47,10 +55,19 @@ export default function BlogIndexPage() {
                 href={`/blog/${post.slug}`}
                 className="mt-3 inline-flex text-sm font-medium text-blue-700 hover:underline"
               >
-                Read article
+                Read more
               </Link>
             </article>
           ))}
+        </div>
+
+        <div className="mt-10">
+          <Link
+            href="/"
+            className="inline-flex items-center rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100"
+          >
+            Back to Home
+          </Link>
         </div>
       </div>
     </main>

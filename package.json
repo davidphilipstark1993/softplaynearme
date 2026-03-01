@@ -12,7 +12,10 @@
     "db:setup": "node scripts/setupDatabase.js",
     "db:seed": "node scripts/seedHullVenues.js",
     "db:migrate": "node scripts/migrateSchema.js",
-    "data:build": "node scripts/buildSoftplayData.mjs"
+    "data:build": "node scripts/buildSoftplayData.mjs",
+    "import:csv": "node scripts/import-softplay-csv.mjs",
+    "enrich:venues": "node scripts/enrich-venues.mjs",
+    "test:enrichment": "node --test scripts/enrichment-utils.test.mjs"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",

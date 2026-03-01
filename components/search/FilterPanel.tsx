@@ -24,7 +24,9 @@ interface FilterPanelProps {
 const DEFAULT_FILTERS: FilterOption[] = [
   { key: 'open_now', label: 'Open Now' },
   { key: 'toddler', label: 'Toddler Friendly' },
+  { key: 'under_1s', label: 'Under 1s' },
   { key: 'sen', label: 'SEN Friendly' },
+  { key: 'outdoor', label: 'Outdoor Play' },
   { key: 'cafe', label: 'Has Cafe' },
   { key: 'parking', label: 'Free Parking' },
   { key: 'parties', label: 'Birthday Parties' },

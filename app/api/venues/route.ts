@@ -65,8 +65,10 @@ export async function GET(request: NextRequest) {
     // Single filter (legacy support)
     if (filter) {
       if (filter === 'toddler') where.push('v.toddler_area = true')
+      else if (filter === 'under_1s') where.push('v.has_under_1s = true')
       else if (filter === 'parties') where.push('v.parties = true')
       else if (filter === 'sen') where.push('v.sen_friendly = true')
+      else if (filter === 'outdoor') where.push('v.has_outdoor_play = true')
       else if (filter === 'cafe') where.push('v.cafe = true')
       else if (filter === 'parking') where.push('v.parking = true')
       else if (filter === 'wheelchair') where.push('v.wheelchair_access = true')
@@ -76,8 +78,10 @@ export async function GET(request: NextRequest) {
     if (filters.length > 0) {
       for (const f of filters) {
         if (f === 'toddler') where.push('v.toddler_area = true')
+        else if (f === 'under_1s') where.push('v.has_under_1s = true')
         else if (f === 'parties') where.push('v.parties = true')
         else if (f === 'sen') where.push('v.sen_friendly = true')
+        else if (f === 'outdoor') where.push('v.has_outdoor_play = true')
         else if (f === 'cafe') where.push('v.cafe = true')
         else if (f === 'parking') where.push('v.parking = true')
         else if (f === 'wheelchair') where.push('v.wheelchair_access = true')
