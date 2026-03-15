@@ -130,14 +130,16 @@ function staticToDisplayVenue(sv: StaticVenue): Venue {
     postcode: sv.postcode,
     phone: sv.phone || undefined,
     website: sv.website || undefined,
-    description: sv.notes || undefined,
+    description: sv.description || sv.notes || undefined,
     mapsUrl: sv.mapsUrl || undefined,
-    cafe: false,
-    parking: false,
-    parties: false,
-    toddler_area: false,
-    baby_area: false,
-    sen_friendly: false,
+    avg_rating: sv.rating ?? undefined,
+    review_count: sv.reviewCount ?? undefined,
+    cafe: sv.cafe ?? false,
+    parking: sv.parking ?? false,
+    parties: sv.parties ?? false,
+    toddler_area: sv.toddlerArea ?? false,
+    baby_area: sv.babyArea ?? false,
+    sen_friendly: sv.senFriendly ?? false,
     isStatic: true
   }
 }
@@ -150,8 +152,8 @@ async function getVenues(citySlug: string, filter?: string, search?: string): Pr
     try {
       let query = `
         SELECT v.*,
-               COALESCE(AVG(r.rating), 0) as avg_rating,
-               COUNT(r.id) as review_count
+               COALESCE(NULLIF(COALESCE(AVG(r.rating), 0), 0), v.rating::numeric) as avg_rating,
+               CASE WHEN COUNT(r.id) > 0 THEN COUNT(r.id) ELSE COALESCE(v.reviews_count, 0) END as review_count
         FROM venues v
         LEFT JOIN reviews r ON r.venue_id = v.id AND r.approved = true
         WHERE v.city_slug = $1

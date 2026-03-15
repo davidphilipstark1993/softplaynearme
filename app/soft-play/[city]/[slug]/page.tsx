@@ -142,17 +142,28 @@ function staticToVenue(sv: StaticVenue): Venue {
     city_slug: sv.townSlug,
     address: sv.address,
     postcode: sv.postcode,
+    lat: sv.lat ?? undefined,
+    lng: sv.lng ?? undefined,
     phone: sv.phone || undefined,
     website: sv.website || undefined,
-    description: sv.notes || undefined,
-    cafe: false,
-    parking: false,
-    parties: false,
-    toddler_area: false,
-    baby_area: false,
-    sen_friendly: false,
-    wheelchair_access: false,
-    free_wifi: false,
+    description: sv.description || sv.notes || undefined,
+    rating: sv.rating ?? undefined,
+    reviews_count: sv.reviewCount ?? undefined,
+    cafe: sv.cafe ?? false,
+    parking: sv.parking ?? false,
+    parties: sv.parties ?? false,
+    toddler_area: sv.toddlerArea ?? false,
+    baby_area: sv.babyArea ?? false,
+    sen_friendly: sv.senFriendly ?? false,
+    wheelchair_access: sv.wheelchairAccess ?? false,
+    free_wifi: sv.freeWifi ?? false,
+    has_outdoor_play: sv.hasOutdoorPlay ?? false,
+    has_party_rooms: sv.hasPartyRooms ?? false,
+    has_sen_sessions: sv.hasSenSessions ?? false,
+    price_from: sv.priceFrom ?? undefined,
+    price_to: sv.priceTo ?? undefined,
+    main_image_url: sv.mainImageUrl ?? undefined,
+    featured: sv.featured ?? false,
     _mapsUrl: sv.mapsUrl,
     _isStatic: true,
   } as Venue & { _mapsUrl?: string; _isStatic?: boolean }
@@ -378,7 +389,7 @@ export default async function VenuePage({ params }: PageProps) {
 
   const avgRating = reviews.length > 0
     ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
-    : 0
+    : ((venue as any).rating ? Number((venue as any).rating) : 0)
 
   const baseUrl = 'https://www.softplaynearme.co.uk'
   const galleryPhotos = photos.length > 0
@@ -402,7 +413,7 @@ export default async function VenuePage({ params }: PageProps) {
     priceFrom: venue.price_from,
     priceTo: venue.price_to,
     avgRating: avgRating > 0 ? avgRating : undefined,
-    reviewCount: reviews.length > 0 ? reviews.length : undefined,
+    reviewCount: reviews.length > 0 ? reviews.length : ((venue as any).reviews_count || undefined),
     imageUrl: galleryPhotos.length > 0 ? galleryPhotos[0].url : undefined,
     citySlug: city,
     venueSlug: slug,
@@ -476,7 +487,7 @@ export default async function VenuePage({ params }: PageProps) {
                   <MapPin className="w-5 h-5" />
                   <span>{venue.address}, {venue.postcode}</span>
                 </div>
-                {reviews.length > 0 && (
+                {avgRating > 0 && (
                   <div className="flex items-center gap-2 mt-3">
                     <div className="flex">
                       {[...Array(5)].map((_, i) => (
@@ -491,7 +502,13 @@ export default async function VenuePage({ params }: PageProps) {
                       ))}
                     </div>
                     <span className="font-semibold">{avgRating.toFixed(1)}</span>
-                    <span className="text-purple-200">({reviews.length} reviews)</span>
+                    <span className="text-purple-200">
+                      {reviews.length > 0
+                        ? `(${reviews.length} reviews)`
+                        : (venue as any).reviews_count
+                          ? `(${(venue as any).reviews_count} Google reviews)`
+                          : ''}
+                    </span>
                   </div>
                 )}
               </div>

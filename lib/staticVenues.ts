@@ -15,12 +15,40 @@ export interface StaticVenue {
   slug: string
   address: string
   postcode: string
+  lat?: number | null
+  lng?: number | null
   phone: string
   website: string
   mapsUrl: string
+  googlePlaceId?: string
   category: string
   notes: string
   lastVerified: string
+  description?: string
+  openingHoursText?: string
+  // Google rating
+  rating?: number | null
+  reviewCount?: number | null
+  // Facilities
+  cafe?: boolean
+  parking?: boolean
+  parties?: boolean
+  toddlerArea?: boolean
+  babyArea?: boolean
+  senFriendly?: boolean
+  wheelchairAccess?: boolean
+  freeWifi?: boolean
+  hasOutdoorPlay?: boolean
+  hasPartyRooms?: boolean
+  hasSenSessions?: boolean
+  hasRolePlay?: boolean
+  hasMultiLevelPlay?: boolean
+  // Pricing
+  priceFrom?: number | null
+  priceTo?: number | null
+  pricingHint?: string
+  mainImageUrl?: string | null
+  featured?: boolean
 }
 
 export interface StaticTown {
@@ -36,8 +64,8 @@ interface VenuesByTownEntry {
 }
 
 // Type the imported data
-const venuesByTown = venuesByTownData as Record<string, VenuesByTownEntry>
-const towns = townsData as StaticTown[]
+const venuesByTown = venuesByTownData as unknown as Record<string, VenuesByTownEntry>
+const towns = townsData as unknown as StaticTown[]
 
 /**
  * Get all towns from static data

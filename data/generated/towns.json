@@ -1,82 +1,206 @@
 [
   {
+    "name": "Aberdeen",
+    "slug": "aberdeen",
+    "venueCount": 12,
+    "avgRating": "4.2"
+  },
+  {
+    "name": "Barnsley",
+    "slug": "barnsley",
+    "venueCount": 18,
+    "avgRating": "4.8"
+  },
+  {
+    "name": "Beverley",
+    "slug": "beverley",
+    "venueCount": 1,
+    "avgRating": "4.6"
+  },
+  {
+    "name": "Blackpool",
+    "slug": "blackpool",
+    "venueCount": 19,
+    "avgRating": "4.5"
+  },
+  {
+    "name": "Bolton Preston",
+    "slug": "bolton-preston",
+    "venueCount": 18,
+    "avgRating": "4.3"
+  },
+  {
     "name": "Bournemouth",
     "slug": "bournemouth",
-    "venueCount": 33
+    "venueCount": 33,
+    "avgRating": "4.6"
+  },
+  {
+    "name": "Bradford",
+    "slug": "bradford",
+    "venueCount": 6,
+    "avgRating": "4.0"
   },
   {
     "name": "Bridlington",
     "slug": "bridlington",
-    "venueCount": 7
+    "venueCount": 7,
+    "avgRating": "3.5"
   },
   {
     "name": "Brighton",
     "slug": "brighton",
-    "venueCount": 27
+    "venueCount": 27,
+    "avgRating": "4.2"
   },
   {
     "name": "Cardiff",
     "slug": "cardiff",
-    "venueCount": 42
+    "venueCount": 42,
+    "avgRating": "4.2"
   },
   {
     "name": "Colchester",
     "slug": "colchester",
-    "venueCount": 32
+    "venueCount": 32,
+    "avgRating": "3.9"
+  },
+  {
+    "name": "Doncaster",
+    "slug": "doncaster",
+    "venueCount": 43,
+    "avgRating": "4.3"
+  },
+  {
+    "name": "Edinburgh",
+    "slug": "edinburgh",
+    "venueCount": 17,
+    "avgRating": "4.3"
+  },
+  {
+    "name": "Glasgow",
+    "slug": "glasgow",
+    "venueCount": 51,
+    "avgRating": "4.3"
+  },
+  {
+    "name": "Halifax",
+    "slug": "halifax",
+    "venueCount": 17,
+    "avgRating": "4.3"
   },
   {
     "name": "Hastings",
     "slug": "hastings",
-    "venueCount": 27
+    "venueCount": 27,
+    "avgRating": "4.2"
   },
   {
     "name": "Huddersfield",
     "slug": "huddersfield",
-    "venueCount": 12
+    "venueCount": 4,
+    "avgRating": "4.3"
   },
   {
     "name": "Hull",
     "slug": "hull",
-    "venueCount": 64
+    "venueCount": 80,
+    "avgRating": "4.4"
+  },
+  {
+    "name": "Inverness",
+    "slug": "inverness",
+    "venueCount": 2,
+    "avgRating": "4.0"
   },
   {
     "name": "Ipswich",
     "slug": "ipswich",
-    "venueCount": 16
+    "venueCount": 16,
+    "avgRating": "4.5"
   },
   {
     "name": "Leeds",
     "slug": "leeds",
-    "venueCount": 73
+    "venueCount": 73,
+    "avgRating": "4.4"
+  },
+  {
+    "name": "Leicester",
+    "slug": "leicester",
+    "venueCount": 35,
+    "avgRating": "4.0"
+  },
+  {
+    "name": "Lincoln",
+    "slug": "lincoln",
+    "venueCount": 22,
+    "avgRating": "4.2"
+  },
+  {
+    "name": "Newcastle",
+    "slug": "newcastle",
+    "venueCount": 22,
+    "avgRating": null
   },
   {
     "name": "Norwich",
     "slug": "norwich",
-    "venueCount": 30
+    "venueCount": 30,
+    "avgRating": "4.3"
+  },
+  {
+    "name": "Nottingham",
+    "slug": "nottingham",
+    "venueCount": 45,
+    "avgRating": "4.3"
   },
   {
     "name": "Portsmouth",
     "slug": "portsmouth",
-    "venueCount": 36
+    "venueCount": 36,
+    "avgRating": "4.1"
   },
   {
     "name": "Sheffield",
     "slug": "sheffield",
-    "venueCount": 120
+    "venueCount": 120,
+    "avgRating": "4.5"
   },
   {
     "name": "Southend",
     "slug": "southend",
-    "venueCount": 23
+    "venueCount": 23,
+    "avgRating": null
+  },
+  {
+    "name": "Stoke",
+    "slug": "stoke",
+    "venueCount": 25,
+    "avgRating": null
+  },
+  {
+    "name": "Sunderland",
+    "slug": "sunderland",
+    "venueCount": 25,
+    "avgRating": "4.2"
   },
   {
     "name": "Swansea",
     "slug": "swansea",
-    "venueCount": 35
+    "venueCount": 35,
+    "avgRating": "4.5"
+  },
+  {
+    "name": "Unknown",
+    "slug": "unknown",
+    "venueCount": 3,
+    "avgRating": null
   },
   {
     "name": "York",
     "slug": "york",
-    "venueCount": 92
+    "venueCount": 91,
+    "avgRating": "4.3"
   }
 ]
