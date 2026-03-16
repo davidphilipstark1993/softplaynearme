@@ -335,16 +335,15 @@ export default async function CityPage({ params, searchParams }: PageProps) {
 
                       <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/0 to-black/0" />
                       {/* Rating overlay */}
-                      <div className="absolute top-3 right-3">
-                        {venue.review_count && venue.review_count > 0 ? (
-                          <div className="flex items-center gap-1 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full text-purple-700 font-bold text-sm shadow-sm">
-                            <Star className="w-3.5 h-3.5 fill-current" />
-                            {Number(venue.avg_rating || 0).toFixed(1)}
-                          </div>
-                        ) : (
-                          <Badge className="bg-white/90 text-slate-600 backdrop-blur-sm shadow-sm">New</Badge>
-                        )}
-                      </div>
+                      {venue.avg_rating && venue.avg_rating > 0 ? (
+                        <div className="absolute top-2 right-2 flex items-center gap-1 bg-white/95 backdrop-blur-sm px-2 py-1 rounded-full shadow text-xs font-bold">
+                          <Star className="w-3 h-3 text-yellow-400 fill-current" />
+                          <span className="text-slate-800">{Number(venue.avg_rating).toFixed(1)}</span>
+                          {venue.review_count && venue.review_count > 0 && (
+                            <span className="text-slate-400 font-normal">({venue.review_count.toLocaleString()})</span>
+                          )}
+                        </div>
+                      ) : null}
                     </div>
                   </Link>
 
