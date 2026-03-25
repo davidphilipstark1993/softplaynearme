@@ -13,6 +13,7 @@
     "db:seed": "node scripts/seedHullVenues.js",
     "db:migrate": "node scripts/migrateSchema.js",
     "db:migrate:enrichment": "node scripts/migrateEnrichment.js",
+    "db:migrate:phase2": "node scripts/migratePhase2Remaining.js",
     "db:scores": "node scripts/updateCompletenessScores.js",
     "db:clean": "node scripts/cleanFabricatedData.js",
     "data:build": "node scripts/buildSoftplayData.mjs",

@@ -8,29 +8,35 @@ import {
   Heart,
   Accessibility,
   Wifi,
-  Shirt,
   Lock,
   Trees,
   Wind,
   Footprints,
   CheckCircle2,
   XCircle,
+  Toilet,
+  Drama,
+  Sparkles,
+  PartyPopper,
 } from 'lucide-react'
 
 interface FacilitiesData {
   cafe?: boolean
   parking?: boolean
   parties?: boolean
+  party_rooms?: boolean
   toddler_area?: boolean
   baby_area?: boolean
+  sensory_area?: boolean
+  role_play_area?: boolean
   sen_friendly?: boolean
   wheelchair_access?: boolean
+  disabled_access?: boolean
   free_wifi?: boolean
+  toilets?: boolean
+  baby_change?: boolean
+  // legacy keys — kept for backwards compatibility
   baby_changing?: boolean
-  lockers?: boolean
-  outdoor_area?: boolean
-  air_conditioning?: boolean
-  socks_required?: boolean
   [key: string]: boolean | undefined
 }
 
@@ -58,23 +64,26 @@ interface FacilityConfig {
 
 const FACILITY_CONFIG: FacilityConfig[] = [
   // Amenities
-  { key: 'cafe', label: 'Cafe', icon: Coffee, category: 'amenities' },
-  { key: 'parking', label: 'Parking', icon: Car, category: 'amenities' },
-  { key: 'free_wifi', label: 'Free WiFi', icon: Wifi, category: 'amenities' },
-  { key: 'baby_changing', label: 'Baby Changing', icon: Baby, category: 'amenities' },
-  { key: 'lockers', label: 'Lockers', icon: Lock, category: 'amenities' },
-  { key: 'air_conditioning', label: 'Air Conditioning', icon: Wind, category: 'amenities' },
-  { key: 'socks_required', label: 'Socks Required', icon: Footprints, category: 'amenities' },
+  { key: 'cafe',         label: 'Café',           icon: Coffee,       category: 'amenities' },
+  { key: 'parking',      label: 'Parking',         icon: Car,          category: 'amenities' },
+  { key: 'free_wifi',    label: 'Free WiFi',       icon: Wifi,         category: 'amenities' },
+  { key: 'toilets',      label: 'Toilets',         icon: Toilet,       category: 'amenities' },
+  { key: 'baby_change',  label: 'Baby Changing',   icon: Baby,         category: 'amenities' },
+  // legacy key — some older records use baby_changing
+  { key: 'baby_changing',label: 'Baby Changing',   icon: Baby,         category: 'amenities' },
 
   // Accessibility
   { key: 'wheelchair_access', label: 'Wheelchair Access', icon: Accessibility, category: 'accessibility' },
-  { key: 'sen_friendly', label: 'SEN Friendly', icon: Heart, category: 'accessibility' },
+  { key: 'disabled_access',   label: 'Disabled Access',   icon: Accessibility, category: 'accessibility' },
+  { key: 'sen_friendly',      label: 'SEN Friendly',      icon: Heart,         category: 'accessibility' },
 
-  // Activities
-  { key: 'toddler_area', label: 'Toddler Area', icon: Baby, category: 'activities' },
-  { key: 'baby_area', label: 'Baby Area', icon: Baby, category: 'activities' },
-  { key: 'parties', label: 'Birthday Parties', icon: Cake, category: 'activities' },
-  { key: 'outdoor_area', label: 'Outdoor Area', icon: Trees, category: 'activities' },
+  // Play areas & activities
+  { key: 'toddler_area',  label: 'Toddler Area',     icon: Baby,         category: 'activities' },
+  { key: 'baby_area',     label: 'Baby Area',        icon: Baby,         category: 'activities' },
+  { key: 'sensory_area',  label: 'Sensory Area',     icon: Sparkles,     category: 'activities' },
+  { key: 'role_play_area',label: 'Role Play Area',   icon: Drama,        category: 'activities' },
+  { key: 'parties',       label: 'Birthday Parties', icon: Cake,         category: 'activities' },
+  { key: 'party_rooms',   label: 'Party Rooms',      icon: PartyPopper,  category: 'activities' },
 ]
 
 const CATEGORY_LABELS: Record<string, string> = {

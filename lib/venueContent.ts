@@ -27,11 +27,17 @@ export interface VenueContentInput {
   parking?: boolean
   free_parking?: boolean
   parties?: boolean
+  party_rooms?: boolean
   toddler_area?: boolean
   baby_area?: boolean
+  sensory_area?: boolean
+  role_play_area?: boolean
   sen_friendly?: boolean
   wheelchair_access?: boolean
+  disabled_access?: boolean
   free_wifi?: boolean
+  toilets?: boolean
+  baby_change?: boolean
   facilities?: Record<string, boolean | undefined> | null
 
   // Booking
@@ -96,15 +102,28 @@ function confirmedFacilities(v: VenueContentInput): string[] {
     cafe: 'an on-site café',
     parking: 'parking nearby',
     parties: 'birthday party facilities',
+    party_rooms: 'dedicated party rooms',
     toddler_area: 'a dedicated toddler area',
     baby_area: 'a baby play area',
+    sensory_area: 'a sensory play area',
+    role_play_area: 'a role-play area',
     sen_friendly: 'SEN-friendly sessions',
     wheelchair_access: 'wheelchair-accessible facilities',
+    disabled_access: 'disabled access',
     free_wifi: 'free WiFi',
   }
 
+  // Also check top-level props for new fields
+  const extended: Record<string, boolean | undefined> = {
+    ...merged,
+    party_rooms: v.party_rooms,
+    sensory_area: v.sensory_area,
+    role_play_area: v.role_play_area,
+    disabled_access: v.disabled_access,
+  }
+
   return Object.entries(LABELS)
-    .filter(([key]) => merged[key] === true)
+    .filter(([key]) => extended[key] === true)
     .map(([, label]) => label)
 }
 
@@ -316,11 +335,27 @@ export function generateVenueFAQs(v: VenueContentInput): FAQItem[] {
   }
 
   // 7. Accessibility
-  const isWheelchair = v.facilities?.wheelchair_access ?? v.wheelchair_access
-  if (isWheelchair === true) {
+  const isAccessible = v.wheelchair_access === true || v.disabled_access === true
+  if (isAccessible) {
     faqs.push({
       question: `Is ${v.name} wheelchair accessible?`,
-      answer: `${v.name} is listed as wheelchair accessible. Contact the venue to confirm the specific accessibility features available.`,
+      answer: `${v.name} is listed as wheelchair/disabled accessible. Contact the venue to confirm the specific accessibility features available.`,
+    })
+  }
+
+  // 8. Sensory area (only show if positive)
+  if (v.sensory_area === true) {
+    faqs.push({
+      question: `Does ${v.name} have a sensory play area?`,
+      answer: `Yes, ${v.name} is listed as having a sensory area. Contact the venue to confirm current availability and any session requirements.`,
+    })
+  }
+
+  // 9. Role play area (only show if positive)
+  if (v.role_play_area === true) {
+    faqs.push({
+      question: `Does ${v.name} have a role-play area?`,
+      answer: `Yes, ${v.name} includes a role-play area. Contact the venue for further details.`,
     })
   }
 

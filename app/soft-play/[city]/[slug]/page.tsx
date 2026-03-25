@@ -40,6 +40,7 @@ import { VenueMap } from '@/components/venue/VenueMap'
 import { FacilitiesGrid, FacilitiesBadges } from '@/components/venue/FacilitiesGrid'
 import { SpecialSessions } from '@/components/venue/SpecialSessions'
 import { CTAButtons } from '@/components/venue/CTAButtons'
+import { QuickFactsPanel } from '@/components/venue/QuickFactsPanel'
 
 interface PageProps {
   params: Promise<{ city: string; slug: string }>
@@ -66,6 +67,7 @@ interface Venue {
   facilities?: Record<string, boolean>
   google_place_id?: string
   featured?: boolean
+  // Core facility booleans (original columns)
   cafe: boolean
   parking: boolean
   free_parking?: boolean
@@ -75,22 +77,41 @@ interface Venue {
   sen_friendly: boolean
   wheelchair_access: boolean
   free_wifi: boolean
+  // Phase 2 facility additions
+  sensory_area?: boolean
+  role_play_area?: boolean
+  party_rooms?: boolean
+  toilets?: boolean
+  baby_change?: boolean
+  disabled_access?: boolean
+  // Age
   age_ranges?: string[]
   age_range_min?: number
   age_range_max?: number
+  // Classification
   venue_type?: string
   indoor_or_outdoor?: string
+  // Booking
   accepts_walk_ins?: boolean
   prebooking_required?: boolean
   membership_available?: boolean
+  // Visitor info
+  description_short?: string
   what_to_expect?: string
   tips_before_visiting?: string
+  session_info?: string
+  peak_times?: string
+  // Ratings
   google_rating?: number
+  review_count?: number
+  // Ownership
   claimed_by_owner?: boolean
   owner_submitted?: boolean
+  // SEO overrides
   seo_title?: string
   meta_description?: string
   faq_json?: Array<{ question: string; answer: string }>
+  local_area_intro?: string
   completeness_score?: number
   images?: string[]
   main_image_url?: string
@@ -604,15 +625,25 @@ export default async function VenuePage({ params }: PageProps) {
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Main Column */}
             <div className="lg:col-span-2 space-y-6">
-              {/* Quick features */}
-              <FacilitiesBadges
-                facilities={venue.facilities}
+              {/* Quick Facts Panel — structured summary with graceful fallbacks */}
+              <QuickFactsPanel
+                ageRangeMin={venue.age_range_min}
+                ageRangeMax={venue.age_range_max}
+                ageRanges={venue.age_ranges}
+                acceptsWalkIns={venue.accepts_walk_ins}
+                prebookingRequired={venue.prebooking_required}
+                priceFrom={venue.price_from}
+                priceTo={venue.price_to}
+                priceRange={venue.price_range}
+                hasOpeningHours={!!venue.opening_hours}
                 cafe={venue.cafe}
                 parking={venue.parking}
                 parties={venue.parties}
                 toddlerArea={venue.toddler_area}
+                babyArea={venue.baby_area}
                 senFriendly={venue.sen_friendly}
                 wheelchairAccess={venue.wheelchair_access}
+                disabledAccess={venue.disabled_access}
               />
 
               {/* About – always shown; uses generated copy when no manual description */}
@@ -710,6 +741,26 @@ export default async function VenuePage({ params }: PageProps) {
                   <h2 className="font-semibold text-lg mb-3">Tips Before You Visit</h2>
                   <p className="text-slate-600 leading-relaxed whitespace-pre-wrap">
                     {venue.tips_before_visiting}
+                  </p>
+                </div>
+              )}
+
+              {/* Session Info (only when data present) */}
+              {venue.session_info && (
+                <div className="bg-white rounded-lg border border-slate-200 p-6">
+                  <h2 className="font-semibold text-lg mb-3">Sessions</h2>
+                  <p className="text-slate-600 leading-relaxed whitespace-pre-wrap">
+                    {venue.session_info}
+                  </p>
+                </div>
+              )}
+
+              {/* Peak Times (only when data present) */}
+              {venue.peak_times && (
+                <div className="bg-white rounded-lg border border-slate-200 p-6">
+                  <h2 className="font-semibold text-lg mb-3">Peak Times</h2>
+                  <p className="text-slate-600 leading-relaxed whitespace-pre-wrap">
+                    {venue.peak_times}
                   </p>
                 </div>
               )}
