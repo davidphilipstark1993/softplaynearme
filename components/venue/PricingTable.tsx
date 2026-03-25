@@ -15,6 +15,8 @@ interface PricingTableProps {
   pricing: PricingItem[]
   priceFrom?: number | null
   priceTo?: number | null
+  /** Show a "not yet confirmed" card instead of returning null when data is absent */
+  showEmptyState?: boolean
 }
 
 const AGE_GROUP_LABELS: Record<string, string> = {
@@ -47,9 +49,9 @@ function formatDuration(minutes: number | null): string {
   return `${hours}h ${mins}m session`
 }
 
-export function PricingTable({ pricing, priceFrom, priceTo }: PricingTableProps) {
+export function PricingTable({ pricing, priceFrom, priceTo, showEmptyState = false }: PricingTableProps) {
   if (!pricing || pricing.length === 0) {
-    // Fall back to simple price range display
+    // Show confirmed price range if we have it
     if (priceFrom || priceTo) {
       return (
         <Card>
@@ -62,19 +64,40 @@ export function PricingTable({ pricing, priceFrom, priceTo }: PricingTableProps)
           <CardContent>
             <p className="text-2xl font-bold text-purple-600">
               {priceFrom && priceTo && priceFrom !== priceTo
-                ? `£${Number(priceFrom).toFixed(2)} - £${Number(priceTo).toFixed(2)}`
+                ? `£${Number(priceFrom).toFixed(2)} – £${Number(priceTo).toFixed(2)}`
                 : priceFrom
                   ? `From £${Number(priceFrom).toFixed(2)}`
-                  : priceTo
-                    ? `Up to £${Number(priceTo).toFixed(2)}`
-                    : 'Contact for pricing'}
+                  : `Up to £${Number(priceTo).toFixed(2)}`}
             </p>
             <p className="text-sm text-muted-foreground mt-1">Per child per session</p>
+            <p className="text-xs text-muted-foreground mt-2">
+              Prices are indicative. Confirm with the venue before visiting.
+            </p>
           </CardContent>
         </Card>
       )
     }
-    return null
+
+    // No pricing data at all
+    if (!showEmptyState) return null
+    return (
+      <Card>
+        <CardHeader className="pb-4">
+          <CardTitle className="flex items-center gap-2 text-lg">
+            <PoundSterling className="h-5 w-5 text-purple-600" />
+            Pricing
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-sm text-slate-500 mb-2">
+            Pricing information has not yet been confirmed for this venue.
+          </p>
+          <p className="text-sm text-slate-500">
+            Contact the venue directly or visit their website to check current admission prices.
+          </p>
+        </CardContent>
+      </Card>
+    )
   }
 
   // Group pricing by type

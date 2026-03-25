@@ -853,6 +853,7 @@ export default async function VenuePage({ params }: PageProps) {
                   pricing={pricing}
                   priceFrom={venue.price_from}
                   priceTo={venue.price_to}
+                  showEmptyState
                 />
 
                 {/* Opening Hours */}

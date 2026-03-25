@@ -14,6 +14,7 @@
     "db:migrate": "node scripts/migrateSchema.js",
     "db:migrate:enrichment": "node scripts/migrateEnrichment.js",
     "db:scores": "node scripts/updateCompletenessScores.js",
+    "db:clean": "node scripts/cleanFabricatedData.js",
     "data:build": "node scripts/buildSoftplayData.mjs",
     "import:csv": "node scripts/import-softplay-csv.mjs",
     "enrich:venues": "node scripts/enrich-venues.mjs",
