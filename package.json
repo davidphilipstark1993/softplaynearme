@@ -12,6 +12,8 @@
     "db:setup": "node scripts/setupDatabase.js",
     "db:seed": "node scripts/seedHullVenues.js",
     "db:migrate": "node scripts/migrateSchema.js",
+    "db:migrate:enrichment": "node scripts/migrateEnrichment.js",
+    "db:scores": "node scripts/updateCompletenessScores.js",
     "data:build": "node scripts/buildSoftplayData.mjs",
     "import:csv": "node scripts/import-softplay-csv.mjs",
     "enrich:venues": "node scripts/enrich-venues.mjs",

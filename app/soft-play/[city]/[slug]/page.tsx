@@ -12,6 +12,8 @@ import {
   Clock,
   Phone,
   CheckCircle2,
+  ChevronDown,
+  ChevronUp,
 } from 'lucide-react'
 import type { Metadata } from 'next'
 import { getPool } from '@/lib/pool'
@@ -19,10 +21,17 @@ import { getStaticVenue, getStaticTownBySlug, getStaticVenuesByTown, getAllStati
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
-import { buildLocalBusinessSchema, buildBreadcrumbSchema } from '@/lib/schema'
+import { buildLocalBusinessSchema, buildBreadcrumbSchema, buildFAQSchema } from '@/lib/schema'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { getStoredReviews } from '@/lib/reviewsStore'
 import { ReviewSection } from '@/components/venue/ReviewSection'
+import {
+  generateVenueDescription,
+  generateVenueMetaDescription,
+  generateVenueFAQs,
+  computeCompletenessScore,
+  NOINDEX_THRESHOLD,
+} from '@/lib/venueContent'
 
 import { PhotoGallery } from '@/components/venue/PhotoGallery'
 import { PricingTable } from '@/components/venue/PricingTable'
@@ -46,6 +55,7 @@ interface Venue {
   lat?: number
   lng?: number
   phone?: string
+  email?: string
   website?: string
   booking_url?: string
   description?: string
@@ -58,6 +68,7 @@ interface Venue {
   featured?: boolean
   cafe: boolean
   parking: boolean
+  free_parking?: boolean
   parties: boolean
   toddler_area: boolean
   baby_area: boolean
@@ -65,6 +76,22 @@ interface Venue {
   wheelchair_access: boolean
   free_wifi: boolean
   age_ranges?: string[]
+  age_range_min?: number
+  age_range_max?: number
+  venue_type?: string
+  indoor_or_outdoor?: string
+  accepts_walk_ins?: boolean
+  prebooking_required?: boolean
+  membership_available?: boolean
+  what_to_expect?: string
+  tips_before_visiting?: string
+  google_rating?: number
+  claimed_by_owner?: boolean
+  owner_submitted?: boolean
+  seo_title?: string
+  meta_description?: string
+  faq_json?: Array<{ question: string; answer: string }>
+  completeness_score?: number
   images?: string[]
   main_image_url?: string
   has_under_1s?: boolean
@@ -322,27 +349,32 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const venue = await getVenue(city, slug)
   const cityConfig = getCityBySlug(city)
   const staticTown = getStaticTownBySlug(city)
-  const relatedCities = cityConfig ? getNearbyCities(city).slice(0, 6) : []
 
   if (!venue) {
     return { title: 'Venue Not Found | Soft Play Near Me' }
   }
 
   const cityName = cityConfig?.name || staticTown?.name || city
-  const title = `${venue.name} | Soft Play in ${cityName}`
-  const features = [
-    venue.toddler_area && 'toddler area',
-    venue.parties && 'birthday parties',
-    venue.cafe && 'cafe',
-    venue.sen_friendly && 'SEN friendly',
-  ].filter(Boolean)
-  const featureText = features.length > 0 ? ` Features: ${features.join(', ')}.` : ''
-  const description = venue.description
-    || `Visit ${venue.name} soft play centre in ${cityName}. Check opening times, facilities, prices, and get directions.${featureText}`
+  const county = cityConfig?.county || ''
+
+  // Use stored overrides when available, fall back to generated copy
+  const title = venue.seo_title || `${venue.name} | Soft Play in ${cityName}`
+  const description =
+    venue.meta_description ||
+    venue.description ||
+    generateVenueMetaDescription({ ...venue, city: cityName, county })
+
+  // Noindex very thin pages (name + address only, no useful content)
+  const score = venue.completeness_score ??
+    computeCompletenessScore({ ...venue, city: cityName, county })
+  const shouldNoindex = score < NOINDEX_THRESHOLD
 
   return {
     title,
     description,
+    robots: shouldNoindex
+      ? { index: false, follow: true }
+      : { index: true, follow: true },
     openGraph: {
       title,
       description,
@@ -398,7 +430,21 @@ export default async function VenuePage({ params }: PageProps) {
       ? [{ id: 0, url: venue.main_image_url, alt_text: `${venue.name} soft play area`, is_primary: true }]
       : []
 
-  // LocalBusiness schema – uses reusable builder from lib/schema.ts
+  // ── Content generation ─────────────────────────────────────────────────
+  const venueContentInput = { ...venue, city: cityName, county }
+
+  // Use stored description if available, otherwise generate one
+  const displayDescription = venue.description || generateVenueDescription(venueContentInput)
+
+  // FAQs: prefer stored faq_json, otherwise generate from structured data
+  const faqs: Array<{ question: string; answer: string }> =
+    (venue.faq_json && venue.faq_json.length > 0)
+      ? venue.faq_json
+      : generateVenueFAQs(venueContentInput)
+
+  const faqSchema = buildFAQSchema(faqs)
+
+  // ── LocalBusiness schema – uses reusable builder from lib/schema.ts ────
   const localBusinessSchema = buildLocalBusinessSchema({
     name: venue.name,
     description: venue.description,
@@ -462,6 +508,7 @@ export default async function VenuePage({ params }: PageProps) {
       <JsonLd data={localBusinessSchema} />
       <JsonLd data={breadcrumbSchema} />
       <JsonLd data={reviewSchema} />
+      <JsonLd data={faqSchema} />
 
       <div className="min-h-screen bg-slate-50">
         <Header backLink={{ href: `/soft-play/${city}`, label: cityName }} />
@@ -568,40 +615,41 @@ export default async function VenuePage({ params }: PageProps) {
                 wheelchairAccess={venue.wheelchair_access}
               />
 
-              {/* Last updated (shown when no description section) */}
-              {!venue.description && venue.last_verified_at && (
-                <p className="text-xs text-slate-400">
-                  Listing last updated: {new Date(venue.last_verified_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+              {/* About – always shown; uses generated copy when no manual description */}
+              <div className="bg-white rounded-lg border border-slate-200 p-6">
+                <h2 className="font-semibold text-lg mb-3">About {venue.name}</h2>
+                <p className="text-slate-600 leading-relaxed">
+                  {displayDescription}
                 </p>
-              )}
-
-              {/* About */}
-              {venue.description && (
-                <div className="bg-white rounded-lg border border-slate-200 p-6">
-                  <h2 className="font-semibold text-lg mb-3">About {venue.name}</h2>
-                  <p className="text-slate-600 whitespace-pre-wrap leading-relaxed">
-                    {venue.description}
+                {!venue.description && (
+                  <p className="mt-3 text-xs text-slate-400 italic">
+                    This description was generated from available listing data. Contact the venue to confirm details.
                   </p>
-                  <div className="mt-4 pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2">
-                    <p className="text-sm text-slate-500">
-                      Is this information correct?{' '}
-                      <a
-                        href={`mailto:info@softplaynearme.co.uk?subject=Update%20for%20${encodeURIComponent(venue.name)}`}
-                        className="text-purple-600 hover:text-purple-700 underline"
-                      >
-                        Send us updates
-                      </a>
+                )}
+                <div className="mt-4 pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2">
+                  <p className="text-sm text-slate-500">
+                    Is this information correct?{' '}
+                    <a
+                      href={`mailto:info@softplaynearme.co.uk?subject=Update%20for%20${encodeURIComponent(venue.name)}`}
+                      className="text-purple-600 hover:text-purple-700 underline"
+                    >
+                      Send us updates
+                    </a>
+                  </p>
+                  {venue.last_verified_at && (
+                    <p className="text-xs text-slate-400">
+                      Last updated:{' '}
+                      {new Date(venue.last_verified_at).toLocaleDateString('en-GB', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric',
+                      })}
                     </p>
-                    {venue.last_verified_at && (
-                      <p className="text-xs text-slate-400">
-                        Last updated: {new Date(venue.last_verified_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
-                      </p>
-                    )}
-                  </div>
+                  )}
                 </div>
-              )}
+              </div>
 
-              {/* Facilities Grid */}
+              {/* Facilities Grid – showEmptyState ensures something renders */}
               <FacilitiesGrid
                 facilities={venue.facilities}
                 cafe={venue.cafe}
@@ -612,7 +660,59 @@ export default async function VenuePage({ params }: PageProps) {
                 senFriendly={venue.sen_friendly}
                 wheelchairAccess={venue.wheelchair_access}
                 freeWifi={venue.free_wifi}
+                showEmptyState
               />
+
+              {/* What to Expect */}
+              {venue.what_to_expect ? (
+                <div className="bg-white rounded-lg border border-slate-200 p-6">
+                  <h2 className="font-semibold text-lg mb-3">What to Expect</h2>
+                  <p className="text-slate-600 leading-relaxed whitespace-pre-wrap">
+                    {venue.what_to_expect}
+                  </p>
+                </div>
+              ) : (
+                <div className="bg-amber-50 rounded-lg border border-amber-200 p-6">
+                  <h2 className="font-semibold text-lg text-amber-800 mb-2">What to Expect</h2>
+                  <p className="text-sm text-amber-700 leading-relaxed">
+                    Information for this venue is still being updated. Parents may want to contact{' '}
+                    {venue.name} directly to confirm opening times, prices, age suitability, and
+                    available facilities before visiting.
+                  </p>
+                  {(venue.phone || venue.website) && (
+                    <div className="flex flex-wrap gap-2 mt-3">
+                      {venue.phone && (
+                        <a
+                          href={`tel:${venue.phone.replace(/\s/g, '')}`}
+                          className="text-sm font-medium text-amber-800 underline hover:text-amber-900"
+                        >
+                          Call {venue.name}
+                        </a>
+                      )}
+                      {venue.website && (
+                        <a
+                          href={venue.website}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm font-medium text-amber-800 underline hover:text-amber-900"
+                        >
+                          Visit website
+                        </a>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Tips Before Visiting (only when data present) */}
+              {venue.tips_before_visiting && (
+                <div className="bg-white rounded-lg border border-slate-200 p-6">
+                  <h2 className="font-semibold text-lg mb-3">Tips Before You Visit</h2>
+                  <p className="text-slate-600 leading-relaxed whitespace-pre-wrap">
+                    {venue.tips_before_visiting}
+                  </p>
+                </div>
+              )}
 
               {/* Special Sessions */}
               {sessions.length > 0 && <SpecialSessions sessions={sessions} />}
@@ -670,6 +770,23 @@ export default async function VenuePage({ params }: PageProps) {
                 </div>
               )}
 
+              {/* FAQ Section */}
+              {faqs.length > 0 && (
+                <div className="bg-white rounded-lg border border-slate-200 p-6">
+                  <h2 className="font-semibold text-lg mb-4">
+                    Frequently Asked Questions about {venue.name}
+                  </h2>
+                  <div className="space-y-4">
+                    {faqs.map((faq, i) => (
+                      <div key={i} className="border-b border-slate-100 last:border-0 pb-4 last:pb-0">
+                        <h3 className="font-medium text-slate-800 mb-1">{faq.question}</h3>
+                        <p className="text-sm text-slate-600 leading-relaxed">{faq.answer}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               {/* Venue Owner Section */}
               <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg border border-green-200 p-6">
                 <h2 className="font-semibold text-lg text-green-800 mb-3">
@@ -698,7 +815,7 @@ export default async function VenuePage({ params }: PageProps) {
                   </li>
                 </ul>
                 <Button asChild className="bg-green-600 hover:bg-green-700">
-                  <Link href={`/add-venue?venue=${encodeURIComponent(venue.name)}`}>
+                  <Link href={`/add-venue?venue=${encodeURIComponent(venue.name)}&city=${city}&slug=${slug}`}>
                     Claim Your Free Listing
                   </Link>
                 </Button>
@@ -776,7 +893,7 @@ export default async function VenuePage({ params }: PageProps) {
                       and manage your venue profile.
                     </p>
                     <Button asChild className="w-full bg-green-600 hover:bg-green-700">
-                      <Link href={`/add-venue?venue=${encodeURIComponent(venue.name)}`}>
+                      <Link href={`/add-venue?venue=${encodeURIComponent(venue.name)}&city=${city}&slug=${slug}`}>
                         Claim This Venue (Free)
                       </Link>
                     </Button>

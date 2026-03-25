@@ -13,11 +13,14 @@ export const metadata: Metadata = {
 }
 
 interface AddVenuePageProps {
-  searchParams: Promise<{ venue?: string }>
+  searchParams: Promise<{ venue?: string; city?: string; slug?: string }>
 }
 
 export default async function AddVenuePage({ searchParams }: AddVenuePageProps) {
-  const { venue } = await searchParams
+  const { venue, city, slug } = await searchParams
+  const venueUrl = city && slug
+    ? `https://www.softplaynearme.co.uk/soft-play/${city}/${slug}`
+    : undefined
   return (
     <div className="min-h-screen bg-slate-50">
       <Header />
@@ -76,7 +79,12 @@ export default async function AddVenuePage({ searchParams }: AddVenuePageProps) 
               Facilities (cafe, parking, toddler area, SEN sessions, parties, etc.)
             </li>
           </ul>
-          <ClaimVenueForm prefilledVenue={venue || ''} />
+          <ClaimVenueForm
+            prefilledVenue={venue || ''}
+            citySlug={city || ''}
+            venueSlug={slug || ''}
+            venueUrl={venueUrl || ''}
+          />
         </Card>
 
         <div className="text-center text-sm text-slate-500">

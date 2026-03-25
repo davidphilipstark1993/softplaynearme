@@ -45,6 +45,8 @@ interface FacilitiesGridProps {
   senFriendly?: boolean
   wheelchairAccess?: boolean
   freeWifi?: boolean
+  /** When true, render a fallback card instead of null when no data is available */
+  showEmptyState?: boolean
 }
 
 interface FacilityConfig {
@@ -91,6 +93,7 @@ export function FacilitiesGrid({
   senFriendly,
   wheelchairAccess,
   freeWifi,
+  showEmptyState = false,
 }: FacilitiesGridProps) {
   // Merge facilities data with legacy props
   const mergedFacilities: FacilitiesData = {
@@ -111,7 +114,20 @@ export function FacilitiesGrid({
   )
 
   if (!hasFacilities) {
-    return null
+    if (!showEmptyState) return null
+    return (
+      <Card>
+        <CardHeader className="pb-4">
+          <CardTitle className="text-lg">Facilities &amp; Features</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-sm text-slate-500">
+            We&apos;re still gathering detailed facility information for this venue.
+            Check directly with the venue for the most up-to-date details.
+          </p>
+        </CardContent>
+      </Card>
+    )
   }
 
   // Get available (true) facilities
