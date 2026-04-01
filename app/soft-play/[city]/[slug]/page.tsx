@@ -118,6 +118,7 @@ interface Venue {
   has_under_1s?: boolean
   has_outdoor_play?: boolean
   has_party_rooms?: boolean
+  has_sen_sessions?: boolean
   last_verified_at?: string
 }
 
@@ -646,12 +647,14 @@ export default async function VenuePage({ params }: PageProps) {
                 disabledAccess={venue.disabled_access}
               />
 
-              {/* About – always shown; uses generated copy when no manual description */}
+              {/* About – always shown; renders stored multi-paragraph description */}
               <div className="bg-white rounded-lg border border-slate-200 p-6">
                 <h2 className="font-semibold text-lg mb-3">About {venue.name}</h2>
-                <p className="text-slate-600 leading-relaxed">
-                  {displayDescription}
-                </p>
+                <div className="space-y-3">
+                  {displayDescription.split('\n\n').filter(Boolean).map((para, i) => (
+                    <p key={i} className="text-slate-600 leading-relaxed">{para}</p>
+                  ))}
+                </div>
                 {!venue.description && (
                   <p className="mt-3 text-xs text-slate-400 italic">
                     This description was generated from available listing data. Contact the venue to confirm details.
@@ -694,46 +697,58 @@ export default async function VenuePage({ params }: PageProps) {
                 showEmptyState
               />
 
-              {/* What to Expect */}
-              {venue.what_to_expect ? (
-                <div className="bg-white rounded-lg border border-slate-200 p-6">
-                  <h2 className="font-semibold text-lg mb-3">What to Expect</h2>
-                  <p className="text-slate-600 leading-relaxed whitespace-pre-wrap">
-                    {venue.what_to_expect}
-                  </p>
-                </div>
-              ) : (
-                <div className="bg-amber-50 rounded-lg border border-amber-200 p-6">
-                  <h2 className="font-semibold text-lg text-amber-800 mb-2">What to Expect</h2>
-                  <p className="text-sm text-amber-700 leading-relaxed">
-                    Information for this venue is still being updated. Parents may want to contact{' '}
-                    {venue.name} directly to confirm opening times, prices, age suitability, and
-                    available facilities before visiting.
-                  </p>
-                  {(venue.phone || venue.website) && (
-                    <div className="flex flex-wrap gap-2 mt-3">
-                      {venue.phone && (
-                        <a
-                          href={`tel:${venue.phone.replace(/\s/g, '')}`}
-                          className="text-sm font-medium text-amber-800 underline hover:text-amber-900"
-                        >
-                          Call {venue.name}
-                        </a>
+              {/* Who Is This Best For? — derived from stored what_to_expect */}
+              {(() => {
+                const wtoe = venue.what_to_expect || ''
+                // Extract "Best for: X." audience line vs body text
+                const bestForMatch = wtoe.match(/^Best for:\s*([^.]+\.?)\s*/i)
+                const bestForLine = bestForMatch ? bestForMatch[1].replace(/\.$/, '') : null
+                const bodyText = bestForMatch ? wtoe.slice(bestForMatch[0].length).trim() : wtoe
+
+                if (wtoe) {
+                  return (
+                    <div className="bg-purple-50 rounded-lg border border-purple-200 p-6">
+                      <h2 className="font-semibold text-lg text-purple-900 mb-3">Who Is This Best For?</h2>
+                      {bestForLine && (
+                        <div className="flex flex-wrap gap-2 mb-3">
+                          {bestForLine.split(/,\s*| and /).map((audience) => audience.trim()).filter(Boolean).map((audience) => (
+                            <span key={audience} className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
+                              {audience}
+                            </span>
+                          ))}
+                        </div>
                       )}
-                      {venue.website && (
-                        <a
-                          href={venue.website}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-sm font-medium text-amber-800 underline hover:text-amber-900"
-                        >
-                          Visit website
-                        </a>
+                      {bodyText && (
+                        <p className="text-slate-600 leading-relaxed text-sm">{bodyText}</p>
                       )}
                     </div>
-                  )}
-                </div>
-              )}
+                  )
+                }
+
+                // Fallback: derive from facility booleans
+                const audiences: string[] = []
+                if (venue.baby_area || venue.has_under_1s) audiences.push('Babies & newborns')
+                if (venue.toddler_area) audiences.push('Toddlers (1–3 yrs)')
+                if (venue.parties) audiences.push('Birthday parties')
+                if (venue.sen_friendly || venue.has_sen_sessions) audiences.push('SEN & additional needs')
+                if (!audiences.length) audiences.push('Children of all ages', 'Families')
+
+                return (
+                  <div className="bg-purple-50 rounded-lg border border-purple-200 p-6">
+                    <h2 className="font-semibold text-lg text-purple-900 mb-3">Who Is This Best For?</h2>
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      {audiences.map((a) => (
+                        <span key={a} className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
+                          {a}
+                        </span>
+                      ))}
+                    </div>
+                    <p className="text-slate-600 leading-relaxed text-sm">
+                      Contact {venue.name} directly to confirm current opening times, prices, and session availability before visiting.
+                    </p>
+                  </div>
+                )
+              })()}
 
               {/* Tips Before Visiting (only when data present) */}
               {venue.tips_before_visiting && (

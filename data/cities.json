@@ -1,5 +1,57 @@
 [
   {
+    "slug": "london",
+    "name": "London",
+    "county": "Greater London",
+    "region": "London",
+    "metaTitle": "Best Soft Play in London 2026 | Indoor Play Centres for Families",
+    "metaDescription": "Find the best soft play in London. Our 2026 guide covers indoor play centres across all London boroughs — with prices, facilities, SEN sessions, and parent tips.",
+    "h1": "Soft Play in London",
+    "intro": "Finding soft play in London is less about whether it exists and more about navigating the sheer number of options — from compact neighbourhood venues in zone 2 to large multi-level adventure centres out in the suburbs. London's indoor play scene spans every budget, borough, and age group, so whether you're in South London, East London, or anywhere in between, there's a soft play centre within reasonable reach.\n\nLondon soft play centres vary enormously in size and style. Central and inner-city venues tend to be smaller, often combined with a café or children's activity space — think play cafés in Hackney or pop-up soft play in Brixton. Head further out into zone 4 and beyond and you'll find the larger commercial venues: multi-level frames, ball pits, role-play zones, and proper party rooms. Many of the best-value options are in outer boroughs where you get more space for your money.\n\nPrices for soft play in London are higher than the rest of the UK, typically ranging from £7 to £14 per child for a standard session — though many cafés and community venues charge less. Under-1s are free at most venues. Book in advance for weekends and school holidays, especially in popular areas — London soft play centres fill up quickly and timed sessions are now standard at most venues. Off-peak weekday mornings are significantly cheaper and much quieter.\n\nFor [SEN-friendly soft play in London](/soft-play/london/sen-friendly), a growing number of venues across the boroughs run dedicated quiet sessions — check individual venue pages for times, as these are often not widely advertised. If you're planning a [birthday party in London](/soft-play/london/birthday-parties), the larger suburban venues offer full packages from around £150 upwards. Book early — popular venues take bookings 8–12 weeks ahead for Saturday slots.\n\nOur directory covers soft play venues across Greater London and the surrounding area, from Croydon and Kingston in the south to Barnet and Enfield in the north. Use the filters to find venues suited to toddlers, babies, older children, or families with mixed ages — and check individual venue pages for ratings, photos, and parent reviews.",
+    "nearbyAreas": [
+      "Croydon",
+      "Bromley",
+      "Kingston",
+      "Barnet",
+      "Enfield",
+      "Bexley"
+    ],
+    "faqs": [
+      {
+        "question": "How much does soft play cost in London?",
+        "answer": "Soft play in London typically costs £7–£14 per child for a standard session — higher than most UK cities. Under-1s are free at most venues. Play cafés and community venues often charge less. Off-peak weekday sessions are significantly cheaper than weekends."
+      },
+      {
+        "question": "What age is soft play suitable for in London?",
+        "answer": "Most London soft play centres welcome children from 6 months, with dedicated baby and toddler zones for under-3s. Larger frame venues typically cater up to age 11 or 12. Always check the venue's age limits before visiting."
+      },
+      {
+        "question": "Do I need to book soft play in London in advance?",
+        "answer": "Yes, for most London soft play venues — especially at weekends and during school holidays — advance booking is strongly recommended. Timed sessions fill up quickly. Many venues now only take bookings online. Weekday walk-ins are more likely to be available."
+      },
+      {
+        "question": "Are there SEN-friendly soft play sessions in London?",
+        "answer": "Yes. A growing number of London soft play venues run dedicated SEN sessions with reduced stimulation, capped numbers, and adjusted lighting. Check individual venue pages for times, as these sessions are often not widely advertised. Booking is usually required."
+      },
+      {
+        "question": "What is the best soft play in London for a birthday party?",
+        "answer": "Larger venues in outer London boroughs tend to offer the best birthday party packages — look for dedicated party rooms, a children's host, and food packages. Prices typically start from £150–£250 for a party of 10–15 children. Book 8–12 weeks ahead for popular Saturday slots."
+      },
+      {
+        "question": "Is there parking at London soft play centres?",
+        "answer": "Parking varies widely across London. Larger suburban venues usually have free on-site or retail park parking. Inner-city venues often rely on street parking or nearby pay-and-display. Always check the venue's website for parking details before travelling by car."
+      },
+      {
+        "question": "When is the quietest time to visit soft play in London?",
+        "answer": "Weekday mornings — especially Tuesday to Thursday between 9:30am and 11:30am — are the quietest times at most London soft play venues. Weekends and school holidays are the busiest. If you need a calmer environment for a young child or a child with additional needs, mid-week mornings are the best option."
+      },
+      {
+        "question": "What should I bring to soft play in London?",
+        "answer": "Socks are required at every London soft play venue — grip socks are ideal. Bring a change of clothes for younger children, a water bottle, and snacks if the venue permits outside food (most have cafés or snack bars). Baby changing facilities are available at most venues."
+      }
+    ]
+  },
+  {
     "slug": "hull",
     "name": "Hull",
     "county": "East Yorkshire",
