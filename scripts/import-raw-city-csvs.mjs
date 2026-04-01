@@ -49,14 +49,44 @@ const CSV_FOLDER =
   '/Users/davidstark/Desktop/Stark Business/soft play near me (set up)/google maps scraped '
 
 const CITY_FILES = [
-  { file: 'Birmingham .csv', city: 'Birmingham', citySlug: 'birmingham', county: 'West Midlands', region: 'Midlands' },
-  { file: 'Bristol.csv', city: 'Bristol', citySlug: 'bristol', county: 'Bristol', region: 'South West' },
-  { file: 'Hull .csv', city: 'Hull', citySlug: 'hull', county: 'East Yorkshire', region: 'Yorkshire and the Humber' },
-  { file: 'Liverpool .csv', city: 'Liverpool', citySlug: 'liverpool', county: 'Merseyside', region: 'North West' },
-  { file: 'leeds.csv', city: 'Leeds', citySlug: 'leeds', county: 'West Yorkshire', region: 'Yorkshire and the Humber' },
-  { file: 'london.csv', city: 'London', citySlug: 'london', county: 'Greater London', region: 'London' },
-  { file: 'manchester .csv', city: 'Manchester', citySlug: 'manchester', county: 'Greater Manchester', region: 'North West' },
-  { file: 'soft play sheffield .csv', city: 'Sheffield', citySlug: 'sheffield', county: 'South Yorkshire', region: 'Yorkshire and the Humber' },
+  // --- Original 8 cities ---
+  { file: 'Birmingham .csv',           city: 'Birmingham',      citySlug: 'birmingham',  county: 'West Midlands',        region: 'West Midlands' },
+  { file: 'Bristol.csv',               city: 'Bristol',         citySlug: 'bristol',     county: 'Bristol',              region: 'South West' },
+  { file: 'Hull .csv',                 city: 'Hull',            citySlug: 'hull',        county: 'East Yorkshire',       region: 'Yorkshire and the Humber' },
+  { file: 'Liverpool .csv',            city: 'Liverpool',       citySlug: 'liverpool',   county: 'Merseyside',           region: 'North West' },
+  { file: 'leeds.csv',                 city: 'Leeds',           citySlug: 'leeds',       county: 'West Yorkshire',       region: 'Yorkshire and the Humber' },
+  { file: 'london.csv',                city: 'London',          citySlug: 'london',      county: 'Greater London',       region: 'London' },
+  { file: 'manchester .csv',           city: 'Manchester',      citySlug: 'manchester',  county: 'Greater Manchester',   region: 'North West' },
+  { file: 'soft play sheffield .csv',  city: 'Sheffield',       citySlug: 'sheffield',   county: 'South Yorkshire',      region: 'Yorkshire and the Humber' },
+
+  // --- Additional cities from raw CSVs ---
+  { file: 'aberdeen .csv',             city: 'Aberdeen',        citySlug: 'aberdeen',    county: 'Aberdeenshire',        region: 'Scotland' },
+  { file: 'Barnsley .csv',             city: 'Barnsley',        citySlug: 'barnsley',    county: 'South Yorkshire',      region: 'Yorkshire and the Humber' },
+  { file: 'BLACKPOOL.csv',             city: 'Blackpool',       citySlug: 'blackpool',   county: 'Lancashire',           region: 'North West' },
+  { file: 'Bolton, Preston.csv',       city: 'Bolton',          citySlug: 'bolton',      county: 'Greater Manchester',   region: 'North West' },
+  { file: 'Bournmouth.csv',            city: 'Bournemouth',     citySlug: 'bournemouth', county: 'Dorset',               region: 'South West' },
+  { file: 'Bradford.csv',              city: 'Bradford',        citySlug: 'bradford',    county: 'West Yorkshire',       region: 'Yorkshire and the Humber' },
+  { file: 'Brighton.csv',              city: 'Brighton',        citySlug: 'brighton',    county: 'East Sussex',          region: 'South East' },
+  { file: 'Cardiff.csv',               city: 'Cardiff',         citySlug: 'cardiff',     county: 'Cardiff',              region: 'Wales' },
+  { file: 'colchester.csv',            city: 'Colchester',      citySlug: 'colchester',  county: 'Essex',                region: 'East of England' },
+  { file: 'doncaster .csv',            city: 'Doncaster',       citySlug: 'doncaster',   county: 'South Yorkshire',      region: 'Yorkshire and the Humber' },
+  { file: 'Edinburgh.csv',             city: 'Edinburgh',       citySlug: 'edinburgh',   county: 'City of Edinburgh',    region: 'Scotland' },
+  { file: 'glasgow.csv',               city: 'Glasgow',         citySlug: 'glasgow',     county: 'City of Glasgow',      region: 'Scotland' },
+  { file: 'Halifax.csv',               city: 'Halifax',         citySlug: 'halifax',     county: 'West Yorkshire',       region: 'Yorkshire and the Humber' },
+  { file: 'Hastings .csv',             city: 'Hastings',        citySlug: 'hastings',    county: 'East Sussex',          region: 'South East' },
+  { file: 'Huddersfield .csv',         city: 'Huddersfield',    citySlug: 'huddersfield',county: 'West Yorkshire',       region: 'Yorkshire and the Humber' },
+  { file: 'Inverness.csv',             city: 'Inverness',       citySlug: 'inverness',   county: 'Highland',             region: 'Scotland' },
+  { file: 'Ipswich .csv',              city: 'Ipswich',         citySlug: 'ipswich',     county: 'Suffolk',              region: 'East of England' },
+  { file: 'Leicester.csv',             city: 'Leicester',       citySlug: 'leicester',   county: 'Leicestershire',       region: 'East Midlands' },
+  { file: 'Lincoln.csv',               city: 'Lincoln',         citySlug: 'lincoln',     county: 'Lincolnshire',         region: 'East Midlands' },
+  { file: 'Newcastle .csv',            city: 'Newcastle',       citySlug: 'newcastle',   county: 'Tyne and Wear',        region: 'North East' },
+  { file: 'Nottingham .csv',           city: 'Nottingham',      citySlug: 'nottingham',  county: 'Nottinghamshire',      region: 'East Midlands' },
+  { file: 'norwich.csv',               city: 'Norwich',         citySlug: 'norwich',     county: 'Norfolk',              region: 'East of England' },
+  { file: 'Portsmouth.csv',            city: 'Portsmouth',      citySlug: 'portsmouth',  county: 'Hampshire',            region: 'South East' },
+  { file: 'southend .csv',             city: 'Southend-on-Sea', citySlug: 'southend',    county: 'Essex',                region: 'East of England' },
+  { file: 'Stoke.csv',                 city: 'Stoke-on-Trent',  citySlug: 'stoke',       county: 'Staffordshire',        region: 'West Midlands' },
+  { file: 'Sunderland .csv',           city: 'Sunderland',      citySlug: 'sunderland',  county: 'Tyne and Wear',        region: 'North East' },
+  { file: 'swansea.csv',               city: 'Swansea',         citySlug: 'swansea',     county: 'Swansea',              region: 'Wales' },
 ]
 
 // Minimum data threshold: a venue must have at least this many non-empty key fields
