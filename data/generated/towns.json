@@ -18,6 +18,11 @@
     "avgRating": "4.6"
   },
   {
+    "name": "Birmingham",
+    "slug": "birmingham",
+    "venueCount": 9
+  },
+  {
     "name": "Blackpool",
     "slug": "blackpool",
     "venueCount": 18,
@@ -52,6 +57,11 @@
     "slug": "brighton",
     "venueCount": 27,
     "avgRating": "4.4"
+  },
+  {
+    "name": "Bristol",
+    "slug": "bristol",
+    "venueCount": 8
   },
   {
     "name": "Cardiff",
@@ -136,6 +146,16 @@
     "slug": "lincoln",
     "venueCount": 22,
     "avgRating": "4.5"
+  },
+  {
+    "name": "Liverpool",
+    "slug": "liverpool",
+    "venueCount": 8
+  },
+  {
+    "name": "Manchester",
+    "slug": "manchester",
+    "venueCount": 10
   },
   {
     "name": "Newcastle",
