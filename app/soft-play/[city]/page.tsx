@@ -22,6 +22,8 @@ interface PageProps {
   searchParams: Promise<{ filter?: string; search?: string }>
 }
 
+export const revalidate = 3600
+
 export async function generateStaticParams() {
   const dbSlugs = getAllCitySlugs()
   const staticSlugs = getAllStaticTownSlugs()

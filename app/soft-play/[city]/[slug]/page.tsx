@@ -304,6 +304,8 @@ async function getPhotos(venueId: number): Promise<Photo[]> {
   }
 }
 
+export const revalidate = 3600
+
 /** Pre-render venue pages from static data */
 export async function generateStaticParams() {
   const params: { city: string; slug: string }[] = []
