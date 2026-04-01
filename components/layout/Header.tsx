@@ -24,17 +24,17 @@ export function Header({ backLink }: HeaderProps) {
             <>
               <Link href="/search">
                 <Button variant="ghost" size="sm">
-                  Find Soft Play
+                  <span className="hidden sm:inline">Find </span>Soft Play
                 </Button>
               </Link>
-              <Link href="/blog">
+              <Link href="/blog" className="hidden sm:block">
                 <Button variant="ghost" size="sm">
                   Blog
                 </Button>
               </Link>
               <Link href="/add-venue">
                 <Button size="sm" className="bg-purple-600 text-white hover:bg-purple-700">
-                  Add Venue
+                  <span className="hidden sm:inline">Add </span>Venue
                 </Button>
               </Link>
             </>

@@ -1,4 +1,4 @@
-import { Search, MapPin, Clock, Baby, PartyPopper, Heart, Coffee, Car, CheckCircle2 } from 'lucide-react'
+import { Search, MapPin, Clock, Baby, PartyPopper, Heart, Coffee, Car, CheckCircle2, Sparkles } from 'lucide-react'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
@@ -12,6 +12,33 @@ import { HeroCarousel } from '@/components/home/HeroCarousel'
 import { buildFAQSchema } from '@/lib/schema'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { blogPosts } from '@/lib/blogPosts'
+import { getPool } from '@/lib/pool'
+import type { Metadata } from 'next'
+
+async function getVenueCount(): Promise<number> {
+  try {
+    const pool = getPool()
+    const { rows } = await pool.query<{ total: number }>('SELECT COUNT(*)::int AS total FROM venues')
+    return rows[0]?.total ?? 0
+  } catch {
+    return 0
+  }
+}
+
+export async function generateMetadata(): Promise<Metadata> {
+  const total = await getVenueCount()
+  const countStr = total > 0 ? total.toLocaleString('en-GB') : '1,000+'
+  const description = `Search ${countStr} soft play centres across the UK. Compare facilities, check opening times, and find the perfect indoor play venue for your family. Free to use.`
+  return {
+    description,
+    openGraph: {
+      description,
+    },
+    twitter: {
+      description,
+    },
+  }
+}
 
 const HOME_FAQS = [
   {
@@ -24,7 +51,7 @@ const HOME_FAQS = [
   },
   {
     question: 'What should I bring to soft play?',
-    answer: 'Socks are essential (grip socks are ideal). Bring a change of clothes for younger children, water bottles, and snacks if the venue allows. Most places have lockers or storage for bags and pushchairs.',
+    answer: 'Socks are essential (grip socks are ideal). Bring a change of clothes for younger children, water bottles, and snacks if the venue allows. Most places have storage areas for bags and pushchairs.',
   },
   {
     question: 'Can I book a birthday party at soft play?',
@@ -42,7 +69,64 @@ const HOME_FAQS = [
 
 const faqSchema = buildFAQSchema(HOME_FAQS)
 
-export default function Home() {
+interface RecentVenue {
+  name: string
+  town_slug: string
+  slug: string
+  city_name: string
+  completeness_score: number
+}
+
+async function getHomepageStats() {
+  try {
+    const pool = getPool()
+    const [countResult, cityCountResult, recentResult] = await Promise.all([
+      pool.query<{ total: number }>('SELECT COUNT(*)::int AS total FROM venues'),
+      pool.query<{ town_slug: string; cnt: number }>(
+        'SELECT town_slug, COUNT(*)::int AS cnt FROM venues GROUP BY town_slug'
+      ),
+      pool.query<RecentVenue>(`
+        SELECT v.name, v.town_slug, v.slug,
+               COALESCE(v.completeness_score, 0) AS completeness_score
+        FROM venues v
+        WHERE v.last_verified_at IS NOT NULL
+          AND v.slug IS NOT NULL
+          AND v.town_slug IS NOT NULL
+          AND COALESCE(v.completeness_score, 0) >= 40
+        ORDER BY v.last_verified_at DESC
+        LIMIT 6
+      `),
+    ])
+    const totalVenues = countResult.rows[0]?.total ?? 0
+    const cityCounts: Record<string, number> = {}
+    for (const row of cityCountResult.rows) {
+      if (row.town_slug) cityCounts[row.town_slug] = row.cnt
+    }
+    // Attach a display city name to each recent venue
+    const cityNameMap: Record<string, string> = {}
+    for (const city of cities) cityNameMap[city.slug] = city.name
+    const recentVenues: RecentVenue[] = recentResult.rows.map((r) => ({
+      ...r,
+      city_name: cityNameMap[r.town_slug] ?? r.town_slug,
+    }))
+    return { totalVenues, cityCounts, recentVenues }
+  } catch {
+    // Fall back to static data if DB unavailable
+    const cityCounts: Record<string, number> = {}
+    for (const city of cities) {
+      cityCounts[city.slug] = getStaticVenuesByTown(city.slug).length
+    }
+    return { totalVenues: 0, cityCounts, recentVenues: [] as RecentVenue[] }
+  }
+}
+
+export default async function Home() {
+  const { totalVenues, cityCounts, recentVenues } = await getHomepageStats()
+
+  const venueCountDisplay = totalVenues > 0
+    ? totalVenues.toLocaleString('en-GB')
+    : '1,000+'
+
   const cityVisuals: Record<string, string> = {
     hull: 'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=900&q=80',
     york: 'https://images.unsplash.com/photo-1624119841587-fb82e55f45f0?auto=format&fit=crop&w=900&q=80',
@@ -52,9 +136,23 @@ export default function Home() {
     bournemouth: 'https://images.unsplash.com/photo-1455729552865-3658a5d39692?auto=format&fit=crop&w=900&q=80',
   }
 
+  // ItemList schema for Browse by City section
+  const cityListSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Soft Play by City',
+    itemListElement: cities.map((city, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: `Soft Play in ${city.name}`,
+      url: `https://www.softplaynearme.co.uk/soft-play/${city.slug}`,
+    })),
+  }
+
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
       <JsonLd data={faqSchema} />
+      <JsonLd data={cityListSchema} />
 
       <Header />
 
@@ -62,17 +160,17 @@ export default function Home() {
       <div className="bg-gradient-to-br from-purple-600 via-purple-500 to-pink-500 text-white py-12 sm:py-16 px-4">
         <div className="max-w-7xl mx-auto grid gap-8 lg:grid-cols-2 lg:items-center">
           <div className="text-center lg:text-left">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
-            Find the Best Soft Play Centres Near You
-          </h1>
-          <p className="text-purple-100 text-lg mb-8">
-            Discover indoor play centres across the UK. Compare venues, check opening times, and find the perfect place for your family.
-          </p>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
+              Find the Best Soft Play Centres Near You
+            </h1>
+            <p className="text-purple-100 text-lg mb-8">
+              Search {venueCountDisplay} indoor play centres across the UK. Compare facilities, check opening times, and find the perfect venue for your family.
+            </p>
 
             <SearchHero />
 
             <p className="text-purple-100 text-sm mt-6">
-              Trusted by families searching thousands of local play options each month.
+              Free to use &middot; No sign-up required &middot; Venues across England
             </p>
             <p className="text-purple-200 text-sm mt-2">
               Popular:{' '}
@@ -102,7 +200,7 @@ export default function Home() {
               { href: '/search?filters=parties', icon: PartyPopper, label: 'Birthday Parties' },
               { href: '/search?filters=sen', icon: Heart, label: 'SEN Friendly' },
               { href: '/search?filters=cafe', icon: Coffee, label: 'Has Cafe' },
-              { href: '/search?filters=parking', icon: Car, label: 'Free Parking' },
+              { href: '/search?filters=parking', icon: Car, label: 'Has Parking' },
             ].map(({ href, icon: Icon, label }) => (
               <Link key={href} href={href} className="group">
                 <Card className="p-4 text-center hover:shadow-lg hover:border-purple-300 transition-all">
@@ -127,7 +225,7 @@ export default function Home() {
                 {[
                   { step: '1', title: 'Search by location', desc: 'Enter your postcode or city to find venues nearby' },
                   { step: '2', title: 'Compare venues', desc: 'Check facilities, prices, opening times, and reviews' },
-                  { step: '3', title: 'Visit and enjoy', desc: 'Get directions, call ahead, or just turn up and play' },
+                  { step: '3', title: 'Visit and enjoy', desc: 'Confirm opening times with the venue, get directions, and go' },
                 ].map(({ step, title, desc }) => (
                   <li key={step} className="flex gap-3">
                     <span className="flex-shrink-0 w-8 h-8 rounded-full bg-purple-100 text-purple-600 font-bold flex items-center justify-center text-sm">
@@ -147,7 +245,7 @@ export default function Home() {
               <ol className="space-y-5">
                 {[
                   { step: '1', title: 'Find your venue', desc: 'Search for your soft play centre in our directory' },
-                  { step: '2', title: 'Claim your listing', desc: 'Email us to verify you\'re the owner \u2014 it\'s completely free' },
+                  { step: '2', title: 'Claim your listing', desc: 'Submit your claim through our form — completely free, no account needed' },
                   { step: '3', title: 'Manage your profile', desc: 'Update hours, add photos, and highlight your facilities' },
                 ].map(({ step, title, desc }) => (
                   <li key={step} className="flex gap-3">
@@ -173,7 +271,7 @@ export default function Home() {
           <p className="text-slate-600 text-center mb-8">Find soft play centres in your area</p>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {cities.map((city) => {
-              const venueCount = getStaticVenuesByTown(city.slug).length
+              const venueCount = cityCounts[city.slug] ?? getStaticVenuesByTown(city.slug).length
               const cityImage = cityVisuals[city.slug] || 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=900&q=80'
               return (
                 <Link key={city.slug} href={`/soft-play/${city.slug}`} className="group">
@@ -204,6 +302,42 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Recently Verified Venues */}
+      {recentVenues.length > 0 && (
+        <div className="bg-white py-12 px-4 border-b border-slate-200">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex items-end justify-between gap-4 mb-6">
+              <div>
+                <h2 className="text-2xl font-bold text-slate-900">Recently Updated Listings</h2>
+                <p className="text-slate-600 mt-1">Venues with freshly confirmed information</p>
+              </div>
+              <Link href="/search" className="text-sm font-semibold text-purple-700 hover:underline whitespace-nowrap">
+                Browse all
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {recentVenues.map((venue) => (
+                <Link
+                  key={`${venue.town_slug}/${venue.slug}`}
+                  href={`/soft-play/${venue.town_slug}/${venue.slug}`}
+                  className="group"
+                >
+                  <Card className="p-4 flex items-start gap-3 hover:border-purple-300 hover:shadow-md transition-all">
+                    <div className="flex-shrink-0 w-9 h-9 bg-purple-100 rounded-full flex items-center justify-center">
+                      <Sparkles className="w-4 h-4 text-purple-600" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="font-semibold text-slate-900 group-hover:text-purple-600 truncate">{venue.name}</p>
+                      <p className="text-xs text-slate-500 mt-0.5">{venue.city_name}</p>
+                    </div>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Venue Owners CTA */}
       <div className="bg-green-50 py-16 px-4 border-y border-green-100">
         <div className="max-w-3xl mx-auto text-center">
@@ -223,9 +357,9 @@ export default function Home() {
             ))}
           </div>
           <Button asChild className="bg-green-600 hover:bg-green-700">
-            <a href="mailto:info@softplaynearme.co.uk?subject=Claim%20My%20Venue">
+            <Link href="/add-venue">
               Claim Your Venue (Free)
-            </a>
+            </Link>
           </Button>
         </div>
       </div>
@@ -235,15 +369,15 @@ export default function Home() {
         <div className="max-w-7xl mx-auto grid gap-4 sm:grid-cols-3 text-center">
           <Card className="p-5 border-slate-200">
             <p className="text-2xl font-bold text-purple-700">{cities.length}+</p>
-            <p className="text-sm text-slate-600">UK locations indexed</p>
+            <p className="text-sm text-slate-600">UK towns and cities covered</p>
           </Card>
           <Card className="p-5 border-slate-200">
-            <p className="text-2xl font-bold text-purple-700">1,000+</p>
+            <p className="text-2xl font-bold text-purple-700">{venueCountDisplay}</p>
             <p className="text-sm text-slate-600">venues and listings</p>
           </Card>
           <Card className="p-5 border-slate-200">
-            <p className="text-2xl font-bold text-purple-700">2025</p>
-            <p className="text-sm text-slate-600">helping UK families since</p>
+            <p className="text-2xl font-bold text-purple-700">Free</p>
+            <p className="text-sm text-slate-600">no sign-up or account needed</p>
           </Card>
         </div>
       </div>
@@ -307,7 +441,7 @@ export default function Home() {
               Soft play centres have become one of the most popular indoor activities for families across the UK, and for good reason. They offer children a safe, supervised environment to climb, slide, bounce, and explore — whatever the weather. For parents, they provide a chance to relax with a coffee while the kids burn off energy.
             </p>
             <p>
-              Whether you are looking for <Link href="/soft-play/hull" className="text-purple-600 hover:underline">soft play in Hull</Link>, <Link href="/soft-play/leeds" className="text-purple-600 hover:underline">indoor play centres in Leeds</Link>, <Link href="/soft-play/york" className="text-purple-600 hover:underline">family venues in York</Link>, or <Link href="/soft-play/sheffield" className="text-purple-600 hover:underline">play areas in Sheffield</Link>, our directory helps you compare your options in one place. Every listing includes the venue&apos;s address, contact details, facilities, and directions.
+              Whether you are looking for <Link href="/soft-play/hull" className="text-purple-600 hover:underline">soft play in Hull</Link>, <Link href="/soft-play/leeds" className="text-purple-600 hover:underline">indoor play centres in Leeds</Link>, <Link href="/soft-play/york" className="text-purple-600 hover:underline">family venues in York</Link>, <Link href="/soft-play/sheffield" className="text-purple-600 hover:underline">play areas in Sheffield</Link>, <Link href="/soft-play/brighton" className="text-purple-600 hover:underline">soft play in Brighton</Link>, <Link href="/soft-play/bournemouth" className="text-purple-600 hover:underline">indoor play in Bournemouth</Link>, or <Link href="/soft-play/norwich" className="text-purple-600 hover:underline">children&apos;s venues in Norwich</Link>, our directory helps you compare your options in one place. Every listing includes the venue&apos;s address, contact details, facilities, and directions.
             </p>
             <p>
               Most modern soft play centres cater to a wide range of ages. Dedicated baby areas with sensory toys and soft mats are perfect for under-1s, while toddler zones with gentle slides and ball pits suit children up to around three or four years old. Older children can enjoy multi-level climbing frames, zip lines, and adventure courses. Many venues also offer <Link href="/search?filters=parties" className="text-purple-600 hover:underline">birthday party packages</Link> with private rooms and catering.
@@ -316,10 +450,10 @@ export default function Home() {
               Accessibility is increasingly important to families, and a growing number of venues now run <Link href="/search?filters=sen" className="text-purple-600 hover:underline">SEN-friendly sessions</Link> with reduced noise, lower lighting, and smaller group sizes. These quieter sessions give children with additional needs the chance to play in a more comfortable environment.
             </p>
             <p>
-              Soft Play Near Me was created to help families find the right venue quickly and easily. We focus on accurate, up-to-date information so you can check opening times, compare facilities, and plan your visit with confidence. Venue owners can claim their listing for free to manage their profile, add photos, and keep their information current.
+              Soft Play Near Me was created to help families find the right venue quickly and easily. We focus on accurate, up-to-date information so you can check opening times, compare facilities, and plan your visit with confidence. Venue owners can <Link href="/add-venue" className="text-purple-600 hover:underline">claim their listing for free</Link> to manage their profile, add photos, and keep their information current.
             </p>
             <p>
-              Browse our <Link href="/search" className="text-purple-600 hover:underline">full search</Link> to find soft play centres near your postcode, or explore by location using the links above. From <Link href="/search?filters=toddler" className="text-purple-600 hover:underline">toddler-friendly venues</Link> to centres with cafes and free parking, we make it simple to find the perfect indoor play destination for your family.
+              Browse our <Link href="/search" className="text-purple-600 hover:underline">full search</Link> to find soft play centres near your postcode, or explore by location using the links above. From <Link href="/search?filters=toddler" className="text-purple-600 hover:underline">toddler-friendly venues</Link> to centres with cafes and parking, we make it simple to find the perfect indoor play destination for your family.
             </p>
           </div>
         </div>

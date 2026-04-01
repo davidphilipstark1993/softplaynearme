@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     default: "Soft Play Near Me | Find Soft Play Centres Across the UK",
     template: "%s | Soft Play Near Me",
   },
-  description: "Find the best soft play centres near you. Compare indoor play venues, check opening times, prices, and discover toddler-friendly play areas across the UK.",
+  description: "Search 1,000+ soft play centres across the UK. Compare facilities, check opening times, and find the perfect indoor play venue for your family. Free to use.",
   keywords: ["soft play near me", "soft play centres", "indoor play", "toddler soft play", "soft play birthday parties", "SEN soft play", "indoor play centres UK"],
   authors: [{ name: "Soft Play Near Me" }],
   creator: "Soft Play Near Me",
