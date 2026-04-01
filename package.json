@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "scrape:hull": "node scripts/scrape-hull-softplay.mjs",
+    "scrape:cities": "node scripts/scrape-cities.mjs",
     "import:hull": "node scripts/import-softplay-to-neon.mjs",
     "db:setup": "node scripts/setupDatabase.js",
     "db:seed": "node scripts/seedHullVenues.js",
