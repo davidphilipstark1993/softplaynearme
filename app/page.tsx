@@ -170,7 +170,7 @@ export default async function Home() {
             <SearchHero />
 
             <p className="text-purple-100 text-sm mt-6">
-              Free to use &middot; No sign-up required &middot; Venues across England
+              Free to use &middot; No sign-up required &middot; Updated by venue owners
             </p>
             <p className="text-purple-200 text-sm mt-2">
               Popular:{' '}

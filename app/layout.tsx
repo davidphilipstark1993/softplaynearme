@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     default: "Soft Play Near Me | Find Soft Play Centres Across the UK",
     template: "%s | Soft Play Near Me",
   },
-  description: "Search 1,000+ soft play centres across the UK. Compare facilities, check opening times, and find the perfect indoor play venue for your family. Free to use.",
+  description: "Find 1,800+ soft play centres near you across the UK. Search by postcode, compare prices, opening times, facilities and reviews. Free directory updated by venue owners.",
   keywords: ["soft play near me", "soft play centres", "indoor play", "toddler soft play", "soft play birthday parties", "SEN soft play", "indoor play centres UK"],
   authors: [{ name: "Soft Play Near Me" }],
   creator: "Soft Play Near Me",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     url: "https://www.softplaynearme.co.uk",
     siteName: "Soft Play Near Me",
     title: "Soft Play Near Me | Find Soft Play Centres Across the UK",
-    description: "Find the best soft play centres near you. Compare indoor play venues, check opening times, and discover toddler-friendly play areas.",
+    description: "Find 1,800+ soft play centres near you across the UK. Search by postcode, compare prices, opening times, facilities and reviews. Free directory.",
     images: ["/opengraph-image"],
   },
   twitter: {

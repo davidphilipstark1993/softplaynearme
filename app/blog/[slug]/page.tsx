@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getPostBySlug, posts } from '@/lib/blogPosts'
+import { ShareButtons } from '@/components/social/ShareButtons'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -87,14 +88,8 @@ export default async function BlogPostPage({ params }: PageProps) {
         <p className="mt-4 text-lg text-slate-700">{post.excerpt}</p>
 
         <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm text-slate-500">
-          <span>Published: {post.publishedAt}</span>
-          <span>Updated: {post.updatedAt}</span>
-          <span>
-            Canonical:{' '}
-            <a className="text-blue-700 hover:underline" href={canonical}>
-              {canonical}
-            </a>
-          </span>
+          <span>Published {new Date(post.publishedAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+          <span>· Updated {new Date(post.updatedAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
         </div>
 
         <div className="mt-10">
@@ -113,9 +108,13 @@ export default async function BlogPostPage({ params }: PageProps) {
           </div>
         </section>
 
-        <div className="mt-12 border-t border-slate-200 pt-6">
-          <Link href="/blog" className="text-sm font-medium text-blue-700 hover:underline">
-            Back to all blog posts
+        <div className="mt-10 border-t border-slate-200 pt-6">
+          <ShareButtons url={canonical} title={post.title} />
+        </div>
+
+        <div className="mt-6">
+          <Link href="/blog" className="text-sm font-medium text-purple-700 hover:underline">
+            ← Back to all blog posts
           </Link>
         </div>
       </article>

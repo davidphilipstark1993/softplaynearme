@@ -28,11 +28,12 @@ export default async function AddVenuePage({ searchParams }: AddVenuePageProps) 
 
       <div className="bg-gradient-to-br from-green-600 to-emerald-500 text-white py-12 px-4">
         <div className="max-w-3xl mx-auto text-center">
+          <p className="text-green-200 text-sm font-semibold uppercase tracking-wider mb-3">Free for venue owners</p>
           <h1 className="text-3xl md:text-4xl font-bold mb-4">
-            Add Your Soft Play Centre
+            Get Found by Thousands of Local Families
           </h1>
-          <p className="text-green-100 text-lg">
-            List your venue on the UK&apos;s growing soft play directory. Completely free, no hidden costs.
+          <p className="text-green-100 text-lg max-w-xl mx-auto">
+            Your soft play centre deserves to be visible. Claim or add your free listing on the UK&apos;s fastest-growing indoor play directory.
           </p>
         </div>
       </div>
@@ -87,8 +88,29 @@ export default async function AddVenuePage({ searchParams }: AddVenuePageProps) 
           />
         </Card>
 
+        <Card className="p-8 bg-green-50 border-green-200">
+          <h2 className="text-lg font-semibold text-green-900 mb-4 flex items-center gap-2">
+            <CheckCircle2 className="w-5 h-5 text-green-600" />
+            Once your listing is live, here&apos;s what to do next
+          </h2>
+          <ol className="space-y-3 text-sm text-green-800">
+            {[
+              'Add at least 3 photos — listings with photos get significantly more clicks',
+              'Confirm your opening hours for every day of the week',
+              'Set your pricing for standard sessions, toddler sessions, and birthday parties',
+              'List all your facilities (café, parking, SEN sessions, toddler zone, etc.)',
+              'Share your listing on your social media to encourage parent reviews',
+            ].map((step, i) => (
+              <li key={i} className="flex items-start gap-3">
+                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-green-600 text-white text-xs font-bold flex items-center justify-center mt-0.5">{i + 1}</span>
+                {step}
+              </li>
+            ))}
+          </ol>
+        </Card>
+
         <div className="text-center text-sm text-slate-500">
-          <p>Already listed? <a href="mailto:info@softplaynearme.co.uk?subject=Claim%20My%20Venue" className="text-purple-600 hover:underline">Claim your listing</a> to manage your venue profile.</p>
+          <p>Already listed? <a href="mailto:info@softplaynearme.co.uk?subject=Claim%20My%20Venue" className="text-purple-600 hover:underline">Email us to claim your listing</a> and take control of your profile.</p>
         </div>
       </main>
 

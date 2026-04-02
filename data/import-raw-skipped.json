@@ -1803,5 +1803,6935 @@
     "city": "Sheffield",
     "name": "G.F Bouncy castle hire",
     "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "Inchgarth Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "The Wee Gym",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "Transition Extreme Sports",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "Loirston Annexe Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "Belong",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "The Lemon Tree",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "Party Supplies Aberdeen",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "Seaton Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "Dyce Farm - Dining & Carvery",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "David Lloyd Aberdeen",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "Marshall's Farm Shop",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "Linx Ice Arena",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "Garioch Indoor Bowling Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "Balmedie Beach",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "practically empty.\",\",\",\",\"",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "Bonnymuir Green",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "The Event Complex Aberdeen (TECA)",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "ReCHarge Cafe",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "Bon Accord Aberdeen",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "Westburn Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "RESTING BRUNCH FACE",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "Aberdeen Beach",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "Toby Carvery Cocket Hat",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "Beach Ballroom",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "Fourmile House",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "Victoria Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "Buckie Farm",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "Beachside Coffee Shop",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "The Gordon Highlanders Museum",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "University of Aberdeen Zoology Museum",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "The Pier",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "Dobbies Garden Centre Aberdeen",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "The Paddock Bar",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "Foodstory",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "The Mains of Drum",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "The Justice Mill - JD Wetherspoon",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "The Cult Of Coffee",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "Grosvenor Casino",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "Blether",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "The Braided Fig",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "Brig O'Don",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Aberdeen",
+    "name": "The Tolbooth Museum",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "The Play Village",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Play Valley Rotherham - Soft Play Centre & Kids Parties",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Playmania Barnsley",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Chestnut Tree Wacky Warehouse",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "The Play House & Cafe Thurnscoe",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "The Little Town of Play",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Jelly Beans under 5’s",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Adventure Reef",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Jungle Monkeys",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "The Secret Garden",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Cannon Hall Farm",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Marquis Wacky Warehouse",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Retrodome",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Barnsley Metrodome Waterpark (Calypso Cove)",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Funny Farm Softplay Ltd",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "NovaCity Barnsley",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Chestnut Tree",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Play - World Explorers",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Whistlestop Valley",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Story Teller Wacky Warehouse",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Cheeky Monkeys",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Ali Bongos Play Barn at Pastures Lodge",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Walnut Tree Wacky Warehouse",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "The Westfield Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Pot House Hamlet",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Treasure Island (Rotherham)",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Superbowl UK Barnsley",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Elsecar Heritage Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Big Apple - Play City",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Elsecar Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Thorncliffe Farm Shop",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "The Zone",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Bright Stars Play Space",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Jump Inc by AirHop Adventure Park Rotherham",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Xplore - Soft Play and 4D Golf",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Fizzy Lizard Play Gym",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Valley Community Association",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Camelot Play Castle",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Experience Barnsley Museum & Discovery Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Shake Rattle and Roll",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Yorkshire Tactical Activities",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Barnsley Bowl",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Moo Moo Soft Play Hire Wakefield",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Playworld Huddersfield",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Play Valley Doncaster - Soft Play Centre & Kids Parties",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "The Fairway Pub",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Monkey Bizness Sheffield",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Krazy Kids",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Rainbow Playrooms",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Inflata Nation Inflatable Theme Park Huddersfield",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Cannon Hall Garden Centre and Thyme Bistro",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "The Potting Shed cafe/restaurant",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Play Valley Sheffield - Soft Play Centre & Kids Parties",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Thee Fuzzy Ed's",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Funalot",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "The Little Town of Play Batley",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Northern Softplay",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Wentworth Garden Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Manvers Lake Cafe",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "RSPB Dearne Valley - Old Moor",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Charley's Play Barn",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Uproar! Play Barn",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Playmania Sheffield",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Anglers Country Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Playtimes Playtown Sensory & Imaginary Role Play Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Hemsworth Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Sam's Space Soft Play, Firth Park Methodist Church",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Pooch playgym scisset",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Dearne Valley Pet Centre Ltd",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Fun House Play Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Play Creations Ltd",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Stanley Ferry Wacky Warehouse",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Skye Pie's Soft Play Limited",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Babyccinos Jungle Cafe",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Sensory World Play Centre & Cafe",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Ponderosa Zoo",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Play Valley Dinnington - Soft Play Centre & Kids Parties",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Town Playcafé Huddersfield",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "TRIP 2 TOWN",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Little Grandma's Play Gym Ltd",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Crofton Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "The Play Lounge",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Chestnut Tree Wacky Warehouse",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Junglecatz Soft Play",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Curious Kids Town",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Rock Up climbing centre Meadowhall",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Tinkerbell’s Trails Ltd at Casa Canine",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Playroom Soft Play Centre Sheffield",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Burntwood Court Hotel",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "JungleMazeia Soft play & children's activity centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "A1 Football Factory",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Tumbles Play Gym",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Astrabound",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Medieval Mayhem",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Munchkins Soft Play",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Diddy Middys",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Jolly Barks and Play",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Indoor Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Sprint Swim Academy",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Falco Lounge",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Walnut Tree",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Barnsley",
+    "name": "Swithens Farm",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Blackpool",
+    "name": "Planet Kaos",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Blackpool",
+    "name": "Westhill Playground",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Blackpool",
+    "name": "Skyline Trampoline Park, Inverurie, Aberdeen-Shire",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Blackpool",
+    "name": "Inchgarth Play Park",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Blackpool",
+    "name": "Kincorth Play Park",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Blackpool",
+    "name": "Transition Extreme Sports",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Blackpool",
+    "name": "Jesmond Drive Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Blackpool",
+    "name": "Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Blackpool",
+    "name": "Loirston Annexe Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Blackpool",
+    "name": "Allansmagic",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Blackpool",
+    "name": "Queens Links Leisure Park",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Blackpool",
+    "name": "Osmans",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Blackpool",
+    "name": "Balgownie Drive Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Blackpool",
+    "name": "Belong",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Blackpool",
+    "name": "The Lemon Tree",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Blackpool",
+    "name": "Party Supplies Aberdeen",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Blackpool",
+    "name": "Seaton Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Blackpool",
+    "name": "Mains Of Balquharn Brewers Fayre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Blackpool",
+    "name": "Marshall's Farm Shop",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Blackpool",
+    "name": "Dyce Farm - Dining & Carvery",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Blackpool",
+    "name": "David Lloyd Aberdeen",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Blackpool",
+    "name": "Garioch Indoor Bowling Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Blackpool",
+    "name": "Balmedie Beach",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Blackpool",
+    "name": "practically empty.\",\",\"",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Blackpool",
+    "name": "Bonnymuir Green",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Blackpool",
+    "name": "Linx Ice Arena",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Blackpool",
+    "name": "The Event Complex Aberdeen (TECA)",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Blackpool",
+    "name": "ReCHarge Cafe",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Blackpool",
+    "name": "Bon Accord Aberdeen",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Blackpool",
+    "name": "Westburn Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Blackpool",
+    "name": "RESTING BRUNCH FACE",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Blackpool",
+    "name": "Aberdeen Beach",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Blackpool",
+    "name": "Toby Carvery Cocket Hat",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Blackpool",
+    "name": "Beach Ballroom",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Blackpool",
+    "name": "Adventure Aberdeen Snowsports",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Blackpool",
+    "name": "Fourmile House",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Blackpool",
+    "name": "Bambini Soft Play Hire",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Blackpool",
+    "name": "Victoria Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bolton",
+    "name": "Little Buddies Play Centre and Cafe",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bolton",
+    "name": "Red Robin Wacky Warehouse",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bolton",
+    "name": "Run and Jump Wigan",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bolton",
+    "name": "The Kinder Hub",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bolton",
+    "name": "Wacky World Inflatable Park",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bolton",
+    "name": "ABUK Soft Play Pemberton",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Little Pickles Play Room",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Farmer Palmer's Farm Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "StreetLight Project",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Ramp Rats",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Playground",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "BH Live Active, Pelhams",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Alfies Bouncy Castles",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "BCP Leisure, Two Riversmeet",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Monkey World - Ape Rescue Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "BH Live Active, Littledown",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Kinson Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Dorset Heavy Horse Farm Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Tumble Tots Verwood",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Blissful Balloonz & Eventz",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "BCP Leisure Rossmore Leisure Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Purbeck Sports Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Warmwell Leisure Resort",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "The Dolphin Poole",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Bubbles Gelato",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Fordingbridge Recreation Ground Playpark",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Dobbies Garden Centre Galton",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Harbour View Bar and Kitchen",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Peek-A-Boo & Brew",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Gullivers Farm Shop & Kitchen",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Furzey Gardens",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "BH Live Active, Corfe Mullen",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Reef Youth & Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Branksome Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "St Leonards Farm Caravan & Camping Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Splashdown Waterpark",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Verwood Bouncy Castle Hire",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Prevail Skatehouse",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Moors Valley Country Park & Forest",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Canford Cliffs Beach",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "The Place",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Poole Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Cappuccino's",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Tapnell Farm Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Wimborne Garden Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Hoburne Bashley Holiday Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "King George's Recreation Ground",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Slades Farm Doggy Play Patch",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bournemouth",
+    "name": "Wellies Weddings And Events",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "Funopolis",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bradford",
+    "name": "Megaplay Bradford",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bradford",
+    "name": "Tumble Town Adventure Play",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bradford",
+    "name": "Funzy",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bradford",
+    "name": "Jungle at the Junction",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bradford",
+    "name": "5 ALIVE BRADFORD Adventure Soft Play Centre/ INDOOR FOOTBALL (SEE WEBSITE FOR OPERATING HOURS)",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bradford",
+    "name": "Blessings Play City",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bradford",
+    "name": "Happy Planet Play Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bradford",
+    "name": "Yanki Doodlz Playzone & Diner",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bradford",
+    "name": "Infinity Bradford",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bradford",
+    "name": "Kids about TARN ltd",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bradford",
+    "name": "Jigsaw Juniors Shipley",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bradford",
+    "name": "Insane Air Bradford",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bradford",
+    "name": "Petit pois play cafe",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bradford",
+    "name": "SoftPlay Toys4kids Ltd",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bradford",
+    "name": "Westhill Playground",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bradford",
+    "name": "Skyline Trampoline Park, Inverurie, Aberdeen-Shire",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bradford",
+    "name": "Inchgarth Play Park",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bradford",
+    "name": "Kincorth Play Park",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bradford",
+    "name": "Transition Extreme Sports",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "Jesmond Drive Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bradford",
+    "name": "Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bradford",
+    "name": "Loirston Annexe Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "Allansmagic",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bradford",
+    "name": "Queens Links Leisure Park",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bradford",
+    "name": "Osmans",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bradford",
+    "name": "Balgownie Drive Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bradford",
+    "name": "Belong",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "The Lemon Tree",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "Party Supplies Aberdeen",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "Seaton Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "Mains Of Balquharn Brewers Fayre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bradford",
+    "name": "Marshall's Farm Shop",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "Dyce Farm - Dining & Carvery",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "David Lloyd Aberdeen",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "David Lloyd Aberdeen",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "Garioch Indoor Bowling Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "Balmedie Beach",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "practically empty.\",\",\",\",\"",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "Bonnymuir Green",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "Linx Ice Arena",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "The Event Complex Aberdeen (TECA)",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "ReCHarge Cafe",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "Bon Accord Aberdeen",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "Westburn Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "RESTING BRUNCH FACE",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "Aberdeen Beach",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "Toby Carvery Cocket Hat",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "Beach Ballroom",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "Adventure Aberdeen Snowsports",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bradford",
+    "name": "Fourmile House",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "Bambini Soft Play Hire",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bradford",
+    "name": "Victoria Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "BECS - Inclusive Soft Play Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bradford",
+    "name": "Beachside Coffee Shop",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "The Gordon Highlanders Museum",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "University of Aberdeen Zoology Museum",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "The Pier",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "Buckie Farm",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "The Paddock Bar",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "Dobbies Garden Centre Aberdeen",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "Foodstory",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "The Mains of Drum",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "The Justice Mill - JD Wetherspoon",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "The Cult Of Coffee",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "Grosvenor Casino",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "The Braided Fig",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "Blether",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "Daisy Play Softplay",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Bradford",
+    "name": "The Tolbooth Museum",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Bradford",
+    "name": "Harvester Ghillies Lair Aberdeen",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Brighton",
+    "name": "Little Piggies Cafe",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Brighton",
+    "name": "Hangleton Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Brighton",
+    "name": "High Bar Lane Play Area",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Brighton",
+    "name": "Jumping Jacks Bouncy Castles",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Brighton",
+    "name": "Old Boat Corner",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Brighton",
+    "name": "Lets Play UK",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Brighton",
+    "name": "Fishers Farm Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Cardiff",
+    "name": "The Ark PlayCentre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Cardiff",
+    "name": "The Role Play Haven - Cardiff Centre Branch",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Cardiff",
+    "name": "Camp Coconuts",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Cardiff",
+    "name": "Cefn Mably Farm Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Cardiff",
+    "name": "Boulders Newport Road",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Cardiff",
+    "name": "Splott Play Centre / Flying Start",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Cardiff",
+    "name": "The Play Palace",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Cardiff",
+    "name": "Halo Cwmbran Stadium",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Cardiff",
+    "name": "Penylan Library and Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Cardiff",
+    "name": "Funtasia",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Cardiff",
+    "name": "Mobile Disco & Entertainments Cardiff",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Cardiff",
+    "name": "Walnut Tree Farm Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Cardiff",
+    "name": "Splash Central",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Cardiff",
+    "name": "Newtown Llantwit Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Cardiff",
+    "name": "Maes-y-Coed Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Cardiff",
+    "name": "Cardiff Garden Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Cardiff",
+    "name": "Partyrocksbounce",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Cardiff",
+    "name": "Bouncy Bees Bouncy Castle Hire Ltd",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Cardiff",
+    "name": "The Willows Centre Troedyrhiw",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Cardiff",
+    "name": "K&K's Bouncy Castles",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "St Johns & Highwoods Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Stanway Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Joscastles",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Splatkidz Lasertag",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Dogs Play Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Colchester Sports Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Bounceability",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Great Bromley Village Hall",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Hythe Community Centre Association",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Tiptree Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Poplar Nurseries",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Feering Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Stanway Garden Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Craft Nurseries",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Stanway Lakelands Centre Cafe",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Childsplay Day Nursery",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "The Playhouse - JD Wetherspoon",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Putt in the Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Venture Centre 2000",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Ardleigh Village Hall",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Meow Cat Café Essex",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Peldon & Wigboroughs Community Hall",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Spring Lodge Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Paddy & Scott's • Colchester",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Aldham Village Hall",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Poplar Nurseries Restaurant",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Colchester Indoor Bowls Club",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "CESSAC Community Cafe",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Colchester Toy Library",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Shrub End Training",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Craft Nurseries Restaurant",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "National Trust - Paycocke's House and Garden",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Dedham Art & Craft Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "The Princess Charlotte",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "William Loveless Hall",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Smyths Toys Superstores Colchester",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "The Rovers Tye",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Assembly Rooms",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "The Brunch Café",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Brightlingsea Beach",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Cudmore Grove Country Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Coffee Hog",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Colchester School of Gymnastics",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Turtle Bay Colchester",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Old Bakery Cafe",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Cafe 21",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "The Paw Patch",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "The Range, Colchester",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Wooden Fender",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Dog & Pheasant",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "The Cricketers",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Colchester Business & Seedbed Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Donkey & Buskins",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Witham Town Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "The Half Butt Inn",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "The Court House",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Essex Rose Tea Room Dedham",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Pavilion Restaurant",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "The Three Horseshoes",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Holiday Inn Colchester by IHG",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Miller & Carter Colchester",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "The Red Dog",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Big Juicy Burgers-Colchester",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "White Elm Petting Farm",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Colchester Visitor Information Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "The Kings Arms Broad Green",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Colchester",
+    "name": "Superbowl UK Ipswich",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Play Valley Doncaster - Soft Play Centre & Kids Parties",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Uproar! Play Barn",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Astrabound",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "JungleMazeia Soft play & children's activity centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Play Pit",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Charley's Play Barn",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "The Play House & Cafe Thurnscoe",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Playmania Barnsley",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Play Valley Rotherham - Soft Play Centre & Kids Parties",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "The Little Town of Play",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Thee Fuzzy Ed's",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "House of Play (Europe) Limited",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Indoor Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Sutcliffe Play Ltd",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Ali Bongos Play Barn at Pastures Lodge",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Flip Out Doncaster",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "The Yorkshire Hive",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Funny Farm Softplay Ltd",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Sensory Haven - Play cafe & Sensory room",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Tots Explore Play Cafe and Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Bounce Happy Doncaster Bouncy Castles, Soft play, Disco equipment, Mobile Cinema, Slush machines and more",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Marquis Wacky Warehouse",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Play - World Explorers",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Monkey Playhouse and Cafe",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Lakeside Village Outlet Shopping",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Jump Inc by AirHop Adventure Park Rotherham",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Yorkshire Wildlife Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Woodfield Farm - Farmhouse Inns",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Treasure Island (Rotherham)",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Adwick Leisure Complex",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Toddler Sense Doncaster",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Hemsworth Waterpark & Playworld",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Evolution Experience Restaurant",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Story Teller Wacky Warehouse",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "CBC-Hire Bouncy castles & inflatables",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Big Apple - Play City",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Bright Stars Play Space",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Camelot Play Castle",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "The Westfield Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Bake Battle Roll CIC",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "A Bouncy Castle Man",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Minsthorpe Leisure Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Elsecar Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Highwayman",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "King of the Castles",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Adventure Reef",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Elsecar Heritage Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "123 Bouncy Castles Doncaster",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Kidz hub ltd",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Crazy Castles",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Eagle & Child Inn",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Doncaster Bouncy Castles",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Valley Community Association",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "The Play Village",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Wentworth Garden Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Xplore - Soft Play and 4D Golf",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Monkey Bizness Sheffield",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Barnsley Metrodome Waterpark (Calypso Cove)",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Shake Rattle and Roll",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Play Valley Sheffield - Soft Play Centre & Kids Parties",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Cornerstone Coffee",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Playtimes Playtown Sensory & Imaginary Role Play Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Barnburgh Village Hall",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Playmania Sheffield",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Village Hall",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "The Secret Garden",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Walnut Tree Wacky Warehouse",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Chestnut Tree Wacky Warehouse",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "RSPB Dearne Valley - Old Moor",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Sir Jack Wacky Warehouse",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Anglers Country Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Thrybergh Country Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Burntwood Bar and Restaurant",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Rock Up climbing centre Meadowhall",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Marquis",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Cheeky Monkeys",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Pastures Lodge - Mexborough",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "A1 Football Factory",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Sam's Space Soft Play, Firth Park Methodist Church",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Jungle Monkeys",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "The Manvers Arms",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Medieval Mayhem",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Meadowhall Riverside Playground",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Stanley Ferry Wacky Warehouse",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "TRIP 2 TOWN",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Cannon Hall Farm",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Experia",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Curious Kids Town",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "NovaCity Barnsley",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Thrybergh Reservoir",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "DB Entertainment Sheffield",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Play Valley Dinnington - Soft Play Centre & Kids Parties",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Fun House Play Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Playroom Soft Play Centre Sheffield",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Our Imagination Station",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Moo Moo Soft Play Hire Wakefield",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "IKEA Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Play Creations Ltd",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Doncaster",
+    "name": "Superbowl UK Barnsley",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Edinburgh",
+    "name": "Harraton & District Community Association",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Edinburgh",
+    "name": "Gibside",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Edinburgh",
+    "name": "Gosforth Garden Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Edinburgh",
+    "name": "Teams Life Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Edinburgh",
+    "name": "Kirkley Hall Zoological Gardens",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Edinburgh",
+    "name": "Felling Childcare",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Edinburgh",
+    "name": "Washington Millennium Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Edinburgh",
+    "name": "Hopscotch",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Edinburgh",
+    "name": "The Elgin Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Edinburgh",
+    "name": "The Arcade Warehouse North Shields",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Edinburgh",
+    "name": "Life Science Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Edinburgh",
+    "name": "Dunston Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Edinburgh",
+    "name": "Nelson Villlage Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Edinburgh",
+    "name": "Pelton Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Planet Play",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Tenpin Dudley",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Kings Norton Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Namco Funscape Tamworth",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Glasgow",
+    "name": "CHERRY LANE- Barnett Hill",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Halesowen Leisure Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Trinity Play Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Kelly's Kastles",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Duncan Edwards Leisure Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Smart Kids Nursery City Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Bearspoke Events",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Apley Farm Shop, Food Hall, Kitchen Cafe & Playbarn",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "LCE EVENTS",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Kidz 2 Play",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Fabaloony",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Glasgow",
+    "name": "SOFT PLAY",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "SENDsational Play",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Glasgow",
+    "name": "The Entertainer",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Hippo Bounce Inflatable Play Hire",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Bright Kidz Day Nursery",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Woodcross Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Jump Xtreme Trampoline Park & That Fun Place Tamworth",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Sycamore Adventure",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Mini Me Children's Role Play Centre and Cafe",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Planet PlayWorld",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "The Kidz Barn",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "PIRATES & PRINCESSES ADVENTURE ZONE",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Wacky Playland",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Ash End House Children's Farm",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Little latte Land",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Banners Gate Golden Jubilee Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Rainforest Rascals",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Party and Play",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Go Kidz Go",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Solihull Play Town Ltd",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "JR Playhouse",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Mini Minds Play Village",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Hare & Hounds",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Glasgow",
+    "name": "The Beach Hut",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Gymboree Play & Music Solihull",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Rock Up Birmingham",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Mini Mugs Funhouse",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Mirabella’s Play Café",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "The Little High Street",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Dotties’s Playhouse",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Handsworth Park Play Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Gravity Active Birmingham",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "LEGOLAND Discovery Centre & LEGO Store Birmingham",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Glasgow",
+    "name": "StarCity",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Natural Play and Cafe",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Anchors Away Soft Play & Cafe",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Kids Kingdom Soft Play (Namco Funscape)",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Apley Playbarn",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Model My Party",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Little P's Play Town",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Church Tavern & Play Kingdom",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Glasgow",
+    "name": "AirHop Adventure & Trampoline Park Birmingham (Formerly Rush)",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Emily’s Adventure Play",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Handsworth Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Fuzzy ED's Fun House",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "The Play Cafe Wombourne",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Tickety-Boo",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Midlands Inflatables",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Glasgow",
+    "name": "St Bernards Grange",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Hamstead Play Park",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Action Indoor Sports Ltd",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Candyland Play Village Ltd",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Little play barn",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Tumbler Grove Play Park",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Bumble Bees Stay and Play",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "West Heath Park Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Little Dots Play Village",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Fathers Barn - Venue, Cafe & Gift shop",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Coronation Road Play Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Freddie's Play Pad",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Play Park",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Glasgow",
+    "name": "Three Trees Nature Play",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Halifax",
+    "name": "PB’s Play Village",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Halifax",
+    "name": "The Play Mill Café",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Halifax",
+    "name": "Jungle at the Junction",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Halifax",
+    "name": "Little Grandma's Play Gym Ltd",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Halifax",
+    "name": "The Zone",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Halifax",
+    "name": "The Edge Play Gym",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Halifax",
+    "name": "Play Palace",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Halifax",
+    "name": "Babyccinos Jungle Cafe",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Halifax",
+    "name": "Playworld Huddersfield",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Halifax",
+    "name": "LITTLE MONKEYS PLAY CENTRE",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Halifax",
+    "name": "Happy Adventures Play Village",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Halifax",
+    "name": "The Spinning Top",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Halifax",
+    "name": "Tumbles Play Gym",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Halifax",
+    "name": "Sunny Gym Soft Play Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Halifax",
+    "name": "Airtime Halifax",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Halifax",
+    "name": "Charlie Fastrax",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Hastings",
+    "name": "The Doves Play Barn",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Hastings",
+    "name": "Funplex.",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Hastings",
+    "name": "Paradise Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Hastings",
+    "name": "SoSoft Play and bouncy castle hire",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Hastings",
+    "name": "Drusillas Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Hastings",
+    "name": "Play Dreams Soft Play",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Hastings",
+    "name": "BATTLE ZONE",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Hastings",
+    "name": "Palace Play",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Hastings",
+    "name": "Heaven Farm",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Hastings",
+    "name": "The BIG Barn",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Hastings",
+    "name": "My Skateworld",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Hastings",
+    "name": "Blackberry Farm Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Hastings",
+    "name": "Lindfield Common Play area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Hastings",
+    "name": "Observatory Science Centre & Museum",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Hastings",
+    "name": "WRAP Play - Event Space",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Hastings",
+    "name": "MissionFIIT Gym & Activity Hub",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Hastings",
+    "name": "Malling Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Hastings",
+    "name": "Summerfields Gymnastics Club",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Hastings",
+    "name": "Pett Village Hall",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Hastings",
+    "name": "FunPlay Leisure",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Hastings",
+    "name": "James West Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Hastings",
+    "name": "Harbourside Gymnastics Academy",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Hastings",
+    "name": "Meeching Hall",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Hastings",
+    "name": "Horam Village Hall",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Hastings",
+    "name": "Saint Luke's Parish Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Hastings",
+    "name": "Latchetts Farm",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Hastings",
+    "name": "Bolnore Wood / Woods End Play area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Hastings",
+    "name": "Princes Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Hastings",
+    "name": "Sky Lark play area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Hastings",
+    "name": "Hastings Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Hastings",
+    "name": "Saltdean Lido",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Hastings",
+    "name": "Jumpin Fun Inflatable Park Burgess Hill",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Hastings",
+    "name": "Hellingly Community Hub",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Hastings",
+    "name": "South Heighton Village Hall",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Fizzy Lizard Play Gym",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "The Zone",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Playworld Huddersfield",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Happy Adventures Play Village",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Inflata Nation Inflatable Theme Park Huddersfield",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Rockin Ronnies Bouncy Castles & Soft Play Hire",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "LaserZone (Huddersfield)",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "The Magical Forest playgym",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Westfield Park (North) Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Children's Adventure Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Westhill Playground",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Skyline Trampoline Park, Inverurie, Aberdeen-Shire",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Inchgarth Play Park",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Kincorth Play Park",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Transition Extreme Sports",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Jesmond Drive Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Loirston Annexe Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Allansmagic",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Queens Links Leisure Park",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Osmans",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Balgownie Drive Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Belong",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "The Lemon Tree",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Party Supplies Aberdeen",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Seaton Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Mains Of Balquharn Brewers Fayre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Marshall's Farm Shop",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Osmans",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Balgownie Drive Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Belong",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "The Lemon Tree",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Party Supplies Aberdeen",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Seaton Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Mains Of Balquharn Brewers Fayre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Marshall's Farm Shop",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Dyce Farm - Dining & Carvery",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "David Lloyd Aberdeen",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Garioch Indoor Bowling Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Balmedie Beach",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "practically empty.\",\",\",\",\"",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Bonnymuir Green",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Linx Ice Arena",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "The Event Complex Aberdeen (TECA)",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "ReCHarge Cafe",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Bon Accord Aberdeen",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Westburn Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "RESTING BRUNCH FACE",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Aberdeen Beach",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Toby Carvery Cocket Hat",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Beach Ballroom",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Adventure Aberdeen Snowsports",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Fourmile House",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Bambini Soft Play Hire",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Victoria Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "BECS - Inclusive Soft Play Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Beachside Coffee Shop",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "The Gordon Highlanders Museum",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "University of Aberdeen Zoology Museum",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "The Pier",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Buckie Farm",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "The Paddock Bar",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Dobbies Garden Centre Aberdeen",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Foodstory",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "The Mains of Drum",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "The Justice Mill - JD Wetherspoon",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "The Cult Of Coffee",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Grosvenor Casino",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "The Braided Fig",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Blether",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Daisy Play Softplay",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "The Tolbooth Museum",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Huddersfield",
+    "name": "Harvester Ghillies Lair Aberdeen",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Inverness",
+    "name": "Hilton Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Inverness",
+    "name": "The Entertainer",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Inverness",
+    "name": "Tiso Inverness Outdoor Experience",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Inverness",
+    "name": "Eden Court Inverness",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Inverness",
+    "name": "Inverness Botanic Gardens and Café",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Inverness",
+    "name": "Performers UK",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Inverness",
+    "name": "Three Witches",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Inverness",
+    "name": "Smyths Toys Superstores Inverness",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Inverness",
+    "name": "Bunchrew House",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Partyman World of Play",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Play2Day, Ipswich",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Mini Monsters Ipswich",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Yaya's House",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Ipswich",
+    "name": "The Play Den",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Inflata Nation Inflatable Theme Park Ipswich",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Buttermarket Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Superbowl UK Ipswich",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Whitton Sports & Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Inflata Nation Ipswich",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Bramford Playing Field",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Childrens Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Baylham House Farm",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Avid Indoor Climbing",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Milk Shed Café",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Craft Nurseries Play Barn",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Northgate Sports Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Chantry Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Three Wise Monkeys Ipswich",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Thrasher",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Suffolk Food Hall",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Capel Community Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Inspire",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Dobbies Garden Centre Woodbridge",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Spoon World Buffet & Bar",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Alder Carr Farm",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Hadleigh Stars Gymnastics",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Claydon and Barham Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Gallery Studio Theatre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Farmhouse",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "The Loraine Victory Hall",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Capel St Mary Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Suffolk New College Sports Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Ipswich School Sports Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "The Shed",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Easton Farm Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Millennium Hall",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Maeve's Suffolk",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Crown Pools",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "The Snug play cafe",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Mermaid",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "St Audrys Club",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Rainbow Fun",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Notcutts Woodbridge",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Mid Suffolk Leisure Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Hollow Trees Farm",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Fynn Valley Terrace",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Suffolk Owl Sanctuary",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Barchester - Alice Grange Care Home",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Smyths Toys Superstores Ipswich",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "milsoms Kesgrave Hall",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Playpalz Party and Soft Play Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Omniplex Cinema Ipswich",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Kesgrave Kitchen",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Man on the Moon",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Ufford Park Resort",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "The Flying Horse & Cavallo Volante Cafe",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Stonham Barns Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Watts Cafe (Formerly Jaceys Coffee House)",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Jungle Adventure Ltd",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Cafe Marina",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Go Bananas",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Ipswich",
+    "name": "The Forge Kitchen",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Tower Street Food Hall",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Applaud Coffee",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Woodbridge Garden Rooms",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Holiday Inn Ipswich - Orwell by IHG",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Seckford Hall Hotel and Spa",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Holiday Inn Ipswich by IHG",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "The Fountain",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Pets at Home Ipswich Martlesham",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "The Black Tiles",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Best Western Ipswich Hotel",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Discovery Bay Adventure Play",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Swan Needham Market",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "The Range, Ipswich",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "B&M Home Store with Garden Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "The Range, Anglia Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Chequers Indian Lounge",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Amazing Activities",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Ipswich",
+    "name": "Craft Nurseries",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "The Jungle Club",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Bees Knees",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Little Diva Pamper Parties and Kids Spa",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Retro Computer Museum",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Northfields And District Play Association",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Bouncy Kings Bouncy Castle Hire",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Astar Bouncy Castles",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Kaines Castles",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Hobby Horse Farm - Dining & Carvery",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Social Climbing Leicester",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Stanton under Bardon Village Hall",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Gynsills Farm - Dining & Carvery",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Windmill Farm Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Grove Farm - Dining & Carvery",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Soft Touch Arts and cafe",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "BBcastle Hire",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Buttercups Tearoom",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "The Crows Nest",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Rack 'N' Roll",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Oadby and Leicester Gymnastics Club",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Brocks Hill Country Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Two Steeples",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Bouncing About",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Sunnyside Garden Centre Ltd",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Victoria Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Little Hill Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Venue Hire South Leicestershire",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Bouncing Buddies Castle Hire",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Anstey Bouncy Castle And Rodeo Bull Hire",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Bubbles Active Play and Blue Bubbles Pre-School",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Church Rooms",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Knighton Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Jubilee Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Ape Index",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Westcotes Gardens",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Elliott Hall, South Wigston, For Youth & Community (CIC)",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Varney's Martial Arts Wigston, Leicester, Karate, Kickboxing, Jiu Jitsu",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Dobbies Garden Centre Stapleton",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "The Lime Tree",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Twinlakes Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Isabella's cafe",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Heaven For Foodies - Leicester",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Potters Carpets & Beds",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "147 snooker & pool club",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "The White Horse",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Artsters",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Leicester",
+    "name": "Meridian Business Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "The Natural World Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Daisy Made Farm",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Whisby Nature Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Willow Farm Shop",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Urban Putters",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Waterside Shopping Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Birchwood Leisure Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "The No Work Club",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Bridge Community Venue",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Windmill Farm - Dining & Carvery",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Sundown Adventureland",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Home",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Rand Farm Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Fenland Hideaway Ltd",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Boardwalk Bistro at the Natural World Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Museum of Lincolnshire Life",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "The Drill",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "THE HUB",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Hollywood Bowl Lincoln",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Akēdo Gaming Bar Lincoln",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Wild Acre Village",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Boultham Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Redwood Park & Community Hall",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Atmosphere",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Birchwood Scout Hut",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Airsoft Armourer",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Smyths Toys Superstores Lincoln",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "West Common",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "The Sensory Den (Potential OT Ltd)",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Hickory's Smokehouse Lincoln",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Lincoln Central Library",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Coffee Cats",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "The Pantry Cafe",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "GATEHOUSE",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Dough LoCo",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Woodcocks",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "The Homestead",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Stokes High Bridge Café",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Coffee Depot",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "The Railway Inn",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "The White Hart",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "The Swan Holme",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "The Sycamore cafe, bar & restaurant",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Pets at Home Lincoln North",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Sun Spray, Spray Tanning Lincoln",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "The Dandy Lion",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Pets at Home Lincoln",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "The Local Physio",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "The Range, Lincoln",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Red Hair",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Olivares Tapas Bar",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "​Springbok Computers LTD",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Play Avenue Ltd",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Tesco Extra",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Asda Living Lincoln",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Group 1 Lincoln BMW",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Lidl",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Our Imagination Station",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Sainsbury's",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Gouldings Car Sales",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Lidl",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Lidl",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "FunForest Brigg",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Lincoln",
+    "name": "B&M Store with Garden Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Lincolnshire Co-op Saxilby Food Store",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Little Astronauts",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Adventure Play Town",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Play Valley Doncaster - Soft Play Centre & Kids Parties",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Mercedes-Benz of Lincoln",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "The Secret Village",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Lincoln Museum",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Starbucks Coffee",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Little Monkeys @ Active+",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Beach Cove Adventure Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Whisby",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Monkey Bizness Hull",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Big Fun",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Crazy kids",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Blue Kangaroo",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Lincoln",
+    "name": "Candy Kingdom",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Newcastle Trampoline Park, Soft Play and Gym",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Inflata Nation Inflatable Theme Park Newcastle",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "The Playhouse",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Jump Giants Newcastle (Trampoline Park & Softplay)",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "InflateSpace Newcastle",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Harraton & District Community Association",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Gibside",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Gosforth Garden Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Teams Life Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Sure Start Children's Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Mister Twister's Jump Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Down At The Farm",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Kirkley Hall Zoological Gardens",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Felling Childcare",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Inflata Nation Inflatable Theme Park Newcastle",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Moobears Chester Le Street",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "The Playhouse",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Silly billys",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "InflateSpace Newcastle",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Rainbows Sensory Space ltd",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "The Sensory Play Den",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Jump Giants Newcastle (Trampoline Park & Softplay)",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Airbox Bounce Trampoline Park",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Lemon Tree Softplay Cafe",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Dunston Activity Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "The Dunes Amusements",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Fun Shack",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Newburn Activity Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Washington Millennium Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Pineapple and Bears Birtley",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Super Tramp Sunderland Trampoline Park",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Walker Activity Dome",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "sport@kenton",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "The Play Café Sunderland",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Gateshead Leisure Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Tumble Gymnastics and Activity Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Hopscotch",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Ponteland Leisure Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "The Elgin Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Newcastle",
+    "name": "South Marine Park Childrens Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Kenton Park Sports Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Kiddies Play Cafe",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Barnes Park Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Babyccinos Wallsend",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "The Arcade Warehouse North Shields",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Lost World Adventure Park",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Life Science Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Newcastle",
+    "name": "interactive science centre,\",\"",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Newcastle",
+    "name": "North Marine Park Childrens Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "West Park Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Dunston Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Jilly's Little Gems bounce and play equipment north east",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Namco Funscape Metrocentre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Concordia Leisure Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "East End Play Park",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Washington Village Play Park",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Rainbow Family Hub",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Play Park",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Fun Day Soft Play",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "The Lakeside Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Parks Sports Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Callerton Lane play area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Jump 360 Newcastle Trampoline Park",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Bounce North East",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Washington Leisure Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Waves Leisure Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Nelson Villlage Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Galafield Family Hub",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Pelton Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Royal Quays Brewers Fayre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Tynemouth Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Silksworth Sports Complex & Ski Slope",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Clip 'n Climb Cramlington",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Scotswood Play Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Newcastle",
+    "name": "East End Pool & Gym",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Blaydon Youth & Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Emmaville Hall",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Sunderland Aquatic Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Newcastle",
+    "name": "PaddlePod",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Newcastle",
+    "name": "Benfield Sports Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "My Little World Play Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "Mundy Play Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "Manor Farm Park & Woodlands",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "Pirate Play Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "Titchy Town",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "Hero Town",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "Clip 'n Climb Nottingham",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "Noah's Ark Soft Play Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Nottingham",
+    "name": "West Park, Long Eaton",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "Topdogs Inflatables",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "Moorways Sports Village and Water Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "Big Little Theatre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "Gedling Bouncy Castle Hire",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "MCL Inflatables",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "Cherry Lane Bradmore",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "Plank & Leggit",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "Clip n' Climb Derby",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "Castle Kingdom Burton",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "Play to Measure",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "Connellans Castles",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "Floralands Farm Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "Blue Diamond Garden and Home",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "Robin Hoods Wheelgate Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "Bailey Bears Sensory Den",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "Kirkby Leisure Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "The Meadows Recreation Ground",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "Planters Brookfields",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "Giltbrook Shopping Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "The Beekeeper",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "Robin Hood Gymnastics Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "The Firebird Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "Woodthorpe Grange Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "Belvoir Bouncy Castle Hire Nottingham",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "Abi’s Events & Entertainments",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Nottingham",
+    "name": "Live 9 Events",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Labyrinth Norwich",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "safe",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "ROARR!",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "BeWILDerwood Norfolk",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Funkys Norwich",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Mini Monkey Gym Norwich",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Superbowl UK Norwich",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "The Bug Parc",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Castle Quarter",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Thrigby Hall Wildlife Gardens",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "YMCA Norfolk Community Hub",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Williams' Kitchen",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Little Squirrels Play Forest",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Castle Carvery - Clocktower",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Wroxham Barns",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Melsop Farm Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Castle Carvery - Racecourse",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Belvedere Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "CAP.CO - Creating Adventurous Places Ltd.",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Premier Parties",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Tickety Boo",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "About2Bounce Inflatable Hire",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Wroxham Miniature Worlds",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Toy Street",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Adventure Island Play Park",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Norwich",
+    "name": "Funtasticcastles",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Norwich Castle",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Little Owls Day Nursery",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Little Tykes Bouncy Castles",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Cherry Lane Southview",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Bugs Play Cafe",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Norwich",
+    "name": "Cherry Lane Bawdeswell Garden Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Hollywood Bowl Norwich",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Sewell Barn",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "The Walled Garden Community Shop and Cafe",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Roys Toys",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "King George's Field",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Copper Beech",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Muddy Puddles Nursery",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Coffee Nook @ Play Nook",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Norfolk Food Hall",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "East Dereham Skate Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Jurassic Journey",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Breckland Hall",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Megafun",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Gemini",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Kings Arms",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Greenstone",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Haven Wild Duck Holiday Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Castle Carvery - Caister",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Fakenham Superbowl",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "The Ram Inn",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Wheatacre Hall Barns",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Acle Bridge Inn",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Cactus Cafe Bar",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "The New Forge",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Cribs and bibs inflatables",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Falgate Inn",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Parkdean Resorts Breydon Water Holiday Park, Great Yarmouth",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Norwich",
+    "name": "Auto Refresh Norwich",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Portsmouth",
+    "name": "Mini Town - Role Play & Cafe - Waterlooville",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Portsmouth",
+    "name": "Inflatazone Indoor Soft Play Centre & Inflatable Zone",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Portsmouth",
+    "name": "Arthur’s Play Space",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Portsmouth",
+    "name": "George's Spaceship Play Zone",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Portsmouth",
+    "name": "Flip Out Portsmouth",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Portsmouth",
+    "name": "Paultons Park Home of Peppa Pig World",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Portsmouth",
+    "name": "Longdown Activity Farm",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Portsmouth",
+    "name": "Testbourne Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Portsmouth",
+    "name": "In-Excess Fair Oak Garden Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Portsmouth",
+    "name": "Flip Out Southampton",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Portsmouth",
+    "name": "Marwell Resort",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Portsmouth",
+    "name": "Lordswood Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Portsmouth",
+    "name": "Lymington Meadows Playground",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Portsmouth",
+    "name": "Manor Farm | Hampshire",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Portsmouth",
+    "name": "Taro Leisure Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Portsmouth",
+    "name": "The Clanfield Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Portsmouth",
+    "name": "BH Live Active, Pyramids",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Portsmouth",
+    "name": "Fleming Park Soft play",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Portsmouth",
+    "name": "Red Spider Climbing",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Portsmouth",
+    "name": "Southampton Outdoor Sports Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Portsmouth",
+    "name": "Portchester Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Portsmouth",
+    "name": "Ganger Farm Sports Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Portsmouth",
+    "name": "Doe Copse Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Portsmouth",
+    "name": "Sovereigns",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Southend-on-Sea",
+    "name": "Monkey Bizzness Adventure Play",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Southend-on-Sea",
+    "name": "The Megacentre Rayleigh",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Southend-on-Sea",
+    "name": "Astro City Southend on Sea",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Southend-on-Sea",
+    "name": "Indirock",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Southend-on-Sea",
+    "name": "Monkey Puzzle",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "The Rage House",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Wheelock Hall Farm Shop",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "GAMEGRID - VR, Esports & Gaming Hub",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Balance & Beam Gymnastics",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Glebe Farm",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Bridgemere Garden Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Awesome Walls, Stoke",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Laser Quest Stoke",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Ruby's Fund",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Our Space",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Arnie’s Castles",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "KIX FC LTD",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Hanley Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Hopley House",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Astbury Mere Country Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Escape Stoke",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Westport Lake View Cafe",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Apedale Heritage Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "TeamSport Go Karting Stoke",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Middleport Pottery",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Penkhull Village Hall",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Funtastic Entertainments",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Rookery Wood Farm",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Affinity Staffordshire",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Brampton Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "The Entertainer",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Congleton Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Audley Climbing Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Tittensor Village Hall",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Spring Park Alexandra",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Blue Diamond - Home & Garden Trentham",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "The Dorothy Clive Garden",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Taste For Life café Queen's Park Crewe",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "The Kinderton",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Brindley Farm - Dining & Carvery",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Longton Exchange Shopping Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "The Clubhouse Stoke",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "The Brampton Museum",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "bet365 Stadium",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Dagfields Craft & Antiques",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Heath Farm",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Golden (The Flame That Never Dies)",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Trentham Gardens",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Pepper Mill",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Blue Bell Smallwood",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Bobby's Ice Cream Parlour",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Etruria Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Northwood Garden Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Alcumlow Hall Farm",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Kidsgrove Ski Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Lawton Memorial Hall",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Burslem Cricket Club",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "New Florence",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Four Eagles",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Haslington Cricket Club Clubhouse",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Genting Casino Stoke",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Longton Snooker & Pool Club",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Northwood Community Sports",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Keele University Events and Conferencing",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Station Pilot",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Sandbach United Football Club",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Cotton Mill",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "The Jug",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "The White Lion",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Premier Inn Newcastle Under Lyme hotel",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Oakhanger Riding & Pony Club Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Smyths Toys Superstores Longton",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Horse Shoe, Astbury",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "The Furlong",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Funsters",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Brisk Coffee Co Hanley",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "The Reginald Mitchell",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Stoke-on-Trent",
+    "name": "Gardeners Arms",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Fun Shack",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Rainbows Sensory Space ltd",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "The Play Café Sunderland",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Silly billys",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Super Tramp Sunderland Trampoline Park",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Washington Millennium Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Barnes Park Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Rainbow Family Hub",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Washington Village Play Park",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Sunrise Enterprise Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Washington Leisure Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Sunderland Wall",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Laser Quest Sunderland",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Grange Villa Community Enterprise",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Clip n Climb Newcastle",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Clip 'n Climb Metrocentre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Eldon Square",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "South Tyneside Gymnastics & Wellbeing Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Kingston Park Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Silksworth Community Pool Tennis & Wellness Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Barmoor Hub",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Quaking Houses Village Hall Association",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Harraton & District Community Association",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Gibside",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Gosforth Garden Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Teams Life Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Sure Start Children's Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Mister Twister's Jump Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Down At The Farm",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Kirkley Hall Zoological Gardens",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Felling Childcare",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "The Dunes Amusements",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Fun Shack",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Newburn Activity Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Washington Millennium Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Pineapple and Bears Birtley",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Super Tramp Sunderland Trampoline Park",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Walker Activity Dome",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "sport@kenton",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "The Play Café Sunderland",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Gateshead Leisure Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Tumble Gymnastics and Activity Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Hopscotch",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Ponteland Leisure Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "The Elgin Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "South Marine Park Childrens Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Kenton Park Sports Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Kiddies Play Cafe",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Barnes Park Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Babyccinos Wallsend",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "The Arcade Warehouse North Shields",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Lost World Adventure Park",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Life Science Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "North Marine Park Childrens Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "West Park Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Dunston Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Jilly's Little Gems bounce and play equipment north east",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Namco Funscape Metrocentre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Concordia Leisure Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "East End Play Park",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Washington Village Play Park",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Rainbow Family Hub",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Play Park",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Fun Day Soft Play",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "The Lakeside Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Parks Sports Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Callerton Lane play area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Jump 360 Newcastle Trampoline Park",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Bounce North East",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Washington Leisure Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Waves Leisure Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Nelson Villlage Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Galafield Family Hub",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Pelton Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Royal Quays Brewers Fayre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Dalton Park Playground",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Tynemouth Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "The Louisa Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Tim Lamb Children's Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Mini Moos Fun Farm - CLOSED",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Water Play",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Christon Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Silksworth Sports Complex & Ski Slope",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Temple Park Playground",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Temple Park Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Clip 'n Climb Cramlington",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Scotswood Play Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "East End Pool & Gym",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Blaydon Youth & Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Chester-le-Street Leisure Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Emmaville Hall",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Sunderland Aquatic Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "PaddlePod",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "No Limits Paintball and Laser",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Benfield Sports Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Lynch Soft Play Ltd",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Grange Villa Community Enterprise",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Children's Centre Washington",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Clip n Climb Newcastle",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Hebburn Central",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Clip 'n Climb Metrocentre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Eldon Square",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "South Tyneside Gymnastics & Wellbeing Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Kingston Park Community Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Silksworth Community Pool Tennis & Wellness Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Barmoor Hub",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Sunderland",
+    "name": "Quaking Houses Village Hall Association",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Swansea Bowl",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Continue Arcades",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Dobbies Garden Centre Swansea",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Meadow View Sports Complex",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Gateway Resort",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Play Area",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Swansea",
+    "name": "Primrose Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "The National Waterfront Museum",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Airfun4u",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Underhill Hub",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Brynmill Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "L A Bouncy Castle Hire",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Trallwn Community Hub",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Wiggleys Fun Farm",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Swansea",
+    "name": "Themes To Dreams",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Bouncy Hire Swansea",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Tŷ Hapus Day Nursery",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Socialdice - Board Game Cafe",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Common Meeple Board Game Cafe",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Abacus Day Nursery",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Langland Bay",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Willows playhouse ltd",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Swansea",
+    "name": "Pinopolis Ltd",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Neath Little Theatre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Aberavon Beach",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Gower Heritage Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Enchanted Adventures Bridgend",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Swansea",
+    "name": "AJ EVENT HIRE",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "WWT Llanelli Wetland Centre",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "The Play Yard",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Swansea",
+    "name": "The Natural Play Company",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Swansea Beach",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Olivers restaurant and sports bar",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Soft Landings Play Zone",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Swansea",
+    "name": "Cwm Level Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "The Canine Cottage",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Tumbling Monkeys",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Albert Hall",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Aberavon Beach",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "The Copper Pot",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Pebbles Day Nursery Gower",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "David Lloyd Swansea",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Swansea Footgolf",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Llanrhidian Holiday park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "The Rake and Riddle",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Coed Derw Day Nursery",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Mecca Bingo Swansea",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "The Purple Badger",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Dragons Den Soft Play",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Swansea",
+    "name": "Bouncy Hire Swansea",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "JD Gyms Swansea Gorseinon",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "The Doghouse Daycare And Grooming",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Window to the Womb Swansea, Wales",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Halo Maesteg Sports Centre",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Swansea",
+    "name": "Margam Deer",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "BikeAbility Wales",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Cockett Inn",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Riverside Holiday Park",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Parc y Scarlets",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Play-zone at Trago",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Swansea",
+    "name": "Mrs McGregor's Hook",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Funtasia",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Copperfish Cafe, Restaurant and Takeaway",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "MAMI Play Events",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Fuze",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Swansea",
+    "name": "Tiny Tumblers",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Swansea",
+    "name": "McDonald's",
+    "reason": "not_a_play_venue"
+  },
+  {
+    "city": "Swansea",
+    "name": "Planet Play Indoor Play Centre Merthyr",
+    "reason": "duplicate_in_csv_set"
+  },
+  {
+    "city": "Swansea",
+    "name": "The Swan Inn",
+    "reason": "not_a_play_venue"
   }
 ]

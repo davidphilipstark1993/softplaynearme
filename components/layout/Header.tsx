@@ -33,8 +33,8 @@ export function Header({ backLink }: HeaderProps) {
                 </Button>
               </Link>
               <Link href="/add-venue">
-                <Button size="sm" className="bg-purple-600 text-white hover:bg-purple-700">
-                  <span className="hidden sm:inline">Add </span>Venue
+                <Button size="sm" className="bg-green-600 text-white hover:bg-green-700 font-semibold">
+                  <span className="hidden sm:inline">Free </span>Listing
                 </Button>
               </Link>
             </>
