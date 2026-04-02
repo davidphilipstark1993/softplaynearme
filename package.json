@@ -23,7 +23,9 @@
     "enrich:venues": "node scripts/enrich-venues.mjs",
     "enrich:seo": "node scripts/enrich-seo-all.mjs --commit",
     "enrich:seo:dry": "node scripts/enrich-seo-all.mjs",
-    "test:enrichment": "node --test scripts/enrichment-utils.test.mjs"
+    "test:enrichment": "node --test scripts/enrichment-utils.test.mjs",
+    "validate": "node scripts/validate-venues.mjs",
+    "validate:fix": "node scripts/validate-venues.mjs --fix"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",
