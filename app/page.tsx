@@ -82,8 +82,8 @@ async function getHomepageStats() {
     const pool = getPool()
     const [countResult, cityCountResult, recentResult] = await Promise.all([
       pool.query<{ total: number }>('SELECT COUNT(*)::int AS total FROM venues'),
-      pool.query<{ town_slug: string; cnt: number }>(
-        'SELECT town_slug, COUNT(*)::int AS cnt FROM venues GROUP BY town_slug'
+      pool.query<{ city_slug: string; cnt: number }>(
+        'SELECT city_slug, COUNT(*)::int AS cnt FROM venues GROUP BY city_slug'
       ),
       pool.query<RecentVenue>(`
         SELECT v.name, v.town_slug, v.slug,
@@ -100,7 +100,7 @@ async function getHomepageStats() {
     const totalVenues = countResult.rows[0]?.total ?? 0
     const cityCounts: Record<string, number> = {}
     for (const row of cityCountResult.rows) {
-      if (row.town_slug) cityCounts[row.town_slug] = row.cnt
+      if (row.city_slug) cityCounts[row.city_slug] = row.cnt
     }
     // Attach a display city name to each recent venue
     const cityNameMap: Record<string, string> = {}
