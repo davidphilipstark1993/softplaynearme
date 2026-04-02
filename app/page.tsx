@@ -102,6 +102,12 @@ async function getHomepageStats() {
     for (const row of cityCountResult.rows) {
       if (row.city_slug) cityCounts[row.city_slug] = row.cnt
     }
+    // Supplement with static JSON counts for cities not yet in the DB
+    for (const city of cities) {
+      if (cityCounts[city.slug] === undefined) {
+        cityCounts[city.slug] = getStaticVenuesByTown(city.slug).length
+      }
+    }
     // Attach a display city name to each recent venue
     const cityNameMap: Record<string, string> = {}
     for (const city of cities) cityNameMap[city.slug] = city.name
