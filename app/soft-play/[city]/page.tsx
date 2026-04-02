@@ -160,6 +160,8 @@ async function getVenues(citySlug: string, filter?: string, search?: string): Pr
         LEFT JOIN reviews r ON r.venue_id = v.id AND r.approved = true
         WHERE v.city_slug = $1
       `
+      // Note: ORDER BY uses column positions to avoid ambiguity between the computed
+      // review_count alias and the real review_count column included via v.*
       const params: (string | boolean)[] = [citySlug]
 
       if (filter) {
@@ -175,7 +177,8 @@ async function getVenues(citySlug: string, filter?: string, search?: string): Pr
         query += ` AND (v.name ILIKE $${params.length} OR v.description ILIKE $${params.length})`
       }
 
-      query += ` GROUP BY v.id ORDER BY avg_rating DESC, review_count DESC, v.name ASC`
+      // Use explicit column references to avoid ambiguity with v.* columns
+      query += ` GROUP BY v.id ORDER BY avg_rating DESC NULLS LAST, v.reviews_count DESC NULLS LAST, v.name ASC`
 
       const result = await client.query(query, params)
       if (result.rows.length > 0) {
