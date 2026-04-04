@@ -343,6 +343,76 @@ export async function generateStaticParams() {
   return params
 }
 
+interface SimilarVenue {
+  name: string
+  slug: string
+  postcode: string
+  toddler_area: boolean
+  sen_friendly: boolean
+  parties: boolean
+}
+
+/**
+ * Get venues in the same city that share at least one key tag with the current venue.
+ * Results are ranked by number of matching tags, then by name.
+ */
+async function getSimilarVenues(
+  citySlug: string,
+  excludeSlug: string,
+  tags: { toddler_area: boolean; sen_friendly: boolean; parties: boolean }
+): Promise<SimilarVenue[]> {
+  const hasAnyTag = tags.toddler_area || tags.sen_friendly || tags.parties
+  if (!hasAnyTag) return []
+
+  try {
+    const pool = getPool()
+    const client = await pool.connect()
+    try {
+      const result = await client.query<SimilarVenue>(
+        `SELECT name, slug, postcode, toddler_area, sen_friendly, parties
+         FROM venues
+         WHERE city_slug = $1
+           AND slug != $2
+           AND (
+             ($3 AND toddler_area = true) OR
+             ($4 AND sen_friendly = true) OR
+             ($5 AND parties = true)
+           )
+         ORDER BY
+           (CASE WHEN $3 AND toddler_area THEN 1 ELSE 0 END +
+            CASE WHEN $4 AND sen_friendly THEN 1 ELSE 0 END +
+            CASE WHEN $5 AND parties THEN 1 ELSE 0 END) DESC,
+           name ASC
+         LIMIT 4`,
+        [citySlug, excludeSlug, tags.toddler_area, tags.sen_friendly, tags.parties]
+      )
+      if (result.rows.length > 0) return result.rows
+    } finally {
+      client.release()
+    }
+  } catch {
+    // Fall through to static
+  }
+
+  const staticVenues = getStaticVenuesByTown(citySlug)
+  return staticVenues
+    .filter(v => v.slug !== excludeSlug)
+    .filter(v =>
+      (tags.toddler_area && v.toddlerArea) ||
+      (tags.sen_friendly && v.senFriendly) ||
+      (tags.parties && v.parties)
+    )
+    .slice(0, 4)
+    .map(v => ({
+      name: v.name,
+      slug: v.slug,
+      postcode: v.postcode,
+      toddler_area: v.toddlerArea ?? false,
+      sen_friendly: v.senFriendly ?? false,
+      parties: v.parties ?? false,
+    }))
+}
+
 /** Get nearby venues in the same city (excluding this one) */
 async function getNearbyVenues(citySlug: string, excludeSlug: string): Promise<{ name: string; slug: string; postcode: string }[]> {
   try {
@@ -435,13 +505,28 @@ export default async function VenuePage({ params }: PageProps) {
   const isStaticVenue = (venue as any)._isStatic === true
 
   // Fetch all related data in parallel
-  const [reviews, pricing, sessions, photos, nearbyVenues] = await Promise.all([
+  const venueTags = {
+    toddler_area: venue.toddler_area ?? false,
+    sen_friendly: venue.sen_friendly ?? false,
+    parties: venue.parties ?? false,
+  }
+  const [reviews, pricing, sessions, photos, nearbyVenues, similarVenues] = await Promise.all([
     getReviews(venue.id, city, slug),
     getPricing(venue.id),
     getSessions(venue.id),
     getPhotos(venue.id),
     getNearbyVenues(city, slug),
+    getSimilarVenues(city, slug, venueTags),
   ])
+
+  // Derive section label from the venue's primary feature tag
+  const similarFeatureLabel = venue.toddler_area
+    ? 'Toddler-Friendly'
+    : venue.sen_friendly
+      ? 'SEN-Friendly'
+      : venue.parties
+        ? 'Party'
+        : null
 
   const avgRating = reviews.length > 0
     ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
@@ -817,6 +902,48 @@ export default async function VenuePage({ params }: PageProps) {
                     className="block text-center text-sm text-purple-600 hover:text-purple-700 font-medium mt-4"
                   >
                     View all venues in {cityName}
+                  </Link>
+                </div>
+              )}
+
+              {/* Similar Venues by Tag */}
+              {similarVenues.length >= 2 && similarFeatureLabel && (
+                <div className="bg-white rounded-lg border border-slate-200 p-6">
+                  <h2 className="font-semibold text-lg mb-4">
+                    More {similarFeatureLabel} Soft Play in {cityName}
+                  </h2>
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    {similarVenues.map((sv) => {
+                      const matchedTags = [
+                        sv.toddler_area && venue.toddler_area ? 'Toddler' : null,
+                        sv.sen_friendly && venue.sen_friendly ? 'SEN' : null,
+                        sv.parties && venue.parties ? 'Parties' : null,
+                      ].filter(Boolean)
+                      return (
+                        <Link
+                          key={sv.slug}
+                          href={`/soft-play/${city}/${sv.slug}`}
+                          className="flex items-start gap-3 p-3 rounded-lg border border-slate-100 hover:border-purple-300 hover:bg-purple-50 transition-colors"
+                        >
+                          <MapPin className="w-4 h-4 text-purple-500 flex-shrink-0 mt-0.5" />
+                          <div className="min-w-0">
+                            <p className="font-medium text-sm truncate">{sv.name}</p>
+                            <p className="text-xs text-slate-500 mb-1">{sv.postcode}</p>
+                            <div className="flex flex-wrap gap-1">
+                              {matchedTags.map(tag => (
+                                <span key={tag} className="text-xs bg-purple-100 text-purple-700 rounded px-1.5 py-0.5">{tag}</span>
+                              ))}
+                            </div>
+                          </div>
+                        </Link>
+                      )
+                    })}
+                  </div>
+                  <Link
+                    href={`/soft-play/${city}/${venueTags.toddler_area ? 'toddler' : venueTags.sen_friendly ? 'sen-friendly' : 'birthday-parties'}`}
+                    className="block text-center text-sm text-purple-600 hover:text-purple-700 font-medium mt-4"
+                  >
+                    View all {similarFeatureLabel.toLowerCase()} venues in {cityName} →
                   </Link>
                 </div>
               )}

@@ -6,12 +6,12 @@ export const metadata: Metadata = {
   title: 'Soft Play Blog',
   description: 'City guides, planning tips, and practical advice for families searching for soft play centres across the UK.',
   alternates: {
-    canonical: 'https://softplaynearme.co.uk/blog',
+    canonical: 'https://www.softplaynearme.co.uk/blog',
   },
   openGraph: {
     title: 'Soft Play Blog | Soft Play Near Me',
     description: 'City guides, planning tips, and practical advice for families searching for soft play centres across the UK.',
-    url: 'https://softplaynearme.co.uk/blog',
+    url: 'https://www.softplaynearme.co.uk/blog',
     type: 'website',
     siteName: 'Soft Play Near Me',
     images: ['/opengraph-image'],

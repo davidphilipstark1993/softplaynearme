@@ -12,6 +12,7 @@ import { HeroCarousel } from '@/components/home/HeroCarousel'
 import { buildFAQSchema } from '@/lib/schema'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { blogPosts } from '@/lib/blogPosts'
+import { CITY_IMAGES } from '@/lib/cityImages'
 import { getPool } from '@/lib/pool'
 import type { Metadata } from 'next'
 
@@ -27,8 +28,8 @@ async function getVenueCount(): Promise<number> {
 
 export async function generateMetadata(): Promise<Metadata> {
   const total = await getVenueCount()
-  const countStr = total > 0 ? total.toLocaleString('en-GB') : '1,000+'
-  const description = `Search ${countStr} soft play centres across the UK. Compare facilities, check opening times, and find the perfect indoor play venue for your family. Free to use.`
+  const countStr = total > 0 ? total.toLocaleString('en-GB') : '1,800+'
+  const description = `Find ${countStr} soft play centres near you across the UK. Search by postcode, compare prices, opening times, facilities, photos & reviews. Free directory updated daily by venue owners.`
   return {
     description,
     openGraph: {
@@ -133,14 +134,7 @@ export default async function Home() {
     ? totalVenues.toLocaleString('en-GB')
     : '1,000+'
 
-  const cityVisuals: Record<string, string> = {
-    hull: 'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=900&q=80',
-    york: 'https://images.unsplash.com/photo-1624119841587-fb82e55f45f0?auto=format&fit=crop&w=900&q=80',
-    leeds: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=900&q=80',
-    sheffield: 'https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=900&q=80',
-    brighton: 'https://images.unsplash.com/photo-1559599238-308793637427?auto=format&fit=crop&w=900&q=80',
-    bournemouth: 'https://images.unsplash.com/photo-1455729552865-3658a5d39692?auto=format&fit=crop&w=900&q=80',
-  }
+  const cityVisuals = CITY_IMAGES
 
   // ItemList schema for Browse by City section
   const cityListSchema = {

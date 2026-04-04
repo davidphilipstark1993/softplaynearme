@@ -71,7 +71,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     sitemap.push({
       url: `${baseUrl}/soft-play/${city}`,
       lastModified: new Date(),
-      changeFrequency: 'daily',
+      changeFrequency: 'weekly',
       priority: 0.9,
     })
 
@@ -79,8 +79,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       sitemap.push({
         url: `${baseUrl}/soft-play/${city}/${filter.slug}`,
         lastModified: new Date(),
-        changeFrequency: 'daily',
-        priority: 0.8,
+        changeFrequency: 'weekly',
+        priority: 0.7,
       })
     }
   }

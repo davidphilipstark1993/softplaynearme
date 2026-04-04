@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { getCityBySlug, getAllCitySlugs, getNearbyCities, filters } from '@/lib/venues'
-import { MapPin, Star, Coffee, Car, Baby, PartyPopper, Heart, Phone, Globe, Navigation } from 'lucide-react'
+import { MapPin, Star, Coffee, Car, Baby, PartyPopper, Heart, Phone, Globe, Navigation, TrendingUp } from 'lucide-react'
 import type { Metadata } from 'next'
 import { getPool } from '@/lib/pool'
 import { getStaticVenuesByTown, getStaticTownBySlug, getAllStaticTownSlugs, type StaticVenue } from '@/lib/staticVenues'
@@ -16,6 +16,7 @@ import { buildBreadcrumbSchema, buildFAQSchema, buildItemListSchema } from '@/li
 import { JsonLd } from '@/components/seo/JsonLd'
 import { getLocationContent } from '@/lib/locationContent'
 import { LocationIntro } from '@/components/location/LocationIntro'
+import { getCityOgImage } from '@/lib/cityImages'
 
 interface PageProps {
   params: Promise<{ city: string }>
@@ -50,6 +51,7 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
     const title = generated.metaTitle
     const description = generated.metaDescription
 
+    const ogImage = getCityOgImage(city)
     return {
       title,
       description,
@@ -60,13 +62,13 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
         url: `https://www.softplaynearme.co.uk/soft-play/${city}`,
         type: 'website',
         siteName: 'Soft Play Near Me',
-        images: ['/opengraph-image'],
+        images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
       },
       twitter: {
         card: 'summary_large_image',
         title,
         description,
-        images: ['/opengraph-image'],
+        images: [ogImage],
       },
       alternates: {
         canonical: `https://www.softplaynearme.co.uk/soft-play/${city}`,
@@ -76,6 +78,7 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
 
   // Use content generator for richer meta if hand-written is thin
   const generated = getLocationContent(city, cityConfig, null)
+  const ogImage = getCityOgImage(city)
 
   return {
     title: generated.metaTitle,
@@ -87,13 +90,13 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
       url: `https://www.softplaynearme.co.uk/soft-play/${city}`,
       type: 'website',
       siteName: 'Soft Play Near Me',
-      images: ['/opengraph-image'],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: generated.metaTitle }],
     },
     twitter: {
       card: 'summary_large_image',
       title: generated.metaTitle,
       description: generated.metaDescription,
-      images: ['/opengraph-image'],
+      images: [ogImage],
     },
     alternates: {
       canonical: `https://www.softplaynearme.co.uk/soft-play/${city}`,
@@ -242,6 +245,16 @@ export default async function CityPage({ params, searchParams }: PageProps) {
     `Soft Play Centres in ${displayName}`
   )
 
+  // Curated spotlight sections (only shown on unfiltered city pages)
+  const showCurated = !filter && !search && venues.length >= 4
+  const toddlerVenues = showCurated ? venues.filter(v => v.toddler_area).slice(0, 4) : []
+  const topRatedVenues = showCurated
+    ? [...venues].filter(v => v.avg_rating && Number(v.avg_rating) > 0).sort((a, b) => Number(b.avg_rating || 0) - Number(a.avg_rating || 0)).slice(0, 4)
+    : []
+  const mostPopularVenues = showCurated
+    ? [...venues].filter(v => v.review_count && Number(v.review_count) > 0).sort((a, b) => Number(b.review_count || 0) - Number(a.review_count || 0)).slice(0, 4)
+    : []
+
   return (
     <>
       <JsonLd data={breadcrumbSchema} />
@@ -288,9 +301,97 @@ export default async function CityPage({ params, searchParams }: PageProps) {
 
         {/* Main Content */}
         <main className="max-w-7xl mx-auto px-4 py-8">
+
+          {/* Curated Spotlight Sections */}
+          {showCurated && (
+            <div className="mb-10 space-y-8">
+              {toddlerVenues.length >= 2 && (
+                <section>
+                  <div className="flex items-center gap-2 mb-3">
+                    <Baby className="w-5 h-5 text-blue-600" />
+                    <h2 className="text-lg font-semibold text-slate-800">Best for Toddlers in {displayName}</h2>
+                  </div>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    {toddlerVenues.map((venue) => (
+                      <Link key={venue.slug} href={`/soft-play/${city}/${venue.slug}`} className="group block">
+                        <div className="bg-white border border-slate-200 rounded-lg p-4 hover:border-blue-300 hover:shadow-md transition-all h-full flex flex-col">
+                          <span className="inline-flex items-center gap-1 text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-200 rounded-full px-2 py-0.5 mb-2 w-fit">
+                            <Baby className="w-3 h-3" /> Toddler Friendly
+                          </span>
+                          <p className="font-semibold text-sm text-slate-800 group-hover:text-blue-600 line-clamp-2 flex-1">{venue.name}</p>
+                          {venue.avg_rating && Number(venue.avg_rating) > 0 && (
+                            <div className="flex items-center gap-1 mt-2 text-xs text-slate-500">
+                              <Star className="w-3 h-3 text-yellow-400 fill-current" />
+                              <span className="font-medium text-slate-700">{Number(venue.avg_rating).toFixed(1)}</span>
+                              {venue.review_count && Number(venue.review_count) > 0 && (
+                                <span>({Number(venue.review_count).toLocaleString()})</span>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {topRatedVenues.length >= 2 && (
+                <section>
+                  <div className="flex items-center gap-2 mb-3">
+                    <Star className="w-5 h-5 text-yellow-500 fill-current" />
+                    <h2 className="text-lg font-semibold text-slate-800">Top Rated Soft Play in {displayName}</h2>
+                  </div>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    {topRatedVenues.map((venue) => (
+                      <Link key={venue.slug} href={`/soft-play/${city}/${venue.slug}`} className="group block">
+                        <div className="bg-white border border-slate-200 rounded-lg p-4 hover:border-yellow-300 hover:shadow-md transition-all h-full flex flex-col">
+                          <span className="inline-flex items-center gap-1 text-xs font-semibold text-yellow-700 bg-yellow-50 border border-yellow-200 rounded-full px-2 py-0.5 mb-2 w-fit">
+                            <Star className="w-3 h-3 fill-current" /> {Number(venue.avg_rating).toFixed(1)} rated
+                          </span>
+                          <p className="font-semibold text-sm text-slate-800 group-hover:text-yellow-600 line-clamp-2 flex-1">{venue.name}</p>
+                          {venue.review_count && Number(venue.review_count) > 0 && (
+                            <p className="mt-2 text-xs text-slate-500">{Number(venue.review_count).toLocaleString()} reviews</p>
+                          )}
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {mostPopularVenues.length >= 2 && (
+                <section>
+                  <div className="flex items-center gap-2 mb-3">
+                    <TrendingUp className="w-5 h-5 text-purple-600" />
+                    <h2 className="text-lg font-semibold text-slate-800">Most Popular in {displayName}</h2>
+                  </div>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    {mostPopularVenues.map((venue) => (
+                      <Link key={venue.slug} href={`/soft-play/${city}/${venue.slug}`} className="group block">
+                        <div className="bg-white border border-slate-200 rounded-lg p-4 hover:border-purple-300 hover:shadow-md transition-all h-full flex flex-col">
+                          <span className="inline-flex items-center gap-1 text-xs font-semibold text-purple-700 bg-purple-50 border border-purple-200 rounded-full px-2 py-0.5 mb-2 w-fit">
+                            <TrendingUp className="w-3 h-3" /> {Number(venue.review_count).toLocaleString()} reviews
+                          </span>
+                          <p className="font-semibold text-sm text-slate-800 group-hover:text-purple-600 line-clamp-2 flex-1">{venue.name}</p>
+                          {venue.avg_rating && Number(venue.avg_rating) > 0 && (
+                            <div className="flex items-center gap-1 mt-2 text-xs text-slate-500">
+                              <Star className="w-3 h-3 text-yellow-400 fill-current" />
+                              <span className="font-medium text-slate-700">{Number(venue.avg_rating).toFixed(1)}</span>
+                            </div>
+                          )}
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </section>
+              )}
+            </div>
+          )}
+
+          {/* All Venues */}
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-lg font-semibold text-slate-700">
-              {venues.length} {venues.length === 1 ? 'venue' : 'venues'} found
+              {showCurated ? `All Soft Play in ${displayName} ` : ''}{venues.length} {venues.length === 1 ? 'venue' : 'venues'}{!showCurated ? ' found' : ''}
             </h2>
           </div>
 

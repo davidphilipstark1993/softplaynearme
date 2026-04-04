@@ -231,6 +231,55 @@ export function buildFAQSchema(faqs: FAQItem[]) {
   }
 }
 
+// ── Article / BlogPosting schema builder ──────────────────────────────
+
+export interface ArticleSchemaInput {
+  title: string
+  description: string
+  slug: string
+  datePublished: string
+  dateModified: string
+  imageUrl?: string
+}
+
+/**
+ * Build a Schema.org BlogPosting JSON-LD object for blog posts.
+ */
+export function buildArticleSchema(input: ArticleSchemaInput) {
+  const url = `https://www.softplaynearme.co.uk/blog/${input.slug}`
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    '@id': `${url}#article`,
+    headline: input.title,
+    description: input.description,
+    url,
+    datePublished: input.datePublished,
+    dateModified: input.dateModified,
+    author: {
+      '@type': 'Organization',
+      '@id': 'https://www.softplaynearme.co.uk/#organization',
+      name: 'Soft Play Near Me',
+      url: 'https://www.softplaynearme.co.uk',
+    },
+    publisher: {
+      '@id': 'https://www.softplaynearme.co.uk/#organization',
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': url,
+    },
+    ...(input.imageUrl && {
+      image: {
+        '@type': 'ImageObject',
+        url: input.imageUrl,
+        width: 1200,
+        height: 630,
+      },
+    }),
+  }
+}
+
 // ── ItemList schema builder ────────────────────────────────────────────
 
 export interface ItemListVenue {

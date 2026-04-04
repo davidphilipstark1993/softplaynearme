@@ -3,6 +3,8 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getPostBySlug, posts } from '@/lib/blogPosts'
 import { ShareButtons } from '@/components/social/ShareButtons'
+import { buildArticleSchema, buildFAQSchema } from '@/lib/schema'
+import { getBlogOgImage } from '@/lib/cityImages'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -25,7 +27,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const title = `${post.title} | Soft Play Near Me`
   const description = post.excerpt
-  const canonical = `https://softplaynearme.co.uk/blog/${post.slug}`
+  const canonical = `https://www.softplaynearme.co.uk/blog/${post.slug}`
+  const ogImage = getBlogOgImage(post.city)
 
   return {
     title,
@@ -41,13 +44,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       siteName: 'Soft Play Near Me',
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt,
-      images: ['/opengraph-image'],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: ['/opengraph-image'],
+      images: [ogImage],
     },
   }
 }
@@ -60,27 +63,34 @@ export default async function BlogPostPage({ params }: PageProps) {
     notFound()
   }
 
-  const canonical = `https://softplaynearme.co.uk/blog/${post.slug}`
+  const canonical = `https://www.softplaynearme.co.uk/blog/${post.slug}`
+  const ogImage = getBlogOgImage(post.city)
 
-  const faqJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: post.faq.map((faq) => ({
-      '@type': 'Question',
-      name: faq.q,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: faq.a,
-      },
-    })),
-  }
+  const articleSchema = buildArticleSchema({
+    title: post.title,
+    description: post.excerpt,
+    slug: post.slug,
+    datePublished: post.datePublished,
+    dateModified: post.dateModified,
+    imageUrl: ogImage,
+  })
+
+  const faqSchema = post.faq.length > 0
+    ? buildFAQSchema(post.faq.map((f) => ({ question: f.q, answer: f.a })))
+    : null
 
   return (
     <main className="min-h-screen bg-white">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd).replace(/</g, '\\u003c') }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema).replace(/</g, '\\u003c') }}
       />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema).replace(/</g, '\\u003c') }}
+        />
+      )}
 
       <article className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
         <p className="text-sm font-medium text-slate-600">Soft Play Near Me Blog</p>
