@@ -5,6 +5,7 @@ import { geocodePostcode, parseRadius, formatPostcode, isValidUKPostcode } from 
 import { SearchForm } from '@/components/search/SearchForm'
 import { SearchResults } from '@/components/search/SearchResults'
 import { SearchFilters } from './SearchFilters'
+import { ActiveFilterBar } from '@/components/search/FilterSidebar'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
@@ -15,7 +16,11 @@ interface SearchPageProps {
     lat?: string
     lng?: string
     radius?: string
-    filters?: string
+    // New structured filter params
+    age?: string        // comma-separated: under2, toddler
+    facilities?: string // comma-separated: cafe, parking, sen, parties, outdoor
+    price?: string      // single: under5 | 5to8 | over8
+    special?: string    // comma-separated: open-now, wheelchair
     sort?: string
   }>
 }
@@ -51,47 +56,50 @@ async function searchVenues(
   lat: number,
   lng: number,
   radius: number,
-  filters: string[],
+  age: string[],
+  facilities: string[],
+  price: string,
+  special: string[],
   sort: string
 ) {
   let client
   try {
     client = await getPool().connect()
 
-    const params: (number | string)[] = [lat, lng]
+    const queryParams: (number | string)[] = [lat, lng]
     const where: string[] = []
 
     const latDegPerMile = 1 / 69.0
     const lngDegPerMile = 1 / (69.0 * Math.cos((lat * Math.PI) / 180))
-    const minLat = lat - radius * latDegPerMile
-    const maxLat = lat + radius * latDegPerMile
-    const minLng = lng - radius * lngDegPerMile
-    const maxLng = lng + radius * lngDegPerMile
+    where.push(`v.lat BETWEEN ${lat - radius * latDegPerMile} AND ${lat + radius * latDegPerMile}`)
+    where.push(`v.lng BETWEEN ${lng - radius * lngDegPerMile} AND ${lng + radius * lngDegPerMile}`)
 
-    where.push(`v.lat BETWEEN ${minLat} AND ${maxLat}`)
-    where.push(`v.lng BETWEEN ${minLng} AND ${maxLng}`)
+    // Age group filters
+    if (age.includes('under2')) where.push('(v.baby_area = true OR v.has_under_1s = true)')
+    if (age.includes('toddler')) where.push('v.toddler_area = true')
 
-    for (const f of filters) {
-      if (f === 'toddler') where.push('v.toddler_area = true')
-      else if (f === 'under_1s') where.push('v.has_under_1s = true')
-      else if (f === 'parties') where.push('v.parties = true')
-      else if (f === 'sen') where.push('v.sen_friendly = true')
-      else if (f === 'outdoor') where.push('v.has_outdoor_play = true')
-      else if (f === 'cafe') where.push('v.cafe = true')
-      else if (f === 'parking') where.push('v.parking = true')
-      else if (f === 'wheelchair') where.push('v.wheelchair_access = true')
-    }
+    // Facility filters
+    if (facilities.includes('cafe')) where.push('v.cafe = true')
+    if (facilities.includes('parking')) where.push('v.parking = true')
+    if (facilities.includes('sen')) where.push('v.sen_friendly = true')
+    if (facilities.includes('parties')) where.push('v.parties = true')
+    if (facilities.includes('outdoor')) where.push('v.has_outdoor_play = true')
+
+    // Price range filters
+    if (price === 'under5') where.push('v.price_from IS NOT NULL AND v.price_from < 5')
+    else if (price === '5to8') where.push('v.price_from IS NOT NULL AND v.price_from >= 5 AND v.price_from <= 8')
+    else if (price === 'over8') where.push('v.price_from IS NOT NULL AND v.price_from > 8')
+
+    // Wheelchair (applied in SQL; open-now is post-filter)
+    if (special.includes('wheelchair')) where.push('v.wheelchair_access = true')
 
     const whereSql = where.length ? `WHERE ${where.join(' AND ')}` : ''
 
     let orderBy = 'distance ASC NULLS LAST'
-    if (sort === 'rating') {
-      orderBy = 'avg_rating DESC, review_count DESC, distance ASC'
-    } else if (sort === 'price_low') {
-      orderBy = 'v.price_from ASC NULLS LAST, distance ASC'
-    } else if (sort === 'price_high') {
-      orderBy = 'v.price_to DESC NULLS LAST, distance ASC'
-    }
+    if (sort === 'rating') orderBy = 'avg_rating DESC, review_count DESC, distance ASC'
+    else if (sort === 'price_low') orderBy = 'v.price_from ASC NULLS LAST, distance ASC'
+    else if (sort === 'price_high') orderBy = 'v.price_to DESC NULLS LAST, distance ASC'
+    else if (sort === 'name') orderBy = 'v.name ASC'
 
     const sql = `
       SELECT v.*,
@@ -119,10 +127,10 @@ async function searchVenues(
       LIMIT 50
     `
 
-    const result = await client.query(sql, params)
+    const result = await client.query(sql, queryParams)
 
     let venues = result.rows
-    if (filters.includes('open_now')) {
+    if (special.includes('open-now')) {
       const { isOpenNow } = await import('@/lib/utils')
       venues = venues.filter((v) => isOpenNow(v.opening_hours))
     }
@@ -142,11 +150,15 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   const latParam = params.lat
   const lngParam = params.lng
   const radiusParam = params.radius
-  const filtersParam = params.filters
   const sortParam = params.sort || 'distance'
 
+  // Structured filter params
+  const age = (params.age || '').split(',').filter(Boolean)
+  const facilities = (params.facilities || '').split(',').filter(Boolean)
+  const price = params.price || ''
+  const special = (params.special || '').split(',').filter(Boolean)
+
   const radius = parseRadius(radiusParam)
-  const filters = filtersParam?.split(',').filter(Boolean) || []
 
   let lat: number | null = null
   let lng: number | null = null
@@ -174,7 +186,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 
   let venues: any[] = []
   if (lat && lng) {
-    venues = await searchVenues(lat, lng, radius, filters, sortParam)
+    venues = await searchVenues(lat, lng, radius, age, facilities, price, special, sortParam)
   }
 
   return (
@@ -220,17 +232,21 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 
         {(lat && lng) || venues.length > 0 ? (
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            <aside className="lg:col-span-1 order-2 lg:order-1">
-              <div className="lg:sticky lg:top-24">
-                <SearchFilters
-                  selectedFilters={filters}
-                  selectedSort={sortParam}
-                  hasLocation={!!(lat && lng)}
-                />
+            {/* Sidebar — sticky on desktop, collapsible bar on mobile (order-1 = top on mobile) */}
+            <aside className="lg:col-span-1 order-1">
+              {/* Mobile sticky filter bar */}
+              <div className="lg:hidden sticky top-16 z-30 bg-white border border-slate-200 rounded-xl px-4 py-3 mb-4 shadow-sm">
+                <SearchFilters hasLocation={!!(lat && lng)} />
+              </div>
+              {/* Desktop sidebar */}
+              <div className="hidden lg:block sticky top-24">
+                <SearchFilters hasLocation={!!(lat && lng)} />
               </div>
             </aside>
 
-            <div className="lg:col-span-3 order-1 lg:order-2">
+            <div className="lg:col-span-3 order-2">
+              {/* Active filter chips */}
+              <ActiveFilterBar className="mb-4" />
               <SearchResults
                 venues={venues}
                 showDistance={!!(lat && lng)}

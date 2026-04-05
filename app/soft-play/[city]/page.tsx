@@ -17,10 +17,19 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { getLocationContent } from '@/lib/locationContent'
 import { LocationIntro } from '@/components/location/LocationIntro'
 import { getCityOgImage } from '@/lib/cityImages'
+import { FilterSidebar, ActiveFilterBar } from '@/components/search/FilterSidebar'
 
 interface PageProps {
   params: Promise<{ city: string }>
-  searchParams: Promise<{ filter?: string; search?: string }>
+  searchParams: Promise<{
+    filter?: string    // legacy: links to SEO sub-pages
+    search?: string
+    age?: string        // comma-separated: under2, toddler
+    facilities?: string // comma-separated: cafe, parking, sen, parties, outdoor
+    price?: string      // single: under5 | 5to8 | over8
+    special?: string    // comma-separated: open-now, wheelchair
+    sort?: string
+  }>
 }
 
 export const revalidate = 3600
@@ -34,11 +43,11 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params, searchParams }: PageProps): Promise<Metadata> {
   const { city } = await params
-  const { filter, search } = await searchParams
+  const { filter, search, age, facilities, price, special } = await searchParams
   const cityConfig = getCityBySlug(city)
 
   // Prevent indexing of filtered / searched variations
-  const noindex = !!(filter || search)
+  const noindex = !!(filter || search || age || facilities || price || special)
 
   if (!cityConfig) {
     const staticTown = getStaticTownBySlug(city)
@@ -119,12 +128,28 @@ interface Venue {
   parties?: boolean
   toddler_area?: boolean
   baby_area?: boolean
+  has_under_1s?: boolean
   sen_friendly?: boolean
+  has_outdoor_play?: boolean
+  wheelchair_access?: boolean
+  price_from?: number | null
+  price_to?: number | null
+  opening_hours?: unknown
   avg_rating?: number
   review_count?: number
   mapsUrl?: string
   notes?: string
   isStatic?: boolean
+}
+
+interface VenueFilters {
+  filter?: string    // legacy category filter
+  search?: string
+  age?: string[]
+  facilities?: string[]
+  price?: string
+  special?: string[]
+  sort?: string
 }
 
 function staticToDisplayVenue(sv: StaticVenue): Venue {
@@ -144,12 +169,18 @@ function staticToDisplayVenue(sv: StaticVenue): Venue {
     parties: sv.parties ?? false,
     toddler_area: sv.toddlerArea ?? false,
     baby_area: sv.babyArea ?? false,
+    has_under_1s: sv.babyArea ?? false, // approximate: babyArea covers under 2s
     sen_friendly: sv.senFriendly ?? false,
-    isStatic: true
+    has_outdoor_play: sv.hasOutdoorPlay ?? false,
+    wheelchair_access: sv.wheelchairAccess ?? false,
+    price_from: sv.priceFrom ?? null,
+    price_to: sv.priceTo ?? null,
+    isStatic: true,
   }
 }
 
-async function getVenues(citySlug: string, filter?: string, search?: string): Promise<Venue[]> {
+async function getVenues(citySlug: string, opts: VenueFilters = {}): Promise<Venue[]> {
+  const { filter, search, age = [], facilities = [], price = '', special = [], sort = 'rating' } = opts
   try {
     const pool = getPool()
     const client = await pool.connect()
@@ -163,30 +194,57 @@ async function getVenues(citySlug: string, filter?: string, search?: string): Pr
         LEFT JOIN reviews r ON r.venue_id = v.id AND r.approved = true
         WHERE v.city_slug = $1
       `
-      // Note: ORDER BY uses column positions to avoid ambiguity between the computed
-      // review_count alias and the real review_count column included via v.*
       const params: (string | boolean)[] = [citySlug]
 
-      if (filter) {
-        if (filter === 'cafe') query += ` AND v.cafe = true`
-        else if (filter === 'parking') query += ` AND v.parking = true`
-        else if (filter === 'parties') query += ` AND v.parties = true`
-        else if (filter === 'toddler') query += ` AND v.toddler_area = true`
-        else if (filter === 'sen') query += ` AND v.sen_friendly = true`
-      }
+      // Legacy category filter (from SEO sub-pages)
+      if (filter === 'cafe') query += ` AND v.cafe = true`
+      else if (filter === 'parking') query += ` AND v.parking = true`
+      else if (filter === 'parties') query += ` AND v.parties = true`
+      else if (filter === 'toddler') query += ` AND v.toddler_area = true`
+      else if (filter === 'sen') query += ` AND v.sen_friendly = true`
 
+      // Age group filters
+      if (age.includes('under2')) query += ` AND (v.baby_area = true OR v.has_under_1s = true)`
+      if (age.includes('toddler')) query += ` AND v.toddler_area = true`
+
+      // Facility filters
+      if (facilities.includes('cafe')) query += ` AND v.cafe = true`
+      if (facilities.includes('parking')) query += ` AND v.parking = true`
+      if (facilities.includes('sen')) query += ` AND v.sen_friendly = true`
+      if (facilities.includes('parties')) query += ` AND v.parties = true`
+      if (facilities.includes('outdoor')) query += ` AND v.has_outdoor_play = true`
+
+      // Price range filters
+      if (price === 'under5') query += ` AND v.price_from IS NOT NULL AND v.price_from < 5`
+      else if (price === '5to8') query += ` AND v.price_from IS NOT NULL AND v.price_from >= 5 AND v.price_from <= 8`
+      else if (price === 'over8') query += ` AND v.price_from IS NOT NULL AND v.price_from > 8`
+
+      // Special filters
+      if (special.includes('wheelchair')) query += ` AND v.wheelchair_access = true`
+
+      // Text search
       if (search) {
         params.push(`%${search}%`)
         query += ` AND (v.name ILIKE $${params.length} OR v.description ILIKE $${params.length})`
       }
 
-      // Use explicit column references to avoid ambiguity with v.* columns
-      query += ` GROUP BY v.id ORDER BY avg_rating DESC NULLS LAST, v.reviews_count DESC NULLS LAST, v.name ASC`
+      // Sort
+      const sortMap: Record<string, string> = {
+        rating: 'avg_rating DESC NULLS LAST, v.reviews_count DESC NULLS LAST, v.name ASC',
+        price_low: 'v.price_from ASC NULLS LAST, avg_rating DESC NULLS LAST',
+        price_high: 'v.price_to DESC NULLS LAST, avg_rating DESC NULLS LAST',
+        name: 'v.name ASC',
+      }
+      query += ` GROUP BY v.id ORDER BY ${sortMap[sort] ?? sortMap.rating}`
 
       const result = await client.query(query, params)
-      if (result.rows.length > 0) {
-        return result.rows
+
+      let venues: Venue[] = result.rows
+      if (special.includes('open-now') && venues.length > 0) {
+        const { isOpenNow } = await import('@/lib/utils')
+        venues = venues.filter((v) => isOpenNow(v.opening_hours as Record<string, unknown>))
       }
+      if (venues.length > 0) return venues
     } finally {
       client.release()
     }
@@ -194,23 +252,46 @@ async function getVenues(citySlug: string, filter?: string, search?: string): Pr
     console.error('Database unavailable, falling back to static data:', error)
   }
 
+  // Static data fallback with client-side filtering
   const staticVenues = getStaticVenuesByTown(citySlug)
   let venues = staticVenues.map(staticToDisplayVenue)
 
+  if (filter === 'toddler') venues = venues.filter((v) => v.toddler_area)
+  if (filter === 'sen') venues = venues.filter((v) => v.sen_friendly)
+  if (filter === 'cafe') venues = venues.filter((v) => v.cafe)
+  if (filter === 'parking') venues = venues.filter((v) => v.parking)
+  if (filter === 'parties') venues = venues.filter((v) => v.parties)
+
+  if (age.includes('under2')) venues = venues.filter((v) => v.baby_area || v.has_under_1s)
+  if (age.includes('toddler')) venues = venues.filter((v) => v.toddler_area)
+  if (facilities.includes('cafe')) venues = venues.filter((v) => v.cafe)
+  if (facilities.includes('parking')) venues = venues.filter((v) => v.parking)
+  if (facilities.includes('sen')) venues = venues.filter((v) => v.sen_friendly)
+  if (facilities.includes('parties')) venues = venues.filter((v) => v.parties)
+  if (facilities.includes('outdoor')) venues = venues.filter((v) => v.has_outdoor_play)
+  if (price === 'under5') venues = venues.filter((v) => v.price_from != null && v.price_from < 5)
+  if (price === '5to8') venues = venues.filter((v) => v.price_from != null && v.price_from >= 5 && v.price_from <= 8)
+  if (price === 'over8') venues = venues.filter((v) => v.price_from != null && v.price_from > 8)
+  if (special.includes('wheelchair')) venues = venues.filter((v) => v.wheelchair_access)
+
   if (search) {
-    const searchLower = search.toLowerCase()
-    venues = venues.filter(v =>
-      v.name.toLowerCase().includes(searchLower) ||
-      (v.description && v.description.toLowerCase().includes(searchLower))
+    const q = search.toLowerCase()
+    venues = venues.filter(
+      (v) =>
+        v.name.toLowerCase().includes(q) ||
+        (v.description && v.description.toLowerCase().includes(q))
     )
   }
+
+  if (sort === 'price_low') venues.sort((a, b) => (a.price_from ?? Infinity) - (b.price_from ?? Infinity))
+  else if (sort === 'name') venues.sort((a, b) => a.name.localeCompare(b.name))
 
   return venues
 }
 
 export default async function CityPage({ params, searchParams }: PageProps) {
   const { city } = await params
-  const { filter, search } = await searchParams
+  const { filter, search, age: ageParam, facilities: facilitiesParam, price, special: specialParam, sort } = await searchParams
   const cityConfig = getCityBySlug(city)
   const staticTown = getStaticTownBySlug(city)
 
@@ -222,7 +303,11 @@ export default async function CityPage({ params, searchParams }: PageProps) {
   const county = cityConfig?.county || ''
   const nearbyAreas = cityConfig?.nearbyAreas || []
 
-  const venues = await getVenues(city, filter, search)
+  const age = (ageParam || '').split(',').filter(Boolean)
+  const facilities = (facilitiesParam || '').split(',').filter(Boolean)
+  const special = (specialParam || '').split(',').filter(Boolean)
+
+  const venues = await getVenues(city, { filter, search, age, facilities, price, special, sort })
   const nearbyCities = cityConfig ? getNearbyCities(city) : []
 
   // Use content generator for rich intros and FAQs
@@ -245,8 +330,9 @@ export default async function CityPage({ params, searchParams }: PageProps) {
     `Soft Play Centres in ${displayName}`
   )
 
-  // Curated spotlight sections (only shown on unfiltered city pages)
-  const showCurated = !filter && !search && venues.length >= 4
+  // Curated spotlight sections (only shown on fully unfiltered city pages)
+  const hasActiveFilters = !!(filter || search || age.length || facilities.length || price || special.length)
+  const showCurated = !hasActiveFilters && venues.length >= 4
   const toddlerVenues = showCurated ? venues.filter(v => v.toddler_area).slice(0, 4) : []
   const topRatedVenues = showCurated
     ? [...venues].filter(v => v.avg_rating && Number(v.avg_rating) > 0).sort((a, b) => Number(b.avg_rating || 0) - Number(a.avg_rating || 0)).slice(0, 4)
@@ -301,6 +387,24 @@ export default async function CityPage({ params, searchParams }: PageProps) {
 
         {/* Main Content */}
         <main className="max-w-7xl mx-auto px-4 py-8">
+          <div className="lg:grid lg:grid-cols-4 lg:gap-8">
+
+            {/* Filter sidebar — sticky on desktop, collapsible on mobile */}
+            <aside className="lg:col-span-1 mb-6 lg:mb-0">
+              {/* Mobile sticky filter bar */}
+              <div className="lg:hidden sticky top-[104px] z-30 bg-white border border-slate-200 rounded-xl px-4 py-3 mb-4 shadow-sm">
+                <FilterSidebar showSort />
+              </div>
+              {/* Desktop sidebar */}
+              <div className="hidden lg:block sticky top-24">
+                <FilterSidebar showSort />
+              </div>
+            </aside>
+
+            {/* Venue content */}
+            <div className="lg:col-span-3">
+              {/* Active filter chips */}
+              <ActiveFilterBar className="mb-4" />
 
           {/* Curated Spotlight Sections */}
           {showCurated && (
@@ -598,6 +702,9 @@ export default async function CityPage({ params, searchParams }: PageProps) {
               </div>
             </div>
           )}
+
+            </div> {/* end venue content col */}
+          </div> {/* end lg:grid */}
         </main>
 
         <Footer />
