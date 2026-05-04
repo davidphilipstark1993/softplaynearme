@@ -452,7 +452,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const county = cityConfig?.county || ''
 
   // Use stored overrides when available, fall back to generated copy
-  const title = venue.seo_title || `${venue.name} | Soft Play in ${cityName}`
+  const title = venue.seo_title || `${venue.name} – Soft Play in ${cityName} | Hours & Prices`
   const description =
     venue.meta_description ||
     venue.description ||

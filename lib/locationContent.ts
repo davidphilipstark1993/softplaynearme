@@ -286,6 +286,7 @@ const FAQ_TEMPLATES: FAQTemplate[] = [
 // ── Meta title/description templates ───────────────────────────────────
 
 const META_TITLES: string[] = [
+  '{name} Soft Play Centres | Prices, Reviews & Opening Times',
   'Soft Play in {name} | Best Indoor Play Centres ({county})',
   'Soft Play Centres in {name} | Find Indoor Play Near You',
   '{name} Soft Play | Compare Indoor Play Venues & Prices',
@@ -411,7 +412,7 @@ export function getLocationContent(
   return {
     ...generated,
     h1: `Soft Play in ${name}`,
-    metaTitle: `Soft play in ${name} - indoor play centres near you`,
-    metaDescription: `Find soft play in ${name}. Compare indoor play centres near you, including toddler zones, parties, SEN-friendly sessions, opening times, and directions.`,
+    metaTitle: `${name} Soft Play Centres | Prices, Reviews & Opening Times`,
+    metaDescription: `Find soft play centres in ${name}. Compare venues, check opening times and prices, discover toddler areas, birthday parties, and SEN-friendly sessions near you.`,
   }
 }

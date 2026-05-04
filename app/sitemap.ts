@@ -138,7 +138,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       if (!addedVenueSlugs.has(key)) {
         sitemap.push({
           url: `${baseUrl}/soft-play/${townSlug}/${venue.slug}`,
-          lastModified: new Date(),
+          // Use the venue's last-verified date so Google knows when data changed
+          lastModified: venue.lastVerified ? new Date(venue.lastVerified) : new Date('2026-02-18'),
           changeFrequency: 'weekly',
           priority: 0.7,
         })

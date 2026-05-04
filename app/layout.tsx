@@ -74,7 +74,18 @@ const organizationSchema = {
     "Children's Activities",
     "Birthday Party Venues",
     "Toddler Play Areas"
-  ]
+  ],
+  sameAs: [
+    "https://www.facebook.com/softplaynearme",
+    "https://www.instagram.com/softplaynearme",
+  ],
+  contactPoint: {
+    "@type": "ContactPoint",
+    email: "info@softplaynearme.co.uk",
+    contactType: "customer support",
+    areaServed: "GB",
+    availableLanguage: "English",
+  },
 };
 
 // WebSite schema for search
