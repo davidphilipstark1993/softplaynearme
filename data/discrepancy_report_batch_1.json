@@ -1,0 +1,393 @@
+{
+  "batch": 1,
+  "town": "Aberdeen",
+  "generated": "2026-04-18",
+  "centres": [
+    {
+      "id": 489,
+      "name": "AirHop Adventure & Trampoline Park Aberdeen",
+      "status": "OPEN",
+      "discrepancies": [
+        {
+          "field": "address",
+          "current": "Craigshaw Rd, Closed, · Opens 3:30 pm Thu",
+          "suggested": "Craigshaw Rd, Aberdeen, AB12 3AP",
+          "source": "Google Maps / airhop.co.uk",
+          "source2": "softplayfind.com listing",
+          "confidence": "HIGH",
+          "action": "UPDATE"
+        },
+        {
+          "field": "openingHoursText",
+          "current": "Mon 10 am – 1:30 pm | 3:30 – 6:30 pm Tue &#8211; Thu 3; Fri 10am – 8pm Sat 9am – 8pm Sun 9am – 5pm School & Public Holidays (Peak) Mon &#8; Thu 9am – 7pm Fri &#8211; Sat 9am – 8pm Sun 9am – 5pm View timetable Special Offers Two For T; ...",
+          "suggested": "Mon: 10am–1:30pm, 3:30–7pm (term time); Tue–Wed: 3:30–6:30pm (term time); Thu: 10:30am–1:30pm, 3:30–6:30pm (term time); Fri: 10am–8pm; Sat: 9am–8pm; Sun: 9am–5pm. School/Public Holidays: Mon–Thu 9am–7pm, Fri–Sat 9am–8pm, Sun 9am–5pm.",
+          "source": "airhop.co.uk timetable page",
+          "source2": "trip.com AirHop Aberdeen listing 2026",
+          "confidence": "HIGH",
+          "action": "UPDATE"
+        },
+        {
+          "field": "description",
+          "current": "AirHop Adventure & Trampoline Park Aberdeen is a soft play venue in aberdeen. Features include cafe, on-site parking, birthday parties, toddler area, SEN-friendly sessions. Prices from £ 53.00, £65.00, £14.45, £28.95, £19.99.",
+          "suggested": "AirHop is primarily a trampoline/inflatable adventure park (formerly Jump In) that includes a dedicated soft play area for children aged 6 and under. It is not purely a soft play venue.",
+          "source": "airhop.co.uk",
+          "source2": "kidsgoplay.co.uk",
+          "confidence": "HIGH",
+          "action": "REVIEW"
+        },
+        {
+          "field": "pricingHint",
+          "current": "£ 53.00, £65.00, £14.45, £28.95, £19.99",
+          "suggested": "Pricing reflects party packages and seasonal passes, not standard admission. Verify at airhop.co.uk/adventure-trampoline-park-aberdeen/prices-offers/",
+          "source": "airhop.co.uk",
+          "source2": null,
+          "confidence": "LOW",
+          "action": "REVIEW"
+        }
+      ],
+      "notes": "Venue open and active. Address contains Google Maps snippet artefacts. HTML entities (&#8211;, &#8;) in openingHoursText must be replaced. This is a trampoline/adventure park with a soft play section — listing it purely as soft play is misleading. Phone 03302233333 is a national call centre number, likely correct."
+    },
+    {
+      "id": 494,
+      "name": "BECS - Inclusive Soft Play Centre",
+      "status": "CLOSED",
+      "discrepancies": [
+        {
+          "field": "status",
+          "current": "Listed as active venue",
+          "suggested": "PERMANENTLY CLOSED — premises at Blackhall Industrial Estate closed 30 September 2024 (end of tenancy). No confirmed new location as of April 2026.",
+          "source": "grampianonline.co.uk: 'Inclusive play charity BECS on the lookout for new premises'",
+          "source2": "pressandjournal.co.uk: 'Fly Cup unveils plans to take over former Inverurie soft play centre'",
+          "confidence": "HIGH",
+          "action": "REMOVE_OR_MARK_CLOSED"
+        },
+        {
+          "field": "address",
+          "current": "Blackhall Industrial Estate, Burghmuir Cir, nan, nan",
+          "suggested": "Burghmuir Pl, Blackhall Industrial Estate, Inverurie, Aberdeenshire AB51 4FS (former address — venue closed)",
+          "source": "find-open.co.uk",
+          "source2": "cylex-uk.co.uk",
+          "confidence": "HIGH",
+          "action": "UPDATE"
+        },
+        {
+          "field": "postcode",
+          "current": "",
+          "suggested": "AB51 4FS (former postcode — venue closed)",
+          "source": "find-open.co.uk",
+          "source2": "cylex-uk.co.uk",
+          "confidence": "HIGH",
+          "action": "UPDATE"
+        },
+        {
+          "field": "website",
+          "current": "https://nan",
+          "suggested": "https://www.becsplaycentre.org/ (site offline — consistent with closure)",
+          "source": "Google Search",
+          "source2": "WebFetch returned ECONNREFUSED",
+          "confidence": "HIGH",
+          "action": "UPDATE"
+        },
+        {
+          "field": "town",
+          "current": "Aberdeen",
+          "suggested": "Inverurie",
+          "source": "grampianonline.co.uk, find-open.co.uk",
+          "source2": "cylex-uk.co.uk",
+          "confidence": "HIGH",
+          "action": "UPDATE"
+        }
+      ],
+      "notes": "BECS closed 30 September 2024 after losing tenancy. The space was taken over by Fly Cup Catering. Charity was searching for new Inverurie premises but no reopening confirmed. Address contains 'nan' artefacts. website field contains literal 'https://nan'. Venue is in Inverurie (Aberdeenshire), not Aberdeen city."
+    },
+    {
+      "id": 488,
+      "name": "Codona's",
+      "status": "OPEN",
+      "discrepancies": [
+        {
+          "field": "address",
+          "current": "Beach Blvd, Old-school rides & indoor arcade games, Open, · Closes 11 pm",
+          "suggested": "Beach Blvd, Aberdeen, AB24 5ED",
+          "source": "codonas.com",
+          "source2": "visitscotland.com",
+          "confidence": "HIGH",
+          "action": "UPDATE"
+        },
+        {
+          "field": "description",
+          "current": "Codona's is a soft play venue in aberdeen. Features include cafe, birthday parties, outdoor play. Prices from £5.",
+          "suggested": "Codona's is an amusement park, not a soft play venue. The soft play element (Smuggler's Cove) is a separate attraction within the complex and is listed separately as id 484. Main park features rides, arcade, bowling, laser tag, go-karts, bumper boats.",
+          "source": "codonas.com/amusement-park",
+          "source2": "wikipedia.org Codona's article",
+          "confidence": "HIGH",
+          "action": "REVIEW"
+        },
+        {
+          "field": "openingHoursText",
+          "current": "Monday: 10:00 AM – 11:00 PM; Tuesday: 10:00 AM – 11:00 PM; Wednesday: 10:00 AM – 11:00 PM; Thursday: 10:00 AM – 11:00 PM; Friday: 10:00 AM – 12:00 AM; Saturday: 10:00 AM – 12:00 AM; Sunday: 10:00 AM – 11:00 PM",
+          "suggested": "Amusement Park: Mon–Sun 12pm–6pm (school holidays only); Sat–Sun 12pm–6pm (outside school holidays). Reopened 28 March 2026.",
+          "source": "codonas.com/info",
+          "source2": "visitabdn.com",
+          "confidence": "HIGH",
+          "action": "UPDATE"
+        }
+      ],
+      "notes": "Address contains Google Maps snippet artefacts. Codona's is an amusement park — Smuggler's Cove (id 484) is the soft play element and is listed separately. These two listings may be duplicates or need differentiating. Opening hours in repo are significantly wrong — park operates seasonally with limited hours."
+    },
+    {
+      "id": 495,
+      "name": "Daisy Play Softplay",
+      "status": "UNKNOWN",
+      "discrepancies": [
+        {
+          "field": "status",
+          "current": "Listed as venue with fixed address",
+          "suggested": "REMOVE — this is a mobile soft play hire service, not a fixed venue. Delivers equipment to customer locations across Aberdeen & Shire.",
+          "source": "Facebook page (Daisy Play Softplay — Aberdeen): 'Neutral softplay hire'",
+          "source2": "Instagram @daisyplaysoftplay: 'Neutral softplay hire Aberdeen & Shire area'",
+          "confidence": "HIGH",
+          "action": "REMOVE_OR_MARK_CLOSED"
+        },
+        {
+          "field": "address",
+          "current": "·",
+          "suggested": "N/A — no fixed premises (mobile hire service)",
+          "source": "Facebook / Instagram",
+          "source2": null,
+          "confidence": "HIGH",
+          "action": "REVIEW"
+        },
+        {
+          "field": "website",
+          "current": "https://nan",
+          "suggested": "No standalone website. Contact: Instagram @daisyplaysoftplay or daisyplaysoftplay@outlook.com",
+          "source": "Instagram @daisyplaysoftplay",
+          "source2": null,
+          "confidence": "HIGH",
+          "action": "UPDATE"
+        }
+      ],
+      "notes": "Mobile/hire service only — hires out neutral soft play equipment for parties and events. Should not be listed in a fixed-venue directory. Address field is a stray '·' scraping artefact. Website is 'https://nan'. Google Place ID coordinates (57.22, -2.78) appear to point to a different location outside Aberdeen — possible data entry error."
+    },
+    {
+      "id": 490,
+      "name": "Fuzzy Ed's Funhouse Aberdeen",
+      "status": "OPEN",
+      "discrepancies": [
+        {
+          "field": "address",
+          "current": "23 N Anderson Dr, Closed, · Opens 11 am Thu, nan",
+          "suggested": "23 North Anderson Drive, Aberdeen, AB15 6DW (located within The Cocket Hat / Toby Carvery)",
+          "source": "softplayfinder.co.uk",
+          "source2": "childrensleisure.co.uk, Google Search",
+          "confidence": "HIGH",
+          "action": "UPDATE"
+        },
+        {
+          "field": "postcode",
+          "current": "",
+          "suggested": "AB15 6DW",
+          "source": "softplayfinder.co.uk",
+          "source2": "Google Search",
+          "confidence": "HIGH",
+          "action": "UPDATE"
+        },
+        {
+          "field": "phone",
+          "current": "",
+          "suggested": "01224 695684 (The Cocket Hat / Toby Carvery venue phone — verify this is also the Fuzzy Ed's contact)",
+          "source": "childrensleisure.co.uk",
+          "source2": null,
+          "confidence": "MEDIUM",
+          "action": "REVIEW"
+        },
+        {
+          "field": "website",
+          "current": "",
+          "suggested": "https://www.fuzzyeds.co.uk/",
+          "source": "fuzzyeds.co.uk",
+          "source2": "Google Search top result",
+          "confidence": "HIGH",
+          "action": "UPDATE"
+        }
+      ],
+      "notes": "Venue is open. Located inside The Cocket Hat (Toby Carvery) on North Anderson Drive. Address contains Google Maps snippet artefacts. Postcode and website both missing and should be added. Hours in repo (Mon–Sun 11am–7pm) appear plausible but could not be confirmed (fuzzyeds.co.uk returned 403)."
+    },
+    {
+      "id": 487,
+      "name": "Innoflate Aberdeen",
+      "status": "OPEN",
+      "discrepancies": [
+        {
+          "field": "address",
+          "current": "1A Beach Esplanade, Closed, · Opens 3 pm Thu",
+          "suggested": "1A Beach Esplanade, Aberdeen, AB24 5NS",
+          "source": "innoflate.co.uk/aberdeen/",
+          "source2": "softplayfind.com",
+          "confidence": "HIGH",
+          "action": "UPDATE"
+        },
+        {
+          "field": "description",
+          "current": "Innoflate Aberdeen is a soft play venue in aberdeen. Features include cafe, on-site parking, birthday parties, toddler area, SEN-friendly sessions.",
+          "suggested": "Scotland's first indoor inflatable theme park — not primarily soft play. Features inflatable slides, obstacle courses, climbing wall, bounce zones, and a dedicated Innotots area (0–5 years). Also offers Nerf Wars, Disco Nights, and Relaxed Sessions.",
+          "source": "innoflate.co.uk: 'Scotland's 1st Inflatable Theme Park'",
+          "source2": "pressandjournal.co.uk",
+          "confidence": "HIGH",
+          "action": "REVIEW"
+        },
+        {
+          "field": "openingHoursText",
+          "current": "Monday: 3:00 – 7:00 PM; Tuesday: Closed; Wednesday: Closed; Thursday: 3:00 – 7:00 PM; Friday: 1:00 – 8:00 PM; Saturday: 9:30 AM – 8:00 PM; Sunday: 9:30 AM – 6:00 PM",
+          "suggested": "Mon: 10am–6pm; Tue: Closed; Wed: Closed; Thu: 10am–6pm; Fri: 10am–8pm; Sat: 9:30am–8pm; Sun: 9:30am–6pm (Mon/Thu open earlier than repo shows — verify against official timetable as sessions are time-based)",
+          "source": "dayoutwiththekids.co.uk, top-rated.online (2026)",
+          "source2": "chamberofcommerce.uk listing",
+          "confidence": "MEDIUM",
+          "action": "REVIEW"
+        }
+      ],
+      "notes": "Venue open and actively taking bookings. Address contains Google Maps snippet artefacts. Inflatable theme park with toddler soft play zone — not a primary soft play venue. Mon/Thu opening times in repo (3pm) differ from third-party sources (10am) — check official timetable. Website should use https://."
+    },
+    {
+      "id": 486,
+      "name": "Playtown Inverurie",
+      "status": "OPEN",
+      "discrepancies": [
+        {
+          "field": "address",
+          "current": "nan, Closed, · Opens 9:30 am Thu",
+          "suggested": "18 High Street, Inverurie, Aberdeenshire, AB51 3QJ",
+          "source": "playtowninverurie.com",
+          "source2": "softplayfind.com",
+          "confidence": "HIGH",
+          "action": "UPDATE"
+        },
+        {
+          "field": "postcode",
+          "current": "AB51 3XQ",
+          "suggested": "AB51 3QJ",
+          "source": "softplayfind.com listing",
+          "source2": "playtowninverurie.com contact page",
+          "confidence": "HIGH",
+          "action": "UPDATE"
+        },
+        {
+          "field": "town",
+          "current": "Aberdeen",
+          "suggested": "Inverurie",
+          "source": "playtowninverurie.com",
+          "source2": "softplayfind.com",
+          "confidence": "HIGH",
+          "action": "UPDATE"
+        },
+        {
+          "field": "openingHoursText",
+          "current": "Tuesday 9:30am - 11am 11:30am - 1pm 1:; Thursday 9:30am - 11am 11:30am - 1pm 1; Saturday 9:30am - 11am 11:30am - 1pm 1:30pm - 3pm 3:30pm - 5pm Sunday 9:30am - 11am 11:30am - 1pm 1:30",
+          "suggested": "Mon–Tue, Thu–Sun: 4 sessions daily (9:30–11am, 11:30am–1pm, 1:30–3pm, 3:30–5pm). Wed: 2 sessions (9:30–11am, 11:30am–1pm — afternoons closed during term time). Each session is 90 minutes. Monday is missing from repo hours.",
+          "source": "playtowninverurie.com",
+          "source2": "softplayfind.com",
+          "confidence": "HIGH",
+          "action": "UPDATE"
+        }
+      ],
+      "notes": "Venue open. Address starts with 'nan' (pandas artefact). Postcode in repo (AB51 3XQ) is a typo — confirmed AB51 3QJ. Town is Inverurie, not Aberdeen. Opening hours truncated and incomplete — Monday is open but missing from repo."
+    },
+    {
+      "id": 491,
+      "name": "Portlethen Playpark",
+      "status": "UNKNOWN",
+      "discrepancies": [
+        {
+          "field": "address",
+          "current": "Devenick Dr, Open 24 hours, nan, nan",
+          "suggested": "Devenick Drive, Portlethen, Aberdeenshire AB12",
+          "source": "Google Maps / dayoutwiththekids.co.uk",
+          "source2": "onthemarket.com (confirms Devenick Drive is in Portlethen AB12)",
+          "confidence": "MEDIUM",
+          "action": "UPDATE"
+        },
+        {
+          "field": "category_suitability",
+          "current": "Listed as indoor soft play venue",
+          "suggested": "REVIEW — this appears to be a free outdoor council-maintained children's playpark. 'Open 24 hours' is consistent with an unstaffed outdoor park, not a commercial soft play centre.",
+          "source": "Aberdeenshire Council parks listings",
+          "source2": null,
+          "confidence": "MEDIUM",
+          "action": "REVIEW"
+        }
+      ],
+      "notes": "This is likely a free outdoor council-maintained playpark, not a commercial indoor soft play venue. Address contains 'nan, nan' artefacts. No postcode, phone, website, or description. Should be reviewed for suitability in the directory. Town may also be wrong: Portlethen is Aberdeenshire, not Aberdeen city."
+    },
+    {
+      "id": 484,
+      "name": "Smuggler's Cove",
+      "status": "OPEN",
+      "discrepancies": [
+        {
+          "field": "address",
+          "current": "Beach Blvd, Closed, · Opens 10 am Thu",
+          "suggested": "Beach Blvd, Aberdeen, AB24 5ED",
+          "source": "codonas.com/smugglers-cove",
+          "source2": "visitscotland.com",
+          "confidence": "HIGH",
+          "action": "UPDATE"
+        },
+        {
+          "field": "openingHoursText",
+          "current": "Monday: 10:00 AM – 6:00 PM; Tuesday: 10:00 AM – 6:00 PM; Wednesday: 10:00 AM – 6:00 PM; Thursday: 10:00 AM – 6:00 PM; Friday: 10:00 AM – 6:00 PM; Saturday: 10:00 AM – 12:00 AM; Sunday: 10:00 AM – 11:00 PM",
+          "suggested": "Mon–Fri: 10am–5pm; Sat–Sun: 10am–6pm (Saturday midnight and Sunday 11pm close in repo are implausible for a children's venue)",
+          "source": "codonas.com/info",
+          "source2": null,
+          "confidence": "HIGH",
+          "action": "UPDATE"
+        },
+        {
+          "field": "hasOutdoorPlay",
+          "current": true,
+          "suggested": "Confirmed correct — 'Tree Huts Outdoor Play' listed on codonas.com/smugglers-cove",
+          "source": "codonas.com/smugglers-cove",
+          "source2": null,
+          "confidence": "HIGH",
+          "action": "NO_CHANGE"
+        }
+      ],
+      "notes": "Venue open. Address contains Google Maps snippet artefacts. Saturday hours (10am–midnight) and Sunday (10am–11pm) in repo are implausible for a children's soft play — official site shows closes at 5–6pm. Shares address/phone with Codona's (id 488) but is a distinct soft play attraction. Outdoor play (Tree Huts) confirmed."
+    },
+    {
+      "id": 483,
+      "name": "The Den & The Glen",
+      "status": "OPEN",
+      "discrepancies": [
+        {
+          "field": "address",
+          "current": "S Deeside Rd, Park peppered with fairytale characters, Closed, · Opens 9:30 am Thu",
+          "suggested": "South Deeside Road, Maryculter, Aberdeen, AB12 5FT",
+          "source": "denandtheglen.co.uk",
+          "source2": "livelifeaberdeenshire.org.uk",
+          "confidence": "HIGH",
+          "action": "UPDATE"
+        },
+        {
+          "field": "openingHoursText",
+          "current": "Monday: 9:30 AM – 5:30 PM; Tuesday: 9:30 AM – 5:30 PM; Wednesday: 9:30 AM – 5:30 PM; Thursday: 9:30 AM – 5:30 PM; Friday: 9:30 AM – 5:30 PM; Saturday: 9:30 AM – 5:30 PM; Sunday: 9:30 AM – 5:30 PM",
+          "suggested": "Daily 9:30am–5:30pm (last entry 4pm) — hours appear correct, last entry note missing.",
+          "source": "denandtheglen.co.uk",
+          "source2": "evendo.com",
+          "confidence": "HIGH",
+          "action": "NO_CHANGE"
+        },
+        {
+          "field": "description",
+          "current": "The Den & The Glen is a soft play venue in aberdeen. Features include cafe, birthday parties, baby area, outdoor play.",
+          "suggested": "The Den & The Glen is an indoor soft play centre (The Den) combined with an extensive outdoor fairytale-themed park (The Glen) across 28 acres in Maryculter, near Aberdeen. 'in aberdeen' should be 'near Aberdeen / in Maryculter'.",
+          "source": "denandtheglen.co.uk",
+          "source2": "evendo.com, trip.com",
+          "confidence": "MEDIUM",
+          "action": "REVIEW"
+        }
+      ],
+      "notes": "Venue open. Address contains Google Maps snippet artefacts — cleaned address confirmed by multiple sources. Postcode AB12 5FT is correct. Hours (9:30am–5:30pm daily) are accurate — only addition needed is 'last entry 4pm'. In Maryculter (Aberdeenshire) not Aberdeen city. Prices for reference: Glen adults £2.95, children (1–3) £3.95, children (4+) £4.95; Den entry free with Glen ticket or £3.95–£4.95 standalone."
+    }
+  ]
+}
