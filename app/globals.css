@@ -3,6 +3,7 @@
 
 @layer base {
   :root {
+    --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;

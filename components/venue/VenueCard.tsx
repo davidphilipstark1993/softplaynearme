@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { shimmerDataURL } from '@/lib/imageUtils'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -113,6 +114,8 @@ export function VenueCard({
                 fill
                 className="object-cover"
                 sizes="(max-width: 640px) 100vw, 192px"
+                placeholder="blur"
+                blurDataURL={shimmerDataURL(192, 160)}
               />
             ) : (
               <div className="absolute inset-0 flex items-center justify-center">
@@ -220,6 +223,8 @@ export function VenueCard({
             fill
             className="object-cover group-hover:scale-105 transition-transform duration-500"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            placeholder="blur"
+            blurDataURL={shimmerDataURL(400, 160)}
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">

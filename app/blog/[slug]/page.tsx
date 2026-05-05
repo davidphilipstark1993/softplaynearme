@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getPostBySlug, posts } from '@/lib/blogPosts'
+import { getPostBySlug, getRelatedPosts, posts } from '@/lib/blogPosts'
 import { ShareButtons } from '@/components/social/ShareButtons'
 import { buildArticleSchema, buildFAQSchema } from '@/lib/schema'
 import { getBlogOgImage } from '@/lib/cityImages'
@@ -65,6 +65,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   const canonical = `https://www.softplaynearme.co.uk/blog/${post.slug}`
   const ogImage = getBlogOgImage(post.city)
+  const relatedPosts = getRelatedPosts(post.slug, post.city, 3)
 
   const articleSchema = buildArticleSchema({
     title: post.title,
@@ -121,6 +122,24 @@ export default async function BlogPostPage({ params }: PageProps) {
         <div className="mt-10 border-t border-slate-200 pt-6">
           <ShareButtons url={canonical} title={post.title} />
         </div>
+
+        {relatedPosts.length > 0 && (
+          <section className="mt-12 border-t border-slate-200 pt-8">
+            <h2 className="text-xl font-semibold text-slate-900 mb-5">More Parent Guides</h2>
+            <div className="space-y-4">
+              {relatedPosts.map((related) => (
+                <Link
+                  key={related.slug}
+                  href={`/blog/${related.slug}`}
+                  className="group flex flex-col gap-1 rounded-lg border border-slate-200 p-4 hover:border-purple-300 hover:bg-purple-50 transition-colors"
+                >
+                  <span className="text-sm font-semibold text-slate-900 group-hover:text-purple-700">{related.title}</span>
+                  <span className="text-sm text-slate-500 line-clamp-1">{related.excerpt}</span>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
 
         <div className="mt-6">
           <Link href="/blog" className="text-sm font-medium text-purple-700 hover:underline">

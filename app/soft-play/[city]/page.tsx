@@ -15,6 +15,7 @@ import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 import { buildBreadcrumbSchema, buildFAQSchema, buildItemListSchema } from '@/lib/schema'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { getLocationContent } from '@/lib/locationContent'
+import { getPostForCity } from '@/lib/blogPosts'
 import { LocationIntro } from '@/components/location/LocationIntro'
 import { getCityOgImage } from '@/lib/cityImages'
 import { FilterSidebar, ActiveFilterBar } from '@/components/search/FilterSidebar'
@@ -337,6 +338,8 @@ export default async function CityPage({ params, searchParams }: PageProps) {
   const topRatedVenues = showCurated
     ? [...venues].filter(v => v.avg_rating && Number(v.avg_rating) > 0).sort((a, b) => Number(b.avg_rating || 0) - Number(a.avg_rating || 0)).slice(0, 4)
     : []
+  const cityBlogPost = getPostForCity(displayName)
+
   const mostPopularVenues = showCurated
     ? [...venues].filter(v => v.review_count && Number(v.review_count) > 0).sort((a, b) => Number(b.review_count || 0) - Number(a.review_count || 0)).slice(0, 4)
     : []
@@ -642,6 +645,23 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                   </div>
                 </Card>
               )})}
+            </div>
+          )}
+
+          {/* Blog post link — shown when a guide exists for this city */}
+          {cityBlogPost && (
+            <div className="mt-12">
+              <Link
+                href={`/blog/${cityBlogPost.slug}`}
+                className="group flex items-start gap-4 rounded-xl border border-purple-200 bg-purple-50 p-5 hover:bg-purple-100 transition-colors"
+              >
+                <div className="flex-1">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-purple-600 mb-1">Parent Guide</p>
+                  <h2 className="text-base font-bold text-slate-900 group-hover:text-purple-700 leading-snug">{cityBlogPost.title}</h2>
+                  <p className="mt-1 text-sm text-slate-600 line-clamp-2">{cityBlogPost.excerpt}</p>
+                </div>
+                <span className="text-purple-500 mt-1 shrink-0">→</span>
+              </Link>
             </div>
           )}
 

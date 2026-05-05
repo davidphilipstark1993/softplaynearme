@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
+import { shimmerDataURL } from '@/lib/imageUtils'
 
 interface Slide {
   src: string
@@ -58,6 +59,8 @@ export function HeroCarousel() {
               index === slideIndex ? 'opacity-100' : 'opacity-0'
             )}
             sizes="(max-width: 768px) 100vw, 1200px"
+            placeholder="blur"
+            blurDataURL={shimmerDataURL(1600, 640)}
           />
         ))}
         <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent" />

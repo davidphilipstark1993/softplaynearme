@@ -5971,3 +5971,16 @@ export const blogPosts: BlogPost[] = posts
 export function getPostBySlug(slug: string): BlogPost | undefined {
   return posts.find((post) => post.slug === slug)
 }
+
+/** Returns the blog post for a given city name (case-insensitive), if one exists. */
+export function getPostForCity(city: string): BlogPost | undefined {
+  return posts.find((post) => post.city.toLowerCase() === city.toLowerCase())
+}
+
+/** Returns up to `limit` other posts (excluding the current slug), preferring same city. */
+export function getRelatedPosts(currentSlug: string, city: string, limit = 3): BlogPost[] {
+  const others = posts.filter((p) => p.slug !== currentSlug)
+  const sameCity = others.filter((p) => p.city.toLowerCase() === city.toLowerCase())
+  const different = others.filter((p) => p.city.toLowerCase() !== city.toLowerCase())
+  return [...sameCity, ...different].slice(0, limit)
+}

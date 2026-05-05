@@ -1,6 +1,43 @@
 import Link from 'next/link'
 import { cities } from '@/lib/venues'
 
+const cityDirectory: { region: string; cities: { name: string; slug: string }[] }[] = [
+  { region: 'Yorkshire', cities: [
+    { name: 'Hull', slug: 'hull' }, { name: 'Leeds', slug: 'leeds' }, { name: 'Sheffield', slug: 'sheffield' },
+    { name: 'York', slug: 'york' }, { name: 'Bradford', slug: 'bradford' }, { name: 'Doncaster', slug: 'doncaster' },
+    { name: 'Barnsley', slug: 'barnsley' }, { name: 'Huddersfield', slug: 'huddersfield' },
+    { name: 'Halifax', slug: 'halifax' }, { name: 'Beverley', slug: 'beverley' }, { name: 'Bridlington', slug: 'bridlington' },
+  ]},
+  { region: 'North West', cities: [
+    { name: 'Manchester', slug: 'manchester' }, { name: 'Liverpool', slug: 'liverpool' },
+    { name: 'Blackpool', slug: 'blackpool' }, { name: 'Bolton', slug: 'bolton' },
+  ]},
+  { region: 'North East', cities: [
+    { name: 'Newcastle', slug: 'newcastle' }, { name: 'Sunderland', slug: 'sunderland' },
+  ]},
+  { region: 'Scotland', cities: [
+    { name: 'Edinburgh', slug: 'edinburgh' }, { name: 'Glasgow', slug: 'glasgow' },
+    { name: 'Aberdeen', slug: 'aberdeen' }, { name: 'Inverness', slug: 'inverness' },
+  ]},
+  { region: 'Midlands', cities: [
+    { name: 'Birmingham', slug: 'birmingham' }, { name: 'Nottingham', slug: 'nottingham' },
+    { name: 'Leicester', slug: 'leicester' }, { name: 'Stoke-on-Trent', slug: 'stoke-on-trent' },
+    { name: 'Lincoln', slug: 'lincoln' },
+  ]},
+  { region: 'East of England', cities: [
+    { name: 'Norwich', slug: 'norwich' }, { name: 'Ipswich', slug: 'ipswich' },
+    { name: 'Colchester', slug: 'colchester' }, { name: 'Southend-on-Sea', slug: 'southend-on-sea' },
+  ]},
+  { region: 'London & South East', cities: [
+    { name: 'London', slug: 'london' }, { name: 'Brighton', slug: 'brighton' },
+    { name: 'Portsmouth', slug: 'portsmouth' }, { name: 'Hastings', slug: 'hastings' },
+  ]},
+  { region: 'South West & Wales', cities: [
+    { name: 'Bristol', slug: 'bristol' }, { name: 'Bournemouth', slug: 'bournemouth' },
+    { name: 'Cardiff', slug: 'cardiff' }, { name: 'Swansea', slug: 'swansea' },
+  ]},
+]
+
 function FacebookIcon() {
   return (
     <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor" aria-hidden="true">
@@ -126,7 +163,27 @@ export function Footer({ minimal = false }: FooterProps) {
             </div>
           </div>
         </div>
-        <div className="border-t border-slate-800 mt-8 pt-8 text-center text-sm">
+        <div className="border-t border-slate-800 mt-8 pt-8">
+          <h4 className="font-semibold text-white mb-5 text-sm">Soft Play Centres by Region</h4>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-6 gap-y-6">
+            {cityDirectory.map((group) => (
+              <div key={group.region}>
+                <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 mb-2">{group.region}</p>
+                <ul className="space-y-1">
+                  {group.cities.map((c) => (
+                    <li key={c.slug}>
+                      <Link href={`/soft-play/${c.slug}`} className="text-xs hover:text-white transition-colors">
+                        Soft Play in {c.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="border-t border-slate-800 mt-8 pt-6 text-center text-sm">
           <p>&copy; {new Date().getFullYear()} Soft Play Near Me. All rights reserved.</p>
         </div>
       </div>
