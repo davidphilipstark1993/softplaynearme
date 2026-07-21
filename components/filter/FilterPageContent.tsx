@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -10,7 +11,7 @@ import { getPool } from '@/lib/pool'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
-import { buildBreadcrumbSchema, buildFAQSchema } from '@/lib/schema'
+import { buildBreadcrumbSchema, buildFAQSchema, buildItemListSchema, buildCollectionPageSchema } from '@/lib/schema'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { isOpenNow } from '@/lib/utils'
 import { getFilterContent, type FilterSlug } from '@/lib/filterContent'
@@ -127,6 +128,23 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
     { name: filterConfig.name, url: canonicalUrl },
   ])
   const faqSchema = buildFAQSchema(faqs)
+  const itemListSchema = buildItemListSchema(
+    venues.map((v) => ({
+      name: v.name,
+      slug: v.slug,
+      citySlug,
+      address: v.address,
+      postcode: v.postcode,
+      avgRating: v.avg_rating ? Number(v.avg_rating) : undefined,
+      reviewCount: v.review_count ? Number(v.review_count) : undefined,
+    })),
+    `${filterConfig.name} in ${cityName}`
+  )
+  const collectionPageSchema = buildCollectionPageSchema({
+    name: h1,
+    description: intro,
+    url: canonicalUrl,
+  })
 
   const primaryBadgeIcon = filterSlug === 'toddler'
     ? <Baby className="w-3 h-3" />
@@ -140,6 +158,8 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
     <>
       <JsonLd data={breadcrumbSchema} />
       <JsonLd data={faqSchema} />
+      <JsonLd data={itemListSchema} />
+      <JsonLd data={collectionPageSchema} />
 
       <div className="min-h-screen bg-slate-50">
         <Header />
@@ -196,11 +216,12 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
                     <Link href={`/soft-play/${citySlug}/${venue.slug}`} tabIndex={-1} aria-hidden="true">
                       <div className="h-32 relative overflow-hidden bg-slate-100 flex-shrink-0">
                         {displayImage ? (
-                          // eslint-disable-next-line @next/next/no-img-element
-                          <img
+                          <Image
                             src={displayImage}
                             alt={`${venue.name} soft play`}
-                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                            fill
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                            className="object-cover transition-transform duration-300 group-hover:scale-105"
                             loading="lazy"
                           />
                         ) : (
@@ -307,10 +328,10 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
           )}
 
           {/* Helpful Advice Section */}
-          <div className="mt-12 bg-white rounded-xl border border-slate-200 p-8">
+          <section aria-labelledby="advice-heading" className="mt-12 bg-white rounded-xl border border-slate-200 p-8">
             <div className="flex items-center gap-2 mb-4">
               <Info className="w-5 h-5 text-purple-600 flex-shrink-0" />
-              <h2 className="text-xl font-semibold">{advice.heading}</h2>
+              <h2 id="advice-heading" className="text-xl font-semibold">{advice.heading}</h2>
             </div>
             <ul className="space-y-3">
               {advice.tips.map((tip, i) => (
@@ -320,20 +341,20 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
                 </li>
               ))}
             </ul>
-          </div>
+          </section>
 
           {/* FAQ Section */}
-          <div className="mt-12">
-            <h2 className="text-xl font-semibold mb-6">{content.faqHeading}</h2>
-            <div className="space-y-4">
+          <section aria-labelledby="filter-faq-heading" className="mt-12">
+            <h2 id="filter-faq-heading" className="text-xl font-semibold mb-6">{content.faqHeading}</h2>
+            <dl className="space-y-4">
               {faqs.map((faq, i) => (
                 <div key={i} className="bg-white p-6 rounded-lg border border-slate-200">
-                  <h3 className="font-semibold text-base mb-2">{faq.question}</h3>
-                  <p className="text-slate-600 text-sm leading-relaxed">{faq.answer}</p>
+                  <dt className="font-semibold text-base mb-2">{faq.question}</dt>
+                  <dd className="text-slate-600 text-sm leading-relaxed">{faq.answer}</dd>
                 </div>
               ))}
-            </div>
-          </div>
+            </dl>
+          </section>
 
           {/* Nearby cities */}
           {nearbyCities.length > 0 && (

@@ -4,16 +4,14 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
-        // General crawlers: allow all public pages; block API, admin, and
-        // search query-string variants (noindex is set at page level for those).
+        // General crawlers (including AI/GEO crawlers — GPTBot, ClaudeBot,
+        // Google-Extended, etc. — are intentionally allowed so AI answer
+        // engines can retrieve and cite venue listings): allow all public
+        // pages; block API, admin, and private token-based routes (noindex
+        // is also set at page level for those as defense-in-depth).
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/admin/'],
-      },
-      {
-        // Prevent AI training crawlers from scraping venue listings
-        userAgent: ['GPTBot', 'ClaudeBot', 'anthropic-ai', 'CCBot', 'Google-Extended'],
-        disallow: '/',
+        disallow: ['/api/', '/admin/', '/dashboard/', '/verify-email/'],
       },
     ],
     sitemap: 'https://www.softplaynearme.co.uk/sitemap.xml',

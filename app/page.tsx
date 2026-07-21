@@ -9,7 +9,7 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { SearchHero } from '@/components/home/SearchHero'
 import { HeroCarousel } from '@/components/home/HeroCarousel'
-import { buildFAQSchema } from '@/lib/schema'
+import { buildFAQSchema, buildCityListSchema } from '@/lib/schema'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { blogPosts } from '@/lib/blogPosts'
 import { CITY_IMAGES } from '@/lib/cityImages'
@@ -137,17 +137,7 @@ export default async function Home() {
   const cityVisuals = CITY_IMAGES
 
   // ItemList schema for Browse by City section
-  const cityListSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'ItemList',
-    name: 'Soft Play by City',
-    itemListElement: cities.map((city, i) => ({
-      '@type': 'ListItem',
-      position: i + 1,
-      name: `Soft Play in ${city.name}`,
-      url: `https://www.softplaynearme.co.uk/soft-play/${city.slug}`,
-    })),
-  }
+  const cityListSchema = buildCityListSchema(cities, 'Soft Play by City')
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
@@ -156,6 +146,7 @@ export default async function Home() {
 
       <Header />
 
+      <main>
       {/* Hero */}
       <div className="bg-gradient-to-br from-purple-600 via-purple-500 to-pink-500 text-white py-12 sm:py-16 px-4">
         <div className="max-w-7xl mx-auto grid gap-8 lg:grid-cols-2 lg:items-center">
@@ -473,6 +464,7 @@ export default async function Home() {
           </div>
         </div>
       </div>
+      </main>
 
       <Footer />
     </div>

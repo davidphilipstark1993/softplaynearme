@@ -412,7 +412,7 @@ export function getLocationContent(
   return {
     ...generated,
     h1: `Soft Play in ${name}`,
-    metaTitle: `${name} Soft Play Centres | Prices, Reviews & Opening Times`,
+    metaTitle: `${name} Soft Play Centres & Indoor Play | Soft Play Near Me`,
     metaDescription: `Find soft play centres in ${name}. Compare venues, check opening times and prices, discover toddler areas, birthday parties, and SEN-friendly sessions near you.`,
   }
 }

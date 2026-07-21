@@ -8,7 +8,7 @@ interface HeaderProps {
 
 export function Header({ backLink }: HeaderProps) {
   return (
-    <nav className="bg-white border-b border-slate-200 sticky top-0 z-50">
+    <nav aria-label="Main navigation" className="bg-white border-b border-slate-200 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <span className="font-bold text-xl text-purple-600">Soft Play Near Me</span>

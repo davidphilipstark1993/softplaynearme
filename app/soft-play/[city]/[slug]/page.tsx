@@ -554,6 +554,9 @@ export default async function VenuePage({ params }: PageProps) {
   const faqSchema = buildFAQSchema(faqs)
 
   // ── LocalBusiness schema – uses reusable builder from lib/schema.ts ────
+  // Reviews are embedded directly into this single SportsActivityLocation
+  // object (rather than a second, separate LocalBusiness block) so search
+  // engines and AI answer engines see one unambiguous entity per venue.
   const localBusinessSchema = buildLocalBusinessSchema({
     name: venue.name,
     description: venue.description,
@@ -569,6 +572,14 @@ export default async function VenuePage({ params }: PageProps) {
     priceTo: venue.price_to,
     avgRating: avgRating > 0 ? avgRating : undefined,
     reviewCount: reviews.length > 0 ? reviews.length : ((venue as any).reviews_count || undefined),
+    reviews: reviews.length > 0
+      ? reviews.slice(0, 10).map((review) => ({
+          reviewerName: review.reviewer_name,
+          rating: review.rating,
+          comment: review.comment,
+          datePublished: review.created_at,
+        }))
+      : undefined,
     imageUrl: galleryPhotos.length > 0 ? galleryPhotos[0].url : undefined,
     citySlug: city,
     venueSlug: slug,
@@ -581,42 +592,10 @@ export default async function VenuePage({ params }: PageProps) {
     { name: venue.name, url: `${baseUrl}/soft-play/${city}/${slug}` },
   ])
 
-  const reviewSchema =
-    reviews.length > 0
-      ? {
-          '@context': 'https://schema.org',
-          '@type': 'LocalBusiness',
-          name: venue.name,
-          aggregateRating: {
-            '@type': 'AggregateRating',
-            ratingValue: avgRating.toFixed(1),
-            reviewCount: reviews.length,
-            bestRating: 5,
-            worstRating: 1,
-          },
-          review: reviews.slice(0, 10).map((review) => ({
-            '@type': 'Review',
-            author: {
-              '@type': 'Person',
-              name: review.reviewer_name,
-            },
-            datePublished: review.created_at,
-            reviewBody: review.comment,
-            reviewRating: {
-              '@type': 'Rating',
-              ratingValue: review.rating,
-              bestRating: 5,
-              worstRating: 1,
-            },
-          })),
-        }
-      : null
-
   return (
     <>
       <JsonLd data={localBusinessSchema} />
       <JsonLd data={breadcrumbSchema} />
-      <JsonLd data={reviewSchema} />
       <JsonLd data={faqSchema} />
 
       <div className="min-h-screen bg-slate-50">
@@ -641,7 +620,7 @@ export default async function VenuePage({ params }: PageProps) {
                 </h1>
                 <div className="flex items-center gap-2 text-purple-100">
                   <MapPin className="w-5 h-5" />
-                  <span>{venue.address}, {venue.postcode}</span>
+                  <address className="not-italic font-normal inline">{venue.address}, {venue.postcode}</address>
                 </div>
                 {avgRating > 0 && (
                   <div className="flex items-center gap-2 mt-3">
@@ -712,7 +691,7 @@ export default async function VenuePage({ params }: PageProps) {
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Main Column */}
-            <div className="lg:col-span-2 space-y-6">
+            <article className="lg:col-span-2 space-y-6">
               {/* Quick Facts Panel — structured summary with graceful fallbacks */}
               <QuickFactsPanel
                 ageRangeMin={venue.age_range_min}
@@ -735,8 +714,8 @@ export default async function VenuePage({ params }: PageProps) {
               />
 
               {/* About – always shown; renders stored multi-paragraph description */}
-              <div className="bg-white rounded-lg border border-slate-200 p-6">
-                <h2 className="font-semibold text-lg mb-3">About {venue.name}</h2>
+              <section aria-labelledby="about-heading" className="bg-white rounded-lg border border-slate-200 p-6">
+                <h2 id="about-heading" className="font-semibold text-lg mb-3">About {venue.name}</h2>
                 <div className="space-y-3">
                   {displayDescription.split('\n\n').filter(Boolean).map((para, i) => (
                     <p key={i} className="text-slate-600 leading-relaxed">{para}</p>
@@ -768,21 +747,55 @@ export default async function VenuePage({ params }: PageProps) {
                     </p>
                   )}
                 </div>
-              </div>
+              </section>
 
               {/* Facilities Grid – showEmptyState ensures something renders */}
-              <FacilitiesGrid
-                facilities={venue.facilities}
-                cafe={venue.cafe}
-                parking={venue.parking}
-                parties={venue.parties}
-                toddlerArea={venue.toddler_area}
-                babyArea={venue.baby_area}
-                senFriendly={venue.sen_friendly}
-                wheelchairAccess={venue.wheelchair_access}
-                freeWifi={venue.free_wifi}
-                showEmptyState
-              />
+              <section aria-label="Facilities & Features">
+                <FacilitiesGrid
+                  facilities={venue.facilities}
+                  cafe={venue.cafe}
+                  parking={venue.parking}
+                  parties={venue.parties}
+                  toddlerArea={venue.toddler_area}
+                  babyArea={venue.baby_area}
+                  senFriendly={venue.sen_friendly}
+                  wheelchairAccess={venue.wheelchair_access}
+                  freeWifi={venue.free_wifi}
+                  showEmptyState
+                />
+              </section>
+
+              {/* Facilities key-value summary — structured for AI extractors,
+                  built only from confirmed booleans (never invents facts) */}
+              {(() => {
+                const facilityPairs: Array<[string, boolean | undefined]> = [
+                  ['Café', venue.cafe],
+                  ['Parking', venue.parking],
+                  ['Birthday Parties', venue.parties],
+                  ['Toddler Area', venue.toddler_area],
+                  ['Baby Area', venue.baby_area],
+                  ['SEN / Sensory Sessions', venue.sen_friendly],
+                  ['Wheelchair Access', venue.wheelchair_access],
+                  ['Free WiFi', venue.free_wifi],
+                ]
+                const confirmedPairs = facilityPairs.filter(([, v]) => v !== undefined)
+                if (confirmedPairs.length === 0) return null
+                return (
+                  <section aria-labelledby="facts-heading" className="bg-white rounded-lg border border-slate-200 p-6">
+                    <h2 id="facts-heading" className="font-semibold text-lg mb-3">
+                      {venue.name} at a Glance
+                    </h2>
+                    <dl className="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-2 text-sm">
+                      {confirmedPairs.map(([label, value]) => (
+                        <div key={label} className="flex flex-col">
+                          <dt className="text-slate-500">{label}</dt>
+                          <dd className="font-medium text-slate-800">{value ? 'Yes' : 'Not available'}</dd>
+                        </div>
+                      ))}
+                    </dl>
+                  </section>
+                )
+              })()}
 
               {/* Who Is This Best For? — derived from stored what_to_expect */}
               {(() => {
@@ -879,8 +892,8 @@ export default async function VenuePage({ params }: PageProps) {
 
               {/* Nearby Venues */}
               {nearbyVenues.length > 0 && (
-                <div className="bg-white rounded-lg border border-slate-200 p-6">
-                  <h2 className="font-semibold text-lg mb-4">Nearby Soft Play in {cityName}</h2>
+                <section aria-labelledby="nearby-heading" className="bg-white rounded-lg border border-slate-200 p-6">
+                  <h2 id="nearby-heading" className="font-semibold text-lg mb-4">Nearby Soft Play in {cityName}</h2>
                   <div className="grid sm:grid-cols-2 gap-3">
                     {nearbyVenues.map((nv) => (
                       <Link
@@ -903,7 +916,7 @@ export default async function VenuePage({ params }: PageProps) {
                   >
                     View all venues in {cityName}
                   </Link>
-                </div>
+                </section>
               )}
 
               {/* Similar Venues by Tag */}
@@ -967,19 +980,19 @@ export default async function VenuePage({ params }: PageProps) {
 
               {/* FAQ Section */}
               {faqs.length > 0 && (
-                <div className="bg-white rounded-lg border border-slate-200 p-6">
-                  <h2 className="font-semibold text-lg mb-4">
+                <section aria-labelledby="faq-heading" className="bg-white rounded-lg border border-slate-200 p-6">
+                  <h2 id="faq-heading" className="font-semibold text-lg mb-4">
                     Frequently Asked Questions about {venue.name}
                   </h2>
-                  <div className="space-y-4">
+                  <dl className="space-y-4">
                     {faqs.map((faq, i) => (
                       <div key={i} className="border-b border-slate-100 last:border-0 pb-4 last:pb-0">
-                        <h3 className="font-medium text-slate-800 mb-1">{faq.question}</h3>
-                        <p className="text-sm text-slate-600 leading-relaxed">{faq.answer}</p>
+                        <dt className="font-medium text-slate-800 mb-1">{faq.question}</dt>
+                        <dd className="text-sm text-slate-600 leading-relaxed">{faq.answer}</dd>
                       </div>
                     ))}
-                  </div>
-                </div>
+                  </dl>
+                </section>
               )}
 
               {/* Venue Owner Section */}
@@ -1015,7 +1028,7 @@ export default async function VenuePage({ params }: PageProps) {
                   </Link>
                 </Button>
               </div>
-            </div>
+            </article>
 
             {/* Sidebar */}
             <div className="lg:col-span-1 space-y-6">

@@ -296,13 +296,15 @@ export function SearchForm({
 
       {/* Radius selection */}
       {showRadius && (
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Search radius">
           <span className="text-sm text-slate-700">Within:</span>
           {RADIUS_OPTIONS.map((option) => (
             <button
               key={option.value}
               type="button"
               onClick={() => setRadius(option.value)}
+              aria-pressed={radius === option.value}
+              aria-label={`Within ${option.label}`}
               className={cn(
                 'px-3 py-1.5 rounded-full text-sm font-medium transition-colors',
                 radius === option.value

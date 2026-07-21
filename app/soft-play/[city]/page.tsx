@@ -12,7 +12,7 @@ import { getStaticVenuesByTown, getStaticTownBySlug, getAllStaticTownSlugs, type
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
-import { buildBreadcrumbSchema, buildFAQSchema, buildItemListSchema } from '@/lib/schema'
+import { buildBreadcrumbSchema, buildFAQSchema, buildItemListSchema, buildCollectionPageSchema } from '@/lib/schema'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { getLocationContent } from '@/lib/locationContent'
 import { getPostForCity } from '@/lib/blogPosts'
@@ -327,9 +327,23 @@ export default async function CityPage({ params, searchParams }: PageProps) {
   const faqSchema = buildFAQSchema(faqs)
 
   const itemListSchema = buildItemListSchema(
-    venues.map(v => ({ name: v.name, slug: v.slug, citySlug: city })),
+    venues.map(v => ({
+      name: v.name,
+      slug: v.slug,
+      citySlug: city,
+      address: v.address,
+      postcode: v.postcode,
+      avgRating: v.avg_rating ? Number(v.avg_rating) : undefined,
+      reviewCount: v.review_count ? Number(v.review_count) : undefined,
+    })),
     `Soft Play Centres in ${displayName}`
   )
+
+  const collectionPageSchema = buildCollectionPageSchema({
+    name: h1,
+    description: locationContent.metaDescription,
+    url: `${baseUrl}/soft-play/${city}`,
+  })
 
   // Curated spotlight sections (only shown on fully unfiltered city pages)
   const hasActiveFilters = !!(filter || search || age.length || facilities.length || price || special.length)
@@ -349,6 +363,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
       <JsonLd data={breadcrumbSchema} />
       <JsonLd data={faqSchema} />
       <JsonLd data={itemListSchema} />
+      <JsonLd data={collectionPageSchema} />
 
       <div className="min-h-screen bg-slate-50">
         <Header />
@@ -367,6 +382,18 @@ export default async function CityPage({ params, searchParams }: PageProps) {
             </p>
           </div>
         </div>
+
+        {city === 'hull' && (
+          <div className="bg-purple-50 border-b border-purple-100 py-3 px-4">
+            <div className="max-w-7xl mx-auto text-sm text-purple-900">
+              New to Hull&apos;s soft play scene?{' '}
+              <Link href="/blog/best-soft-play-in-hull" className="font-semibold underline hover:text-purple-700">
+                Read our local guide to soft play in Hull
+              </Link>{' '}
+              — venues compared by age, parties and sensory needs.
+            </div>
+          </div>
+        )}
 
         {/* Sticky Filters */}
         <div className="bg-white border-b border-slate-200 py-3 sticky top-16 z-40">
@@ -405,7 +432,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
             </aside>
 
             {/* Venue content */}
-            <div className="lg:col-span-3">
+            <article className="lg:col-span-3">
               {/* Active filter chips */}
               <ActiveFilterBar className="mb-4" />
 
@@ -666,8 +693,8 @@ export default async function CityPage({ params, searchParams }: PageProps) {
           )}
 
           {/* Category Links */}
-          <div className="mt-12">
-            <h2 className="text-xl font-semibold mb-4">Browse by Category in {displayName}</h2>
+          <section aria-labelledby="category-heading" className="mt-12">
+            <h2 id="category-heading" className="text-xl font-semibold mb-4">Browse by Category in {displayName}</h2>
             <div className="flex flex-wrap gap-2">
               {filters.map((f) => (
                 <Link key={f.slug} href={`/soft-play/${city}/${f.slug}`}>
@@ -677,12 +704,12 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                 </Link>
               ))}
             </div>
-          </div>
+          </section>
 
           {/* Nearby Areas */}
           {(nearbyCities.length > 0 || nearbyAreas.length > 0) && (
-            <div className="mt-12">
-              <h2 className="text-xl font-semibold mb-4">Nearby Areas</h2>
+            <section aria-labelledby="nearby-areas-heading" className="mt-12">
+              <h2 id="nearby-areas-heading" className="text-xl font-semibold mb-4">Nearby Areas</h2>
               <div className="flex flex-wrap gap-2">
                 {nearbyAreas.map((area) => {
                   const nearbyCity = nearbyCities.find(c => c.name === area)
@@ -702,7 +729,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                   )
                 })}
               </div>
-            </div>
+            </section>
           )}
 
           {/* Location Intro (SEO content) */}
@@ -710,20 +737,20 @@ export default async function CityPage({ params, searchParams }: PageProps) {
 
           {/* FAQs */}
           {faqs.length > 0 && (
-            <div className="mt-12">
-              <h2 className="text-xl font-semibold mb-6">Frequently Asked Questions</h2>
-              <div className="space-y-4">
+            <section aria-labelledby="city-faq-heading" className="mt-12">
+              <h2 id="city-faq-heading" className="text-xl font-semibold mb-6">Frequently Asked Questions</h2>
+              <dl className="space-y-4">
                 {faqs.map((faq, index) => (
                   <div key={index} className="bg-white p-6 rounded-lg border border-slate-200">
-                    <h3 className="font-semibold text-lg mb-2">{faq.question}</h3>
-                    <p className="text-slate-600">{faq.answer}</p>
+                    <dt className="font-semibold text-lg mb-2">{faq.question}</dt>
+                    <dd className="text-slate-600">{faq.answer}</dd>
                   </div>
                 ))}
-              </div>
-            </div>
+              </dl>
+            </section>
           )}
 
-            </div> {/* end venue content col */}
+            </article> {/* end venue content col */}
           </div> {/* end lg:grid */}
         </main>
 

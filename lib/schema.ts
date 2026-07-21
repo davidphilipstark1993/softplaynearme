@@ -59,6 +59,13 @@ function parseHoursString(raw: string | { open: string; close: string }): { open
 
 // ── Public interfaces ──────────────────────────────────────────────────
 
+export interface LocalBusinessReviewInput {
+  reviewerName: string
+  rating: number
+  comment: string
+  datePublished: string
+}
+
 export interface LocalBusinessSchemaInput {
   name: string
   description?: string
@@ -74,6 +81,7 @@ export interface LocalBusinessSchemaInput {
   priceTo?: number
   avgRating?: number
   reviewCount?: number
+  reviews?: LocalBusinessReviewInput[]
   imageUrl?: string
   citySlug: string
   venueSlug: string
@@ -124,6 +132,9 @@ export function buildLocalBusinessSchema(input: LocalBusinessSchemaInput) {
       postalCode: input.postcode,
       addressCountry: 'GB',
     },
+    publisher: {
+      '@id': 'https://www.softplaynearme.co.uk/#organization',
+    },
   }
 
   if (input.description) {
@@ -164,6 +175,24 @@ export function buildLocalBusinessSchema(input: LocalBusinessSchemaInput) {
       bestRating: 5,
       worstRating: 1,
     }
+  }
+
+  if (input.reviews && input.reviews.length > 0) {
+    schema.review = input.reviews.slice(0, 10).map((review) => ({
+      '@type': 'Review',
+      author: {
+        '@type': 'Person',
+        name: review.reviewerName,
+      },
+      datePublished: review.datePublished,
+      reviewBody: review.comment,
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: review.rating,
+        bestRating: 5,
+        worstRating: 1,
+      },
+    }))
   }
 
   if (input.imageUrl) {
@@ -288,11 +317,15 @@ export interface ItemListVenue {
   citySlug: string
   address?: string
   postcode?: string
+  avgRating?: number
+  reviewCount?: number
 }
 
 /**
  * Build a Schema.org ItemList JSON-LD object for a list of venues.
  * Used on city/town pages to give Google structured listing data.
+ * Embeds address and aggregateRating per item (when available) so
+ * answer engines can extract venue facts without a second page fetch.
  */
 export function buildItemListSchema(
   venues: ItemListVenue[],
@@ -307,11 +340,90 @@ export function buildItemListSchema(
     '@type': 'ItemList',
     name: listName,
     numberOfItems: venues.length,
-    itemListElement: venues.map((venue, i) => ({
+    itemListElement: venues.map((venue, i) => {
+      const url = `${baseUrl}/soft-play/${venue.citySlug}/${venue.slug}`
+      const item: Record<string, any> = {
+        '@type': 'ListItem',
+        position: i + 1,
+        name: venue.name,
+        url,
+        item: {
+          '@type': 'SportsActivityLocation',
+          '@id': `${url}#business`,
+          name: venue.name,
+          url,
+          ...(venue.address && {
+            address: {
+              '@type': 'PostalAddress',
+              streetAddress: venue.address,
+              ...(venue.postcode && { postalCode: venue.postcode }),
+              addressCountry: 'GB',
+            },
+          }),
+          ...(venue.avgRating && venue.reviewCount && venue.reviewCount > 0 && {
+            aggregateRating: {
+              '@type': 'AggregateRating',
+              ratingValue: venue.avgRating.toFixed(1),
+              reviewCount: venue.reviewCount,
+              bestRating: 5,
+              worstRating: 1,
+            },
+          }),
+        },
+      }
+      return item
+    }),
+  }
+}
+
+/**
+ * Build a Schema.org ItemList JSON-LD object for a list of city hub pages.
+ * Used on the homepage "Browse by City" section.
+ */
+export function buildCityListSchema(
+  cities: { name: string; slug: string }[],
+  listName: string
+) {
+  if (cities.length === 0) return null
+
+  const baseUrl = 'https://www.softplaynearme.co.uk'
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: listName,
+    numberOfItems: cities.length,
+    itemListElement: cities.map((city, i) => ({
       '@type': 'ListItem',
       position: i + 1,
-      name: venue.name,
-      url: `${baseUrl}/soft-play/${venue.citySlug}/${venue.slug}`,
+      name: `Soft Play in ${city.name}`,
+      url: `${baseUrl}/soft-play/${city.slug}`,
     })),
+  }
+}
+
+// ── CollectionPage schema builder ──────────────────────────────────────
+
+export interface CollectionPageSchemaInput {
+  name: string
+  description?: string
+  url: string
+}
+
+/**
+ * Build a Schema.org CollectionPage JSON-LD object for hub pages (city
+ * and filter subpages) that primarily exist to list an ItemList of venues.
+ */
+export function buildCollectionPageSchema(input: CollectionPageSchemaInput) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    '@id': `${input.url}#webpage`,
+    name: input.name,
+    url: input.url,
+    ...(input.description && { description: input.description }),
+    isPartOf: {
+      '@id': 'https://www.softplaynearme.co.uk/#website',
+    },
   }
 }

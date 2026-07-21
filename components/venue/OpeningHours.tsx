@@ -121,42 +121,57 @@ export function OpeningHours({ hours, className }: OpeningHoursProps) {
         </div>
       </CardHeader>
       <CardContent>
-        <ul className="space-y-2">
-          {DAYS.map(({ key, label }) => {
-            const isToday = key === todayKey
-            const dayHoursRaw = hours[key]
-            const dayHours = normalizeHoursValue(dayHoursRaw)
+        <table className="w-full text-sm border-collapse">
+          <caption className="sr-only">Opening hours by day of the week</caption>
+          <thead>
+            <tr className="sr-only">
+              <th scope="col">Day</th>
+              <th scope="col">Hours</th>
+            </tr>
+          </thead>
+          <tbody>
+            {DAYS.map(({ key, label }) => {
+              const isToday = key === todayKey
+              const dayHoursRaw = hours[key]
+              const dayHours = normalizeHoursValue(dayHoursRaw)
 
-            return (
-              <li
-                key={key}
-                className={cn(
-                  'flex justify-between py-1.5 px-2 rounded-md text-sm',
-                  isToday && 'bg-purple-50 font-medium'
-                )}
-              >
-                <span className={cn(isToday && 'text-purple-700')}>
-                  {label}
-                  {isToday && (
-                    <span className="ml-2 text-xs text-purple-500">(Today)</span>
-                  )}
-                </span>
-                <span
+              return (
+                <tr
+                  key={key}
                   className={cn(
-                    'tabular-nums',
-                    !dayHours || dayHours.toLowerCase() === 'closed'
-                      ? 'text-muted-foreground'
-                      : isToday
-                        ? 'text-purple-700'
-                        : ''
+                    'text-sm',
+                    isToday && 'bg-purple-50 font-medium'
                   )}
                 >
-                  {formatHours(dayHoursRaw)}
-                </span>
-              </li>
-            )
-          })}
-        </ul>
+                  <th
+                    scope="row"
+                    className={cn(
+                      'text-left font-normal py-1.5 px-2 rounded-l-md',
+                      isToday && 'text-purple-700 font-medium'
+                    )}
+                  >
+                    {label}
+                    {isToday && (
+                      <span className="ml-2 text-xs text-purple-500">(Today)</span>
+                    )}
+                  </th>
+                  <td
+                    className={cn(
+                      'tabular-nums text-right py-1.5 px-2 rounded-r-md',
+                      !dayHours || dayHours.toLowerCase() === 'closed'
+                        ? 'text-muted-foreground'
+                        : isToday
+                          ? 'text-purple-700'
+                          : ''
+                    )}
+                  >
+                    {formatHours(dayHoursRaw)}
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
       </CardContent>
     </Card>
   )
