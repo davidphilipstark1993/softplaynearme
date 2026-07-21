@@ -7,8 +7,9 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { Input } from '@/components/ui/input'
 import { computeCompleteness } from '@/lib/completeness'
-import { ArrowLeft, Save, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react'
+import { ArrowLeft, Save, CheckCircle2, AlertCircle, Loader2, Plus, Trash2, Eye } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { toast } from 'sonner'
 
 const DAYS = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'] as const
 const DAY_LABELS: Record<string, string> = {
@@ -16,20 +17,69 @@ const DAY_LABELS: Record<string, string> = {
   friday: 'Fri', saturday: 'Sat', sunday: 'Sun',
 }
 
-const FACILITIES = [
-  { key: 'cafe', label: 'Café / Food & Drink' },
-  { key: 'parking', label: 'Free Parking' },
-  { key: 'parties', label: 'Birthday Parties' },
-  { key: 'toddler_area', label: 'Toddler Area' },
-  { key: 'baby_area', label: 'Baby / Under 1s Area' },
-  { key: 'sen_friendly', label: 'SEN Sessions' },
-  { key: 'wheelchair_access', label: 'Wheelchair Accessible' },
-  { key: 'has_outdoor_play', label: 'Outdoor Play Area' },
-  { key: 'free_wifi', label: 'Free WiFi' },
+const FACILITY_GROUPS = [
+  {
+    label: 'Food & Drink',
+    items: [
+      { key: 'cafe', label: 'Café / Food & Drink' },
+      { key: 'food_served', label: 'Full Meals Served' },
+    ],
+  },
+  {
+    label: 'Play Areas',
+    items: [
+      { key: 'toddler_area', label: 'Toddler Area' },
+      { key: 'baby_area', label: 'Baby / Under 1s Area' },
+      { key: 'has_outdoor_play', label: 'Outdoor Play Area' },
+      { key: 'role_play_area', label: 'Role Play Area' },
+    ],
+  },
+  {
+    label: 'Events & Parties',
+    items: [
+      { key: 'parties', label: 'Birthday Parties' },
+      { key: 'party_rooms', label: 'Dedicated Party Rooms' },
+      { key: 'sen_friendly', label: 'SEN Sessions' },
+    ],
+  },
+  {
+    label: 'Convenience',
+    items: [
+      { key: 'parking', label: 'Free Parking' },
+      { key: 'wheelchair_access', label: 'Wheelchair Accessible' },
+      { key: 'changing_facilities', label: 'Baby Changing Facilities' },
+      { key: 'free_wifi', label: 'Free WiFi' },
+      { key: 'air_conditioning', label: 'Air Conditioning' },
+    ],
+  },
 ]
+
+const SESSION_TYPES = [
+  'Standard Session',
+  'Toddler Session (under 5s)',
+  'Baby Session (under 1s)',
+  'Weekend Session',
+  'After-School Session',
+  'Party Package',
+  'SEN Session',
+  'Family Bundle',
+  'Other',
+]
+
+interface Session {
+  type: string
+  price_from: string
+  price_to: string
+  description: string
+}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type FormState = Record<string, any>
+
+function wordCount(text: string): number {
+  if (!text) return 0
+  return text.trim().split(/\s+/).filter(Boolean).length
+}
 
 export default function EditPage() {
   const params = useParams()
@@ -39,11 +89,12 @@ export default function EditPage() {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState('')
-  const [saved, setSaved] = useState(false)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [claim, setClaim] = useState<any>(null)
   const [form, setForm] = useState<FormState>({})
   const [hours, setHours] = useState<Record<string, { open: string; close: string } | null>>({})
+  const [sessions, setSessions] = useState<Session[]>([])
+  const [photoUrls, setPhotoUrls] = useState<string[]>([''])
 
   useEffect(() => {
     async function load() {
@@ -60,6 +111,7 @@ export default function EditPage() {
             phone: v.phone || '',
             website: v.website || '',
             description: v.description || '',
+            special_notes: v.special_notes || '',
             price_from: v.price_from ?? '',
             price_to: v.price_to ?? '',
             price_range: v.price_range || '',
@@ -73,8 +125,14 @@ export default function EditPage() {
             wheelchair_access: !!v.wheelchair_access,
             has_outdoor_play: !!v.has_outdoor_play,
             free_wifi: !!v.free_wifi,
+            air_conditioning: !!v.air_conditioning,
+            party_rooms: !!v.party_rooms,
+            food_served: !!v.food_served,
+            changing_facilities: !!v.changing_facilities,
+            role_play_area: !!v.role_play_area,
           })
-          // Parse opening hours
+
+          // Opening hours
           const oh: Record<string, { open: string; close: string } | null> = {}
           for (const day of DAYS) {
             const raw = v.opening_hours?.[day]
@@ -86,6 +144,34 @@ export default function EditPage() {
             }
           }
           setHours(oh)
+
+          // Session pricing
+          if (Array.isArray(v.session_pricing) && v.session_pricing.length > 0) {
+            setSessions(
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              v.session_pricing.map((s: any) => ({
+                type: s.type || 'Standard Session',
+                price_from: s.price_from != null ? String(s.price_from) : '',
+                price_to: s.price_to != null ? String(s.price_to) : '',
+                description: s.description || '',
+              }))
+            )
+          }
+
+          // Photo URLs
+          const photos: string[] = []
+          if (v.main_image_url) photos.push(v.main_image_url)
+          if (Array.isArray(v.photo_urls)) {
+            for (const u of v.photo_urls) {
+              if (u && !photos.includes(u)) photos.push(u)
+            }
+          }
+          if (Array.isArray(v.images)) {
+            for (const u of v.images) {
+              if (u && !photos.includes(u)) photos.push(u)
+            }
+          }
+          setPhotoUrls(photos.length > 0 ? photos : [''])
         } else {
           // Pre-fill from claim data
           setForm({
@@ -93,15 +179,18 @@ export default function EditPage() {
             address: c.venue_address || '',
             phone: c.venue_phone || '',
             website: c.venue_website || '',
-            postcode: '', description: '', price_from: '', price_to: '',
-            price_range: '', main_image_url: '',
+            postcode: '', description: '', special_notes: '',
+            price_from: '', price_to: '', price_range: '', main_image_url: '',
             cafe: false, parking: false, parties: false, toddler_area: false,
             baby_area: false, sen_friendly: false, wheelchair_access: false,
-            has_outdoor_play: false, free_wifi: false,
+            has_outdoor_play: false, free_wifi: false, air_conditioning: false,
+            party_rooms: false, food_served: false, changing_facilities: false,
+            role_play_area: false,
           })
           const oh: Record<string, null> = {}
           for (const day of DAYS) oh[day] = null
           setHours(oh)
+          setPhotoUrls([''])
         }
       } catch {
         setError('Failed to load venue data')
@@ -115,27 +204,37 @@ export default function EditPage() {
   async function handleSave(e: React.FormEvent) {
     e.preventDefault()
     setSaving(true)
-    setSaved(false)
     setError('')
 
-    // Build opening_hours from state
     const opening_hours: Record<string, { open: string; close: string } | null> = {}
     for (const day of DAYS) {
       opening_hours[day] = hours[day] || null
     }
 
+    // First URL becomes main_image_url, all go into photo_urls
+    const cleanPhotos = photoUrls.filter((u) => u.trim() !== '')
+    const main_image_url = cleanPhotos[0] || ''
+
     try {
       const res = await fetch(`/api/dashboard/${token}/update`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, opening_hours }),
+        body: JSON.stringify({
+          ...form,
+          opening_hours,
+          session_pricing: sessions,
+          photo_urls: cleanPhotos,
+          main_image_url,
+        }),
       })
       if (!res.ok) {
         const d = await res.json()
         throw new Error(d.error || 'Save failed')
       }
-      setSaved(true)
-      setTimeout(() => setSaved(false), 4000)
+      toast.success(`Great! Your listing is now ${score}% complete — parents will love the new details.`, {
+        icon: '🎉',
+        duration: 5000,
+      })
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Save failed')
     } finally {
@@ -147,8 +246,39 @@ export default function EditPage() {
     setForm((f) => ({ ...f, [key]: value }))
   }
 
+  function addSession() {
+    setSessions((s) => [...s, { type: 'Standard Session', price_from: '', price_to: '', description: '' }])
+  }
+
+  function updateSession(i: number, field: keyof Session, value: string) {
+    setSessions((s) => s.map((row, idx) => idx === i ? { ...row, [field]: value } : row))
+  }
+
+  function removeSession(i: number) {
+    setSessions((s) => s.filter((_, idx) => idx !== i))
+  }
+
+  function addPhotoUrl() {
+    if (photoUrls.length < 10) setPhotoUrls((p) => [...p, ''])
+  }
+
+  function updatePhotoUrl(i: number, value: string) {
+    setPhotoUrls((p) => p.map((u, idx) => idx === i ? value : u))
+  }
+
+  function removePhotoUrl(i: number) {
+    setPhotoUrls((p) => {
+      const next = p.filter((_, idx) => idx !== i)
+      return next.length === 0 ? [''] : next
+    })
+  }
+
+  const descWords = wordCount(form.description || '')
+
   const { score } = computeCompleteness(
-    claim && Object.keys(form).length > 0 ? { ...form, opening_hours: hours } : null
+    claim && Object.keys(form).length > 0
+      ? { ...form, opening_hours: hours, session_pricing: sessions, photo_urls: photoUrls.filter(Boolean) }
+      : null
   )
 
   if (loading) {
@@ -171,14 +301,24 @@ export default function EditPage() {
             href={`/dashboard/${token}`}
             className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-slate-800"
           >
-            <ArrowLeft className="w-4 h-4" /> Back to dashboard
+            <ArrowLeft className="w-4 h-4" /> Back
           </Link>
           <div className="ml-auto flex items-center gap-3">
+            {/* Preview public page — only shown once a venue is linked */}
+            {claim?.city_slug && claim?.venue_slug && (
+              <a
+                href={`/soft-play/${claim.city_slug}/${claim.venue_slug}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-purple-600 hover:text-purple-700 border border-purple-200 bg-purple-50 hover:bg-purple-100 px-3 py-1.5 rounded-lg transition-colors"
+              >
+                <Eye className="w-3.5 h-3.5" /> Preview page
+              </a>
+            )}
             <div className="text-sm text-slate-500">
               <span className="font-semibold text-purple-600">{score}%</span> complete
             </div>
-            {/* Inline progress bar */}
-            <div className="w-24 h-2 bg-slate-200 rounded-full overflow-hidden">
+            <div className="hidden sm:block w-24 h-2 bg-slate-200 rounded-full overflow-hidden">
               <div
                 className="h-full rounded-full bg-gradient-to-r from-purple-500 to-pink-500 transition-all"
                 style={{ width: `${score}%` }}
@@ -207,23 +347,42 @@ export default function EditPage() {
                 <Input value={form.postcode || ''} onChange={(e) => setField('postcode', e.target.value.toUpperCase())} maxLength={10} placeholder="HU1 1AA" />
               </Field>
             </div>
-            <Field label="Website">
+            <Field label="Website" hint="include https://">
               <Input type="url" value={form.website || ''} onChange={(e) => setField('website', e.target.value)} placeholder="https://yourvenue.co.uk" />
             </Field>
           </Section>
 
           {/* DESCRIPTION */}
           <Section id="description" title="Description" emoji="📝">
-            <Field label="Venue description" hint="2–4 sentences work best">
+            <Field
+              label="Venue description"
+              hint={descWords >= 80 ? '✓ 80+ words — great!' : `${descWords}/80 words — aim for 80+`}
+            >
               <textarea
                 value={form.description || ''}
                 onChange={(e) => setField('description', e.target.value)}
-                rows={5}
+                rows={6}
                 maxLength={3000}
                 placeholder="Tell parents what makes your soft play special — the size, age ranges, party rooms, café, what parents love about it…"
                 className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-purple-400 resize-none"
               />
-              <p className="text-xs text-slate-400 mt-1">{(form.description || '').length} / 3000</p>
+              <div className="flex justify-between mt-1">
+                <p className={cn('text-xs', descWords >= 80 ? 'text-green-600 font-medium' : 'text-slate-400')}>
+                  {descWords} words
+                </p>
+                <p className="text-xs text-slate-400">{(form.description || '').length} / 3000 chars</p>
+              </div>
+            </Field>
+            <Field label="Special notes" hint="seasonal hours, SEN session details, upcoming events…">
+              <textarea
+                value={form.special_notes || ''}
+                onChange={(e) => setField('special_notes', e.target.value)}
+                rows={3}
+                maxLength={1000}
+                placeholder="e.g. 'Easter 2026 hours: open daily 10am–5pm' or 'SEN sessions every Tuesday 9–11am — booking required'"
+                className="w-full rounded-lg border border-slate-300 px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-purple-400 resize-none"
+              />
+              <p className="text-xs text-slate-400 mt-1">{(form.special_notes || '').length} / 1000</p>
             </Field>
           </Section>
 
@@ -235,7 +394,6 @@ export default function EditPage() {
                 const isOpen = dayHours !== null
                 return (
                   <div key={day} className="flex items-center gap-3">
-                    {/* Open/closed toggle */}
                     <label className="flex items-center gap-2 w-24 flex-shrink-0 cursor-pointer">
                       <input
                         type="checkbox"
@@ -284,26 +442,34 @@ export default function EditPage() {
 
           {/* FACILITIES */}
           <Section id="facilities" title="Facilities" emoji="✅">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-6">
-              {FACILITIES.map((f) => (
-                <label key={f.key} className="flex items-center gap-3 cursor-pointer group">
-                  <input
-                    type="checkbox"
-                    checked={!!form[f.key]}
-                    onChange={(e) => setField(f.key, e.target.checked)}
-                    className="w-4 h-4 rounded border-slate-300 text-purple-600 focus:ring-purple-500"
-                  />
-                  <span className={cn('text-sm', form[f.key] ? 'font-medium text-slate-900' : 'text-slate-600 group-hover:text-slate-800')}>
-                    {f.label}
-                  </span>
-                </label>
+            <div className="space-y-5">
+              {FACILITY_GROUPS.map((group) => (
+                <div key={group.label}>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2.5">{group.label}</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2.5 gap-x-6">
+                    {group.items.map((f) => (
+                      <label key={f.key} className="flex items-center gap-3 cursor-pointer group">
+                        <input
+                          type="checkbox"
+                          checked={!!form[f.key]}
+                          onChange={(e) => setField(f.key, e.target.checked)}
+                          className="w-4 h-4 rounded border-slate-300 text-purple-600 focus:ring-purple-500"
+                        />
+                        <span className={cn('text-sm', form[f.key] ? 'font-medium text-slate-900' : 'text-slate-600 group-hover:text-slate-800')}>
+                          {f.label}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
           </Section>
 
           {/* PRICING */}
           <Section id="pricing" title="Pricing" emoji="💷">
-            <div className="grid gap-4 sm:grid-cols-3">
+            {/* General price range */}
+            <div className="grid gap-4 sm:grid-cols-3 mb-6">
               <Field label="Price from (£)">
                 <Input
                   type="number"
@@ -333,30 +499,145 @@ export default function EditPage() {
                 />
               </Field>
             </div>
+
+            {/* Session pricing table */}
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <p className="text-sm font-medium text-slate-700">Session types</p>
+                <button
+                  type="button"
+                  onClick={addSession}
+                  className="inline-flex items-center gap-1.5 text-xs font-medium text-purple-600 hover:text-purple-700"
+                >
+                  <Plus className="w-3.5 h-3.5" /> Add session
+                </button>
+              </div>
+
+              {sessions.length === 0 && (
+                <p className="text-sm text-slate-400 italic">
+                  No session types added yet. Click &ldquo;Add session&rdquo; to add pricing for Standard, Toddler, Party, and other sessions.
+                </p>
+              )}
+
+              <div className="space-y-3">
+                {sessions.map((session, i) => (
+                  <div key={i} className="bg-slate-50 rounded-lg border border-slate-200 p-4">
+                    <div className="flex items-start gap-2 mb-3">
+                      <div className="flex-1">
+                        <label className="block text-xs font-medium text-slate-600 mb-1">Session type</label>
+                        <select
+                          value={session.type}
+                          onChange={(e) => updateSession(i, 'type', e.target.value)}
+                          className="w-full rounded-md border border-slate-300 px-2.5 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-purple-400 bg-white"
+                        >
+                          {SESSION_TYPES.map((t) => (
+                            <option key={t} value={t}>{t}</option>
+                          ))}
+                        </select>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => removeSession(i)}
+                        className="mt-5 p-1.5 text-slate-400 hover:text-red-500 transition-colors"
+                        title="Remove session"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                    <div className="grid grid-cols-2 gap-3 mb-3">
+                      <div>
+                        <label className="block text-xs font-medium text-slate-600 mb-1">Price from (£)</label>
+                        <Input
+                          type="number"
+                          min={0}
+                          step={0.5}
+                          value={session.price_from}
+                          onChange={(e) => updateSession(i, 'price_from', e.target.value)}
+                          placeholder="e.g. 5"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-medium text-slate-600 mb-1">Price to (£)</label>
+                        <Input
+                          type="number"
+                          min={0}
+                          step={0.5}
+                          value={session.price_to}
+                          onChange={(e) => updateSession(i, 'price_to', e.target.value)}
+                          placeholder="e.g. 8"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-slate-600 mb-1">Notes (optional)</label>
+                      <Input
+                        value={session.description}
+                        onChange={(e) => updateSession(i, 'description', e.target.value)}
+                        placeholder="e.g. includes soft play + lunch, booking required"
+                        maxLength={300}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </Section>
 
           {/* PHOTOS */}
-          <Section id="photos" title="Main Photo" emoji="📸">
-            <Field label="Main image URL" hint="paste a direct image URL or link from your website">
-              <Input
-                type="url"
-                value={form.main_image_url || ''}
-                onChange={(e) => setField('main_image_url', e.target.value)}
-                placeholder="https://yourvenue.co.uk/images/soft-play.jpg"
-              />
-            </Field>
-            <p className="text-xs text-slate-400 mt-1">
-              Full photo upload coming soon. For now, paste a URL to an image hosted on your website.
+          <Section id="photos" title="Photos" emoji="📸">
+            <p className="text-sm text-slate-500 mb-4">
+              Listings with 3+ photos get 3× more clicks. Paste URLs to images hosted on your website.
+            </p>
+
+            <div className="space-y-2.5">
+              {photoUrls.map((url, i) => (
+                <div key={i} className="flex items-center gap-2">
+                  <div className="flex-shrink-0 w-6 text-center text-xs font-medium text-slate-400">
+                    {i + 1}
+                  </div>
+                  <Input
+                    type="url"
+                    value={url}
+                    onChange={(e) => updatePhotoUrl(i, e.target.value)}
+                    placeholder="https://yourvenue.co.uk/images/soft-play.jpg"
+                    className="flex-1"
+                  />
+                  {photoUrls.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={() => removePhotoUrl(i)}
+                      className="p-1.5 text-slate-400 hover:text-red-500 transition-colors"
+                      title="Remove photo"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {photoUrls.length < 10 && (
+              <button
+                type="button"
+                onClick={addPhotoUrl}
+                className="mt-3 inline-flex items-center gap-1.5 text-sm text-purple-600 hover:text-purple-700 font-medium"
+              >
+                <Plus className="w-4 h-4" /> Add another photo URL
+              </button>
+            )}
+
+            {photoUrls.filter(Boolean).length > 0 && (
+              <p className="mt-2 text-xs text-slate-400">
+                First URL will be used as the main listing image.
+              </p>
+            )}
+            <p className="mt-1 text-xs text-slate-400">
+              Full photo upload coming soon.
             </p>
           </Section>
 
           {/* Save / feedback */}
           <div className="sticky bottom-0 -mx-4 px-4 py-4 bg-white border-t border-slate-200 flex items-center gap-4">
-            {saved && (
-              <span className="flex items-center gap-1.5 text-sm text-green-700 font-medium">
-                <CheckCircle2 className="w-4 h-4 text-green-600" /> Saved!
-              </span>
-            )}
             {error && (
               <span className="flex items-center gap-1.5 text-sm text-red-600">
                 <AlertCircle className="w-4 h-4" /> {error}

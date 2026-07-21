@@ -15,7 +15,7 @@ export async function GET(
     // Look up the claim by access token
     const claimResult = await client.query(
       `SELECT id, name, email, venue_name, venue_address, venue_phone, venue_website,
-              city_slug, venue_slug, venue_url, status, created_at
+              city_slug, venue_slug, venue_url, status, email_verified, created_at
        FROM venue_claims
        WHERE access_token = $1
        LIMIT 1`,

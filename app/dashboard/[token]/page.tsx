@@ -6,7 +6,7 @@ import { Footer } from '@/components/layout/Footer'
 import { computeCompleteness, scoreColor, scoreLabel } from '@/lib/completeness'
 import {
   CheckCircle2, Clock, AlertCircle, ExternalLink,
-  Pencil, Camera, ListChecks, PoundSterling, FileText, ArrowRight,
+  Pencil, Camera, ListChecks, PoundSterling, FileText, ArrowRight, Mail, Eye,
 } from 'lucide-react'
 
 export const metadata: Metadata = {
@@ -16,12 +16,14 @@ export const metadata: Metadata = {
 
 interface DashboardPageProps {
   params: Promise<{ token: string }>
+  searchParams: Promise<{ verified?: string }>
 }
 
 export const revalidate = 0 // always fresh
 
-export default async function DashboardPage({ params }: DashboardPageProps) {
+export default async function DashboardPage({ params, searchParams }: DashboardPageProps) {
   const { token } = await params
+  const { verified } = await searchParams
 
   // Fetch claim + venue via our own API
   const res = await fetch(
@@ -75,9 +77,9 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
                 href={venueUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm text-slate-600 hover:text-purple-700 border border-slate-200 bg-white px-3 py-2 rounded-lg hover:border-purple-300 transition-colors"
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-purple-600 hover:text-purple-700 border border-purple-200 bg-purple-50 hover:bg-purple-100 px-3 py-2 rounded-lg transition-colors"
               >
-                View listing <ExternalLink className="w-3.5 h-3.5" />
+                <Eye className="w-3.5 h-3.5" /> Preview Public Page
               </a>
             )}
             <Link
@@ -89,6 +91,35 @@ export default async function DashboardPage({ params }: DashboardPageProps) {
             </Link>
           </div>
         </div>
+
+        {/* Email just verified — show once */}
+        {verified === '1' && (
+          <div className="flex items-center gap-3 bg-green-50 border border-green-200 rounded-xl p-4 mb-6">
+            <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />
+            <p className="font-medium text-green-900 text-sm">
+              Email verified! Your ownership is confirmed.
+            </p>
+          </div>
+        )}
+
+        {/* Email verification banner */}
+        {!verified && claim.email_verified === false && (
+          <div className="flex items-start gap-3 bg-blue-50 border border-blue-200 rounded-xl p-4 mb-6">
+            <Mail className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
+            <div className="flex-1 min-w-0">
+              <p className="font-medium text-blue-900 text-sm">Please verify your email address</p>
+              <p className="text-blue-700 text-sm mt-0.5">
+                We sent a verification link to your inbox. Click it to confirm ownership and unlock full dashboard access.
+              </p>
+            </div>
+            <a
+              href={`mailto:hello@softplaynearme.co.uk?subject=Resend%20verification%20for%20${encodeURIComponent(claim.venue_name || '')}`}
+              className="flex-shrink-0 text-xs text-blue-600 hover:text-blue-800 underline whitespace-nowrap"
+            >
+              Resend email
+            </a>
+          </div>
+        )}
 
         {/* Claim status banner */}
         {isPending && (

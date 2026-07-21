@@ -25,7 +25,9 @@
     "enrich:seo:dry": "node scripts/enrich-seo-all.mjs",
     "test:enrichment": "node --test scripts/enrichment-utils.test.mjs",
     "validate": "node scripts/validate-venues.mjs",
-    "validate:fix": "node scripts/validate-venues.mjs --fix"
+    "validate:fix": "node scripts/validate-venues.mjs --fix",
+    "extract:emails": "node scripts/extract-contact-emails.mjs",
+    "extract:emails:dry": "node scripts/extract-contact-emails.mjs --dry-run"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",

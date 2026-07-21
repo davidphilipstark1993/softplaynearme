@@ -17,8 +17,8 @@ const CHECKLIST = [
   {
     icon: Camera,
     title: 'Upload photos (3+ recommended)',
-    desc: 'Listings with photos get 3× more clicks. Show parents your ball pit, café, and party rooms.',
-    value: '+10%',
+    desc: 'Listings with 3+ photos get 3× more clicks. Show parents your ball pit, café, and party rooms.',
+    value: '+20%',
     color: 'text-blue-600 bg-blue-50 border-blue-100',
     iconColor: 'text-blue-600',
     anchor: 'photos',
@@ -27,7 +27,7 @@ const CHECKLIST = [
     icon: Clock,
     title: 'Set your opening hours',
     desc: 'Appear in "Open Now" searches and show parents exactly when you\'re open each day.',
-    value: '+15%',
+    value: '+20%',
     color: 'text-amber-600 bg-amber-50 border-amber-100',
     iconColor: 'text-amber-600',
     anchor: 'hours',
@@ -45,7 +45,7 @@ const CHECKLIST = [
     icon: ListChecks,
     title: 'Select your facilities',
     desc: 'Café, free parking, SEN sessions, birthday parties — let parents filter to find you.',
-    value: '+20%',
+    value: '+15%',
     color: 'text-purple-600 bg-purple-50 border-purple-100',
     iconColor: 'text-purple-600',
     anchor: 'facilities',
@@ -53,8 +53,8 @@ const CHECKLIST = [
   {
     icon: FileText,
     title: 'Write a venue description',
-    desc: 'A friendly 2–3 sentence intro helps parents understand what you offer and who it\'s perfect for.',
-    value: '+15%',
+    desc: 'A great description helps parents decide — and boosts your search ranking.',
+    value: '+10%',
     color: 'text-pink-600 bg-pink-50 border-pink-100',
     iconColor: 'text-pink-600',
     anchor: 'description',
@@ -93,6 +93,13 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
               We&apos;ve emailed you a link to your dashboard — check your inbox.
             </p>
           )}
+        </div>
+
+        {/* Testimonial */}
+        <div className="bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-100 rounded-xl px-6 py-4 mb-6 text-center">
+          <p className="text-slate-700 text-sm font-medium">
+            💜 &ldquo;Venue owners who complete their profile get up to 3&times; more views from local parents.&rdquo;
+          </p>
         </div>
 
         {/* Progress bar */}

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const inter = Inter({
@@ -170,6 +171,7 @@ export default function RootLayout({
           `}
         </Script>
         {children}
+        <Toaster position="bottom-center" richColors closeButton />
       </body>
     </html>
   );
