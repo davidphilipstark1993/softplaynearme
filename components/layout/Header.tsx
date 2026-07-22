@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 
 interface HeaderProps {
@@ -11,6 +12,14 @@ export function Header({ backLink }: HeaderProps) {
     <nav aria-label="Main navigation" className="bg-white border-b border-slate-200 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
+          <Image
+            src="/brand/logo-icon.png"
+            alt=""
+            width={30}
+            height={40}
+            className="h-9 w-auto"
+            priority
+          />
           <span className="font-bold text-xl text-purple-600">Soft Play Near Me</span>
         </Link>
         <div className="flex gap-2 sm:gap-4">
