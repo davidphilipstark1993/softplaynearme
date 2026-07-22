@@ -88,7 +88,11 @@ export async function POST(request: NextRequest) {
     const accessToken = result.rows[0].access_token as string
     const verificationToken = result.rows[0].verification_token as string
 
-    // Fire-and-forget emails — never block the response
+    // Emails are awaited (not fire-and-forget) — Vercel's serverless runtime
+    // doesn't keep a function alive for background work after the response
+    // is sent, so un-awaited sends were getting cut off mid-request and
+    // silently failing. Promise.allSettled means one failure doesn't stop
+    // the others or fail the request.
     const emailOpts = {
       to: email.trim(),
       ownerName: name.trim(),
@@ -97,22 +101,26 @@ export async function POST(request: NextRequest) {
       citySlug: citySlug?.trim() || undefined,
       venueSlug: venueSlug?.trim() || undefined,
     }
-    sendWelcomeEmail(emailOpts).catch((e) => console.error('[claims] welcome email:', e))
-    if (verificationToken) {
-      sendVerificationEmail({ ...emailOpts, verificationToken }).catch((e) =>
-        console.error('[claims] verification email:', e)
-      )
-    }
-    sendAdminClaimNotification({
-      claimantName: name.trim(),
-      claimantEmail: email.trim(),
-      venueName: venueName.trim(),
-      venueAddress: venueAddress?.trim() || undefined,
-      venuePhone: venuePhone?.trim() || undefined,
-      venueWebsite: venueWebsite?.trim() || undefined,
-      citySlug: citySlug?.trim() || undefined,
-      venueSlug: venueSlug?.trim() || undefined,
-    }).catch((e) => console.error('[claims] admin notification:', e))
+    const emailResults = await Promise.allSettled([
+      sendWelcomeEmail(emailOpts),
+      verificationToken
+        ? sendVerificationEmail({ ...emailOpts, verificationToken })
+        : Promise.resolve(),
+      sendAdminClaimNotification({
+        claimantName: name.trim(),
+        claimantEmail: email.trim(),
+        venueName: venueName.trim(),
+        venueAddress: venueAddress?.trim() || undefined,
+        venuePhone: venuePhone?.trim() || undefined,
+        venueWebsite: venueWebsite?.trim() || undefined,
+        citySlug: citySlug?.trim() || undefined,
+        venueSlug: venueSlug?.trim() || undefined,
+      }),
+    ])
+    const emailLabels = ['welcome email', 'verification email', 'admin notification']
+    emailResults.forEach((r, i) => {
+      if (r.status === 'rejected') console.error(`[claims] ${emailLabels[i]}:`, r.reason)
+    })
 
     return NextResponse.json({ success: true, token: accessToken })
   } catch (err) {
