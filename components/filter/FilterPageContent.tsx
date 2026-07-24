@@ -15,6 +15,7 @@ import { buildBreadcrumbSchema, buildFAQSchema, buildItemListSchema, buildCollec
 import { JsonLd } from '@/components/seo/JsonLd'
 import { isOpenNow } from '@/lib/utils'
 import { getFilterContent, type FilterSlug } from '@/lib/filterContent'
+import { getCardQuote, formatLastVerified } from '@/lib/venueCardText'
 
 interface FilterVenue {
   id: number
@@ -23,6 +24,8 @@ interface FilterVenue {
   address: string
   postcode: string
   description?: string
+  review_snippet?: string | null
+  last_verified_at?: string | null
   main_image_url?: string
   cafe: boolean
   parking: boolean
@@ -93,6 +96,7 @@ async function getFilteredVenues(citySlug: string, filterSlug: FilterSlug): Prom
     baby_area: v.babyArea ?? false,
     avg_rating: v.rating ?? undefined,
     review_count: v.reviewCount ?? undefined,
+    last_verified_at: v.lastVerified || undefined,
   }))
 }
 
@@ -259,8 +263,10 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
                         <span className="truncate">{venue.address || venue.postcode}</span>
                       </div>
 
-                      {venue.description && (
-                        <p className="text-slate-600 text-sm mb-3 line-clamp-2">{venue.description}</p>
+                      {getCardQuote(venue.review_snippet) && (
+                        <p className="text-slate-600 text-sm mb-3 line-clamp-2 italic">
+                          &ldquo;{getCardQuote(venue.review_snippet)}&rdquo;
+                        </p>
                       )}
 
                       {/* Feature badges — highlight the filter-relevant one */}
@@ -307,6 +313,12 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
                           </Badge>
                         )}
                       </div>
+
+                      {formatLastVerified(venue.last_verified_at) && (
+                        <p className="text-xs text-slate-400 mt-2">
+                          Verified {formatLastVerified(venue.last_verified_at)}
+                        </p>
+                      )}
                     </div>
 
                     <div className="px-5 py-3 bg-slate-50 border-t border-slate-100 flex gap-2">

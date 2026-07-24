@@ -20,6 +20,7 @@ import { LocationIntro } from '@/components/location/LocationIntro'
 import { getCityOgImage } from '@/lib/cityImages'
 import { FilterSidebar, ActiveFilterBar } from '@/components/search/FilterSidebar'
 import { isSoftPlayVenueType } from '@/lib/venueTypes'
+import { getCardQuote, formatLastVerified } from '@/lib/venueCardText'
 
 interface PageProps {
   params: Promise<{ city: string }>
@@ -143,6 +144,8 @@ interface Venue {
   notes?: string
   isStatic?: boolean
   venue_type?: string | null
+  review_snippet?: string | null
+  last_verified_at?: string | null
 }
 
 interface VenueFilters {
@@ -179,6 +182,7 @@ function staticToDisplayVenue(sv: StaticVenue): Venue {
     price_from: sv.priceFrom ?? null,
     price_to: sv.priceTo ?? null,
     isStatic: true,
+    last_verified_at: sv.lastVerified || undefined,
   }
 }
 
@@ -607,9 +611,11 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                       <span className="truncate">{venue.address || venue.postcode}</span>
                     </div>
 
-                    {/* Description */}
-                    {venue.description && (
-                      <p className="text-slate-600 text-sm mb-3 line-clamp-2">{venue.description}</p>
+                    {/* Genuine review quote only — never the generic AI description */}
+                    {getCardQuote(venue.review_snippet) && (
+                      <p className="text-slate-600 text-sm mb-3 line-clamp-2 italic">
+                        &ldquo;{getCardQuote(venue.review_snippet)}&rdquo;
+                      </p>
                     )}
 
                     {/* Feature badges */}
@@ -641,6 +647,12 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                           </Badge>
                         )}
                       </div>
+                    )}
+
+                    {formatLastVerified(venue.last_verified_at) && (
+                      <p className="text-xs text-slate-400 mt-2">
+                        Verified {formatLastVerified(venue.last_verified_at)}
+                      </p>
                     )}
                   </div>
 

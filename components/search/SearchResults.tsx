@@ -15,6 +15,7 @@ import {
   Navigation,
 } from 'lucide-react'
 import { formatDistance } from '@/lib/geo'
+import { getCardQuote, formatLastVerified } from '@/lib/venueCardText'
 import { cn } from '@/lib/utils'
 
 interface VenueResult {
@@ -25,6 +26,8 @@ interface VenueResult {
   address: string
   postcode: string
   description: string | null
+  review_snippet?: string | null
+  last_verified_at?: string | null
   price_from: number | null
   price_to: number | null
   price_range: string | null
@@ -125,10 +128,10 @@ function VenueCard({
               )}
             </div>
 
-            {/* Description */}
-            {venue.description && (
-              <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
-                {venue.description}
+            {/* Genuine review quote only — never the generic AI description */}
+            {getCardQuote(venue.review_snippet) && (
+              <p className="text-sm text-muted-foreground line-clamp-2 mb-3 italic">
+                &ldquo;{getCardQuote(venue.review_snippet)}&rdquo;
               </p>
             )}
 
@@ -147,6 +150,12 @@ function VenueCard({
                 )
               })}
             </div>
+
+            {formatLastVerified(venue.last_verified_at) && (
+              <p className="text-xs text-muted-foreground mt-2">
+                Verified {formatLastVerified(venue.last_verified_at)}
+              </p>
+            )}
           </div>
 
           {/* Right side - Price and CTA */}

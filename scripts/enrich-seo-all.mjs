@@ -258,16 +258,21 @@ const P2_TEMPLATES = [
       : `${v.name} is a soft play centre in ${v.city} providing indoor play for children in a dedicated and supervised environment. ${v.snippetStr || ''}`,
 ]
 
+// NOTE: these deliberately do NOT assert facts we don't hold for a specific
+// venue (sock policy, generic "designed to entertain" filler, etc — see
+// reports/data-quality-audit.md Phase 3). Every sentence here is either
+// gated on a confirmed v.features.* boolean, or general advice to verify
+// something ("check their website") rather than a claim about the venue.
 const P3_TEMPLATES = [
-  (v) => `Before visiting ${v.name}, it's worth checking their website or social media for current opening times, session prices, and any booking requirements — these can change seasonally. Socks are required for all children and adults entering the play frame. ${v.features.parties ? `If you're planning a birthday party, book well in advance as slots fill up quickly, especially at weekends.` : `Weekday morning sessions are typically quieter and cheaper than weekend slots.`}`,
+  (v) => `Before visiting ${v.name}, it's worth checking their website or social media for current opening times, session prices, and any booking requirements — these can change seasonally.${v.features.parties ? ` If you're planning a birthday party, book well in advance as slots fill up quickly, especially at weekends.` : ''}`,
 
-  (v) => `${v.name} is located in ${v.city} — check their website or call ahead to confirm opening times before your visit, as hours can vary by day and season. Soft-soled socks are required throughout the play area. ${v.features.cafe ? `The on-site café makes it easy to turn a play session into a longer outing — ideal for those mornings when you need to keep the kids entertained until lunchtime.` : `Bringing a packed lunch or snacks is worth considering if you plan to stay for a longer session.`}`,
+  (v) => `${v.name} is located in ${v.city} — check their website or call ahead to confirm opening times before your visit, as hours can vary by day and season.${v.features.cafe ? ` The on-site café makes it easy to turn a play session into a longer outing.` : ''}`,
 
-  (v) => `To get the most out of a visit to ${v.name}, check their current session times and prices online before you go — these are updated regularly. Children will need socks, so keep a spare pair in the bag. ${v.features.sen ? `SEN-friendly sessions are available — contact the venue directly for schedule details, as these sessions are often not listed on the main booking page.` : `Off-peak weekday mornings are the best time for a calmer, less crowded experience.`}`,
+  (v) => `To get the most out of a visit to ${v.name}, check their current session times and prices online before you go — these are updated regularly.${v.features.sen ? ` SEN-friendly sessions are available — contact the venue directly for schedule details, as these sessions are often not listed on the main booking page.` : ''}`,
 
-  (v) => `Parents planning a visit to ${v.name} should confirm opening hours and whether pre-booking is required — this is increasingly common across soft play venues in ${v.city}. Socks are mandatory in all play areas. ${v.features.toddler ? `The dedicated toddler area is separate from the main frame, which is particularly useful when visiting with both a baby or toddler and an older sibling.` : `The play frame is designed to entertain children across a range of ages and abilities.`}`,
+  (v) => `Parents planning a visit to ${v.name} should confirm opening hours and whether pre-booking is required — this is increasingly common across soft play venues in ${v.city}.${v.features.toddler ? ` The dedicated toddler area is separate from the main frame, which is particularly useful when visiting with both a baby or toddler and an older sibling.` : ''}`,
 
-  (v) => `If you're heading to ${v.name} for the first time, it's a good idea to check their website for up-to-date session times, prices, and any booking requirements. Grip socks are recommended for the play areas. ${v.features.parking ? `Parking is available, making it accessible by car for families travelling from across ${v.city} and the surrounding area.` : `Check local transport links and parking options before you travel.`}`,
+  (v) => `If you're heading to ${v.name} for the first time, it's a good idea to check their website for up-to-date session times, prices, and any booking requirements.${v.features.parking ? ` Parking is available, making it accessible by car for families travelling from across ${v.city}.` : ''}`,
 ]
 
 // ── What to Expect generator ──────────────────────────────────────────────
@@ -276,7 +281,7 @@ function generateWhatToExpect(v, features, city) {
   const audiences = []
   if (features.baby || features.toddler) audiences.push('babies and toddlers')
   if (!features.toddler && !features.baby) audiences.push('children of all ages')
-  if (features.multiLevel || parseFloat(v.rating) >= 4.0) audiences.push('children aged 3–10')
+  if (features.multiLevel) audiences.push('older children (multi-level play structure)')
   if (features.parties) audiences.push('birthday party groups')
   if (features.sen) audiences.push('children with additional needs')
 
@@ -296,29 +301,37 @@ function generateWhatToExpect(v, features, city) {
     ? ` Younger children have a dedicated toddler area separated from the main frame, giving parents peace of mind when visiting with mixed-age groups.`
     : ''
 
+  // Only add a rating-based note when we actually have a rating to back it —
+  // no generic filler sentence when there's nothing real to say.
   const ratingNote = v.rating && parseFloat(v.rating) >= 4.2
     ? ` Consistently well-rated by local families, ${v.name} is a reliable choice for a soft play outing in ${city}.`
-    : ` ${v.name} provides a dedicated indoor play environment in ${city} for children to stay active and entertained.`
+    : ''
 
   return `${bestFor}${toddlerNote}${senNote}${partyNote}${ratingNote}`
 }
 
 // ── Tips Before Visiting generator ────────────────────────────────────────
+// Every tip here is either general industry-wide advice (hedged with
+// "most"/"many", not asserted as a confirmed fact about this specific
+// venue) or gated on a confirmed features.* boolean. Nothing here should
+// claim a specific policy (sock rules, ball pit presence, etc) that we
+// don't actually hold as data for this venue — see
+// reports/data-quality-audit.md Phase 3.
 
 function generateTips(v, features, city) {
   const tips = [
-    `Pack socks — grip socks are ideal and required for all play areas.`,
+    `Most soft play centres require socks for children (and often adults) — worth packing a spare pair just in case.`,
     features.cafe
       ? `The on-site café means no need to rush home for lunch. Check the menu on their website or social media.`
       : `Bring a snack bag and a water bottle as the café situation varies — call ahead if refreshments are important.`,
     features.parking
       ? `On-site parking is available. Arrive a few minutes early on weekends as the car park can fill up.`
       : `Check parking options near ${v.address || city} before you travel — street parking availability varies.`,
-    `Book online in advance for weekend and school holiday sessions — they fill up quickly at popular venues.`,
+    `Weekend and school holiday sessions fill up quickly at popular venues — check if pre-booking is available.`,
     features.sen
       ? `If you have a child with additional needs, call ahead to ask about SEN session schedules — these aren't always listed on the main website.`
-      : `Weekday mornings (especially Tuesday–Thursday, 9–11am) are the quietest and calmest times to visit.`,
-    `Bring a change of clothes for younger children — soft play can get messy, especially in the ball pit.`,
+      : `Weekday mornings (especially Tuesday–Thursday, 9–11am) are typically the quietest and calmest times to visit.`,
+    `Bring a change of clothes for younger children — soft play sessions can get messy.`,
   ]
 
   // Return 4-5 tips
