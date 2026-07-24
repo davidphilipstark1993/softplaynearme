@@ -2924,7 +2924,7 @@ export const posts: BlogPost[] = [
 
 <p>From Southend seafront to Rayleigh, Rochford, Leigh-on-Sea and Basildon, you'll find everything from cosy toddler play cafés to large adventure play centres.</p>
 
-<p>Browse soft play venues near you: <a href="/southend">/southend</a></p>
+<p>Browse soft play venues near you: <a href="/soft-play/southend">/soft-play/southend</a></p>
 
 <h2>Why families love soft play in Southend</h2>
 <p>Soft play is a lifesaver for Southend families — especially when the seaside weather doesn't cooperate. It provides a safe indoor space for kids to climb, slide and burn off energy all year round.</p>
@@ -2947,7 +2947,7 @@ export const posts: BlogPost[] = [
   <li><strong>Party availability</strong> if you're planning a celebration</li>
   <li><strong>Quiet/SEN sessions</strong> for calmer play</li>
 </ul>
-<p>Start exploring: <a href="/southend">/southend</a> • Toddlers: <a href="/southend?filter=toddler">/southend?filter=toddler</a></p>
+<p>Start exploring: <a href="/soft-play/southend">/soft-play/southend</a> • Toddlers: <a href="/soft-play/southend/toddler">/soft-play/southend/toddler</a></p>
 
 <h2>Toddler soft play in Southend (1–3 years)</h2>
 <p>If you're searching for <strong>toddler soft play Southend</strong>, look for venues with dedicated under-3 zones with mini slides, soft tunnels, ball pits and sensory features.</p>
@@ -2958,7 +2958,7 @@ export const posts: BlogPost[] = [
   <li>Role-play corners</li>
   <li>Calmer weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly venues: <a href="/southend?filter=toddler">/southend?filter=toddler</a></p>
+<p>Browse toddler-friendly venues: <a href="/soft-play/southend/toddler">/soft-play/southend/toddler</a></p>
 
 <h2>Baby soft play in Southend (under 1s)</h2>
 <p>Many Southend soft play centres run dedicated baby sessions for crawlers, early walkers and sensory exploration.</p>
@@ -2977,7 +2977,7 @@ export const posts: BlogPost[] = [
   <li>Food and drink packages</li>
   <li>Party hosts and add-ons</li>
 </ul>
-<p>Explore party venues: <a href="/southend?filter=parties">/southend?filter=parties</a></p>
+<p>Explore party venues: <a href="/soft-play/southend/birthday-parties">/soft-play/southend/birthday-parties</a></p>
 
 <h2>Cheap soft play in Southend: money-saving tips</h2>
 <p>Looking for <strong>cheap soft play Southend</strong>? There are easy ways to keep costs down.</p>
@@ -5258,7 +5258,7 @@ export const posts: BlogPost[] = [
 <ul>
   <li><a href="/birmingham">/birmingham</a></li>
   <li><a href="/coventry">/coventry</a></li>
-  <li><a href="/stoke-on-trent">/stoke-on-trent</a></li>
+  <li><a href="/soft-play/stoke">/soft-play/stoke</a></li>
 </ul>`,
     faq: [
       { q: 'What is the best soft play in Wolverhampton?', a: 'Wolverhampton has a range of indoor play venues for babies, toddlers and older children, including party packages and SEN-friendly sessions across the area.' },
@@ -5281,7 +5281,7 @@ export const posts: BlogPost[] = [
 
 <p>This 2026 parent guide covers the best soft play in Stoke-on-Trent, with practical advice on toddler and baby sessions, birthday parties, SEN-friendly options and how to save money.</p>
 
-<p>Browse soft play venues in Stoke-on-Trent: <a href="/stoke-on-trent">/stoke-on-trent</a></p>
+<p>Browse soft play venues in Stoke-on-Trent: <a href="/soft-play/stoke">/soft-play/stoke</a></p>
 
 <h2>Why families love soft play in Stoke-on-Trent</h2>
 <ul>
@@ -5312,7 +5312,7 @@ export const posts: BlogPost[] = [
   <li>Sensory play features</li>
   <li>Quieter weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly soft play in Stoke-on-Trent: <a href="/stoke-on-trent?filter=toddler">/stoke-on-trent?filter=toddler</a></p>
+<p>Browse toddler-friendly soft play in Stoke-on-Trent: <a href="/soft-play/stoke/toddler">/soft-play/stoke/toddler</a></p>
 
 <h2>Baby soft play in Stoke-on-Trent (under 1s)</h2>
 <p>Several venues in the Stoke-on-Trent area offer baby-friendly sessions or dedicated baby areas with padded flooring and sensory toys — a lovely option for babies who can sit up or crawl.</p>
@@ -5331,7 +5331,7 @@ export const posts: BlogPost[] = [
   <li>Reserved play time for your group</li>
   <li>Party host support at some venues</li>
 </ul>
-<p>Explore birthday party venues in Stoke-on-Trent: <a href="/stoke-on-trent?filter=parties">/stoke-on-trent?filter=parties</a></p>
+<p>Explore birthday party venues in Stoke-on-Trent: <a href="/soft-play/stoke/birthday-parties">/soft-play/stoke/birthday-parties</a></p>
 
 <h2>Cheap soft play in Stoke-on-Trent: money-saving tips</h2>
 <p>Want <strong>cheap soft play in Stoke-on-Trent</strong>? Try these ideas:</p>
@@ -5351,7 +5351,7 @@ export const posts: BlogPost[] = [
   <li>Predictable session structure</li>
   <li>Supportive, trained staff</li>
 </ul>
-<p>Find SEN-friendly soft play in Stoke-on-Trent: <a href="/stoke-on-trent?filter=sen">/stoke-on-trent?filter=sen</a></p>
+<p>Find SEN-friendly soft play in Stoke-on-Trent: <a href="/soft-play/stoke/sen-friendly">/soft-play/stoke/sen-friendly</a></p>
 
 <h2>Local tips: parking, cafés, quieter times and what to bring</h2>
 <ul>
@@ -5474,7 +5474,7 @@ export const posts: BlogPost[] = [
 <ul>
   <li><a href="/nottingham">/nottingham</a></li>
   <li><a href="/leicester">/leicester</a></li>
-  <li><a href="/stoke-on-trent">/stoke-on-trent</a></li>
+  <li><a href="/soft-play/stoke">/soft-play/stoke</a></li>
 </ul>`,
     faq: [
       { q: 'What is the best soft play in Derby?', a: 'Derby has a solid range of indoor play venues for babies, toddlers and older children, including birthday party packages and SEN-friendly sessions at select venues.' },

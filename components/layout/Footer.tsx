@@ -21,12 +21,12 @@ const cityDirectory: { region: string; cities: { name: string; slug: string }[] 
   ]},
   { region: 'Midlands', cities: [
     { name: 'Birmingham', slug: 'birmingham' }, { name: 'Nottingham', slug: 'nottingham' },
-    { name: 'Leicester', slug: 'leicester' }, { name: 'Stoke-on-Trent', slug: 'stoke-on-trent' },
+    { name: 'Leicester', slug: 'leicester' }, { name: 'Stoke-on-Trent', slug: 'stoke' },
     { name: 'Lincoln', slug: 'lincoln' },
   ]},
   { region: 'East of England', cities: [
     { name: 'Norwich', slug: 'norwich' }, { name: 'Ipswich', slug: 'ipswich' },
-    { name: 'Colchester', slug: 'colchester' }, { name: 'Southend-on-Sea', slug: 'southend-on-sea' },
+    { name: 'Colchester', slug: 'colchester' }, { name: 'Southend-on-Sea', slug: 'southend' },
   ]},
   { region: 'London & South East', cities: [
     { name: 'London', slug: 'london' }, { name: 'Brighton', slug: 'brighton' },
