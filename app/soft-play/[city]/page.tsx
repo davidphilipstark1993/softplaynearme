@@ -19,6 +19,7 @@ import { getPostForCity } from '@/lib/blogPosts'
 import { LocationIntro } from '@/components/location/LocationIntro'
 import { getCityOgImage } from '@/lib/cityImages'
 import { FilterSidebar, ActiveFilterBar } from '@/components/search/FilterSidebar'
+import { isSoftPlayVenueType } from '@/lib/venueTypes'
 
 interface PageProps {
   params: Promise<{ city: string }>
@@ -141,6 +142,7 @@ interface Venue {
   mapsUrl?: string
   notes?: string
   isStatic?: boolean
+  venue_type?: string | null
 }
 
 interface VenueFilters {
@@ -345,17 +347,21 @@ export default async function CityPage({ params, searchParams }: PageProps) {
     url: `${baseUrl}/soft-play/${city}`,
   })
 
-  // Curated spotlight sections (only shown on fully unfiltered city pages)
+  // Curated spotlight sections (only shown on fully unfiltered city pages).
+  // Restricted to genuine soft play venues — trampoline parks, play farms,
+  // and other family attractions shouldn't rank in soft-play-specific
+  // modules even though they may still appear in the main listing.
   const hasActiveFilters = !!(filter || search || age.length || facilities.length || price || special.length)
   const showCurated = !hasActiveFilters && venues.length >= 4
-  const toddlerVenues = showCurated ? venues.filter(v => v.toddler_area).slice(0, 4) : []
+  const softPlayVenues = venues.filter(v => isSoftPlayVenueType(v.venue_type))
+  const toddlerVenues = showCurated ? softPlayVenues.filter(v => v.toddler_area).slice(0, 4) : []
   const topRatedVenues = showCurated
-    ? [...venues].filter(v => v.avg_rating && Number(v.avg_rating) > 0).sort((a, b) => Number(b.avg_rating || 0) - Number(a.avg_rating || 0)).slice(0, 4)
+    ? [...softPlayVenues].filter(v => v.avg_rating && Number(v.avg_rating) > 0).sort((a, b) => Number(b.avg_rating || 0) - Number(a.avg_rating || 0)).slice(0, 4)
     : []
   const cityBlogPost = getPostForCity(displayName)
 
   const mostPopularVenues = showCurated
-    ? [...venues].filter(v => v.review_count && Number(v.review_count) > 0).sort((a, b) => Number(b.review_count || 0) - Number(a.review_count || 0)).slice(0, 4)
+    ? [...softPlayVenues].filter(v => v.review_count && Number(v.review_count) > 0).sort((a, b) => Number(b.review_count || 0) - Number(a.review_count || 0)).slice(0, 4)
     : []
 
   return (
