@@ -14,21 +14,12 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { blogPosts } from '@/lib/blogPosts'
 import { CITY_IMAGES } from '@/lib/cityImages'
 import { getPool } from '@/lib/pool'
+import { getTotalVenueCount } from '@/lib/venueStats'
 import type { Metadata } from 'next'
 
-async function getVenueCount(): Promise<number> {
-  try {
-    const pool = getPool()
-    const { rows } = await pool.query<{ total: number }>('SELECT COUNT(*)::int AS total FROM venues')
-    return rows[0]?.total ?? 0
-  } catch {
-    return 0
-  }
-}
-
 export async function generateMetadata(): Promise<Metadata> {
-  const total = await getVenueCount()
-  const countStr = total > 0 ? total.toLocaleString('en-GB') : '1,800+'
+  const total = await getTotalVenueCount()
+  const countStr = total ? total.toLocaleString('en-GB') : '1,800+'
   const description = `Find ${countStr} soft play centres near you across the UK. Search by postcode, compare prices, opening times, facilities, photos & reviews. Free directory updated daily by venue owners.`
   return {
     description,
