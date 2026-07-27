@@ -25,7 +25,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     }
   }
 
-  const title = `${post.title} | Soft Play Near Me`
+  // The root layout already applies `template: "%s | Soft Play Near Me"`, so the
+  // page title must NOT repeat the suffix — doing so rendered it twice. Social
+  // cards don't go through the template, so they keep the suffix explicitly.
+  const title = post.title
+  const socialTitle = `${post.title} | Soft Play Near Me`
   const description = post.excerpt
   const canonical = `https://www.softplaynearme.co.uk/blog/${post.slug}`
   const ogImage = getBlogOgImage(post.city)
@@ -36,19 +40,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     alternates: {
       canonical,
     },
+    ...(post.noindex && { robots: { index: false, follow: true } }),
     openGraph: {
-      title,
+      title: socialTitle,
       description,
       url: canonical,
       type: 'article',
       siteName: 'Soft Play Near Me',
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt,
-      images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: socialTitle }],
     },
     twitter: {
       card: 'summary_large_image',
-      title,
+      title: socialTitle,
       description,
       images: [ogImage],
     },

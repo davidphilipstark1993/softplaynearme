@@ -58,6 +58,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]
 
   for (const post of blogPosts) {
+    // Skip noindexed guides for the same reason we skip thin venue pages below:
+    // submitting a URL that carries a noindex directive is a mixed signal.
+    if (post.noindex) continue
+
     sitemap.push({
       url: `${baseUrl}/blog/${post.slug}`,
       lastModified: new Date(post.dateModified),
