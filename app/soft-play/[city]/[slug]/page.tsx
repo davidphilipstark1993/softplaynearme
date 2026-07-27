@@ -16,7 +16,7 @@ import {
   ChevronUp,
 } from 'lucide-react'
 import type { Metadata } from 'next'
-import { getPool } from '@/lib/pool'
+import { getPool, STATIC_BUILD } from '@/lib/pool'
 import { getStaticVenue, getStaticTownBySlug, getStaticVenuesByTown, getAllStaticTownSlugs, type StaticVenue } from '@/lib/staticVenues'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
@@ -172,7 +172,10 @@ async function getVenue(citySlug: string, slug: string): Promise<Venue | null> {
       client.release()
     }
   } catch (error) {
-    console.error('Database unavailable, falling back to static data:', error)
+    // Static builds skip the DB on purpose — don't log once per page for that.
+    if (!STATIC_BUILD) {
+      console.error('Database unavailable, falling back to static data:', error)
+    }
   }
 
   const staticVenue = getStaticVenue(citySlug, slug)

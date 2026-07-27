@@ -7,7 +7,7 @@ import { Badge } from '@/components/ui/badge'
 import { getCityBySlug, getFilterBySlug, getNearbyCities } from '@/lib/venues'
 import { getStaticVenuesByTown } from '@/lib/staticVenues'
 import { MapPin, Star, Coffee, Car, Baby, PartyPopper, Heart, Globe, Navigation, CheckCircle2, Info } from 'lucide-react'
-import { getPool } from '@/lib/pool'
+import { getPool, STATIC_BUILD } from '@/lib/pool'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
@@ -70,7 +70,10 @@ async function getFilteredVenues(citySlug: string, filterSlug: FilterSlug): Prom
       client.release()
     }
   } catch (error) {
-    console.error(`[FilterPage] DB error for ${citySlug}/${filterSlug}:`, error)
+    // Static builds skip the DB on purpose — don't log once per city/filter pair.
+    if (!STATIC_BUILD) {
+      console.error(`[FilterPage] DB error for ${citySlug}/${filterSlug}:`, error)
+    }
   }
 
   // Static data fallback

@@ -7,7 +7,7 @@ import { Badge } from '@/components/ui/badge'
 import { getCityBySlug, getAllCitySlugs, getNearbyCities, filters } from '@/lib/venues'
 import { MapPin, Star, Coffee, Car, Baby, PartyPopper, Heart, Phone, Globe, Navigation, TrendingUp } from 'lucide-react'
 import type { Metadata } from 'next'
-import { getPool } from '@/lib/pool'
+import { getPool, STATIC_BUILD } from '@/lib/pool'
 import { getStaticVenuesByTown, getStaticTownBySlug, getAllStaticTownSlugs, type StaticVenue } from '@/lib/staticVenues'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
@@ -256,7 +256,10 @@ async function getVenues(citySlug: string, opts: VenueFilters = {}): Promise<Ven
       client.release()
     }
   } catch (error) {
-    console.error('Database unavailable, falling back to static data:', error)
+    // Static builds skip the DB on purpose — don't log once per page for that.
+    if (!STATIC_BUILD) {
+      console.error('Database unavailable, falling back to static data:', error)
+    }
   }
 
   // Static data fallback with client-side filtering
