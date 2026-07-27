@@ -1,0 +1,470 @@
+[
+  {
+    "slug": "best-soft-play-in-york",
+    "city": "York",
+    "citySlugGuess": "york",
+    "declared": true,
+    "venueDataCount": 91,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 1
+  },
+  {
+    "slug": "best-soft-play-in-sheffield",
+    "city": "Sheffield",
+    "citySlugGuess": "sheffield",
+    "declared": true,
+    "venueDataCount": 120,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 1
+  },
+  {
+    "slug": "best-soft-play-in-hull",
+    "city": "Hull",
+    "citySlugGuess": "hull",
+    "declared": true,
+    "venueDataCount": 79,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 4
+  },
+  {
+    "slug": "cheap-soft-play-in-hull",
+    "city": "Hull",
+    "citySlugGuess": "hull",
+    "declared": true,
+    "venueDataCount": 79,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-leeds",
+    "city": "Leeds",
+    "citySlugGuess": "leeds",
+    "declared": true,
+    "venueDataCount": 73,
+    "hasPlaceholder": true,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-london",
+    "city": "London",
+    "citySlugGuess": "london",
+    "declared": true,
+    "venueDataCount": 0,
+    "hasPlaceholder": true,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-manchester",
+    "city": "Manchester",
+    "citySlugGuess": "manchester",
+    "declared": true,
+    "venueDataCount": 0,
+    "hasPlaceholder": true,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-birmingham",
+    "city": "Birmingham",
+    "citySlugGuess": "birmingham",
+    "declared": true,
+    "venueDataCount": 0,
+    "hasPlaceholder": true,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-bristol",
+    "city": "Bristol",
+    "citySlugGuess": "bristol",
+    "declared": true,
+    "venueDataCount": 0,
+    "hasPlaceholder": true,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-liverpool",
+    "city": "Liverpool",
+    "citySlugGuess": "liverpool",
+    "declared": true,
+    "venueDataCount": 0,
+    "hasPlaceholder": true,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-sheffield",
+    "city": "Sheffield",
+    "citySlugGuess": "sheffield",
+    "declared": true,
+    "venueDataCount": 120,
+    "hasPlaceholder": true,
+    "realVenuesNamed": 2
+  },
+  {
+    "slug": "best-soft-play-in-newcastle",
+    "city": "Newcastle",
+    "citySlugGuess": "newcastle",
+    "declared": true,
+    "venueDataCount": 22,
+    "hasPlaceholder": true,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-bournemouth",
+    "city": "Bournemouth",
+    "citySlugGuess": "bournemouth",
+    "declared": true,
+    "venueDataCount": 32,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-brighton",
+    "city": "Brighton",
+    "citySlugGuess": "brighton",
+    "declared": true,
+    "venueDataCount": 27,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-cardiff",
+    "city": "Cardiff",
+    "citySlugGuess": "cardiff",
+    "declared": true,
+    "venueDataCount": 42,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-colchester",
+    "city": "Colchester",
+    "citySlugGuess": "colchester",
+    "declared": true,
+    "venueDataCount": 32,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-hastings",
+    "city": "Hastings",
+    "citySlugGuess": "hastings",
+    "declared": true,
+    "venueDataCount": 27,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-ipswich",
+    "city": "Ipswich",
+    "citySlugGuess": "ipswich",
+    "declared": true,
+    "venueDataCount": 16,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-norwich",
+    "city": "Norwich",
+    "citySlugGuess": "norwich",
+    "declared": true,
+    "venueDataCount": 30,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-portsmouth",
+    "city": "Portsmouth",
+    "citySlugGuess": "portsmouth",
+    "declared": true,
+    "venueDataCount": 36,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-southend",
+    "city": "Southend",
+    "citySlugGuess": "southend",
+    "declared": true,
+    "venueDataCount": 23,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-swansea",
+    "city": "Swansea",
+    "citySlugGuess": "swansea",
+    "declared": true,
+    "venueDataCount": 35,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-huddersfield",
+    "city": "Huddersfield",
+    "citySlugGuess": "huddersfield",
+    "declared": true,
+    "venueDataCount": 4,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-york",
+    "city": "York",
+    "citySlugGuess": "york",
+    "declared": true,
+    "venueDataCount": 91,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-edinburgh",
+    "city": "Edinburgh",
+    "citySlugGuess": "edinburgh",
+    "declared": true,
+    "venueDataCount": 17,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-glasgow",
+    "city": "Glasgow",
+    "citySlugGuess": "glasgow",
+    "declared": true,
+    "venueDataCount": 51,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-aberdeen",
+    "city": "Aberdeen",
+    "citySlugGuess": "aberdeen",
+    "declared": true,
+    "venueDataCount": 9,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-dundee",
+    "city": "Dundee",
+    "citySlugGuess": "dundee",
+    "declared": false,
+    "venueDataCount": 0,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-inverness",
+    "city": "Inverness",
+    "citySlugGuess": "inverness",
+    "declared": true,
+    "venueDataCount": 2,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-stirling",
+    "city": "Stirling",
+    "citySlugGuess": "stirling",
+    "declared": false,
+    "venueDataCount": 0,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-nottingham",
+    "city": "Nottingham",
+    "citySlugGuess": "nottingham",
+    "declared": true,
+    "venueDataCount": 45,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-leicester",
+    "city": "Leicester",
+    "citySlugGuess": "leicester",
+    "declared": true,
+    "venueDataCount": 35,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-coventry",
+    "city": "Coventry",
+    "citySlugGuess": "coventry",
+    "declared": false,
+    "venueDataCount": 0,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-milton-keynes",
+    "city": "Milton Keynes",
+    "citySlugGuess": "milton-keynes",
+    "declared": false,
+    "venueDataCount": 0,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-oxford",
+    "city": "Oxford",
+    "citySlugGuess": "oxford",
+    "declared": false,
+    "venueDataCount": 0,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-cambridge",
+    "city": "Cambridge",
+    "citySlugGuess": "cambridge",
+    "declared": false,
+    "venueDataCount": 0,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-reading",
+    "city": "Reading",
+    "citySlugGuess": "reading",
+    "declared": false,
+    "venueDataCount": 0,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-southampton",
+    "city": "Southampton",
+    "citySlugGuess": "southampton",
+    "declared": false,
+    "venueDataCount": 0,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-plymouth",
+    "city": "Plymouth",
+    "citySlugGuess": "plymouth",
+    "declared": false,
+    "venueDataCount": 0,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-exeter",
+    "city": "Exeter",
+    "citySlugGuess": "exeter",
+    "declared": false,
+    "venueDataCount": 0,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-swindon",
+    "city": "Swindon",
+    "citySlugGuess": "swindon",
+    "declared": false,
+    "venueDataCount": 0,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-wolverhampton",
+    "city": "Wolverhampton",
+    "citySlugGuess": "wolverhampton",
+    "declared": false,
+    "venueDataCount": 0,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-stoke-on-trent",
+    "city": "Stoke-on-Trent",
+    "citySlugGuess": "stoke-on-trent",
+    "declared": false,
+    "venueDataCount": 0,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-derby",
+    "city": "Derby",
+    "citySlugGuess": "derby",
+    "declared": false,
+    "venueDataCount": 0,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-chester",
+    "city": "Chester",
+    "citySlugGuess": "chester",
+    "declared": false,
+    "venueDataCount": 0,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-preston",
+    "city": "Preston",
+    "citySlugGuess": "preston",
+    "declared": false,
+    "venueDataCount": 0,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-blackpool",
+    "city": "Blackpool",
+    "citySlugGuess": "blackpool",
+    "declared": true,
+    "venueDataCount": 18,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-middlesbrough",
+    "city": "Middlesbrough",
+    "citySlugGuess": "middlesbrough",
+    "declared": false,
+    "venueDataCount": 0,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-peterborough",
+    "city": "Peterborough",
+    "citySlugGuess": "peterborough",
+    "declared": false,
+    "venueDataCount": 0,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-soft-play-in-northampton",
+    "city": "Northampton",
+    "citySlugGuess": "northampton",
+    "declared": false,
+    "venueDataCount": 0,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "best-toddler-soft-play-in-hull",
+    "city": "Hull",
+    "citySlugGuess": "hull",
+    "declared": true,
+    "venueDataCount": 79,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  },
+  {
+    "slug": "rainy-day-activities-hull",
+    "city": "Hull",
+    "citySlugGuess": "hull",
+    "declared": true,
+    "venueDataCount": 79,
+    "hasPlaceholder": false,
+    "realVenuesNamed": 0
+  }
+]

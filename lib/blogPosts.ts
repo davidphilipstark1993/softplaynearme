@@ -14,6 +14,14 @@ export interface BlogPost {
   dateModified: string
   contentHtml: string
   faq: BlogFaq[]
+  /**
+   * Set on guides that still contain unfinished template scaffolding (literal
+   * `example-venue-N` links) or otherwise aren't fit to be indexed yet. The page
+   * stays reachable at its URL, but emits `robots: noindex` and is kept out of
+   * the sitemap — same "don't send mixed signals" rule the thin venue pages use.
+   * Clear the flag once the guide is rewritten against real venue data.
+   */
+  noindex?: boolean
 }
 
 export const posts: BlogPost[] = [
@@ -164,148 +172,149 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'best-soft-play-in-sheffield',
-    title: 'Best Soft Play in Sheffield (2026 Parent Guide)',
+    title: "Soft Play in Sheffield: A Parent's Guide (2026)",
     city: 'Sheffield',
     excerpt:
-      'Discover the best soft play in Sheffield for babies, toddlers and older kids—plus party venues, sensory play, local tips and money-saving ideas for families.',
+      'A guide to the 14 soft play and role-play centres we hold verified listings for in Sheffield — grouped by part of the city, with opening patterns, closed days and timed-session venues.',
     publishedAt: '2026-02-15T00:00:00.000Z',
-    updatedAt: '2026-02-15T00:00:00.000Z',
+    updatedAt: '2026-07-27T00:00:00.000Z',
     datePublished: '2026-02-15T00:00:00.000Z',
-    dateModified: '2026-02-15T00:00:00.000Z',
-    contentHtml: `<p>Looking for the <strong>best soft play in Sheffield</strong>? Whether you’re planning a toddler session, a rainy day activity, or a fun birthday party, Sheffield has several great indoor soft play centres for families to enjoy.</p>
+    dateModified: '2026-07-27T00:00:00.000Z',
+    contentHtml: `<p>Sheffield is a big, hilly, spread-out city, and that shapes soft play more than anything else. A centre that looks close on a map can be twenty minutes and two sets of lights away, and the venue that suits you is usually the one on your side of town rather than the one with the best photos. So this guide is organised by <strong>where things actually are</strong> — plus the practical detail that decides a morning out: which days each place is shut, which run fixed timed sessions you need to plan around, and which stay open past teatime.</p>
 
-<p>In this 2026 parent guide, we cover toddler play options, baby sessions, party setups, cheap soft play tips and SEN-friendly environments across Sheffield and nearby areas.</p>
+<p>We hold verified listings for <strong>14 soft play and children's role-play centres</strong> inside Sheffield's own postcode districts. A note on that number: plenty of "Sheffield" listings elsewhere are actually in Rotherham (S60–S66), Barnsley (S70–S75) or Worksop (S80). They're all "S" postcodes, but none of them are Sheffield, and we've left them out. Everything below is in S1–S14, S17, S20, S35 or S36.</p>
 
-<p>Browse local venues here: <a href="/sheffield">/sheffield</a></p>
+<blockquote>
+  <p>👉 <strong><a href="/soft-play/sheffield">Browse every soft play in Sheffield — opening hours, facilities and locations</a></strong></p>
+</blockquote>
 
-<h2>Why families love soft play in Sheffield</h2>
-<p>Indoor soft play centres in Sheffield provide safe, padded play spaces with climbing frames, slides, ball pits and interactive zones all under one roof—perfect for rainy UK days and energetic kids.</p>
+<h2>Sheffield soft play at a glance</h2>
+<p>The clearest split isn't by age — it's between <em>drop-in</em> centres, where you turn up and stay as long as you like, and <em>timed-session</em> venues, where you book a slot of roughly 80 to 90 minutes. Sheffield has an unusually high number of the second kind, and turning up at one without knowing that is the single most common way to waste a trip.</p>
+
+<p>The other useful split is geographic. Most of the city's play centres cluster in three places: the Lower Don Valley in the east (S9), the Hillsborough and Wadsley side to the north-west (S6), and the Handsworth–Woodhouse–Beighton corridor to the south-east (S13 and S20). The city centre and inner north have a handful more, and there's one out at Stocksbridge.</p>
+
+<h2>East Sheffield and the Lower Don Valley (S9)</h2>
+<p>Three centres sit within about a mile of each other along the old industrial corridor, which makes this the easiest part of the city to have a backup plan in.</p>
+
+<p><strong><a href="/soft-play/sheffield/monkey-bizness-sheffield">Monkey Bizness Sheffield</a></strong> at Valley Centertainment on Broughton Lane is the city's most-reviewed play centre by a distance — 1,142 Google reviews at 4.2. It's also the most forgiving to plan around: open <strong>9.30am to 6pm, every day of the week</strong>, with no closed day and no session structure. If you want somewhere you can leave for on a whim, this is it. Being on the Centertainment site also means the usual retail-park parking rather than a residential side street.</p>
+
+<p><strong><a href="/soft-play/sheffield/play-valley-sheffield-soft-play-centre-and-kids-parties">Play Valley Sheffield</a></strong> on Coleford Road in Darnall rates higher — 4.7 from 816 reviews, one of the best combinations of score and sample size in the city. The catch is the timetable: it's <strong>closed all day Tuesday</strong>, and Monday and Wednesday it shuts at 2.30pm. Thursday to Saturday it runs to 6pm, Sunday to 4pm. Worth checking the day before rather than assuming.</p>
+
+<p><strong><a href="/soft-play/sheffield/playtimes-playtown-sensory-and-imaginary-role-play-centre">Playtimes Playtown</a></strong> on Leigh Street in Attercliffe is a sensory and imaginary role-play centre rather than a climbing-frame venue, and it holds the highest rating in the city with a meaningful number of reviews behind it: <strong>4.9 from 129</strong>. Open 9.30am to 3pm Monday to Saturday, <strong>closed Sunday</strong>. The short, consistent day suggests a small operation, which is usually a good sign if your child finds the big frame venues overwhelming.</p>
+
+<h2>Hillsborough, Walkley and the north-west (S6)</h2>
+<p>Three more, all quite different from each other.</p>
+
+<p><strong><a href="/soft-play/sheffield/fun-house-play-centre">Fun House Play Centre</a></strong> on Middlewood Road is the straightforward option — 9.30am to 5.30pm every weekday and Saturday, 10am Sunday, no closed days, no sessions. It rates 4.0 from 216 reviews — a middling score, but on the largest review sample of the three S6 venues, so it's the most settled of them. It's open when you need it and it's on a main road with buses.</p>
+
+<p><strong><a href="/soft-play/sheffield/trip-2-town">TRIP 2 TOWN</a></strong> on Halifax Road runs <strong>fixed 90-minute sessions</strong> — 9.30, 11.30, 1.30 and 4pm on weekdays and Saturdays, with a reduced Sunday timetable of just two afternoon slots (12pm and 2.30pm). It rates 4.9, though from only 17 reviews, so treat that as promising rather than proven. The late-afternoon 4pm slot is one of the few genuine after-school options in the city.</p>
+
+<p><strong><a href="/soft-play/sheffield/treasure-island-sheffield">Treasure Island Sheffield</a></strong> on Baxter Road is <strong>closed Mondays</strong>, then 10am to 6pm Tuesday to Friday and 10am to 5pm at weekends. At 3.8 from 33 reviews it's the lowest-rated in this guide, and with a sample that small the score could move either way.</p>
+
+<h2>Handsworth, Woodhouse and the south-east (S13, S20)</h2>
+<p><strong><a href="/soft-play/sheffield/runaround-play-centre">Runaround Play Centre</a></strong> on Holbrook Rise at Halfway is the main draw for the far south-east, and it's among the most-reviewed centres in the city — 814 reviews at 4.2, third only to Monkey Bizness and Play Valley. Open every day, 9.30am to 6pm on weekdays and 10am to 6pm at weekends. For families out towards Beighton, Mosborough and Killamarsh it's considerably closer than anything in town.</p>
+
+<p><strong><a href="/soft-play/sheffield/playmania-sheffield">Playmania Sheffield</a></strong> on Orgreave Drive rates well at 4.7 from 257 reviews, but it has the most awkward timetable of any venue here and it's worth reading twice: <strong>closed all day Wednesday</strong>, and <strong>Tuesday it opens 9am to 11.30am only</strong>. Monday, Thursday and Friday run 9.30am to 3pm, weekends 9.30am to 2.30pm. There is no afternoon at this venue at all.</p>
+
+<p><strong><a href="/soft-play/sheffield/pandyland-childrens-role-play">PandyLand Children's Role Play</a></strong> on Richmond Park Road in Handsworth is a role-play centre — the pretend-shops-and-post-office format rather than padded climbing. 4.4 from 91 reviews. It's one of the few places in Sheffield with genuinely longer <strong>weekend</strong> hours than weekday ones: 9am to 5pm Saturday and Sunday, against a 3.30pm weekday finish.</p>
+
+<h2>City centre and inner north (S2, S3, S4, S5)</h2>
+<p><strong><a href="/soft-play/sheffield/playroom-soft-play-centre-sheffield">Playroom Soft Play Centre</a></strong> on St Mary's Gate is the answer to a question no other Sheffield venue answers: what if you can't get there until after work? It's open <strong>until 7pm Monday to Thursday and until 8pm Friday, Saturday and Sunday</strong> — the only centre in the city open into the evening, and by a margin of at least an hour. 4.3 from 63 reviews. Central location, so parking is city-centre parking.</p>
+
+<p><strong><a href="/soft-play/sheffield/medieval-mayhem">Medieval Mayhem</a></strong> at Toledo Works on Neepsend Lane is the themed option, and well established — 789 reviews at 4.4. Weekdays it splits into two blocks with a <strong>closed gap between 2pm and 3.30pm</strong>, so a late-lunch arrival will find the doors shut; Wednesday is <strong>morning only</strong>, closing at 2pm. Weekends run straight through, 9.30am to 6pm.</p>
+
+<p><strong><a href="/soft-play/sheffield/curious-kids-town">Curious Kids Town</a></strong> at Bankside Works on Lumley Street runs the most structured timetable in the city: <strong>four fixed sessions a day, every day</strong>, each about 80 minutes — 9.30, 11.30, 1.30 and 3.30 on weekdays, shifting half an hour earlier at weekends (9am, 11am, 1pm, 3pm). 4.3 from 127 reviews. Capped sessions with a hard reset between them tend to mean a lower noise floor than a drop-in venue at the same capacity.</p>
+
+<p><strong><a href="/soft-play/sheffield/sams-space-soft-play-firth-park-methodist-church">Sam's Space Soft Play</a></strong> on Stubbin Lane runs out of Firth Park Methodist Church, and it's the smallest venue in this guide — a perfect 5.0, but from just 35 reviews. Weekdays 10am to 2pm, Saturday 10.30am to 5.30pm, <strong>closed Sunday</strong>. Church-hall soft play is a different proposition to a commercial centre: smaller, quieter, usually cheaper, and often more welcoming to a child who struggles with the big venues.</p>
+
+<h2>Stocksbridge (S36)</h2>
+<p><strong><a href="/soft-play/sheffield/jungle-monkeys">Jungle Monkeys</a></strong> at the Wharncliffe Industrial Complex on Station Road rates 4.8 from 118 reviews — one of the highest scores in this guide, and backed by a reasonable sample. But check the hours before setting off, because they're counterintuitive: weekdays 9.30am to 2.30pm, and <strong>weekends 9am to 11.30am only</strong>. A Saturday afternoon trip isn't possible. For families in Stocksbridge, Deepcar and the upper Don Valley it saves a long run into the city, as long as you go early.</p>
+
+<h2>Timed sessions: the thing to check first</h2>
+<p>Three Sheffield venues don't do open-ended play, and this catches people out:</p>
 <ul>
-  <li>Indoor fun year-round</li>
-  <li>Dedicated baby and toddler areas</li>
-  <li>Birthday party packages and private hire</li>
-  <li>Cafés and seating for adults</li>
-  <li>Accessible locations around the city</li>
+  <li><strong>Curious Kids Town</strong> — four ~80-minute sessions daily, from 9.30am weekdays / 9am weekends</li>
+  <li><strong>TRIP 2 TOWN</strong> — four 90-minute sessions, 9.30am to 5.30pm, but only two on Sundays</li>
+  <li><strong>Medieval Mayhem</strong> — not booked sessions as such, but a genuine closure between 2pm and 3.30pm on most weekdays</li>
 </ul>
+<p>Add the venues with a full closed day — <strong>Play Valley</strong> (Tuesday), <strong>Playmania</strong> (Wednesday), <strong>Treasure Island</strong> (Monday), <strong>Playtimes Playtown</strong> and <strong>Sam's Space</strong> (both Sunday) — and on any given day roughly a third of Sheffield's soft play is either shut or mid-changeover. Checking beats guessing.</p>
 
-<h2>Best soft play in Sheffield: what to look for</h2>
-<p>When choosing soft play, look for:</p>
-<ul>
-  <li><strong>Age-appropriate zones</strong> (baby/toddler vs older kids)</li>
-  <li><strong>Clean and well-maintained equipment</strong></li>
-  <li><strong>Good visibility</strong> so parents can supervise</li>
-  <li><strong>Facilities</strong> like cafés, toilets and baby changing</li>
-  <li><strong>Party packages</strong> if you’re planning a celebration</li>
-</ul>
+<h2>When to go</h2>
+<p>The general rule holds in Sheffield as everywhere: term-time weekday mornings are the quietest, and the hour after opening is the best of those. Most centres here open at 9.30am, with Playroom, Treasure Island and Sam's Space starting at 10am.</p>
 
-<p>Start here: <a href="/sheffield">/sheffield</a> and for toddlers: <a href="/sheffield?filter=toddler">/sheffield?filter=toddler</a></p>
+<p>Sheffield's own quirk is that its two calmest-looking options are also its most restricted. Playmania's Tuesday morning-only slot and Jungle Monkeys' weekend 9–11.30am window are both short precisely because they're single-session mornings — which usually means a quieter room, if you can make the timing work.</p>
 
-<h2>Toddler soft play in Sheffield (1–3 years)</h2>
-<p>If you’re searching for <strong>toddler soft play Sheffield</strong>, many local venues provide dedicated areas for under-3s with small slides, padded shapes and sensory toys to help develop motor skills.</p>
-<ul>
-  <li>Mini slides and low frames</li>
-  <li>Soft tunnels and crawl spots</li>
-  <li>Ball pits designed for little ones</li>
-  <li>Quieter weekday sessions</li>
-</ul>
-<p>Browse toddler-friendly options: <a href="/sheffield?filter=toddler">/sheffield?filter=toddler</a></p>
+<p>If you need an afternoon, your realistic choices narrow to Monkey Bizness, Fun House, Runaround, Playroom, Treasure Island and PandyLand. If you need an evening, it's Playroom alone.</p>
 
-<h2>Baby soft play in Sheffield (under 1s)</h2>
-<p>Many Sheffield soft play venues offer baby sessions—ideal once your baby can sit or crawl confidently. These are typically quieter, sensory-focused times with low equipment and soft matting.</p>
-<ul>
-  <li>Baby-only or under-1 sessions</li>
-  <li>Sensory mats and soft shapes</li>
-  <li>Comfortable seating for parents</li>
-  <li>Changing facilities and cafés nearby</li>
-</ul>
+<h2>Parties, prices and SEN sessions</h2>
+<p>We don't hold confirmed pricing, age limits or party-package details for the Sheffield venues, so rather than guess: check the venue's own page or website before booking. Each listing above links through to what we do hold, including addresses, opening hours and the date we last verified the entry.</p>
 
-<h2>Soft play birthday parties in Sheffield</h2>
-<p>Celebrate your child’s special day with a <strong>soft play birthday party in Sheffield</strong>. Many centres offer party packages including reserved areas, food, a host and themed activities for kids.</p>
-<ul>
-  <li>Private party room or reserved tables</li>
-  <li>Food and drink packages for kids and adults</li>
-  <li>Dedicated party hosts</li>
-  <li>Invitations and party bag options</li>
-</ul>
-<p>Explore party venues: <a href="/sheffield?filter=parties">/sheffield?filter=parties</a></p>
+<p>As general guidance rather than a claim about any specific centre here — most UK soft play charges per child with adults free or nominal, most require socks (grippy ones ideally), and most run party packages that vary a lot in whether you get exclusive use or a roped-off corner. The questions worth asking any venue are the same everywhere: is it exclusive hire or shared, is food included and what exactly, how long is the play time before the party room, and can you bring your own cake.</p>
 
-<p>Example venue placeholders (replace with real ones):</p>
-<ul>
-  <li><a href="/sheffield/runaround-playcentre">/sheffield/runaround-playcentre</a></li>
-  <li><a href="/sheffield/play-valley">/sheffield/play-valley</a></li>
-  <li><a href="/sheffield/playmania">/sheffield/playmania</a></li>
-  <li><a href="/sheffield/fun-house-play-centre">/sheffield/fun-house-play-centre</a></li>
-</ul>
+<p>On SEN and quieter provision, the same caution applies: we can't confirm which Sheffield venues run dedicated sensory sessions. What the data does support is that <strong>capped timed-session venues</strong> (Curious Kids Town, TRIP 2 TOWN) and <strong>small single-room venues</strong> (Sam's Space, Playtimes Playtown) operate at a structurally lower capacity than the large drop-in centres, which often makes them a calmer starting point. Ring ahead and ask — that's still the only reliable way to find out.</p>
 
-<h2>Cheap soft play in Sheffield: money-saving tips</h2>
-<p>Want <strong>cheap soft play Sheffield</strong>? Try these tips:</p>
-<ul>
-  <li>Visit weekday mornings or early afternoons when prices are lower</li>
-  <li>Look for sibling/multi-child deals</li>
-  <li>Check for loyalty cards or repeat visit discounts</li>
-  <li>Book party slots well in advance for better pricing</li>
-</ul>
+<h2>So which Sheffield soft play should you pick?</h2>
+<p>If you want the safest bet with no timetable to check: <strong>Monkey Bizness</strong> in the Lower Don Valley, open 9.30 to 6 every single day.</p>
 
-<h2>SEN-friendly / autism-friendly soft play in Sheffield</h2>
-<p>Sheffield venues often offer quieter sessions with reduced numbers, lower volume and calmer lighting to support sensory-sensitive children.</p>
-<ul>
-  <li>Quiet or reduced capacity sessions</li>
-  <li>Lower background music</li>
-  <li>Break areas and staff support</li>
-  <li>Predictable session structure</li>
-</ul>
+<p>If you're in the south-east of the city: <strong>Runaround</strong> at Halfway.</p>
 
-<h2>Local tips: parking, cafés, quieter times, and what to bring</h2>
-<ul>
-  <li><strong>Quieter times:</strong> weekday mornings are usually best for toddlers</li>
-  <li><strong>What to bring:</strong> socks, spare clothes, wipes, water</li>
-  <li><strong>Café tip:</strong> check allergy-friendly menus if needed</li>
-  <li><strong>Parking:</strong> many venues offer free or easy pay-and-display near them</li>
-</ul>
+<p>If you want the highest-rated centre with a real weight of reviews behind it: <strong>Play Valley</strong> (4.7 from 816) — just not on a Tuesday.</p>
 
-<h2>More soft play near Sheffield</h2>
-<p>If you’re happy to travel, great options exist nearby in South Yorkshire. Add links to nearby city pages when available:</p>
-<ul>
-  <li><a href="/rotherham">/rotherham</a></li>
-  <li><a href="/chesterfield">/chesterfield</a></li>
-  <li><a href="/doncaster">/doncaster</a></li>
-</ul>
+<p>If your child prefers pretending to run a shop over climbing a frame: <strong>PandyLand</strong>, <strong>Playtimes Playtown</strong>, <strong>Curious Kids Town</strong> or <strong>TRIP 2 TOWN</strong>.</p>
 
-<h2>FAQs – Soft play in Sheffield</h2>
-<h3>What is the best soft play in Sheffield?</h3>
-<p>The best soft play in Sheffield depends on your child’s age and your priorities—toddler zones, sensory areas, party packages or quieter sessions.</p>
+<p>If you need somewhere smaller and quieter: <strong>Sam's Space</strong> at Firth Park, or a booked session at <strong>Curious Kids Town</strong>.</p>
 
-<h3>Are there toddler-only sessions in Sheffield?</h3>
-<p>Yes, many venues around Sheffield offer dedicated weekday toddler sessions with calmer numbers and softer play areas.</p>
+<p>If you can only get out after work: <strong>Playroom</strong> in the city centre, and realistically nowhere else.</p>
 
-<h3>How much does soft play cost in Sheffield?</h3>
-<p>Prices vary by venue and time, but most soft play sessions in Sheffield cost roughly £5–£11 per child.</p>
+<p>If you're up in Stocksbridge: <strong>Jungle Monkeys</strong>, before 11.30am at weekends.</p>
 
-<h3>Which soft play centres in Sheffield do birthday parties?</h3>
-<p>Many Sheffield venues like Runaround Playcentre and Play Valley offer party packages with reserved areas, food and a host. :contentReference[oaicite:1]{index=1}</p>
+<blockquote>
+  <p>👉 <strong><a href="/soft-play/sheffield">See all soft play centres in Sheffield with opening hours, addresses and facilities</a></strong></p>
+</blockquote>
 
-<h3>Are there SEN-friendly or quiet soft play sessions in Sheffield?</h3>
-<p>Yes—look for quiet or reduced capacity sessions that have lower volume and calmer environments for sensory-sensitive children.</p>`,
+<h2>Frequently asked questions</h2>
+
+<h3>How many soft play centres are there in Sheffield?</h3>
+<p>We hold verified listings for 14 soft play and children's role-play centres within Sheffield's own postcode districts (S1–S14, S17, S20, S35 and S36). Listings that describe themselves as Sheffield but sit in Rotherham, Barnsley or Worksop postcodes aren't counted here.</p>
+
+<h3>Which soft play in Sheffield is open latest?</h3>
+<p>Playroom Soft Play Centre on St Mary's Gate, which opens until 7pm Monday to Thursday and until 8pm on Friday, Saturday and Sunday. It's the only centre in the city open into the evening.</p>
+
+<h3>Are any Sheffield soft play centres closed on weekdays?</h3>
+<p>Yes, several. Play Valley Sheffield is closed all day Tuesday, Playmania Sheffield is closed Wednesday and only opens 9am–11.30am on Tuesday, and Treasure Island is closed Monday. Playtimes Playtown and Sam's Space are both closed on Sundays.</p>
+
+<h3>Which Sheffield soft play centres run timed sessions?</h3>
+<p>Curious Kids Town runs four sessions of about 80 minutes each day, and TRIP 2 TOWN runs four 90-minute sessions (two on Sundays). Medieval Mayhem isn't session-booked but closes between 2pm and 3.30pm on most weekdays. Check before travelling.</p>
+
+<h3>Which is the highest-rated soft play in Sheffield?</h3>
+<p>By raw score, Sam's Space Soft Play at Firth Park holds 5.0, though from only 35 reviews. With a larger sample, Playtimes Playtown rates 4.9 from 129 reviews, Jungle Monkeys 4.8 from 118, and Play Valley Sheffield 4.7 from 816 — the strongest combination of rating and review volume in the city.</p>
+
+<h3>How much does soft play in Sheffield cost?</h3>
+<p>We don't hold confirmed prices for Sheffield venues, so check each centre's page or website directly. As general context, UK soft play sessions commonly run in the region of £5–£9 per child, with adults free or charged a small amount, and term-time weekday sessions usually cheaper than weekends and school holidays.</p>`,
     faq: [
       {
-        q: 'What is the best soft play in Sheffield?',
-        a: 'The best soft play in Sheffield depends on your child’s age and your priorities—toddler zones, sensory areas, party packages or quieter sessions.',
+        q: 'How many soft play centres are there in Sheffield?',
+        a: "We hold verified listings for 14 soft play and children's role-play centres within Sheffield's own postcode districts (S1–S14, S17, S20, S35 and S36). Listings that describe themselves as Sheffield but sit in Rotherham, Barnsley or Worksop postcodes aren't counted here.",
       },
       {
-        q: 'Are there toddler-only sessions in Sheffield?',
-        a: 'Yes, many venues around Sheffield offer dedicated weekday toddler sessions with calmer numbers and softer play areas.',
+        q: 'Which soft play in Sheffield is open latest?',
+        a: "Playroom Soft Play Centre on St Mary's Gate, which opens until 7pm Monday to Thursday and until 8pm on Friday, Saturday and Sunday. It's the only centre in the city open into the evening.",
       },
       {
-        q: 'How much does soft play cost in Sheffield?',
-        a: 'Prices vary by venue and time, but most soft play sessions in Sheffield cost roughly £5–£11 per child.',
+        q: 'Are any Sheffield soft play centres closed on weekdays?',
+        a: "Yes, several. Play Valley Sheffield is closed all day Tuesday, Playmania Sheffield is closed Wednesday and only opens 9am–11.30am on Tuesday, and Treasure Island is closed Monday. Playtimes Playtown and Sam's Space are both closed on Sundays.",
       },
       {
-        q: 'Which soft play centres in Sheffield do birthday parties?',
-        a: 'Many Sheffield venues like Runaround Playcentre and Play Valley offer party packages with reserved areas, food and a host.',
+        q: 'Which Sheffield soft play centres run timed sessions?',
+        a: 'Curious Kids Town runs four sessions of about 80 minutes each day, and TRIP 2 TOWN runs four 90-minute sessions (two on Sundays). Medieval Mayhem isn’t session-booked but closes between 2pm and 3.30pm on most weekdays. Check before travelling.',
       },
       {
-        q: 'Are there SEN-friendly or quiet soft play sessions in Sheffield?',
-        a: 'Yes—look for quiet or reduced capacity sessions that have lower volume and calmer environments for sensory-sensitive children.',
+        q: 'Which is the highest-rated soft play in Sheffield?',
+        a: 'By raw score, Sam’s Space Soft Play at Firth Park holds 5.0, though from only 35 reviews. With a larger sample, Playtimes Playtown rates 4.9 from 129 reviews, Jungle Monkeys 4.8 from 118, and Play Valley Sheffield 4.7 from 816 — the strongest combination of rating and review volume in the city.',
+      },
+      {
+        q: 'How much does soft play in Sheffield cost?',
+        a: 'We don’t hold confirmed prices for Sheffield venues, so check each centre’s page or website directly. As general context, UK soft play sessions commonly run in the region of £5–£9 per child, with adults free or charged a small amount, and term-time weekday sessions usually cheaper than weekends and school holidays.',
       },
     ],
   },
@@ -632,6 +641,7 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'best-soft-play-in-leeds',
+    noindex: true,
     title: 'Best Soft Play in Leeds (2026 Parent Guide)',
     city: 'Leeds',
     excerpt:
@@ -786,6 +796,7 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'best-soft-play-in-london',
+    noindex: true,
     title: 'Best Soft Play in London (2026 Parent Guide)',
     city: 'London',
     excerpt:
@@ -940,6 +951,7 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'best-soft-play-in-manchester',
+    noindex: true,
     title: 'Best Soft Play in Manchester (2026 Parent Guide)',
     city: 'Manchester',
     excerpt:
@@ -1094,6 +1106,7 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'best-soft-play-in-birmingham',
+    noindex: true,
     title: 'Best Soft Play in Birmingham (2026 Parent Guide)',
     city: 'Birmingham',
     excerpt:
@@ -1248,6 +1261,7 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'best-soft-play-in-bristol',
+    noindex: true,
     title: 'Best Soft Play in Bristol (2026 Parent Guide)',
     city: 'Bristol',
     excerpt:
@@ -1402,6 +1416,7 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'best-soft-play-in-liverpool',
+    noindex: true,
     title: 'Best Soft Play in Liverpool (2026 Parent Guide)',
     city: 'Liverpool',
     excerpt:
@@ -1555,161 +1570,8 @@ export const posts: BlogPost[] = [
     ],
   },
   {
-    slug: 'best-soft-play-in-sheffield',
-    title: 'Best Soft Play in Sheffield (2026 Parent Guide)',
-    city: 'Sheffield',
-    excerpt:
-      'Find the best soft play in Sheffield for babies, toddlers and older kids — plus birthday party venues, SEN-friendly sessions and money-saving tips for South Yorkshire families.',
-    publishedAt: '2026-02-18T00:00:00.000Z',
-    updatedAt: '2026-02-18T00:00:00.000Z',
-    datePublished: '2026-02-18T00:00:00.000Z',
-    dateModified: '2026-02-18T00:00:00.000Z',
-    contentHtml: `<p>Looking for the <strong>best soft play in Sheffield</strong>? Whether you're planning a toddler day out, searching for baby-friendly sessions, or booking a birthday party, Sheffield and South Yorkshire have a great range of indoor soft play centres for every age group.</p>
-
-<p>From the city centre to Meadowhall, Hillsborough, Ecclesall and beyond, you'll find everything from cosy toddler play cafés to large multi-level adventure frames.</p>
-
-<p>Browse soft play venues near you: <a href="/sheffield">/sheffield</a></p>
-
-<h2>Why families love soft play in Sheffield</h2>
-<p>Soft play is a favourite for Sheffield families. It provides a safe indoor space for kids to climb, slide and burn off energy — perfect for rainy days, school holidays and weekends when you need a reliable plan.</p>
-<ul>
-  <li>Indoor fun all year round — whatever the weather</li>
-  <li>Dedicated baby and toddler zones</li>
-  <li>Large adventure play frames for older kids</li>
-  <li>Birthday party packages at most venues</li>
-  <li>Cafés and comfortable parent seating</li>
-  <li>Great school holiday and weekend activity</li>
-</ul>
-
-<h2>Best soft play in Sheffield: what to look for</h2>
-<p>When choosing the <strong>best soft play in Sheffield</strong>, consider:</p>
-<ul>
-  <li><strong>Age separation</strong> (baby/toddler areas away from older children)</li>
-  <li><strong>Cleanliness and maintenance</strong></li>
-  <li><strong>Clear visibility</strong> so you can supervise easily</li>
-  <li><strong>Seating and café quality</strong></li>
-  <li><strong>Party availability</strong> if you're planning a celebration</li>
-  <li><strong>Quiet/SEN sessions</strong> for calmer play</li>
-</ul>
-<p>Start exploring: <a href="/sheffield">/sheffield</a> • Toddlers: <a href="/sheffield?filter=toddler">/sheffield?filter=toddler</a></p>
-
-<h2>Toddler soft play in Sheffield (1–3 years)</h2>
-<p>If you're searching for <strong>toddler soft play Sheffield</strong>, look for venues with dedicated under-3 zones. These areas typically have mini slides, soft tunnels, ball pits, role-play corners and sensory features — all designed so little ones can play safely away from bigger kids.</p>
-<ul>
-  <li>Mini slides and soft climbing frames</li>
-  <li>Soft tunnels and crawl spaces</li>
-  <li>Ball pits and padded shapes</li>
-  <li>Role-play corners (kitchens, shops, cars)</li>
-  <li>Calmer weekday morning sessions</li>
-</ul>
-<p>Browse toddler-friendly venues: <a href="/sheffield?filter=toddler">/sheffield?filter=toddler</a></p>
-
-<h2>Baby soft play in Sheffield (under 1s)</h2>
-<p>Many Sheffield soft play centres run dedicated baby sessions for crawlers, early walkers and sensory exploration. These are ideal once your baby can sit or crawl confidently.</p>
-<ul>
-  <li>Padded floors and low-height equipment</li>
-  <li>Baby-only / under-1 sessions</li>
-  <li>Sensory toys and soft mats</li>
-  <li>Comfortable seating for parents and feeding</li>
-</ul>
-
-<h2>Soft play birthday parties in Sheffield</h2>
-<p>Planning a birthday? Sheffield has plenty of <strong>soft play birthday party</strong> venues across the city and South Yorkshire. Most party packages include a private or reserved room, timed play sessions, food and drink, and a party host.</p>
-<ul>
-  <li>Reserved or private party rooms</li>
-  <li>Timed play sessions</li>
-  <li>Food and drink packages</li>
-  <li>Party hosts and add-ons</li>
-</ul>
-<p>Explore party venues: <a href="/sheffield?filter=parties">/sheffield?filter=parties</a></p>
-
-<p>Venue placeholders (replace with real ones):</p>
-<ul>
-  <li><a href="/sheffield/example-venue-1">/sheffield/example-venue-1</a></li>
-  <li><a href="/sheffield/example-venue-2">/sheffield/example-venue-2</a></li>
-  <li><a href="/sheffield/example-venue-3">/sheffield/example-venue-3</a></li>
-  <li><a href="/sheffield/example-venue-4">/sheffield/example-venue-4</a></li>
-</ul>
-
-<h2>Cheap soft play in Sheffield: money-saving tips</h2>
-<p>Looking for <strong>cheap soft play Sheffield</strong>? Prices vary across South Yorkshire, but there are easy ways to keep costs down.</p>
-<ul>
-  <li>Visit weekday mornings or early afternoons</li>
-  <li>Avoid peak weekend and school holiday times</li>
-  <li>Check sibling and multi-child discounts</li>
-  <li>Look for memberships or loyalty schemes</li>
-  <li>Book birthday parties early for better rates</li>
-</ul>
-
-<h2>SEN-friendly / autism-friendly soft play in Sheffield</h2>
-<p>Sheffield has a growing number of SEN-friendly soft play sessions. These typically feature reduced capacity, lower music volume, softer lighting, predictable session times and supportive staff.</p>
-<ul>
-  <li>Reduced capacity sessions</li>
-  <li>Lower music volume</li>
-  <li>Softer lighting</li>
-  <li>Clear session times</li>
-  <li>Staff awareness and support</li>
-</ul>
-
-<h2>Local tips: parking, cafés, quieter times & what to bring</h2>
-<ul>
-  <li><strong>Quieter times:</strong> weekday mornings are best for toddlers</li>
-  <li><strong>Bring socks:</strong> required at most venues</li>
-  <li><strong>Spare clothes:</strong> especially for younger children</li>
-  <li><strong>Parking:</strong> most suburban venues have free parking; city centre options may charge</li>
-  <li><strong>Café tip:</strong> check allergy-friendly options in advance</li>
-</ul>
-
-<h2>More soft play near Sheffield</h2>
-<p>If you're happy to travel slightly outside Sheffield, there are excellent options in nearby areas:</p>
-<ul>
-  <li><a href="/rotherham">/rotherham</a></li>
-  <li><a href="/doncaster">/doncaster</a></li>
-  <li><a href="/barnsley">/barnsley</a></li>
-  <li><a href="/chesterfield">/chesterfield</a></li>
-</ul>
-
-<h2>FAQs – Soft play in Sheffield</h2>
-
-<h3>What is the best soft play in Sheffield?</h3>
-<p>The best soft play in Sheffield depends on your child's age, your location and whether you need toddler zones, party facilities or quieter sessions.</p>
-
-<h3>Are there toddler-only sessions in Sheffield?</h3>
-<p>Yes, many Sheffield soft play centres offer weekday toddler sessions with reduced numbers and dedicated under-3 areas.</p>
-
-<h3>How much does soft play cost in Sheffield?</h3>
-<p>Prices vary across South Yorkshire, but most sessions cost between £4–£9 per child depending on peak or off-peak times.</p>
-
-<h3>Which soft play centres in Sheffield do birthday parties?</h3>
-<p>Many venues across Sheffield offer birthday party packages including private rooms, food and a party host.</p>
-
-<h3>Are there SEN-friendly or quiet soft play sessions in Sheffield?</h3>
-<p>Yes, several venues offer quiet or SEN-friendly sessions with lower capacity, reduced noise and calmer environments.</p>`,
-    faq: [
-      {
-        q: 'What is the best soft play in Sheffield?',
-        a: 'The best soft play in Sheffield depends on your child\u2019s age, your location and whether you need toddler zones, party facilities or quieter sessions.',
-      },
-      {
-        q: 'Are there toddler-only sessions in Sheffield?',
-        a: 'Yes, many Sheffield soft play centres offer weekday toddler sessions with reduced numbers and dedicated under-3 areas.',
-      },
-      {
-        q: 'How much does soft play cost in Sheffield?',
-        a: 'Prices vary across South Yorkshire, but most sessions cost between \u00a34\u2013\u00a39 per child depending on peak or off-peak times.',
-      },
-      {
-        q: 'Which soft play centres in Sheffield do birthday parties?',
-        a: 'Many venues across Sheffield offer birthday party packages including private rooms, food and a party host.',
-      },
-      {
-        q: 'Are there SEN-friendly or quiet soft play sessions in Sheffield?',
-        a: 'Yes, several venues offer quiet or SEN-friendly sessions with lower capacity, reduced noise and calmer environments.',
-      },
-    ],
-  },
-  {
     slug: 'best-soft-play-in-newcastle',
+    noindex: true,
     title: 'Best Soft Play in Newcastle (2026 Parent Guide)',
     city: 'Newcastle',
     excerpt:
@@ -3304,137 +3166,6 @@ export const posts: BlogPost[] = [
     ],
   },
   {
-    slug: 'best-soft-play-in-york',
-    title: 'Best Soft Play in York (2026 Parent Guide)',
-    city: 'York',
-    excerpt:
-      'Find the best soft play in York for babies, toddlers and older kids — plus birthday party venues, SEN-friendly sessions and money-saving tips for North Yorkshire families.',
-    publishedAt: '2026-02-20T00:00:00.000Z',
-    updatedAt: '2026-02-20T00:00:00.000Z',
-    datePublished: '2026-02-20T00:00:00.000Z',
-    dateModified: '2026-02-20T00:00:00.000Z',
-    contentHtml: `<p>Looking for the <strong>best soft play in York</strong>? Whether you're planning a toddler day out, searching for baby-friendly sessions, or booking a birthday party, York and North Yorkshire have a brilliant range of indoor soft play centres for every age group.</p>
-
-<p>From the city centre to Haxby, Strensall, Poppleton and further afield towards Tadcaster, Selby and Malton, you'll find everything from cosy toddler play cafés to large multi-level adventure frames.</p>
-
-<p>Browse soft play venues near you: <a href="/york">/york</a></p>
-
-<h2>Why families love soft play in York</h2>
-<p>Soft play is hugely popular with York families. It provides a safe indoor space for kids to climb, slide and burn off energy — perfect for rainy days, school holidays and weekends when you need a reliable plan.</p>
-<ul>
-  <li>Indoor fun all year round — whatever the weather</li>
-  <li>Dedicated baby and toddler zones</li>
-  <li>Large adventure play frames for older kids</li>
-  <li>Birthday party packages at most venues</li>
-  <li>Cafés and comfortable parent seating</li>
-  <li>Great school holiday and weekend activity</li>
-</ul>
-
-<h2>Best soft play in York: what to look for</h2>
-<p>When choosing the <strong>best soft play in York</strong>, consider:</p>
-<ul>
-  <li><strong>Age separation</strong> (baby/toddler areas away from older children)</li>
-  <li><strong>Cleanliness and maintenance</strong></li>
-  <li><strong>Clear visibility</strong> so you can supervise easily</li>
-  <li><strong>Seating and café quality</strong></li>
-  <li><strong>Party availability</strong> if you're planning a celebration</li>
-  <li><strong>Quiet/SEN sessions</strong> for calmer play</li>
-</ul>
-<p>Start exploring: <a href="/york">/york</a> • Toddlers: <a href="/york?filter=toddler">/york?filter=toddler</a></p>
-
-<h2>Toddler soft play in York (1–3 years)</h2>
-<p>If you're searching for <strong>toddler soft play York</strong>, look for venues with dedicated under-3 zones. These areas typically have mini slides, soft tunnels, ball pits, role-play corners and sensory features — all designed so little ones can play safely away from bigger kids.</p>
-<ul>
-  <li>Mini slides and soft climbing frames</li>
-  <li>Soft tunnels and crawl spaces</li>
-  <li>Ball pits and padded shapes</li>
-  <li>Role-play corners (kitchens, shops, cars)</li>
-  <li>Calmer weekday morning sessions</li>
-</ul>
-<p>Browse toddler-friendly venues: <a href="/york?filter=toddler">/york?filter=toddler</a></p>
-
-<h2>Baby soft play in York (under 1s)</h2>
-<p>Many York soft play centres run dedicated baby sessions for crawlers, early walkers and sensory exploration. These are ideal once your baby can sit or crawl confidently.</p>
-<ul>
-  <li>Padded floors and low-height equipment</li>
-  <li>Baby-only / under-1 sessions</li>
-  <li>Sensory toys and soft mats</li>
-  <li>Comfortable seating for parents and feeding</li>
-</ul>
-
-<h2>Soft play birthday parties in York</h2>
-<p>Planning a birthday? York has excellent <strong>soft play birthday party</strong> venues across the city and North Yorkshire. Most party packages include a private or reserved room, timed play sessions, food and drink, and a party host.</p>
-<ul>
-  <li>Reserved or private party rooms</li>
-  <li>Timed play sessions</li>
-  <li>Food and drink packages</li>
-  <li>Party hosts and add-ons</li>
-</ul>
-<p>Explore party venues: <a href="/york?filter=parties">/york?filter=parties</a></p>
-
-<h2>Cheap soft play in York: money-saving tips</h2>
-<p>Looking for <strong>cheap soft play York</strong>? Prices vary across North Yorkshire, but there are easy ways to keep costs down.</p>
-<ul>
-  <li>Visit weekday mornings or early afternoons</li>
-  <li>Avoid peak weekend and school holiday times</li>
-  <li>Check sibling and multi-child discounts</li>
-  <li>Look for memberships or loyalty schemes</li>
-  <li>Book birthday parties early for better rates</li>
-</ul>
-
-<h2>SEN-friendly / autism-friendly soft play in York</h2>
-<p>York has a growing number of SEN-friendly soft play sessions. These typically feature reduced capacity, lower music volume, softer lighting, predictable session times and supportive staff.</p>
-<ul>
-  <li>Reduced capacity sessions</li>
-  <li>Lower music volume</li>
-  <li>Softer lighting</li>
-  <li>Clear session times</li>
-  <li>Staff awareness and support</li>
-</ul>
-
-<h2>Local tips: parking, cafés, quieter times & what to bring</h2>
-<ul>
-  <li><strong>Quieter times:</strong> weekday mornings are best for toddlers</li>
-  <li><strong>Bring socks:</strong> required at most venues</li>
-  <li><strong>Spare clothes:</strong> especially for younger children</li>
-  <li><strong>Parking:</strong> suburban venues usually have free parking; city centre can be tricky</li>
-  <li><strong>Café tip:</strong> check allergy-friendly options in advance</li>
-</ul>
-
-<h2>More soft play near York</h2>
-<p>If you're happy to travel slightly outside York, there are excellent options in nearby areas:</p>
-<ul>
-  <li><a href="/tadcaster">/tadcaster</a></li>
-  <li><a href="/selby">/selby</a></li>
-  <li><a href="/malton">/malton</a></li>
-  <li><a href="/harrogate">/harrogate</a></li>
-</ul>
-
-<h2>FAQs – Soft play in York</h2>
-
-<h3>What is the best soft play in York?</h3>
-<p>The best soft play in York depends on your child's age, your location and whether you need toddler zones, party facilities or quieter sessions.</p>
-
-<h3>Are there toddler-only sessions in York?</h3>
-<p>Yes, many York soft play centres offer weekday toddler sessions with reduced numbers and dedicated under-3 areas.</p>
-
-<h3>How much does soft play cost in York?</h3>
-<p>Prices vary across North Yorkshire, but most sessions cost between £5–£10 per child depending on peak or off-peak times.</p>
-
-<h3>Which soft play centres in York do birthday parties?</h3>
-<p>Many venues across York offer birthday party packages including private rooms, food and a party host.</p>
-
-<h3>Are there SEN-friendly or quiet soft play sessions in York?</h3>
-<p>Yes, several venues offer quiet or SEN-friendly sessions with lower capacity, reduced noise and calmer environments.</p>`,
-    faq: [
-      { q: 'What is the best soft play in York?', a: 'The best soft play in York depends on your child\u2019s age, your location and whether you need toddler zones, party facilities or quieter sessions.' },
-      { q: 'Are there toddler-only sessions in York?', a: 'Yes, many York soft play centres offer weekday toddler sessions with reduced numbers and dedicated under-3 areas.' },
-      { q: 'How much does soft play cost in York?', a: 'Prices vary across North Yorkshire, but most sessions cost between \u00a35\u2013\u00a310 per child depending on peak or off-peak times.' },
-      { q: 'Which soft play centres in York do birthday parties?', a: 'Many venues across York offer birthday party packages including private rooms, food and a party host.' },
-      { q: 'Are there SEN-friendly or quiet soft play sessions in York?', a: 'Yes, several venues offer quiet or SEN-friendly sessions with lower capacity, reduced noise and calmer environments.' },
-    ],
-  },
-  {
     slug: 'best-soft-play-in-edinburgh',
     title: 'Best Soft Play in Edinburgh (2026 Parent Guide)',
     city: 'Edinburgh',
@@ -3706,6 +3437,7 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'best-soft-play-in-dundee',
+    noindex: true,
     title: 'Best Soft Play in Dundee (2026 Parent Guide)',
     city: 'Dundee',
     excerpt:
@@ -3886,6 +3618,7 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'best-soft-play-in-stirling',
+    noindex: true,
     title: 'Best Soft Play in Stirling (2026 Parent Guide)',
     city: 'Stirling',
     excerpt:
@@ -4192,6 +3925,7 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'best-soft-play-in-coventry',
+    noindex: true,
     title: 'Best Soft Play in Coventry (2026 Parent Guide)',
     city: 'Coventry',
     excerpt: 'Discover the best soft play in Coventry for babies, toddlers and older children, plus party options, budget-saving tips, SEN-friendly sessions and indoor play recommendations for families in 2026.',
@@ -4300,6 +4034,7 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'best-soft-play-in-milton-keynes',
+    noindex: true,
     title: 'Best Soft Play in Milton Keynes (2026 Parent Guide)',
     city: 'Milton Keynes',
     excerpt: 'Discover the best soft play in Milton Keynes for babies, toddlers and older children, plus party options, budget-saving tips, SEN-friendly sessions and indoor play recommendations for families in 2026.',
@@ -4408,6 +4143,7 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'best-soft-play-in-oxford',
+    noindex: true,
     title: 'Best Soft Play in Oxford (2026 Parent Guide)',
     city: 'Oxford',
     excerpt: 'Discover the best soft play in Oxford for babies, toddlers and older children, plus party options, budget-saving tips, SEN-friendly sessions and indoor play recommendations for families in 2026.',
@@ -4516,6 +4252,7 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'best-soft-play-in-cambridge',
+    noindex: true,
     title: 'Best Soft Play in Cambridge (2026 Parent Guide)',
     city: 'Cambridge',
     excerpt: 'Discover the best soft play in Cambridge for babies, toddlers and older children, plus party options, budget-saving tips, SEN-friendly sessions and indoor play recommendations for families in 2026.',
@@ -4624,6 +4361,7 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'best-soft-play-in-reading',
+    noindex: true,
     title: 'Best Soft Play in Reading (2026 Parent Guide)',
     city: 'Reading',
     excerpt: 'Discover the best soft play in Reading for babies, toddlers and older children, plus party options, budget-saving tips, SEN-friendly sessions and indoor play recommendations for families in 2026.',
@@ -4732,6 +4470,7 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'best-soft-play-in-southampton',
+    noindex: true,
     title: 'Best Soft Play in Southampton (2026 Parent Guide)',
     city: 'Southampton',
     excerpt: 'Discover the best soft play in Southampton for babies, toddlers and older children, plus party options, budget-saving tips, SEN-friendly sessions and indoor play recommendations for families in 2026.',
@@ -4840,6 +4579,7 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'best-soft-play-in-plymouth',
+    noindex: true,
     title: 'Best Soft Play in Plymouth (2026 Parent Guide)',
     city: 'Plymouth',
     excerpt: 'Discover the best soft play in Plymouth for babies, toddlers and older children, plus party options, budget-saving tips, SEN-friendly sessions and indoor play recommendations for families in 2026.',
@@ -4947,6 +4687,7 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'best-soft-play-in-exeter',
+    noindex: true,
     title: 'Best Soft Play in Exeter (2026 Parent Guide)',
     city: 'Exeter',
     excerpt: 'Discover the best soft play in Exeter for babies, toddlers and older children, plus party options, budget-saving tips, SEN-friendly sessions and indoor play recommendations for families in 2026.',
@@ -5054,6 +4795,7 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'best-soft-play-in-swindon',
+    noindex: true,
     title: 'Best Soft Play in Swindon (2026 Parent Guide)',
     city: 'Swindon',
     excerpt: 'Discover the best soft play in Swindon for babies, toddlers and older children, plus party options, budget-saving tips, SEN-friendly sessions and indoor play recommendations for families in 2026.',
@@ -5162,6 +4904,7 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'best-soft-play-in-wolverhampton',
+    noindex: true,
     title: 'Best Soft Play in Wolverhampton (2026 Parent Guide)',
     city: 'Wolverhampton',
     excerpt: 'Discover the best soft play in Wolverhampton for babies, toddlers and older children, plus party options, budget-saving tips, SEN-friendly sessions and indoor play recommendations for families in 2026.',
@@ -5270,6 +5013,7 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'best-soft-play-in-stoke-on-trent',
+    noindex: true,
     title: 'Best Soft Play in Stoke-on-Trent (2026 Parent Guide)',
     city: 'Stoke-on-Trent',
     excerpt: 'Discover the best soft play in Stoke-on-Trent for babies, toddlers and older children, plus party options, budget-saving tips, SEN-friendly sessions and indoor play recommendations for families in 2026.',
@@ -5378,6 +5122,7 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'best-soft-play-in-derby',
+    noindex: true,
     title: 'Best Soft Play in Derby (2026 Parent Guide)',
     city: 'Derby',
     excerpt: 'Discover the best soft play in Derby for babies, toddlers and older children, plus party options, budget-saving tips, SEN-friendly sessions and indoor play recommendations for families in 2026.',
@@ -5486,6 +5231,7 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'best-soft-play-in-chester',
+    noindex: true,
     title: 'Best Soft Play in Chester (2026 Parent Guide)',
     city: 'Chester',
     excerpt: 'Discover the best soft play in Chester for babies, toddlers and older children, plus party options, budget-saving tips, SEN-friendly sessions and indoor play recommendations for families in 2026.',
@@ -5594,6 +5340,7 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'best-soft-play-in-preston',
+    noindex: true,
     title: 'Best Soft Play in Preston (2026 Parent Guide)',
     city: 'Preston',
     excerpt: 'Discover the best soft play in Preston for babies, toddlers and older children, plus party options, budget-saving tips, SEN-friendly sessions and indoor play recommendations for families in 2026.',
@@ -5810,6 +5557,7 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'best-soft-play-in-middlesbrough',
+    noindex: true,
     title: 'Best Soft Play in Middlesbrough (2026 Parent Guide)',
     city: 'Middlesbrough',
     excerpt: 'Discover the best soft play in Middlesbrough for babies, toddlers and older children, plus party options, budget-saving tips, SEN-friendly sessions and indoor play recommendations for families in 2026.',
@@ -5918,6 +5666,7 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'best-soft-play-in-peterborough',
+    noindex: true,
     title: 'Best Soft Play in Peterborough (2026 Parent Guide)',
     city: 'Peterborough',
     excerpt: 'Discover the best soft play in Peterborough for babies, toddlers and older children, plus party options, budget-saving tips, SEN-friendly sessions and indoor play recommendations for families in 2026.',
@@ -6026,6 +5775,7 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'best-soft-play-in-northampton',
+    noindex: true,
     title: 'Best Soft Play in Northampton (2026 Parent Guide)',
     city: 'Northampton',
     excerpt: 'Discover the best soft play in Northampton for babies, toddlers and older children, plus party options, budget-saving tips, SEN-friendly sessions and indoor play recommendations for families in 2026.',
