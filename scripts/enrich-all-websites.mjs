@@ -25,7 +25,11 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.join(__dirname, '..')
 
 // --- Config ---
-const DB_URL = process.env.DATABASE_URL || 'postgresql://neondb_owner:npg_Xci4hHOpqG1f@ep-noisy-silence-abqebbn6.eu-west-2.aws.neon.tech/neondb?sslmode=require'
+const DB_URL = process.env.DATABASE_URL
+if (!DB_URL) {
+  console.error('DATABASE_URL is not set. Export it or run via a tool that loads .env.local.')
+  process.exit(1)
+}
 const CONCURRENCY = 3
 const TIMEOUT_MS = 12000
 const DELAY_MS = 600

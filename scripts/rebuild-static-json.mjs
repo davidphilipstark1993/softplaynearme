@@ -24,7 +24,11 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.join(__dirname, '..')
 const OUTPUT_DIR = path.join(ROOT, 'data', 'generated')
 
-const DB_URL = process.env.DATABASE_URL || 'postgresql://neondb_owner:npg_Xci4hHOpqG1f@ep-noisy-silence-abqebbn6.eu-west-2.aws.neon.tech/neondb?sslmode=require'
+const DB_URL = process.env.DATABASE_URL
+if (!DB_URL) {
+  console.error('DATABASE_URL is not set. Export it or run via a tool that loads .env.local.')
+  process.exit(1)
+}
 
 function slugify(text) {
   return text.toString().toLowerCase().trim()

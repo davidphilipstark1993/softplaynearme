@@ -17,7 +17,11 @@
 import pg from 'pg'
 const { Pool } = pg
 
-const DB_URL = process.env.DATABASE_URL || 'postgresql://neondb_owner:npg_Xci4hHOpqG1f@ep-noisy-silence-abqebbn6.eu-west-2.aws.neon.tech/neondb?sslmode=require'
+const DB_URL = process.env.DATABASE_URL
+if (!DB_URL) {
+  console.error('DATABASE_URL is not set. Export it or run via a tool that loads .env.local.')
+  process.exit(1)
+}
 const API_KEY = process.env.GOOGLE_PLACES_API_KEY || process.env.GOOGLE_MAPS_API_KEY
 
 if (!API_KEY) {

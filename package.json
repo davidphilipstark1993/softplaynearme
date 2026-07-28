@@ -19,6 +19,7 @@
     "db:scores": "node scripts/updateCompletenessScores.js",
     "db:clean": "node scripts/cleanFabricatedData.js",
     "data:build": "node scripts/buildSoftplayData.mjs",
+    "data:rebuild": "node scripts/rebuild-static-json.mjs",
     "import:csv": "node scripts/import-softplay-csv.mjs",
     "import:cities": "node scripts/import-raw-city-csvs.mjs --commit",
     "enrich:venues": "node scripts/enrich-venues.mjs",
