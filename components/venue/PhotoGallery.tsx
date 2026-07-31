@@ -169,6 +169,11 @@ export function PhotoGallery({ photos, venueName }: PhotoGalleryProps) {
                     e.stopPropagation()
                     setCurrentIndex(index)
                   }}
+                  // The thumbnail image is decorative (alt=""), so the button
+                  // needs its own accessible name — without one it announced
+                  // as an unlabelled button.
+                  aria-label={`View photo ${index + 1} of ${photos.length}`}
+                  aria-current={index === currentIndex}
                   className={cn(
                     'relative w-12 h-12 flex-shrink-0 rounded overflow-hidden',
                     index === currentIndex && 'ring-2 ring-white'

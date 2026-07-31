@@ -129,7 +129,9 @@ export function buildLocalBusinessSchema(input: LocalBusinessSchemaInput) {
       '@type': 'PostalAddress',
       streetAddress: input.address,
       addressLocality: input.city,
-      postalCode: input.postcode,
+      // Omit rather than emit `postalCode: ""` — an empty string is a stated
+      // blank value in JSON-LD, which validators flag; absent is correct.
+      ...(input.postcode ? { postalCode: input.postcode } : {}),
       addressCountry: 'GB',
     },
     publisher: {

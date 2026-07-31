@@ -5,10 +5,32 @@ import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 import { ClaimVenueForm } from '@/components/forms/ClaimVenueForm'
 import { CheckCircle2 } from 'lucide-react'
 
+// The root layout applies `template: "%s | Soft Play Near Me"`, so `title` must
+// NOT repeat the suffix. Social cards bypass the template, so they keep it.
+const TITLE = 'Claim Your Venue'
+const SOCIAL_TITLE = 'Claim Your Venue | Soft Play Near Me'
+const DESCRIPTION =
+  'Claim or add your soft play centre on Soft Play Near Me for free. Reach thousands of families and manage your listing from your own dashboard.'
+const URL = 'https://www.softplaynearme.co.uk/add-venue'
+
 export const metadata: Metadata = {
-  title: 'Claim Your Venue | Soft Play Near Me',
-  description: 'Claim or add your soft play centre on Soft Play Near Me for free. Reach thousands of families and manage your listing from your own dashboard.',
-  alternates: { canonical: 'https://www.softplaynearme.co.uk/add-venue' },
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: { canonical: URL },
+  openGraph: {
+    title: SOCIAL_TITLE,
+    description: DESCRIPTION,
+    url: URL,
+    type: 'website',
+    siteName: 'Soft Play Near Me',
+    images: ['/opengraph-image'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: SOCIAL_TITLE,
+    description: DESCRIPTION,
+    images: ['/opengraph-image'],
+  },
 }
 
 interface AddVenuePageProps {

@@ -21,12 +21,23 @@ export async function generateMetadata(): Promise<Metadata> {
   const total = await getTotalVenueCount()
   const countStr = total ? total.toLocaleString('en-GB') : '1,800+'
   const description = `Find ${countStr} soft play centres near you across the UK. Search by postcode, compare prices, opening times, facilities, photos & reviews. Free directory updated daily by venue owners.`
+  // Next.js replaces (does not deep-merge) the whole `openGraph` / `twitter`
+  // object when a page defines one, so anything the root layout set here has to
+  // be restated. Omitting `card` previously silently downgraded the homepage's
+  // Twitter/X card from summary_large_image to the default small `summary`.
   return {
     description,
     openGraph: {
+      type: 'website',
+      locale: 'en_GB',
+      url: 'https://www.softplaynearme.co.uk',
+      siteName: 'Soft Play Near Me',
+      title: 'Soft Play Near Me | Find Soft Play Centres Across the UK',
       description,
     },
     twitter: {
+      card: 'summary_large_image',
+      title: 'Soft Play Near Me | Find Soft Play Centres',
       description,
     },
   }

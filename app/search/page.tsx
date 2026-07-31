@@ -41,13 +41,16 @@ export async function generateMetadata({ searchParams }: SearchPageProps): Promi
     }
   }
 
-  const title = 'Search Soft Play Centres | Soft Play Near Me'
+  // The root layout applies `template: "%s | Soft Play Near Me"`, so `title` must
+  // NOT repeat the suffix. Social cards bypass the template, so they keep it.
+  const title = 'Search Soft Play Centres'
+  const socialTitle = 'Search Soft Play Centres | Soft Play Near Me'
   const description = 'Search for soft play centres near you. Filter by facilities, distance, and more to find the perfect venue for your family.'
   return {
     title,
     description,
-    openGraph: { title, description, url: 'https://www.softplaynearme.co.uk/search', type: 'website', siteName: 'Soft Play Near Me' },
-    twitter: { card: 'summary_large_image', title, description },
+    openGraph: { title: socialTitle, description, url: 'https://www.softplaynearme.co.uk/search', type: 'website', siteName: 'Soft Play Near Me' },
+    twitter: { card: 'summary_large_image', title: socialTitle, description },
     alternates: { canonical: 'https://www.softplaynearme.co.uk/search' },
   }
 }

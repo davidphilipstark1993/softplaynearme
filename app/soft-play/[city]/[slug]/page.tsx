@@ -448,7 +448,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const staticTown = getStaticTownBySlug(city)
 
   if (!venue) {
-    return { title: 'Venue Not Found | Soft Play Near Me' }
+    // No suffix — the root layout's title template appends it. Never index a
+    // not-found response, otherwise it inherits the root `index: true`.
+    return { title: 'Venue Not Found', robots: { index: false, follow: false } }
   }
 
   const cityName = cityConfig?.name || staticTown?.name || city

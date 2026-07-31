@@ -19,9 +19,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const post = getPostBySlug(slug)
 
   if (!post) {
+    // No suffix — the root layout's title template appends it. Never index a
+    // not-found response, otherwise it inherits the root `index: true`.
     return {
-      title: 'Post Not Found | Soft Play Near Me',
+      title: 'Post Not Found',
       description: 'The requested blog post could not be found.',
+      robots: { index: false, follow: false },
     }
   }
 

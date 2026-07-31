@@ -55,7 +55,9 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
   if (!cityConfig) {
     const staticTown = getStaticTownBySlug(city)
     if (!staticTown) {
-      return { title: 'City Not Found | Soft Play Near Me' }
+      // No suffix — the root layout's title template appends it. Never index a
+      // not-found response, otherwise it inherits the root `index: true`.
+      return { title: 'City Not Found', robots: { index: false, follow: false } }
     }
 
     // Use content generator for unique meta titles/descriptions

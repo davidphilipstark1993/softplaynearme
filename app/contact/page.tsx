@@ -6,10 +6,32 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 
+// The root layout applies `template: "%s | Soft Play Near Me"`, so `title` must
+// NOT repeat the suffix. Social cards bypass the template, so they keep it.
+const TITLE = 'Contact Us'
+const SOCIAL_TITLE = 'Contact Us | Soft Play Near Me'
+const DESCRIPTION =
+  'Get in touch with the Soft Play Near Me team. Report an error, suggest a venue, or claim your listing.'
+const URL = 'https://www.softplaynearme.co.uk/contact'
+
 export const metadata: Metadata = {
-  title: 'Contact Us | Soft Play Near Me',
-  description: 'Get in touch with the Soft Play Near Me team. Report an error, suggest a venue, or claim your listing.',
-  alternates: { canonical: 'https://www.softplaynearme.co.uk/contact' },
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: { canonical: URL },
+  openGraph: {
+    title: SOCIAL_TITLE,
+    description: DESCRIPTION,
+    url: URL,
+    type: 'website',
+    siteName: 'Soft Play Near Me',
+    images: ['/opengraph-image'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: SOCIAL_TITLE,
+    description: DESCRIPTION,
+    images: ['/opengraph-image'],
+  },
 }
 
 export default function ContactPage() {
