@@ -70,7 +70,7 @@ Worse, the server HTML for these is **visually blank** — 0 characters of visib
 
 I've made these responses `noindex` (below), which limits the damage, but the status code itself needs a structural change — **see "Needs approval."**
 
-### P0 — 343 broken internal links in blog content
+### P0 — 343 broken internal links in blog content (23 fixed, 320 remain)
 
 `lib/blogPosts.ts` contains 409 internal `href`s; **343 instances across 249 unique URLs are broken**, all using a legacy no-`/soft-play/` prefix. Confirmed live: `/york`, `/york/flip-out-york`, `/malton`, `/market-weighton`, `/essar` all return hard 404s.
 
@@ -79,13 +79,20 @@ I've made these responses `noindex` (below), which limits the damage, but the st
 | A — city exists, prefix missing | 138 | 73 | `/york`, `/glasgow?filter=toddler` | `/soft-play/york`, `/soft-play/glasgow/toddler` |
 | B — city not in the directory at all | 158 | 129 | `/luton`, `/bath`, `/poole`, `/essar` | no valid target — de-link or point at `/search` |
 | D — **placeholder content shipped live** | 24 | 24 | `/london/example-venue-1` … `-4` | none; these are stubs |
-| E — uncommitted Leeds rewrite | 23 | 23 | `/soft-play/leeds/kids-club-house` | `…/kids-club-house-leeds` |
+| ~~E — uncommitted Leeds rewrite~~ | ~~23~~ | ~~23~~ | ~~`/soft-play/leeds/kids-club-house`~~ | **fixed** — see below |
 
 Category **D** is the embarrassing one: six blog posts link to `example-venue-1` through `-4` — placeholder text that was never filled in and is live now.
 
-Category **E** is in your **uncommitted** `lib/blogPosts.ts` changes. The rewritten Leeds guide links to 23 venue slugs that don't exist — every real Leeds slug carries a `-leeds` suffix (`kids-club-house-leeds`, not `kids-club-house`). **Don't ship that file as-is**; it would add 23 fresh 404s.
+Category **E** was in the then-uncommitted `lib/blogPosts.ts` Leeds rewrite: 23 links to venue slugs that don't exist. **Now fixed** — all 23 remapped to real slugs and verified against `venues.json`. It wasn't a clean suffix append; four needed real mapping because the generated slugs drop `and` and expand apostrophes:
 
-Only categories A and E have deterministic correct targets. B and D need a content decision, so I've left all of it for you — **see "Needs approval."**
+| Blog link | Actual slug |
+|---|---|
+| `headingley-enterprise-and-arts-centre` | `headingley-enterprise-arts-centre-leeds` |
+| `jump-inc-…-adventure-and-trampoline-park-leeds` | `jump-inc-…-adventure-trampoline-park-leeds-leeds` |
+| `the-hidden-village-childrens-role-play-village-and-caf` | `the-hidden-village-children-s-role-play-village-caf-leeds` |
+| `yanki-doodlz-playzone-and-diner` | `yanki-doodlz-playzone-diner-leeds` |
+
+**320 broken links remain** (categories A, B and D) — all pre-existing, none deterministic enough to fix without a content decision. **See "Needs approval."**
 
 ### P1 — Homepage contradicts itself on venue count, and both numbers are wrong
 
@@ -289,6 +296,6 @@ Either way it's a **bulk data change affecting 16 city pages and ~356 new indexa
 
 I'd want to discuss which, since each trades off against ISR behaviour.
 
-**4. Repair the 343 broken blog links.** Categories A (138) and E (23) have deterministic targets and I can script those safely. Categories B (158 links to cities not in the directory) and D (24 `example-venue-N` placeholders) need your decision: de-link, point at `/search`, or write real content. Happy to do A and E now and leave B and D flagged inline, if you'd prefer to split it.
+**4. Repair the remaining 320 broken blog links.** Category E (23) is done. Category **A** (138 links where the city exists and only the `/soft-play/` prefix is missing) has deterministic targets and I can script it safely on your go-ahead — including `?filter=toddler` → `/toddler` path rewrites. Categories **B** (158 links to cities not in the directory) and **D** (24 `example-venue-N` placeholders) need your decision: de-link, point at `/search`, or write real content.
 
 **5. Settle the venue-count claim.** "1,800+" vs "1,000+" vs 669 actually served. Tell me the number you want to stand behind — or let me wire both fallbacks to the real static count so they can't diverge again — and I'll make it consistent.

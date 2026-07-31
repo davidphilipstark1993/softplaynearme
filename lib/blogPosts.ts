@@ -641,156 +641,158 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'best-soft-play-in-leeds',
-    noindex: true,
-    title: 'Best Soft Play in Leeds (2026 Parent Guide)',
+    title: "Soft Play in Leeds: A Parent's Guide (2026)",
     city: 'Leeds',
     excerpt:
-      'Find the best soft play in Leeds for babies and toddlers, plus party venues, quiet sessions and money-saving tips—your 2026 family guide to indoor play.',
+      'A guide to the 23 soft play and role-play centres we hold verified listings for across Leeds — grouped by area, with closed days, weekday-only venues and the ones open into the evening.',
     publishedAt: '2026-02-14T00:00:00.000Z',
-    updatedAt: '2026-02-14T00:00:00.000Z',
+    updatedAt: '2026-07-28T00:00:00.000Z',
     datePublished: '2026-02-14T00:00:00.000Z',
-    dateModified: '2026-02-14T00:00:00.000Z',
-    contentHtml: `<p>Searching for the <strong>best soft play in Leeds</strong>? Whether you need a toddler-friendly session, a baby-safe play space, or a birthday party venue, Leeds has loads of indoor soft play options for every age and budget.</p>
+    dateModified: '2026-07-28T00:00:00.000Z',
+    contentHtml: `<p>Leeds is unusually well provided for on soft play — more centres than most cities its size, and spread right across the district rather than clustered in the middle. The awkward part isn't finding one, it's that the good ones keep genuinely strange hours. Several close on a Monday. Two of the biggest don't open until the afternoon midweek. A couple shut at weekends entirely, and one opens <em>only</em> at weekends. Turning up unchecked is how a Leeds soft play trip goes wrong.</p>
 
-<p>This 2026 parent guide covers:</p>
+<p>So this guide leads with where each place is and when it's actually open, and it's organised by area — Horsforth and Yeadon in the north-west, Pudsey and Farsley to the west, Morley to the south, Seacroft east, plus the inner ring and the city centre.</p>
+
+<blockquote>
+  <p>👉 <strong><a href="/soft-play/leeds">Browse every soft play in Leeds — opening hours, facilities and locations</a></strong></p>
+</blockquote>
+
+<h2>The short answer</h2>
+<p>If you want one recommendation and no homework: <strong><a href="/soft-play/leeds/kids-club-house-leeds">Kids Club House</a></strong> on New Road Side in Horsforth. It rates 4.8 from 1,454 reviews — comfortably the strongest combination of score and sample size of any play centre in Leeds — and it's open 9.30am to 5.15pm <em>every day of the week</em>, with no closed day and no split hours. In a city where the timetables are the hard part, that consistency counts for a lot.</p>
+
+<h2>North-west Leeds: Horsforth, Yeadon and Guiseley</h2>
+<p>The densest cluster in the city, and the one with the most choice for under-fives.</p>
+
+<p>Alongside Kids Club House, <strong><a href="/soft-play/leeds/jigsaw-juniors-horsforth-leeds">Jigsaw Juniors</a></strong> on Town Street in Horsforth (4.4 from 105) runs 9am to 3pm on weekdays and 9am to 1pm on Sundays, but is <strong>closed all day Saturday</strong> — an unusual pattern worth committing to memory if Horsforth is your default.</p>
+
+<p>Out in Yeadon, <strong><a href="/soft-play/leeds/kids-about-tarn-ltd-leeds">Kids About TARN</a></strong> on High Street (4.6 from 138) is one of the few Leeds venues where our listing confirms role-play and SEN-friendly facilities rather than leaving them blank. <strong><a href="/soft-play/leeds/yanki-doodlz-playzone-diner-leeds">Yanki Doodlz Playzone &amp; Diner</a></strong> on Sizers Court (4.6 from 115) is the nearby alternative — a playzone with a diner attached — but it's <strong>closed Mondays</strong> and closes early at 1pm on Thursdays.</p>
+
+<p>Further out at Guiseley, <strong><a href="/soft-play/leeds/tumble-town-adventure-play-leeds">Tumble Town Adventure Play</a></strong> at the South View Business Centre (4.4 from 185) is <strong>closed Tuesdays and Sundays</strong>, finishes at 1.15pm on Thursdays, and otherwise runs mornings into early afternoon. It's one of the few listings here that confirms both a cafe and party facilities.</p>
+
+<h2>West: Pudsey and Farsley (LS28)</h2>
+<p>Four venues within a couple of miles, and between them they cover most gaps in the week.</p>
+
+<p><strong><a href="/soft-play/leeds/jackaboos-ltd-leeds">Jackaboos</a></strong> on Town Street (4.3 from 175) runs 9am to 3.30pm Monday to Friday and is <strong>closed both weekend days</strong> — a weekday-only venue, which is either perfect or useless depending on your working pattern.</p>
+
+<p><strong><a href="/soft-play/leeds/jigsaw-gyms-leeds">Jigsaw Gyms</a></strong> on Broad Lane (4.4 from 232) has the same weekday-only shape, 9am to 3pm, <strong>closed Saturday and Sunday</strong>. <strong><a href="/soft-play/leeds/tiny-tykes-play-leeds">Tiny Tykes Play</a></strong> (4.7 from 54) shares that postcode and those hours, but opens Saturdays too.</p>
+
+<p><strong><a href="/soft-play/leeds/little-burrowers-leeds">Little Burrowers</a></strong> (4.6 from 36) is the one in this group that's open all seven days — 9.30am to 2.45pm on weekdays, and later at weekends until 4.30pm.</p>
+
+<h2>South: Morley (LS27)</h2>
+<p><strong><a href="/soft-play/leeds/the-play-lounge-leeds">The Play Lounge</a></strong> is the pick here on rating — 4.8 from 57 reviews, and the only Leeds listing that confirms a baby area, SEN-friendly facilities, dedicated SEN sessions <em>and</em> outdoor play. It's <strong>closed Wednesdays</strong>, runs 9.30am to 2pm on other weekdays, and opens longer at weekends to 5pm.</p>
+
+<p><strong><a href="/soft-play/leeds/munchkins-soft-play-leeds">Munchkins Soft Play</a></strong> on Bank Avenue (4.3 from 271) is <strong>closed Tuesdays</strong>, and its weekend hours are very short — <strong>9am to 11.30am only</strong> on Saturday and Sunday. Weekday mornings are the real offer here.</p>
+
+<p><strong><a href="/soft-play/leeds/junglecatz-soft-play-leeds">Junglecatz Soft Play</a></strong> (4.4 from 189) is the inverse and the most restricted venue in the guide: <strong>weekends only</strong>, Saturday and Sunday 10am to 2pm, closed Monday through Friday.</p>
+
+<h2>East: Seacroft (LS14)</h2>
+<p><strong><a href="/soft-play/leeds/the-kidsplay-formerly-kidzplay-leeds-leeds">The Kidsplay</a></strong> on Limewood Road (4.1 from 690) is the dependable one — 9.30am to 6pm, seven days, no closed day and no split shifts. For east Leeds it's the equivalent of what Kids Club House offers in the north-west.</p>
+
+<p><strong><a href="/soft-play/leeds/flip-out-leeds-leeds">Flip Out Leeds</a></strong> on Coal Road (4.7 from 872) is a trampoline park rather than a traditional frame, and its timetable needs care: <strong>closed Monday and Tuesday</strong>, Wednesday and Thursday <strong>4pm to 9pm only</strong>, then 10am to 9pm Friday through Sunday. Those late finishes make it one of very few genuine evening options in the city.</p>
+
+<h2>South-west: Beeston, Armley and Holbeck</h2>
+<p><strong><a href="/soft-play/leeds/jump-inc-by-airhop-adventure-trampoline-park-leeds-leeds">Jump Inc</a></strong> on Benyon Park Way is the most-reviewed venue in Leeds by a wide margin — 2,421 reviews at 4.5 — and another trampoline-and-adventure park rather than soft play proper. Read the hours before setting out: Monday 10am to 7pm, but <strong>Tuesday to Thursday it doesn't open until 3pm</strong> (running to 8pm), then long days Friday to Sunday from 9 or 10am.</p>
+
+<p><strong><a href="/soft-play/leeds/monster-kidz-beeston-leeds">Monster Kidz Beeston</a></strong> on Matrix Court (4.2 from 945) is straightforward by comparison — 9.30am to 5.30pm on weekdays, 5pm at weekends, open every day. Its sister site <strong><a href="/soft-play/leeds/monster-kidz-leeds">Monster Kidz</a></strong> in Bramley on Broad Lane (4.2 from 532) runs 9.30am to 5pm all week.</p>
+
+<p><strong><a href="/soft-play/leeds/rugratz-play-gym-leeds">RugRatz Play Gym</a></strong> on Whingate in Armley (4.1 from 528) is <strong>closed Mondays</strong>, and alternates between a 6pm finish (Tuesday, Friday) and a 4.30pm one (Wednesday, Thursday and weekends).</p>
+
+<h2>Inner north-west and the city centre</h2>
+<p><strong><a href="/soft-play/leeds/gravity-active-leeds-leeds">Gravity Active</a></strong> at Cardigan Fields on Kirkstall Road (4.1 from 446) is <strong>closed Mondays</strong> and open to 8pm the rest of the week — another of the small number of venues useful after school or work.</p>
+
+<p>In Headingley, the <strong><a href="/soft-play/leeds/headingley-enterprise-arts-centre-leeds">Heart Centre</a></strong> on Bennett Road (4.7 from 218) has the longest opening hours of anywhere in this guide, 9am to 9pm Monday to Saturday, <strong>closed Sunday</strong>. <strong><a href="/soft-play/leeds/tiny-boo-ltd-leeds">Tiny Boo</a></strong> (4.5 from 46) shares that address and those hours — our listings hold them separately, and going by the shared address and identical timetable, Tiny Boo appears to be the play provision operating inside the Heart Centre rather than a separate destination.</p>
+
+<p>In the city centre itself, <strong><a href="/soft-play/leeds/the-hidden-village-children-s-role-play-village-caf-leeds">The Hidden Village</a></strong> on Call Lane (4.8 from 172) is a children's role-play village with a cafe — the pretend-town format rather than climbing — and one of the highest-rated venues in Leeds. Weekdays 9.45am to 3.15pm, longer at weekends.</p>
+
+<p>Out east, <strong><a href="/soft-play/leeds/little-leeds-leeds">Little Leeds</a></strong> on Chelwood Drive (4.5 from 25) rounds out the list, though we don't currently hold opening hours for it — worth ringing ahead.</p>
+
+<h2>The timetable problem, in one place</h2>
+<p>Leeds has more awkward opening patterns than any city we cover, so here it is condensed:</p>
 <ul>
-  <li><strong>Toddler soft play in Leeds</strong> (1–3 years)</li>
-  <li><strong>Baby soft play in Leeds</strong> (under 1s)</li>
-  <li><strong>Soft play birthday parties</strong> in Leeds</li>
-  <li><strong>Cheap soft play Leeds</strong> tips</li>
-  <li><strong>SEN-friendly / quiet sessions</strong></li>
+  <li><strong>Closed Mondays</strong> — RugRatz, Gravity Active, Yanki Doodlz; Flip Out is closed Monday <em>and</em> Tuesday</li>
+  <li><strong>Closed Tuesdays</strong> — Munchkins, Tumble Town</li>
+  <li><strong>Closed Wednesdays</strong> — The Play Lounge</li>
+  <li><strong>Weekdays only, shut all weekend</strong> — Jackaboos, Jigsaw Gyms</li>
+  <li><strong>Weekends only</strong> — Junglecatz (Sat/Sun, 10am–2pm)</li>
+  <li><strong>Afternoon-only midweek</strong> — Jump Inc (from 3pm Tue–Thu), Flip Out (from 4pm Wed–Thu)</li>
+  <li><strong>Very short weekend windows</strong> — Munchkins (9–11.30am Sat/Sun)</li>
+  <li><strong>Closed Sundays</strong> — Heart Centre, Tiny Boo, Jigsaw Gyms, Jackaboos, Tumble Town</li>
 </ul>
 
-<p>Browse all venues in the area here: <a href="/leeds">/leeds</a></p>
+<h2>When to go, and where to go late</h2>
+<p>The usual rule applies: term-time weekday mornings are quietest, and most Leeds centres open at 9 or 9.30am, so the first ninety minutes are the calmest of the day.</p>
 
-<h2>Why families love soft play in Leeds</h2>
-<p>Soft play is one of the easiest ways to keep kids active in a safe indoor setting—especially when the weather’s bad or you need a reliable weekend plan. Leeds has a wide range of centres, from toddler-focused play cafés to large indoor play frames for older children.</p>
-<ul>
-  <li>Great rainy day option for families</li>
-  <li>Plenty of toddler zones and baby sessions</li>
-  <li>Birthday party packages and private hire</li>
-  <li>Many venues include cafés with seating</li>
-  <li>Off-peak weekday deals are common</li>
-</ul>
+<p>Leeds is better than most cities for late openings, which is unusual and worth knowing. The <strong>Heart Centre</strong> and <strong>Tiny Boo</strong> in Headingley run to 9pm Monday to Saturday. <strong>Flip Out</strong> runs to 9pm Wednesday through Sunday. <strong>Gravity Active</strong> and <strong>Jump Inc</strong> both run to 8pm. If you can't get out before teatime, those five are effectively your whole list.</p>
 
-<h2>Best soft play in Leeds: what to look for</h2>
-<p>If you want the <strong>best soft play in Leeds</strong>, focus on a few key things:</p>
-<ul>
-  <li><strong>Age separation</strong> (baby/toddler areas away from big kids)</li>
-  <li><strong>Cleanliness</strong> and good maintenance</li>
-  <li><strong>Visibility</strong> so you can supervise easily</li>
-  <li><strong>Comfort</strong> (seating, café, toilets, baby changing)</li>
-  <li><strong>Safety</strong> rules and staff presence</li>
-</ul>
+<h2>Parties, prices and SEN sessions</h2>
+<p>We don't hold confirmed pricing or age limits for most Leeds venues, so check the venue's own page or website before booking rather than relying on a guide. Each listing above links through to what we do hold — address, opening hours, and the date we last verified the entry.</p>
 
-<p>Start here: <a href="/leeds">/leeds</a> and for toddlers: <a href="/leeds?filter=toddler">/leeds?filter=toddler</a></p>
+<p>On facilities, our listings confirm party provision at <strong>Tumble Town</strong>, <strong>Kids About TARN</strong> and <strong>Yanki Doodlz</strong>, and a cafe at all three. For everywhere else the facilities fields are simply blank in our data, which means unknown rather than absent — most soft play centres do parties, so ask.</p>
 
-<h2>Toddler soft play in Leeds (1–3 years)</h2>
-<p>For families searching <strong>toddler soft play Leeds</strong>, the ideal venues have dedicated under-3 spaces so toddlers can explore without being knocked over by older kids.</p>
-<ul>
-  <li>Mini climbing frames and low slides</li>
-  <li>Soft tunnels and padded shapes</li>
-  <li>Role-play corners (shops, kitchens, cars)</li>
-  <li>Quieter weekday morning sessions</li>
-</ul>
-<p>Browse toddler venues: <a href="/leeds?filter=toddler">/leeds?filter=toddler</a></p>
+<p>For SEN, the one venue our data positively flags for dedicated sensory sessions is <strong>The Play Lounge</strong> in Morley, which also confirms SEN-friendly facilities and a baby area. <strong>Kids About TARN</strong> and <strong>Yanki Doodlz</strong> are both flagged SEN-friendly. That's what we can stand behind; other venues may well run quiet sessions without it being recorded in our listing, so it's worth ringing round.</p>
 
-<h2>Baby soft play in Leeds (under 1s)</h2>
-<p>Many Leeds centres offer baby mornings or under-1 sessions. These are best once your baby can sit or crawl confidently. Look for padded floors, sensory toys, and calm spaces with room for feeding breaks.</p>
-<ul>
-  <li>Baby-only / under-1 sessions</li>
-  <li>Sensory corners and soft mats</li>
-  <li>Reduced capacity options</li>
-  <li>Comfortable seating for parents</li>
-</ul>
+<p>As general guidance rather than a claim about any venue here: most UK soft play charges per child with adults free or nominal, most require socks, and party packages vary widely in whether you get exclusive use or a roped-off area of a live session.</p>
 
-<h2>Soft play birthday parties in Leeds</h2>
-<p>Leeds has lots of options for <strong>soft play birthday parties</strong>, from small venues with party tables to larger centres offering private rooms, food, and a host.</p>
-<ul>
-  <li>Private party room or reserved area</li>
-  <li>Food packages and add-ons</li>
-  <li>Party host and timed play sessions</li>
-  <li>Themes, invitations and party bags (sometimes)</li>
-</ul>
-<p>Explore party venues: <a href="/leeds?filter=parties">/leeds?filter=parties</a></p>
+<h2>So which Leeds soft play should you pick?</h2>
+<p>If you want the safest bet in the city: <strong>Kids Club House</strong> in Horsforth — best rating, big sample, open every day, same hours daily.</p>
 
-<p>Venue placeholders (replace with real ones):</p>
-<ul>
-  <li><a href="/leeds/example-venue-slug">/leeds/example-venue-slug</a></li>
-  <li><a href="/leeds/example-venue-slug-2">/leeds/example-venue-slug-2</a></li>
-  <li><a href="/leeds/example-venue-slug-3">/leeds/example-venue-slug-3</a></li>
-</ul>
+<p>If you're in east Leeds: <strong>The Kidsplay</strong> in Seacroft, seven days, 9.30 to 6.</p>
 
-<h2>Cheap soft play in Leeds: money-saving tips</h2>
-<p>Want <strong>cheap soft play Leeds</strong>? Small changes make a big difference to cost.</p>
-<ul>
-  <li>Choose weekday mornings or early afternoons</li>
-  <li>Look for sibling deals and multi-child pricing</li>
-  <li>Check if memberships or loyalty cards exist</li>
-  <li>Bring your own essentials (socks, water)</li>
-</ul>
+<p>If your child prefers a pretend town to a climbing frame: <strong>The Hidden Village</strong> on Call Lane, or <strong>Kids About TARN</strong> in Yeadon.</p>
 
-<h2>SEN-friendly / autism-friendly soft play in Leeds</h2>
-<p>Some Leeds venues offer quieter sessions with fewer children, lower music volume and calmer play. These sessions can be brilliant for children who find busy environments overwhelming.</p>
-<ul>
-  <li>Quiet sessions with reduced capacity</li>
-  <li>Clear rules and staff support</li>
-  <li>Spaces for breaks and calm-down</li>
-  <li>Predictable session times</li>
-</ul>
+<p>If you need SEN-aware provision: <strong>The Play Lounge</strong> in Morley.</p>
 
-<h2>Local tips: parking, cafés, quieter times, and what to bring</h2>
-<ul>
-  <li><strong>Quieter times:</strong> weekday mornings are usually best for toddlers</li>
-  <li><strong>What to bring:</strong> socks, spare clothes, wipes, water</li>
-  <li><strong>Café tip:</strong> check allergy-friendly menus if needed</li>
-  <li><strong>Parking:</strong> confirm on-site parking or nearby pay-and-display</li>
-</ul>
+<p>If you have older kids who want to burn themselves out: <strong>Jump Inc</strong> in Holbeck, <strong>Flip Out</strong> in Seacroft or <strong>Gravity Active</strong> at Kirkstall — checking the midweek afternoon-only hours first.</p>
 
-<h2>More soft play near Leeds</h2>
-<p>If you’re happy to travel, there are great options in nearby areas too. Add links to nearby city pages when available.</p>
-<ul>
-  <li><a href="/wakefield">/wakefield</a></li>
-  <li><a href="/bradford">/bradford</a></li>
-  <li><a href="/harrogate">/harrogate</a></li>
-</ul>
+<p>If you can only get out in the evening: <strong>Heart Centre</strong> or <strong>Tiny Boo</strong> in Headingley, to 9pm.</p>
 
-<h2>FAQs – Soft play in Leeds</h2>
+<blockquote>
+  <p>👉 <strong><a href="/soft-play/leeds">See all soft play centres in Leeds with opening hours, addresses and facilities</a></strong></p>
+</blockquote>
 
-<h3>What is the best soft play in Leeds?</h3>
-<p>The best soft play in Leeds depends on your child’s age and what matters most—cleanliness, toddler zones, party packages or quieter sessions.</p>
+<h2>Frequently asked questions</h2>
 
-<h3>Are there toddler-only sessions in Leeds?</h3>
-<p>Yes, many Leeds soft play centres offer weekday toddler sessions that are quieter and better for under-3s.</p>
+<h3>How many soft play centres are there in Leeds?</h3>
+<p>We hold verified listings for 23 soft play and children's role-play centres across the Leeds postcode districts (LS1–LS20, LS26–LS28). That excludes nurseries and private members' gyms that appear in some directory listings but aren't drop-in play centres.</p>
 
-<h3>How much does soft play cost in Leeds?</h3>
-<p>Prices vary, but most sessions in Leeds cost roughly £5–£11 per child depending on age and peak times.</p>
+<h3>Which is the best-rated soft play in Leeds?</h3>
+<p>Kids Club House in Horsforth, at 4.8 from 1,454 reviews — the strongest combination of rating and review volume in the city. The Hidden Village on Call Lane and The Play Lounge in Morley also rate 4.8, from smaller samples of 172 and 57 reviews.</p>
 
-<h3>Which soft play centres in Leeds do birthday parties?</h3>
-<p>Many venues in Leeds offer birthday party packages with food, a host and private or reserved seating areas.</p>
+<h3>Which soft play centres in Leeds are open in the evening?</h3>
+<p>The Heart Centre and Tiny Boo in Headingley are open until 9pm Monday to Saturday, Flip Out Leeds until 9pm Wednesday to Sunday, and Gravity Active and Jump Inc until 8pm. Most other Leeds venues close between 2.30pm and 6pm.</p>
 
-<h3>Are there SEN-friendly or quiet soft play sessions in Leeds?</h3>
-<p>Some venues offer SEN-friendly sessions with reduced capacity and lower noise—check listings or contact venues for quiet session times.</p>`,
+<h3>Are any Leeds soft play centres closed during the week?</h3>
+<p>Several. RugRatz, Gravity Active and Yanki Doodlz are closed Mondays; Flip Out is closed Monday and Tuesday; Munchkins and Tumble Town are closed Tuesdays; The Play Lounge is closed Wednesdays. Jackaboos and Jigsaw Gyms are weekday-only and shut all weekend, while Junglecatz opens at weekends only.</p>
+
+<h3>Which soft play in Leeds is best for toddlers and babies?</h3>
+<p>The Play Lounge in Morley is the only Leeds listing in our data that confirms a dedicated baby area alongside SEN-friendly facilities and sensory sessions. Kids Club House and Little Burrowers are also popular with under-fives, though we don't hold confirmed age-range data for them — check with the venue.</p>
+
+<h3>How much does soft play in Leeds cost?</h3>
+<p>We don't hold confirmed prices for Leeds venues, so check each centre's page or website directly. As general context, UK soft play sessions commonly run in the region of £5–£9 per child, with adults free or charged a small amount, and term-time weekday sessions usually cheaper than weekends and school holidays.</p>`,
     faq: [
       {
-        q: 'What is the best soft play in Leeds?',
-        a: 'The best soft play in Leeds depends on your child’s age and what matters most—cleanliness, toddler zones, party packages or quieter sessions.',
+        q: 'How many soft play centres are there in Leeds?',
+        a: "We hold verified listings for 23 soft play and children's role-play centres across the Leeds postcode districts (LS1–LS20, LS26–LS28). That excludes nurseries and private members' gyms that appear in some directory listings but aren't drop-in play centres.",
       },
       {
-        q: 'Are there toddler-only sessions in Leeds?',
-        a: 'Yes, many Leeds soft play centres offer weekday toddler sessions that are quieter and better for under-3s.',
+        q: 'Which is the best-rated soft play in Leeds?',
+        a: 'Kids Club House in Horsforth, at 4.8 from 1,454 reviews — the strongest combination of rating and review volume in the city. The Hidden Village on Call Lane and The Play Lounge in Morley also rate 4.8, from smaller samples of 172 and 57 reviews.',
       },
       {
-        q: 'How much does soft play cost in Leeds?',
-        a: 'Prices vary, but most sessions in Leeds cost roughly £5–£11 per child depending on age and peak times.',
+        q: 'Which soft play centres in Leeds are open in the evening?',
+        a: 'The Heart Centre and Tiny Boo in Headingley are open until 9pm Monday to Saturday, Flip Out Leeds until 9pm Wednesday to Sunday, and Gravity Active and Jump Inc until 8pm. Most other Leeds venues close between 2.30pm and 6pm.',
       },
       {
-        q: 'Which soft play centres in Leeds do birthday parties?',
-        a: 'Many venues in Leeds offer birthday party packages with food, a host and private or reserved seating areas.',
+        q: 'Are any Leeds soft play centres closed during the week?',
+        a: 'Several. RugRatz, Gravity Active and Yanki Doodlz are closed Mondays; Flip Out is closed Monday and Tuesday; Munchkins and Tumble Town are closed Tuesdays; The Play Lounge is closed Wednesdays. Jackaboos and Jigsaw Gyms are weekday-only and shut all weekend, while Junglecatz opens at weekends only.',
       },
       {
-        q: 'Are there SEN-friendly or quiet soft play sessions in Leeds?',
-        a: 'Some venues offer SEN-friendly sessions with reduced capacity and lower noise—check listings or contact venues for quiet session times.',
+        q: 'Which soft play in Leeds is best for toddlers and babies?',
+        a: "The Play Lounge in Morley is the only Leeds listing in our data that confirms a dedicated baby area alongside SEN-friendly facilities and sensory sessions. Kids Club House and Little Burrowers are also popular with under-fives, though we don't hold confirmed age-range data for them — check with the venue.",
+      },
+      {
+        q: 'How much does soft play in Leeds cost?',
+        a: 'We don’t hold confirmed prices for Leeds venues, so check each centre’s page or website directly. As general context, UK soft play sessions commonly run in the region of £5–£9 per child, with adults free or charged a small amount, and term-time weekday sessions usually cheaper than weekends and school holidays.',
       },
     ],
   },
