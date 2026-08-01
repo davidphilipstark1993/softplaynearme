@@ -116,3 +116,13 @@ export function hasStaticDataForTown(townSlug: string): boolean {
 export function getAllStaticTownSlugs(): string[] {
   return Object.keys(venuesByTown)
 }
+
+/**
+ * Total venue count across all towns in the static export. Used as the
+ * display fallback wherever the live DB count is unavailable (e.g. during
+ * SOFTPLAY_STATIC_BUILD builds), so those fallbacks track real data instead
+ * of a hand-maintained number that silently goes stale.
+ */
+export function getStaticTotalVenueCount(): number {
+  return towns.reduce((sum, town) => sum + town.venueCount, 0)
+}

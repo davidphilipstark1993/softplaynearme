@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import Image from 'next/image'
 import { cities } from '@/lib/venues'
-import { getStaticVenuesByTown } from '@/lib/staticVenues'
+import { getStaticVenuesByTown, getStaticTotalVenueCount } from '@/lib/staticVenues'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { SearchHero } from '@/components/home/SearchHero'
@@ -19,7 +19,9 @@ import type { Metadata } from 'next'
 
 export async function generateMetadata(): Promise<Metadata> {
   const total = await getTotalVenueCount()
-  const countStr = total ? total.toLocaleString('en-GB') : '1,800+'
+  const countStr = total
+    ? total.toLocaleString('en-GB')
+    : `${getStaticTotalVenueCount().toLocaleString('en-GB')}+`
   const description = `Find ${countStr} soft play centres near you across the UK. Search by postcode, compare prices, opening times, facilities, photos & reviews. Free directory updated daily by venue owners.`
   // Next.js replaces (does not deep-merge) the whole `openGraph` / `twitter`
   // object when a page defines one, so anything the root layout set here has to
@@ -134,7 +136,7 @@ export default async function Home() {
 
   const venueCountDisplay = totalVenues > 0
     ? totalVenues.toLocaleString('en-GB')
-    : '1,000+'
+    : `${getStaticTotalVenueCount().toLocaleString('en-GB')}+`
 
   const cityVisuals = CITY_IMAGES
 
