@@ -3,8 +3,12 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getPostBySlug, getRelatedPosts, posts } from '@/lib/blogPosts'
 import { ShareButtons } from '@/components/social/ShareButtons'
-import { buildArticleSchema, buildFAQSchema } from '@/lib/schema'
+import { buildArticleSchema, buildFAQSchema, buildBreadcrumbSchema } from '@/lib/schema'
 import { getBlogOgImage } from '@/lib/cityImages'
+import { Header } from '@/components/layout/Header'
+import { Footer } from '@/components/layout/Footer'
+import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
+import { JsonLd } from '@/components/seo/JsonLd'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -88,8 +92,18 @@ export default async function BlogPostPage({ params }: PageProps) {
     ? buildFAQSchema(post.faq.map((f) => ({ question: f.q, answer: f.a })))
     : null
 
+  const breadcrumbSchema = buildBreadcrumbSchema([
+    { name: 'Home', url: 'https://www.softplaynearme.co.uk' },
+    { name: 'Blog', url: 'https://www.softplaynearme.co.uk/blog' },
+    { name: post.title },
+  ])
+
   return (
-    <main className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white">
+      <Header />
+      <Breadcrumbs items={[{ label: 'Blog', href: '/blog' }, { label: post.title }]} />
+
+      <JsonLd data={breadcrumbSchema} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema).replace(/</g, '\\u003c') }}
@@ -155,6 +169,8 @@ export default async function BlogPostPage({ params }: PageProps) {
           </Link>
         </div>
       </article>
-    </main>
+
+      <Footer />
+    </div>
   )
 }

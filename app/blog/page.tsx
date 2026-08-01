@@ -1,6 +1,9 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import { posts } from '@/lib/blogPosts'
+import { Header } from '@/components/layout/Header'
+import { Footer } from '@/components/layout/Footer'
+import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 
 export const metadata: Metadata = {
   title: 'Soft Play Blog',
@@ -25,24 +28,24 @@ export const metadata: Metadata = {
 }
 
 export default function BlogIndexPage() {
+  // Don't link out to guides we've asked Google not to index — app/sitemap.ts
+  // already excludes them, and linking them anyway sends a mixed signal while
+  // spending internal link equity on pages we've judged unfit.
+  const listedPosts = posts.filter((post) => !post.noindex)
+
   return (
-    <main className="min-h-screen bg-slate-50">
-      <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Soft Play Blog</h1>
-          <Link
-            href="/"
-            className="inline-flex items-center rounded-md border border-purple-300 bg-purple-600 px-4 py-2 text-sm font-medium text-white hover:bg-purple-700"
-          >
-            Home
-          </Link>
-        </div>
+    <div className="min-h-screen bg-slate-50">
+      <Header />
+      <Breadcrumbs items={[{ label: 'Blog' }]} />
+
+      <main className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+        <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Soft Play Blog</h1>
         <p className="mt-3 text-base text-slate-700 sm:text-lg">
           Local city guides and practical planning tips for families searching for the best soft play near them.
         </p>
 
         <div className="mt-10 space-y-4">
-          {posts.map((post) => (
+          {listedPosts.map((post) => (
             <article key={post.slug} className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
               <h2 className="text-xl font-semibold text-slate-900">
                 <Link className="hover:text-blue-700 hover:underline" href={`/blog/${post.slug}`}>
@@ -50,7 +53,16 @@ export default function BlogIndexPage() {
                 </Link>
               </h2>
               <p className="mt-2 text-slate-700">{post.excerpt}</p>
-              <p className="mt-2 text-sm text-slate-500">Updated: {post.updatedAt}</p>
+              <p className="mt-2 text-sm text-slate-500">
+                Updated{' '}
+                <time dateTime={post.updatedAt}>
+                  {new Date(post.updatedAt).toLocaleDateString('en-GB', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric',
+                  })}
+                </time>
+              </p>
               <Link
                 href={`/blog/${post.slug}`}
                 className="mt-3 inline-flex text-sm font-medium text-blue-700 hover:underline"
@@ -63,13 +75,15 @@ export default function BlogIndexPage() {
 
         <div className="mt-10">
           <Link
-            href="/"
+            href="/search"
             className="inline-flex items-center rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100"
           >
-            Back to Home
+            Browse all soft play venues
           </Link>
         </div>
-      </div>
-    </main>
+      </main>
+
+      <Footer />
+    </div>
   )
 }
