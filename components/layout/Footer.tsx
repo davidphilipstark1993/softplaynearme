@@ -31,6 +31,7 @@ const cityDirectory: { region: string; cities: { name: string; slug: string }[] 
   { region: 'London & South East', cities: [
     { name: 'London', slug: 'london' }, { name: 'Brighton', slug: 'brighton' },
     { name: 'Portsmouth', slug: 'portsmouth' }, { name: 'Hastings', slug: 'hastings' },
+    { name: 'Romsey', slug: 'romsey' },
   ]},
   { region: 'South West & Wales', cities: [
     { name: 'Bristol', slug: 'bristol' }, { name: 'Bournemouth', slug: 'bournemouth' },
