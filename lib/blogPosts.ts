@@ -37,12 +37,12 @@ export const posts: BlogPost[] = [
     dateModified: '2026-02-15T00:00:00.000Z',
     contentHtml: `<p>Looking for the <strong>best soft play in York</strong>? Whether you’re planning a toddler session, a rainy day activity or a fun birthday party, York has several charming and engaging soft play options for families to choose from.</p>
 
-<p>This 2026 parent guide covers the top soft play areas, toddler and baby sessions, party setups, inexpensive play ideas and SEN-friendly options across the city and nearby areas. Many venues combine soft play with trampolines, ball pits, climbing frames and café spaces for adults. :contentReference[oaicite:1]{index=1}</p>
+<p>This 2026 parent guide covers the top soft play areas, toddler and baby sessions, party setups, inexpensive play ideas and SEN-friendly options across the city and nearby areas. Many venues combine soft play with trampolines, ball pits, climbing frames and café spaces for adults.</p>
 
 <p>Browse local soft play venues here: <a href="/soft-play/york">/york</a></p>
 
 <h2>Why families love soft play in York</h2>
-<p>Soft play in York provides safe indoor fun year-round, whether it’s raining or cold outside. Parents appreciate padded play spaces, separate toddler zones, and well-maintained equipment with plenty of seating and café facilities nearby. :contentReference[oaicite:2]{index=2}</p>
+<p>Soft play in York provides safe indoor fun year-round, whether it’s raining or cold outside. Parents appreciate padded play spaces, separate toddler zones, and well-maintained equipment with plenty of seating and café facilities nearby.</p>
 <ul>
   <li>Activities for all ages, from babies to older children</li>
   <li>Dedicated toddler and baby play areas</li>
@@ -62,7 +62,7 @@ export const posts: BlogPost[] = [
 </ul>
 
 <h2>Toddler soft play in York (1–3 years)</h2>
-<p>If you’re searching for <strong>toddler soft play York</strong>, look for play areas designed for under-3s with small slides, ball pits and padded crawl spaces. These spaces help toddlers explore confidently and safely. :contentReference[oaicite:3]{index=3}</p>
+<p>If you’re searching for <strong>toddler soft play York</strong>, look for play areas designed for under-3s with small slides, ball pits and padded crawl spaces. These spaces help toddlers explore confidently and safely.</p>
 <ul>
   <li>Mini slides and tunnels</li>
   <li>Soft shapes and ball pits</li>
@@ -72,7 +72,7 @@ export const posts: BlogPost[] = [
 <p>Browse toddler-friendly venues: <a href="/soft-play/york/toddler">/york?filter=toddler</a></p>
 
 <h2>Baby soft play in York (under 1s)</h2>
-<p>Many York venues offer sessions for babies under one year old that include gentle padded areas and sensory-focused play. These sessions are ideal once babies can sit up or crawl confidently. :contentReference[oaicite:4]{index=4}</p>
+<p>Many York venues offer sessions for babies under one year old that include gentle padded areas and sensory-focused play. These sessions are ideal once babies can sit up or crawl confidently.</p>
 <ul>
   <li>Baby-only soft play sessions</li>
   <li>Sensory mats and low impact shapes</li>
@@ -81,7 +81,7 @@ export const posts: BlogPost[] = [
 </ul>
 
 <h2>Soft play birthday parties in York</h2>
-<p>Celebrating a birthday? York’s soft play centres often offer party packages including private tables, reserved play time, food options and even specialised party hosts at some venues. :contentReference[oaicite:5]{index=5}</p>
+<p>Celebrating a birthday? York’s soft play centres often offer party packages including private tables, reserved play time, food options and even specialised party hosts at some venues.</p>
 <ul>
   <li>Private party areas</li>
   <li>Food and drink packages</li>
@@ -108,7 +108,7 @@ export const posts: BlogPost[] = [
 </ul>
 
 <h2>SEN-friendly / quiet soft play in York</h2>
-<p>Many venues provide quieter sessions with lower numbers and calmer environments tailored for sensory-sensitive children. These are great options if busy sessions are overwhelming. :contentReference[oaicite:6]{index=6}</p>
+<p>Many venues provide quieter sessions with lower numbers and calmer environments tailored for sensory-sensitive children. These are great options if busy sessions are overwhelming.</p>
 <ul>
   <li>Quiet or reduced capacity sessions</li>
   <li>Lower volume music or lighting</li>
@@ -122,14 +122,6 @@ export const posts: BlogPost[] = [
   <li><strong>What to bring:</strong> socks, spare clothes, wipes and water</li>
   <li><strong>Cafés:</strong> check allergy-friendly menu options</li>
   <li><strong>Parking:</strong> confirm if on-site or nearby pay-and-display</li>
-</ul>
-
-<h2>More soft play near York</h2>
-<p>If you’re happy to travel, great indoor play options exist in nearby towns. Add these links when ready:</p>
-<ul>
-  <li><a href="/malton">/malton</a></li>
-  <li><a href="/essar">/essar</a></li>
-  <li><a href="/market-weighton">/market-weighton</a></li>
 </ul>
 
 <h2>FAQs – Soft play in York</h2>
@@ -686,7 +678,7 @@ export const posts: BlogPost[] = [
 <p><strong><a href="/soft-play/leeds/junglecatz-soft-play-leeds">Junglecatz Soft Play</a></strong> (4.4 from 189) is the inverse and the most restricted venue in the guide: <strong>weekends only</strong>, Saturday and Sunday 10am to 2pm, closed Monday through Friday.</p>
 
 <h2>East: Seacroft (LS14)</h2>
-<p><strong><a href="/soft-play/leeds/the-kidsplay-formerly-kidzplay-leeds-leeds">The Kidsplay</a></strong> on Limewood Road (4.1 from 690) is the dependable one — 9.30am to 6pm, seven days, no closed day and no split shifts. For east Leeds it's the equivalent of what Kids Club House offers in the north-west.</p>
+<p><strong><a href="/soft-play/leeds/the-kidsplay-formerly-kidzplay-leeds-york">The Kidsplay</a></strong> on Limewood Road (4.1 from 690) is the dependable one — 9.30am to 6pm, seven days, no closed day and no split shifts. For east Leeds it's the equivalent of what Kids Club House offers in the north-west.</p>
 
 <p><strong><a href="/soft-play/leeds/flip-out-leeds-leeds">Flip Out Leeds</a></strong> on Coal Road (4.7 from 872) is a trampoline park rather than a traditional frame, and its timetable needs care: <strong>closed Monday and Tuesday</strong>, Wednesday and Thursday <strong>4pm to 9pm only</strong>, then 10am to 9pm Friday through Sunday. Those late finishes make it one of very few genuine evening options in the city.</p>
 
@@ -895,15 +887,6 @@ export const posts: BlogPost[] = [
   <li><strong>Café tip:</strong> check allergy-friendly options in advance</li>
 </ul>
 
-<h2>More soft play near London</h2>
-<p>If you're willing to travel slightly outside central London, you may also find excellent options in nearby areas:</p>
-<ul>
-  <li><a href="/croydon">/croydon</a></li>
-  <li><a href="/watford">/watford</a></li>
-  <li><a href="/romford">/romford</a></li>
-  <li><a href="/kingston">/kingston</a></li>
-</ul>
-
 <h2>FAQs – Soft play in London</h2>
 
 <h3>What is the best soft play in London?</h3>
@@ -1040,15 +1023,6 @@ export const posts: BlogPost[] = [
   <li><strong>Spare clothes:</strong> especially for younger children</li>
   <li><strong>Parking:</strong> many suburban venues have free parking; city centre spots may not</li>
   <li><strong>Café tip:</strong> check allergy-friendly options in advance</li>
-</ul>
-
-<h2>More soft play near Manchester</h2>
-<p>If you're happy to travel slightly outside central Manchester, there are excellent options in nearby areas:</p>
-<ul>
-  <li><a href="/stockport">/stockport</a></li>
-  <li><a href="/soft-play/bolton">/bolton</a></li>
-  <li><a href="/oldham">/oldham</a></li>
-  <li><a href="/salford">/salford</a></li>
 </ul>
 
 <h2>FAQs – Soft play in Manchester</h2>
@@ -1189,15 +1163,6 @@ export const posts: BlogPost[] = [
   <li><strong>Café tip:</strong> check allergy-friendly options in advance</li>
 </ul>
 
-<h2>More soft play near Birmingham</h2>
-<p>If you're happy to travel slightly outside central Birmingham, there are excellent options in nearby areas:</p>
-<ul>
-  <li><a href="/solihull">/solihull</a></li>
-  <li><a href="/blog/best-soft-play-in-wolverhampton">/wolverhampton</a></li>
-  <li><a href="/blog/best-soft-play-in-coventry">/coventry</a></li>
-  <li><a href="/walsall">/walsall</a></li>
-</ul>
-
 <h2>FAQs – Soft play in Birmingham</h2>
 
 <h3>What is the best soft play in Birmingham?</h3>
@@ -1334,15 +1299,6 @@ export const posts: BlogPost[] = [
   <li><strong>Spare clothes:</strong> especially for younger children</li>
   <li><strong>Parking:</strong> most suburban venues have free parking; city centre options may charge</li>
   <li><strong>Café tip:</strong> check allergy-friendly options in advance</li>
-</ul>
-
-<h2>More soft play near Bristol</h2>
-<p>If you're happy to travel slightly outside central Bristol, there are excellent options in nearby areas:</p>
-<ul>
-  <li><a href="/bath">/bath</a></li>
-  <li><a href="/weston-super-mare">/weston-super-mare</a></li>
-  <li><a href="/gloucester">/gloucester</a></li>
-  <li><a href="/taunton">/taunton</a></li>
 </ul>
 
 <h2>FAQs – Soft play in Bristol</h2>
@@ -1483,15 +1439,6 @@ export const posts: BlogPost[] = [
   <li><strong>Café tip:</strong> check allergy-friendly options in advance</li>
 </ul>
 
-<h2>More soft play near Liverpool</h2>
-<p>If you're happy to travel slightly outside Liverpool, there are excellent options in nearby areas:</p>
-<ul>
-  <li><a href="/wirral">/wirral</a></li>
-  <li><a href="/st-helens">/st-helens</a></li>
-  <li><a href="/southport">/southport</a></li>
-  <li><a href="/warrington">/warrington</a></li>
-</ul>
-
 <h2>FAQs – Soft play in Liverpool</h2>
 
 <h3>What is the best soft play in Liverpool?</h3>
@@ -1628,15 +1575,6 @@ export const posts: BlogPost[] = [
   <li><strong>Spare clothes:</strong> especially for younger children</li>
   <li><strong>Parking:</strong> most suburban venues have free parking; city centre options may charge</li>
   <li><strong>Café tip:</strong> check allergy-friendly options in advance</li>
-</ul>
-
-<h2>More soft play near Newcastle</h2>
-<p>If you're happy to travel slightly outside Newcastle, there are excellent options in nearby areas:</p>
-<ul>
-  <li><a href="/gateshead">/gateshead</a></li>
-  <li><a href="/soft-play/sunderland">/sunderland</a></li>
-  <li><a href="/durham">/durham</a></li>
-  <li><a href="/north-shields">/north-shields</a></li>
 </ul>
 
 <h2>FAQs – Soft play in Newcastle</h2>
@@ -1776,15 +1714,6 @@ export const posts: BlogPost[] = [
   <li><strong>Café tip:</strong> check allergy-friendly options in advance</li>
 </ul>
 
-<h2>More soft play near Bournemouth</h2>
-<p>If you're happy to travel slightly outside Bournemouth, there are excellent options in nearby areas:</p>
-<ul>
-  <li><a href="/poole">/poole</a></li>
-  <li><a href="/christchurch">/christchurch</a></li>
-  <li><a href="/wimborne">/wimborne</a></li>
-  <li><a href="/ferndown">/ferndown</a></li>
-</ul>
-
 <h2>FAQs – Soft play in Bournemouth</h2>
 
 <h3>What is the best soft play in Bournemouth?</h3>
@@ -1905,15 +1834,6 @@ export const posts: BlogPost[] = [
   <li><strong>Spare clothes:</strong> especially for younger children</li>
   <li><strong>Parking:</strong> central Brighton has limited parking — suburban venues are easier</li>
   <li><strong>Café tip:</strong> check allergy-friendly options in advance</li>
-</ul>
-
-<h2>More soft play near Brighton</h2>
-<p>If you're happy to travel slightly outside Brighton, there are excellent options in nearby areas:</p>
-<ul>
-  <li><a href="/worthing">/worthing</a></li>
-  <li><a href="/lewes">/lewes</a></li>
-  <li><a href="/burgess-hill">/burgess-hill</a></li>
-  <li><a href="/soft-play/hastings">/hastings</a></li>
 </ul>
 
 <h2>FAQs – Soft play in Brighton</h2>
@@ -2038,15 +1958,6 @@ export const posts: BlogPost[] = [
   <li><strong>Café tip:</strong> check allergy-friendly options in advance</li>
 </ul>
 
-<h2>More soft play near Cardiff</h2>
-<p>If you're happy to travel slightly outside Cardiff, there are excellent options in nearby areas:</p>
-<ul>
-  <li><a href="/newport">/newport</a></li>
-  <li><a href="/barry">/barry</a></li>
-  <li><a href="/caerphilly">/caerphilly</a></li>
-  <li><a href="/bridgend">/bridgend</a></li>
-</ul>
-
 <h2>FAQs – Soft play in Cardiff</h2>
 
 <h3>What is the best soft play in Cardiff?</h3>
@@ -2167,15 +2078,6 @@ export const posts: BlogPost[] = [
   <li><strong>Spare clothes:</strong> especially for younger children</li>
   <li><strong>Parking:</strong> most venues have free on-site parking</li>
   <li><strong>Café tip:</strong> check allergy-friendly options in advance</li>
-</ul>
-
-<h2>More soft play near Colchester</h2>
-<p>If you're happy to travel slightly outside Colchester, there are excellent options in nearby areas:</p>
-<ul>
-  <li><a href="/chelmsford">/chelmsford</a></li>
-  <li><a href="/soft-play/ipswich">/ipswich</a></li>
-  <li><a href="/braintree">/braintree</a></li>
-  <li><a href="/clacton">/clacton</a></li>
 </ul>
 
 <h2>FAQs – Soft play in Colchester</h2>
@@ -2300,15 +2202,6 @@ export const posts: BlogPost[] = [
   <li><strong>Café tip:</strong> check allergy-friendly options in advance</li>
 </ul>
 
-<h2>More soft play near Hastings</h2>
-<p>If you're happy to travel slightly outside Hastings, there are excellent options in nearby areas:</p>
-<ul>
-  <li><a href="/eastbourne">/eastbourne</a></li>
-  <li><a href="/bexhill">/bexhill</a></li>
-  <li><a href="/soft-play/brighton">/brighton</a></li>
-  <li><a href="/lewes">/lewes</a></li>
-</ul>
-
 <h2>FAQs – Soft play in Hastings</h2>
 
 <h3>What is the best soft play in Hastings?</h3>
@@ -2429,15 +2322,6 @@ export const posts: BlogPost[] = [
   <li><strong>Spare clothes:</strong> especially for younger children</li>
   <li><strong>Parking:</strong> most venues have free on-site parking</li>
   <li><strong>Café tip:</strong> check allergy-friendly options in advance</li>
-</ul>
-
-<h2>More soft play near Ipswich</h2>
-<p>If you're happy to travel slightly outside Ipswich, there are excellent options in nearby areas:</p>
-<ul>
-  <li><a href="/soft-play/colchester">/colchester</a></li>
-  <li><a href="/felixstowe">/felixstowe</a></li>
-  <li><a href="/stowmarket">/stowmarket</a></li>
-  <li><a href="/bury-st-edmunds">/bury-st-edmunds</a></li>
 </ul>
 
 <h2>FAQs – Soft play in Ipswich</h2>
@@ -2562,15 +2446,6 @@ export const posts: BlogPost[] = [
   <li><strong>Café tip:</strong> check allergy-friendly options in advance</li>
 </ul>
 
-<h2>More soft play near Norwich</h2>
-<p>If you're happy to travel slightly outside Norwich, there are excellent options in nearby areas:</p>
-<ul>
-  <li><a href="/great-yarmouth">/great-yarmouth</a></li>
-  <li><a href="/lowestoft">/lowestoft</a></li>
-  <li><a href="/dereham">/dereham</a></li>
-  <li><a href="/wymondham">/wymondham</a></li>
-</ul>
-
 <h2>FAQs – Soft play in Norwich</h2>
 
 <h3>What is the best soft play in Norwich?</h3>
@@ -2691,15 +2566,6 @@ export const posts: BlogPost[] = [
   <li><strong>Spare clothes:</strong> especially for younger children</li>
   <li><strong>Parking:</strong> most suburban venues have free parking</li>
   <li><strong>Café tip:</strong> check allergy-friendly options in advance</li>
-</ul>
-
-<h2>More soft play near Portsmouth</h2>
-<p>If you're happy to travel slightly outside Portsmouth, there are excellent options in nearby areas:</p>
-<ul>
-  <li><a href="/gosport">/gosport</a></li>
-  <li><a href="/fareham">/fareham</a></li>
-  <li><a href="/blog/best-soft-play-in-southampton">/southampton</a></li>
-  <li><a href="/havant">/havant</a></li>
 </ul>
 
 <h2>FAQs – Soft play in Portsmouth</h2>
@@ -2824,15 +2690,6 @@ export const posts: BlogPost[] = [
   <li><strong>Café tip:</strong> check allergy-friendly options in advance</li>
 </ul>
 
-<h2>More soft play near Southend</h2>
-<p>If you're happy to travel slightly outside Southend, there are excellent options in nearby areas:</p>
-<ul>
-  <li><a href="/rayleigh">/rayleigh</a></li>
-  <li><a href="/basildon">/basildon</a></li>
-  <li><a href="/rochford">/rochford</a></li>
-  <li><a href="/canvey-island">/canvey-island</a></li>
-</ul>
-
 <h2>FAQs – Soft play in Southend</h2>
 
 <h3>What is the best soft play in Southend?</h3>
@@ -2955,15 +2812,6 @@ export const posts: BlogPost[] = [
   <li><strong>Café tip:</strong> check allergy-friendly options in advance</li>
 </ul>
 
-<h2>More soft play near Swansea</h2>
-<p>If you're happy to travel slightly outside Swansea, there are excellent options in nearby areas:</p>
-<ul>
-  <li><a href="/neath">/neath</a></li>
-  <li><a href="/port-talbot">/port-talbot</a></li>
-  <li><a href="/llanelli">/llanelli</a></li>
-  <li><a href="/carmarthen">/carmarthen</a></li>
-</ul>
-
 <h2>FAQs – Soft play in Swansea</h2>
 
 <h3>What is the best soft play in Swansea?</h3>
@@ -3084,15 +2932,6 @@ export const posts: BlogPost[] = [
   <li><strong>Spare clothes:</strong> especially for younger children</li>
   <li><strong>Parking:</strong> most venues have free on-site parking</li>
   <li><strong>Café tip:</strong> check allergy-friendly options in advance</li>
-</ul>
-
-<h2>More soft play near Huddersfield</h2>
-<p>If you're happy to travel slightly outside Huddersfield, there are excellent options in nearby areas:</p>
-<ul>
-  <li><a href="/soft-play/leeds">/leeds</a></li>
-  <li><a href="/soft-play/bradford">/bradford</a></li>
-  <li><a href="/wakefield">/wakefield</a></li>
-  <li><a href="/soft-play/halifax">/halifax</a></li>
 </ul>
 
 <h2>FAQs – Soft play in Huddersfield</h2>
@@ -4080,13 +3919,7 @@ export const posts: BlogPost[] = [
   <li><strong>Parking:</strong> Milton Keynes is very car-friendly; most venues have good parking</li>
 </ul>
 
-<h2>More soft play near Milton Keynes</h2>
-<p>If you're happy to travel a little further, great indoor play options exist in nearby towns:</p>
-<ul>
-  <li><a href="/blog/best-soft-play-in-northampton">/northampton</a></li>
-  <li><a href="/blog/best-soft-play-in-oxford">/oxford</a></li>
-  <li><a href="/luton">/luton</a></li>
-</ul>`,
+`,
     faq: [
       { q: 'What is the best soft play in Milton Keynes?', a: 'Milton Keynes has a good selection of indoor play venues for babies, toddlers and older children, with options including party packages and SEN-friendly sessions.' },
       { q: 'Are there toddler-only sessions in Milton Keynes?', a: 'Yes \u2014 several venues have dedicated under-3 zones or quieter toddler sessions, particularly on weekday mornings.' },

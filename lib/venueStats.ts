@@ -10,7 +10,12 @@ import { getPool } from '@/lib/pool'
 export const getTotalVenueCount = cache(async (): Promise<number | null> => {
   try {
     const pool = getPool()
-    const { rows } = await pool.query<{ total: number }>('SELECT COUNT(*)::int AS total FROM venues')
+    // Genuine soft play only — see lib/venueTypes.ts. Counting bucketed
+    // venue_types (trampoline parks, farms, park playgrounds, other family
+    // attractions) here would overstate the "soft play centres" claim.
+    const { rows } = await pool.query<{ total: number }>(
+      `SELECT COUNT(*)::int AS total FROM venues WHERE venue_type IS NULL OR venue_type = 'indoor'`
+    )
     return rows[0]?.total ?? null
   } catch {
     return null

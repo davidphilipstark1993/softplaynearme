@@ -86,9 +86,13 @@ async function getHomepageStats() {
   try {
     const pool = getPool()
     const [countResult, cityCountResult, recentResult] = await Promise.all([
-      pool.query<{ total: number }>('SELECT COUNT(*)::int AS total FROM venues'),
+      // "soft play centres" should count genuine soft play only — venue_type
+      // buckets trampoline parks/farms/park-playgrounds/other attractions
+      // out of the main directory (see lib/venueTypes.ts), so counting all
+      // rows here would overstate the claim with venues that aren't soft play.
+      pool.query<{ total: number }>(`SELECT COUNT(*)::int AS total FROM venues WHERE venue_type IS NULL OR venue_type = 'indoor'`),
       pool.query<{ city_slug: string; cnt: number }>(
-        'SELECT city_slug, COUNT(*)::int AS cnt FROM venues GROUP BY city_slug'
+        `SELECT city_slug, COUNT(*)::int AS cnt FROM venues WHERE venue_type IS NULL OR venue_type = 'indoor' GROUP BY city_slug`
       ),
       pool.query<RecentVenue>(`
         SELECT v.name, v.town_slug, v.slug,
