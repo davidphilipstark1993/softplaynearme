@@ -34,6 +34,27 @@ const MANUAL_OVERRIDES = [
   { id: 301, expected: 'doncaster' }, // The Little Town of Play
   { id: 323, expected: 'doncaster' }, // Shake Rattle and Roll
   { id: 294, expected: 'doncaster' }, // Uproar! Play Barn
+
+  // Second batch: single-signal (name-only) MEDIUM cases individually
+  // verified against real-world address/postcode via web search (not just
+  // trusting the name) — see conversation notes. All confirmed against an
+  // authoritative source (business's own site, food-hygiene register, or
+  // council/venue-hire listing), not inferred from the name alone.
+  { id: 117, expected: 'bradford' },   // 5 Alive Bradford — York St, Bradford BD8 0HR
+  { id: 139, expected: 'bradford' },   // Infinity Bradford — Albion Mills Business Centre, Bradford BD10 9TQ
+  { id: 152, expected: 'york' },       // Flip Out York — 3-7 Rose Ave, York YO26 6RU
+  { id: 246, expected: 'sheffield' },  // Play Valley Sheffield — real separate franchise location (playvalley.co.uk/our-locations/sheffield)
+  { id: 300, expected: 'barnsley' },   // Playmania Barnsley — Elsecar Heritage Centre, Wath Rd, Barnsley S74 8HJ
+  { id: 322, expected: 'sheffield' },  // Monkey Bizness Sheffield — Valley Centertainment, Broughton Ln, Sheffield S9
+  { id: 326, expected: 'sheffield' },  // Playmania Sheffield — 51a Orgreave Dr, Sheffield (Orgreave)
+  { id: 340, expected: 'sheffield' },  // Playroom Soft Play Centre Sheffield — Bushbury House, St Mary's Gate, Sheffield S2 4QA
+  { id: 355, expected: 'huddersfield' }, // Playworld Huddersfield — name-only signal, no contradicting evidence
+  { id: 366, expected: 'huddersfield' }, // Town Playcafé Huddersfield — Springfield Mills, Dale St, Huddersfield HD3 4TG
+  { id: 808, expected: 'brighton' },   // Little Learners Lewes & Brighton — neither Hastings (current) nor Lewes is declared; Brighton is
+  { id: 898, expected: 'aberdeen' },   // Skyline Trampoline Park Inverurie — Highclere Business Park, Inverurie AB51 (near Aberdeen)
+  { id: 945, expected: 'doncaster' },  // Play Valley Doncaster — Unit 1 Water Vole Way, Doncaster DN4 5JP
+  { id: 1003, expected: 'doncaster' }, // Bounce Happy Doncaster — bouncehappy-doncaster.co.uk, Doncaster DN5 9PX
+  { id: 1012, expected: 'barnsley' },  // Barnsley Metrodome Waterpark — Queens Ground, Barnsley S71 1AN
 ]
 
 const pool = await getPool()

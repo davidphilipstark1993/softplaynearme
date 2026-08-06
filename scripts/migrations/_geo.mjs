@@ -23,6 +23,10 @@
 export const POSTCODE_TO_CITIES = {
   AB: ['aberdeen'], IV: ['inverness'],
   B: ['birmingham'], BL: ['bolton'], BN: ['brighton'], BS: ['bristol'],
+  // Greater West Midlands satellite towns with no declared city of their own
+  // — nearest declared city is Birmingham, same precedent as PR->bolton and
+  // HD->huddersfield below.
+  WS: ['birmingham'], WV: ['birmingham'], DY: ['birmingham'], TF: ['birmingham'],
   BD: ['bradford'], HX: ['halifax'], HD: ['huddersfield'],
   CF: ['cardiff'], SA: ['swansea'],
   CO: ['colchester'], IP: ['ipswich'],
@@ -48,6 +52,35 @@ export function postcodeArea(pc) {
   return m ? m[1] : null
 }
 
+export function postcodeDistrict(pc) {
+  if (!pc) return null
+  const m = String(pc).trim().toUpperCase().match(/^([A-Z]{1,2}\d{1,2})[A-Z]?\s*\d[A-Z]{2}$/)
+  return m ? m[1] : null
+}
+
+// District-level overrides for areas where a single postcode-area letter
+// (HU, YO, S) genuinely spans multiple declared cities and the area-level
+// table alone leaves it ambiguous. Real Royal Mail postcode-district
+// geography, not a guess — e.g. HU17 is specifically Beverley's own
+// district, not greater Hull; YO15/16 is specifically Bridlington/Filey.
+// Checked before the area-level table; only fires for listed districts.
+const POSTCODE_DISTRICT_TO_CITY = {
+  // HU (Hull postcode area): HU1-16 = Hull & suburbs, HU17 = Beverley itself
+  HU17: ['beverley'],
+  // YO (York postcode area): YO15/16 = Bridlington & Filey; YO8/30/32 etc = York side
+  YO15: ['bridlington'], YO16: ['bridlington'],
+  // YO25 = Driffield, East Riding — same council area as Bridlington and
+  // closer to it (~11mi) than York (~28mi) or the declared-but-unmapped Beverley (~13mi)
+  YO25: ['bridlington'],
+  YO8: ['york'], YO19: ['york'], YO23: ['york'], YO24: ['york'],
+  YO26: ['york'], YO30: ['york'], YO31: ['york'], YO32: ['york'],
+  YO41: ['york'], YO42: ['york'], YO43: ['york'], YO51: ['york'],
+  YO60: ['york'], YO61: ['york'], YO62: ['york'],
+  // S (Sheffield postcode area): S70-S75 = Barnsley, not Sheffield
+  S70: ['barnsley'], S71: ['barnsley'], S72: ['barnsley'],
+  S73: ['barnsley'], S74: ['barnsley'], S75: ['barnsley'],
+}
+
 function escapeRe(s) {
   return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 }
@@ -55,6 +88,18 @@ function escapeRe(s) {
 // Short/hyphenated core word for name matching, e.g. "Stoke-on-Trent" -> "Stoke".
 function coreName(name) {
   return name.split(/-on-|-upon-/i)[0].trim()
+}
+
+// District-level lookup takes precedence over the coarser area-level table
+// (e.g. HU17 -> beverley, not the area's hull/beverley pair).
+function expectedCitiesForPostcode(pc) {
+  const district = postcodeDistrict(pc)
+  if (district && POSTCODE_DISTRICT_TO_CITY[district]) {
+    return { expected: POSTCODE_DISTRICT_TO_CITY[district], detail: `postcode district ${district}` }
+  }
+  const area = postcodeArea(pc)
+  const expected = area ? POSTCODE_TO_CITIES[area] : null
+  return expected ? { expected, detail: `postcode area ${area}` } : null
 }
 
 /**
@@ -71,9 +116,8 @@ export function detectCityMismatch(v, cities) {
   // postcode-moved away from a city can get immediately re-flagged by its own
   // stale "-york" slug/name and bounced back.
   if (v.postcode && String(v.postcode).trim()) {
-    const area = postcodeArea(v.postcode)
-    const expected = area ? POSTCODE_TO_CITIES[area] : null
-    if (expected && expected.includes(v.city_slug)) {
+    const resolved = expectedCitiesForPostcode(v.postcode)
+    if (resolved && resolved.expected.includes(v.city_slug)) {
       return null
     }
   }
@@ -83,11 +127,10 @@ export function detectCityMismatch(v, cities) {
   // 1. Postcode
   let postcodeExpected = null
   if (v.postcode && String(v.postcode).trim()) {
-    const area = postcodeArea(v.postcode)
-    const expected = area ? POSTCODE_TO_CITIES[area] : null
-    if (expected && !expected.includes(v.city_slug)) {
-      postcodeExpected = expected
-      signals.push({ type: 'postcode', expected, detail: `postcode ${v.postcode} (area ${area}) -> ${expected.join('/')}` })
+    const resolved = expectedCitiesForPostcode(v.postcode)
+    if (resolved && !resolved.expected.includes(v.city_slug)) {
+      postcodeExpected = resolved.expected
+      signals.push({ type: 'postcode', expected: resolved.expected, detail: `${resolved.detail} (${v.postcode}) -> ${resolved.expected.join('/')}` })
     }
   }
 
