@@ -17,6 +17,13 @@ import { getPool } from '@/lib/pool'
 import { getTotalVenueCount } from '@/lib/venueStats'
 import type { Metadata } from 'next'
 
+// Genuine soft play only — matches the live DB query's venue_type filter.
+// Used wherever the static export is the fallback (DB unreachable, or a
+// city not yet represented in the live cityCounts).
+function getStaticSoftPlayCount(citySlug: string): number {
+  return getStaticVenuesByTown(citySlug).filter((v) => !v.venueType || v.venueType === 'indoor').length
+}
+
 export async function generateMetadata(): Promise<Metadata> {
   const total = await getTotalVenueCount()
   const countStr = total
@@ -114,7 +121,7 @@ async function getHomepageStats() {
     // Supplement with static JSON counts for cities not yet in the DB
     for (const city of cities) {
       if (cityCounts[city.slug] === undefined) {
-        cityCounts[city.slug] = getStaticVenuesByTown(city.slug).length
+        cityCounts[city.slug] = getStaticSoftPlayCount(city.slug)
       }
     }
     // Attach a display city name to each recent venue
@@ -129,7 +136,7 @@ async function getHomepageStats() {
     // Fall back to static data if DB unavailable
     const cityCounts: Record<string, number> = {}
     for (const city of cities) {
-      cityCounts[city.slug] = getStaticVenuesByTown(city.slug).length
+      cityCounts[city.slug] = getStaticSoftPlayCount(city.slug)
     }
     return { totalVenues: 0, cityCounts, recentVenues: [] as RecentVenue[] }
   }
@@ -270,7 +277,7 @@ export default async function Home() {
           <p className="text-slate-600 text-center mb-8">Find soft play centres in your area</p>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {cities.map((city) => {
-              const venueCount = cityCounts[city.slug] ?? getStaticVenuesByTown(city.slug).length
+              const venueCount = cityCounts[city.slug] ?? getStaticSoftPlayCount(city.slug)
               const cityImage = cityVisuals[city.slug] || 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=900&q=80'
               return (
                 <Link key={city.slug} href={`/soft-play/${city.slug}`} className="group">

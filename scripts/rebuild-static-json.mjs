@@ -53,7 +53,7 @@ async function main() {
       has_sen_sessions, has_role_play, has_multi_level_play,
       google_maps_url, google_place_id, category, notes,
       last_verified_at, price_from, price_to, pricing_hint,
-      main_image_url, featured
+      main_image_url, featured, venue_type
     FROM venues
     WHERE status IS DISTINCT FROM 'closed_permanently'
     ORDER BY city_slug, name
@@ -126,6 +126,8 @@ async function main() {
       // Images
       mainImageUrl: v.main_image_url || null,
       featured: Boolean(v.featured),
+      // See lib/venueTypes.ts — null/'indoor' means genuine soft play.
+      venueType: v.venue_type || 'indoor',
       lastVerified: v.last_verified_at
         ? new Date(v.last_verified_at).toISOString().split('T')[0]
         : (existing.lastVerified || ''),
@@ -156,7 +158,11 @@ async function main() {
     .map(([slug, venues]) => ({
       name: townNames[slug] || titleCase(slug),
       slug,
-      venueCount: venues.length,
+      // Genuine soft play only — matches the live DB query's venue_type
+      // filter (app/page.tsx, lib/venueStats.ts) so the count doesn't
+      // flip-flop between what a fresh SOFTPLAY_STATIC_BUILD=1 deploy bakes
+      // in and what ISR revalidation later computes from the live DB.
+      venueCount: venues.filter(v => v.venueType === 'indoor').length,
       avgRating: venues.filter(v => v.rating).length > 0
         ? (venues.reduce((s, v) => s + (v.rating || 0), 0) / venues.filter(v => v.rating).length).toFixed(1)
         : null,

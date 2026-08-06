@@ -49,6 +49,7 @@ export interface StaticVenue {
   pricingHint?: string
   mainImageUrl?: string | null
   featured?: boolean
+  venueType?: string
 }
 
 export interface StaticTown {
