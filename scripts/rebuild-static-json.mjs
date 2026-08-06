@@ -86,7 +86,13 @@ async function main() {
       townSlug,
       name: v.name,
       slug: v.slug,
-      address: v.address || existing.address || '',
+      // Trust the DB's address directly — no fallback to the previous
+      // static export. That fallback used to silently resurrect stale
+      // corrupted values (literal "nan", leaked Google status text) after
+      // scripts/migrations/phase2-06-clean-corrupted-addresses.mjs had
+      // explicitly nulled them in the DB, defeating the cleanup on every
+      // subsequent rebuild.
+      address: v.address || '',
       postcode: v.postcode || existing.postcode || '',
       lat: v.lat || null,
       lng: v.lng || null,

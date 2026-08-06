@@ -25,6 +25,7 @@ import { buildLocalBusinessSchema, buildBreadcrumbSchema, buildFAQSchema } from 
 import { JsonLd } from '@/components/seo/JsonLd'
 import { getStoredReviews } from '@/lib/reviewsStore'
 import { ReviewSection } from '@/components/venue/ReviewSection'
+import { cleanAddressForDisplay, formatAddressLine } from '@/lib/sanitize'
 import {
   generateVenueDescription,
   generateVenueMetaDescription,
@@ -51,7 +52,7 @@ interface Venue {
   name: string
   slug: string
   city_slug: string
-  address: string
+  address: string | null
   postcode: string
   lat?: number
   lng?: number
@@ -623,10 +624,12 @@ export default async function VenuePage({ params }: PageProps) {
                 <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
                   {venue.name} <span className="text-purple-200 font-normal text-xl sm:text-2xl md:text-3xl">| Soft Play in {cityName}</span>
                 </h1>
-                <div className="flex items-center gap-2 text-purple-100">
-                  <MapPin className="w-5 h-5" />
-                  <address className="not-italic font-normal inline">{venue.address}, {venue.postcode}</address>
-                </div>
+                {formatAddressLine(venue.address, venue.postcode) && (
+                  <div className="flex items-center gap-2 text-purple-100">
+                    <MapPin className="w-5 h-5" />
+                    <address className="not-italic font-normal inline">{formatAddressLine(venue.address, venue.postcode)}</address>
+                  </div>
+                )}
                 {avgRating > 0 && (
                   <div className="flex items-center gap-2 mt-3">
                     <div className="flex">

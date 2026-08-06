@@ -1,55 +1,101 @@
-// Merges duplicate venues (same phone number = same physical premises).
-// Only auto-merges HIGH-confidence groups (name similarity backs up the
-// phone match too). MEDIUM-confidence groups are listed but NOT auto-merged
-// — the audit flagged those as needing a manual look (e.g. two different
-// attractions that happen to share a building's reception phone line).
+// Merges duplicate venues — the same real-world place ingested twice. Two
+// independent signals, each queried live from the database:
+//
+//   A. Same phone number, same city — the original signal (see
+//      reports/data-quality-audit.md §5). Domain-only matching was tried and
+//      discarded there (franchise brands share a domain across genuinely
+//      different premises); phone is specific to one physical location.
+//      Auto-merges only when name similarity also backs up the phone match.
+//
+//   B. Same name + same review count + same rating, different slug/address —
+//      the same real place scraped twice into different rows (e.g. under two
+//      slightly different addresses). Two independent venues coincidentally
+//      sharing an exact review count AND exact rating AND exact name is
+//      vanishingly unlikely, so this auto-merges without needing name-fuzz
+//      confirmation.
+//
 // Keeps whichever venue in a group has the most complete data (non-empty
-// field count), removes the other(s), and queues a 301 to the survivor.
-// See reports/data-quality-audit.md §5.
+// field count), deletes the other(s), and queues a 301 to the survivor via
+// data/redirects.json.
 //
 //   node scripts/migrations/phase2-05-merge-duplicates.mjs [--execute]
 
-import { EXECUTE, loadFindings, loadVenuesJson, getPool, runBatched, appendRedirects } from './_lib.mjs'
+import { EXECUTE, getPool, runBatched, appendRedirects } from './_lib.mjs'
 
-const findings = loadFindings()
-const venuesJson = loadVenuesJson()
-const byNameTown = new Map(venuesJson.map((v) => [v.townSlug + '|' + v.name, v]))
+function normPhone(p) {
+  if (!p) return null
+  const digits = String(p).replace(/\D/g, '')
+  return digits.length >= 9 ? digits.slice(-9) : null
+}
+function normName(n) {
+  return (n || '').toLowerCase().replace(/[^a-z0-9]/g, '')
+}
 
 const FIELDS_FOR_COMPLETENESS = [
-  'address', 'postcode', 'website', 'phone', 'description', 'openingHoursText',
-  'rating', 'reviewCount', 'mainImageUrl', 'pricingHint',
+  'address', 'postcode', 'website', 'phone', 'description', 'opening_hours',
+  'rating', 'reviews_count', 'main_image_url', 'price_from',
 ]
 function completeness(v) {
-  if (!v) return -1
   return FIELDS_FOR_COMPLETENESS.reduce((n, f) => n + (v[f] ? 1 : 0), 0)
 }
-
-const highGroups = findings.duplicates.filter((d) => d.confidence === 'HIGH')
-const mediumGroups = findings.duplicates.filter((d) => d.confidence === 'MEDIUM')
-
-console.log(`Found ${highGroups.length} HIGH-confidence duplicate groups (auto-merge) and ${mediumGroups.length} MEDIUM-confidence groups (manual review only):`)
-for (const g of mediumGroups) {
-  console.log(`  MANUAL  ${g.town}: ${g.venues.map((v) => v.name).join(' <-> ')}`)
-}
-
-console.log(EXECUTE ? '\nEXECUTING — this will DELETE the less-complete duplicate(s) and append to data/redirects.json.' : '\nDRY RUN — no changes will be made.')
 
 const pool = await getPool()
 const redirectsToAdd = []
 
 try {
-  await runBatched(highGroups, async (g) => {
-    const full = g.venues.map((v) => byNameTown.get(g.town + '|' + v.name)).filter(Boolean)
-    if (full.length < 2) {
-      console.log(`  SKIP  ${g.town} group — couldn't resolve all venues in venues.json`)
-      return 'skipped'
-    }
-    const ranked = [...full].sort((a, b) => completeness(b) - completeness(a))
-    const keep = ranked[0]
-    const remove = ranked.slice(1)
+  const { rows } = await pool.query(
+    `SELECT id, name, slug, city_slug, phone, address, postcode, website, description,
+            opening_hours, rating, reviews_count, main_image_url, price_from
+     FROM venues`
+  )
 
+  // ── Signal A: phone + city ──────────────────────────────────────────────
+  const byPhoneCity = {}
+  for (const v of rows) {
+    const p = normPhone(v.phone)
+    if (!p) continue
+    const key = `${p}|${v.city_slug}`
+    ;(byPhoneCity[key] ??= []).push(v)
+  }
+  const phoneGroups = Object.values(byPhoneCity)
+    .filter((g) => g.length > 1)
+    .map((g) => {
+      const names = g.map((v) => normName(v.name))
+      const nameSimilar = names.some((a, i) => names.some((b, j) => i !== j && a.length > 3 && b.length > 3 && (a.includes(b) || b.includes(a))))
+      return { matchType: 'phone', town: g[0].city_slug, confidence: nameSimilar ? 'HIGH' : 'MEDIUM', venues: g }
+    })
+
+  // ── Signal B: name + reviewCount + rating ───────────────────────────────
+  const byNameCountRating = {}
+  for (const v of rows) {
+    if (v.reviews_count == null || v.rating == null) continue
+    if (Number(v.reviews_count) === 0) continue // 0 reviews is too common to be a useful signal
+    const key = `${normName(v.name)}|${v.city_slug}|${v.reviews_count}|${v.rating}`
+    ;(byNameCountRating[key] ??= []).push(v)
+  }
+  const statGroups = Object.values(byNameCountRating)
+    .filter((g) => g.length > 1)
+    .filter((g) => new Set(g.map((v) => v.slug)).size > 1) // different slugs, i.e. actually two rows
+    .map((g) => ({ matchType: 'name+reviews+rating', town: g[0].city_slug, confidence: 'HIGH', venues: g }))
+
+  const highGroups = [...phoneGroups.filter((g) => g.confidence === 'HIGH'), ...statGroups]
+  const mediumGroups = phoneGroups.filter((g) => g.confidence === 'MEDIUM')
+
+  console.log(`Found ${phoneGroups.length} phone-match groups (${phoneGroups.filter(g=>g.confidence==='HIGH').length} HIGH, ${mediumGroups.length} MEDIUM) and ${statGroups.length} name+reviews+rating groups.`)
+  console.log(`Auto-merging ${highGroups.length} HIGH-confidence groups. MEDIUM groups need a manual look:`)
+  for (const g of mediumGroups) {
+    console.log(`  MANUAL  ${g.town}: ${g.venues.map((v) => v.name).join(' <-> ')}`)
+  }
+
+  console.log(EXECUTE ? '\nEXECUTING — this will DELETE the less-complete duplicate(s) and append to data/redirects.json.' : '\nDRY RUN — no changes will be made.')
+
+  await runBatched(highGroups, async (g) => {
     const client = await pool.connect()
     try {
+      const ranked = [...g.venues].sort((a, b) => completeness(b) - completeness(a))
+      const keep = ranked[0]
+      const remove = ranked.slice(1)
+
       const keepCheck = await client.query('SELECT id, name FROM venues WHERE id = $1', [keep.id])
       if (keepCheck.rows.length === 0) {
         console.log(`  SKIP  ${g.town} group — survivor id=${keep.id} "${keep.name}" no longer in DB`)
@@ -61,7 +107,7 @@ try {
           console.log(`  SKIP  id=${r.id} "${r.name}" — already gone`)
           continue
         }
-        console.log(`  ${EXECUTE ? 'MERGE' : 'would MERGE'}  "${r.name}" (id=${r.id}) -> "${keep.name}" (id=${keep.id}), ${g.town}`)
+        console.log(`  ${EXECUTE ? 'MERGE' : 'would MERGE'}  [${g.matchType}] "${r.name}" (id=${r.id}) -> "${keep.name}" (id=${keep.id}), ${g.town}`)
         if (EXECUTE) {
           await client.query('DELETE FROM venues WHERE id = $1', [r.id])
         }
@@ -71,6 +117,7 @@ try {
           permanent: true,
         })
       }
+      return 'ok'
     } finally {
       client.release()
     }

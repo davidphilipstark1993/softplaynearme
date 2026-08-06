@@ -42,7 +42,6 @@ function parseArgs(argv) {
     commit:      argv.includes('--commit'),
     onlyMissing: argv.includes('--only-missing'),
     city:        argv.includes('--city') ? argv[argv.indexOf('--city') + 1] || '' : '',
-    fixSlugs:    !argv.includes('--skip-slug-fix'),
   }
 }
 
@@ -187,16 +186,34 @@ function categoryLabel(category) {
 }
 
 // ── Description templates ─────────────────────────────────────────────────
-// 6 P1 openers, 6 P2 bodies, 5 P3 closers
-// All interpolated with venue data
+// 18 P1 openers, 18 P2 bodies, 15 P3 closers (2,430 P1×P2×P3 boilerplate
+// combinations before per-venue interpolation is even counted). Widened from
+// the original 6/6/5 (180 combos) because at ~1,850 venues the fixed portions
+// of even a 1-in-6 template were showing up 300+ times sitewide. Leans harder
+// on venue-specific data — exact rating/review figures via v.statsStr,
+// category label, fuller facility lists — instead of generic tier words, so
+// two venues landing on the same template still read differently.
+// All interpolated with venue data.
 
 const P1_TEMPLATES = [
   (v) => `${v.name} is ${v.article} ${v.type} based in ${v.city}${v.countyStr ? `, ${v.countyStr}` : ''}. ${v.repStr}a welcoming play venue that offers indoor facilities for children of varying ages in a safe and supervised environment.`,
   (v) => `Located in ${v.city}${v.countyStr ? `, ${v.countyStr}` : ''}, ${v.name} is ${v.article} ${v.type} catering to families looking for indoor play activities. ${v.repStr}a reliable destination for local parents and carers.`,
   (v) => `${v.name} provides indoor children's play facilities in ${v.city}. ${v.ratingStr ? v.ratingStr + ' — t' : 'T'}his ${v.type} is ${v.reviewTierStr.trim().toLowerCase()} among families across ${v.city}${v.countyStr ? ` and ${v.countyStr}` : ''}.`,
   (v) => `Families in ${v.city} looking for a reliable indoor play option often head to ${v.name}. ${v.article.charAt(0).toUpperCase() + v.article.slice(1)} ${v.type}${v.countyStr ? ` in ${v.countyStr}` : ''}, it offers a welcoming environment for children to explore, climb, and play.${v.ratingStr ? ` ${v.ratingStr.trim()}.` : ''}`,
-  (v) => `${v.name} is ${v.article} ${v.type} in ${v.city} that has become a go-to destination for parents seeking indoor activities for their children. ${v.repStr}a venue that prides itself on providing a safe and enjoyable experience.`,
-  (v) => `A ${v.reviewTierStr.trim().toLowerCase()} choice for families in ${v.city}${v.countyStr ? ` and ${v.countyStr}` : ''}, ${v.name} offers indoor play in a dedicated ${v.type} setting. ${v.ratingStr.trim() ? v.ratingStr.trim() + ' — c' : 'C'}hildren and parents consistently appreciate the space.`,
+  (v) => `${v.name} is ${v.article} ${v.type} in ${v.city}${v.statsStr ? `, ${v.statsStr}` : ''}. ${v.repStr}a venue focused on giving children a safe, active space to play.`,
+  (v) => `A ${v.reviewTierStr.trim().toLowerCase()} choice for families in ${v.city}${v.countyStr ? ` and ${v.countyStr}` : ''}, ${v.name} offers indoor play in a dedicated ${v.type} setting.${v.statsStr ? ` It's currently ${v.statsStr}.` : ''}`,
+  (v) => `${v.name}, ${v.article} ${v.type} in ${v.city}, gives parents an indoor option for active play regardless of the weather.${v.ratingStr ? ` ${v.ratingStr.trim()} by the families who've visited.` : ''}`,
+  (v) => `For families in ${v.city}${v.countyStr ? ` and the wider ${v.countyStr} area` : ''}, ${v.name} is ${v.article} ${v.type} offering supervised indoor play for children.${v.statsStr ? ` Currently ${v.statsStr}.` : ''}`,
+  (v) => `${v.name} operates as ${v.article} ${v.type} in ${v.city}, aimed at giving younger children room to climb, run, and play safely indoors. ${v.repStr}worth considering for a local family outing.`,
+  (v) => `If you're searching for indoor play in ${v.city}, ${v.name} is ${v.article} ${v.type} worth knowing about.${v.statsStr ? ` It's ${v.statsStr},` : ''} and ${v.reviewTierStr.trim().toLowerCase()} among local parents.`,
+  (v) => `${v.name} is a ${v.type} serving ${v.city}${v.countyStr ? ` and the surrounding ${v.countyStr} area` : ''}. ${v.repStr}an indoor space where children can play under supervision away from the weather.`,
+  (v) => `Parents in ${v.city} looking for something to fill a rainy afternoon often consider ${v.name}, ${v.article} ${v.type} in the area.${v.ratingStr ? ` ${v.ratingStr.trim()} by visiting families.` : ''}`,
+  (v) => `${v.name} is one of ${v.city}'s ${v.type} options, offering indoor play facilities for local children.${v.statsStr ? ` The venue is ${v.statsStr}.` : ''}`,
+  (v) => `Set in ${v.city}${v.countyStr ? `, ${v.countyStr}` : ''}, ${v.name} is ${v.article} ${v.type} built around supervised indoor play for children. ${v.repStr}a fixture for local family days out.`,
+  (v) => `${v.name} serves families across ${v.city} as ${v.article} ${v.type}, with indoor play space designed for children to burn off energy safely.${v.statsStr ? ` It's ${v.statsStr}.` : ''}`,
+  (v) => `Whether it's a birthday, a rainy weekend, or an after-school outing, ${v.name} in ${v.city} is ${v.article} ${v.type} that local families turn to.${v.ratingStr ? ` ${v.ratingStr.trim()} overall.` : ''}`,
+  (v) => `${v.name} is ${v.article} ${v.type} in ${v.city}${v.countyStr ? `, ${v.countyStr}` : ''}, offering families a supervised indoor alternative to the playground. ${v.repStr}a familiar name locally.`,
+  (v) => `In ${v.city}, ${v.name} operates as ${v.article} ${v.type} focused on indoor play for children of different ages.${v.statsStr ? ` Currently ${v.statsStr} on Google.` : ''}`,
 ]
 
 const P2_TEMPLATES = [
@@ -256,6 +273,59 @@ const P2_TEMPLATES = [
     : v.facilitiesStr
       ? `${v.name} provides ${v.facilitiesStr} in a dedicated ${v.type} setting in ${v.city}. ${v.snippetStr || ''}`
       : `${v.name} is a soft play centre in ${v.city} providing indoor play for children in a dedicated and supervised environment. ${v.snippetStr || ''}`,
+
+  (v) => v.facilitiesStr
+    ? `Between visits, families mention ${v.facilitiesStr} as the standout features. ${v.snippetStr || ''}`
+    : `${v.name} keeps its play equipment geared toward active, imaginative play rather than passive entertainment. ${v.snippetStr || ''}`,
+
+  (v) => {
+    const f = v.features
+    if (f.wheelchair) return `${v.name} offers wheelchair access, which is worth knowing if you're visiting with a family member who needs it. ${v.facilitiesStr ? `Other facilities include ${v.facilitiesStr}.` : ''} ${v.snippetStr || ''}`
+    return v.snippetStr
+      ? `One recurring theme in visitor feedback: ${v.snippetStr}`
+      : `${v.name}'s layout is built for supervised play, with sightlines that make it easier for parents to keep an eye on more than one child at a time.`
+  },
+
+  (v) => v.reviewCount && v.reviewCount >= 100
+    ? `${v.name} has built up a track record locally, with ${v.reviewCount.toLocaleString()} Google reviews from visiting families.${v.facilitiesStr ? ` The venue offers ${v.facilitiesStr}.` : ''} ${v.snippetStr || ''}`
+    : v.facilitiesStr
+      ? `${v.name} offers ${v.facilitiesStr}, giving families a few reasons to make a return visit.${v.snippetStr ? ` ${v.snippetStr}` : ''}`
+      : `${v.name} focuses on straightforward indoor play rather than a long list of extras — a solid option if you just need somewhere for the kids to run around.`,
+
+  (v) => v.snippetStr
+    ? `${v.snippetStr}${v.facilitiesStr ? ` Beyond that, the venue offers ${v.facilitiesStr}.` : ''}`
+    : `${v.name}'s play frame and equipment are aimed at keeping children active for a couple of hours at a stretch, rather than a quick ten-minute visit.`,
+
+  (v) => {
+    const f = v.features
+    if (f.rolePlay && f.multiLevel) return `${v.name} splits its space between a multi-level play frame and a role-play area, giving children a choice between climbing and imaginative play. ${v.snippetStr || ''}`
+    if (f.outdoor) return `Unusually for an indoor venue, ${v.name} also has outdoor play space, which is a plus on a mild day. ${v.facilitiesStr ? `Indoors, it also offers ${v.facilitiesStr}.` : ''} ${v.snippetStr || ''}`
+    return v.facilitiesStr
+      ? `${v.name}'s main draw is ${v.facilitiesStr}. ${v.snippetStr || ''}`
+      : `${v.name} keeps things fairly simple — a supervised indoor play space without a long list of add-ons.${v.snippetStr ? ` ${v.snippetStr}` : ''}`
+  },
+
+  (v) => `${v.city} families tend to visit ${v.name} for a couple of hours at a time.${v.facilitiesStr ? ` The venue offers ${v.facilitiesStr}.` : ''}${v.snippetStr ? ` ${v.snippetStr}` : ''}`,
+
+  (v) => v.facilitiesStr
+    ? `What you'll find on site: ${v.facilitiesStr}.${v.snippetStr ? ` ${v.snippetStr}` : ''}`
+    : `${v.name} is built around one straightforward job: giving children a safe indoor space to play.${v.snippetStr ? ` ${v.snippetStr}` : ''}`,
+
+  (v) => {
+    const f = v.features
+    if (f.baby && f.toddler) return `${v.name} separates its space by age group, with distinct areas for babies, toddlers, and older children. ${v.snippetStr || ''}`
+    return v.snippetStr
+      ? `${v.snippetStr}`
+      : `${v.name} aims to give children of different ages somewhere appropriate to play, rather than a single one-size-fits-all space.`
+  },
+
+  (v) => v.statsStr
+    ? `On Google, ${v.name} is ${v.statsStr}.${v.facilitiesStr ? ` It offers ${v.facilitiesStr}.` : ''}${v.snippetStr ? ` ${v.snippetStr}` : ''}`
+    : `${v.name} hasn't built up a large review count yet, but offers${v.facilitiesStr ? ` ${v.facilitiesStr}` : ' a straightforward indoor play space'} for local families.`,
+
+  (v) => v.snippetStr
+    ? `A visitor summed it up: ${v.snippetStr}${v.facilitiesStr ? ` The venue also offers ${v.facilitiesStr}.` : ''}`
+    : `${v.name} is a fairly typical ${v.type.toLowerCase()} in terms of layout — a main play frame plus a handful of extras depending on the site.`,
 ]
 
 // NOTE: these deliberately do NOT assert facts we don't hold for a specific
@@ -273,6 +343,26 @@ const P3_TEMPLATES = [
   (v) => `Parents planning a visit to ${v.name} should confirm opening hours and whether pre-booking is required — this is increasingly common across soft play venues in ${v.city}.${v.features.toddler ? ` The dedicated toddler area is separate from the main frame, which is particularly useful when visiting with both a baby or toddler and an older sibling.` : ''}`,
 
   (v) => `If you're heading to ${v.name} for the first time, it's a good idea to check their website for up-to-date session times, prices, and any booking requirements.${v.features.parking ? ` Parking is available, making it accessible by car for families travelling from across ${v.city}.` : ''}`,
+
+  (v) => `Opening hours at ${v.name} can shift around school holidays and bank holidays, so it's worth a quick check before you set off.${v.features.parties ? ` Party bookings especially are worth confirming a few weeks ahead.` : ''}`,
+
+  (v) => `${v.name} doesn't always list every detail online, so a quick call ahead can save a wasted trip — particularly around prices and age restrictions.${v.features.wheelchair ? ` The venue offers wheelchair access if that's relevant to your visit.` : ''}`,
+
+  (v) => `Weekday visits to ${v.name} tend to be quieter than weekends — worth bearing in mind if you're after a calmer session.${v.features.sen ? ` SEN sessions, where offered, are usually a good option for a lower-sensory visit too.` : ''}`,
+
+  (v) => `As with most soft play venues, ${v.name}'s prices and session times are best confirmed directly before travelling, since they aren't always kept up to date everywhere online.${v.features.cafe ? ` If the café is a priority, it's worth checking what's on the menu that day.` : ''}`,
+
+  (v) => `${v.name} is worth a direct call or website check before visiting, especially if you're travelling some distance — details like age limits and session length vary by venue.${v.features.toddler ? ` The toddler area is a useful thing to ask about if you have a mixed-age group.` : ''}`,
+
+  (v) => `A quick look at ${v.name}'s website or social pages before you go will usually cover opening times, pricing, and whether booking ahead is expected.${v.features.parking ? ` Parking availability is also worth checking if you're driving.` : ''}`,
+
+  (v) => `Like most venues of this kind, ${v.name} is easiest to plan around by checking directly beforehand rather than relying on general listings.${v.features.parties ? ` This is especially true for party bookings, which can fill up weeks in advance.` : ''}`,
+
+  (v) => `If ${v.name} is new to you, allow a little extra time on your first visit to find parking and get oriented.${v.features.outdoor ? ` The outdoor play area is a nice bonus if the weather cooperates.` : ''}`,
+
+  (v) => `${v.name}'s session structure (timed slots vs. open play) is worth confirming ahead of a visit, since this varies venue to venue.${v.features.baby ? ` If you're bringing a baby, it's also worth asking about the baby area specifically.` : ''}`,
+
+  (v) => `Before setting off to ${v.name}, a quick check of current opening times is sensible — these can change with less notice than you'd expect.${v.features.rolePlay ? ` The role-play area tends to be a hit with younger children if you're looking for something beyond the main frame.` : ''}`,
 ]
 
 // ── What to Expect generator ──────────────────────────────────────────────
@@ -454,9 +544,18 @@ function enrichVenue(v) {
         ? `${rTier.charAt(0).toUpperCase() + rTier.slice(1)} — `
         : ''
 
+  // Exact figures instead of tier words ("highly rated") — a second, more
+  // specific string to interpolate so venues sharing a rating tier don't
+  // also share the exact same sentence.
+  const statsStr = rating && v.reviews_count
+    ? `rated ${rating.toFixed(1)} from ${Number(v.reviews_count).toLocaleString()} review${Number(v.reviews_count) === 1 ? '' : 's'}`
+    : rating
+      ? `rated ${rating.toFixed(1)} on Google`
+      : null
+
   const vData = {
     name: v.name, city, countyStr, type, article: art,
-    ratingStr, reviewTierStr, repStr, facilitiesStr, snippetStr,
+    ratingStr, reviewTierStr, repStr, facilitiesStr, snippetStr, statsStr,
     features, rating: v.rating, reviewCount: v.reviews_count,
   }
 
@@ -482,73 +581,19 @@ function enrichVenue(v) {
 }
 
 // ── City slug bug fixes ───────────────────────────────────────────────────
-
-async function fixCitySlugs(client) {
-  console.log('\n── Fixing city_slug data bugs ──')
-
-  const fixes = [
-    // 30 Birmingham venues incorrectly got city_slug='glasgow'
-    {
-      sql: `UPDATE venues SET city_slug = 'birmingham' WHERE city_slug = 'glasgow' AND city = 'Birmingham'`,
-      label: 'glasgow→birmingham (city=Birmingham)',
-    },
-    // 2 London venues incorrectly got city_slug='glasgow'
-    {
-      sql: `UPDATE venues SET city_slug = 'london' WHERE city_slug = 'glasgow' AND city = 'London'`,
-      label: 'glasgow→london (city=London)',
-    },
-    // Hull sub-area venues that got wrong slugs
-    {
-      sql: `UPDATE venues SET city_slug = 'hull' WHERE city_slug IN ('lincoln','york','bridlington') AND city = 'Hull'`,
-      label: 'hull sub-slugs→hull (city=Hull)',
-    },
-    {
-      sql: `UPDATE venues SET city_slug = 'hull' WHERE city_slug = 'doncaster' AND city = 'Hull'`,
-      label: 'doncaster→hull (city=Hull)',
-    },
-    // Fill empty city names from slug
-    {
-      sql: `UPDATE venues SET city = 'Sheffield' WHERE city_slug = 'sheffield' AND (city IS NULL OR city = '')`,
-      label: 'fill empty city=Sheffield',
-    },
-    {
-      sql: `UPDATE venues SET city = 'Hull' WHERE city_slug = 'hull' AND (city IS NULL OR city = '')`,
-      label: 'fill empty city=Hull',
-    },
-    {
-      sql: `UPDATE venues SET city = 'Leeds' WHERE city_slug = 'leeds' AND (city IS NULL OR city = '')`,
-      label: 'fill empty city=Leeds',
-    },
-    {
-      sql: `UPDATE venues SET city = 'York' WHERE city_slug = 'york' AND (city IS NULL OR city = '')`,
-      label: 'fill empty city=York',
-    },
-    {
-      sql: `UPDATE venues SET city = 'Bridlington' WHERE city_slug = 'bridlington' AND (city IS NULL OR city = '')`,
-      label: 'fill empty city=Bridlington',
-    },
-    {
-      sql: `UPDATE venues SET city = 'Beverley' WHERE city_slug = 'beverley' AND (city IS NULL OR city = '')`,
-      label: 'fill empty city=Beverley',
-    },
-    // Normalise Bournemouth spelling
-    {
-      sql: `UPDATE venues SET city = 'Bournemouth', city_slug = 'bournemouth' WHERE city ILIKE 'bournmouth'`,
-      label: 'Bournmouth→Bournemouth',
-    },
-    // Remove unknown venues that are clearly non-play (no name match to soft play)
-    // Don't delete — just mark as needs_review
-    {
-      sql: `UPDATE venues SET needs_review = true WHERE city_slug = 'unknown' OR (city_slug IS NULL AND city IS NULL)`,
-      label: 'flag unknown city venues for review',
-    },
-  ]
-
-  for (const { sql, label } of fixes) {
-    const result = await client.query(sql)
-    console.log(`  ${label}: ${result.rowCount} rows`)
-  }
-}
+//
+// REMOVED (2026-08-06): this function used to force city_slug to match the
+// free-text `city` column whenever they disagreed (e.g. "doncaster→hull
+// (city=Hull)"). That premise is backwards — `city` is the unreliable field
+// (copied verbatim from whichever CSV/city-search batch a row was scraped
+// into), while `city_slug` is what scripts/migrations/phase2-04-move-wrong-
+// city.mjs verifies against real postcode/slug/name evidence. Running this
+// function silently reverted 9 venues that Phase 1 of the 2026-08 data-
+// quality fix had just correctly moved from Hull to Doncaster — including
+// every venue the site owner had personally flagged as wrong. Geo
+// corrections now live exclusively in scripts/migrations/phase2-04-move-
+// wrong-city.mjs and scripts/check-city-mismatch.mjs (spot-check tool) —
+// nothing in this file should touch city_slug.
 
 // ── Main ──────────────────────────────────────────────────────────────────
 
@@ -573,13 +618,6 @@ async function main() {
   const client = await pool.connect()
 
   try {
-    // ── Phase 1: Fix city_slug bugs ────────────────────────────────────────
-    if (args.fixSlugs && args.commit) {
-      await fixCitySlugs(client)
-    } else if (args.fixSlugs && !args.commit) {
-      console.log('(city_slug fixes will run on --commit)')
-    }
-
     // ── Phase 2: Load all venues ───────────────────────────────────────────
     console.log('\n── Loading venues ──')
     let query = `SELECT id, name, slug, city_slug, city, county, address, phone, website, email,

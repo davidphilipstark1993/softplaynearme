@@ -18,6 +18,7 @@ import { getLocationContent } from '@/lib/locationContent'
 import { getPostForCity } from '@/lib/blogPosts'
 import { LocationIntro } from '@/components/location/LocationIntro'
 import { getCityOgImage } from '@/lib/cityImages'
+import { formatAddressLine } from '@/lib/sanitize'
 import { FilterSidebar, ActiveFilterBar } from '@/components/search/FilterSidebar'
 import { isSoftPlayVenueType } from '@/lib/venueTypes'
 import { getCardQuote, formatLastVerified } from '@/lib/venueCardText'
@@ -204,6 +205,17 @@ async function getVenues(citySlug: string, opts: VenueFilters = {}): Promise<Ven
         WHERE v.city_slug = $1
       `
       const params: (string | boolean)[] = [citySlug]
+
+      // Category scope: the main A-Z listing shows genuine soft play venues
+      // only. Non-soft-play venues (trampoline parks, play farms, park
+      // playgrounds, other family attractions — see lib/venueTypes.ts) are
+      // tagged via venue_type and surfaced instead through the dedicated
+      // "other" filter tab, rather than diluting every other view.
+      if (filter === 'other') {
+        query += ` AND v.venue_type IS NOT NULL AND v.venue_type != 'indoor'`
+      } else {
+        query += ` AND (v.venue_type IS NULL OR v.venue_type = 'indoor')`
+      }
 
       // Legacy category filter (from SEO sub-pages)
       if (filter === 'cafe') query += ` AND v.cafe = true`
@@ -426,6 +438,11 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                   </Button>
                 </Link>
               ))}
+              <Link href={`/soft-play/${city}?filter=other`}>
+                <Button variant={filter === 'other' ? 'default' : 'outline'} size="sm" className={filter === 'other' ? 'bg-purple-600' : ''}>
+                  Other Family Activities
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -680,10 +697,10 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                         </a>
                       </Button>
                     )}
-                    {(venue.mapsUrl || venue.address) && (
+                    {(venue.mapsUrl || formatAddressLine(venue.address, venue.postcode)) && (
                       <Button variant="outline" size="sm" asChild>
                         <a
-                          href={venue.mapsUrl || `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${venue.address}, ${venue.postcode}`)}`}
+                          href={venue.mapsUrl || `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(formatAddressLine(venue.address, venue.postcode)!)}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           aria-label={`Get directions to ${venue.name}`}

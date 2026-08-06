@@ -5,6 +5,8 @@
  * <script type="application/ld+json">.
  */
 
+import { cleanAddressForDisplay } from './sanitize'
+
 // ── Day-name map for Schema.org openingHoursSpecification ──────────────
 const SCHEMA_DAYS: Record<string, string> = {
   monday: 'https://schema.org/Monday',
@@ -69,7 +71,7 @@ export interface LocalBusinessReviewInput {
 export interface LocalBusinessSchemaInput {
   name: string
   description?: string
-  address: string
+  address: string | null
   city: string
   postcode: string
   phone?: string
@@ -127,7 +129,10 @@ export function buildLocalBusinessSchema(input: LocalBusinessSchemaInput) {
     url: venueUrl,
     address: {
       '@type': 'PostalAddress',
-      streetAddress: input.address,
+      // Omit streetAddress rather than assert leaked scrape junk ("nan",
+      // "Closed, · Opens 9am") as a stated fact — same principle as the
+      // postalCode omission below.
+      ...(cleanAddressForDisplay(input.address) ? { streetAddress: cleanAddressForDisplay(input.address)! } : {}),
       addressLocality: input.city,
       // Omit rather than emit `postalCode: ""` — an empty string is a stated
       // blank value in JSON-LD, which validators flag; absent is correct.
@@ -317,7 +322,7 @@ export interface ItemListVenue {
   name: string
   slug: string
   citySlug: string
-  address?: string
+  address?: string | null
   postcode?: string
   avgRating?: number
   reviewCount?: number
@@ -354,10 +359,10 @@ export function buildItemListSchema(
           '@id': `${url}#business`,
           name: venue.name,
           url,
-          ...(venue.address && {
+          ...(cleanAddressForDisplay(venue.address) && {
             address: {
               '@type': 'PostalAddress',
-              streetAddress: venue.address,
+              streetAddress: cleanAddressForDisplay(venue.address)!,
               ...(venue.postcode && { postalCode: venue.postcode }),
               addressCountry: 'GB',
             },

@@ -2,13 +2,13 @@
   {
     "name": "Aberdeen",
     "slug": "aberdeen",
-    "venueCount": 32,
+    "venueCount": 33,
     "avgRating": "4.4"
   },
   {
     "name": "Barnsley",
     "slug": "barnsley",
-    "venueCount": 30,
+    "venueCount": 31,
     "avgRating": "4.5"
   },
   {
@@ -20,31 +20,31 @@
   {
     "name": "Birmingham",
     "slug": "birmingham",
-    "venueCount": 104,
+    "venueCount": 103,
     "avgRating": "4.4"
   },
   {
     "name": "Blackpool",
     "slug": "blackpool",
-    "venueCount": 21,
+    "venueCount": 17,
     "avgRating": "4.4"
   },
   {
     "name": "Bolton",
     "slug": "bolton",
-    "venueCount": 18,
-    "avgRating": "4.4"
+    "venueCount": 20,
+    "avgRating": "4.3"
   },
   {
     "name": "Bournemouth",
     "slug": "bournemouth",
-    "venueCount": 73,
+    "venueCount": 71,
     "avgRating": "4.5"
   },
   {
     "name": "Bradford",
     "slug": "bradford",
-    "venueCount": 8,
+    "venueCount": 10,
     "avgRating": "4.2"
   },
   {
@@ -56,7 +56,7 @@
   {
     "name": "Brighton",
     "slug": "brighton",
-    "venueCount": 52,
+    "venueCount": 51,
     "avgRating": "4.4"
   },
   {
@@ -68,19 +68,19 @@
   {
     "name": "Cardiff",
     "slug": "cardiff",
-    "venueCount": 91,
+    "venueCount": 94,
     "avgRating": "4.3"
   },
   {
     "name": "Colchester",
     "slug": "colchester",
-    "venueCount": 52,
+    "venueCount": 45,
     "avgRating": "4.3"
   },
   {
     "name": "Doncaster",
     "slug": "doncaster",
-    "venueCount": 55,
+    "venueCount": 65,
     "avgRating": "4.4"
   },
   {
@@ -98,25 +98,25 @@
   {
     "name": "Halifax",
     "slug": "halifax",
-    "venueCount": 17,
-    "avgRating": "4.4"
+    "venueCount": 15,
+    "avgRating": "4.5"
   },
   {
     "name": "Hastings",
     "slug": "hastings",
-    "venueCount": 65,
-    "avgRating": "4.4"
+    "venueCount": 64,
+    "avgRating": "4.3"
   },
   {
     "name": "Huddersfield",
     "slug": "huddersfield",
-    "venueCount": 5,
-    "avgRating": "4.2"
+    "venueCount": 8,
+    "avgRating": "4.3"
   },
   {
     "name": "Hull",
     "slug": "hull",
-    "venueCount": 93,
+    "venueCount": 82,
     "avgRating": "4.4"
   },
   {
@@ -128,19 +128,19 @@
   {
     "name": "Ipswich",
     "slug": "ipswich",
-    "venueCount": 40,
+    "venueCount": 45,
     "avgRating": "4.5"
   },
   {
     "name": "Leeds",
     "slug": "leeds",
-    "venueCount": 92,
+    "venueCount": 91,
     "avgRating": "4.5"
   },
   {
     "name": "Leicester",
     "slug": "leicester",
-    "venueCount": 64,
+    "venueCount": 63,
     "avgRating": "4.3"
   },
   {
@@ -152,37 +152,37 @@
   {
     "name": "Liverpool",
     "slug": "liverpool",
-    "venueCount": 71,
+    "venueCount": 70,
     "avgRating": "4.3"
   },
   {
     "name": "London",
     "slug": "london",
-    "venueCount": 29,
+    "venueCount": 31,
     "avgRating": "4.4"
   },
   {
     "name": "Manchester",
     "slug": "manchester",
-    "venueCount": 74,
+    "venueCount": 77,
     "avgRating": "4.3"
   },
   {
     "name": "Newcastle",
     "slug": "newcastle",
-    "venueCount": 32,
+    "venueCount": 40,
     "avgRating": "4.3"
   },
   {
     "name": "Norwich",
     "slug": "norwich",
-    "venueCount": 60,
+    "venueCount": 59,
     "avgRating": "4.4"
   },
   {
     "name": "Nottingham",
     "slug": "nottingham",
-    "venueCount": 81,
+    "venueCount": 80,
     "avgRating": "4.4"
   },
   {
@@ -192,45 +192,39 @@
     "avgRating": "4.3"
   },
   {
-    "name": "Romsey",
-    "slug": "romsey",
-    "venueCount": 1,
-    "avgRating": "4.9"
-  },
-  {
     "name": "Sheffield",
     "slug": "sheffield",
-    "venueCount": 119,
+    "venueCount": 113,
     "avgRating": "4.5"
   },
   {
     "name": "Southend",
     "slug": "southend",
-    "venueCount": 37,
+    "venueCount": 40,
     "avgRating": "4.3"
   },
   {
     "name": "Stoke",
     "slug": "stoke",
-    "venueCount": 47,
+    "venueCount": 46,
     "avgRating": "4.3"
   },
   {
     "name": "Sunderland",
     "slug": "sunderland",
-    "venueCount": 29,
+    "venueCount": 21,
     "avgRating": "4.4"
   },
   {
     "name": "Swansea",
     "slug": "swansea",
-    "venueCount": 59,
+    "venueCount": 53,
     "avgRating": "4.4"
   },
   {
     "name": "York",
     "slug": "york",
-    "venueCount": 88,
+    "venueCount": 78,
     "avgRating": "4.4"
   }
 ]

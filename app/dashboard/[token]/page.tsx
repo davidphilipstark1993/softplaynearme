@@ -4,6 +4,7 @@ import type { Metadata } from 'next'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { computeCompleteness, scoreColor, scoreLabel } from '@/lib/completeness'
+import { formatAddressLine } from '@/lib/sanitize'
 import {
   CheckCircle2, Clock, AlertCircle, ExternalLink,
   Pencil, Camera, ListChecks, PoundSterling, FileText, ArrowRight, Mail, Eye,
@@ -66,8 +67,8 @@ export default async function DashboardPage({ params, searchParams }: DashboardP
             <h1 className="text-2xl sm:text-3xl font-bold text-slate-900">
               {venue?.name || claim.venue_name}
             </h1>
-            {venue?.address && (
-              <p className="text-slate-500 text-sm mt-1">{venue.address}{venue.postcode ? `, ${venue.postcode}` : ''}</p>
+            {formatAddressLine(venue?.address, venue?.postcode) && (
+              <p className="text-slate-500 text-sm mt-1">{formatAddressLine(venue?.address, venue?.postcode)}</p>
             )}
           </div>
 

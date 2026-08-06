@@ -17,6 +17,7 @@ import {
 import { formatDistance } from '@/lib/geo'
 import { getCardQuote, formatLastVerified } from '@/lib/venueCardText'
 import { cn } from '@/lib/utils'
+import { formatAddressLine } from '@/lib/sanitize'
 
 interface VenueResult {
   id: number
@@ -167,10 +168,10 @@ function VenueCard({
               </div>
             )}
             <div className="flex gap-2">
-              {showDistance && venue.distance !== undefined && (
+              {showDistance && venue.distance !== undefined && formatAddressLine(venue.address, venue.postcode) && (
                 <Button variant="outline" size="sm" asChild>
                   <a
-                    href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${venue.address}, ${venue.postcode}`)}`}
+                    href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(formatAddressLine(venue.address, venue.postcode)!)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                   >

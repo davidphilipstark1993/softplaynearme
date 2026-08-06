@@ -17,6 +17,7 @@ import type { FAQItem } from './schema'
 
 export interface VenueContentInput {
   name: string
+  slug?: string
   city: string
   county?: string
   address?: string
@@ -230,21 +231,55 @@ function capitalise(str: string): string {
  * Generate FAQ entries for a venue listing.
  * Returns only questions we can give a meaningful answer to —
  * either a confirmed fact or a clear "not yet confirmed" statement.
+ *
+ * Answers are deterministically varied per venue (seeded on slug/name, same
+ * approach as scripts/enrich-seo-all.mjs's description templates) rather
+ * than a single fixed string per branch. Without this, the majority of
+ * venues — most facility booleans are unconfirmed sitewide — rendered
+ * byte-identical FAQ answers differing only in the venue name. Still
+ * deterministic for the same input, per this file's design rules.
  */
+
+// FNV-1a style hash, matching scripts/enrich-seo-all.mjs's slugHash so the
+// same seeding approach is used sitewide.
+function contentHash(seed: string): number {
+  let h = 0x811c9dc5
+  for (let i = 0; i < seed.length; i++) {
+    h ^= seed.charCodeAt(i)
+    h = (h * 0x01000193) >>> 0
+  }
+  return h
+}
+function lcgNext(seed: number): number {
+  return (seed * 1664525 + 1013904223) >>> 0
+}
+function pick<T>(arr: T[], seed: number): T {
+  return arr[seed % arr.length]
+}
+
 export function generateVenueFAQs(v: VenueContentInput): FAQItem[] {
   const faqs: FAQItem[] = []
+  const baseSeed = contentHash(v.slug || v.name)
+  const seeds = [baseSeed, lcgNext(baseSeed), lcgNext(lcgNext(baseSeed)), lcgNext(lcgNext(lcgNext(baseSeed)))]
 
   // 1. Toddler suitability
   if (v.toddler_area || v.baby_area || v.age_range_min !== undefined) {
     if (v.toddler_area) {
       faqs.push({
         question: `Is ${v.name} suitable for toddlers?`,
-        answer: `Yes. ${v.name} has a dedicated toddler area designed for younger children. We recommend contacting the venue to check age limits and session times before visiting.`,
+        answer: pick([
+          `Yes. ${v.name} has a dedicated toddler area designed for younger children. We recommend contacting the venue to check age limits and session times before visiting.`,
+          `Yes — ${v.name} has a toddler-specific area separate from the main play frame. Session times and age limits are best confirmed directly with the venue.`,
+          `${v.name} caters for toddlers with a dedicated area for younger children. Contact the venue ahead of your visit to confirm current age guidance.`,
+        ], seeds[0]),
       })
     } else if (v.baby_area) {
       faqs.push({
         question: `Is ${v.name} suitable for babies and toddlers?`,
-        answer: `${v.name} has a baby play area. Contact the venue to confirm current session availability and age requirements for younger visitors.`,
+        answer: pick([
+          `${v.name} has a baby play area. Contact the venue to confirm current session availability and age requirements for younger visitors.`,
+          `Yes, there's a baby area at ${v.name}. It's worth checking with the venue directly for age limits and session availability before visiting.`,
+        ], seeds[0]),
       })
     } else if (v.age_range_min !== undefined && v.age_range_min === 0) {
       faqs.push({
@@ -255,7 +290,12 @@ export function generateVenueFAQs(v: VenueContentInput): FAQItem[] {
   } else {
     faqs.push({
       question: `Is ${v.name} suitable for toddlers?`,
-      answer: `We do not yet have confirmed details about toddler-specific areas at ${v.name}. We recommend contacting the venue directly to check age suitability, session times, and available areas.`,
+      answer: pick([
+        `We do not yet have confirmed details about toddler-specific areas at ${v.name}. We recommend contacting the venue directly to check age suitability, session times, and available areas.`,
+        `We haven't confirmed whether ${v.name} has a dedicated toddler area. The venue is the best source for current age suitability and session details.`,
+        `Toddler-specific facilities at ${v.name} aren't confirmed on our listing yet — worth a quick check with the venue before you visit, especially if you have a younger child in tow.`,
+        `Our listing doesn't yet confirm toddler-area details for ${v.name}. Contact the venue directly if age suitability is important for your visit.`,
+      ], seeds[0]),
     })
   }
 
@@ -264,7 +304,11 @@ export function generateVenueFAQs(v: VenueContentInput): FAQItem[] {
   if (hasCafe === true) {
     faqs.push({
       question: `Does ${v.name} have a café or refreshments?`,
-      answer: `Yes, ${v.name} has an on-site café. Contact the venue for details on opening times and the menu.`,
+      answer: pick([
+        `Yes, ${v.name} has an on-site café. Contact the venue for details on opening times and the menu.`,
+        `Yes — there's an on-site café at ${v.name}. Menu and opening times are best confirmed directly with the venue.`,
+        `${v.name} has a café on site, so there's no need to bring your own food. Check with the venue for current menu and hours.`,
+      ], seeds[1]),
     })
   } else if (hasCafe === false) {
     faqs.push({
@@ -274,7 +318,12 @@ export function generateVenueFAQs(v: VenueContentInput): FAQItem[] {
   } else {
     faqs.push({
       question: `Does ${v.name} have food and drinks available?`,
-      answer: `We do not yet have confirmed information about catering at ${v.name}. Contact the venue directly to ask about refreshments.`,
+      answer: pick([
+        `We do not yet have confirmed information about catering at ${v.name}. Contact the venue directly to ask about refreshments.`,
+        `Catering options at ${v.name} aren't confirmed on our listing. It's worth checking with the venue directly, or bringing your own snacks just in case.`,
+        `We haven't confirmed whether ${v.name} has food or drink available on site — contact the venue ahead of your visit if this matters to you.`,
+        `Refreshment options at ${v.name} are unconfirmed on our end. The venue's own website or social media is the most reliable source.`,
+      ], seeds[1]),
     })
   }
 
@@ -294,7 +343,11 @@ export function generateVenueFAQs(v: VenueContentInput): FAQItem[] {
   } else {
     faqs.push({
       question: `Is parking available near ${v.name}?`,
-      answer: `Parking availability has not yet been confirmed for ${v.name}. We recommend contacting the venue or checking local parking options near ${v.address || v.city}.`,
+      answer: pick([
+        `Parking availability has not yet been confirmed for ${v.name}. We recommend contacting the venue or checking local parking options near ${v.address || v.city}.`,
+        `We don't have confirmed parking details for ${v.name} yet. Local parking near ${v.address || v.city} is worth checking in advance if you're driving.`,
+        `Parking at ${v.name} isn't confirmed on our listing — the venue or a quick map search of ${v.address || v.city} should help before you set off.`,
+      ], seeds[2]),
     })
   }
 
@@ -312,7 +365,11 @@ export function generateVenueFAQs(v: VenueContentInput): FAQItem[] {
   } else {
     faqs.push({
       question: `Do I need to book in advance to visit ${v.name}?`,
-      answer: `Booking requirements for ${v.name} have not yet been confirmed on our listing. We recommend checking with the venue directly before your visit.`,
+      answer: pick([
+        `Booking requirements for ${v.name} have not yet been confirmed on our listing. We recommend checking with the venue directly before your visit.`,
+        `We haven't confirmed whether ${v.name} requires advance booking. It's worth checking their website or calling ahead, particularly for weekends.`,
+        `Whether ${v.name} takes walk-ins or requires booking isn't confirmed on our end — a quick check with the venue before you travel is the safest bet.`,
+      ], seeds[3]),
     })
   }
 

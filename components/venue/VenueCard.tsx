@@ -18,6 +18,7 @@ import {
   ExternalLink,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { cleanAddressForDisplay, formatAddressLine } from '@/lib/sanitize'
 
 interface VenueCardProps {
   venue: {
@@ -94,11 +95,11 @@ export function VenueCard({
   const hasRating = venue.avg_rating && venue.avg_rating > 0
   const primaryImage = venue.images?.[0]
 
-  // Google Maps directions URL
-  const directionsUrl = venue.postcode
-    ? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
-        `${venue.address || ''}, ${venue.postcode}`
-      )}`
+  // Google Maps directions URL — null (button hidden) when there's no valid
+  // destination, rather than linking to "destination=·, null".
+  const directionsDestination = formatAddressLine(venue.address, venue.postcode)
+  const directionsUrl = directionsDestination
+    ? `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(directionsDestination)}`
     : null
 
   if (variant === 'horizontal') {
