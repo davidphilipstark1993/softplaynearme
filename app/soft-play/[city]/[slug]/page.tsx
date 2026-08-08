@@ -682,7 +682,7 @@ export default async function VenuePage({ params }: PageProps) {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div className="bg-slate-100 border-2 border-dashed border-slate-300 rounded-xl p-8 text-center">
               <Camera className="w-12 h-12 mx-auto text-slate-400 mb-3" />
-              <h3 className="font-semibold text-slate-700 mb-2">No photos yet</h3>
+              <p className="font-semibold text-slate-700 mb-2">No photos yet</p>
               <p className="text-sm text-slate-500 mb-4">
                 Are you the owner of {venue.name}? Add photos to help families choose your venue.
               </p>

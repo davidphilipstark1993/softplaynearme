@@ -8,7 +8,7 @@ import { Search, MapPin, Loader2 } from 'lucide-react'
 import { isValidUKPostcode, RADIUS_OPTIONS } from '@/lib/geo'
 import { cn } from '@/lib/utils'
 import { cities } from '@/lib/venues'
-import { getStaticTowns } from '@/lib/staticVenues'
+import { getStaticTowns } from '@/lib/staticTowns'
 
 // Build autocomplete list from cities config + static towns
 const AUTOCOMPLETE_ITEMS = (() => {

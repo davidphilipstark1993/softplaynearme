@@ -1,9 +1,9 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Image from 'next/image'
 import { cn } from '@/lib/utils'
 import { shimmerDataURL } from '@/lib/imageUtils'
+import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 
 interface Slide {
   src: string
@@ -48,7 +48,7 @@ export function HeroCarousel() {
     <div className="relative w-full overflow-hidden rounded-2xl border border-white/20 bg-white/10 shadow-xl">
       <div className="relative h-64 sm:h-80 md:h-96">
         {SLIDES.map((slide, slideIndex) => (
-          <Image
+          <ImageWithFallback
             key={`${slide.src}-${slideIndex}`}
             src={slide.src}
             alt={slide.alt}

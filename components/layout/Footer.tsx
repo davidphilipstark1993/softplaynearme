@@ -124,7 +124,7 @@ export function Footer({ minimal = false }: FooterProps) {
             </div>
           </div>
           <div>
-            <h4 className="font-semibold text-white mb-4">Popular Cities</h4>
+            <h2 className="font-semibold text-white mb-4">Popular Cities</h2>
             <ul className="space-y-2 text-sm">
               {majorCities.map((city) => (
                 <li key={city.slug}>
@@ -136,7 +136,7 @@ export function Footer({ minimal = false }: FooterProps) {
             </ul>
           </div>
           <div>
-            <h4 className="font-semibold text-white mb-4">Quick Links</h4>
+            <h2 className="font-semibold text-white mb-4">Quick Links</h2>
             <ul className="space-y-2 text-sm">
               <li><Link href="/search" className="hover:text-white transition-colors">Search Venues</Link></li>
               <li><Link href="/search?filters=toddler" className="hover:text-white transition-colors">Toddler Soft Play</Link></li>
@@ -147,7 +147,7 @@ export function Footer({ minimal = false }: FooterProps) {
             </ul>
           </div>
           <div>
-            <h4 className="font-semibold text-white mb-4">About</h4>
+            <h2 className="font-semibold text-white mb-4">About</h2>
             <ul className="space-y-2 text-sm">
               <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
               <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
@@ -165,7 +165,7 @@ export function Footer({ minimal = false }: FooterProps) {
           </div>
         </div>
         <div className="border-t border-slate-800 mt-8 pt-8">
-          <h4 className="font-semibold text-white mb-5 text-sm">Soft Play Centres by Region</h4>
+          <h2 className="font-semibold text-white mb-5 text-sm">Soft Play Centres by Region</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-6 gap-y-6">
             {cityDirectory.map((group) => (
               <div key={group.region}>

@@ -2,7 +2,7 @@ import { Search, MapPin, Clock, Baby, PartyPopper, Heart, Coffee, Car, CheckCirc
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import Image from 'next/image'
+import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 import { cities } from '@/lib/venues'
 import { getStaticVenuesByTown, getStaticTotalVenueCount } from '@/lib/staticVenues'
 import { Header } from '@/components/layout/Header'
@@ -283,7 +283,7 @@ export default async function Home() {
                 <Link key={city.slug} href={`/soft-play/${city.slug}`} className="group">
                   <Card className="overflow-hidden text-center hover:shadow-lg hover:border-purple-300 transition-all">
                     <div className="relative h-24 w-full">
-                      <Image
+                      <ImageWithFallback
                         src={cityImage}
                         alt={`Families looking for soft play in ${city.name}`}
                         fill
