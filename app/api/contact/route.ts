@@ -1,19 +1,31 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { sendContactFormNotification } from '@/lib/email'
+
+const VALID_TOPICS = ['General enquiry', 'Add or claim a venue', 'Report an error', 'Other']
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { name, email, phone, message, venueName } = body
+    const { name, email, phone, topic, message } = body || {}
 
-    if (!name || !email || !message) {
-      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
+    if (!name?.trim() || !email?.trim() || !message?.trim()) {
+      return NextResponse.json({ error: 'Name, email, and message are required' }, { status: 400 })
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      return NextResponse.json({ error: 'Please enter a valid email address' }, { status: 400 })
     }
 
-    // For MVP, just log the contact - you can add email sending later
-    console.log('Contact form submission:', { name, email, phone, message, venueName })
+    await sendContactFormNotification({
+      name: name.trim().slice(0, 100),
+      email: email.trim().slice(0, 150),
+      phone: phone?.trim()?.slice(0, 30) || undefined,
+      topic: VALID_TOPICS.includes(topic) ? topic : 'General enquiry',
+      message: message.trim().slice(0, 5000),
+    })
 
-    return NextResponse.json({ success: true, message: 'Message received' })
-  } catch (err: any) {
-    return NextResponse.json({ error: 'Server error' }, { status: 500 })
+    return NextResponse.json({ success: true })
+  } catch (err) {
+    console.error('[contact] Failed to process submission:', err)
+    return NextResponse.json({ error: 'Something went wrong. Please try again or email info@softplaynearme.co.uk' }, { status: 500 })
   }
 }

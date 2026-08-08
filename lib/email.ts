@@ -174,6 +174,59 @@ export async function sendAdminClaimNotification(opts: AdminClaimNotificationOpt
   )
 }
 
+// ─── Contact form notification ─────────────────────────────────────────────────
+
+export interface ContactFormNotificationOptions {
+  name: string
+  email: string
+  phone?: string
+  topic: string
+  message: string
+}
+
+export async function sendContactFormNotification(opts: ContactFormNotificationOptions): Promise<void> {
+  const rows = [
+    ['From', `${opts.name} &lt;${opts.email}&gt;`],
+    ...(opts.phone ? [['Phone', opts.phone]] : []),
+    ['Topic', opts.topic],
+  ] as [string, string][]
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#f8fafc;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#1e293b">
+<div style="max-width:520px;margin:0 auto;padding:32px 16px">
+
+  <div style="background:linear-gradient(135deg,#9333ea 0%,#ec4899 100%);border-radius:16px;padding:28px 28px;text-align:center;margin-bottom:20px">
+    <div style="font-size:32px;margin-bottom:10px">&#x1F4E9;</div>
+    <h1 style="color:#fff;margin:0 0 6px;font-size:18px;font-weight:700">New Contact Form Message</h1>
+    <p style="color:rgba(255,255,255,0.7);margin:0;font-size:13px">Someone just submitted the contact form on Soft Play Near Me</p>
+  </div>
+
+  <div style="background:#fff;border-radius:12px;padding:24px;border:1px solid #e2e8f0;margin-bottom:16px">
+    ${rows.map(([label, value]) => `
+    <div style="display:flex;gap:16px;padding:10px 0;border-bottom:1px solid #f1f5f9">
+      <span style="font-size:13px;color:#64748b;font-weight:500;width:80px;flex-shrink:0">${label}</span>
+      <span style="font-size:13px;color:#1e293b;flex:1">${value}</span>
+    </div>`).join('')}
+    <div style="padding-top:16px">
+      <span style="font-size:13px;color:#64748b;font-weight:500">Message</span>
+      <p style="font-size:14px;color:#1e293b;white-space:pre-wrap;margin:8px 0 0;line-height:1.6">${opts.message.replace(/</g, '&lt;')}</p>
+    </div>
+  </div>
+
+  <a href="mailto:${opts.email}" style="display:block;background:#0f172a;color:#fff;text-decoration:none;padding:14px 24px;border-radius:9px;font-weight:600;font-size:14px;text-align:center;margin-bottom:16px">
+    Reply to ${opts.name.split(' ')[0]} &#x2192;
+  </a>
+
+  <p style="font-size:11px;color:#cbd5e1;text-align:center;margin:0">Soft Play Near Me &#xB7; contact form notification</p>
+</div>
+</body>
+</html>`
+
+  await sendEmail('hello@softplaynearme.co.uk', `Contact form: ${opts.topic} — ${opts.name}`, html)
+}
+
 // ─── Verification email ───────────────────────────────────────────────────────
 
 export interface VerificationEmailOptions {
