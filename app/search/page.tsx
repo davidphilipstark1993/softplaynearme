@@ -103,6 +103,8 @@ async function searchVenues(
     else if (sort === 'price_low') orderBy = 'v.price_from ASC NULLS LAST, distance ASC'
     else if (sort === 'price_high') orderBy = 'v.price_to DESC NULLS LAST, distance ASC'
     else if (sort === 'name') orderBy = 'v.name ASC'
+    // Featured (Premium/Bespoke) venues surface first regardless of sort.
+    orderBy = `v.featured DESC, ${orderBy}`
 
     const sql = `
       SELECT v.*,

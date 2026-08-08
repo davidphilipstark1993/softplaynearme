@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { getCityBySlug, getAllCitySlugs, getNearbyCities, filters } from '@/lib/venues'
-import { MapPin, Star, Coffee, Car, Baby, PartyPopper, Heart, Phone, Globe, Navigation, TrendingUp } from 'lucide-react'
+import { MapPin, Star, Coffee, Car, Baby, PartyPopper, Heart, Phone, Globe, Navigation, TrendingUp, CheckCircle2 } from 'lucide-react'
 import type { Metadata } from 'next'
 import { getPool, STATIC_BUILD } from '@/lib/pool'
 import { getStaticVenuesByTown, getStaticTownBySlug, getAllStaticTownSlugs, type StaticVenue } from '@/lib/staticVenues'
@@ -22,6 +22,8 @@ import { formatAddressLine } from '@/lib/sanitize'
 import { FilterSidebar, ActiveFilterBar } from '@/components/search/FilterSidebar'
 import { isSoftPlayVenueType } from '@/lib/venueTypes'
 import { getCardQuote, formatLastVerified } from '@/lib/venueCardText'
+import { isVerified } from '@/lib/plans'
+import { FeaturedImpression } from '@/components/venue/FeaturedImpression'
 
 interface PageProps {
   params: Promise<{ city: string }>
@@ -149,6 +151,10 @@ interface Venue {
   venue_type?: string | null
   review_snippet?: string | null
   last_verified_at?: string | null
+  featured?: boolean
+  plan?: string
+  plan_status?: string
+  claimed_by_owner?: boolean
 }
 
 interface VenueFilters {
@@ -256,7 +262,8 @@ async function getVenues(citySlug: string, opts: VenueFilters = {}): Promise<Ven
         price_high: 'v.price_to DESC NULLS LAST, avg_rating DESC NULLS LAST',
         name: 'v.name ASC',
       }
-      query += ` GROUP BY v.id ORDER BY ${sortMap[sort] ?? sortMap.rating}`
+      // Featured (Premium/Bespoke) venues surface first regardless of sort.
+      query += ` GROUP BY v.id ORDER BY v.featured DESC, ${sortMap[sort] ?? sortMap.rating}`
 
       const result = await client.query(query, params)
 
@@ -606,6 +613,20 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                       )}
 
                       <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/0 to-black/0" />
+                      {/* Featured / Verified overlay */}
+                      {(venue.featured || isVerified(venue)) && (
+                        <div className="absolute top-2 left-2 flex gap-1">
+                          {venue.featured && <FeaturedImpression venueId={venue.id} city={city} />}
+                          {venue.featured && (
+                            <Badge className="bg-yellow-400 text-yellow-900 text-xs">Featured</Badge>
+                          )}
+                          {isVerified(venue) && (
+                            <Badge className="bg-blue-500 text-white text-xs inline-flex items-center gap-1">
+                              <CheckCircle2 className="w-3 h-3" /> Verified
+                            </Badge>
+                          )}
+                        </div>
+                      )}
                       {/* Rating overlay */}
                       {venue.avg_rating && venue.avg_rating > 0 ? (
                         <div className="absolute top-2 right-2 flex items-center gap-1 bg-white/95 backdrop-blur-sm px-2 py-1 rounded-full shadow text-xs font-bold">

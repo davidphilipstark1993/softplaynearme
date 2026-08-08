@@ -168,10 +168,64 @@ export async function sendAdminClaimNotification(opts: AdminClaimNotificationOpt
 </html>`
 
   await sendEmail(
-    'hello@softplaynearme.co.uk',
+    'david@softplaynearme.co.uk',
     `New claim: ${opts.venueName} from ${opts.claimantName}`,
     html
   )
+}
+
+// ─── Lead notification (Premium/Bespoke venues only) ──────────────────────────
+
+export interface LeadNotificationOptions {
+  to: string
+  venueName: string
+  enquirerName: string
+  enquirerEmail: string
+  enquirerPhone?: string
+  message: string
+  dashboardUrl?: string
+}
+
+export async function sendLeadNotificationEmail(opts: LeadNotificationOptions): Promise<void> {
+  const rows = [
+    ['From', `${opts.enquirerName} &lt;${opts.enquirerEmail}&gt;`],
+    ...(opts.enquirerPhone ? [['Phone', opts.enquirerPhone]] : []),
+  ] as [string, string][]
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#f8fafc;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#1e293b">
+<div style="max-width:520px;margin:0 auto;padding:32px 16px">
+
+  <div style="background:linear-gradient(135deg,#9333ea 0%,#ec4899 100%);border-radius:16px;padding:28px 28px;text-align:center;margin-bottom:20px">
+    <div style="font-size:32px;margin-bottom:10px">&#x1F4E9;</div>
+    <h1 style="color:#fff;margin:0 0 6px;font-size:18px;font-weight:700">New Enquiry for ${opts.venueName}</h1>
+    <p style="color:rgba(255,255,255,0.7);margin:0;font-size:13px">A parent just messaged you through Soft Play Near Me</p>
+  </div>
+
+  <div style="background:#fff;border-radius:12px;padding:24px;border:1px solid #e2e8f0;margin-bottom:16px">
+    ${rows.map(([label, value]) => `
+    <div style="display:flex;gap:16px;padding:10px 0;border-bottom:1px solid #f1f5f9">
+      <span style="font-size:13px;color:#64748b;font-weight:500;width:60px;flex-shrink:0">${label}</span>
+      <span style="font-size:13px;color:#1e293b;flex:1">${value}</span>
+    </div>`).join('')}
+    <div style="padding-top:16px">
+      <span style="font-size:13px;color:#64748b;font-weight:500">Message</span>
+      <p style="font-size:14px;color:#1e293b;white-space:pre-wrap;margin:8px 0 0;line-height:1.6">${opts.message.replace(/</g, '&lt;')}</p>
+    </div>
+  </div>
+
+  <a href="mailto:${opts.enquirerEmail}" style="display:block;background:#9333ea;color:#fff;text-decoration:none;padding:14px 24px;border-radius:9px;font-weight:600;font-size:14px;text-align:center;margin-bottom:16px">
+    Reply to ${opts.enquirerName.split(' ')[0]} &#x2192;
+  </a>
+
+  <p style="font-size:11px;color:#cbd5e1;text-align:center;margin:0">You&#x27;re receiving this because ${opts.venueName} is on a Premium or Bespoke plan &#xB7; Soft Play Near Me</p>
+</div>
+</body>
+</html>`
+
+  await sendEmail(opts.to, `New enquiry for ${opts.venueName} — ${opts.enquirerName}`, html)
 }
 
 // ─── Contact form notification ─────────────────────────────────────────────────
@@ -225,6 +279,60 @@ export async function sendContactFormNotification(opts: ContactFormNotificationO
 </html>`
 
   await sendEmail('hello@softplaynearme.co.uk', `Contact form: ${opts.topic} — ${opts.name}`, html)
+}
+
+// ─── Upgrade request notification ─────────────────────────────────────────────
+
+export interface UpgradeRequestNotificationOptions {
+  venueName: string
+  ownerName: string
+  ownerEmail: string
+  requestedPlan: 'premium' | 'bespoke'
+  dashboardUrl: string
+}
+
+export async function sendUpgradeRequestNotification(opts: UpgradeRequestNotificationOptions): Promise<void> {
+  const rows = [
+    ['Venue', opts.venueName],
+    ['Owner', `${opts.ownerName} &lt;${opts.ownerEmail}&gt;`],
+    ['Plan requested', opts.requestedPlan === 'bespoke' ? 'Bespoke' : 'Premium'],
+    ['Dashboard', `<a href="${opts.dashboardUrl}" style="color:#7c3aed">${opts.dashboardUrl}</a>`],
+  ] as [string, string][]
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#f8fafc;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#1e293b">
+<div style="max-width:520px;margin:0 auto;padding:32px 16px">
+
+  <div style="background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);border-radius:16px;padding:28px 28px;text-align:center;margin-bottom:20px">
+    <div style="font-size:32px;margin-bottom:10px">&#x1F4B3;</div>
+    <h1 style="color:#fff;margin:0 0 6px;font-size:18px;font-weight:700">Upgrade Request</h1>
+    <p style="color:rgba(255,255,255,0.7);margin:0;font-size:13px">A venue owner wants to go ${opts.requestedPlan === 'bespoke' ? 'Bespoke' : 'Premium'}</p>
+  </div>
+
+  <div style="background:#fff;border-radius:12px;padding:24px;border:1px solid #e2e8f0;margin-bottom:16px">
+    ${rows.map(([label, value]) => `
+    <div style="display:flex;gap:16px;padding:10px 0;border-bottom:1px solid #f1f5f9">
+      <span style="font-size:13px;color:#64748b;font-weight:500;width:110px;flex-shrink:0">${label}</span>
+      <span style="font-size:13px;color:#1e293b;flex:1">${value}</span>
+    </div>`).join('')}
+  </div>
+
+  <a href="https://www.softplaynearme.co.uk/admin/venues" style="display:block;background:#0f172a;color:#fff;text-decoration:none;padding:14px 24px;border-radius:9px;font-weight:600;font-size:14px;text-align:center;margin-bottom:16px">
+    Set plan in Admin &#x2192;
+  </a>
+
+  <p style="font-size:11px;color:#cbd5e1;text-align:center;margin:0">Soft Play Near Me &#xB7; upgrade request notification</p>
+</div>
+</body>
+</html>`
+
+  await sendEmail(
+    'david@softplaynearme.co.uk',
+    `Upgrade request: ${opts.venueName} wants ${opts.requestedPlan === 'bespoke' ? 'Bespoke' : 'Premium'}`,
+    html
+  )
 }
 
 // ─── Verification email ───────────────────────────────────────────────────────

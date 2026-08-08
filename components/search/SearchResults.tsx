@@ -18,6 +18,8 @@ import { formatDistance } from '@/lib/geo'
 import { getCardQuote, formatLastVerified } from '@/lib/venueCardText'
 import { cn } from '@/lib/utils'
 import { formatAddressLine } from '@/lib/sanitize'
+import { isVerified } from '@/lib/plans'
+import { FeaturedImpression } from '@/components/venue/FeaturedImpression'
 
 interface VenueResult {
   id: number
@@ -42,6 +44,10 @@ interface VenueResult {
   review_count: number
   distance?: number
   main_image_url?: string | null
+  featured?: boolean
+  plan?: string
+  plan_status?: string
+  claimed_by_owner?: boolean
 }
 
 interface SearchResultsProps {
@@ -94,6 +100,17 @@ function VenueCard({
               />
             ) : (
               <div className="absolute inset-0 bg-gradient-to-br from-purple-100 to-pink-100" />
+            )}
+            {(venue.featured || isVerified(venue)) && (
+              <div className="absolute top-1.5 left-1.5 flex gap-1">
+                {venue.featured && <FeaturedImpression venueId={venue.id} city={venue.city_slug} />}
+                {venue.featured && (
+                  <Badge className="bg-yellow-400 text-yellow-900 text-[10px] px-1.5 py-0">Featured</Badge>
+                )}
+                {isVerified(venue) && (
+                  <Badge className="bg-blue-500 text-white text-[10px] px-1.5 py-0">Verified</Badge>
+                )}
+              </div>
             )}
           </div>
 

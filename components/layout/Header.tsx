@@ -41,6 +41,11 @@ export function Header({ backLink }: HeaderProps) {
                   Blog
                 </Button>
               </Link>
+              <Link href="/pricing" className="hidden sm:block">
+                <Button variant="ghost" size="sm">
+                  Pricing
+                </Button>
+              </Link>
               <Link href="/add-venue">
                 <Button size="sm" className="bg-green-600 text-white hover:bg-green-700 font-semibold">
                   <span className="hidden sm:inline">Free </span>Listing

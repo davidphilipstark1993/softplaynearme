@@ -24,6 +24,7 @@ import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 import { buildLocalBusinessSchema, buildBreadcrumbSchema, buildFAQSchema } from '@/lib/schema'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { getStoredReviews } from '@/lib/reviewsStore'
+import { isVerified } from '@/lib/plans'
 import { ReviewSection } from '@/components/venue/ReviewSection'
 import { cleanAddressForDisplay, formatAddressLine } from '@/lib/sanitize'
 import {
@@ -42,6 +43,7 @@ import { FacilitiesGrid, FacilitiesBadges } from '@/components/venue/FacilitiesG
 import { SpecialSessions } from '@/components/venue/SpecialSessions'
 import { CTAButtons } from '@/components/venue/CTAButtons'
 import { QuickFactsPanel } from '@/components/venue/QuickFactsPanel'
+import { EnquiryForm } from '@/components/venue/EnquiryForm'
 
 interface PageProps {
   params: Promise<{ city: string; slug: string }>
@@ -68,6 +70,8 @@ interface Venue {
   facilities?: Record<string, boolean>
   google_place_id?: string
   featured?: boolean
+  plan?: string
+  plan_status?: string
   // Core facility booleans (original columns)
   cafe: boolean
   parking: boolean
@@ -618,9 +622,16 @@ export default async function VenuePage({ params }: PageProps) {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="text-white">
-                {venue.featured && (
-                  <Badge className="bg-yellow-400 text-yellow-900 mb-2">Featured</Badge>
-                )}
+                <div className="flex items-center gap-2 mb-2">
+                  {venue.featured && (
+                    <Badge className="bg-yellow-400 text-yellow-900">Featured</Badge>
+                  )}
+                  {isVerified(venue) && (
+                    <Badge className="bg-blue-500 text-white inline-flex items-center gap-1">
+                      <CheckCircle2 className="w-3 h-3" /> Verified
+                    </Badge>
+                  )}
+                </div>
                 <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
                   {venue.name} <span className="text-purple-200 font-normal text-xl sm:text-2xl md:text-3xl">| Soft Play in {cityName}</span>
                 </h1>
@@ -1063,6 +1074,11 @@ export default async function VenuePage({ params }: PageProps) {
                   bookingUrl={venue.booking_url}
                   googlePlaceId={venue.google_place_id}
                 />
+
+                {/* Enquiry form — only for venues that exist in our DB (have a real id) */}
+                {typeof venue.id === 'number' && (
+                  <EnquiryForm venueId={venue.id} venueName={venue.name} />
+                )}
 
                 {/* Pricing */}
                 <PricingTable

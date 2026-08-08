@@ -16,6 +16,7 @@
     "db:migrate": "node scripts/migrateSchema.js",
     "db:migrate:enrichment": "node scripts/migrateEnrichment.js",
     "db:migrate:phase2": "node scripts/migratePhase2Remaining.js",
+    "db:migrate:billing": "node scripts/migrateBilling.mjs",
     "db:scores": "node scripts/updateCompletenessScores.js",
     "db:clean": "node scripts/cleanFabricatedData.js",
     "data:build": "node scripts/buildSoftplayData.mjs",

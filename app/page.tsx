@@ -89,6 +89,30 @@ interface RecentVenue {
   completeness_score: number
 }
 
+interface FeaturedVenue {
+  name: string
+  city_slug: string
+  slug: string
+  city_name: string
+}
+
+async function getFeaturedHomepageVenues(): Promise<FeaturedVenue[]> {
+  try {
+    const pool = getPool()
+    const result = await pool.query<{ name: string; city_slug: string; slug: string }>(`
+      SELECT name, city_slug, slug FROM venues
+      WHERE ad_placements->>'homepage' = 'true'
+      ORDER BY RANDOM()
+      LIMIT 6
+    `)
+    const cityNameMap: Record<string, string> = {}
+    for (const city of cities) cityNameMap[city.slug] = city.name
+    return result.rows.map((r) => ({ ...r, city_name: cityNameMap[r.city_slug] ?? r.city_slug }))
+  } catch {
+    return []
+  }
+}
+
 async function getHomepageStats() {
   try {
     const pool = getPool()
@@ -144,6 +168,7 @@ async function getHomepageStats() {
 
 export default async function Home() {
   const { totalVenues, cityCounts, recentVenues } = await getHomepageStats()
+  const featuredVenues = await getFeaturedHomepageVenues()
 
   const venueCountDisplay = totalVenues > 0
     ? totalVenues.toLocaleString('en-GB')
@@ -307,6 +332,37 @@ export default async function Home() {
           </div>
         </div>
       </div>
+
+      {/* Featured Venues — Bespoke plan homepage ad placement */}
+      {featuredVenues.length > 0 && (
+        <div className="bg-gradient-to-br from-amber-50 to-purple-50 py-12 px-4 border-b border-slate-200">
+          <div className="max-w-7xl mx-auto">
+            <div className="mb-6">
+              <h2 className="text-2xl font-bold text-slate-900">Featured Soft Play Venues</h2>
+              <p className="text-slate-600 mt-1">Highlighted by our Bespoke partners</p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {featuredVenues.map((venue) => (
+                <Link
+                  key={`${venue.city_slug}/${venue.slug}`}
+                  href={`/soft-play/${venue.city_slug}/${venue.slug}`}
+                  className="group"
+                >
+                  <Card className="p-4 flex items-start gap-3 hover:border-amber-300 hover:shadow-md transition-all bg-white">
+                    <div className="flex-shrink-0 w-9 h-9 bg-amber-100 rounded-full flex items-center justify-center">
+                      <Sparkles className="w-4 h-4 text-amber-600" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="font-semibold text-slate-900 group-hover:text-amber-700 truncate">{venue.name}</p>
+                      <p className="text-xs text-slate-500 mt-0.5">{venue.city_name}</p>
+                    </div>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Recently Verified Venues */}
       {recentVenues.length > 0 && (

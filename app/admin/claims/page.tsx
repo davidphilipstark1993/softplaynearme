@@ -1,7 +1,9 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { CheckCircle2, XCircle, Clock, ExternalLink, RefreshCw } from 'lucide-react'
+import { cities } from '@/lib/venues'
 
 interface Claim {
   id: number
@@ -37,6 +39,8 @@ export default function AdminClaimsPage() {
   const [claims, setClaims] = useState<Claim[]>([])
   const [loading, setLoading] = useState(false)
   const [updating, setUpdating] = useState<number | null>(null)
+  const [cityChoice, setCityChoice] = useState<Record<number, string>>({})
+  const [approveError, setApproveError] = useState<Record<number, string>>({})
 
   async function login(e: React.FormEvent) {
     e.preventDefault()
@@ -66,15 +70,23 @@ export default function AdminClaimsPage() {
     }
   }
 
-  async function updateStatus(id: number, status: string) {
+  async function updateStatus(id: number, status: string, citySlug?: string) {
     setUpdating(id)
+    setApproveError((prev) => ({ ...prev, [id]: '' }))
     try {
-      await fetch('/api/admin/claims', {
+      const res = await fetch('/api/admin/claims', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id, status }),
+        body: JSON.stringify({ id, status, citySlug }),
       })
-      setClaims((prev) => prev.map((c) => c.id === id ? { ...c, status: status as Claim['status'] } : c))
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        setApproveError((prev) => ({ ...prev, [id]: data.error || 'Something went wrong' }))
+        return
+      }
+      // Re-fetch rather than patch local state — approving a brand-new listing
+      // fills in city_slug/venue_slug server-side and we want that reflected.
+      await loadClaims()
     } finally {
       setUpdating(null)
     }
@@ -132,14 +144,19 @@ export default function AdminClaimsPage() {
               {' ·'} {claims.length} total
             </p>
           </div>
-          <button
-            onClick={loadClaims}
-            disabled={loading}
-            className="inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-slate-900 border border-slate-300 bg-white px-3 py-2 rounded-lg transition-colors"
-          >
-            <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
-            Refresh
-          </button>
+          <div className="flex items-center gap-3">
+            <Link href="/admin/venues" className="text-sm text-purple-600 hover:underline">
+              Venues &amp; Plans →
+            </Link>
+            <button
+              onClick={loadClaims}
+              disabled={loading}
+              className="inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-slate-900 border border-slate-300 bg-white px-3 py-2 rounded-lg transition-colors"
+            >
+              <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin' : ''}`} />
+              Refresh
+            </button>
+          </div>
         </div>
 
         {/* Claims table */}
@@ -153,6 +170,7 @@ export default function AdminClaimsPage() {
               const venueUrl = claim.city_slug && claim.venue_slug
                 ? `/soft-play/${claim.city_slug}/${claim.venue_slug}`
                 : null
+              const needsCity = !claim.city_slug || !claim.venue_slug
               const date = new Date(claim.created_at).toLocaleDateString('en-GB', {
                 day: 'numeric', month: 'short', year: 'numeric',
               })
@@ -210,35 +228,54 @@ export default function AdminClaimsPage() {
                     </div>
 
                     {/* Right: action buttons */}
-                    <div className="flex items-center gap-2 flex-shrink-0">
-                      {claim.status !== 'approved' && (
-                        <button
-                          onClick={() => updateStatus(claim.id, 'approved')}
-                          disabled={updating === claim.id}
-                          className="inline-flex items-center gap-1.5 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors disabled:opacity-50"
-                        >
-                          <CheckCircle2 className="w-3.5 h-3.5" />
-                          Approve
-                        </button>
-                      )}
-                      {claim.status !== 'rejected' && (
-                        <button
-                          onClick={() => updateStatus(claim.id, 'rejected')}
-                          disabled={updating === claim.id}
-                          className="inline-flex items-center gap-1.5 bg-white hover:bg-red-50 text-red-600 border border-red-200 text-sm font-medium px-4 py-2 rounded-lg transition-colors disabled:opacity-50"
-                        >
-                          <XCircle className="w-3.5 h-3.5" />
-                          Reject
-                        </button>
-                      )}
-                      {claim.status !== 'pending' && (
-                        <button
-                          onClick={() => updateStatus(claim.id, 'pending')}
-                          disabled={updating === claim.id}
-                          className="text-xs text-slate-400 hover:text-slate-600 underline"
-                        >
-                          Reset
-                        </button>
+                    <div className="flex flex-col items-end gap-2 flex-shrink-0">
+                      <div className="flex items-center gap-2">
+                        {needsCity && claim.status !== 'approved' && (
+                          <select
+                            value={cityChoice[claim.id] || ''}
+                            onChange={(e) =>
+                              setCityChoice((prev) => ({ ...prev, [claim.id]: e.target.value }))
+                            }
+                            className="text-sm border border-slate-300 rounded-lg px-2 py-2 bg-white text-slate-700"
+                          >
+                            <option value="">New listing — select city…</option>
+                            {cities.map((c) => (
+                              <option key={c.slug} value={c.slug}>{c.name}</option>
+                            ))}
+                          </select>
+                        )}
+                        {claim.status !== 'approved' && (
+                          <button
+                            onClick={() => updateStatus(claim.id, 'approved', cityChoice[claim.id])}
+                            disabled={updating === claim.id || (needsCity && !cityChoice[claim.id])}
+                            className="inline-flex items-center gap-1.5 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors disabled:opacity-50"
+                          >
+                            <CheckCircle2 className="w-3.5 h-3.5" />
+                            Approve
+                          </button>
+                        )}
+                        {claim.status !== 'rejected' && (
+                          <button
+                            onClick={() => updateStatus(claim.id, 'rejected')}
+                            disabled={updating === claim.id}
+                            className="inline-flex items-center gap-1.5 bg-white hover:bg-red-50 text-red-600 border border-red-200 text-sm font-medium px-4 py-2 rounded-lg transition-colors disabled:opacity-50"
+                          >
+                            <XCircle className="w-3.5 h-3.5" />
+                            Reject
+                          </button>
+                        )}
+                        {claim.status !== 'pending' && (
+                          <button
+                            onClick={() => updateStatus(claim.id, 'pending')}
+                            disabled={updating === claim.id}
+                            className="text-xs text-slate-400 hover:text-slate-600 underline"
+                          >
+                            Reset
+                          </button>
+                        )}
+                      </div>
+                      {approveError[claim.id] && (
+                        <p className="text-xs text-red-600 max-w-[220px] text-right">{approveError[claim.id]}</p>
                       )}
                     </div>
                   </div>

@@ -5,6 +5,8 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { computeCompleteness, scoreColor, scoreLabel } from '@/lib/completeness'
 import { formatAddressLine } from '@/lib/sanitize'
+import { ResendVerificationButton } from '@/components/dashboard/ResendVerificationButton'
+import { PlanCard } from '@/components/dashboard/PlanCard'
 import {
   CheckCircle2, Clock, AlertCircle, ExternalLink,
   Pencil, Camera, ListChecks, PoundSterling, FileText, ArrowRight, Mail, Eye,
@@ -113,12 +115,7 @@ export default async function DashboardPage({ params, searchParams }: DashboardP
                 We sent a verification link to your inbox. Click it to confirm ownership and unlock full dashboard access.
               </p>
             </div>
-            <a
-              href={`mailto:hello@softplaynearme.co.uk?subject=Resend%20verification%20for%20${encodeURIComponent(claim.venue_name || '')}`}
-              className="flex-shrink-0 text-xs text-blue-600 hover:text-blue-800 underline whitespace-nowrap"
-            >
-              Resend email
-            </a>
+            <ResendVerificationButton token={token} />
           </div>
         )}
 
@@ -142,6 +139,16 @@ export default async function DashboardPage({ params, searchParams }: DashboardP
               Claim approved — you have full control of this listing.
             </p>
           </div>
+        )}
+
+        {/* Plan card — only once the venue exists to have a plan on it */}
+        {venue && (
+          <PlanCard
+            token={token}
+            venueId={venue.id}
+            plan={venue.plan || 'free'}
+            planStatus={venue.plan_status || 'inactive'}
+          />
         )}
 
         {/* Completeness card */}
