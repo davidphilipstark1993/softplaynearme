@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input'
 import { Search, MapPin, Loader2 } from 'lucide-react'
 import { isValidUKPostcode, RADIUS_OPTIONS } from '@/lib/geo'
 import { cn } from '@/lib/utils'
-import { cities } from '@/lib/venues'
+import { citiesBasic as cities } from '@/lib/cityBasics'
 import { getStaticTowns } from '@/lib/staticTowns'
 
 // Build autocomplete list from cities config + static towns
@@ -198,12 +198,14 @@ export function SearchForm({
   const suggestionsList = showSuggestions && suggestions.length > 0 ? (
     <ul
       ref={suggestionsRef}
+      id="search-suggestions-listbox"
       className="absolute z-50 top-full left-0 right-0 mt-1 bg-white border border-slate-200 rounded-lg shadow-lg overflow-hidden"
       role="listbox"
     >
       {suggestions.map((item, i) => (
         <li
           key={item.slug}
+          id={`search-suggestion-${item.slug}`}
           role="option"
           aria-selected={i === selectedIndex}
           className={cn(
@@ -262,8 +264,15 @@ export function SearchForm({
             onKeyDown={handleKeyDown}
             className={cn('pl-11 h-12 text-base', readableInputClasses)}
             aria-label="Search by postcode or city"
+            role="combobox"
             aria-expanded={showSuggestions}
             aria-autocomplete="list"
+            aria-controls="search-suggestions-listbox"
+            aria-activedescendant={
+              showSuggestions && selectedIndex >= 0 && suggestions[selectedIndex]
+                ? `search-suggestion-${suggestions[selectedIndex].slug}`
+                : undefined
+            }
             autoComplete="off"
           />
           {suggestionsList}
@@ -275,6 +284,7 @@ export function SearchForm({
           variant="outline"
           onClick={handleGeolocation}
           disabled={isLocating}
+          aria-label={isLocating ? 'Locating...' : 'Use my location'}
           className="h-12 whitespace-nowrap text-slate-900 border-slate-300"
         >
           {isLocating ? (
@@ -288,7 +298,7 @@ export function SearchForm({
         </Button>
 
         {/* Search button */}
-        <Button type="submit" size="lg" className="h-12 bg-slate-100 text-slate-900 hover:bg-slate-200">
+        <Button type="submit" size="lg" aria-label="Search" className="h-12 bg-slate-100 text-slate-900 hover:bg-slate-200">
           <Search className="h-4 w-4 sm:mr-2" />
           <span className="hidden sm:inline">Search</span>
         </Button>

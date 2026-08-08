@@ -1,0 +1,192 @@
+[
+  {
+    "slug": "london",
+    "name": "London",
+    "county": "Greater London"
+  },
+  {
+    "slug": "hull",
+    "name": "Hull",
+    "county": "East Yorkshire"
+  },
+  {
+    "slug": "beverley",
+    "name": "Beverley",
+    "county": "East Yorkshire"
+  },
+  {
+    "slug": "york",
+    "name": "York",
+    "county": "North Yorkshire"
+  },
+  {
+    "slug": "leeds",
+    "name": "Leeds",
+    "county": "West Yorkshire"
+  },
+  {
+    "slug": "sheffield",
+    "name": "Sheffield",
+    "county": "South Yorkshire"
+  },
+  {
+    "slug": "bridlington",
+    "name": "Bridlington",
+    "county": "East Yorkshire"
+  },
+  {
+    "slug": "brighton",
+    "name": "Brighton",
+    "county": "East Sussex"
+  },
+  {
+    "slug": "bournemouth",
+    "name": "Bournemouth",
+    "county": "Dorset"
+  },
+  {
+    "slug": "norwich",
+    "name": "Norwich",
+    "county": "Norfolk"
+  },
+  {
+    "slug": "colchester",
+    "name": "Colchester",
+    "county": "Essex"
+  },
+  {
+    "slug": "huddersfield",
+    "name": "Huddersfield",
+    "county": "West Yorkshire"
+  },
+  {
+    "slug": "manchester",
+    "name": "Manchester",
+    "county": "Greater Manchester"
+  },
+  {
+    "slug": "birmingham",
+    "name": "Birmingham",
+    "county": "West Midlands"
+  },
+  {
+    "slug": "liverpool",
+    "name": "Liverpool",
+    "county": "Merseyside"
+  },
+  {
+    "slug": "nottingham",
+    "name": "Nottingham",
+    "county": "Nottinghamshire"
+  },
+  {
+    "slug": "bristol",
+    "name": "Bristol",
+    "county": "Bristol"
+  },
+  {
+    "slug": "newcastle",
+    "name": "Newcastle",
+    "county": "Tyne and Wear"
+  },
+  {
+    "slug": "cardiff",
+    "name": "Cardiff",
+    "county": "Cardiff"
+  },
+  {
+    "slug": "edinburgh",
+    "name": "Edinburgh",
+    "county": "City of Edinburgh"
+  },
+  {
+    "slug": "glasgow",
+    "name": "Glasgow",
+    "county": "City of Glasgow"
+  },
+  {
+    "slug": "leicester",
+    "name": "Leicester",
+    "county": "Leicestershire"
+  },
+  {
+    "slug": "portsmouth",
+    "name": "Portsmouth",
+    "county": "Hampshire"
+  },
+  {
+    "slug": "swansea",
+    "name": "Swansea",
+    "county": "Swansea"
+  },
+  {
+    "slug": "sunderland",
+    "name": "Sunderland",
+    "county": "Tyne and Wear"
+  },
+  {
+    "slug": "stoke",
+    "name": "Stoke-on-Trent",
+    "county": "Staffordshire"
+  },
+  {
+    "slug": "blackpool",
+    "name": "Blackpool",
+    "county": "Lancashire"
+  },
+  {
+    "slug": "ipswich",
+    "name": "Ipswich",
+    "county": "Suffolk"
+  },
+  {
+    "slug": "lincoln",
+    "name": "Lincoln",
+    "county": "Lincolnshire"
+  },
+  {
+    "slug": "doncaster",
+    "name": "Doncaster",
+    "county": "South Yorkshire"
+  },
+  {
+    "slug": "southend",
+    "name": "Southend-on-Sea",
+    "county": "Essex"
+  },
+  {
+    "slug": "hastings",
+    "name": "Hastings",
+    "county": "East Sussex"
+  },
+  {
+    "slug": "aberdeen",
+    "name": "Aberdeen",
+    "county": "Aberdeenshire"
+  },
+  {
+    "slug": "inverness",
+    "name": "Inverness",
+    "county": "Highland"
+  },
+  {
+    "slug": "barnsley",
+    "name": "Barnsley",
+    "county": "South Yorkshire"
+  },
+  {
+    "slug": "bolton",
+    "name": "Bolton",
+    "county": "Greater Manchester"
+  },
+  {
+    "slug": "bradford",
+    "name": "Bradford",
+    "county": "West Yorkshire"
+  },
+  {
+    "slug": "halifax",
+    "name": "Halifax",
+    "county": "West Yorkshire"
+  }
+]
