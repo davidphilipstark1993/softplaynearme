@@ -20,7 +20,8 @@ export async function GET(req: NextRequest) {
     client = await getPool().connect()
     const result = await client.query(
       `SELECT id, name, email, venue_name, venue_address, venue_phone, venue_website,
-              city_slug, venue_slug, status, email_verified, created_at
+              city_slug, venue_slug, status, email_verified, created_at,
+              plan_interest, message
        FROM venue_claims
        ORDER BY
          CASE status WHEN 'pending' THEN 0 WHEN 'approved' THEN 1 ELSE 2 END,
@@ -51,7 +52,8 @@ export async function PATCH(req: NextRequest) {
 
     if (status === 'approved') {
       const claimResult = await client.query(
-        `SELECT venue_name, venue_address, venue_phone, venue_website, city_slug, venue_slug
+        `SELECT venue_name, venue_address, venue_phone, venue_website, city_slug, venue_slug,
+                plan_interest, stripe_customer_id, stripe_subscription_id
          FROM venue_claims WHERE id = $1 LIMIT 1`,
         [id]
       )
@@ -59,6 +61,12 @@ export async function PATCH(req: NextRequest) {
         return NextResponse.json({ error: 'Claim not found' }, { status: 404 })
       }
       const claim = claimResult.rows[0]
+      // Only a claim whose Direct Debit subscription is actually confirmed
+      // (the webhook sets stripe_subscription_id once Stripe Checkout
+      // completes) counts as a paid Premium sign-up here — someone who
+      // abandoned the Stripe page mid-flow gets approved as a normal free
+      // listing instead.
+      const isPaidPremium = claim.plan_interest === 'premium' && !!claim.stripe_subscription_id
 
       // Creates a `venues` row for this claim and points the claim's
       // city_slug/venue_slug at it. Used both for genuinely-new listings
@@ -80,8 +88,10 @@ export async function PATCH(req: NextRequest) {
 
         await client!.query(
           `INSERT INTO venues
-             (name, slug, city_slug, address, phone, website, owner_submitted, claimed_by_owner, needs_review)
-           VALUES ($1,$2,$3,$4,$5,$6, true, true, true)`,
+             (name, slug, city_slug, address, phone, website, owner_submitted, claimed_by_owner, needs_review,
+              plan, plan_status, plan_started_at, stripe_customer_id, stripe_subscription_id)
+           VALUES ($1,$2,$3,$4,$5,$6, true, true, true,
+                   $7, $8, $9, $10, $11)`,
           [
             claim.venue_name,
             slug,
@@ -89,6 +99,11 @@ export async function PATCH(req: NextRequest) {
             claim.venue_address || null,
             claim.venue_phone || null,
             claim.venue_website || null,
+            isPaidPremium ? 'premium' : 'free',
+            isPaidPremium ? 'active' : 'inactive',
+            isPaidPremium ? new Date() : null,
+            isPaidPremium ? claim.stripe_customer_id : null,
+            isPaidPremium ? claim.stripe_subscription_id : null,
           ]
         )
 
@@ -99,10 +114,18 @@ export async function PATCH(req: NextRequest) {
       }
 
       if (claim.city_slug && claim.venue_slug) {
-        // Claiming an existing venue already in the directory — mark it owner-claimed.
+        // Claiming an existing venue already in the directory — mark it owner-claimed,
+        // carrying over the Premium plan if the Direct Debit mandate already came through.
         const updateResult = await client.query(
-          `UPDATE venues SET claimed_by_owner = true WHERE city_slug = $1 AND slug = $2`,
-          [claim.city_slug, claim.venue_slug]
+          isPaidPremium
+            ? `UPDATE venues SET claimed_by_owner = true, plan = 'premium', plan_status = 'active',
+                 plan_started_at = COALESCE(plan_started_at, CURRENT_TIMESTAMP),
+                 stripe_customer_id = $3, stripe_subscription_id = $4
+               WHERE city_slug = $1 AND slug = $2`
+            : `UPDATE venues SET claimed_by_owner = true WHERE city_slug = $1 AND slug = $2`,
+          isPaidPremium
+            ? [claim.city_slug, claim.venue_slug, claim.stripe_customer_id, claim.stripe_subscription_id]
+            : [claim.city_slug, claim.venue_slug]
         )
         if (updateResult.rowCount === 0) {
           // Orphaned claim: slugs were set (e.g. from a static/un-imported

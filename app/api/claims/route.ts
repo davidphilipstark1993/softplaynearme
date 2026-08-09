@@ -16,11 +16,15 @@ export async function POST(request: NextRequest) {
       citySlug,
       venueSlug,
       venueUrl,
+      planInterest,
+      message,
     } = body || {}
 
     if (!name?.trim() || !email?.trim() || !venueName?.trim()) {
       return NextResponse.json({ error: 'Name, email, and venue name are required' }, { status: 400 })
     }
+
+    const isBespoke = planInterest === 'bespoke'
 
     client = await getPool().connect()
 
@@ -52,6 +56,7 @@ export async function POST(request: NextRequest) {
       `ALTER TABLE venue_claims ADD COLUMN IF NOT EXISTS access_token UUID UNIQUE DEFAULT gen_random_uuid()`,
       `ALTER TABLE venue_claims ADD COLUMN IF NOT EXISTS verification_token UUID UNIQUE DEFAULT gen_random_uuid()`,
       `ALTER TABLE venue_claims ADD COLUMN IF NOT EXISTS email_verified BOOLEAN DEFAULT FALSE`,
+      `ALTER TABLE venue_claims ADD COLUMN IF NOT EXISTS plan_interest VARCHAR(20) DEFAULT 'free'`,
     ]
 
     for (const sql of schemaSql) {
@@ -63,8 +68,8 @@ export async function POST(request: NextRequest) {
     const result = await client.query(
       `INSERT INTO venue_claims
          (name, email, venue_name, venue_address, venue_phone, venue_website,
-          city_slug, venue_slug, venue_url, proof, message)
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)
+          city_slug, venue_slug, venue_url, proof, message, plan_interest)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)
        RETURNING access_token,
                  COALESCE(verification_token::text, '') AS verification_token`,
       [
@@ -78,7 +83,8 @@ export async function POST(request: NextRequest) {
         venueSlug?.trim() || null,
         venueUrl?.trim() || null,
         '',
-        '',
+        message?.trim() || '',
+        isBespoke ? 'bespoke' : 'free',
       ]
     )
 
@@ -102,10 +108,12 @@ export async function POST(request: NextRequest) {
       venueSlug: venueSlug?.trim() || undefined,
     }
     const emailResults = await Promise.allSettled([
-      sendWelcomeEmail(emailOpts),
-      verificationToken
-        ? sendVerificationEmail({ ...emailOpts, verificationToken })
-        : Promise.resolve(),
+      // Bespoke enquiries aren't a free-listing claim, so skip the
+      // "your listing is ready" welcome/verification emails for them.
+      isBespoke ? Promise.resolve() : sendWelcomeEmail(emailOpts),
+      isBespoke || !verificationToken
+        ? Promise.resolve()
+        : sendVerificationEmail({ ...emailOpts, verificationToken }),
       sendAdminClaimNotification({
         claimantName: name.trim(),
         claimantEmail: email.trim(),
@@ -115,6 +123,8 @@ export async function POST(request: NextRequest) {
         venueWebsite: venueWebsite?.trim() || undefined,
         citySlug: citySlug?.trim() || undefined,
         venueSlug: venueSlug?.trim() || undefined,
+        planInterest: isBespoke ? 'bespoke' : 'free',
+        message: message?.trim() || undefined,
       }),
     ])
     const emailLabels = ['welcome email', 'verification email', 'admin notification']

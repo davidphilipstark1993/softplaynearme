@@ -120,6 +120,8 @@ export interface AdminClaimNotificationOptions {
   citySlug?: string
   venueSlug?: string
   claimId?: number
+  planInterest?: 'free' | 'premium' | 'bespoke'
+  message?: string
 }
 
 export async function sendAdminClaimNotification(opts: AdminClaimNotificationOptions): Promise<void> {
@@ -128,14 +130,19 @@ export async function sendAdminClaimNotification(opts: AdminClaimNotificationOpt
     opts.citySlug && opts.venueSlug
       ? `${BASE_URL}/soft-play/${opts.citySlug}/${opts.venueSlug}`
       : null
+  const isBespoke = opts.planInterest === 'bespoke'
+  const isPremium = opts.planInterest === 'premium'
 
   const rows = [
     ['Claimant', `${opts.claimantName} &lt;${opts.claimantEmail}&gt;`],
     ['Venue', opts.venueName],
+    ...(isBespoke ? [['Plan interest', 'Bespoke']] : []),
+    ...(isPremium ? [['Plan interest', 'Premium — Direct Debit in progress']] : []),
     ...(opts.venueAddress ? [['Address', opts.venueAddress]] : []),
     ...(opts.venuePhone ? [['Phone', opts.venuePhone]] : []),
     ...(opts.venueWebsite ? [['Website', opts.venueWebsite]] : []),
     ...(venueUrl ? [['Listing', `<a href="${venueUrl}" style="color:#7c3aed">${venueUrl}</a>`]] : []),
+    ...(opts.message ? [['Details', opts.message.replace(/\n/g, '<br>')]] : []),
   ] as [string, string][]
 
   const html = `<!DOCTYPE html>
@@ -145,15 +152,15 @@ export async function sendAdminClaimNotification(opts: AdminClaimNotificationOpt
 <div style="max-width:520px;margin:0 auto;padding:32px 16px">
 
   <div style="background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);border-radius:16px;padding:28px 28px;text-align:center;margin-bottom:20px">
-    <div style="font-size:32px;margin-bottom:10px">&#x1F4CB;</div>
-    <h1 style="color:#fff;margin:0 0 6px;font-size:18px;font-weight:700">New Venue Claim</h1>
-    <p style="color:rgba(255,255,255,0.7);margin:0;font-size:13px">Someone just claimed a venue on Soft Play Near Me</p>
+    <div style="font-size:32px;margin-bottom:10px">${isBespoke ? '&#x1F4B0;' : isPremium ? '&#x2728;' : '&#x1F4CB;'}</div>
+    <h1 style="color:#fff;margin:0 0 6px;font-size:18px;font-weight:700">${isBespoke ? 'New Bespoke Enquiry' : isPremium ? 'Premium Sign-up Started' : 'New Venue Claim'}</h1>
+    <p style="color:rgba(255,255,255,0.7);margin:0;font-size:13px">${isBespoke ? 'Someone wants a Bespoke plan quote' : isPremium ? 'Someone started Direct Debit set-up for Premium' : 'Someone just claimed a venue on Soft Play Near Me'}</p>
   </div>
 
   <div style="background:#fff;border-radius:12px;padding:24px;border:1px solid #e2e8f0;margin-bottom:16px">
     ${rows.map(([label, value]) => `
     <div style="display:flex;gap:16px;padding:10px 0;border-bottom:1px solid #f1f5f9">
-      <span style="font-size:13px;color:#64748b;font-weight:500;width:80px;flex-shrink:0">${label}</span>
+      <span style="font-size:13px;color:#64748b;font-weight:500;width:90px;flex-shrink:0">${label}</span>
       <span style="font-size:13px;color:#1e293b;flex:1">${value}</span>
     </div>`).join('')}
   </div>
@@ -169,9 +176,49 @@ export async function sendAdminClaimNotification(opts: AdminClaimNotificationOpt
 
   await sendEmail(
     'david@softplaynearme.co.uk',
-    `New claim: ${opts.venueName} from ${opts.claimantName}`,
+    `${isBespoke ? 'Bespoke enquiry' : isPremium ? 'Premium sign-up started' : 'New claim'}: ${opts.venueName} from ${opts.claimantName}`,
     html
   )
+}
+
+// ─── Premium subscription activated ────────────────────────────────────────────
+
+export interface PremiumActivatedEmailOptions {
+  to: string
+  ownerName: string
+  venueName: string
+  dashboardUrl: string
+}
+
+export async function sendPremiumActivatedEmail(opts: PremiumActivatedEmailOptions): Promise<void> {
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#f8fafc;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#1e293b">
+<div style="max-width:520px;margin:0 auto;padding:32px 16px">
+
+  <div style="background:linear-gradient(135deg,#7c3aed 0%,#db2777 100%);border-radius:16px;padding:28px 28px;text-align:center;margin-bottom:20px">
+    <div style="font-size:32px;margin-bottom:10px">&#x2728;</div>
+    <h1 style="color:#fff;margin:0 0 6px;font-size:18px;font-weight:700">You&#x27;re on Premium!</h1>
+    <p style="color:rgba(255,255,255,0.85);margin:0;font-size:13px">Your Direct Debit is set up and ${opts.venueName} is now a Verified venue</p>
+  </div>
+
+  <div style="background:#fff;border-radius:12px;padding:24px;border:1px solid #e2e8f0;margin-bottom:16px">
+    <p style="font-size:14px;color:#334155;margin:0 0 12px">Hi ${opts.ownerName},</p>
+    <p style="font-size:14px;color:#334155;margin:0 0 12px">Your Premium subscription for <strong>${opts.venueName}</strong> is now active — &pound;24.99/month by Direct Debit. You&#x27;ll see the Verified badge, featured placement, and lead notifications live on your listing already.</p>
+    <p style="font-size:14px;color:#334155;margin:0">You&#x27;re covered by the Direct Debit Guarantee, and you can cancel any time from your dashboard.</p>
+  </div>
+
+  <a href="${opts.dashboardUrl}" style="display:block;background:#7c3aed;color:#fff;text-decoration:none;padding:14px 24px;border-radius:9px;font-weight:600;font-size:14px;text-align:center;margin-bottom:16px">
+    Open My Dashboard &#x2192;
+  </a>
+
+  <p style="font-size:11px;color:#cbd5e1;text-align:center;margin:0">Soft Play Near Me &#xB7; Premium confirmation</p>
+</div>
+</body>
+</html>`
+
+  await sendEmail(opts.to, `Your ${opts.venueName} Premium subscription is active`, html)
 }
 
 // ─── Lead notification (Premium/Bespoke venues only) ──────────────────────────

@@ -96,9 +96,10 @@ export default function PricingPage() {
               <h2 className="font-bold text-lg text-slate-900">Premium</h2>
             </div>
             <p className="text-3xl font-bold text-slate-900 mb-1">£24.99<span className="text-base font-normal text-slate-400">/mo</span></p>
-            <p className="text-sm text-slate-500 mb-5">or £249/year</p>
+            <p className="text-sm text-slate-500 mb-1">or £249/year</p>
+            <p className="text-xs text-slate-400 mb-4">Monthly is a rolling contract — cancel any time, no fixed term</p>
             <Link
-              href="/add-venue"
+              href="/premium"
               className="block text-center bg-purple-600 hover:bg-purple-700 text-white text-sm font-semibold px-4 py-2.5 rounded-lg transition-colors"
             >
               Claim your venue to upgrade
@@ -112,12 +113,12 @@ export default function PricingPage() {
             </div>
             <p className="text-3xl font-bold text-slate-900 mb-1">From £59<span className="text-base font-normal text-slate-400">/mo</span></p>
             <p className="text-sm text-slate-500 mb-5">custom quote</p>
-            <a
-              href="mailto:david@softplaynearme.co.uk?subject=Bespoke%20plan%20enquiry"
+            <Link
+              href="/pricing/bespoke"
               className="block text-center bg-amber-600 hover:bg-amber-700 text-white text-sm font-semibold px-4 py-2.5 rounded-lg transition-colors"
             >
               Get a quote
-            </a>
+            </Link>
           </div>
         </div>
 

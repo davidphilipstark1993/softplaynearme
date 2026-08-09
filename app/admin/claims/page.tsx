@@ -18,6 +18,8 @@ interface Claim {
   status: 'pending' | 'approved' | 'rejected'
   email_verified: boolean
   created_at: string
+  plan_interest: 'free' | 'bespoke' | null
+  message: string | null
 }
 
 const STATUS_STYLES = {
@@ -197,6 +199,11 @@ export default function AdminClaimsPage() {
                             <CheckCircle2 className="w-3 h-3" /> Email verified
                           </span>
                         )}
+                        {claim.plan_interest === 'bespoke' && (
+                          <span className="inline-flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200">
+                            Bespoke enquiry
+                          </span>
+                        )}
                       </div>
 
                       <p className="text-sm text-slate-600">
@@ -214,6 +221,12 @@ export default function AdminClaimsPage() {
                         )}
                         <span>Submitted {date}</span>
                       </div>
+
+                      {claim.message && (
+                        <div className="mt-2 text-xs text-slate-600 bg-amber-50 border border-amber-100 rounded-lg px-3 py-2 whitespace-pre-line">
+                          {claim.message}
+                        </div>
+                      )}
 
                       {venueUrl && (
                         <a
