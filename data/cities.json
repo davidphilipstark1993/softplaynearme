@@ -1324,5 +1324,73 @@
         "answer": "Weekday mornings are quietest. School holidays follow the West Yorkshire calendar. Weekends are peak periods — book ahead for popular venues."
       }
     ]
+  },
+  {
+    "slug": "crewe",
+    "name": "Crewe",
+    "county": "Cheshire",
+    "region": "North West",
+    "metaTitle": "Soft Play in Crewe",
+    "metaDescription": "Find soft play centres in Crewe and Cheshire East. Compare indoor play venues, opening times, and family-friendly facilities.",
+    "h1": "Soft Play Centres in Crewe",
+    "intro": "Explore soft play centres in Crewe for rainy days, toddler sessions, and family fun across Cheshire East.",
+    "nearbyAreas": ["Nantwich", "Sandbach", "Stoke-on-Trent", "Alsager", "Middlewich"],
+    "faqs": [
+      {
+        "question": "Are there good soft play centres in Crewe?",
+        "answer": "Yes, Crewe has soft play options ranging from toddler-friendly spaces to larger centres with party facilities, with more nearby in Nantwich and Sandbach."
+      }
+    ]
+  },
+  {
+    "slug": "worthing",
+    "name": "Worthing",
+    "county": "West Sussex",
+    "region": "South East",
+    "metaTitle": "Soft Play in Worthing",
+    "metaDescription": "Find soft play centres in Worthing and West Sussex. Compare indoor play venues, opening times, and family-friendly facilities.",
+    "h1": "Soft Play Centres in Worthing",
+    "intro": "Explore soft play centres in Worthing for rainy days, toddler sessions, and family fun across West Sussex.",
+    "nearbyAreas": ["Brighton", "Lancing", "Shoreham-by-Sea", "Littlehampton", "Chichester"],
+    "faqs": [
+      {
+        "question": "Are there good soft play centres in Worthing?",
+        "answer": "Yes, Worthing has a range of indoor play options from toddler-friendly spaces to larger centres with party facilities, with more nearby in Lancing and Brighton."
+      }
+    ]
+  },
+  {
+    "slug": "mossley",
+    "name": "Mossley",
+    "county": "Greater Manchester",
+    "region": "North West",
+    "metaTitle": "Soft Play in Mossley",
+    "metaDescription": "Find soft play centres in Mossley and Tameside. Compare indoor play venues, opening times, and family-friendly facilities.",
+    "h1": "Soft Play Centres in Mossley",
+    "intro": "Explore soft play centres in Mossley for rainy days, toddler sessions, and family fun across Tameside and Greater Manchester.",
+    "nearbyAreas": ["Ashton-under-Lyne", "Stalybridge", "Oldham", "Manchester", "Huddersfield"],
+    "faqs": [
+      {
+        "question": "Are there good soft play centres in Mossley?",
+        "answer": "Yes, Mossley has soft play options with more nearby in Ashton-under-Lyne and across Tameside."
+      }
+    ]
+  },
+  {
+    "slug": "llanelli",
+    "name": "Llanelli",
+    "county": "Carmarthenshire",
+    "region": "Wales",
+    "metaTitle": "Soft Play in Llanelli",
+    "metaDescription": "Find soft play centres in Llanelli and Carmarthenshire. Compare indoor play venues, opening times, and family-friendly facilities.",
+    "h1": "Soft Play Centres in Llanelli",
+    "intro": "Explore soft play centres in Llanelli for rainy days, toddler sessions, and family fun across Carmarthenshire.",
+    "nearbyAreas": ["Swansea", "Carmarthen", "Ammanford", "Burry Port", "Kidwelly"],
+    "faqs": [
+      {
+        "question": "Are there good soft play centres in Llanelli?",
+        "answer": "Yes, Llanelli has soft play options with more nearby in Swansea and across Carmarthenshire."
+      }
+    ]
   }
 ]

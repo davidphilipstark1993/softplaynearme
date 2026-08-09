@@ -188,5 +188,25 @@
     "slug": "halifax",
     "name": "Halifax",
     "county": "West Yorkshire"
+  },
+  {
+    "slug": "crewe",
+    "name": "Crewe",
+    "county": "Cheshire"
+  },
+  {
+    "slug": "worthing",
+    "name": "Worthing",
+    "county": "West Sussex"
+  },
+  {
+    "slug": "mossley",
+    "name": "Mossley",
+    "county": "Greater Manchester"
+  },
+  {
+    "slug": "llanelli",
+    "name": "Llanelli",
+    "county": "Carmarthenshire"
   }
 ]
