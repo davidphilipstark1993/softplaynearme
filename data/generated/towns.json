@@ -68,7 +68,7 @@
   {
     "name": "Colchester",
     "slug": "colchester",
-    "venueCount": 28,
+    "venueCount": 27,
     "avgRating": "4.3"
   },
   {
@@ -80,7 +80,7 @@
   {
     "name": "Edinburgh",
     "slug": "edinburgh",
-    "venueCount": 17,
+    "venueCount": 18,
     "avgRating": "4.3"
   },
   {
@@ -98,7 +98,7 @@
   {
     "name": "Hastings",
     "slug": "hastings",
-    "venueCount": 29,
+    "venueCount": 30,
     "avgRating": "4.4"
   },
   {
@@ -164,7 +164,7 @@
   {
     "name": "Newcastle",
     "slug": "newcastle",
-    "venueCount": 38,
+    "venueCount": 37,
     "avgRating": "4.3"
   },
   {
@@ -200,7 +200,7 @@
   {
     "name": "Southend",
     "slug": "southend",
-    "venueCount": 24,
+    "venueCount": 25,
     "avgRating": "4.3"
   },
   {
@@ -212,7 +212,7 @@
   {
     "name": "Sunderland",
     "slug": "sunderland",
-    "venueCount": 15,
+    "venueCount": 16,
     "avgRating": "4.4"
   },
   {
