@@ -53,7 +53,8 @@ const SKIP_EXISTING  = args['skip-existing'] === 'true'
 // ── Email priority ─────────────────────────────────────────────────────────────
 // Matched left-to-right; first match wins.
 const PRIORITY_PREFIXES = ['info', 'bookings', 'booking', 'contact', 'hello', 'enquiries', 'enquiry']
-const JUNK_DOMAINS   = ['example.com', 'domain.com', 'wixpress.com', 'sentry.io', 'w3.org',
+const JUNK_DOMAINS   = ['example.com', 'domain.com', 'website.com', 'yourdomain.com', 'yoursite.com',
+                        'wixpress.com', 'sentry.io', 'w3.org',
                         'schema.org', 'google.com', 'apple.com', 'facebook.com', 'instagram.com']
 const JUNK_PREFIXES  = ['noreply', 'no-reply', 'donotreply', 'support@', 'admin@wordpress', 'postmaster']
 

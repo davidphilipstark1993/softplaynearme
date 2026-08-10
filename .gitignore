@@ -29,3 +29,6 @@ yarn-error.log*
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
+
+# Scraped venue contact emails — business data, not for public repo
+contacts/
