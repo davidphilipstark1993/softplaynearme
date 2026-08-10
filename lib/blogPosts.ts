@@ -790,7 +790,6 @@ export const posts: BlogPost[] = [
   },
   {
     slug: 'best-soft-play-in-london',
-    noindex: true,
     title: 'Best Soft Play in London (2026 Parent Guide)',
     city: 'London',
     excerpt:
@@ -816,6 +815,18 @@ export const posts: BlogPost[] = [
   <li>Great rainy day entertainment</li>
 </ul>
 
+<h2>Popular areas for soft play in London</h2>
+<p>London is too big to treat as one big list — where you look usually depends on which side of the city you're on. Browse venues by area:</p>
+<ul>
+  <li><a href="/soft-play/london?area=north-london">Soft play in North London</a></li>
+  <li><a href="/soft-play/london?area=north-west-london">Soft play in North West London</a></li>
+  <li><a href="/soft-play/london?area=east-london">Soft play in East London</a></li>
+  <li><a href="/soft-play/london?area=south-east-london">Soft play in South East London</a></li>
+  <li><a href="/soft-play/london?area=south-west-london">Soft play in South West London</a></li>
+  <li><a href="/soft-play/london?area=west-london">Soft play in West London</a></li>
+  <li><a href="/soft-play/london?area=central-london">Soft play in Central London</a></li>
+</ul>
+
 <h2>Best soft play in London: what to look for</h2>
 <p>When choosing the <strong>best soft play in London</strong>, look for:</p>
 <ul>
@@ -826,7 +837,7 @@ export const posts: BlogPost[] = [
   <li><strong>Party availability</strong> if you're planning a celebration</li>
   <li><strong>Quiet/SEN sessions</strong> for calmer play</li>
 </ul>
-<p>Start exploring: <a href="/soft-play/london">/london</a> • Toddlers: <a href="/soft-play/london/toddler">/london?filter=toddler</a></p>
+<p>Start exploring: <a href="/soft-play/london">all soft play venues in London</a> • Toddlers: <a href="/soft-play/london/toddler">toddler-friendly venues</a></p>
 
 <h2>Toddler soft play in London (1–3 years)</h2>
 <p>If you're searching for <strong>toddler soft play London</strong>, prioritise venues with dedicated under-3 zones. These areas usually include mini slides, soft tunnels, ball pits, role-play corners and sensory features. Weekday mornings are often the quietest time for toddlers.</p>
@@ -837,7 +848,7 @@ export const posts: BlogPost[] = [
   <li>Role-play corners</li>
   <li>Calmer weekday sessions</li>
 </ul>
-<p>Browse toddler-friendly venues: <a href="/soft-play/london/toddler">/london?filter=toddler</a></p>
+<p>Browse toddler-friendly venues: <a href="/soft-play/london/toddler">toddler soft play in London</a></p>
 
 <h2>Baby soft play in London (under 1s)</h2>
 <p>Many London soft play centres run baby sessions designed for crawlers, early walkers, and sensory exploration. Look for padded flooring, low-height equipment, baby-only sessions, and comfortable seating for feeding and breaks.</p>
@@ -856,7 +867,7 @@ export const posts: BlogPost[] = [
   <li>Food and drink packages</li>
   <li>Party hosts and add-ons</li>
 </ul>
-<p>Explore party venues: <a href="/soft-play/london/birthday-parties">/london?filter=parties</a></p>
+<p>Explore party venues: <a href="/soft-play/london/birthday-parties">soft play birthday parties in London</a></p>
 
 <h2>Cheap soft play in London: money-saving tips</h2>
 <p>Looking for <strong>cheap soft play London</strong>? Prices vary across boroughs, but you can save money by visiting off-peak, checking sibling discounts, and using memberships if you go regularly.</p>

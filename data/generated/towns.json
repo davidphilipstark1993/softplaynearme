@@ -74,7 +74,7 @@
   {
     "name": "Crewe",
     "slug": "crewe",
-    "venueCount": 1,
+    "venueCount": 2,
     "avgRating": "4.1"
   },
   {
@@ -158,14 +158,14 @@
   {
     "name": "Llanelli",
     "slug": "llanelli",
-    "venueCount": 1,
+    "venueCount": 2,
     "avgRating": "5.0"
   },
   {
     "name": "London",
     "slug": "london",
-    "venueCount": 22,
-    "avgRating": "4.5"
+    "venueCount": 20,
+    "avgRating": "4.4"
   },
   {
     "name": "Manchester",
@@ -176,7 +176,7 @@
   {
     "name": "Mossley",
     "slug": "mossley",
-    "venueCount": 1,
+    "venueCount": 2,
     "avgRating": "4.7"
   },
   {
@@ -242,13 +242,13 @@
   {
     "name": "Worthing",
     "slug": "worthing",
-    "venueCount": 1,
+    "venueCount": 2,
     "avgRating": "4.9"
   },
   {
     "name": "York",
     "slug": "york",
-    "venueCount": 41,
+    "venueCount": 43,
     "avgRating": "4.4"
   }
 ]

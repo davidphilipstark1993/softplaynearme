@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { getCityBySlug, getAllCitySlugs, getNearbyCities, filters } from '@/lib/venues'
-import { MapPin, Star, Coffee, Car, Baby, PartyPopper, Heart, Phone, Globe, Navigation, TrendingUp, CheckCircle2 } from 'lucide-react'
+import { MapPin, Star, Coffee, Car, Baby, PartyPopper, Heart, Phone, Globe, Navigation, TrendingUp, CheckCircle2, Sparkles, Compass } from 'lucide-react'
 import type { Metadata } from 'next'
 import { getPool, STATIC_BUILD } from '@/lib/pool'
 import { getStaticVenuesByTown, getStaticTownBySlug, getAllStaticTownSlugs, type StaticVenue } from '@/lib/staticVenues'
@@ -24,6 +24,7 @@ import { isSoftPlayVenueType } from '@/lib/venueTypes'
 import { getCardQuote, formatLastVerified } from '@/lib/venueCardText'
 import { isVerified } from '@/lib/plans'
 import { FeaturedImpression } from '@/components/venue/FeaturedImpression'
+import { LONDON_AREAS, getLondonAreaSlug } from '@/lib/londonAreas'
 
 interface PageProps {
   params: Promise<{ city: string }>
@@ -35,6 +36,7 @@ interface PageProps {
     price?: string      // single: under5 | 5to8 | over8
     special?: string    // comma-separated: open-now, wheelchair
     sort?: string
+    area?: string       // London only: north-london, east-london, etc — see lib/londonAreas.ts
   }>
 }
 
@@ -49,11 +51,11 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params, searchParams }: PageProps): Promise<Metadata> {
   const { city } = await params
-  const { filter, search, age, facilities, price, special } = await searchParams
+  const { filter, search, age, facilities, price, special, area } = await searchParams
   const cityConfig = getCityBySlug(city)
 
   // Prevent indexing of filtered / searched variations
-  const noindex = !!(filter || search || age || facilities || price || special)
+  const noindex = !!(filter || search || age || facilities || price || special || area)
 
   if (!cityConfig) {
     const staticTown = getStaticTownBySlug(city)
@@ -165,6 +167,7 @@ interface VenueFilters {
   price?: string
   special?: string[]
   sort?: string
+  area?: string       // London only — see lib/londonAreas.ts
 }
 
 function staticToDisplayVenue(sv: StaticVenue): Venue {
@@ -192,11 +195,19 @@ function staticToDisplayVenue(sv: StaticVenue): Venue {
     price_to: sv.priceTo ?? null,
     isStatic: true,
     last_verified_at: sv.lastVerified || undefined,
+    featured: sv.featured ?? false,
   }
 }
 
 async function getVenues(citySlug: string, opts: VenueFilters = {}): Promise<Venue[]> {
-  const { filter, search, age = [], facilities = [], price = '', special = [], sort = 'rating' } = opts
+  const { filter, search, age = [], facilities = [], price = '', special = [], sort = 'rating', area = '' } = opts
+  // London-only postcode-based area filter — not a DB column, so it's
+  // applied as a post-fetch filter uniformly across both the live-DB and
+  // static-fallback paths below rather than in SQL.
+  const applyAreaFilter = (list: Venue[]): Venue[] =>
+    citySlug === 'london' && area
+      ? list.filter((v) => getLondonAreaSlug(v.postcode) === area)
+      : list
   try {
     const pool = getPool()
     const client = await pool.connect()
@@ -272,6 +283,7 @@ async function getVenues(citySlug: string, opts: VenueFilters = {}): Promise<Ven
         const { isOpenNow } = await import('@/lib/utils')
         venues = venues.filter((v) => isOpenNow(v.opening_hours as Record<string, unknown>))
       }
+      venues = applyAreaFilter(venues)
       if (venues.length > 0) return venues
     } finally {
       client.release()
@@ -317,12 +329,17 @@ async function getVenues(citySlug: string, opts: VenueFilters = {}): Promise<Ven
   if (sort === 'price_low') venues.sort((a, b) => (a.price_from ?? Infinity) - (b.price_from ?? Infinity))
   else if (sort === 'name') venues.sort((a, b) => a.name.localeCompare(b.name))
 
-  return venues
+  // Featured (Premium/Bespoke) venues surface first regardless of sort —
+  // stable sort preserves the ordering above as the secondary key, matching
+  // the `ORDER BY v.featured DESC, ...` behaviour of the live-DB query.
+  venues.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0))
+
+  return applyAreaFilter(venues)
 }
 
 export default async function CityPage({ params, searchParams }: PageProps) {
   const { city } = await params
-  const { filter, search, age: ageParam, facilities: facilitiesParam, price, special: specialParam, sort } = await searchParams
+  const { filter, search, age: ageParam, facilities: facilitiesParam, price, special: specialParam, sort, area } = await searchParams
   const cityConfig = getCityBySlug(city)
   const staticTown = getStaticTownBySlug(city)
 
@@ -338,8 +355,19 @@ export default async function CityPage({ params, searchParams }: PageProps) {
   const facilities = (facilitiesParam || '').split(',').filter(Boolean)
   const special = (specialParam || '').split(',').filter(Boolean)
 
-  const venues = await getVenues(city, { filter, search, age, facilities, price, special, sort })
+  const venues = await getVenues(city, { filter, search, age, facilities, price, special, sort, area })
   const nearbyCities = cityConfig ? getNearbyCities(city) : []
+
+  // Popular-areas counts for London — a second, unfiltered fetch so the area
+  // pills always show true totals regardless of whatever filters are active.
+  const londonAreaCounts: Record<string, number> = {}
+  if (city === 'london') {
+    const allLondonVenues = await getVenues('london', {})
+    for (const v of allLondonVenues) {
+      const slug = getLondonAreaSlug(v.postcode)
+      if (slug) londonAreaCounts[slug] = (londonAreaCounts[slug] || 0) + 1
+    }
+  }
 
   // Use content generator for rich intros and FAQs
   const locationContent = getLocationContent(city, cityConfig, staticTown, venues.length)
@@ -379,9 +407,14 @@ export default async function CityPage({ params, searchParams }: PageProps) {
   // Restricted to genuine soft play venues — trampoline parks, play farms,
   // and other family attractions shouldn't rank in soft-play-specific
   // modules even though they may still appear in the main listing.
-  const hasActiveFilters = !!(filter || search || age.length || facilities.length || price || special.length)
+  const hasActiveFilters = !!(filter || search || age.length || facilities.length || price || special.length || area)
   const showCurated = !hasActiveFilters && venues.length >= 4
   const softPlayVenues = venues.filter(v => isSoftPlayVenueType(v.venue_type))
+  // Featured (Premium/Bespoke) venues get their own spotlight, shown ahead of
+  // the others — a single featured venue is still worth surfacing since it's
+  // a paid placement, unlike the other categories which need a few to look
+  // like a real "best of" grid.
+  const featuredVenues = showCurated ? softPlayVenues.filter(v => v.featured).slice(0, 4) : []
   const toddlerVenues = showCurated ? softPlayVenues.filter(v => v.toddler_area).slice(0, 4) : []
   const topRatedVenues = showCurated
     ? [...softPlayVenues].filter(v => v.avg_rating && Number(v.avg_rating) > 0).sort((a, b) => Number(b.avg_rating || 0) - Number(a.avg_rating || 0)).slice(0, 4)
@@ -414,6 +447,16 @@ export default async function CityPage({ params, searchParams }: PageProps) {
             <p className="text-purple-100 text-lg max-w-3xl">
               Find and compare soft play centres in {displayName}{county ? `, ${county}` : ''}. Browse venues, check facilities, and plan your visit.
             </p>
+          </div>
+        </div>
+
+        {/* Quick facts strip */}
+        <div className="bg-white border-b border-slate-200 py-3 px-4">
+          <div className="max-w-7xl mx-auto flex flex-wrap gap-x-6 gap-y-1 text-sm">
+            <span><strong className="text-slate-900">{venues.length}</strong> <span className="text-slate-500">{venues.length === 1 ? 'venue' : 'venues'} in {displayName}</span></span>
+            {city === 'london' && (
+              <span><strong className="text-slate-900">£7&ndash;£14</strong> <span className="text-slate-500">per child, typical session &mdash; under-1s usually free</span></span>
+            )}
           </div>
         </div>
 
@@ -478,6 +521,33 @@ export default async function CityPage({ params, searchParams }: PageProps) {
           {/* Curated Spotlight Sections */}
           {showCurated && (
             <div className="mb-10 space-y-8">
+              {featuredVenues.length >= 1 && (
+                <section>
+                  <div className="flex items-center gap-2 mb-3">
+                    <Sparkles className="w-5 h-5 text-purple-600" />
+                    <h2 className="text-lg font-semibold text-slate-800">Featured in {displayName}</h2>
+                  </div>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    {featuredVenues.map((venue) => (
+                      <Link key={venue.slug} href={`/soft-play/${city}/${venue.slug}`} className="group block">
+                        <div className="bg-white border-2 border-purple-200 rounded-lg p-4 hover:border-purple-400 hover:shadow-md transition-all h-full flex flex-col">
+                          <span className="inline-flex items-center gap-1 text-xs font-semibold text-purple-700 bg-purple-50 border border-purple-200 rounded-full px-2 py-0.5 mb-2 w-fit">
+                            <Sparkles className="w-3 h-3" /> Featured
+                          </span>
+                          <p className="font-semibold text-sm text-slate-800 group-hover:text-purple-600 line-clamp-2 flex-1">{venue.name}</p>
+                          {venue.avg_rating && Number(venue.avg_rating) > 0 && (
+                            <div className="flex items-center gap-1 mt-2 text-xs text-slate-500">
+                              <Star className="w-3 h-3 text-yellow-400 fill-current" />
+                              <span className="font-medium text-slate-700">{Number(venue.avg_rating).toFixed(1)}</span>
+                            </div>
+                          )}
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </section>
+              )}
+
               {toddlerVenues.length >= 2 && (
                 <section>
                   <div className="flex items-center gap-2 mb-3">
@@ -766,6 +836,36 @@ export default async function CityPage({ params, searchParams }: PageProps) {
               ))}
             </div>
           </section>
+
+          {/* Popular Areas — London only, postcode-derived */}
+          {city === 'london' && (
+            <section aria-labelledby="london-areas-heading" className="mt-12">
+              <div className="flex items-center gap-2 mb-4">
+                <Compass className="w-5 h-5 text-purple-600" />
+                <h2 id="london-areas-heading" className="text-xl font-semibold">Popular Areas in London</h2>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {LONDON_AREAS.map((a) => {
+                  const count = londonAreaCounts[a.slug] || 0
+                  const isActive = area === a.slug
+                  return (
+                    <Link key={a.slug} href={isActive ? `/soft-play/london` : `/soft-play/london?area=${a.slug}`}>
+                      <Badge
+                        variant="outline"
+                        className={
+                          isActive
+                            ? 'bg-purple-600 text-white border-purple-600 cursor-pointer py-1.5 px-3'
+                            : 'hover:bg-purple-50 hover:border-purple-300 cursor-pointer py-1.5 px-3'
+                        }
+                      >
+                        {a.name}{count > 0 && <span className={isActive ? 'text-purple-100' : 'text-slate-400'}> ({count})</span>}
+                      </Badge>
+                    </Link>
+                  )
+                })}
+              </div>
+            </section>
+          )}
 
           {/* Nearby Areas */}
           {(nearbyCities.length > 0 || nearbyAreas.length > 0) && (
