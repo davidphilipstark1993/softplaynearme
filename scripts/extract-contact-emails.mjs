@@ -57,6 +57,11 @@ const JUNK_DOMAINS   = ['example.com', 'domain.com', 'website.com', 'yourdomain.
                         'wixpress.com', 'sentry.io', 'w3.org',
                         'schema.org', 'google.com', 'apple.com', 'facebook.com', 'instagram.com']
 const JUNK_PREFIXES  = ['noreply', 'no-reply', 'donotreply', 'support@', 'admin@wordpress', 'postmaster']
+// Personal-email providers small businesses genuinely use as their contact
+// address — an email on one of these isn't "off-domain" in the way an email
+// on some other unrelated *business's* domain is.
+const GENERIC_EMAIL_PROVIDERS = ['gmail.com', 'yahoo.com', 'yahoo.co.uk', 'outlook.com', 'hotmail.com',
+                                  'hotmail.co.uk', 'icloud.com', 'aol.com', 'btinternet.com', 'live.com', 'msn.com']
 
 // Known contact-page path fragments to try
 const CONTACT_PATHS  = ['/contact', '/contact-us', '/contact_us', '/contactus', '/get-in-touch',
@@ -101,20 +106,42 @@ function extractEmails(html) {
   })
 }
 
-function pickBestEmail(emails) {
-  if (emails.length === 0) return null
+// A venue's own site occasionally embeds or links to a completely different
+// business (shared web developer's footer credit, an ad widget, a third
+// party booking iframe) — an email scraped from that content isn't the
+// venue's contact address just because it has a good prefix like "info@".
+// Real contact emails are almost always either on the venue's own domain or
+// a personal provider (small operators run off a gmail address); anything
+// else is excluded rather than trusted.
+function isRelevantDomain(emailDomain, siteDomain) {
+  if (!siteDomain) return true // no site domain to compare against — can't filter
+  const bareSite = siteDomain.replace(/^www\./, '')
+  const bareEmail = emailDomain.replace(/^www\./, '')
+  if (bareEmail === bareSite || bareEmail.endsWith(`.${bareSite}`) || bareSite.endsWith(`.${bareEmail}`)) return true
+  // Compare just the core business name (first label), ignoring TLD — a
+  // business owning both venuename.com and venuename.co.uk and using one
+  // for its site and the other for email is a common, legitimate pattern,
+  // not a mismatch.
+  const coreOf = (d) => d.split('.')[0]
+  if (coreOf(bareEmail) === coreOf(bareSite) && coreOf(bareEmail).length >= 4) return true
+  return GENERIC_EMAIL_PROVIDERS.includes(bareEmail)
+}
+
+function pickBestEmail(emails, siteDomain) {
+  const relevant = siteDomain ? emails.filter((e) => isRelevantDomain(e.split('@')[1], siteDomain)) : emails
+  if (relevant.length === 0) return null
   // Priority prefix match
   for (const prefix of PRIORITY_PREFIXES) {
-    const match = emails.find((e) => e.split('@')[0] === prefix)
+    const match = relevant.find((e) => e.split('@')[0] === prefix)
     if (match) return match
   }
   // Starts-with match (e.g. info.hull@example.com)
   for (const prefix of PRIORITY_PREFIXES) {
-    const match = emails.find((e) => e.split('@')[0].startsWith(prefix))
+    const match = relevant.find((e) => e.split('@')[0].startsWith(prefix))
     if (match) return match
   }
   // Fall back to first found
-  return emails[0]
+  return relevant[0]
 }
 
 async function fetchHtml(url, timeoutMs = TIMEOUT_MS) {
@@ -157,8 +184,8 @@ function findContactLinks(html, baseUrl) {
 }
 
 async function scrapeVenue(website) {
-  let url
-  try { url = new URL(website).href } catch { return { emails: [], tried: [website] } }
+  let url, siteDomain
+  try { url = new URL(website).href; siteDomain = new URL(website).hostname.replace(/^www\./, '') } catch { return { emails: [], tried: [website] } }
 
   const tried = []
 
@@ -170,7 +197,7 @@ async function scrapeVenue(website) {
   const homeEmails = extractEmails(homeHtml)
 
   // If we already have a solid email, return early
-  const best = pickBestEmail(homeEmails)
+  const best = pickBestEmail(homeEmails, siteDomain)
   if (best && PRIORITY_PREFIXES.includes(best.split('@')[0])) {
     return { emails: homeEmails, tried }
   }
@@ -195,7 +222,7 @@ async function scrapeVenue(website) {
     if (!html) continue
     allEmails.push(...extractEmails(html))
     // Stop early if we found a priority email
-    const b = pickBestEmail([...new Set(allEmails)])
+    const b = pickBestEmail([...new Set(allEmails)], siteDomain)
     if (b && PRIORITY_PREFIXES.includes(b.split('@')[0])) break
   }
 
@@ -265,7 +292,9 @@ async function main() {
     process.stdout.write(`  ${label}… `)
 
     const { emails, tried } = await scrapeVenue(venue.website)
-    const best = pickBestEmail(emails)
+    let siteDomain
+    try { siteDomain = new URL(venue.website).hostname.replace(/^www\./, '') } catch { siteDomain = null }
+    const best = pickBestEmail(emails, siteDomain)
 
     if (best) {
       console.log(`✉  ${best}${emails.length > 1 ? ` (+${emails.length - 1} more)` : ''}`)

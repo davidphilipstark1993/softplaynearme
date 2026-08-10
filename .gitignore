@@ -32,3 +32,4 @@ next-env.d.ts
 
 # Scraped venue contact emails — business data, not for public repo
 contacts/
+scripts/.discover-cache-*.json
