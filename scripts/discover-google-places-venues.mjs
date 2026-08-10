@@ -71,6 +71,9 @@ const CITY_CENTRES = {
     { name: 'Croydon & Bromley', lat: 51.3762, lng: -0.0982, radius: 10000 },
     { name: 'Hillingdon & Uxbridge', lat: 51.5322, lng: -0.4790, radius: 8000 },
   ],
+  nottingham: [
+    { name: 'Nottingham', lat: 52.9548, lng: -1.1581, radius: 14000 },
+  ],
 }
 
 const centres = CITY_CENTRES[citySlug]

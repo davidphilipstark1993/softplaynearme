@@ -183,9 +183,23 @@ function findContactLinks(html, baseUrl) {
   return [...links].slice(0, 3) // at most 3 contact candidates
 }
 
+// When a venue's registered "website" is actually a third-party booking or
+// social platform (Bookwhen, Eventbrite, Facebook, Instagram) rather than
+// their own domain, any email found there is the *platform's* contact
+// (support, partnerships, etc.), not the venue's — same-domain matching
+// can't tell the difference since it genuinely is that domain. Safer to
+// treat these as having no scrapeable site at all than to risk emailing a
+// venue's outreach to the platform's business-development team instead.
+const THIRD_PARTY_PLATFORM_DOMAINS = ['bookwhen.com', 'eventbrite.com', 'eventbrite.co.uk',
+  'facebook.com', 'instagram.com', 'fb.com', 'linktr.ee', 'wix.com', 'squarespace.com']
+
 async function scrapeVenue(website) {
   let url, siteDomain
   try { url = new URL(website).href; siteDomain = new URL(website).hostname.replace(/^www\./, '') } catch { return { emails: [], tried: [website] } }
+
+  if (THIRD_PARTY_PLATFORM_DOMAINS.some((d) => siteDomain === d || siteDomain.endsWith(`.${d}`))) {
+    return { emails: [], tried: [] }
+  }
 
   const tried = []
 
