@@ -20,7 +20,7 @@ import { LocationIntro } from '@/components/location/LocationIntro'
 import { getCityOgImage } from '@/lib/cityImages'
 import { formatAddressLine } from '@/lib/sanitize'
 import { FilterSidebar, ActiveFilterBar } from '@/components/search/FilterSidebar'
-import { isSoftPlayVenueType } from '@/lib/venueTypes'
+import { isSoftPlayVenueType, VISIBLE_VENUE_TYPES, visibleVenueTypeSql } from '@/lib/venueTypes'
 import { getCardQuote, formatLastVerified } from '@/lib/venueCardText'
 import { isVerified } from '@/lib/plans'
 import { FeaturedImpression } from '@/components/venue/FeaturedImpression'
@@ -196,6 +196,7 @@ function staticToDisplayVenue(sv: StaticVenue): Venue {
     isStatic: true,
     last_verified_at: sv.lastVerified || undefined,
     featured: sv.featured ?? false,
+    venue_type: sv.venueType ?? null,
   }
 }
 
@@ -229,9 +230,9 @@ async function getVenues(citySlug: string, opts: VenueFilters = {}): Promise<Ven
       // tagged via venue_type and surfaced instead through the dedicated
       // "other" filter tab, rather than diluting every other view.
       if (filter === 'other') {
-        query += ` AND v.venue_type IS NOT NULL AND v.venue_type != 'indoor'`
+        query += ` AND v.venue_type IS NOT NULL AND v.venue_type NOT IN ('${VISIBLE_VENUE_TYPES.join("','")}')`
       } else {
-        query += ` AND (v.venue_type IS NULL OR v.venue_type = 'indoor')`
+        query += ` AND ${visibleVenueTypeSql()}`
       }
 
       // Legacy category filter (from SEO sub-pages)
@@ -298,6 +299,16 @@ async function getVenues(citySlug: string, opts: VenueFilters = {}): Promise<Ven
   // Static data fallback with client-side filtering
   const staticVenues = getStaticVenuesByTown(citySlug)
   let venues = staticVenues.map(staticToDisplayVenue)
+
+  // Category scope: mirror the live-DB query's venue_type inclusion/exclusion
+  // above — this branch runs at build time under SOFTPLAY_STATIC_BUILD, so
+  // without this filter every static production build would show excluded
+  // categories (park playgrounds, mobile hire, retail, etc.) in the main
+  // listing regardless of the DB-side fix.
+  venues =
+    filter === 'other'
+      ? venues.filter((v) => v.venue_type != null && !(VISIBLE_VENUE_TYPES as readonly string[]).includes(v.venue_type))
+      : venues.filter((v) => v.venue_type == null || (VISIBLE_VENUE_TYPES as readonly string[]).includes(v.venue_type))
 
   if (filter === 'toddler') venues = venues.filter((v) => v.toddler_area)
   if (filter === 'sen') venues = venues.filter((v) => v.sen_friendly)
@@ -416,13 +427,24 @@ export default async function CityPage({ params, searchParams }: PageProps) {
   // like a real "best of" grid.
   const featuredVenues = showCurated ? softPlayVenues.filter(v => v.featured).slice(0, 4) : []
   const toddlerVenues = showCurated ? softPlayVenues.filter(v => v.toddler_area).slice(0, 4) : []
+  // A minimum review count keeps a single 5-star fluke review from
+  // outranking a venue with hundreds of consistently good ones; a maximum
+  // keeps a review-count outlier (mistagged big attraction, franchise HQ
+  // listing, etc.) from dominating "most popular" regardless of whether
+  // venue_type classification catches it. See reports/ for the review-count
+  // outlier audit that found several misclassified venues this way.
+  const MIN_REVIEWS_FOR_CURATED = 5
+  const MAX_REVIEWS_FOR_POPULAR = 5000
   const topRatedVenues = showCurated
-    ? [...softPlayVenues].filter(v => v.avg_rating && Number(v.avg_rating) > 0).sort((a, b) => Number(b.avg_rating || 0) - Number(a.avg_rating || 0)).slice(0, 4)
+    ? [...softPlayVenues].filter(v => v.avg_rating && Number(v.avg_rating) > 0 && Number(v.review_count || 0) >= MIN_REVIEWS_FOR_CURATED).sort((a, b) => Number(b.avg_rating || 0) - Number(a.avg_rating || 0)).slice(0, 4)
     : []
   const cityBlogPost = getPostForCity(displayName)
 
   const mostPopularVenues = showCurated
-    ? [...softPlayVenues].filter(v => v.review_count && Number(v.review_count) > 0).sort((a, b) => Number(b.review_count || 0) - Number(a.review_count || 0)).slice(0, 4)
+    ? [...softPlayVenues]
+        .filter(v => v.review_count && Number(v.review_count) >= MIN_REVIEWS_FOR_CURATED && Number(v.review_count) <= MAX_REVIEWS_FOR_POPULAR)
+        .sort((a, b) => Number(b.review_count || 0) - Number(a.review_count || 0))
+        .slice(0, 4)
     : []
 
   return (

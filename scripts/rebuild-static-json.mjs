@@ -162,7 +162,7 @@ async function main() {
       // filter (app/page.tsx, lib/venueStats.ts) so the count doesn't
       // flip-flop between what a fresh SOFTPLAY_STATIC_BUILD=1 deploy bakes
       // in and what ISR revalidation later computes from the live DB.
-      venueCount: venues.filter(v => v.venueType === 'indoor').length,
+      venueCount: venues.filter(v => v.venueType === 'indoor' || v.venueType === 'pub').length,
       avgRating: venues.filter(v => v.rating).length > 0
         ? (venues.reduce((s, v) => s + (v.rating || 0), 0) / venues.filter(v => v.rating).length).toFixed(1)
         : null,

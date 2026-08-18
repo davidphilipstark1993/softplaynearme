@@ -197,10 +197,25 @@ function extractCategory(row) {
   return norm(row['W4Efsd'])
 }
 
+// For some listings — chain restaurants (Brewers Fayre, Beefeater) and a
+// few others — Google's business panel shows an editorial tagline
+// ("Family-friendly chain pub & restaurant") at the DOM position the
+// scraper treats as the address line, instead of an actual address. No
+// digit, no recognized street/place suffix, but marketing language and/or
+// a bare "&" — treat as not a real address rather than store it.
+const STREET_SUFFIX = /\b(road|rd|street|st|lane|ln|avenue|ave|close|way|drive|dr|park|centre|center|place|pl|court|ct|square|sq|hill|walk|row|gardens|estate|industrial|retail|business|unit|shop|mews|terrace|crescent|grove|yard|wharf|quay|green|common|approach|parade|ings|gate)\b/i
+const ADDRESS_TAGLINE_TELL = /\b(chain|hub|friendly|coffee|eats|facility|service)\b/i
+
+function looksLikeTagline(addr) {
+  if (/\d/.test(addr)) return false
+  if (STREET_SUFFIX.test(addr)) return false
+  return / & /.test(addr) || ADDRESS_TAGLINE_TELL.test(addr)
+}
+
 function extractAddress(row) {
   const raw = norm(row['W4Efsd 4'])
   // Strip Google Maps status/hours noise that bleeds into the address field
-  return raw
+  const cleaned = raw
     .replace(/,?\s*(Closed|Open|Opens?\s[\d:]+\s?(am|pm)\s?\w*|Closes?\s[\d:]+\s?(am|pm))[^,]*/gi, '')
     .replace(/,?\s*·[^,]*/g, '')
     .replace(/,\s*nan\b/gi, '')
@@ -208,6 +223,7 @@ function extractAddress(row) {
     .trim()
     .replace(/,+$/, '')
     .trim()
+  return looksLikeTagline(cleaned) ? '' : cleaned
 }
 
 function extractStatus(row) {
@@ -241,8 +257,17 @@ function extractReviewSnippet(row) {
   let snippet = parts.join(' ').replace(/^"+|"+$/g, '').trim()
   snippet = snippet.replace(/\s+/g, ' ')
   if (snippet.length < 10) return null
-  // Ensure it ends with punctuation
-  if (!/[.!?]$/.test(snippet)) snippet += '.'
+  // Google's own search-result review preview is frequently a mid-sentence
+  // fragment (its "..." truncation stripped upstream, before this ever sees
+  // the text) — blindly appending a period here fabricates a sentence
+  // ending that was never actually written, which reads as broken
+  // mid-clause ("Great soft play for the."). Truncate to the last genuine
+  // terminal punctuation instead; if the fragment never contains one, it
+  // can't be cleanly terminated, so drop it rather than invent one.
+  const lastTerminal = Math.max(snippet.lastIndexOf('.'), snippet.lastIndexOf('!'), snippet.lastIndexOf('?'))
+  if (lastTerminal === -1) return null
+  snippet = snippet.slice(0, lastTerminal + 1).trim()
+  if (snippet.length < 10) return null
   return snippet
 }
 

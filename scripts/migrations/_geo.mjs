@@ -92,7 +92,7 @@ function coreName(name) {
 
 // District-level lookup takes precedence over the coarser area-level table
 // (e.g. HU17 -> beverley, not the area's hull/beverley pair).
-function expectedCitiesForPostcode(pc) {
+export function expectedCitiesForPostcode(pc) {
   const district = postcodeDistrict(pc)
   if (district && POSTCODE_DISTRICT_TO_CITY[district]) {
     return { expected: POSTCODE_DISTRICT_TO_CITY[district], detail: `postcode district ${district}` }

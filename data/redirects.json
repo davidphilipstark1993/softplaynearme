@@ -1118,5 +1118,650 @@
     "source": "/soft-play/sheffield/barnsley-metrodome-waterpark-calypso-cove",
     "destination": "/soft-play/barnsley/barnsley-metrodome-waterpark-calypso-cove",
     "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/charleys-play-barn",
+    "destination": "/soft-play/doncaster/charley-s-play-barn-doncaster",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/doncaster/play-valley-doncaster-soft-play-centre-and-kids-parties",
+    "destination": "/soft-play/doncaster/play-valley-doncaster-soft-play-centre-kids-parties-york",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/indoor-play-area",
+    "destination": "/soft-play/doncaster/indoor-play-area-doncaster",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/bradford/5-alive-bradford-adventure-soft-play-centre-indoor-football-see-website-for-operating-hours-leeds",
+    "destination": "/soft-play/bradford/5-alive-bradford-adventure-soft-play-centre-indoor-football-see-website-for-operating-hours-york",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/adventure-reef",
+    "destination": "/soft-play/barnsley/adventure-reef-doncaster",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/york/flip-out-york-previously-point-zero-trampoline-park-york-york",
+    "destination": "/soft-play/york/flip-out-york-previously-point-zero-trampoline-park-york-leeds",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/barnsley/playmania-barnsley",
+    "destination": "/soft-play/barnsley/playmania-barnsley-doncaster",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/monkey-bizness-sheffield",
+    "destination": "/soft-play/sheffield/monkey-bizness-sheffield-doncaster",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/doncaster/play-valley-dinnington-soft-play-centre-kids-parties-doncaster",
+    "destination": "/soft-play/sheffield/play-valley-dinnington-soft-play-centre-and-kids-parties",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/doncaster/curious-kids-town-doncaster",
+    "destination": "/soft-play/sheffield/curious-kids-town",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/tower-of-fun",
+    "destination": "/soft-play/manchester/tower-of-fun-manchester",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/leeds/monkey-maze-hull",
+    "destination": "/soft-play/leeds/monkey-maze-leeds",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/york/world-of-their-own-york",
+    "destination": "/soft-play/leeds/world-of-their-own-leeds",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/play-valley-rotherham-soft-play-centre-and-kids-parties",
+    "destination": "/soft-play/barnsley/play-valley-rotherham-soft-play-centre-kids-parties-york",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/doncaster/playtimes-playtown-sensory-imaginary-role-play-centre-doncaster",
+    "destination": "/soft-play/sheffield/playtimes-playtown-sensory-and-imaginary-role-play-centre",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/york/the-web-adventure-park-hull",
+    "destination": "/soft-play/york/the-web-adventure-park-york",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/leeds/the-web-adventure-park-leeds",
+    "destination": "/soft-play/york/the-web-adventure-park-york",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/leeds/crazy-tykes-indoor-and-outdoor-children-s-soft-play-centre-hull",
+    "destination": "/soft-play/leeds/crazy-tykes-indoor-and-outdoor-children-s-soft-play-centre-york",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/play-valley-sheffield-soft-play-centre-and-kids-parties",
+    "destination": "/soft-play/sheffield/play-valley-sheffield-soft-play-centre-kids-parties-york",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/uproar-play-barn",
+    "destination": "/soft-play/doncaster/uproar-play-barn-doncaster",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/york/the-little-bees-formerly-kidzplay-harrogate-york",
+    "destination": "/soft-play/leeds/the-little-bees-formerly-kidzplay-harrogate-leeds",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/astrabound",
+    "destination": "/soft-play/doncaster/astrabound-doncaster",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/the-little-town-of-play",
+    "destination": "/soft-play/doncaster/the-little-town-of-play-doncaster",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/thee-fuzzy-eds",
+    "destination": "/soft-play/doncaster/thee-fuzzy-ed-s-doncaster",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/tots-explore-play-cafe-and-play-area",
+    "destination": "/soft-play/barnsley/tots-explore-play-cafe-and-play-area-doncaster",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/marquis-wacky-warehouse",
+    "destination": "/soft-play/barnsley/marquis-wacky-warehouse-doncaster",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/doncaster/big-apple-play-city-doncaster",
+    "destination": "/soft-play/sheffield/big-apple-play-city",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/doncaster/funny-farm-softplay-ltd-doncaster",
+    "destination": "/soft-play/sheffield/funny-farm-softplay-ltd",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/doncaster/medieval-mayhem-doncaster",
+    "destination": "/soft-play/sheffield/medieval-mayhem",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/doncaster/chestnut-tree-wacky-warehouse-doncaster",
+    "destination": "/soft-play/barnsley/chestnut-tree-wacky-warehouse-barnsley",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/chestnut-tree-wacky-warehouse",
+    "destination": "/soft-play/barnsley/chestnut-tree-wacky-warehouse-barnsley",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/doncaster/camelot-play-castle-doncaster",
+    "destination": "/soft-play/sheffield/camelot-play-castle",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/sensory-haven-play-cafe-and-sensory-room",
+    "destination": "/soft-play/doncaster/sensory-haven-play-cafe-sensory-room-doncaster",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/doncaster/play-world-explorers-doncaster",
+    "destination": "/soft-play/sheffield/play-world-explorers",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/round-the-twist-tameside",
+    "destination": "/soft-play/manchester/round-the-twist-tameside-manchester",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/let-us-play-little-town",
+    "destination": "/soft-play/manchester/let-us-play-little-town-manchester",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/manchester/born-2-bounce-bouncy-castle-hire-and-soft-play-hire-stockport-tameside-manchester-manchester",
+    "destination": "/soft-play/manchester/born-2-bounce-bouncy-castle-hire-and-soft-play-hire-stockport-tameside-manchester",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/playroom-soft-play-centre-sheffield",
+    "destination": "/soft-play/sheffield/playroom-soft-play-centre-sheffield-doncaster",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/playmania-sheffield",
+    "destination": "/soft-play/sheffield/playmania-sheffield-doncaster",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/doncaster/sam-s-space-soft-play-firth-park-methodist-church-doncaster",
+    "destination": "/soft-play/sheffield/sams-space-soft-play-firth-park-methodist-church",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/the-play-house-and-cafe-thurnscoe",
+    "destination": "/soft-play/barnsley/the-play-house-cafe-thurnscoe-doncaster",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/doncaster/fun-house-play-centre-doncaster",
+    "destination": "/soft-play/sheffield/fun-house-play-centre",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/ali-bongos-play-barn-at-pastures-lodge",
+    "destination": "/soft-play/doncaster/ali-bongos-play-barn-at-pastures-lodge-doncaster",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/the-play-village",
+    "destination": "/soft-play/barnsley/the-play-village-doncaster",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/play-oldham",
+    "destination": "/soft-play/manchester/play-oldham-manchester",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/sir-jack-wacky-warehouse",
+    "destination": "/soft-play/doncaster/sir-jack-wacky-warehouse-doncaster",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/tumbles-play-place",
+    "destination": "/soft-play/mossley/tumbles-play-place-manchester",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/leeds/flying-legends-wacky-warehouse-leeds",
+    "destination": "/soft-play/york/flying-legends-wacky-warehouse-hull",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/york/squinting-cat-wacky-warehouse-york",
+    "destination": "/soft-play/leeds/squinting-cat-wacky-warehouse-leeds",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/bounce-central-oldham",
+    "destination": "/soft-play/manchester/bounce-central-oldham-manchester",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/york/happy-planet-play-centre-york",
+    "destination": "/soft-play/bradford/happy-planet-play-centre-leeds",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/kidz-hub-ltd",
+    "destination": "/soft-play/doncaster/kidz-hub-ltd-doncaster",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/jungle-monkeys",
+    "destination": "/soft-play/barnsley/jungle-monkeys-doncaster",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/the-fun-depot",
+    "destination": "/soft-play/manchester/the-fun-depot-manchester",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/doncaster/trip-2-town-doncaster",
+    "destination": "/soft-play/sheffield/trip-2-town",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/jumparooz-inflatable-park",
+    "destination": "/soft-play/manchester/jumparooz-inflatable-park-manchester",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/wacky-warehouse-mottram-wood",
+    "destination": "/soft-play/manchester/wacky-warehouse-mottram-wood-manchester",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/york/stockeld-park-york",
+    "destination": "/soft-play/leeds/stockeld-park-leeds",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/treasure-island-rotherham",
+    "destination": "/soft-play/doncaster/treasure-island-rotherham-doncaster",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/doncaster/story-teller-wacky-warehouse-doncaster",
+    "destination": "/soft-play/sheffield/story-teller-wacky-warehouse",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/barnsley/jump-inc-by-airhop-adventure-park-rotherham-barnsley",
+    "destination": "/soft-play/sheffield/jump-inc-by-airhop-adventure-park-rotherham",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/leeds/soft4tots-leeds",
+    "destination": "/soft-play/york/soft4tots-leeds",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/york/the-secret-realm-scarborough-york",
+    "destination": "/soft-play/bridlington/the-secret-realm-scarborough-york",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/york/the-little-play-company-york",
+    "destination": "/soft-play/bridlington/the-little-play-company-york",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/york/gravity-active-castleford-xscape-york",
+    "destination": "/soft-play/leeds/gravity-active-castleford-xscape-york",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/lincoln/i-fun-trampoline-soft-play-mansfield-lincoln",
+    "destination": "/soft-play/nottingham/i-fun-trampoline-soft-play-mansfield-lincoln",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/blackpool/little-stars-soft-play-limited-blackpool",
+    "destination": "/soft-play/bolton/little-stars-soft-play-limited-blackpool",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/blackpool/osmans-blackpool",
+    "destination": "/soft-play/aberdeen/osmans-blackpool",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/doncaster/xplore-soft-play-and-4d-golf-doncaster",
+    "destination": "/soft-play/leeds/xplore-soft-play-and-4d-golf-doncaster",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/doncaster/the-secret-garden-doncaster",
+    "destination": "/soft-play/barnsley/the-secret-garden-doncaster",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/doncaster/walnut-tree-wacky-warehouse-doncaster",
+    "destination": "/soft-play/barnsley/walnut-tree-wacky-warehouse-doncaster",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/doncaster/cheeky-monkeys-doncaster",
+    "destination": "/soft-play/leeds/cheeky-monkeys-doncaster",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/doncaster/stanley-ferry-wacky-warehouse-doncaster",
+    "destination": "/soft-play/leeds/stanley-ferry-wacky-warehouse-doncaster",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/barnsley/wonderland-playgym-barnsley",
+    "destination": "/soft-play/huddersfield/wonderland-playgym-barnsley",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/stoke/polar-palace-play-and-party-centre-stoke",
+    "destination": "/soft-play/crewe/polar-palace-play-and-party-centre-stoke",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/stoke/just-kidding-holmes-chapel-stoke",
+    "destination": "/soft-play/crewe/just-kidding-holmes-chapel-stoke",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/stoke/ua-trampoline-park-winsford-stoke",
+    "destination": "/soft-play/crewe/ua-trampoline-park-winsford-stoke",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/stoke/happy-little-signers-baby-and-toddler-signing-classes-stoke",
+    "destination": "/soft-play/crewe/happy-little-signers-baby-and-toddler-signing-classes-stoke",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/llanelli/tiny-tots-town",
+    "destination": "/soft-play/swansea/tiny-tots-town",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/swansea/sgiliau-play-centre-carmarthen",
+    "destination": "/soft-play/llanelli/sgiliau-play-centre-carmarthen",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/colchester/the-play-den",
+    "destination": "/soft-play/ipswich/the-play-den",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/hastings/monkey-bizness-lewes",
+    "destination": "/soft-play/brighton/monkey-bizness-lewes",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/hastings/barneys-play",
+    "destination": "/soft-play/brighton/barneys-play",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/hastings/sky-high-trampoline-park",
+    "destination": "/soft-play/brighton/sky-high-trampoline-park",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/colchester/the-snug-play-cafe",
+    "destination": "/soft-play/ipswich/the-snug-play-cafe",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/hastings/childrens-playground",
+    "destination": "/soft-play/brighton/childrens-playground",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/hastings/the-hub-peacehaven",
+    "destination": "/soft-play/brighton/the-hub-peacehaven",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/flying-fortress",
+    "destination": "/soft-play/worthing/flying-fortress",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/out-of-bounds",
+    "destination": "/soft-play/worthing/out-of-bounds",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/harbour-park-amusements",
+    "destination": "/soft-play/worthing/harbour-park-amusements",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/puppet-castle-and-softplay",
+    "destination": "/soft-play/worthing/puppet-castle-and-softplay",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/harbour-park-indoor-soft-play",
+    "destination": "/soft-play/worthing/harbour-park-indoor-soft-play",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/shweet-soft-play",
+    "destination": "/soft-play/worthing/shweet-soft-play",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/playground",
+    "destination": "/soft-play/portsmouth/playground",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/west-sands-fun-fair",
+    "destination": "/soft-play/portsmouth/west-sands-fun-fair",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/little-lions-active-play",
+    "destination": "/soft-play/worthing/little-lions-active-play",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/selsey-play-park",
+    "destination": "/soft-play/portsmouth/selsey-play-park",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/kids-zone-notts-ltd",
+    "destination": "/soft-play/doncaster/kids-zone-notts-ltd",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/tumble-jacks",
+    "destination": "/soft-play/manchester/tumble-jacks",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/play-glossop",
+    "destination": "/soft-play/mossley/play-glossop",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/the-nook-saddleworth-play-cafe",
+    "destination": "/soft-play/mossley/the-nook-saddleworth-play-cafe",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/lakeside-village-outlet-shopping",
+    "destination": "/soft-play/doncaster/lakeside-village-outlet-shopping",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/woodfield-farm-farmhouse-inns",
+    "destination": "/soft-play/doncaster/woodfield-farm-farmhouse-inns",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/interactive-play-ltd",
+    "destination": "/soft-play/manchester/interactive-play-ltd",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/jelly-beans-under-5s",
+    "destination": "/soft-play/huddersfield/jelly-beans-under-5s",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/cbc-hire-bouncy-castles-and-inflatables",
+    "destination": "/soft-play/doncaster/cbc-hire-bouncy-castles-and-inflatables",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/baby-bears-play-cafe",
+    "destination": "/soft-play/manchester/baby-bears-play-cafe",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/active-itrain",
+    "destination": "/soft-play/manchester/active-itrain",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/shirebrook-play-area",
+    "destination": "/soft-play/mossley/shirebrook-play-area",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/adwick-leisure-complex",
+    "destination": "/soft-play/doncaster/adwick-leisure-complex",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/wildmoor-avenue-play-area",
+    "destination": "/soft-play/mossley/wildmoor-avenue-play-area",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/bizzy-bouncers",
+    "destination": "/soft-play/manchester/bizzy-bouncers",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/highwayman",
+    "destination": "/soft-play/doncaster/highwayman",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/sheffield/pure-imagination-play-ltd",
+    "destination": "/soft-play/manchester/pure-imagination-play-ltd",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/liverpool/treetops-play-and-party-cafe-liverpool",
+    "destination": "/soft-play/bolton/treetops-play-and-party-cafe-liverpool",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/liverpool/willowbees-adventure-play-liverpool",
+    "destination": "/soft-play/bolton/willowbees-adventure-play-liverpool",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/liverpool/gulliver-s-world-theme-park-liverpool",
+    "destination": "/soft-play/bolton/gulliver-s-world-theme-park-liverpool",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/liverpool/gravity-active-warrington-liverpool",
+    "destination": "/soft-play/bolton/gravity-active-warrington-liverpool",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/liverpool/fun2b-indoor-play-and-party-centre-liverpool",
+    "destination": "/soft-play/bolton/fun2b-indoor-play-and-party-centre-liverpool",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/liverpool/giggles-play-mill-liverpool",
+    "destination": "/soft-play/bolton/giggles-play-mill-liverpool",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/liverpool/velocity-trampoline-park-liverpool",
+    "destination": "/soft-play/bolton/velocity-trampoline-park-liverpool",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/leeds/bizzybees-leeds",
+    "destination": "/soft-play/mossley/bizzybees-leeds",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/leeds/jollytots-leeds",
+    "destination": "/soft-play/mossley/jollytots-leeds",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/bounce-about-sussex-bouncy-castle-soft-play-hire-brighton",
+    "destination": "/soft-play/worthing/bounce-about-sussex-bouncy-castle-soft-play-hire-brighton",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/leisure-centre-playground-brighton",
+    "destination": "/soft-play/worthing/leisure-centre-playground-brighton",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/edinburgh/play-park-edinburgh",
+    "destination": "/soft-play/newcastle/play-park-edinburgh",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/hastings/forest-fields-play-area-hastings",
+    "destination": "/soft-play/brighton/forest-fields-play-area-hastings",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/stoke/moss-drive-play-area-stoke-on-trent",
+    "destination": "/soft-play/crewe/moss-drive-play-area-stoke-on-trent",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/stoke/holmes-chapel-community-centre-stoke-on-trent",
+    "destination": "/soft-play/crewe/holmes-chapel-community-centre-stoke-on-trent",
+    "permanent": true
   }
 ]

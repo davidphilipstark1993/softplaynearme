@@ -42,6 +42,7 @@ function parseArgs(argv) {
     commit:      argv.includes('--commit'),
     onlyMissing: argv.includes('--only-missing'),
     city:        argv.includes('--city') ? argv[argv.indexOf('--city') + 1] || '' : '',
+    ids:         argv.includes('--ids') ? (argv[argv.indexOf('--ids') + 1] || '').split(',').map((s) => parseInt(s.trim(), 10)).filter(Boolean) : null,
   }
 }
 
@@ -612,6 +613,7 @@ async function main() {
   console.log(args.commit ? 'MODE: COMMIT' : 'MODE: DRY RUN (add --commit to write)')
   if (args.onlyMissing) console.log('FILTER: Only venues missing descriptions (--only-missing)')
   if (args.city) console.log(`FILTER: City slug = ${args.city}`)
+  if (args.ids) console.log(`FILTER: ${args.ids.length} specific venue id(s)`)
   console.log()
 
   const pool = new Pool({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } })
@@ -636,6 +638,11 @@ async function main() {
     if (args.city) {
       params.push(args.city)
       conditions.push(`city_slug = $${params.length}`)
+    }
+
+    if (args.ids && args.ids.length) {
+      params.push(args.ids)
+      conditions.push(`id = ANY($${params.length})`)
     }
 
     if (args.onlyMissing) {

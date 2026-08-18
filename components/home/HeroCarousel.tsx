@@ -23,11 +23,6 @@ const SLIDES: Slide[] = [
     label: 'Toddler-Friendly Zones',
   },
   {
-    src: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=1600&q=80',
-    alt: 'Soft play party setup for children birthday celebrations',
-    label: 'Birthday Party Venues',
-  },
-  {
     src: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1600&q=80',
     alt: 'Parent relaxing in cafe while children play indoors',
     label: 'Parent-Friendly Cafes',

@@ -1,5 +1,6 @@
 import { cache } from 'react'
 import { getPool } from '@/lib/pool'
+import { visibleVenueTypeSql } from '@/lib/venueTypes'
 
 /**
  * Total live venue count, memoized per-request. Falls back to null on any
@@ -14,7 +15,7 @@ export const getTotalVenueCount = cache(async (): Promise<number | null> => {
     // venue_types (trampoline parks, farms, park playgrounds, other family
     // attractions) here would overstate the "soft play centres" claim.
     const { rows } = await pool.query<{ total: number }>(
-      `SELECT COUNT(*)::int AS total FROM venues WHERE venue_type IS NULL OR venue_type = 'indoor'`
+      `SELECT COUNT(*)::int AS total FROM venues v WHERE ${visibleVenueTypeSql()}`
     )
     return rows[0]?.total ?? null
   } catch {

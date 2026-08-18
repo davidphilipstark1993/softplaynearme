@@ -31,3 +31,23 @@ export function isSoftPlayVenueType(venueType: string | null | undefined): boole
   if (!venueType) return true
   return !NON_SOFT_PLAY_VENUE_TYPES.includes(venueType as NonSoftPlayVenueType)
 }
+
+/**
+ * venue_type values that count as "genuine soft play" for the main
+ * directory — visible in the default city listing, counted in every
+ * total/card/hero figure. 'pub' is here alongside the 'indoor' default
+ * because pub venues with a real, verified play offering (toddler area +
+ * parties, not just any pub) are legitimate, not scope creep — see
+ * scripts/migrations/phase5-01-reclassify-venue-types.mjs. Keep this as the
+ * single source of truth: every count (homepage hero/cards, hub heading,
+ * meta descriptions) and every listing query should reference this rather
+ * than repeating the `venue_type IS NULL OR venue_type = 'indoor'` condition
+ * inline, which is exactly how the pub venues fell out of sync with the
+ * homepage counts after being added.
+ */
+export const VISIBLE_VENUE_TYPES = ['indoor', 'pub'] as const
+
+/** SQL fragment for `WHERE <this>` — visible venue_types only. Assumes the venues table/alias is unqualified or aliased as `v`. */
+export function visibleVenueTypeSql(alias = 'v'): string {
+  return `(${alias}.venue_type IS NULL OR ${alias}.venue_type IN ('${VISIBLE_VENUE_TYPES.join("','")}'))`
+}

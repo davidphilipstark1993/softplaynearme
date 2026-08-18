@@ -15,13 +15,14 @@ import { blogPosts } from '@/lib/blogPosts'
 import { CITY_IMAGES } from '@/lib/cityImages'
 import { getPool } from '@/lib/pool'
 import { getTotalVenueCount } from '@/lib/venueStats'
+import { VISIBLE_VENUE_TYPES, visibleVenueTypeSql } from '@/lib/venueTypes'
 import type { Metadata } from 'next'
 
 // Genuine soft play only — matches the live DB query's venue_type filter.
 // Used wherever the static export is the fallback (DB unreachable, or a
 // city not yet represented in the live cityCounts).
 function getStaticSoftPlayCount(citySlug: string): number {
-  return getStaticVenuesByTown(citySlug).filter((v) => !v.venueType || v.venueType === 'indoor').length
+  return getStaticVenuesByTown(citySlug).filter((v) => !v.venueType || (VISIBLE_VENUE_TYPES as readonly string[]).includes(v.venueType)).length
 }
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -121,9 +122,9 @@ async function getHomepageStats() {
       // buckets trampoline parks/farms/park-playgrounds/other attractions
       // out of the main directory (see lib/venueTypes.ts), so counting all
       // rows here would overstate the claim with venues that aren't soft play.
-      pool.query<{ total: number }>(`SELECT COUNT(*)::int AS total FROM venues WHERE venue_type IS NULL OR venue_type = 'indoor'`),
+      pool.query<{ total: number }>(`SELECT COUNT(*)::int AS total FROM venues v WHERE ${visibleVenueTypeSql()}`),
       pool.query<{ city_slug: string; cnt: number }>(
-        `SELECT city_slug, COUNT(*)::int AS cnt FROM venues WHERE venue_type IS NULL OR venue_type = 'indoor' GROUP BY city_slug`
+        `SELECT city_slug, COUNT(*)::int AS cnt FROM venues v WHERE ${visibleVenueTypeSql()} GROUP BY city_slug`
       ),
       pool.query<RecentVenue>(`
         SELECT v.name, v.town_slug, v.slug,
