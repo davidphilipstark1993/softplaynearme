@@ -1,12 +1,15 @@
 const RESEND_API_KEY = process.env.RESEND_API_KEY
-const FROM = 'Soft Play Near Me <hello@softplaynearme.co.uk>'
+const SENDGRID_API_KEY = process.env.SENDGRID_API_KEY
+const FROM_NAME = 'Soft Play Near Me'
+const FROM_EMAIL = 'hello@softplaynearme.co.uk'
+const FROM = `${FROM_NAME} <${FROM_EMAIL}>`
+// SendGrid only has david@ as a confirmed single-sender (not full domain auth) — sending from
+// any other @softplaynearme.co.uk address there can be silently dropped despite a 202 response.
+const SENDGRID_VERIFIED_SENDER = 'david@softplaynearme.co.uk'
 const BASE_URL = 'https://www.softplaynearme.co.uk'
 
-async function sendEmail(to: string, subject: string, html: string): Promise<void> {
-  if (!RESEND_API_KEY) {
-    console.log('[email] No RESEND_API_KEY set — skipping email to', to)
-    return
-  }
+async function sendViaResend(to: string, subject: string, html: string): Promise<boolean> {
+  if (!RESEND_API_KEY) return false
   try {
     const res = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -16,10 +19,57 @@ async function sendEmail(to: string, subject: string, html: string): Promise<voi
       },
       body: JSON.stringify({ from: FROM, to, subject, html }),
     })
-    if (!res.ok) console.error('[email] Resend error:', await res.text())
+    if (!res.ok) {
+      console.error('[email] Resend error:', await res.text())
+      return false
+    }
+    return true
   } catch (err) {
-    console.error('[email] Failed to send email:', err)
+    console.error('[email] Resend request failed:', err)
+    return false
   }
+}
+
+async function sendViaSendGrid(to: string, subject: string, html: string): Promise<boolean> {
+  if (!SENDGRID_API_KEY) return false
+  try {
+    const res = await fetch('https://api.sendgrid.com/v3/mail/send', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${SENDGRID_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        personalizations: [{ to: [{ email: to }] }],
+        from: { email: SENDGRID_VERIFIED_SENDER, name: FROM_NAME },
+        reply_to: { email: FROM_EMAIL, name: FROM_NAME },
+        subject,
+        content: [{ type: 'text/html', value: html }],
+      }),
+    })
+    if (!res.ok) {
+      console.error('[email] SendGrid error:', res.status, await res.text())
+      return false
+    }
+    return true
+  } catch (err) {
+    console.error('[email] SendGrid request failed:', err)
+    return false
+  }
+}
+
+// Tries Resend first (the intended primary provider, using the full hello@ domain sender).
+// Falls back to SendGrid automatically if Resend is unconfigured or fails — e.g. while the
+// softplaynearme.co.uk sending domain isn't yet verified in Resend. Once that domain verifies,
+// Resend succeeds on the first attempt and SendGrid is never called.
+async function sendEmail(to: string, subject: string, html: string): Promise<void> {
+  if (!RESEND_API_KEY && !SENDGRID_API_KEY) {
+    console.log('[email] No email provider configured — skipping email to', to)
+    return
+  }
+  if (await sendViaResend(to, subject, html)) return
+  if (await sendViaSendGrid(to, subject, html)) return
+  console.error(`[email] FAILED to send "${subject}" to ${to} via both Resend and SendGrid`)
 }
 
 // ─── Welcome email ────────────────────────────────────────────────────────────
