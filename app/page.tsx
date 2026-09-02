@@ -2,7 +2,6 @@ import { Search, MapPin, Clock, Baby, PartyPopper, Heart, Coffee, Car, CheckCirc
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 import { cities } from '@/lib/venues'
 import { getStaticVenuesByTown, getStaticTotalVenueCount } from '@/lib/staticVenues'
 import { Header } from '@/components/layout/Header'
@@ -12,7 +11,6 @@ import { HeroCarousel } from '@/components/home/HeroCarousel'
 import { buildFAQSchema, buildCityListSchema } from '@/lib/schema'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { blogPosts } from '@/lib/blogPosts'
-import { CITY_IMAGES } from '@/lib/cityImages'
 import { getPool } from '@/lib/pool'
 import { getTotalVenueCount } from '@/lib/venueStats'
 import { VISIBLE_VENUE_TYPES, visibleVenueTypeSql } from '@/lib/venueTypes'
@@ -175,8 +173,6 @@ export default async function Home() {
     ? totalVenues.toLocaleString('en-GB')
     : `${getStaticTotalVenueCount().toLocaleString('en-GB')}+`
 
-  const cityVisuals = CITY_IMAGES
-
   // ItemList schema for Browse by City section
   const cityListSchema = buildCityListSchema(cities, 'Soft Play by City')
 
@@ -302,21 +298,20 @@ export default async function Home() {
           <h2 className="text-2xl font-bold text-slate-900 mb-2 text-center">Browse by Location</h2>
           <p className="text-slate-600 text-center mb-8">Find soft play centres in your area</p>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {cities.map((city) => {
+            {cities.map((city, index) => {
               const venueCount = cityCounts[city.slug] ?? getStaticSoftPlayCount(city.slug)
-              const cityImage = cityVisuals[city.slug] || 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=900&q=80'
               return (
                 <Link key={city.slug} href={`/soft-play/${city.slug}`} className="group">
                   <Card className="overflow-hidden text-center hover:shadow-lg hover:border-purple-300 transition-all">
-                    <div className="relative h-24 w-full">
-                      <ImageWithFallback
-                        src={cityImage}
-                        alt={`Families looking for soft play in ${city.name}`}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                        sizes="(max-width: 768px) 50vw, 16vw"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/45 to-black/5" />
+                    <div
+                      className="relative h-24 w-full flex items-center justify-center overflow-hidden transition-transform duration-500 group-hover:scale-105"
+                      style={{
+                        background: `linear-gradient(135deg, hsl(${(index * 47 + 262) % 360}, 70%, 55%), hsl(${(index * 47 + 320) % 360}, 60%, 50%))`,
+                      }}
+                    >
+                      <span className="text-white/25 text-4xl font-bold select-none" aria-hidden="true">
+                        {city.name.charAt(0)}
+                      </span>
                     </div>
                     <div className="p-4">
                       <MapPin className="w-5 h-5 mx-auto mb-1.5 text-purple-500" />

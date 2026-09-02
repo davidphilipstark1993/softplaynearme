@@ -1,34 +1,24 @@
 /**
  * City hero images — single source of truth used by:
- *   - Homepage city grid
  *   - City page Open Graph meta
  *   - Blog post Open Graph meta (matched by post.city)
+ * (The homepage city grid no longer uses this — see app/page.tsx, which
+ * renders a deterministic gradient card instead of a photo.)
  *
- * All images are high-quality Unsplash shots licensed for free use.
- * Add entries here; they propagate automatically to every consumer.
+ * Every entry here was fetched and visually checked against its city name
+ * (Aug 2026 audit). Most of the previous list — assembled without that
+ * check — turned out to be mismatched (e.g. "Birmingham" was a polar bear,
+ * "Manchester" a pool villa, "Leeds" was actually London, "Glasgow" a
+ * wedding photo). Rather than replace those with more unverified guesses,
+ * unlisted cities fall back to DEFAULT_OG_IMAGE. Only add a city here after
+ * opening the exact URL and confirming it actually shows that city.
  */
 
 export const CITY_IMAGES: Record<string, string> = {
-  hull:         'https://images.unsplash.com/photo-1596461404969-9ae70f2830c1?auto=format&fit=crop&w=1200&q=80',
-  york:         'https://images.unsplash.com/photo-1682346361366-4ba6b4a943f0?auto=format&fit=crop&w=1200&q=80',
-  leeds:        'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=1200&q=80',
-  sheffield:    'https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1200&q=80',
-  brighton:     'https://images.unsplash.com/photo-1559599238-308793637427?auto=format&fit=crop&w=1200&q=80',
-  bournemouth:  'https://images.unsplash.com/photo-1455729552865-3658a5d39692?auto=format&fit=crop&w=1200&q=80',
-  manchester:   'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80',
-  birmingham:   'https://images.unsplash.com/photo-1589656966895-2f33e7653819?auto=format&fit=crop&w=1200&q=80',
-  liverpool:    'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1200&q=80',
-  bristol:      'https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?auto=format&fit=crop&w=1200&q=80',
-  nottingham:   'https://images.unsplash.com/photo-1568495248636-6432b97bd949?auto=format&fit=crop&w=1200&q=80',
-  newcastle:    'https://images.unsplash.com/photo-1600718374662-0483d2b9da44?auto=format&fit=crop&w=1200&q=80',
-  edinburgh:    'https://images.unsplash.com/photo-1506377585622-bedcbb027afc?auto=format&fit=crop&w=1200&q=80',
-  glasgow:      'https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=1200&q=80',
-  norwich:      'https://images.unsplash.com/photo-1690451830409-abec84b1d9b2?auto=format&fit=crop&w=1200&q=80',
-  colchester:   'https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1200&q=80',
-  huddersfield: 'https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1200&q=80',
-  beverley:     'https://images.unsplash.com/photo-1682346361366-4ba6b4a943f0?auto=format&fit=crop&w=1200&q=80',
-  bridlington:  'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80',
-  stirling:     'https://images.unsplash.com/photo-1506377585622-bedcbb027afc?auto=format&fit=crop&w=1200&q=80',
+  york:      'https://images.unsplash.com/photo-1682346361366-4ba6b4a943f0?auto=format&fit=crop&w=1200&q=80', // verified: York Minster
+  beverley:  'https://images.unsplash.com/photo-1682346361366-4ba6b4a943f0?auto=format&fit=crop&w=1200&q=80', // shares York's image (same East Yorkshire area)
+  edinburgh: 'https://images.unsplash.com/photo-1506377585622-bedcbb027afc?auto=format&fit=crop&w=1200&q=80', // verified: Edinburgh skyline
+  stirling:  'https://images.unsplash.com/photo-1506377585622-bedcbb027afc?auto=format&fit=crop&w=1200&q=80', // shares Edinburgh's image (same region)
 }
 
 /** Default OG image when no city-specific one exists */

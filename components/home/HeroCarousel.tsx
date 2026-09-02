@@ -11,21 +11,21 @@ interface Slide {
   label: string
 }
 
+// Every slide here was fetched and visually checked (Aug 2026 audit) — the
+// previous third slide ("Parent-Friendly Cafes") was actually two office
+// workers high-fiving over a laptop, so it was dropped rather than kept
+// with a caption that didn't match. Verify a replacement the same way
+// before adding one back.
 const SLIDES: Slide[] = [
   {
     src: 'https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=1600&q=80',
-    alt: 'Children enjoying colourful indoor soft play climbing equipment',
+    alt: 'Toddler playing indoors with toys',
     label: 'Safe Indoor Adventures',
   },
   {
     src: 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=1600&q=80',
-    alt: 'Toddler ball pit with bright soft play toys',
-    label: 'Toddler-Friendly Zones',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1600&q=80',
-    alt: 'Parent relaxing in cafe while children play indoors',
-    label: 'Parent-Friendly Cafes',
+    alt: 'Child enjoying messy, colourful play',
+    label: 'Fun for Every Age',
   },
 ]
 
