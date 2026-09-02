@@ -909,6 +909,7 @@ export default async function VenuePage({ params }: PageProps) {
                 venueId={venue.id}
                 citySlug={city}
                 venueSlug={slug}
+                googleReviewCount={(venue as any).reviews_count}
               />
 
               {/* Nearby Venues */}

@@ -18,6 +18,8 @@ interface ReviewSectionProps {
   venueId: number
   citySlug: string
   venueSlug: string
+  /** Google's aggregate review count shown in the page header, so the empty state here can explain the difference instead of looking contradictory. */
+  googleReviewCount?: number
 }
 
 function Stars({ value, className = 'w-4 h-4' }: { value: number; className?: string }) {
@@ -33,7 +35,7 @@ function Stars({ value, className = 'w-4 h-4' }: { value: number; className?: st
   )
 }
 
-export function ReviewSection({ initialReviews, venueId, citySlug, venueSlug }: ReviewSectionProps) {
+export function ReviewSection({ initialReviews, venueId, citySlug, venueSlug, googleReviewCount }: ReviewSectionProps) {
   const [reviews, setReviews] = useState<ReviewItem[]>(initialReviews)
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -113,7 +115,14 @@ export function ReviewSection({ initialReviews, venueId, citySlug, venueSlug }: 
           <p className="text-sm text-slate-600 mt-1">Based on {reviews.length} review{reviews.length === 1 ? '' : 's'}.</p>
         </div>
       ) : (
-        <p className="text-slate-500 text-center py-4">No reviews yet. Be the first to review.</p>
+        <div className="text-center py-4">
+          <p className="text-slate-500">No reviews yet on Soft Play Near Me. Be the first to review.</p>
+          {googleReviewCount != null && googleReviewCount > 0 && (
+            <p className="text-slate-400 text-sm mt-1">
+              (The rating above is from {googleReviewCount.toLocaleString('en-GB')} Google reviews — separate from reviews left here.)
+            </p>
+          )}
+        </div>
       )}
 
       {reviews.length > 0 && (
