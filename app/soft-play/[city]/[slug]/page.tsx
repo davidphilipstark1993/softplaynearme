@@ -27,6 +27,7 @@ import { getStoredReviews } from '@/lib/reviewsStore'
 import { isVerified } from '@/lib/plans'
 import { ReviewSection } from '@/components/venue/ReviewSection'
 import { cleanAddressForDisplay, formatAddressLine } from '@/lib/sanitize'
+import { isUsablePhotoUrl } from '@/lib/imageUtils'
 import {
   generateVenueDescription,
   generateVenueMetaDescription,
@@ -543,9 +544,10 @@ export default async function VenuePage({ params }: PageProps) {
     : ((venue as any).rating ? Number((venue as any).rating) : 0)
 
   const baseUrl = 'https://www.softplaynearme.co.uk'
-  const galleryPhotos = photos.length > 0
-    ? photos
-    : venue.main_image_url
+  const usablePhotos = photos.filter((p) => isUsablePhotoUrl(p.url))
+  const galleryPhotos = usablePhotos.length > 0
+    ? usablePhotos
+    : isUsablePhotoUrl(venue.main_image_url)
       ? [{ id: 0, url: venue.main_image_url, alt_text: `${venue.name} soft play area`, is_primary: true }]
       : []
 

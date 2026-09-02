@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { isUsablePhotoUrl } from '@/lib/imageUtils'
 import {
   MapPin,
   Star,
@@ -89,7 +90,7 @@ function VenueCard({
       <CardContent className="p-4 sm:p-6">
         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
           <div className="relative h-28 w-full overflow-hidden rounded-lg bg-slate-100 sm:h-24 sm:w-36 sm:flex-shrink-0">
-            {venue.main_image_url ? (
+            {isUsablePhotoUrl(venue.main_image_url) ? (
               <Image
                 src={venue.main_image_url}
                 alt={`${venue.name} soft play venue`}

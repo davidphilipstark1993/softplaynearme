@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
+import { isUsablePhotoUrl } from '@/lib/imageUtils'
 import { Badge } from '@/components/ui/badge'
 import { getCityBySlug, getFilterBySlug, getNearbyCities } from '@/lib/venues'
 import { getStaticVenuesByTown } from '@/lib/staticVenues'
@@ -213,7 +214,7 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {venues.map((venue, index) => {
-                const displayImage = venue.main_image_url?.trim() || null
+                const displayImage = isUsablePhotoUrl(venue.main_image_url) ? venue.main_image_url : null
                 return (
                   <Card
                     key={venue.slug}

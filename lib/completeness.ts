@@ -1,3 +1,5 @@
+import { isUsablePhotoUrl } from './imageUtils'
+
 // ─── Types ─────────────────────────────────────────────────────────────────
 
 export interface CompletenessItem {
@@ -37,12 +39,12 @@ function countFacilities(venue: Record<string, unknown>): number {
 
 function countPhotos(venue: Record<string, unknown>): number {
   let count = 0
-  if (venue.main_image_url) count++
+  if (isUsablePhotoUrl(venue.main_image_url)) count++
   if (Array.isArray(venue.photo_urls)) {
-    count += (venue.photo_urls as string[]).filter(Boolean).length
+    count += (venue.photo_urls as string[]).filter(isUsablePhotoUrl).length
   }
   if (Array.isArray(venue.images)) {
-    count += (venue.images as string[]).filter(Boolean).length
+    count += (venue.images as string[]).filter(isUsablePhotoUrl).length
   }
   return count
 }

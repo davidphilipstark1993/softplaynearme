@@ -1,4 +1,35 @@
 /**
+ * Scraped venue photo URLs that are never renderable, so render sites should
+ * treat them the same as "no photo" rather than pass them to next/image:
+ *  - `gps-cs-s` is Google's session-scoped Maps photo path; it 403s once the
+ *    scrape session expires (confirmed: 719 venues affected as of Aug 2026).
+ *  - `streetviewpixels-pa.googleapis.com` panoids likewise expire (404).
+ *  - `result-no-thumbnail` / `default_user.png` aren't photos at all — they're
+ *    Google's own "no photo available" placeholder assets, scraped as if they
+ *    were real images.
+ *  - literal "nan" strings leak in from the CSV/scrape pipeline (see
+ *    lib/sanitize.ts for the same pattern on address fields).
+ * Google's stable `lh3.googleusercontent.com/p/AF1Qip...` place-photo
+ * references are NOT in this list — those 200 in spot checks and should
+ * still render.
+ */
+const UNRENDERABLE_PHOTO_PATTERNS = [
+  /googleusercontent\.com\/gps-cs-s\//,
+  /streetviewpixels-pa\.googleapis\.com/,
+  /maps\.gstatic\.com\/tactile\/pane\/result-no-thumbnail/,
+  /ssl\.gstatic\.com\/local\/servicebusiness\/default_user\.png/,
+]
+
+/** True if `url` is a real, directly-renderable photo (not empty, not a known-dead/placeholder pattern). */
+export function isUsablePhotoUrl(url: unknown): url is string {
+  if (typeof url !== 'string') return false
+  const trimmed = url.trim()
+  if (!trimmed || trimmed.toLowerCase() === 'nan') return false
+  if (!/^https?:\/\//i.test(trimmed)) return false
+  return !UNRENDERABLE_PHOTO_PATTERNS.some((p) => p.test(trimmed))
+}
+
+/**
  * Generates a shimmer SVG as a base64-encoded blur placeholder for next/image.
  * Use as: blurDataURL={shimmerDataURL(700, 475)} placeholder="blur"
  */
