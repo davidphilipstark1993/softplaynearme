@@ -39,7 +39,7 @@ export const posts: BlogPost[] = [
 
 <p>This 2026 parent guide covers the top soft play areas, toddler and baby sessions, party setups, inexpensive play ideas and SEN-friendly options across the city and nearby areas. Many venues combine soft play with trampolines, ball pits, climbing frames and café spaces for adults.</p>
 
-<p>Browse local soft play venues here: <a href="/soft-play/york">/york</a></p>
+<p>Browse local soft play venues here: <a href="/soft-play/york">York</a></p>
 
 <h2>Why families love soft play in York</h2>
 <p>Soft play in York provides safe indoor fun year-round, whether it’s raining or cold outside. Parents appreciate padded play spaces, separate toddler zones, and well-maintained equipment with plenty of seating and café facilities nearby.</p>
@@ -69,7 +69,7 @@ export const posts: BlogPost[] = [
   <li>Interactive sensory elements</li>
   <li>Quieter weekday sessions</li>
 </ul>
-<p>Browse toddler-friendly venues: <a href="/soft-play/york/toddler">/york?filter=toddler</a></p>
+<p>Browse toddler-friendly venues: <a href="/soft-play/york/toddler">toddler-friendly soft play in York</a></p>
 
 <h2>Baby soft play in York (under 1s)</h2>
 <p>Many York venues offer sessions for babies under one year old that include gentle padded areas and sensory-focused play. These sessions are ideal once babies can sit up or crawl confidently.</p>
@@ -88,15 +88,7 @@ export const posts: BlogPost[] = [
   <li>Dedicated hosts and themed setups</li>
   <li>Invitations and party bag options</li>
 </ul>
-<p>Explore party options at: <a href="/soft-play/york/birthday-parties">/york?filter=parties</a></p>
-
-<p>Example venue placeholders (replace with real ones):</p>
-<ul>
-  <li><a href="/soft-play/york/the-web-adventure-park-york">/york/the-web-adventure-park</a></li>
-  <li><a href="/soft-play/york/oxygen-york-york">/york/oxygen-york</a></li>
-  <li><a href="/soft-play/york/flip-out-york-previously-point-zero-trampoline-park-york-york">/york/flip-out-york</a></li>
-  <li><a href="/soft-play/york/york-leisure-centre-york">/york/york-leisure-centre</a></li>
-</ul>
+<p>Explore party options at: <a href="/soft-play/york/birthday-parties">birthday party venues in York</a></p>
 
 <h2>Cheap soft play in York: money-saving tips</h2>
 <p>Want <strong>cheap soft play York</strong>? Try these ideas:</p>
@@ -792,148 +784,86 @@ export const posts: BlogPost[] = [
     slug: 'best-soft-play-in-london',
     title: 'Best Soft Play in London (2026 Parent Guide)',
     city: 'London',
-    excerpt:
-      'Discover the best soft play in London for babies, toddlers and older kids — plus birthday venues, quiet sessions and money-saving tips across the capital.',
-    publishedAt: '2026-02-17T00:00:00.000Z',
-    updatedAt: '2026-02-17T00:00:00.000Z',
-    datePublished: '2026-02-17T00:00:00.000Z',
-    dateModified: '2026-02-17T00:00:00.000Z',
-    contentHtml: `<p>Looking for the <strong>best soft play in London</strong>? Whether you're planning a toddler day out, searching for baby-friendly sessions, or organising a birthday party, London has an incredible range of indoor soft play centres across every borough.</p>
+    excerpt: 'There’s no single best soft play in London — the city’s too big. This guide breaks it down by area, with real ratings, hours and the handful of confirmed accessibility and SEN options across the venues we hold data for.',
+    publishedAt: '2026-08-20T00:00:00.000Z',
+    updatedAt: '2026-08-20T00:00:00.000Z',
+    datePublished: '2026-08-20T00:00:00.000Z',
+    dateModified: '2026-08-20T00:00:00.000Z',
+    contentHtml: `<p>There isn’t really a single "best soft play in London" — the city is too big for that question to mean much. A top-rated venue in Wembley does you no good if you live in Woolwich. What actually matters is which venues are good and near you, so this guide is organised by area rather than one ranked list.</p>
 
-<p>From North London to South London, East to West, you'll find everything from small toddler cafés to huge multi-level adventure play frames.</p>
+<p>One genuine pattern worth knowing before you start: a good chunk of London’s soft play scene — around a quarter of the venues we hold data for — trades as a "play café" rather than a big warehouse-style centre. Smaller footprint, sit-down café built into the same room, aimed more at parents-and-under-5s than older kids wanting a three-storey frame to climb. Worth knowing which format you’re walking into before you go.</p>
 
-<p>Browse soft play venues near you: <a href="/soft-play/london">/london</a></p>
+<blockquote>
+  <p>👉 <strong><a href="/soft-play/london">Browse every soft play venue in London with hours, ratings and facilities</a></strong></p>
+</blockquote>
 
-<h2>Why families love soft play in London</h2>
-<p>Soft play in London is popular because it offers safe indoor fun year-round, dedicated baby and toddler zones, multi-level play structures, and café seating for parents. With unpredictable UK weather, indoor soft play is one of the easiest ways to keep children active and entertained.</p>
-<ul>
-  <li>Safe indoor fun year-round</li>
-  <li>Dedicated baby and toddler zones</li>
-  <li>Big adventure play frames for older kids</li>
-  <li>Birthday party packages</li>
-  <li>Cafés and parent seating areas</li>
-  <li>Great rainy day entertainment</li>
-</ul>
+<h2>North London</h2>
+<p><strong>Ballooon Soft Play & Cafe</strong> on the High Road in North Finchley (N12) is one of the strongest-rated venues on the whole London list — 4.9 stars from 251 reviews. <strong>Harmony Coffee House & Soft Play</strong> in Muswell Hill (N10) runs long hours, 6am–9pm most days, and sits at 4.8 stars. <strong>Under the Canopy Play Cafe</strong> near Kentish Town (NW5) has a smaller review count but a perfect 5-star average.</p>
 
-<h2>Popular areas for soft play in London</h2>
-<p>London is too big to treat as one big list — where you look usually depends on which side of the city you're on. Browse venues by area:</p>
-<ul>
-  <li><a href="/soft-play/london?area=north-london">Soft play in North London</a></li>
-  <li><a href="/soft-play/london?area=north-west-london">Soft play in North West London</a></li>
-  <li><a href="/soft-play/london?area=east-london">Soft play in East London</a></li>
-  <li><a href="/soft-play/london?area=south-east-london">Soft play in South East London</a></li>
-  <li><a href="/soft-play/london?area=south-west-london">Soft play in South West London</a></li>
-  <li><a href="/soft-play/london?area=west-london">Soft play in West London</a></li>
-  <li><a href="/soft-play/london?area=central-london">Soft play in Central London</a></li>
-</ul>
+<h2>East London</h2>
+<p><strong>Dreami Play Café</strong> off Hackney Road (E2) is the standout here — 5 stars from 141 reviews. <strong>Kinder Island Soft Play</strong> on Fish Island near Bow (E3) and <strong>It Takes a Village Play Cafe</strong> in Walthamstow (E17) are both smaller, well-reviewed neighbourhood options. <strong>Caloroso Soft Play & Parties</strong> in East Ham (E6) runs some of the longest hours on the list — open until 9.30pm on weeknights, and past 10pm on Fridays and Saturdays.</p>
 
-<h2>Best soft play in London: what to look for</h2>
-<p>When choosing the <strong>best soft play in London</strong>, look for:</p>
-<ul>
-  <li><strong>Age separation</strong> (baby/toddler areas away from older children)</li>
-  <li><strong>Cleanliness and maintenance</strong></li>
-  <li><strong>Clear visibility</strong> so you can supervise easily</li>
-  <li><strong>Seating and café options</strong></li>
-  <li><strong>Party availability</strong> if you're planning a celebration</li>
-  <li><strong>Quiet/SEN sessions</strong> for calmer play</li>
-</ul>
-<p>Start exploring: <a href="/soft-play/london">all soft play venues in London</a> • Toddlers: <a href="/soft-play/london/toddler">toddler-friendly venues</a></p>
+<h2>South London</h2>
+<p><strong>Epic Inflatables And Soft Play</strong> in Lee (SE12) has a perfect 5-star average from 213 reviews — one of only four London venues on our list with a full 5 stars, and easily the most-reviewed of that group. <strong>Millie & Maisie Play Café</strong> in Clapham (SW4) and <strong>Littleville Role Play Cafe</strong> in Orpington (BR6) both sit comfortably above 4.6 stars. <strong>Owls Play Centre</strong> at Fairlop Waters in Ilford, technically East but often grouped with South-East options, has by far the highest review count in this group at 1,071 — worth knowing if you’d rather go somewhere with a long track record than a smaller, newer venue.</p>
 
-<h2>Toddler soft play in London (1–3 years)</h2>
-<p>If you're searching for <strong>toddler soft play London</strong>, prioritise venues with dedicated under-3 zones. These areas usually include mini slides, soft tunnels, ball pits, role-play corners and sensory features. Weekday mornings are often the quietest time for toddlers.</p>
-<ul>
-  <li>Mini slides and soft climbing</li>
-  <li>Soft tunnels and crawl spaces</li>
-  <li>Ball pits and padded shapes</li>
-  <li>Role-play corners</li>
-  <li>Calmer weekday sessions</li>
-</ul>
-<p>Browse toddler-friendly venues: <a href="/soft-play/london/toddler">toddler soft play in London</a></p>
+<h2>West London</h2>
+<p><strong>Cheeky Chops Play Cafe</strong> in Twickenham (TW1) is well established at 4.8 stars from 343 reviews. <strong>Full of Beans Soft Play & Cafe</strong> in Wembley (HA0) and <strong>Sammy's Soft Play</strong> off Ladbroke Grove (W10) are both smaller neighbourhood options. <strong>Halo Play Café</strong> in Uxbridge (UB8) is the furthest west on the list, inside The Chimes shopping centre.</p>
 
-<h2>Baby soft play in London (under 1s)</h2>
-<p>Many London soft play centres run baby sessions designed for crawlers, early walkers, and sensory exploration. Look for padded flooring, low-height equipment, baby-only sessions, and comfortable seating for feeding and breaks.</p>
-<ul>
-  <li>Padded floors and low equipment</li>
-  <li>Baby-only / under-1 sessions</li>
-  <li>Sensory toys and soft mats</li>
-  <li>Comfortable seating for parents</li>
-</ul>
+<h2>Outer London</h2>
+<p><strong>Appletown London</strong> in Burnt Oak, Edgware (HA8) is worth flagging specifically — it’s the one venue on our full London list with wheelchair access, SEN-friendly facilities, a confirmed toddler area, café and party rooms all listed together. Long opening hours too, 9am–9pm daily. <strong>MyPlace Soft Play & Parties</strong> in Harold Wood (RM3) and <strong>Ollie Polly Play Cafe</strong> in West Wickham (BR4) are further options toward the edges of the city.</p>
 
-<h2>Soft play birthday parties in London</h2>
-<p>Planning a birthday? London has excellent <strong>soft play birthday party</strong> venues across the city. Most party packages include reserved or private party rooms, timed play sessions, food and drink packages, and a party host.</p>
-<ul>
-  <li>Reserved or private party rooms</li>
-  <li>Timed play sessions</li>
-  <li>Food and drink packages</li>
-  <li>Party hosts and add-ons</li>
-</ul>
-<p>Explore party venues: <a href="/soft-play/london/birthday-parties">soft play birthday parties in London</a></p>
+<h2>Booking and hours</h2>
+<p>Hours genuinely vary by borough and format. The café-style venues tend to run shorter days that match a nursery school run — several close by 4.30–5pm. The bigger inflatable-park and multi-level venues run closer to a full retail day, some past 9pm. If you’re planning a specific visit, check the individual venue rather than assuming — London hours vary more than you’d get away with assuming in a smaller city.</p>
 
-<h2>Cheap soft play in London: money-saving tips</h2>
-<p>Looking for <strong>cheap soft play London</strong>? Prices vary across boroughs, but you can save money by visiting off-peak, checking sibling discounts, and using memberships if you go regularly.</p>
-<ul>
-  <li>Visit weekday mornings</li>
-  <li>Avoid peak weekend times</li>
-  <li>Check sibling/multi-child discounts</li>
-  <li>Look for memberships or loyalty schemes</li>
-  <li>Book parties early</li>
-</ul>
+<h2>Accessibility and additional needs</h2>
+<p>Confirmed accessibility data is thin across London’s smaller venues generally. Appletown London in Edgware is the one venue on this list with wheelchair access and SEN-friendly sessions both explicitly confirmed. If accessibility is a specific requirement, it’s worth calling ahead to any venue rather than relying on what’s listed, since this is exactly the kind of detail that goes unrecorded even at venues that do offer it.</p>
 
-<h2>SEN-friendly / autism-friendly soft play in London</h2>
-<p>London has a growing number of SEN-friendly sessions. These may include reduced capacity, lower music volume, softer lighting, predictable session times and supportive staff.</p>
-<ul>
-  <li>Reduced capacity sessions</li>
-  <li>Lower music volume</li>
-  <li>Softer lighting</li>
-  <li>Clear session times</li>
-  <li>Staff awareness and support</li>
-</ul>
+<h2>Which area to start with</h2>
+<p>Perfect rating, most reviewed: <strong>Epic Inflatables And Soft Play</strong> in Lee, South-East London.</p>
+<p>Longest track record: <strong>Owls Play Centre</strong> at Fairlop Waters, with over a thousand reviews.</p>
+<p>If accessibility or SEN provision matters: <strong>Appletown London</strong> in Edgware.</p>
+<p>If you want the café-first, parent-friendly format: <strong>Dreami Play Café</strong> (East), <strong>Ballooon Soft Play & Cafe</strong> (North), or <strong>Millie & Maisie Play Café</strong> (South).</p>
 
-<h2>Local tips: parking, cafés, quieter times & what to bring</h2>
-<ul>
-  <li><strong>Quieter times:</strong> weekday mornings are best for toddlers</li>
-  <li><strong>Bring socks:</strong> required at most venues</li>
-  <li><strong>Spare clothes:</strong> especially for younger children</li>
-  <li><strong>Transport:</strong> some central venues have limited parking</li>
-  <li><strong>Café tip:</strong> check allergy-friendly options in advance</li>
-</ul>
+<blockquote>
+  <p>👉 <strong><a href="/soft-play/london">See the full London directory — filter by area, hours and facilities</a></strong></p>
+</blockquote>
 
-<h2>FAQs – Soft play in London</h2>
+<h2>Frequently asked questions</h2>
 
-<h3>What is the best soft play in London?</h3>
-<p>The best soft play in London depends on your child's age, your location and whether you need toddler zones, party facilities or quieter sessions.</p>
+<h3>What’s the best soft play in London?</h3>
+<p>It depends entirely on which part of London you’re in — this is too large a city for one answer to be useful. Epic Inflatables And Soft Play in Lee (SE12) has a perfect 5-star rating and the most reviews of any venue at that rating; Owls Play Centre in Ilford has the longest review history. See the area breakdown above for something nearer you.</p>
 
-<h3>Are there toddler-only sessions in London?</h3>
-<p>Yes, many London soft play centres offer weekday toddler sessions with reduced numbers and smaller play areas.</p>
+<h3>What’s a "play café" and how is it different from soft play?</h3>
+<p>A play café combines a smaller soft play area with a proper sit-down café in the same room, usually aimed at parents with under-5s rather than older children wanting a large climbing frame. Around a quarter of London’s soft play venues follow this format.</p>
 
-<h3>How much does soft play cost in London?</h3>
-<p>Prices vary widely by borough, but most sessions cost between £5–£12 per child depending on peak or off-peak times.</p>
+<h3>Are London soft play venues wheelchair accessible?</h3>
+<p>Confirmed accessibility data is limited across the venues we hold. Appletown London in Edgware explicitly lists wheelchair access. For any other venue, it’s worth calling ahead to confirm before you travel.</p>
 
-<h3>Which soft play centres in London do birthday parties?</h3>
-<p>Many venues across London offer birthday party packages including private rooms, food and a party host.</p>
+<h3>Do London soft play venues run SEN-friendly sessions?</h3>
+<p>Appletown London in Edgware is the one venue on our list with SEN-friendly sessions explicitly confirmed. Given how thin this data is generally, it’s worth contacting venues directly if this is a requirement.</p>
 
-<h3>Are there SEN-friendly or quiet soft play sessions in London?</h3>
-<p>Yes, several venues offer quiet or SEN-friendly sessions with lower capacity and calmer environments.</p>`,
+<h3>What time do soft play venues in London open?</h3>
+<p>It varies significantly by venue and format. Smaller café-style venues often run shorter days, sometimes closing by 4.30–5pm, while larger venues can stay open past 9pm. Always check the specific venue rather than assuming standard hours.</p>`,
     faq: [
       {
-        q: 'What is the best soft play in London?',
-        a: 'The best soft play in London depends on your child\u2019s age, your location and whether you need toddler zones, party facilities or quieter sessions.',
+        q: 'What’s the best soft play in London?',
+        a: 'It depends entirely on which part of London you’re in — this is too large a city for one answer to be useful. Epic Inflatables And Soft Play in Lee (SE12) has a perfect 5-star rating and the most reviews of any venue at that rating; Owls Play Centre in Ilford has the longest review history. See the area breakdown above for something nearer you.',
       },
       {
-        q: 'Are there toddler-only sessions in London?',
-        a: 'Yes, many London soft play centres offer weekday toddler sessions with reduced numbers and smaller play areas.',
+        q: 'What’s a "play café" and how is it different from soft play?',
+        a: 'A play café combines a smaller soft play area with a proper sit-down café in the same room, usually aimed at parents with under-5s rather than older children wanting a large climbing frame. Around a quarter of London’s soft play venues follow this format.',
       },
       {
-        q: 'How much does soft play cost in London?',
-        a: 'Prices vary widely by borough, but most sessions cost between \u00a35\u2013\u00a312 per child depending on peak or off-peak times.',
+        q: 'Are London soft play venues wheelchair accessible?',
+        a: 'Confirmed accessibility data is limited across the venues we hold. Appletown London in Edgware explicitly lists wheelchair access. For any other venue, it’s worth calling ahead to confirm before you travel.',
       },
       {
-        q: 'Which soft play centres in London do birthday parties?',
-        a: 'Many venues across London offer birthday party packages including private rooms, food and a party host.',
+        q: 'Do London soft play venues run SEN-friendly sessions?',
+        a: 'Appletown London in Edgware is the one venue on our list with SEN-friendly sessions explicitly confirmed. Given how thin this data is generally, it’s worth contacting venues directly if this is a requirement.',
       },
       {
-        q: 'Are there SEN-friendly or quiet soft play sessions in London?',
-        a: 'Yes, several venues offer quiet or SEN-friendly sessions with lower capacity and calmer environments.',
+        q: 'What time do soft play venues in London open?',
+        a: 'It varies significantly by venue and format. Smaller café-style venues often run shorter days, sometimes closing by 4.30–5pm, while larger venues can stay open past 9pm. Always check the specific venue rather than assuming standard hours.',
       },
     ],
   },
@@ -952,7 +882,7 @@ export const posts: BlogPost[] = [
 
 <p>From the city centre to Stockport, Trafford, Salford and beyond, you'll find everything from small toddler play cafés to massive multi-level adventure frames.</p>
 
-<p>Browse soft play venues near you: <a href="/soft-play/manchester">/manchester</a></p>
+<p>Browse soft play venues near you: <a href="/soft-play/manchester">Manchester</a></p>
 
 <h2>Why families love soft play in Manchester</h2>
 <p>Soft play is one of the most popular family activities in Manchester — and for good reason. It offers a safe, indoor space for kids to climb, slide and burn off energy regardless of the weather. With Manchester's famously unpredictable rain, indoor play centres are a lifesaver for parents.</p>
@@ -975,7 +905,7 @@ export const posts: BlogPost[] = [
   <li><strong>Party availability</strong> if you're planning a celebration</li>
   <li><strong>Quiet/SEN sessions</strong> for calmer play</li>
 </ul>
-<p>Start exploring: <a href="/soft-play/manchester">/manchester</a> • Toddlers: <a href="/soft-play/manchester/toddler">/manchester?filter=toddler</a></p>
+<p>Start exploring: <a href="/soft-play/manchester">Manchester</a> • Toddlers: <a href="/soft-play/manchester/toddler">toddler-friendly soft play in Manchester</a></p>
 
 <h2>Toddler soft play in Manchester (1–3 years)</h2>
 <p>If you're searching for <strong>toddler soft play Manchester</strong>, look for venues with dedicated under-3 zones. These areas typically have mini slides, soft tunnels, ball pits, role-play corners and sensory features — all designed so little ones can explore safely away from bigger kids.</p>
@@ -986,7 +916,7 @@ export const posts: BlogPost[] = [
   <li>Role-play corners (kitchens, shops, cars)</li>
   <li>Calmer weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly venues: <a href="/soft-play/manchester/toddler">/manchester?filter=toddler</a></p>
+<p>Browse toddler-friendly venues: <a href="/soft-play/manchester/toddler">toddler-friendly soft play in Manchester</a></p>
 
 <h2>Baby soft play in Manchester (under 1s)</h2>
 <p>Many Manchester soft play centres run dedicated baby sessions for crawlers, early walkers and sensory exploration. These are perfect once your baby can sit or crawl confidently.</p>
@@ -1005,7 +935,7 @@ export const posts: BlogPost[] = [
   <li>Food and drink packages</li>
   <li>Party hosts and add-ons</li>
 </ul>
-<p>Explore party venues: <a href="/soft-play/manchester/birthday-parties">/manchester?filter=parties</a></p>
+<p>Explore party venues: <a href="/soft-play/manchester/birthday-parties">birthday party venues in Manchester</a></p>
 
 <h2>Cheap soft play in Manchester: money-saving tips</h2>
 <p>Looking for <strong>cheap soft play Manchester</strong>? Prices vary across Greater Manchester, but there are easy ways to keep costs down.</p>
@@ -1090,7 +1020,7 @@ export const posts: BlogPost[] = [
 
 <p>From the city centre to Solihull, Sutton Coldfield, Erdington and beyond, you'll find everything from cosy toddler play cafés to huge multi-level adventure frames.</p>
 
-<p>Browse soft play venues near you: <a href="/soft-play/birmingham">/birmingham</a></p>
+<p>Browse soft play venues near you: <a href="/soft-play/birmingham">Birmingham</a></p>
 
 <h2>Why families love soft play in Birmingham</h2>
 <p>Soft play is one of the most popular family activities in Birmingham. It provides a safe indoor space for kids to climb, slide and burn off energy — perfect for rainy days, school holidays and weekends when you need a reliable plan.</p>
@@ -1113,7 +1043,7 @@ export const posts: BlogPost[] = [
   <li><strong>Party availability</strong> if you're planning a celebration</li>
   <li><strong>Quiet/SEN sessions</strong> for calmer play</li>
 </ul>
-<p>Start exploring: <a href="/soft-play/birmingham">/birmingham</a> • Toddlers: <a href="/soft-play/birmingham/toddler">/birmingham?filter=toddler</a></p>
+<p>Start exploring: <a href="/soft-play/birmingham">Birmingham</a> • Toddlers: <a href="/soft-play/birmingham/toddler">toddler-friendly soft play in Birmingham</a></p>
 
 <h2>Toddler soft play in Birmingham (1–3 years)</h2>
 <p>If you're searching for <strong>toddler soft play Birmingham</strong>, look for venues with dedicated under-3 zones. These areas typically have mini slides, soft tunnels, ball pits, role-play corners and sensory features — all designed so little ones can play safely away from bigger kids.</p>
@@ -1124,7 +1054,7 @@ export const posts: BlogPost[] = [
   <li>Role-play corners (kitchens, shops, cars)</li>
   <li>Calmer weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly venues: <a href="/soft-play/birmingham/toddler">/birmingham?filter=toddler</a></p>
+<p>Browse toddler-friendly venues: <a href="/soft-play/birmingham/toddler">toddler-friendly soft play in Birmingham</a></p>
 
 <h2>Baby soft play in Birmingham (under 1s)</h2>
 <p>Many Birmingham soft play centres run dedicated baby sessions for crawlers, early walkers and sensory exploration. These are ideal once your baby can sit or crawl confidently.</p>
@@ -1143,7 +1073,7 @@ export const posts: BlogPost[] = [
   <li>Food and drink packages</li>
   <li>Party hosts and add-ons</li>
 </ul>
-<p>Explore party venues: <a href="/soft-play/birmingham/birthday-parties">/birmingham?filter=parties</a></p>
+<p>Explore party venues: <a href="/soft-play/birmingham/birthday-parties">birthday party venues in Birmingham</a></p>
 
 <h2>Cheap soft play in Birmingham: money-saving tips</h2>
 <p>Looking for <strong>cheap soft play Birmingham</strong>? Prices vary across the West Midlands, but there are easy ways to keep costs down.</p>
@@ -1228,7 +1158,7 @@ export const posts: BlogPost[] = [
 
 <p>From the city centre to Filton, Bradley Stoke, Brislington and beyond, you'll find everything from cosy toddler play cafés to large multi-level adventure frames.</p>
 
-<p>Browse soft play venues near you: <a href="/soft-play/bristol">/bristol</a></p>
+<p>Browse soft play venues near you: <a href="/soft-play/bristol">Bristol</a></p>
 
 <h2>Why families love soft play in Bristol</h2>
 <p>Soft play is a go-to for Bristol families. It provides a safe indoor space for kids to climb, slide and burn off energy — ideal for rainy days, school holidays and weekends when you need a reliable plan.</p>
@@ -1251,7 +1181,7 @@ export const posts: BlogPost[] = [
   <li><strong>Party availability</strong> if you're planning a celebration</li>
   <li><strong>Quiet/SEN sessions</strong> for calmer play</li>
 </ul>
-<p>Start exploring: <a href="/soft-play/bristol">/bristol</a> • Toddlers: <a href="/soft-play/bristol/toddler">/bristol?filter=toddler</a></p>
+<p>Start exploring: <a href="/soft-play/bristol">Bristol</a> • Toddlers: <a href="/soft-play/bristol/toddler">toddler-friendly soft play in Bristol</a></p>
 
 <h2>Toddler soft play in Bristol (1–3 years)</h2>
 <p>If you're searching for <strong>toddler soft play Bristol</strong>, look for venues with dedicated under-3 zones. These areas typically have mini slides, soft tunnels, ball pits, role-play corners and sensory features — all designed so little ones can play safely away from bigger kids.</p>
@@ -1262,7 +1192,7 @@ export const posts: BlogPost[] = [
   <li>Role-play corners (kitchens, shops, cars)</li>
   <li>Calmer weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly venues: <a href="/soft-play/bristol/toddler">/bristol?filter=toddler</a></p>
+<p>Browse toddler-friendly venues: <a href="/soft-play/bristol/toddler">toddler-friendly soft play in Bristol</a></p>
 
 <h2>Baby soft play in Bristol (under 1s)</h2>
 <p>Many Bristol soft play centres run dedicated baby sessions for crawlers, early walkers and sensory exploration. These are ideal once your baby can sit or crawl confidently.</p>
@@ -1281,7 +1211,7 @@ export const posts: BlogPost[] = [
   <li>Food and drink packages</li>
   <li>Party hosts and add-ons</li>
 </ul>
-<p>Explore party venues: <a href="/soft-play/bristol/birthday-parties">/bristol?filter=parties</a></p>
+<p>Explore party venues: <a href="/soft-play/bristol/birthday-parties">birthday party venues in Bristol</a></p>
 
 <h2>Cheap soft play in Bristol: money-saving tips</h2>
 <p>Looking for <strong>cheap soft play Bristol</strong>? Prices vary across the city, but there are easy ways to keep costs down.</p>
@@ -1366,7 +1296,7 @@ export const posts: BlogPost[] = [
 
 <p>From the city centre to Speke, Huyton, Walton and the Wirral, you'll find everything from cosy toddler play cafés to huge multi-level adventure frames.</p>
 
-<p>Browse soft play venues near you: <a href="/soft-play/liverpool">/liverpool</a></p>
+<p>Browse soft play venues near you: <a href="/soft-play/liverpool">Liverpool</a></p>
 
 <h2>Why families love soft play in Liverpool</h2>
 <p>Soft play is one of the most popular family activities across Merseyside. It provides a safe indoor space for kids to climb, slide and burn off energy — perfect for rainy days, school holidays and weekends when you need a reliable plan.</p>
@@ -1389,7 +1319,7 @@ export const posts: BlogPost[] = [
   <li><strong>Party availability</strong> if you're planning a celebration</li>
   <li><strong>Quiet/SEN sessions</strong> for calmer play</li>
 </ul>
-<p>Start exploring: <a href="/soft-play/liverpool">/liverpool</a> • Toddlers: <a href="/soft-play/liverpool/toddler">/liverpool?filter=toddler</a></p>
+<p>Start exploring: <a href="/soft-play/liverpool">Liverpool</a> • Toddlers: <a href="/soft-play/liverpool/toddler">toddler-friendly soft play in Liverpool</a></p>
 
 <h2>Toddler soft play in Liverpool (1–3 years)</h2>
 <p>If you're searching for <strong>toddler soft play Liverpool</strong>, look for venues with dedicated under-3 zones. These areas typically have mini slides, soft tunnels, ball pits, role-play corners and sensory features — all designed so little ones can play safely away from bigger kids.</p>
@@ -1400,7 +1330,7 @@ export const posts: BlogPost[] = [
   <li>Role-play corners (kitchens, shops, cars)</li>
   <li>Calmer weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly venues: <a href="/soft-play/liverpool/toddler">/liverpool?filter=toddler</a></p>
+<p>Browse toddler-friendly venues: <a href="/soft-play/liverpool/toddler">toddler-friendly soft play in Liverpool</a></p>
 
 <h2>Baby soft play in Liverpool (under 1s)</h2>
 <p>Many Liverpool soft play centres run dedicated baby sessions for crawlers, early walkers and sensory exploration. These are ideal once your baby can sit or crawl confidently.</p>
@@ -1419,7 +1349,7 @@ export const posts: BlogPost[] = [
   <li>Food and drink packages</li>
   <li>Party hosts and add-ons</li>
 </ul>
-<p>Explore party venues: <a href="/soft-play/liverpool/birthday-parties">/liverpool?filter=parties</a></p>
+<p>Explore party venues: <a href="/soft-play/liverpool/birthday-parties">birthday party venues in Liverpool</a></p>
 
 <h2>Cheap soft play in Liverpool: money-saving tips</h2>
 <p>Looking for <strong>cheap soft play Liverpool</strong>? Prices vary across Merseyside, but there are easy ways to keep costs down.</p>
@@ -1504,7 +1434,7 @@ export const posts: BlogPost[] = [
 
 <p>From the city centre to Gosforth, Jesmond, Byker, Team Valley and Gateshead, you'll find everything from cosy toddler play cafés to huge multi-level adventure frames.</p>
 
-<p>Browse soft play venues near you: <a href="/soft-play/newcastle">/newcastle</a></p>
+<p>Browse soft play venues near you: <a href="/soft-play/newcastle">Newcastle</a></p>
 
 <h2>Why families love soft play in Newcastle</h2>
 <p>Soft play is one of the most popular family activities across Tyneside. It provides a safe indoor space for kids to climb, slide and burn off energy — perfect for those North East rainy days, school holidays and weekends when you need a reliable plan.</p>
@@ -1527,7 +1457,7 @@ export const posts: BlogPost[] = [
   <li><strong>Party availability</strong> if you're planning a celebration</li>
   <li><strong>Quiet/SEN sessions</strong> for calmer play</li>
 </ul>
-<p>Start exploring: <a href="/soft-play/newcastle">/newcastle</a> • Toddlers: <a href="/soft-play/newcastle/toddler">/newcastle?filter=toddler</a></p>
+<p>Start exploring: <a href="/soft-play/newcastle">Newcastle</a> • Toddlers: <a href="/soft-play/newcastle/toddler">toddler-friendly soft play in Newcastle</a></p>
 
 <h2>Toddler soft play in Newcastle (1–3 years)</h2>
 <p>If you're searching for <strong>toddler soft play Newcastle</strong>, look for venues with dedicated under-3 zones. These areas typically have mini slides, soft tunnels, ball pits, role-play corners and sensory features — all designed so little ones can play safely away from bigger kids.</p>
@@ -1538,7 +1468,7 @@ export const posts: BlogPost[] = [
   <li>Role-play corners (kitchens, shops, cars)</li>
   <li>Calmer weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly venues: <a href="/soft-play/newcastle/toddler">/newcastle?filter=toddler</a></p>
+<p>Browse toddler-friendly venues: <a href="/soft-play/newcastle/toddler">toddler-friendly soft play in Newcastle</a></p>
 
 <h2>Baby soft play in Newcastle (under 1s)</h2>
 <p>Many Newcastle soft play centres run dedicated baby sessions for crawlers, early walkers and sensory exploration. These are ideal once your baby can sit or crawl confidently.</p>
@@ -1557,7 +1487,7 @@ export const posts: BlogPost[] = [
   <li>Food and drink packages</li>
   <li>Party hosts and add-ons</li>
 </ul>
-<p>Explore party venues: <a href="/soft-play/newcastle/birthday-parties">/newcastle?filter=parties</a></p>
+<p>Explore party venues: <a href="/soft-play/newcastle/birthday-parties">birthday party venues in Newcastle</a></p>
 
 <h2>Cheap soft play in Newcastle: money-saving tips</h2>
 <p>Looking for <strong>cheap soft play Newcastle</strong>? Prices vary across Tyneside, but there are easy ways to keep costs down.</p>
@@ -1641,7 +1571,7 @@ export const posts: BlogPost[] = [
 
 <p>From Bournemouth town centre to Poole, Christchurch, Ferndown and Wimborne, you'll find everything from cosy toddler play cafés to large multi-level adventure frames.</p>
 
-<p>Browse soft play venues near you: <a href="/soft-play/bournemouth">/bournemouth</a></p>
+<p>Browse soft play venues near you: <a href="/soft-play/bournemouth">Bournemouth</a></p>
 
 <h2>Why families love soft play in Bournemouth</h2>
 <p>Soft play is a favourite for Bournemouth families. It provides a safe indoor space for kids to climb, slide and burn off energy — ideal when the seaside weather doesn't cooperate, during school holidays, and on weekends when you need a reliable plan.</p>
@@ -1664,7 +1594,7 @@ export const posts: BlogPost[] = [
   <li><strong>Party availability</strong> if you're planning a celebration</li>
   <li><strong>Quiet/SEN sessions</strong> for calmer play</li>
 </ul>
-<p>Start exploring: <a href="/soft-play/bournemouth">/bournemouth</a> • Toddlers: <a href="/soft-play/bournemouth/toddler">/bournemouth?filter=toddler</a></p>
+<p>Start exploring: <a href="/soft-play/bournemouth">Bournemouth</a> • Toddlers: <a href="/soft-play/bournemouth/toddler">toddler-friendly soft play in Bournemouth</a></p>
 
 <h2>Toddler soft play in Bournemouth (1–3 years)</h2>
 <p>If you're searching for <strong>toddler soft play Bournemouth</strong>, look for venues with dedicated under-3 zones. These areas typically have mini slides, soft tunnels, ball pits, role-play corners and sensory features — all designed so little ones can play safely away from bigger kids.</p>
@@ -1675,7 +1605,7 @@ export const posts: BlogPost[] = [
   <li>Role-play corners (kitchens, shops, cars)</li>
   <li>Calmer weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly venues: <a href="/soft-play/bournemouth/toddler">/bournemouth?filter=toddler</a></p>
+<p>Browse toddler-friendly venues: <a href="/soft-play/bournemouth/toddler">toddler-friendly soft play in Bournemouth</a></p>
 
 <h2>Baby soft play in Bournemouth (under 1s)</h2>
 <p>Many Bournemouth soft play centres run dedicated baby sessions for crawlers, early walkers and sensory exploration. These are ideal once your baby can sit or crawl confidently.</p>
@@ -1694,7 +1624,7 @@ export const posts: BlogPost[] = [
   <li>Food and drink packages</li>
   <li>Party hosts and add-ons</li>
 </ul>
-<p>Explore party venues: <a href="/soft-play/bournemouth/birthday-parties">/bournemouth?filter=parties</a></p>
+<p>Explore party venues: <a href="/soft-play/bournemouth/birthday-parties">birthday party venues in Bournemouth</a></p>
 
 <h2>Cheap soft play in Bournemouth: money-saving tips</h2>
 <p>Looking for <strong>cheap soft play Bournemouth</strong>? Prices vary across Dorset, but there are easy ways to keep costs down.</p>
@@ -1763,7 +1693,7 @@ export const posts: BlogPost[] = [
 
 <p>From the seafront to Burgess Hill, Lewes and Worthing, you'll find everything from cosy toddler play cafés to large multi-level adventure frames.</p>
 
-<p>Browse soft play venues near you: <a href="/soft-play/brighton">/brighton</a></p>
+<p>Browse soft play venues near you: <a href="/soft-play/brighton">Brighton</a></p>
 
 <h2>Why families love soft play in Brighton</h2>
 <p>Soft play is hugely popular with Brighton families. It provides a safe indoor space for kids to climb, slide and burn off energy — ideal when the seaside weather turns, during school holidays, and on weekends when you need a reliable plan.</p>
@@ -1786,7 +1716,7 @@ export const posts: BlogPost[] = [
   <li><strong>Party availability</strong> if you're planning a celebration</li>
   <li><strong>Quiet/SEN sessions</strong> for calmer play</li>
 </ul>
-<p>Start exploring: <a href="/soft-play/brighton">/brighton</a> • Toddlers: <a href="/soft-play/brighton/toddler">/brighton?filter=toddler</a></p>
+<p>Start exploring: <a href="/soft-play/brighton">Brighton</a> • Toddlers: <a href="/soft-play/brighton/toddler">toddler-friendly soft play in Brighton</a></p>
 
 <h2>Toddler soft play in Brighton (1–3 years)</h2>
 <p>If you're searching for <strong>toddler soft play Brighton</strong>, look for venues with dedicated under-3 zones. These areas typically have mini slides, soft tunnels, ball pits, role-play corners and sensory features.</p>
@@ -1797,7 +1727,7 @@ export const posts: BlogPost[] = [
   <li>Role-play corners (kitchens, shops, cars)</li>
   <li>Calmer weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly venues: <a href="/soft-play/brighton/toddler">/brighton?filter=toddler</a></p>
+<p>Browse toddler-friendly venues: <a href="/soft-play/brighton/toddler">toddler-friendly soft play in Brighton</a></p>
 
 <h2>Baby soft play in Brighton (under 1s)</h2>
 <p>Many Brighton soft play centres run dedicated baby sessions for crawlers, early walkers and sensory exploration. These are ideal once your baby can sit or crawl confidently.</p>
@@ -1816,7 +1746,7 @@ export const posts: BlogPost[] = [
   <li>Food and drink packages</li>
   <li>Party hosts and add-ons</li>
 </ul>
-<p>Explore party venues: <a href="/soft-play/brighton/birthday-parties">/brighton?filter=parties</a></p>
+<p>Explore party venues: <a href="/soft-play/brighton/birthday-parties">birthday party venues in Brighton</a></p>
 
 <h2>Cheap soft play in Brighton: money-saving tips</h2>
 <p>Looking for <strong>cheap soft play Brighton</strong>? Prices vary across East Sussex, but there are easy ways to keep costs down.</p>
@@ -1885,7 +1815,7 @@ export const posts: BlogPost[] = [
 
 <p>From the city centre to Newport, Barry, Caerphilly and Bridgend, you'll find everything from cosy toddler play cafés to large multi-level adventure frames.</p>
 
-<p>Browse soft play venues near you: <a href="/soft-play/cardiff">/cardiff</a></p>
+<p>Browse soft play venues near you: <a href="/soft-play/cardiff">Cardiff</a></p>
 
 <h2>Why families love soft play in Cardiff</h2>
 <p>Soft play is one of the most popular family activities in Cardiff. It provides a safe indoor space for kids to climb, slide and burn off energy — perfect for those rainy Welsh days, school holidays and weekends.</p>
@@ -1908,7 +1838,7 @@ export const posts: BlogPost[] = [
   <li><strong>Party availability</strong> if you're planning a celebration</li>
   <li><strong>Quiet/SEN sessions</strong> for calmer play</li>
 </ul>
-<p>Start exploring: <a href="/soft-play/cardiff">/cardiff</a> • Toddlers: <a href="/soft-play/cardiff/toddler">/cardiff?filter=toddler</a></p>
+<p>Start exploring: <a href="/soft-play/cardiff">Cardiff</a> • Toddlers: <a href="/soft-play/cardiff/toddler">toddler-friendly soft play in Cardiff</a></p>
 
 <h2>Toddler soft play in Cardiff (1–3 years)</h2>
 <p>If you're searching for <strong>toddler soft play Cardiff</strong>, look for venues with dedicated under-3 zones. These areas typically have mini slides, soft tunnels, ball pits, role-play corners and sensory features.</p>
@@ -1919,7 +1849,7 @@ export const posts: BlogPost[] = [
   <li>Role-play corners (kitchens, shops, cars)</li>
   <li>Calmer weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly venues: <a href="/soft-play/cardiff/toddler">/cardiff?filter=toddler</a></p>
+<p>Browse toddler-friendly venues: <a href="/soft-play/cardiff/toddler">toddler-friendly soft play in Cardiff</a></p>
 
 <h2>Baby soft play in Cardiff (under 1s)</h2>
 <p>Many Cardiff soft play centres run dedicated baby sessions for crawlers, early walkers and sensory exploration. These are ideal once your baby can sit or crawl confidently.</p>
@@ -1938,7 +1868,7 @@ export const posts: BlogPost[] = [
   <li>Food and drink packages</li>
   <li>Party hosts and add-ons</li>
 </ul>
-<p>Explore party venues: <a href="/soft-play/cardiff/birthday-parties">/cardiff?filter=parties</a></p>
+<p>Explore party venues: <a href="/soft-play/cardiff/birthday-parties">birthday party venues in Cardiff</a></p>
 
 <h2>Cheap soft play in Cardiff: money-saving tips</h2>
 <p>Looking for <strong>cheap soft play Cardiff</strong>? Prices vary across South Wales, but there are easy ways to keep costs down.</p>
@@ -2007,7 +1937,7 @@ export const posts: BlogPost[] = [
 
 <p>From Colchester town centre to Chelmsford, Braintree, Clacton and Basildon, you'll find everything from cosy toddler play cafés to large multi-level adventure frames.</p>
 
-<p>Browse soft play venues near you: <a href="/soft-play/colchester">/colchester</a></p>
+<p>Browse soft play venues near you: <a href="/soft-play/colchester">Colchester</a></p>
 
 <h2>Why families love soft play in Colchester</h2>
 <p>Soft play is a go-to for Colchester families. It provides a safe indoor space for kids to climb, slide and burn off energy — perfect for rainy days, school holidays and weekends.</p>
@@ -2030,7 +1960,7 @@ export const posts: BlogPost[] = [
   <li><strong>Party availability</strong> if you're planning a celebration</li>
   <li><strong>Quiet/SEN sessions</strong> for calmer play</li>
 </ul>
-<p>Start exploring: <a href="/soft-play/colchester">/colchester</a> • Toddlers: <a href="/soft-play/colchester/toddler">/colchester?filter=toddler</a></p>
+<p>Start exploring: <a href="/soft-play/colchester">Colchester</a> • Toddlers: <a href="/soft-play/colchester/toddler">toddler-friendly soft play in Colchester</a></p>
 
 <h2>Toddler soft play in Colchester (1–3 years)</h2>
 <p>If you're searching for <strong>toddler soft play Colchester</strong>, look for venues with dedicated under-3 zones. These areas typically have mini slides, soft tunnels, ball pits, role-play corners and sensory features.</p>
@@ -2041,7 +1971,7 @@ export const posts: BlogPost[] = [
   <li>Role-play corners (kitchens, shops, cars)</li>
   <li>Calmer weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly venues: <a href="/soft-play/colchester/toddler">/colchester?filter=toddler</a></p>
+<p>Browse toddler-friendly venues: <a href="/soft-play/colchester/toddler">toddler-friendly soft play in Colchester</a></p>
 
 <h2>Baby soft play in Colchester (under 1s)</h2>
 <p>Many Colchester soft play centres run dedicated baby sessions for crawlers, early walkers and sensory exploration.</p>
@@ -2060,7 +1990,7 @@ export const posts: BlogPost[] = [
   <li>Food and drink packages</li>
   <li>Party hosts and add-ons</li>
 </ul>
-<p>Explore party venues: <a href="/soft-play/colchester/birthday-parties">/colchester?filter=parties</a></p>
+<p>Explore party venues: <a href="/soft-play/colchester/birthday-parties">birthday party venues in Colchester</a></p>
 
 <h2>Cheap soft play in Colchester: money-saving tips</h2>
 <p>Looking for <strong>cheap soft play Colchester</strong>? Prices vary across Essex, but there are easy ways to keep costs down.</p>
@@ -2129,7 +2059,7 @@ export const posts: BlogPost[] = [
 
 <p>From Hastings and St Leonards to Eastbourne, Bexhill and Hailsham, you'll find everything from cosy toddler play cafés to large adventure play centres.</p>
 
-<p>Browse soft play venues near you: <a href="/soft-play/hastings">/hastings</a></p>
+<p>Browse soft play venues near you: <a href="/soft-play/hastings">Hastings</a></p>
 
 <h2>Why families love soft play in Hastings</h2>
 <p>Soft play is a lifesaver for Hastings families — especially on those coastal rainy days. It provides a safe indoor space for kids to climb, slide and burn off energy all year round.</p>
@@ -2152,7 +2082,7 @@ export const posts: BlogPost[] = [
   <li><strong>Party availability</strong> if you're planning a celebration</li>
   <li><strong>Quiet/SEN sessions</strong> for calmer play</li>
 </ul>
-<p>Start exploring: <a href="/soft-play/hastings">/hastings</a> • Toddlers: <a href="/soft-play/hastings/toddler">/hastings?filter=toddler</a></p>
+<p>Start exploring: <a href="/soft-play/hastings">Hastings</a> • Toddlers: <a href="/soft-play/hastings/toddler">toddler-friendly soft play in Hastings</a></p>
 
 <h2>Toddler soft play in Hastings (1–3 years)</h2>
 <p>If you're searching for <strong>toddler soft play Hastings</strong>, look for venues with dedicated under-3 zones with mini slides, soft tunnels, ball pits and sensory features.</p>
@@ -2163,7 +2093,7 @@ export const posts: BlogPost[] = [
   <li>Role-play corners</li>
   <li>Calmer weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly venues: <a href="/soft-play/hastings/toddler">/hastings?filter=toddler</a></p>
+<p>Browse toddler-friendly venues: <a href="/soft-play/hastings/toddler">toddler-friendly soft play in Hastings</a></p>
 
 <h2>Baby soft play in Hastings (under 1s)</h2>
 <p>Many Hastings soft play centres run dedicated baby sessions for crawlers, early walkers and sensory exploration.</p>
@@ -2182,7 +2112,7 @@ export const posts: BlogPost[] = [
   <li>Food and drink packages</li>
   <li>Party hosts and add-ons</li>
 </ul>
-<p>Explore party venues: <a href="/soft-play/hastings/birthday-parties">/hastings?filter=parties</a></p>
+<p>Explore party venues: <a href="/soft-play/hastings/birthday-parties">birthday party venues in Hastings</a></p>
 
 <h2>Cheap soft play in Hastings: money-saving tips</h2>
 <p>Looking for <strong>cheap soft play Hastings</strong>? There are easy ways to keep costs down.</p>
@@ -2251,7 +2181,7 @@ export const posts: BlogPost[] = [
 
 <p>From Ipswich town centre to Felixstowe, Stowmarket and Woodbridge, you'll find everything from cosy toddler play cafés to large adventure play centres.</p>
 
-<p>Browse soft play venues near you: <a href="/soft-play/ipswich">/ipswich</a></p>
+<p>Browse soft play venues near you: <a href="/soft-play/ipswich">Ipswich</a></p>
 
 <h2>Why families love soft play in Ipswich</h2>
 <p>Soft play is a popular choice for Ipswich families. It provides a safe indoor space for kids to climb, slide and burn off energy — perfect for rainy days, school holidays and weekends.</p>
@@ -2274,7 +2204,7 @@ export const posts: BlogPost[] = [
   <li><strong>Party availability</strong> if you're planning a celebration</li>
   <li><strong>Quiet/SEN sessions</strong> for calmer play</li>
 </ul>
-<p>Start exploring: <a href="/soft-play/ipswich">/ipswich</a> • Toddlers: <a href="/soft-play/ipswich/toddler">/ipswich?filter=toddler</a></p>
+<p>Start exploring: <a href="/soft-play/ipswich">Ipswich</a> • Toddlers: <a href="/soft-play/ipswich/toddler">toddler-friendly soft play in Ipswich</a></p>
 
 <h2>Toddler soft play in Ipswich (1–3 years)</h2>
 <p>If you're searching for <strong>toddler soft play Ipswich</strong>, look for venues with dedicated under-3 zones with mini slides, soft tunnels, ball pits and sensory features.</p>
@@ -2285,7 +2215,7 @@ export const posts: BlogPost[] = [
   <li>Role-play corners</li>
   <li>Calmer weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly venues: <a href="/soft-play/ipswich/toddler">/ipswich?filter=toddler</a></p>
+<p>Browse toddler-friendly venues: <a href="/soft-play/ipswich/toddler">toddler-friendly soft play in Ipswich</a></p>
 
 <h2>Baby soft play in Ipswich (under 1s)</h2>
 <p>Many Ipswich soft play centres run dedicated baby sessions for crawlers, early walkers and sensory exploration.</p>
@@ -2304,7 +2234,7 @@ export const posts: BlogPost[] = [
   <li>Food and drink packages</li>
   <li>Party hosts and add-ons</li>
 </ul>
-<p>Explore party venues: <a href="/soft-play/ipswich/birthday-parties">/ipswich?filter=parties</a></p>
+<p>Explore party venues: <a href="/soft-play/ipswich/birthday-parties">birthday party venues in Ipswich</a></p>
 
 <h2>Cheap soft play in Ipswich: money-saving tips</h2>
 <p>Looking for <strong>cheap soft play Ipswich</strong>? There are easy ways to keep costs down.</p>
@@ -2373,7 +2303,7 @@ export const posts: BlogPost[] = [
 
 <p>From Norwich city centre to Great Yarmouth, Lowestoft, Dereham and Wymondham, you'll find everything from cosy toddler play cafés to large multi-level adventure frames.</p>
 
-<p>Browse soft play venues near you: <a href="/soft-play/norwich">/norwich</a></p>
+<p>Browse soft play venues near you: <a href="/soft-play/norwich">Norwich</a></p>
 
 <h2>Why families love soft play in Norwich</h2>
 <p>Soft play is hugely popular with Norwich families. It provides a safe indoor space for kids to climb, slide and burn off energy — perfect for rainy days, school holidays and weekends.</p>
@@ -2396,7 +2326,7 @@ export const posts: BlogPost[] = [
   <li><strong>Party availability</strong> if you're planning a celebration</li>
   <li><strong>Quiet/SEN sessions</strong> for calmer play</li>
 </ul>
-<p>Start exploring: <a href="/soft-play/norwich">/norwich</a> • Toddlers: <a href="/soft-play/norwich/toddler">/norwich?filter=toddler</a></p>
+<p>Start exploring: <a href="/soft-play/norwich">Norwich</a> • Toddlers: <a href="/soft-play/norwich/toddler">toddler-friendly soft play in Norwich</a></p>
 
 <h2>Toddler soft play in Norwich (1–3 years)</h2>
 <p>If you're searching for <strong>toddler soft play Norwich</strong>, look for venues with dedicated under-3 zones with mini slides, soft tunnels, ball pits and sensory features.</p>
@@ -2407,7 +2337,7 @@ export const posts: BlogPost[] = [
   <li>Role-play corners (kitchens, shops, cars)</li>
   <li>Calmer weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly venues: <a href="/soft-play/norwich/toddler">/norwich?filter=toddler</a></p>
+<p>Browse toddler-friendly venues: <a href="/soft-play/norwich/toddler">toddler-friendly soft play in Norwich</a></p>
 
 <h2>Baby soft play in Norwich (under 1s)</h2>
 <p>Many Norwich soft play centres run dedicated baby sessions for crawlers, early walkers and sensory exploration.</p>
@@ -2426,7 +2356,7 @@ export const posts: BlogPost[] = [
   <li>Food and drink packages</li>
   <li>Party hosts and add-ons</li>
 </ul>
-<p>Explore party venues: <a href="/soft-play/norwich/birthday-parties">/norwich?filter=parties</a></p>
+<p>Explore party venues: <a href="/soft-play/norwich/birthday-parties">birthday party venues in Norwich</a></p>
 
 <h2>Cheap soft play in Norwich: money-saving tips</h2>
 <p>Looking for <strong>cheap soft play Norwich</strong>? Prices vary across Norfolk, but there are easy ways to keep costs down.</p>
@@ -2495,7 +2425,7 @@ export const posts: BlogPost[] = [
 
 <p>From Southsea and Cosham to Gosport, Fareham, Havant and Southampton, you'll find everything from cosy toddler play cafés to large multi-level adventure frames.</p>
 
-<p>Browse soft play venues near you: <a href="/soft-play/portsmouth">/portsmouth</a></p>
+<p>Browse soft play venues near you: <a href="/soft-play/portsmouth">Portsmouth</a></p>
 
 <h2>Why families love soft play in Portsmouth</h2>
 <p>Soft play is one of the most popular family activities in Portsmouth. It provides a safe indoor space for kids to climb, slide and burn off energy — perfect for rainy days, school holidays and weekends.</p>
@@ -2518,7 +2448,7 @@ export const posts: BlogPost[] = [
   <li><strong>Party availability</strong> if you're planning a celebration</li>
   <li><strong>Quiet/SEN sessions</strong> for calmer play</li>
 </ul>
-<p>Start exploring: <a href="/soft-play/portsmouth">/portsmouth</a> • Toddlers: <a href="/soft-play/portsmouth/toddler">/portsmouth?filter=toddler</a></p>
+<p>Start exploring: <a href="/soft-play/portsmouth">Portsmouth</a> • Toddlers: <a href="/soft-play/portsmouth/toddler">toddler-friendly soft play in Portsmouth</a></p>
 
 <h2>Toddler soft play in Portsmouth (1–3 years)</h2>
 <p>If you're searching for <strong>toddler soft play Portsmouth</strong>, look for venues with dedicated under-3 zones with mini slides, soft tunnels, ball pits and sensory features.</p>
@@ -2529,7 +2459,7 @@ export const posts: BlogPost[] = [
   <li>Role-play corners (kitchens, shops, cars)</li>
   <li>Calmer weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly venues: <a href="/soft-play/portsmouth/toddler">/portsmouth?filter=toddler</a></p>
+<p>Browse toddler-friendly venues: <a href="/soft-play/portsmouth/toddler">toddler-friendly soft play in Portsmouth</a></p>
 
 <h2>Baby soft play in Portsmouth (under 1s)</h2>
 <p>Many Portsmouth soft play centres run dedicated baby sessions for crawlers, early walkers and sensory exploration.</p>
@@ -2548,7 +2478,7 @@ export const posts: BlogPost[] = [
   <li>Food and drink packages</li>
   <li>Party hosts and add-ons</li>
 </ul>
-<p>Explore party venues: <a href="/soft-play/portsmouth/birthday-parties">/portsmouth?filter=parties</a></p>
+<p>Explore party venues: <a href="/soft-play/portsmouth/birthday-parties">birthday party venues in Portsmouth</a></p>
 
 <h2>Cheap soft play in Portsmouth: money-saving tips</h2>
 <p>Looking for <strong>cheap soft play Portsmouth</strong>? Prices vary across Hampshire, but there are easy ways to keep costs down.</p>
@@ -2739,7 +2669,7 @@ export const posts: BlogPost[] = [
 
 <p>From Swansea city centre to Neath, Port Talbot, Llanelli and Carmarthen, you'll find everything from cosy toddler play cafés to large multi-level adventure frames.</p>
 
-<p>Browse soft play venues near you: <a href="/soft-play/swansea">/swansea</a></p>
+<p>Browse soft play venues near you: <a href="/soft-play/swansea">Swansea</a></p>
 
 <h2>Why families love soft play in Swansea</h2>
 <p>Soft play is hugely popular with Swansea families. It provides a safe indoor space for kids to climb, slide and burn off energy — ideal when the Welsh weather turns, during school holidays, and on weekends.</p>
@@ -2762,7 +2692,7 @@ export const posts: BlogPost[] = [
   <li><strong>Party availability</strong> if you're planning a celebration</li>
   <li><strong>Quiet/SEN sessions</strong> for calmer play</li>
 </ul>
-<p>Start exploring: <a href="/soft-play/swansea">/swansea</a> • Toddlers: <a href="/soft-play/swansea/toddler">/swansea?filter=toddler</a></p>
+<p>Start exploring: <a href="/soft-play/swansea">Swansea</a> • Toddlers: <a href="/soft-play/swansea/toddler">toddler-friendly soft play in Swansea</a></p>
 
 <h2>Toddler soft play in Swansea (1–3 years)</h2>
 <p>If you're searching for <strong>toddler soft play Swansea</strong>, look for venues with dedicated under-3 zones with mini slides, soft tunnels, ball pits and sensory features.</p>
@@ -2773,7 +2703,7 @@ export const posts: BlogPost[] = [
   <li>Role-play corners (kitchens, shops, cars)</li>
   <li>Calmer weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly venues: <a href="/soft-play/swansea/toddler">/swansea?filter=toddler</a></p>
+<p>Browse toddler-friendly venues: <a href="/soft-play/swansea/toddler">toddler-friendly soft play in Swansea</a></p>
 
 <h2>Baby soft play in Swansea (under 1s)</h2>
 <p>Many Swansea soft play centres run dedicated baby sessions for crawlers, early walkers and sensory exploration.</p>
@@ -2792,7 +2722,7 @@ export const posts: BlogPost[] = [
   <li>Food and drink packages</li>
   <li>Party hosts and add-ons</li>
 </ul>
-<p>Explore party venues: <a href="/soft-play/swansea/birthday-parties">/swansea?filter=parties</a></p>
+<p>Explore party venues: <a href="/soft-play/swansea/birthday-parties">birthday party venues in Swansea</a></p>
 
 <h2>Cheap soft play in Swansea: money-saving tips</h2>
 <p>Looking for <strong>cheap soft play Swansea</strong>? Prices vary across West Wales, but there are easy ways to keep costs down.</p>
@@ -2861,7 +2791,7 @@ export const posts: BlogPost[] = [
 
 <p>From Huddersfield town centre to Holmfirth, Mirfield, Brighouse and Dewsbury, you'll find everything from cosy toddler play cafés to large multi-level adventure frames.</p>
 
-<p>Browse soft play venues near you: <a href="/soft-play/huddersfield">/huddersfield</a></p>
+<p>Browse soft play venues near you: <a href="/soft-play/huddersfield">Huddersfield</a></p>
 
 <h2>Why families love soft play in Huddersfield</h2>
 <p>Soft play is a favourite for Huddersfield families. It provides a safe indoor space for kids to climb, slide and burn off energy — perfect for those rainy Pennine days, school holidays and weekends when you need a reliable plan.</p>
@@ -2884,7 +2814,7 @@ export const posts: BlogPost[] = [
   <li><strong>Party availability</strong> if you're planning a celebration</li>
   <li><strong>Quiet/SEN sessions</strong> for calmer play</li>
 </ul>
-<p>Start exploring: <a href="/soft-play/huddersfield">/huddersfield</a> • Toddlers: <a href="/soft-play/huddersfield/toddler">/huddersfield?filter=toddler</a></p>
+<p>Start exploring: <a href="/soft-play/huddersfield">Huddersfield</a> • Toddlers: <a href="/soft-play/huddersfield/toddler">toddler-friendly soft play in Huddersfield</a></p>
 
 <h2>Toddler soft play in Huddersfield (1–3 years)</h2>
 <p>If you're searching for <strong>toddler soft play Huddersfield</strong>, look for venues with dedicated under-3 zones. These areas typically have mini slides, soft tunnels, ball pits, role-play corners and sensory features — all designed so little ones can play safely away from bigger kids.</p>
@@ -2895,7 +2825,7 @@ export const posts: BlogPost[] = [
   <li>Role-play corners (kitchens, shops, cars)</li>
   <li>Calmer weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly venues: <a href="/soft-play/huddersfield/toddler">/huddersfield?filter=toddler</a></p>
+<p>Browse toddler-friendly venues: <a href="/soft-play/huddersfield/toddler">toddler-friendly soft play in Huddersfield</a></p>
 
 <h2>Baby soft play in Huddersfield (under 1s)</h2>
 <p>Many Huddersfield soft play centres run dedicated baby sessions for crawlers, early walkers and sensory exploration. These are ideal once your baby can sit or crawl confidently.</p>
@@ -2914,7 +2844,7 @@ export const posts: BlogPost[] = [
   <li>Food and drink packages</li>
   <li>Party hosts and add-ons</li>
 </ul>
-<p>Explore party venues: <a href="/soft-play/huddersfield/birthday-parties">/huddersfield?filter=parties</a></p>
+<p>Explore party venues: <a href="/soft-play/huddersfield/birthday-parties">birthday party venues in Huddersfield</a></p>
 
 <h2>Cheap soft play in Huddersfield: money-saving tips</h2>
 <p>Looking for <strong>cheap soft play Huddersfield</strong>? Prices vary across West Yorkshire, but there are easy ways to keep costs down.</p>
@@ -2990,7 +2920,7 @@ export const posts: BlogPost[] = [
   <li><strong>SEN-friendly / quiet sessions</strong></li>
 </ul>
 
-<p>Browse all local options here: <a href="/soft-play/edinburgh">/edinburgh</a></p>
+<p>Browse all local options here: <a href="/soft-play/edinburgh">Edinburgh</a></p>
 
 <h2>Why families love soft play in Edinburgh</h2>
 <p>Edinburgh is a brilliant city for families, but the Scottish weather means indoor play is essential. Soft play centres across the capital provide safe, stimulating environments for children of all ages — from baby sensory areas to multi-level climbing frames for older kids.</p>
@@ -3080,7 +3010,7 @@ export const posts: BlogPost[] = [
   <li><strong>SEN-friendly / quiet sessions</strong></li>
 </ul>
 
-<p>Browse all local options here: <a href="/soft-play/glasgow">/glasgow</a></p>
+<p>Browse all local options here: <a href="/soft-play/glasgow">Glasgow</a></p>
 
 <h2>Why families love soft play in Glasgow</h2>
 <p>Glasgow is Scotland's largest city with no shortage of family-friendly venues. With unpredictable weather year-round, soft play centres are a lifeline for parents looking to keep kids entertained and active indoors. From small community centres to large multi-level adventure play warehouses, Glasgow has something for every age group and budget.</p>
@@ -3170,7 +3100,7 @@ export const posts: BlogPost[] = [
   <li><strong>SEN-friendly / quiet sessions</strong></li>
 </ul>
 
-<p>Browse all local options here: <a href="/soft-play/aberdeen">/aberdeen</a></p>
+<p>Browse all local options here: <a href="/soft-play/aberdeen">Aberdeen</a></p>
 
 <h2>Why families love soft play in Aberdeen</h2>
 <p>Aberdeen's North Sea climate means plenty of cold and rainy days, making indoor soft play centres a go-to for families year-round. The Granite City has a growing number of play venues offering everything from baby sensory areas to multi-level climbing frames for older children.</p>
@@ -3261,7 +3191,7 @@ export const posts: BlogPost[] = [
   <li><strong>SEN-friendly / quiet sessions</strong></li>
 </ul>
 
-<p>Browse all local options here: <a href="/blog/best-soft-play-in-dundee">/dundee</a></p>
+<p>Browse all local options here: <a href="/blog/best-soft-play-in-dundee">Dundee</a></p>
 
 <h2>Why families love soft play in Dundee</h2>
 <p>Dundee sits on the Tay estuary and catches its fair share of Scottish weather, making indoor soft play centres essential for families with young children. The city has a growing number of play venues offering everything from baby sensory areas to large climbing frames and adventure play for older kids.</p>
@@ -3351,7 +3281,7 @@ export const posts: BlogPost[] = [
   <li><strong>SEN-friendly / quiet sessions</strong></li>
 </ul>
 
-<p>Browse all local options here: <a href="/soft-play/inverness">/inverness</a></p>
+<p>Browse all local options here: <a href="/soft-play/inverness">Inverness</a></p>
 
 <h2>Why families love soft play in Inverness</h2>
 <p>As the capital of the Scottish Highlands, Inverness sees its fair share of wind and rain — making indoor soft play centres a lifeline for families with young children. Whether you live in Inverness or you're visiting the Highlands on holiday, soft play is a reliable way to keep kids entertained and active.</p>
@@ -3442,7 +3372,7 @@ export const posts: BlogPost[] = [
   <li><strong>SEN-friendly / quiet sessions</strong></li>
 </ul>
 
-<p>Browse all local options here: <a href="/blog/best-soft-play-in-stirling">/stirling</a></p>
+<p>Browse all local options here: <a href="/blog/best-soft-play-in-stirling">Stirling</a></p>
 
 <h2>Why families love soft play in Stirling</h2>
 <p>Sitting at the gateway between the Lowlands and the Highlands, Stirling is a popular base for families — and its indoor play centres are well used year-round. Whether you live locally or you're visiting Stirling Castle with the kids, soft play is a reliable option for burning off energy indoors.</p>
@@ -3515,108 +3445,89 @@ export const posts: BlogPost[] = [
     slug: 'best-soft-play-in-nottingham',
     title: 'Best Soft Play in Nottingham (2026 Parent Guide)',
     city: 'Nottingham',
-    excerpt: 'Discover the best soft play in Nottingham for babies, toddlers and older children, plus party options, budget-saving tips, SEN-friendly sessions and indoor play recommendations for families in 2026.',
-    publishedAt: '2026-03-08T00:00:00.000Z',
-    updatedAt: '2026-03-08T00:00:00.000Z',
-    datePublished: '2026-03-08T00:00:00.000Z',
-    dateModified: '2026-03-08T00:00:00.000Z',
-    contentHtml: `<p>Looking for the <strong>best soft play in Nottingham</strong>? Whether you're planning a toddler session, a rainy day activity or a soft play birthday party, Nottingham has a solid range of indoor play centres to choose from.</p>
+    excerpt: 'A guide to soft play in Nottingham and Derby grounded in real ratings, hours and confirmed facilities — big inflatable parks, café-style venues, and role-play centres, with the venues we don’t have solid data on left out rather than guessed at.',
+    publishedAt: '2026-08-20T00:00:00.000Z',
+    updatedAt: '2026-08-20T00:00:00.000Z',
+    datePublished: '2026-08-20T00:00:00.000Z',
+    dateModified: '2026-08-20T00:00:00.000Z',
+    contentHtml: `<p>Nottingham’s soft play scene is bigger than the city boundary suggests, because the venues that actually serve Nottingham families are spread across Nottinghamshire and into Derby and Derbyshire too — roughly a third of the places on our Nottingham list are Derby-postcode venues that Nottingham parents drive to as readily as anything in the city centre. If you’re searching from Beeston, Long Eaton or the western suburbs, several of the best options are technically in Derbyshire.</p>
 
-<p>This 2026 parent guide covers the top soft play options across Nottingham and the surrounding area, with advice on toddler and baby sessions, birthday parties, SEN-friendly play and how to keep costs down.</p>
+<p>This guide sticks to venues we hold real, checkable data for — opening hours, ratings, confirmed facilities — rather than guessing at things like age limits or exact party pricing that vary venue to venue and change without much notice.</p>
 
-<p>Browse soft play venues in Nottingham: <a href="/soft-play/nottingham">/nottingham</a></p>
+<blockquote>
+  <p>👉 <strong><a href="/soft-play/nottingham">Browse every soft play venue in Nottingham with hours, ratings and facilities</a></strong></p>
+</blockquote>
 
-<h2>Why families love soft play in Nottingham</h2>
+<h2>The big, well-reviewed names</h2>
+<p><strong>Planet Bounce</strong> on Huntingdon Street, right in the city centre, is the highest-volume venue on the list by review count — 1,316 reviews at 4.2 stars. <strong>Oxygen Derby</strong> at the Soccerdome on Derwent Parade isn’t far behind at 1,233 reviews, and rates slightly higher at 4.3 stars. Both lean toward the bigger inflatable-park end of soft play rather than a quiet toddler session, so they suit the five-plus crowd better than babies.</p>
+
+<p><strong>Treetops Activity Centre</strong> in Riddings (that’s the Derbyshire side, near Alfreton) has one of the strongest rating-to-volume combinations on the list — 4.6 stars from 727 reviews — and <strong>JANGALA SoftPlay</strong> at Hilton Business Park sits at 4.4 from 686. Neither is central, but both have clearly built a loyal following worth the drive.</p>
+
+<h2>Where the confirmed facilities are</h2>
+<p>Facility data is patchy across smaller venues generally, so we’ve only listed what’s actually confirmed rather than assumed:</p>
 <ul>
-  <li>Safe indoor fun all year round — perfect for rainy days and school holidays</li>
-  <li>Age-appropriate zones for babies, toddlers and older children</li>
-  <li>Café space for parents and carers while kids burn off energy</li>
-  <li>Soft play birthday parties are a hugely popular choice for Nottingham families</li>
-  <li>SEN-friendly and quiet sessions available at select venues</li>
-  <li>A great mix of large adventure centres and smaller neighbourhood play spaces</li>
+  <li><strong>Ed & Molly's Playbarn</strong> (Fosse Way) and <strong>Fun Valley Nottingham</strong> (Armitage Business Park) both have a confirmed on-site café.</li>
+  <li><strong>Party2Party Entertainment Hire</strong> and <strong>My Messy Play – Mickleover & Derby</strong> are both set up specifically for party bookings, with dedicated party-room facilities. My Messy Play also lists both a toddler and a baby area.</li>
+  <li><strong>The Square Play Cafe</strong> on The Square lists a café, toddler and baby areas, and SEN-friendly sessions all together — a rare combination on this list and worth a look if you need more than one of those.</li>
+  <li><strong>Tiny Town Adventures</strong> (Radford Rd), <strong>Robyn's World</strong> (Montpelier Rd) and <strong>Little Foxes Play Town</strong> (Chilwell Rd) are all built around role-play — themed pretend-play rooms rather than the climbing-frame format, which tends to suit imaginative younger children better than kids who just want to burn energy.</li>
 </ul>
 
-<h2>Best soft play in Nottingham: what to look for</h2>
-<p>When searching for the <strong>best soft play in Nottingham</strong>, consider:</p>
-<ul>
-  <li><strong>Age separation</strong> — clear zones for babies, toddlers and older kids</li>
-  <li><strong>Cleanliness</strong> — well-maintained and regularly sanitised equipment</li>
-  <li><strong>Visibility</strong> — open layouts so you can supervise easily</li>
-  <li><strong>Café and facilities</strong> — good food, clean toilets and baby-changing on-site</li>
-  <li><strong>Party room availability</strong> — book early, especially for weekend slots</li>
-  <li><strong>Quiet or SEN sessions</strong> — increasingly available at venues across the city</li>
-</ul>
+<h2>Opening hours are shorter than you might expect</h2>
+<p>A pattern worth knowing before you plan a visit: several of the smaller, higher-rated venues run genuinely short weekday hours — closer to a nursery timetable than a shop. Bizzy Beans and Blossoms Play Café both close at 3pm on weekdays; Dinky Dino's Soft Play is closed Mondays and doesn’t open until 9.30am other days; JANGALA closes at 2.45pm. The bigger venues — Oxygen Derby, Meadowside Leisure Centre, Mill House Wacky Warehouse, Planet Bounce — run closer to standard 9/10am–6/7pm hours. If you’re planning an after-school visit, it’s worth checking the specific venue’s hours rather than assuming, since it genuinely varies by more than an hour or two either way.</p>
 
-<h2>Toddler soft play in Nottingham (1–3 years)</h2>
-<p>Searching for <strong>toddler soft play in Nottingham</strong>? Look for venues with dedicated under-3 zones featuring smaller slides, soft shapes, ball pits and padded areas. Weekday morning sessions are typically quieter and far better suited to younger children.</p>
-<ul>
-  <li>Mini slides, tunnels and soft crawl spaces</li>
-  <li>Ball pits at toddler height</li>
-  <li>Sensory and interactive play features</li>
-  <li>Quieter weekday morning sessions</li>
-</ul>
-<p>Browse toddler-friendly soft play in Nottingham: <a href="/soft-play/nottingham/toddler">/nottingham?filter=toddler</a></p>
+<h2>SEN-friendly sessions</h2>
+<p>Two venues explicitly list SEN-friendly facilities or sessions in their data: <strong>The Square Play Cafe</strong> and <strong>My Messy Play – Mickleover & Derby</strong>. Neither publishes exact session times in what we hold, so it’s worth calling ahead to check current scheduling — this tends to shift term by term at smaller venues.</p>
 
-<h2>Baby soft play in Nottingham (under 1s)</h2>
-<p>Many Nottingham venues offer dedicated baby sessions or baby-friendly areas with padded flooring, sensory toys and low-height equipment — ideal once your baby can sit up or crawl confidently.</p>
-<ul>
-  <li>Padded floors and low-height play equipment</li>
-  <li>Sensory mats and soft toys</li>
-  <li>Baby-priority session times</li>
-  <li>Comfortable seating close by for parents and carers</li>
-</ul>
+<h2>Practical things worth checking before you go</h2>
+<p>Socks are standard practice at almost every soft play venue, though policies vary by site, so it’s worth checking if you’ve not visited before. Most of the smaller cafés and party-focused venues (Party2Party, Pop and Play by Holly, Blossoms) don’t have a large public footprint online, so a quick call is more reliable than assuming from a website that may be out of date. For the bigger venues — Oxygen Derby, Planet Bounce, Meadowside — booking ahead for weekends is generally a safer bet than turning up, particularly during school holidays.</p>
 
-<h2>Soft play birthday parties in Nottingham</h2>
-<p><strong>Soft play birthday parties in Nottingham</strong> are a popular choice for families with young children. Most venues offer reserved play time, private party rooms and food packages all under one roof. Book early, particularly for weekend slots.</p>
-<ul>
-  <li>Private or semi-private party rooms</li>
-  <li>Food and drink packages included</li>
-  <li>Reserved soft play time for your group</li>
-  <li>Party hosts available at some venues</li>
-</ul>
-<p>Explore birthday party venues in Nottingham: <a href="/soft-play/nottingham/birthday-parties">/nottingham?filter=parties</a></p>
+<h2>Which one to try first</h2>
+<p>For a big, established, high-review-volume option: <strong>Oxygen Derby</strong> or <strong>Planet Bounce Nottingham</strong>.</p>
+<p>For a café-and-play combination: <strong>Ed & Molly's Playbarn</strong>, <strong>Fun Valley Nottingham</strong>, or <strong>The Square Play Cafe</strong> if you also want toddler/baby/SEN facilities in one place.</p>
+<p>For imaginative role-play rather than climbing frames: <strong>Tiny Town Adventures</strong>, <strong>Robyn's World</strong>, or <strong>Little Foxes Play Town</strong>.</p>
+<p>For a party booking: <strong>Party2Party</strong> or <strong>My Messy Play</strong>, both set up specifically for it.</p>
 
-<h2>Cheap soft play in Nottingham: money-saving tips</h2>
-<p>Want <strong>cheap soft play in Nottingham</strong>? Try these ideas:</p>
-<ul>
-  <li>Visit on weekday mornings for off-peak pricing</li>
-  <li>Look for sibling discounts at family-focused venues</li>
-  <li>Check for memberships or loyalty passes if you visit regularly</li>
-  <li>Book online in advance — some venues offer a small discount</li>
-  <li>Follow local venues on social media for flash deals and promotions</li>
-</ul>
+<blockquote>
+  <p>👉 <strong><a href="/soft-play/nottingham">See the full Nottingham directory — opening hours, ratings and facilities for every venue</a></strong></p>
+</blockquote>
 
-<h2>SEN-friendly and quiet soft play in Nottingham</h2>
-<p>A number of Nottingham soft play centres offer <strong>SEN-friendly sessions</strong> with reduced capacity, lower sound levels and trained staff — ideal for children with autism or sensory sensitivities.</p>
-<ul>
-  <li>Reduced visitor numbers for a calmer atmosphere</li>
-  <li>Lower or no background music during sessions</li>
-  <li>Predictable session structure</li>
-  <li>Supportive staff with relevant awareness</li>
-</ul>
-<p>Find SEN-friendly soft play in Nottingham: <a href="/soft-play/nottingham/sen-friendly">/nottingham?filter=sen</a></p>
+<h2>Frequently asked questions</h2>
 
-<h2>Local tips: parking, cafés, quieter times and what to bring</h2>
-<ul>
-  <li><strong>Quieter times:</strong> weekday mornings and early afternoons</li>
-  <li><strong>What to bring:</strong> socks (always bring a spare pair), wipes and spare clothes</li>
-  <li><strong>Cafés:</strong> check for allergy-friendly options before you visit</li>
-  <li><strong>Parking:</strong> confirm on-site or nearby parking before travelling</li>
-</ul>
+<h3>Is Nottingham’s soft play scene just in the city, or wider too?</h3>
+<p>Wider — a significant share of the venues families in Nottingham actually use are in Derby and Derbyshire towns like Riddings and Hilton, not inside the city boundary. If you’re on the western side of Nottingham, some of the best-reviewed options are a Derby postcode.</p>
 
-<h2>More soft play near Nottingham</h2>
-<p>If you're happy to travel a little further, great indoor play options exist in nearby towns:</p>
-<ul>
-  <li><a href="/blog/best-soft-play-in-derby">/derby</a></li>
-  <li><a href="/soft-play/leicester">/leicester</a></li>
-  <li><a href="/soft-play/sheffield">/sheffield</a></li>
-</ul>`,
+<h3>Which Nottingham soft play has the most reviews?</h3>
+<p>Planet Bounce Inflatable Park (1,316 reviews, 4.2 stars) and Oxygen Derby (1,233 reviews, 4.3 stars) are the two highest-volume venues on the list.</p>
+
+<h3>Are there role-play venues in Nottingham, not just climbing frames?</h3>
+<p>Yes — Tiny Town Adventures, Robyn's World and Little Foxes Play Town are all built around themed role-play rooms rather than a traditional soft play frame.</p>
+
+<h3>Do Nottingham soft play venues have SEN-friendly sessions?</h3>
+<p>The Square Play Cafe and My Messy Play – Mickleover & Derby both list SEN-friendly facilities. Scheduling varies, so check directly with the venue for current session times.</p>
+
+<h3>What time do Nottingham soft play venues open?</h3>
+<p>It varies more than you’d expect — some smaller cafés close as early as 2.45–3pm on weekdays, while the bigger venues run closer to standard 9am–6/7pm hours. Check the specific venue before planning an after-school visit.</p>`,
     faq: [
-      { q: 'What is the best soft play in Nottingham?', a: 'The best soft play in Nottingham depends on your child\u2019s age. The city has a good mix of venues with dedicated toddler zones, baby sessions, large climbing structures and party packages.' },
-      { q: 'Are there toddler-only sessions in Nottingham?', a: 'Yes \u2014 many Nottingham venues offer dedicated under-3 zones or toddler sessions. Weekday mornings are typically the quietest.' },
-      { q: 'How much does soft play cost in Nottingham?', a: 'Most sessions cost roughly \u00a35\u2013\u00a39 per child. Check individual venue pages for up-to-date pricing.' },
-      { q: 'Which venues in Nottingham are good for birthday parties?', a: 'Several Nottingham soft play centres offer dedicated party packages with reserved play time, party rooms and food options. Book well in advance for weekend slots.' },
-      { q: 'Are there SEN-friendly soft play sessions in Nottingham?', a: 'Yes \u2014 a number of venues offer quieter, SEN-friendly sessions. Search our directory to find sensory-friendly options near you.' },
+      {
+        q: 'Is Nottingham’s soft play scene just in the city, or wider too?',
+        a: 'Wider — a significant share of the venues families in Nottingham actually use are in Derby and Derbyshire towns like Riddings and Hilton, not inside the city boundary. If you’re on the western side of Nottingham, some of the best-reviewed options are a Derby postcode.',
+      },
+      {
+        q: 'Which Nottingham soft play has the most reviews?',
+        a: 'Planet Bounce Inflatable Park (1,316 reviews, 4.2 stars) and Oxygen Derby (1,233 reviews, 4.3 stars) are the two highest-volume venues on the list.',
+      },
+      {
+        q: 'Are there role-play venues in Nottingham, not just climbing frames?',
+        a: 'Yes — Tiny Town Adventures, Robyn\'s World and Little Foxes Play Town are all built around themed role-play rooms rather than a traditional soft play frame.',
+      },
+      {
+        q: 'Do Nottingham soft play venues have SEN-friendly sessions?',
+        a: 'The Square Play Cafe and My Messy Play – Mickleover & Derby both list SEN-friendly facilities. Scheduling varies, so check directly with the venue for current session times.',
+      },
+      {
+        q: 'What time do Nottingham soft play venues open?',
+        a: 'It varies more than you’d expect — some smaller cafés close as early as 2.45–3pm on weekdays, while the bigger venues run closer to standard 9am–6/7pm hours. Check the specific venue before planning an after-school visit.',
+      },
     ],
   },
   {
@@ -3632,7 +3543,7 @@ export const posts: BlogPost[] = [
 
 <p>This 2026 parent guide covers the best soft play in Leicester, with advice on toddler sessions, baby play, birthday parties, SEN-friendly options and money-saving tips.</p>
 
-<p>Browse soft play venues in Leicester: <a href="/soft-play/leicester">/leicester</a></p>
+<p>Browse soft play venues in Leicester: <a href="/soft-play/leicester">Leicester</a></p>
 
 <h2>Why families love soft play in Leicester</h2>
 <ul>
@@ -3663,7 +3574,7 @@ export const posts: BlogPost[] = [
   <li>Sensory play features</li>
   <li>Quieter weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly soft play in Leicester: <a href="/soft-play/leicester/toddler">/leicester?filter=toddler</a></p>
+<p>Browse toddler-friendly soft play in Leicester: <a href="/soft-play/leicester/toddler">toddler-friendly soft play in Leicester</a></p>
 
 <h2>Baby soft play in Leicester (under 1s)</h2>
 <p>Many Leicester venues offer baby-friendly sessions with padded floors, sensory toys and gentle low-height equipment — ideal once your baby can sit up or crawl with confidence.</p>
@@ -3682,7 +3593,7 @@ export const posts: BlogPost[] = [
   <li>Reserved soft play time for your group</li>
   <li>Party hosts and support available at many venues</li>
 </ul>
-<p>Explore birthday party venues in Leicester: <a href="/soft-play/leicester/birthday-parties">/leicester?filter=parties</a></p>
+<p>Explore birthday party venues in Leicester: <a href="/soft-play/leicester/birthday-parties">birthday party venues in Leicester</a></p>
 
 <h2>Cheap soft play in Leicester: money-saving tips</h2>
 <p>Want <strong>cheap soft play in Leicester</strong>? Try these ideas:</p>
@@ -3702,7 +3613,7 @@ export const posts: BlogPost[] = [
   <li>Predictable session structure</li>
   <li>Supportive, trained staff</li>
 </ul>
-<p>Find SEN-friendly soft play in Leicester: <a href="/soft-play/leicester/sen-friendly">/leicester?filter=sen</a></p>
+<p>Find SEN-friendly soft play in Leicester: <a href="/soft-play/leicester/sen-friendly">SEN-friendly soft play in Leicester</a></p>
 
 <h2>Local tips: parking, cafés, quieter times and what to bring</h2>
 <ul>
@@ -3715,9 +3626,9 @@ export const posts: BlogPost[] = [
 <h2>More soft play near Leicester</h2>
 <p>If you're happy to travel a little further, great indoor play options exist in nearby towns:</p>
 <ul>
-  <li><a href="/soft-play/nottingham">/nottingham</a></li>
-  <li><a href="/blog/best-soft-play-in-coventry">/coventry</a></li>
-  <li><a href="/blog/best-soft-play-in-derby">/derby</a></li>
+  <li><a href="/soft-play/nottingham">Nottingham</a></li>
+  <li><a href="/blog/best-soft-play-in-coventry">Coventry</a></li>
+  <li><a href="/blog/best-soft-play-in-derby">Derby</a></li>
 </ul>`,
     faq: [
       { q: 'What is the best soft play in Leicester?', a: 'The best soft play in Leicester depends on your child\u2019s age. The city has a good mix of venues with toddler zones, baby sessions, large climbing structures and party packages for all ages.' },
@@ -3741,7 +3652,7 @@ export const posts: BlogPost[] = [
 
 <p>This 2026 parent guide covers the best soft play in Coventry, with practical advice on toddler sessions, baby play, birthday parties, SEN-friendly options and ways to save money.</p>
 
-<p>Browse soft play venues in Coventry: <a href="/blog/best-soft-play-in-coventry">/coventry</a></p>
+<p>Browse soft play venues in Coventry: <a href="/blog/best-soft-play-in-coventry">Coventry</a></p>
 
 <h2>Why families love soft play in Coventry</h2>
 <ul>
@@ -3772,7 +3683,7 @@ export const posts: BlogPost[] = [
   <li>Sensory play features</li>
   <li>Quieter weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly soft play in Coventry: <a href="/blog/best-soft-play-in-coventry">/coventry?filter=toddler</a></p>
+<p>Browse toddler-friendly soft play in Coventry: <a href="/blog/best-soft-play-in-coventry">toddler-friendly soft play in Coventry</a></p>
 
 <h2>Baby soft play in Coventry (under 1s)</h2>
 <p>Several Coventry venues offer baby-friendly areas or dedicated sessions with padded flooring, sensory toys and gentle play equipment — ideal once your baby can sit up or crawl.</p>
@@ -3791,7 +3702,7 @@ export const posts: BlogPost[] = [
   <li>Reserved play time for your group</li>
   <li>Party hosts available at some venues</li>
 </ul>
-<p>Explore birthday party venues in Coventry: <a href="/blog/best-soft-play-in-coventry">/coventry?filter=parties</a></p>
+<p>Explore birthday party venues in Coventry: <a href="/blog/best-soft-play-in-coventry">birthday party venues in Coventry</a></p>
 
 <h2>Cheap soft play in Coventry: money-saving tips</h2>
 <p>Want <strong>cheap soft play in Coventry</strong>? Try these ideas:</p>
@@ -3811,7 +3722,7 @@ export const posts: BlogPost[] = [
   <li>Predictable session format</li>
   <li>Supportive staff</li>
 </ul>
-<p>Find SEN-friendly soft play in Coventry: <a href="/blog/best-soft-play-in-coventry">/coventry?filter=sen</a></p>
+<p>Find SEN-friendly soft play in Coventry: <a href="/blog/best-soft-play-in-coventry">SEN-friendly soft play in Coventry</a></p>
 
 <h2>Local tips: parking, cafés, quieter times and what to bring</h2>
 <ul>
@@ -3824,9 +3735,9 @@ export const posts: BlogPost[] = [
 <h2>More soft play near Coventry</h2>
 <p>If you're happy to travel a little further, great indoor play options exist in nearby towns:</p>
 <ul>
-  <li><a href="/soft-play/birmingham">/birmingham</a></li>
-  <li><a href="/soft-play/leicester">/leicester</a></li>
-  <li><a href="/blog/best-soft-play-in-wolverhampton">/wolverhampton</a></li>
+  <li><a href="/soft-play/birmingham">Birmingham</a></li>
+  <li><a href="/soft-play/leicester">Leicester</a></li>
+  <li><a href="/blog/best-soft-play-in-wolverhampton">Wolverhampton</a></li>
 </ul>`,
     faq: [
       { q: 'What is the best soft play in Coventry?', a: 'Coventry has a good selection of indoor play venues suited to babies, toddlers and older children, including options with party packages and SEN-friendly sessions.' },
@@ -3850,7 +3761,7 @@ export const posts: BlogPost[] = [
 
 <p>This 2026 parent guide covers the best soft play in Milton Keynes, from toddler and baby sessions to birthday parties, SEN-friendly play and money-saving ideas.</p>
 
-<p>Browse soft play venues in Milton Keynes: <a href="/blog/best-soft-play-in-milton-keynes">/milton-keynes</a></p>
+<p>Browse soft play venues in Milton Keynes: <a href="/blog/best-soft-play-in-milton-keynes">Milton Keynes</a></p>
 
 <h2>Why families love soft play in Milton Keynes</h2>
 <ul>
@@ -3881,7 +3792,7 @@ export const posts: BlogPost[] = [
   <li>Sensory play features</li>
   <li>Quieter weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly soft play in Milton Keynes: <a href="/blog/best-soft-play-in-milton-keynes">/milton-keynes?filter=toddler</a></p>
+<p>Browse toddler-friendly soft play in Milton Keynes: <a href="/blog/best-soft-play-in-milton-keynes">toddler-friendly soft play in Milton Keynes</a></p>
 
 <h2>Baby soft play in Milton Keynes (under 1s)</h2>
 <p>Several Milton Keynes venues offer baby-friendly areas or dedicated sessions with padded flooring, sensory toys and low-height play equipment — ideal once your baby can sit up or crawl confidently.</p>
@@ -3900,7 +3811,7 @@ export const posts: BlogPost[] = [
   <li>Reserved soft play time</li>
   <li>Party hosts available at some venues</li>
 </ul>
-<p>Explore birthday party venues in Milton Keynes: <a href="/blog/best-soft-play-in-milton-keynes">/milton-keynes?filter=parties</a></p>
+<p>Explore birthday party venues in Milton Keynes: <a href="/blog/best-soft-play-in-milton-keynes">birthday party venues in Milton Keynes</a></p>
 
 <h2>Cheap soft play in Milton Keynes: money-saving tips</h2>
 <p>Want <strong>cheap soft play in Milton Keynes</strong>? Try these ideas:</p>
@@ -3920,7 +3831,7 @@ export const posts: BlogPost[] = [
   <li>Predictable session structure</li>
   <li>Supportive, trained staff</li>
 </ul>
-<p>Find SEN-friendly soft play in Milton Keynes: <a href="/blog/best-soft-play-in-milton-keynes">/milton-keynes?filter=sen</a></p>
+<p>Find SEN-friendly soft play in Milton Keynes: <a href="/blog/best-soft-play-in-milton-keynes">SEN-friendly soft play in Milton Keynes</a></p>
 
 <h2>Local tips: parking, cafés, quieter times and what to bring</h2>
 <ul>
@@ -3953,7 +3864,7 @@ export const posts: BlogPost[] = [
 
 <p>This 2026 parent guide covers the best soft play in Oxford, with advice on toddler and baby sessions, birthday parties, SEN-friendly options and money-saving tips.</p>
 
-<p>Browse soft play venues in Oxford: <a href="/blog/best-soft-play-in-oxford">/oxford</a></p>
+<p>Browse soft play venues in Oxford: <a href="/blog/best-soft-play-in-oxford">Oxford</a></p>
 
 <h2>Why families love soft play in Oxford</h2>
 <ul>
@@ -3984,7 +3895,7 @@ export const posts: BlogPost[] = [
   <li>Sensory play features</li>
   <li>Quieter weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly soft play in Oxford: <a href="/blog/best-soft-play-in-oxford">/oxford?filter=toddler</a></p>
+<p>Browse toddler-friendly soft play in Oxford: <a href="/blog/best-soft-play-in-oxford">toddler-friendly soft play in Oxford</a></p>
 
 <h2>Baby soft play in Oxford (under 1s)</h2>
 <p>Several Oxford venues offer baby-friendly areas or dedicated sessions with padded flooring, sensory toys and gentle, low-height play equipment — a lovely environment for babies who can sit up or crawl.</p>
@@ -4003,7 +3914,7 @@ export const posts: BlogPost[] = [
   <li>Reserved play time for your group</li>
   <li>Party host support available at some venues</li>
 </ul>
-<p>Explore birthday party venues in Oxford: <a href="/blog/best-soft-play-in-oxford">/oxford?filter=parties</a></p>
+<p>Explore birthday party venues in Oxford: <a href="/blog/best-soft-play-in-oxford">birthday party venues in Oxford</a></p>
 
 <h2>Cheap soft play in Oxford: money-saving tips</h2>
 <p>Want <strong>cheap soft play in Oxford</strong>? Try these ideas:</p>
@@ -4023,7 +3934,7 @@ export const posts: BlogPost[] = [
   <li>Predictable session structure</li>
   <li>Supportive, trained staff</li>
 </ul>
-<p>Find SEN-friendly soft play in Oxford: <a href="/blog/best-soft-play-in-oxford">/oxford?filter=sen</a></p>
+<p>Find SEN-friendly soft play in Oxford: <a href="/blog/best-soft-play-in-oxford">SEN-friendly soft play in Oxford</a></p>
 
 <h2>Local tips: parking, cafés, quieter times and what to bring</h2>
 <ul>
@@ -4036,9 +3947,9 @@ export const posts: BlogPost[] = [
 <h2>More soft play near Oxford</h2>
 <p>If you're happy to travel a little further, great indoor play options exist in nearby towns:</p>
 <ul>
-  <li><a href="/blog/best-soft-play-in-reading">/reading</a></li>
-  <li><a href="/blog/best-soft-play-in-swindon">/swindon</a></li>
-  <li><a href="/blog/best-soft-play-in-milton-keynes">/milton-keynes</a></li>
+  <li><a href="/blog/best-soft-play-in-reading">Reading</a></li>
+  <li><a href="/blog/best-soft-play-in-swindon">Swindon</a></li>
+  <li><a href="/blog/best-soft-play-in-milton-keynes">Milton Keynes</a></li>
 </ul>`,
     faq: [
       { q: 'What is the best soft play in Oxford?', a: 'Oxford has a range of indoor play venues suited to babies, toddlers and older children, with party packages and SEN-friendly sessions available across the city.' },
@@ -4062,7 +3973,7 @@ export const posts: BlogPost[] = [
 
 <p>This 2026 parent guide covers the best soft play in Cambridge, with advice on toddler and baby sessions, birthday parties, SEN-friendly play and how to make the most of your visit.</p>
 
-<p>Browse soft play venues in Cambridge: <a href="/blog/best-soft-play-in-cambridge">/cambridge</a></p>
+<p>Browse soft play venues in Cambridge: <a href="/blog/best-soft-play-in-cambridge">Cambridge</a></p>
 
 <h2>Why families love soft play in Cambridge</h2>
 <ul>
@@ -4093,7 +4004,7 @@ export const posts: BlogPost[] = [
   <li>Sensory play features</li>
   <li>Quieter weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly soft play in Cambridge: <a href="/blog/best-soft-play-in-cambridge">/cambridge?filter=toddler</a></p>
+<p>Browse toddler-friendly soft play in Cambridge: <a href="/blog/best-soft-play-in-cambridge">toddler-friendly soft play in Cambridge</a></p>
 
 <h2>Baby soft play in Cambridge (under 1s)</h2>
 <p>A number of Cambridge venues offer baby-friendly sessions or dedicated baby areas with padded flooring and sensory toys — ideal once your baby can sit up or crawl, and a genuinely relaxing outing for parents too.</p>
@@ -4112,7 +4023,7 @@ export const posts: BlogPost[] = [
   <li>Reserved play time for your group</li>
   <li>Party host support at some venues</li>
 </ul>
-<p>Explore birthday party venues in Cambridge: <a href="/blog/best-soft-play-in-cambridge">/cambridge?filter=parties</a></p>
+<p>Explore birthday party venues in Cambridge: <a href="/blog/best-soft-play-in-cambridge">birthday party venues in Cambridge</a></p>
 
 <h2>Cheap soft play in Cambridge: money-saving tips</h2>
 <p>Want <strong>cheap soft play in Cambridge</strong>? Try these ideas:</p>
@@ -4132,7 +4043,7 @@ export const posts: BlogPost[] = [
   <li>Predictable session structure</li>
   <li>Supportive and trained staff</li>
 </ul>
-<p>Find SEN-friendly soft play in Cambridge: <a href="/blog/best-soft-play-in-cambridge">/cambridge?filter=sen</a></p>
+<p>Find SEN-friendly soft play in Cambridge: <a href="/blog/best-soft-play-in-cambridge">SEN-friendly soft play in Cambridge</a></p>
 
 <h2>Local tips: parking, cafés, quieter times and what to bring</h2>
 <ul>
@@ -4145,9 +4056,9 @@ export const posts: BlogPost[] = [
 <h2>More soft play near Cambridge</h2>
 <p>If you're happy to travel a little further, great indoor play options exist in nearby towns:</p>
 <ul>
-  <li><a href="/blog/best-soft-play-in-peterborough">/peterborough</a></li>
-  <li><a href="/soft-play/ipswich">/ipswich</a></li>
-  <li><a href="/soft-play/norwich">/norwich</a></li>
+  <li><a href="/blog/best-soft-play-in-peterborough">Peterborough</a></li>
+  <li><a href="/soft-play/ipswich">Ipswich</a></li>
+  <li><a href="/soft-play/norwich">Norwich</a></li>
 </ul>`,
     faq: [
       { q: 'What is the best soft play in Cambridge?', a: 'Cambridge has a solid range of indoor play venues suited to babies, toddlers and older children, including birthday party packages and SEN-friendly sessions.' },
@@ -4171,7 +4082,7 @@ export const posts: BlogPost[] = [
 
 <p>This 2026 parent guide covers the best soft play in Reading, with advice on toddler sessions, baby play, birthday parties, SEN-friendly options and how to save on costs.</p>
 
-<p>Browse soft play venues in Reading: <a href="/blog/best-soft-play-in-reading">/reading</a></p>
+<p>Browse soft play venues in Reading: <a href="/blog/best-soft-play-in-reading">Reading</a></p>
 
 <h2>Why families love soft play in Reading</h2>
 <ul>
@@ -4202,7 +4113,7 @@ export const posts: BlogPost[] = [
   <li>Sensory play features</li>
   <li>Quieter weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly soft play in Reading: <a href="/blog/best-soft-play-in-reading">/reading?filter=toddler</a></p>
+<p>Browse toddler-friendly soft play in Reading: <a href="/blog/best-soft-play-in-reading">toddler-friendly soft play in Reading</a></p>
 
 <h2>Baby soft play in Reading (under 1s)</h2>
 <p>Several Reading area venues offer baby-friendly sessions with padded floors, sensory toys and low-height equipment — ideal once your baby can sit up or crawl.</p>
@@ -4221,7 +4132,7 @@ export const posts: BlogPost[] = [
   <li>Reserved soft play time for your group</li>
   <li>Party host support available at some venues</li>
 </ul>
-<p>Explore birthday party venues in Reading: <a href="/blog/best-soft-play-in-reading">/reading?filter=parties</a></p>
+<p>Explore birthday party venues in Reading: <a href="/blog/best-soft-play-in-reading">birthday party venues in Reading</a></p>
 
 <h2>Cheap soft play in Reading: money-saving tips</h2>
 <p>Want <strong>cheap soft play in Reading</strong>? Try these ideas:</p>
@@ -4241,7 +4152,7 @@ export const posts: BlogPost[] = [
   <li>Predictable session structure</li>
   <li>Supportive, trained staff</li>
 </ul>
-<p>Find SEN-friendly soft play in Reading: <a href="/blog/best-soft-play-in-reading">/reading?filter=sen</a></p>
+<p>Find SEN-friendly soft play in Reading: <a href="/blog/best-soft-play-in-reading">SEN-friendly soft play in Reading</a></p>
 
 <h2>Local tips: parking, cafés, quieter times and what to bring</h2>
 <ul>
@@ -4254,9 +4165,9 @@ export const posts: BlogPost[] = [
 <h2>More soft play near Reading</h2>
 <p>If you're happy to travel a little further, great indoor play options exist in nearby towns:</p>
 <ul>
-  <li><a href="/blog/best-soft-play-in-oxford">/oxford</a></li>
-  <li><a href="/blog/best-soft-play-in-swindon">/swindon</a></li>
-  <li><a href="/blog/best-soft-play-in-southampton">/southampton</a></li>
+  <li><a href="/blog/best-soft-play-in-oxford">Oxford</a></li>
+  <li><a href="/blog/best-soft-play-in-swindon">Swindon</a></li>
+  <li><a href="/blog/best-soft-play-in-southampton">Southampton</a></li>
 </ul>`,
     faq: [
       { q: 'What is the best soft play in Reading?', a: 'Reading and Berkshire have a good range of indoor play venues for all ages, from dedicated toddler spaces to venues with full party packages.' },
@@ -4280,7 +4191,7 @@ export const posts: BlogPost[] = [
 
 <p>This 2026 parent guide covers the best soft play in Southampton, with practical advice on toddler sessions, baby play, birthday parties, SEN-friendly options and cost-saving tips.</p>
 
-<p>Browse soft play venues in Southampton: <a href="/blog/best-soft-play-in-southampton">/southampton</a></p>
+<p>Browse soft play venues in Southampton: <a href="/blog/best-soft-play-in-southampton">Southampton</a></p>
 
 <h2>Why families love soft play in Southampton</h2>
 <ul>
@@ -4311,7 +4222,7 @@ export const posts: BlogPost[] = [
   <li>Sensory play features</li>
   <li>Quieter weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly soft play in Southampton: <a href="/blog/best-soft-play-in-southampton">/southampton?filter=toddler</a></p>
+<p>Browse toddler-friendly soft play in Southampton: <a href="/blog/best-soft-play-in-southampton">toddler-friendly soft play in Southampton</a></p>
 
 <h2>Baby soft play in Southampton (under 1s)</h2>
 <p>Several Southampton venues offer dedicated baby sessions or baby-friendly areas with padded flooring, sensory toys and low-height play equipment — perfect once your baby can sit up or crawl.</p>
@@ -4330,7 +4241,7 @@ export const posts: BlogPost[] = [
   <li>Reserved play time for your group</li>
   <li>Party hosts at some venues</li>
 </ul>
-<p>Explore birthday party venues in Southampton: <a href="/blog/best-soft-play-in-southampton">/southampton?filter=parties</a></p>
+<p>Explore birthday party venues in Southampton: <a href="/blog/best-soft-play-in-southampton">birthday party venues in Southampton</a></p>
 
 <h2>Cheap soft play in Southampton: money-saving tips</h2>
 <p>Want <strong>cheap soft play in Southampton</strong>? Try these ideas:</p>
@@ -4350,7 +4261,7 @@ export const posts: BlogPost[] = [
   <li>Predictable session structure</li>
   <li>Supportive, trained staff</li>
 </ul>
-<p>Find SEN-friendly soft play in Southampton: <a href="/blog/best-soft-play-in-southampton">/southampton?filter=sen</a></p>
+<p>Find SEN-friendly soft play in Southampton: <a href="/blog/best-soft-play-in-southampton">SEN-friendly soft play in Southampton</a></p>
 
 <h2>Local tips: parking, cafés, quieter times and what to bring</h2>
 <ul>
@@ -4363,9 +4274,9 @@ export const posts: BlogPost[] = [
 <h2>More soft play near Southampton</h2>
 <p>If you're happy to travel a little further, great indoor play options exist in nearby towns:</p>
 <ul>
-  <li><a href="/soft-play/portsmouth">/portsmouth</a></li>
-  <li><a href="/soft-play/bournemouth">/bournemouth</a></li>
-  <li><a href="/soft-play/bristol">/bristol</a></li>
+  <li><a href="/soft-play/portsmouth">Portsmouth</a></li>
+  <li><a href="/soft-play/bournemouth">Bournemouth</a></li>
+  <li><a href="/soft-play/bristol">Bristol</a></li>
 </ul>`,
     faq: [
       { q: 'What is the best soft play in Southampton?', a: 'Southampton has a good range of indoor play venues for babies, toddlers and older children, with party packages and SEN-friendly sessions available across the city.' },
@@ -4389,7 +4300,7 @@ export const posts: BlogPost[] = [
 
 <p>This 2026 parent guide covers the best soft play in Plymouth, with advice on toddler and baby sessions, birthday parties, SEN-friendly play and money-saving tips.</p>
 
-<p>Browse soft play venues in Plymouth: <a href="/blog/best-soft-play-in-plymouth">/plymouth</a></p>
+<p>Browse soft play venues in Plymouth: <a href="/blog/best-soft-play-in-plymouth">Plymouth</a></p>
 
 <h2>Why families love soft play in Plymouth</h2>
 <ul>
@@ -4420,7 +4331,7 @@ export const posts: BlogPost[] = [
   <li>Sensory play features</li>
   <li>Quieter weekday sessions</li>
 </ul>
-<p>Browse toddler-friendly soft play in Plymouth: <a href="/blog/best-soft-play-in-plymouth">/plymouth?filter=toddler</a></p>
+<p>Browse toddler-friendly soft play in Plymouth: <a href="/blog/best-soft-play-in-plymouth">toddler-friendly soft play in Plymouth</a></p>
 
 <h2>Baby soft play in Plymouth (under 1s)</h2>
 <p>Several Plymouth venues offer baby-friendly areas or dedicated sessions with padded flooring and sensory toys — ideal for babies who can sit up or crawl, and a lovely environment for parents to relax too.</p>
@@ -4439,7 +4350,7 @@ export const posts: BlogPost[] = [
   <li>Reserved play time for your group</li>
   <li>Party host support available at some venues</li>
 </ul>
-<p>Explore birthday party venues in Plymouth: <a href="/blog/best-soft-play-in-plymouth">/plymouth?filter=parties</a></p>
+<p>Explore birthday party venues in Plymouth: <a href="/blog/best-soft-play-in-plymouth">birthday party venues in Plymouth</a></p>
 
 <h2>Cheap soft play in Plymouth: money-saving tips</h2>
 <p>Want <strong>cheap soft play in Plymouth</strong>? Try these ideas:</p>
@@ -4459,7 +4370,7 @@ export const posts: BlogPost[] = [
   <li>Predictable session structure</li>
   <li>Supportive staff</li>
 </ul>
-<p>Find SEN-friendly soft play in Plymouth: <a href="/blog/best-soft-play-in-plymouth">/plymouth?filter=sen</a></p>
+<p>Find SEN-friendly soft play in Plymouth: <a href="/blog/best-soft-play-in-plymouth">SEN-friendly soft play in Plymouth</a></p>
 
 <h2>Local tips: parking, cafés, quieter times and what to bring</h2>
 <ul>
@@ -4472,8 +4383,8 @@ export const posts: BlogPost[] = [
 <h2>More soft play near Plymouth</h2>
 <p>If you're happy to travel a little further, great indoor play options exist in nearby towns:</p>
 <ul>
-  <li><a href="/blog/best-soft-play-in-exeter">/exeter</a></li>
-  <li><a href="/soft-play/bristol">/bristol</a></li>
+  <li><a href="/blog/best-soft-play-in-exeter">Exeter</a></li>
+  <li><a href="/soft-play/bristol">Bristol</a></li>
 </ul>`,
     faq: [
       { q: 'What is the best soft play in Plymouth?', a: 'Plymouth has a good range of indoor play venues suited to babies, toddlers and older children, including party packages and SEN-friendly sessions.' },
@@ -4497,7 +4408,7 @@ export const posts: BlogPost[] = [
 
 <p>This 2026 parent guide covers the best soft play in Exeter, with advice on toddler and baby sessions, birthday parties, SEN-friendly play and cost-saving tips.</p>
 
-<p>Browse soft play venues in Exeter: <a href="/blog/best-soft-play-in-exeter">/exeter</a></p>
+<p>Browse soft play venues in Exeter: <a href="/blog/best-soft-play-in-exeter">Exeter</a></p>
 
 <h2>Why families love soft play in Exeter</h2>
 <ul>
@@ -4528,7 +4439,7 @@ export const posts: BlogPost[] = [
   <li>Sensory play features</li>
   <li>Quieter weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly soft play in Exeter: <a href="/blog/best-soft-play-in-exeter">/exeter?filter=toddler</a></p>
+<p>Browse toddler-friendly soft play in Exeter: <a href="/blog/best-soft-play-in-exeter">toddler-friendly soft play in Exeter</a></p>
 
 <h2>Baby soft play in Exeter (under 1s)</h2>
 <p>Several Exeter venues offer baby-friendly sessions or dedicated baby areas with padded floors and sensory toys — ideal for babies who can sit up or crawl confidently, and a relaxed setting for parents too.</p>
@@ -4547,7 +4458,7 @@ export const posts: BlogPost[] = [
   <li>Reserved play time for your group</li>
   <li>Party hosts available at some venues</li>
 </ul>
-<p>Explore birthday party venues in Exeter: <a href="/blog/best-soft-play-in-exeter">/exeter?filter=parties</a></p>
+<p>Explore birthday party venues in Exeter: <a href="/blog/best-soft-play-in-exeter">birthday party venues in Exeter</a></p>
 
 <h2>Cheap soft play in Exeter: money-saving tips</h2>
 <p>Want <strong>cheap soft play in Exeter</strong>? Try these ideas:</p>
@@ -4567,7 +4478,7 @@ export const posts: BlogPost[] = [
   <li>Predictable session structure</li>
   <li>Supportive, trained staff</li>
 </ul>
-<p>Find SEN-friendly soft play in Exeter: <a href="/blog/best-soft-play-in-exeter">/exeter?filter=sen</a></p>
+<p>Find SEN-friendly soft play in Exeter: <a href="/blog/best-soft-play-in-exeter">SEN-friendly soft play in Exeter</a></p>
 
 <h2>Local tips: parking, cafés, quieter times and what to bring</h2>
 <ul>
@@ -4580,8 +4491,8 @@ export const posts: BlogPost[] = [
 <h2>More soft play near Exeter</h2>
 <p>If you're happy to travel a little further, great indoor play options exist in nearby towns:</p>
 <ul>
-  <li><a href="/blog/best-soft-play-in-plymouth">/plymouth</a></li>
-  <li><a href="/soft-play/bristol">/bristol</a></li>
+  <li><a href="/blog/best-soft-play-in-plymouth">Plymouth</a></li>
+  <li><a href="/soft-play/bristol">Bristol</a></li>
 </ul>`,
     faq: [
       { q: 'What is the best soft play in Exeter?', a: 'Exeter has a good range of indoor play venues suited to babies, toddlers and older children, with party packages and SEN-friendly sessions at select venues.' },
@@ -4605,7 +4516,7 @@ export const posts: BlogPost[] = [
 
 <p>This 2026 parent guide covers the best soft play in Swindon, with advice on toddler and baby sessions, birthday parties, SEN-friendly play and money-saving tips.</p>
 
-<p>Browse soft play venues in Swindon: <a href="/blog/best-soft-play-in-swindon">/swindon</a></p>
+<p>Browse soft play venues in Swindon: <a href="/blog/best-soft-play-in-swindon">Swindon</a></p>
 
 <h2>Why families love soft play in Swindon</h2>
 <ul>
@@ -4636,7 +4547,7 @@ export const posts: BlogPost[] = [
   <li>Sensory play features</li>
   <li>Quieter weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly soft play in Swindon: <a href="/blog/best-soft-play-in-swindon">/swindon?filter=toddler</a></p>
+<p>Browse toddler-friendly soft play in Swindon: <a href="/blog/best-soft-play-in-swindon">toddler-friendly soft play in Swindon</a></p>
 
 <h2>Baby soft play in Swindon (under 1s)</h2>
 <p>Several Swindon venues offer baby-friendly sessions or dedicated baby areas with padded flooring and sensory toys — ideal once your baby can sit up or crawl confidently.</p>
@@ -4655,7 +4566,7 @@ export const posts: BlogPost[] = [
   <li>Reserved soft play time for your group</li>
   <li>Party host support at some venues</li>
 </ul>
-<p>Explore birthday party venues in Swindon: <a href="/blog/best-soft-play-in-swindon">/swindon?filter=parties</a></p>
+<p>Explore birthday party venues in Swindon: <a href="/blog/best-soft-play-in-swindon">birthday party venues in Swindon</a></p>
 
 <h2>Cheap soft play in Swindon: money-saving tips</h2>
 <p>Want <strong>cheap soft play in Swindon</strong>? Try these ideas:</p>
@@ -4675,7 +4586,7 @@ export const posts: BlogPost[] = [
   <li>Predictable session structure</li>
   <li>Supportive, trained staff</li>
 </ul>
-<p>Find SEN-friendly soft play in Swindon: <a href="/blog/best-soft-play-in-swindon">/swindon?filter=sen</a></p>
+<p>Find SEN-friendly soft play in Swindon: <a href="/blog/best-soft-play-in-swindon">SEN-friendly soft play in Swindon</a></p>
 
 <h2>Local tips: parking, cafés, quieter times and what to bring</h2>
 <ul>
@@ -4688,9 +4599,9 @@ export const posts: BlogPost[] = [
 <h2>More soft play near Swindon</h2>
 <p>If you're happy to travel a little further, great indoor play options exist in nearby towns:</p>
 <ul>
-  <li><a href="/soft-play/bristol">/bristol</a></li>
-  <li><a href="/blog/best-soft-play-in-oxford">/oxford</a></li>
-  <li><a href="/blog/best-soft-play-in-reading">/reading</a></li>
+  <li><a href="/soft-play/bristol">Bristol</a></li>
+  <li><a href="/blog/best-soft-play-in-oxford">Oxford</a></li>
+  <li><a href="/blog/best-soft-play-in-reading">Reading</a></li>
 </ul>`,
     faq: [
       { q: 'What is the best soft play in Swindon?', a: 'Swindon has a solid range of indoor play venues for babies, toddlers and older children, including birthday party packages and SEN-friendly sessions.' },
@@ -4714,7 +4625,7 @@ export const posts: BlogPost[] = [
 
 <p>This 2026 parent guide covers the best soft play in Wolverhampton, with advice on toddler and baby sessions, birthday parties, SEN-friendly play and cost-saving ideas.</p>
 
-<p>Browse soft play venues in Wolverhampton: <a href="/blog/best-soft-play-in-wolverhampton">/wolverhampton</a></p>
+<p>Browse soft play venues in Wolverhampton: <a href="/blog/best-soft-play-in-wolverhampton">Wolverhampton</a></p>
 
 <h2>Why families love soft play in Wolverhampton</h2>
 <ul>
@@ -4745,7 +4656,7 @@ export const posts: BlogPost[] = [
   <li>Sensory play features</li>
   <li>Quieter weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly soft play in Wolverhampton: <a href="/blog/best-soft-play-in-wolverhampton">/wolverhampton?filter=toddler</a></p>
+<p>Browse toddler-friendly soft play in Wolverhampton: <a href="/blog/best-soft-play-in-wolverhampton">toddler-friendly soft play in Wolverhampton</a></p>
 
 <h2>Baby soft play in Wolverhampton (under 1s)</h2>
 <p>Several Wolverhampton venues offer baby-friendly areas or dedicated sessions with padded flooring, sensory toys and low-height equipment — ideal once your baby can sit up or crawl with confidence.</p>
@@ -4764,7 +4675,7 @@ export const posts: BlogPost[] = [
   <li>Reserved soft play time for your group</li>
   <li>Party hosts available at some venues</li>
 </ul>
-<p>Explore birthday party venues in Wolverhampton: <a href="/blog/best-soft-play-in-wolverhampton">/wolverhampton?filter=parties</a></p>
+<p>Explore birthday party venues in Wolverhampton: <a href="/blog/best-soft-play-in-wolverhampton">birthday party venues in Wolverhampton</a></p>
 
 <h2>Cheap soft play in Wolverhampton: money-saving tips</h2>
 <p>Want <strong>cheap soft play in Wolverhampton</strong>? Try these ideas:</p>
@@ -4784,7 +4695,7 @@ export const posts: BlogPost[] = [
   <li>Predictable session structure</li>
   <li>Supportive, trained staff</li>
 </ul>
-<p>Find SEN-friendly soft play in Wolverhampton: <a href="/blog/best-soft-play-in-wolverhampton">/wolverhampton?filter=sen</a></p>
+<p>Find SEN-friendly soft play in Wolverhampton: <a href="/blog/best-soft-play-in-wolverhampton">SEN-friendly soft play in Wolverhampton</a></p>
 
 <h2>Local tips: parking, cafés, quieter times and what to bring</h2>
 <ul>
@@ -4797,8 +4708,8 @@ export const posts: BlogPost[] = [
 <h2>More soft play near Wolverhampton</h2>
 <p>If you're happy to travel a little further, great indoor play options exist in nearby towns:</p>
 <ul>
-  <li><a href="/soft-play/birmingham">/birmingham</a></li>
-  <li><a href="/blog/best-soft-play-in-coventry">/coventry</a></li>
+  <li><a href="/soft-play/birmingham">Birmingham</a></li>
+  <li><a href="/blog/best-soft-play-in-coventry">Coventry</a></li>
   <li><a href="/soft-play/stoke">/soft-play/stoke</a></li>
 </ul>`,
     faq: [
@@ -4906,9 +4817,9 @@ export const posts: BlogPost[] = [
 <h2>More soft play near Stoke-on-Trent</h2>
 <p>If you're happy to travel a little further, great indoor play options exist in nearby towns:</p>
 <ul>
-  <li><a href="/blog/best-soft-play-in-derby">/derby</a></li>
-  <li><a href="/blog/best-soft-play-in-chester">/chester</a></li>
-  <li><a href="/soft-play/sheffield">/sheffield</a></li>
+  <li><a href="/blog/best-soft-play-in-derby">Derby</a></li>
+  <li><a href="/blog/best-soft-play-in-chester">Chester</a></li>
+  <li><a href="/soft-play/sheffield">Sheffield</a></li>
 </ul>`,
     faq: [
       { q: 'What is the best soft play in Stoke-on-Trent?', a: 'Stoke-on-Trent has a good range of indoor play venues for babies, toddlers and older children, with birthday party packages and SEN-friendly sessions at select venues.' },
@@ -4932,7 +4843,7 @@ export const posts: BlogPost[] = [
 
 <p>This 2026 parent guide covers the best soft play in Derby, with advice on toddler and baby sessions, birthday parties, SEN-friendly play and money-saving tips.</p>
 
-<p>Browse soft play venues in Derby: <a href="/blog/best-soft-play-in-derby">/derby</a></p>
+<p>Browse soft play venues in Derby: <a href="/blog/best-soft-play-in-derby">Derby</a></p>
 
 <h2>Why families love soft play in Derby</h2>
 <ul>
@@ -4963,7 +4874,7 @@ export const posts: BlogPost[] = [
   <li>Sensory play features</li>
   <li>Quieter weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly soft play in Derby: <a href="/blog/best-soft-play-in-derby">/derby?filter=toddler</a></p>
+<p>Browse toddler-friendly soft play in Derby: <a href="/blog/best-soft-play-in-derby">toddler-friendly soft play in Derby</a></p>
 
 <h2>Baby soft play in Derby (under 1s)</h2>
 <p>Several Derby venues offer baby-friendly sessions or dedicated baby areas with padded flooring and sensory toys — ideal for babies who can sit up or crawl.</p>
@@ -4982,7 +4893,7 @@ export const posts: BlogPost[] = [
   <li>Reserved soft play time for your group</li>
   <li>Party host support available at some venues</li>
 </ul>
-<p>Explore birthday party venues in Derby: <a href="/blog/best-soft-play-in-derby">/derby?filter=parties</a></p>
+<p>Explore birthday party venues in Derby: <a href="/blog/best-soft-play-in-derby">birthday party venues in Derby</a></p>
 
 <h2>Cheap soft play in Derby: money-saving tips</h2>
 <p>Want <strong>cheap soft play in Derby</strong>? Try these ideas:</p>
@@ -5002,7 +4913,7 @@ export const posts: BlogPost[] = [
   <li>Predictable session structure</li>
   <li>Supportive, trained staff</li>
 </ul>
-<p>Find SEN-friendly soft play in Derby: <a href="/blog/best-soft-play-in-derby">/derby?filter=sen</a></p>
+<p>Find SEN-friendly soft play in Derby: <a href="/blog/best-soft-play-in-derby">SEN-friendly soft play in Derby</a></p>
 
 <h2>Local tips: parking, cafés, quieter times and what to bring</h2>
 <ul>
@@ -5015,8 +4926,8 @@ export const posts: BlogPost[] = [
 <h2>More soft play near Derby</h2>
 <p>If you're happy to travel a little further, great indoor play options exist in nearby towns:</p>
 <ul>
-  <li><a href="/soft-play/nottingham">/nottingham</a></li>
-  <li><a href="/soft-play/leicester">/leicester</a></li>
+  <li><a href="/soft-play/nottingham">Nottingham</a></li>
+  <li><a href="/soft-play/leicester">Leicester</a></li>
   <li><a href="/soft-play/stoke">/soft-play/stoke</a></li>
 </ul>`,
     faq: [
@@ -5041,7 +4952,7 @@ export const posts: BlogPost[] = [
 
 <p>This 2026 parent guide covers the best soft play in Chester, with advice on toddler and baby sessions, birthday parties, SEN-friendly play and cost-saving tips.</p>
 
-<p>Browse soft play venues in Chester: <a href="/blog/best-soft-play-in-chester">/chester</a></p>
+<p>Browse soft play venues in Chester: <a href="/blog/best-soft-play-in-chester">Chester</a></p>
 
 <h2>Why families love soft play in Chester</h2>
 <ul>
@@ -5072,7 +4983,7 @@ export const posts: BlogPost[] = [
   <li>Sensory play features</li>
   <li>Quieter weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly soft play in Chester: <a href="/blog/best-soft-play-in-chester">/chester?filter=toddler</a></p>
+<p>Browse toddler-friendly soft play in Chester: <a href="/blog/best-soft-play-in-chester">toddler-friendly soft play in Chester</a></p>
 
 <h2>Baby soft play in Chester (under 1s)</h2>
 <p>Several Chester area venues offer baby-friendly sessions or dedicated baby areas with padded flooring and sensory toys — ideal for babies who can sit up or crawl confidently.</p>
@@ -5091,7 +5002,7 @@ export const posts: BlogPost[] = [
   <li>Reserved soft play time for your group</li>
   <li>Party hosts available at some venues</li>
 </ul>
-<p>Explore birthday party venues in Chester: <a href="/blog/best-soft-play-in-chester">/chester?filter=parties</a></p>
+<p>Explore birthday party venues in Chester: <a href="/blog/best-soft-play-in-chester">birthday party venues in Chester</a></p>
 
 <h2>Cheap soft play in Chester: money-saving tips</h2>
 <p>Want <strong>cheap soft play in Chester</strong>? Try these ideas:</p>
@@ -5111,7 +5022,7 @@ export const posts: BlogPost[] = [
   <li>Predictable session structure</li>
   <li>Supportive, trained staff</li>
 </ul>
-<p>Find SEN-friendly soft play in Chester: <a href="/blog/best-soft-play-in-chester">/chester?filter=sen</a></p>
+<p>Find SEN-friendly soft play in Chester: <a href="/blog/best-soft-play-in-chester">SEN-friendly soft play in Chester</a></p>
 
 <h2>Local tips: parking, cafés, quieter times and what to bring</h2>
 <ul>
@@ -5124,9 +5035,9 @@ export const posts: BlogPost[] = [
 <h2>More soft play near Chester</h2>
 <p>If you're happy to travel a little further, great indoor play options exist in nearby towns:</p>
 <ul>
-  <li><a href="/soft-play/liverpool">/liverpool</a></li>
-  <li><a href="/soft-play/manchester">/manchester</a></li>
-  <li><a href="/blog/best-soft-play-in-preston">/preston</a></li>
+  <li><a href="/soft-play/liverpool">Liverpool</a></li>
+  <li><a href="/soft-play/manchester">Manchester</a></li>
+  <li><a href="/blog/best-soft-play-in-preston">Preston</a></li>
 </ul>`,
     faq: [
       { q: 'What is the best soft play in Chester?', a: 'Chester has a good range of indoor play venues for babies, toddlers and older children, including birthday party packages and SEN-friendly sessions across the city and wider Cheshire area.' },
@@ -5150,7 +5061,7 @@ export const posts: BlogPost[] = [
 
 <p>This 2026 parent guide covers the best soft play in Preston, with advice on toddler and baby sessions, birthday parties, SEN-friendly play and money-saving tips.</p>
 
-<p>Browse soft play venues in Preston: <a href="/blog/best-soft-play-in-preston">/preston</a></p>
+<p>Browse soft play venues in Preston: <a href="/blog/best-soft-play-in-preston">Preston</a></p>
 
 <h2>Why families love soft play in Preston</h2>
 <ul>
@@ -5181,7 +5092,7 @@ export const posts: BlogPost[] = [
   <li>Sensory play features</li>
   <li>Quieter weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly soft play in Preston: <a href="/blog/best-soft-play-in-preston">/preston?filter=toddler</a></p>
+<p>Browse toddler-friendly soft play in Preston: <a href="/blog/best-soft-play-in-preston">toddler-friendly soft play in Preston</a></p>
 
 <h2>Baby soft play in Preston (under 1s)</h2>
 <p>Several Preston venues offer baby-friendly areas or dedicated sessions with padded flooring and sensory toys — a calm, welcoming environment for babies who can sit up or crawl.</p>
@@ -5200,7 +5111,7 @@ export const posts: BlogPost[] = [
   <li>Reserved play time for your group</li>
   <li>Party host support available at some venues</li>
 </ul>
-<p>Explore birthday party venues in Preston: <a href="/blog/best-soft-play-in-preston">/preston?filter=parties</a></p>
+<p>Explore birthday party venues in Preston: <a href="/blog/best-soft-play-in-preston">birthday party venues in Preston</a></p>
 
 <h2>Cheap soft play in Preston: money-saving tips</h2>
 <p>Want <strong>cheap soft play in Preston</strong>? Try these ideas:</p>
@@ -5220,7 +5131,7 @@ export const posts: BlogPost[] = [
   <li>Predictable session structure</li>
   <li>Supportive, trained staff</li>
 </ul>
-<p>Find SEN-friendly soft play in Preston: <a href="/blog/best-soft-play-in-preston">/preston?filter=sen</a></p>
+<p>Find SEN-friendly soft play in Preston: <a href="/blog/best-soft-play-in-preston">SEN-friendly soft play in Preston</a></p>
 
 <h2>Local tips: parking, cafés, quieter times and what to bring</h2>
 <ul>
@@ -5233,9 +5144,9 @@ export const posts: BlogPost[] = [
 <h2>More soft play near Preston</h2>
 <p>If you're happy to travel a little further, great indoor play options exist in nearby towns:</p>
 <ul>
-  <li><a href="/soft-play/blackpool">/blackpool</a></li>
-  <li><a href="/soft-play/manchester">/manchester</a></li>
-  <li><a href="/soft-play/liverpool">/liverpool</a></li>
+  <li><a href="/soft-play/blackpool">Blackpool</a></li>
+  <li><a href="/soft-play/manchester">Manchester</a></li>
+  <li><a href="/soft-play/liverpool">Liverpool</a></li>
 </ul>`,
     faq: [
       { q: 'What is the best soft play in Preston?', a: 'Preston has a good range of indoor play venues for babies, toddlers and older children, with birthday party packages and SEN-friendly sessions at select venues.' },
@@ -5258,7 +5169,7 @@ export const posts: BlogPost[] = [
 
 <p>This 2026 parent guide covers the best soft play in Blackpool, with advice on toddler and baby sessions, birthday parties, SEN-friendly options and money-saving tips.</p>
 
-<p>Browse soft play venues in Blackpool: <a href="/soft-play/blackpool">/blackpool</a></p>
+<p>Browse soft play venues in Blackpool: <a href="/soft-play/blackpool">Blackpool</a></p>
 
 <h2>Why families love soft play in Blackpool</h2>
 <ul>
@@ -5289,7 +5200,7 @@ export const posts: BlogPost[] = [
   <li>Sensory play features</li>
   <li>Quieter weekday sessions during term time</li>
 </ul>
-<p>Browse toddler-friendly soft play in Blackpool: <a href="/soft-play/blackpool/toddler">/blackpool?filter=toddler</a></p>
+<p>Browse toddler-friendly soft play in Blackpool: <a href="/soft-play/blackpool/toddler">toddler-friendly soft play in Blackpool</a></p>
 
 <h2>Baby soft play in Blackpool (under 1s)</h2>
 <p>Several Blackpool venues offer baby-friendly areas or dedicated sessions with padded flooring and sensory toys — a lovely, calm space for babies who can sit up or crawl.</p>
@@ -5308,7 +5219,7 @@ export const posts: BlogPost[] = [
   <li>Reserved play time for your group</li>
   <li>Party hosts available at some venues</li>
 </ul>
-<p>Explore birthday party venues in Blackpool: <a href="/soft-play/blackpool/birthday-parties">/blackpool?filter=parties</a></p>
+<p>Explore birthday party venues in Blackpool: <a href="/soft-play/blackpool/birthday-parties">birthday party venues in Blackpool</a></p>
 
 <h2>Cheap soft play in Blackpool: money-saving tips</h2>
 <p>Want <strong>cheap soft play in Blackpool</strong>? Try these ideas:</p>
@@ -5328,7 +5239,7 @@ export const posts: BlogPost[] = [
   <li>Predictable session structure</li>
   <li>Supportive, trained staff</li>
 </ul>
-<p>Find SEN-friendly soft play in Blackpool: <a href="/soft-play/blackpool/sen-friendly">/blackpool?filter=sen</a></p>
+<p>Find SEN-friendly soft play in Blackpool: <a href="/soft-play/blackpool/sen-friendly">SEN-friendly soft play in Blackpool</a></p>
 
 <h2>Local tips: parking, cafés, quieter times and what to bring</h2>
 <ul>
@@ -5341,9 +5252,9 @@ export const posts: BlogPost[] = [
 <h2>More soft play near Blackpool</h2>
 <p>If you're happy to travel a little further, great indoor play options exist in nearby towns:</p>
 <ul>
-  <li><a href="/blog/best-soft-play-in-preston">/preston</a></li>
-  <li><a href="/soft-play/liverpool">/liverpool</a></li>
-  <li><a href="/soft-play/manchester">/manchester</a></li>
+  <li><a href="/blog/best-soft-play-in-preston">Preston</a></li>
+  <li><a href="/soft-play/liverpool">Liverpool</a></li>
+  <li><a href="/soft-play/manchester">Manchester</a></li>
 </ul>`,
     faq: [
       { q: 'What is the best soft play in Blackpool?', a: 'Blackpool has a range of indoor play venues suited to babies, toddlers and older children, including birthday party packages and SEN-friendly sessions at select venues.' },
@@ -5367,7 +5278,7 @@ export const posts: BlogPost[] = [
 
 <p>This 2026 parent guide covers the best soft play in Middlesbrough, with advice on toddler and baby sessions, birthday parties, SEN-friendly play and cost-saving tips.</p>
 
-<p>Browse soft play venues in Middlesbrough: <a href="/blog/best-soft-play-in-middlesbrough">/middlesbrough</a></p>
+<p>Browse soft play venues in Middlesbrough: <a href="/blog/best-soft-play-in-middlesbrough">Middlesbrough</a></p>
 
 <h2>Why families love soft play in Middlesbrough</h2>
 <ul>
@@ -5398,7 +5309,7 @@ export const posts: BlogPost[] = [
   <li>Sensory play features</li>
   <li>Quieter weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly soft play in Middlesbrough: <a href="/blog/best-soft-play-in-middlesbrough">/middlesbrough?filter=toddler</a></p>
+<p>Browse toddler-friendly soft play in Middlesbrough: <a href="/blog/best-soft-play-in-middlesbrough">toddler-friendly soft play in Middlesbrough</a></p>
 
 <h2>Baby soft play in Middlesbrough (under 1s)</h2>
 <p>Several venues in the Teesside area offer baby-friendly sessions or dedicated baby areas with padded flooring and sensory toys — ideal for babies who can sit up or crawl, and a welcoming, relaxed outing for parents.</p>
@@ -5417,7 +5328,7 @@ export const posts: BlogPost[] = [
   <li>Reserved play time for your group</li>
   <li>Party host support available at some venues</li>
 </ul>
-<p>Explore birthday party venues in Middlesbrough: <a href="/blog/best-soft-play-in-middlesbrough">/middlesbrough?filter=parties</a></p>
+<p>Explore birthday party venues in Middlesbrough: <a href="/blog/best-soft-play-in-middlesbrough">birthday party venues in Middlesbrough</a></p>
 
 <h2>Cheap soft play in Middlesbrough: money-saving tips</h2>
 <p>Want <strong>cheap soft play in Middlesbrough</strong>? Try these ideas:</p>
@@ -5437,7 +5348,7 @@ export const posts: BlogPost[] = [
   <li>Predictable session structure</li>
   <li>Supportive, trained staff</li>
 </ul>
-<p>Find SEN-friendly soft play in Middlesbrough: <a href="/blog/best-soft-play-in-middlesbrough">/middlesbrough?filter=sen</a></p>
+<p>Find SEN-friendly soft play in Middlesbrough: <a href="/blog/best-soft-play-in-middlesbrough">SEN-friendly soft play in Middlesbrough</a></p>
 
 <h2>Local tips: parking, cafés, quieter times and what to bring</h2>
 <ul>
@@ -5450,9 +5361,9 @@ export const posts: BlogPost[] = [
 <h2>More soft play near Middlesbrough</h2>
 <p>If you're happy to travel a little further, great indoor play options exist in nearby towns:</p>
 <ul>
-  <li><a href="/soft-play/newcastle">/newcastle</a></li>
-  <li><a href="/soft-play/york">/york</a></li>
-  <li><a href="/soft-play/sunderland">/sunderland</a></li>
+  <li><a href="/soft-play/newcastle">Newcastle</a></li>
+  <li><a href="/soft-play/york">York</a></li>
+  <li><a href="/soft-play/sunderland">Sunderland</a></li>
 </ul>`,
     faq: [
       { q: 'What is the best soft play in Middlesbrough?', a: 'Middlesbrough and Teesside have a solid range of indoor play venues for babies, toddlers and older children, including birthday party packages and SEN-friendly sessions at select venues.' },
@@ -5476,7 +5387,7 @@ export const posts: BlogPost[] = [
 
 <p>This 2026 parent guide covers the best soft play in Peterborough, with advice on toddler and baby sessions, birthday parties, SEN-friendly play and money-saving tips.</p>
 
-<p>Browse soft play venues in Peterborough: <a href="/blog/best-soft-play-in-peterborough">/peterborough</a></p>
+<p>Browse soft play venues in Peterborough: <a href="/blog/best-soft-play-in-peterborough">Peterborough</a></p>
 
 <h2>Why families love soft play in Peterborough</h2>
 <ul>
@@ -5507,7 +5418,7 @@ export const posts: BlogPost[] = [
   <li>Sensory play features</li>
   <li>Quieter weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly soft play in Peterborough: <a href="/blog/best-soft-play-in-peterborough">/peterborough?filter=toddler</a></p>
+<p>Browse toddler-friendly soft play in Peterborough: <a href="/blog/best-soft-play-in-peterborough">toddler-friendly soft play in Peterborough</a></p>
 
 <h2>Baby soft play in Peterborough (under 1s)</h2>
 <p>Several Peterborough venues offer baby-friendly areas or dedicated sessions with padded flooring and sensory toys — ideal for babies who can sit up or crawl confidently.</p>
@@ -5526,7 +5437,7 @@ export const posts: BlogPost[] = [
   <li>Reserved soft play time for your group</li>
   <li>Party hosts available at some venues</li>
 </ul>
-<p>Explore birthday party venues in Peterborough: <a href="/blog/best-soft-play-in-peterborough">/peterborough?filter=parties</a></p>
+<p>Explore birthday party venues in Peterborough: <a href="/blog/best-soft-play-in-peterborough">birthday party venues in Peterborough</a></p>
 
 <h2>Cheap soft play in Peterborough: money-saving tips</h2>
 <p>Want <strong>cheap soft play in Peterborough</strong>? Try these ideas:</p>
@@ -5546,7 +5457,7 @@ export const posts: BlogPost[] = [
   <li>Predictable session structure</li>
   <li>Supportive, trained staff</li>
 </ul>
-<p>Find SEN-friendly soft play in Peterborough: <a href="/blog/best-soft-play-in-peterborough">/peterborough?filter=sen</a></p>
+<p>Find SEN-friendly soft play in Peterborough: <a href="/blog/best-soft-play-in-peterborough">SEN-friendly soft play in Peterborough</a></p>
 
 <h2>Local tips: parking, cafés, quieter times and what to bring</h2>
 <ul>
@@ -5559,9 +5470,9 @@ export const posts: BlogPost[] = [
 <h2>More soft play near Peterborough</h2>
 <p>If you're happy to travel a little further, great indoor play options exist in nearby towns:</p>
 <ul>
-  <li><a href="/blog/best-soft-play-in-cambridge">/cambridge</a></li>
-  <li><a href="/soft-play/ipswich">/ipswich</a></li>
-  <li><a href="/soft-play/norwich">/norwich</a></li>
+  <li><a href="/blog/best-soft-play-in-cambridge">Cambridge</a></li>
+  <li><a href="/soft-play/ipswich">Ipswich</a></li>
+  <li><a href="/soft-play/norwich">Norwich</a></li>
 </ul>`,
     faq: [
       { q: 'What is the best soft play in Peterborough?', a: 'Peterborough has a solid range of indoor play venues for babies, toddlers and older children, including birthday party packages and SEN-friendly sessions at select venues.' },
@@ -5585,7 +5496,7 @@ export const posts: BlogPost[] = [
 
 <p>This 2026 parent guide covers the best soft play in Northampton, with advice on toddler and baby sessions, birthday parties, SEN-friendly play and money-saving tips.</p>
 
-<p>Browse soft play venues in Northampton: <a href="/blog/best-soft-play-in-northampton">/northampton</a></p>
+<p>Browse soft play venues in Northampton: <a href="/blog/best-soft-play-in-northampton">Northampton</a></p>
 
 <h2>Why families love soft play in Northampton</h2>
 <ul>
@@ -5616,7 +5527,7 @@ export const posts: BlogPost[] = [
   <li>Sensory play features</li>
   <li>Quieter weekday morning sessions</li>
 </ul>
-<p>Browse toddler-friendly soft play in Northampton: <a href="/blog/best-soft-play-in-northampton">/northampton?filter=toddler</a></p>
+<p>Browse toddler-friendly soft play in Northampton: <a href="/blog/best-soft-play-in-northampton">toddler-friendly soft play in Northampton</a></p>
 
 <h2>Baby soft play in Northampton (under 1s)</h2>
 <p>Several Northampton venues offer baby-friendly sessions or dedicated baby areas with padded flooring and sensory toys — ideal for babies who can sit up or crawl confidently.</p>
@@ -5635,7 +5546,7 @@ export const posts: BlogPost[] = [
   <li>Reserved play time for your group</li>
   <li>Party hosts available at some venues</li>
 </ul>
-<p>Explore birthday party venues in Northampton: <a href="/blog/best-soft-play-in-northampton">/northampton?filter=parties</a></p>
+<p>Explore birthday party venues in Northampton: <a href="/blog/best-soft-play-in-northampton">birthday party venues in Northampton</a></p>
 
 <h2>Cheap soft play in Northampton: money-saving tips</h2>
 <p>Want <strong>cheap soft play in Northampton</strong>? Try these ideas:</p>
@@ -5655,7 +5566,7 @@ export const posts: BlogPost[] = [
   <li>Predictable session structure</li>
   <li>Supportive, trained staff</li>
 </ul>
-<p>Find SEN-friendly soft play in Northampton: <a href="/blog/best-soft-play-in-northampton">/northampton?filter=sen</a></p>
+<p>Find SEN-friendly soft play in Northampton: <a href="/blog/best-soft-play-in-northampton">SEN-friendly soft play in Northampton</a></p>
 
 <h2>Local tips: parking, cafés, quieter times and what to bring</h2>
 <ul>
@@ -5668,9 +5579,9 @@ export const posts: BlogPost[] = [
 <h2>More soft play near Northampton</h2>
 <p>If you're happy to travel a little further, great indoor play options exist in nearby towns:</p>
 <ul>
-  <li><a href="/blog/best-soft-play-in-milton-keynes">/milton-keynes</a></li>
-  <li><a href="/blog/best-soft-play-in-coventry">/coventry</a></li>
-  <li><a href="/soft-play/leicester">/leicester</a></li>
+  <li><a href="/blog/best-soft-play-in-milton-keynes">Milton Keynes</a></li>
+  <li><a href="/blog/best-soft-play-in-coventry">Coventry</a></li>
+  <li><a href="/soft-play/leicester">Leicester</a></li>
 </ul>`,
     faq: [
       { q: 'What is the best soft play in Northampton?', a: 'Northampton has a solid range of indoor play venues for babies, toddlers and older children, including birthday party packages and SEN-friendly sessions at select venues.' },
