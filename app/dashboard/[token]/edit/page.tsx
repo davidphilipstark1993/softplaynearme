@@ -7,7 +7,8 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { Input } from '@/components/ui/input'
 import { computeCompleteness } from '@/lib/completeness'
-import { ArrowLeft, Save, CheckCircle2, AlertCircle, Loader2, Plus, Trash2, Eye } from 'lucide-react'
+import { isUsablePhotoUrl } from '@/lib/imageUtils'
+import { ArrowLeft, Save, CheckCircle2, AlertCircle, Loader2, Plus, Trash2, Eye, Upload } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { toast } from 'sonner'
 
@@ -95,6 +96,7 @@ export default function EditPage() {
   const [hours, setHours] = useState<Record<string, { open: string; close: string } | null>>({})
   const [sessions, setSessions] = useState<Session[]>([])
   const [photoUrls, setPhotoUrls] = useState<string[]>([''])
+  const [uploadingIndex, setUploadingIndex] = useState<number | null>(null)
 
   useEffect(() => {
     async function load() {
@@ -158,17 +160,19 @@ export default function EditPage() {
             )
           }
 
-          // Photo URLs
+          // Photo URLs — dead/placeholder scraped URLs (expired Google session
+          // photos, Google's own "no photo" icons) are dropped rather than
+          // shown as an editable-but-broken field.
           const photos: string[] = []
-          if (v.main_image_url) photos.push(v.main_image_url)
+          if (isUsablePhotoUrl(v.main_image_url)) photos.push(v.main_image_url)
           if (Array.isArray(v.photo_urls)) {
             for (const u of v.photo_urls) {
-              if (u && !photos.includes(u)) photos.push(u)
+              if (isUsablePhotoUrl(u) && !photos.includes(u)) photos.push(u)
             }
           }
           if (Array.isArray(v.images)) {
             for (const u of v.images) {
-              if (u && !photos.includes(u)) photos.push(u)
+              if (isUsablePhotoUrl(u) && !photos.includes(u)) photos.push(u)
             }
           }
           setPhotoUrls(photos.length > 0 ? photos : [''])
@@ -271,6 +275,23 @@ export default function EditPage() {
       const next = p.filter((_, idx) => idx !== i)
       return next.length === 0 ? [''] : next
     })
+  }
+
+  async function handlePhotoFile(i: number, file: File) {
+    setUploadingIndex(i)
+    setError('')
+    try {
+      const body = new FormData()
+      body.append('file', file)
+      const res = await fetch(`/api/dashboard/${token}/upload`, { method: 'POST', body })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || 'Upload failed')
+      updatePhotoUrl(i, data.url)
+    } catch (err: unknown) {
+      toast.error(err instanceof Error ? err.message : 'Photo upload failed')
+    } finally {
+      setUploadingIndex(null)
+    }
   }
 
   const descWords = wordCount(form.description || '')
@@ -586,7 +607,7 @@ export default function EditPage() {
           {/* PHOTOS */}
           <Section id="photos" title="Photos" emoji="📸">
             <p className="text-sm text-slate-500 mb-4">
-              Listings with 3+ photos get 3× more clicks. Paste URLs to images hosted on your website.
+              Listings with 3+ photos get 3× more clicks. Upload photos from your device, or paste a URL to an image already hosted online.
             </p>
 
             <div className="space-y-2.5">
@@ -595,6 +616,14 @@ export default function EditPage() {
                   <div className="flex-shrink-0 w-6 text-center text-xs font-medium text-slate-400">
                     {i + 1}
                   </div>
+                  {url && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={url}
+                      alt=""
+                      className="w-9 h-9 rounded object-cover flex-shrink-0 border border-slate-200"
+                    />
+                  )}
                   <Input
                     type="url"
                     value={url}
@@ -602,6 +631,29 @@ export default function EditPage() {
                     placeholder="https://yourvenue.co.uk/images/soft-play.jpg"
                     className="flex-1"
                   />
+                  <label
+                    className={cn(
+                      'flex-shrink-0 p-1.5 text-slate-400 hover:text-purple-600 transition-colors cursor-pointer',
+                      uploadingIndex === i && 'pointer-events-none'
+                    )}
+                    title="Upload photo from your device"
+                  >
+                    {uploadingIndex === i ? (
+                      <Loader2 className="w-4 h-4 animate-spin text-purple-500" />
+                    ) : (
+                      <Upload className="w-4 h-4" />
+                    )}
+                    <input
+                      type="file"
+                      accept="image/jpeg,image/png,image/webp,image/gif"
+                      className="hidden"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0]
+                        if (file) handlePhotoFile(i, file)
+                        e.target.value = ''
+                      }}
+                    />
+                  </label>
                   {photoUrls.length > 1 && (
                     <button
                       type="button"
@@ -622,18 +674,15 @@ export default function EditPage() {
                 onClick={addPhotoUrl}
                 className="mt-3 inline-flex items-center gap-1.5 text-sm text-purple-600 hover:text-purple-700 font-medium"
               >
-                <Plus className="w-4 h-4" /> Add another photo URL
+                <Plus className="w-4 h-4" /> Add another photo
               </button>
             )}
 
             {photoUrls.filter(Boolean).length > 0 && (
               <p className="mt-2 text-xs text-slate-400">
-                First URL will be used as the main listing image.
+                First photo will be used as the main listing image. Max 4MB per photo.
               </p>
             )}
-            <p className="mt-1 text-xs text-slate-400">
-              Full photo upload coming soon.
-            </p>
           </Section>
 
           {/* Save / feedback */}
