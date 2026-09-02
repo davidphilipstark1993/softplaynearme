@@ -82,6 +82,48 @@ function seededPick(arr, seed) {
   return arr[idx]
 }
 
+// Words a genuine sentence essentially never ends on — used to catch review
+// snippets that were truncated mid-clause during scraping (e.g. "...allows
+// perfect views while.", "...ranging from babies to bigger."). Reject these
+// outright rather than let a dangling fragment through: see the 2026-08-19
+// fix in reports/ for the class of bug this replaced (170+ live venue
+// descriptions with broken-grammar or dangling-fragment review quotes).
+const SNIPPET_BAD_ENDINGS = new Set([
+  'the', 'a', 'an', 'to', 'and', 'but', 'or', 'with', 'for', 'of', 'in', 'on', 'at', 'that', 'this',
+  'so', 'because', 'if', 'than', 'then', 'how', 'it', 'its', 'their', 'our', 'his', 'her', 'some',
+  'more', 'less', 'bigger', 'smaller', 'other', 'another', 'while', 'which', 'who', 'whom', 'whose',
+  'not', 'no', 'very', 'too', 'also', 'just', 'still', 'even', 'only', 'over', 'under', 'into',
+  'onto', 'from', 'as', 'be', 'been', 'being',
+])
+
+function looksTruncated(snippet) {
+  const words = snippet.replace(/[.!?"]+$/, '').split(/\s+/)
+  const last = (words[words.length - 1] || '').replace(/[^\w]/g, '').toLowerCase()
+  return SNIPPET_BAD_ENDINGS.has(last)
+}
+
+// Abbreviations that end in "." without ending a sentence — "timed slots
+// vs. open play" is not "...vs. Open play". Checked against the word
+// immediately preceding the matched period.
+const SENTENCE_ABBREV = new Set(['vs', 'etc', 'approx', 'no', 'st', 'mr', 'mrs', 'dr'])
+
+// Capitalizes the first letter after every ". " in a paragraph. Covers two
+// bug classes at once: (1) repStr being '' for venues with no rating/reviews
+// at all, which otherwise leaves the template's hardcoded continuation text
+// lowercase (e.g. "...based in Aberdeen. a welcoming play venue..."), and
+// (2) a review snippet that itself starts lowercase mid-quote. Venue names
+// that are intentionally lowercase (e.g. "sport@kenton") are left alone
+// since they never follow ". " mid-sentence in these templates.
+function capitalizeSentenceStarts(text) {
+  if (!text) return text
+  return text.replace(/\.(\s+)([a-z])/g, (full, ws, ch, offset, str) => {
+    const before = str.slice(0, offset).trimEnd()
+    const word = (before.split(/[\s(]/).pop() || '').toLowerCase()
+    if (SENTENCE_ABBREV.has(word)) return full
+    return `.${ws}${ch.toUpperCase()}`
+  })
+}
+
 // ── City display name lookup ──────────────────────────────────────────────
 
 const CITY_NAMES = {
@@ -173,9 +215,20 @@ function reviewTier(count) {
   return 'local'
 }
 
+// NOTE: 'playground' must be checked before the generic 'play centre'/
+// leisure fallbacks below — these are outdoor public park playgrounds
+// (venue_type: 'park-playground', see lib/venueTypes.ts), not indoor
+// commercial venues. Calling one "a soft play centre" offering "indoor"
+// facilities is a factual mismatch, not just generic phrasing — found
+// affecting 366 of 410 Playground-category venues on 2026-08-19. This
+// function only fixes the *type label*; callers must also avoid feeding
+// playground-typed venues into templates whose fixed text hardcodes
+// "indoor" regardless of the interpolated type (see isOutdoorPlayground
+// gating at the P1/P2 call sites).
 function categoryLabel(category) {
   if (!category) return 'soft play centre'
   const c = category.toLowerCase()
+  if (c.includes('playground') || c.includes('play area') || c.includes('play park')) return 'public park playground'
   if (c.includes('inflatable')) return 'inflatable play and amusement centre'
   if (c.includes('role play')) return 'role-play and activity centre'
   if (c.includes('trampoline')) return 'trampoline and play centre'
@@ -184,6 +237,11 @@ function categoryLabel(category) {
   if (c.includes('play centre') || c.includes('play center')) return 'soft play centre'
   if (c.includes('leisure')) return 'leisure and play centre'
   return 'soft play centre'
+}
+
+function isOutdoorPlayground(category, venueType) {
+  const c = (category || '').toLowerCase()
+  return venueType === 'park-playground' || c.includes('playground') || c.includes('play area') || c.includes('play park')
 }
 
 // ── Description templates ─────────────────────────────────────────────────
@@ -511,22 +569,62 @@ function computeScore(v) {
   return Math.min(s, 100)
 }
 
+// ── Outdoor playground templates ──────────────────────────────────────────
+// P1_TEMPLATES/P2_TEMPLATES above hardcode "indoor"/"soft play centre"
+// language in their fixed text (not just via the interpolated `type`), so
+// they're wrong for outdoor public park playgrounds regardless of what
+// categoryLabel() returns. Separate, honest pool for venues where
+// isOutdoorPlayground() is true — smaller because there's less to
+// differentiate (no café/parties/SEN sessions to describe) and nothing here
+// claims paid admission, booking, or indoor facilities that don't exist.
+const P1_OUTDOOR_TEMPLATES = [
+  (v) => `${v.name} is a public park playground in ${v.city}${v.countyStr ? `, ${v.countyStr}` : ''}, with outdoor play equipment for local children.`,
+  (v) => `${v.name} is a council-run outdoor playground serving ${v.city}${v.countyStr ? ` and ${v.countyStr}` : ''}, free to visit and open to the public.`,
+  (v) => `Located in ${v.city}${v.countyStr ? `, ${v.countyStr}` : ''}, ${v.name} is an outdoor play area with equipment for children, typically open during daylight hours.`,
+  (v) => `${v.name} provides outdoor play equipment for children in ${v.city}${v.countyStr ? ` and the wider ${v.countyStr} area` : ''}.`,
+]
+
+const P2_OUTDOOR_TEMPLATES = [
+  (v) => v.snippetStr
+    ? `${v.snippetStr}${v.features.outdoor ? ' Being outdoors, a visit here works best in dry weather.' : ''}`
+    : `As with most public playgrounds, equipment and condition can vary — it's worth checking recent local reviews if you're travelling some distance.`,
+  (v) => `Public playgrounds like this are typically free to use, unsupervised, and open year-round, though equipment and condition can vary by council maintenance schedule.${v.snippetStr ? ` ${v.snippetStr}` : ''}`,
+  (v) => v.snippetStr
+    ? `${v.snippetStr}`
+    : `${v.name} doesn't have listed opening hours or admission fees in the way a commercial soft play centre would — it's public outdoor space.`,
+]
+
 // ── Build all enriched fields for one venue ───────────────────────────────
 
 function enrichVenue(v) {
+  // A handful of scraped names carry a spurious trailing period (e.g.
+  // "Funplex."), which duplicates as "Name. lowercase-continuation" every
+  // time the name is interpolated mid-sentence across description, SEO
+  // title, and tips. Strip it once here for every downstream use in this
+  // function — the stored venue title elsewhere in the app is unaffected.
+  v = { ...v, name: (v.name || '').replace(/\.+$/, '') }
+
   const city = cityDisplayName(v.city_slug, v.city)
   const countyStr = v.county ? v.county : ''
   const features = getFeatures(v)
   const facilities = featureList(features)
   const facilitiesStr = facilities.length ? oxford(facilities) : null
   const snippetRaw = (v.review_snippet || '').trim()
+    .replace(/^[.\s]*\.{3}[.\s]*/, '') // leading "... " ellipsis from a scraped mid-review excerpt
     .replace(/[,\s]+\.$/, '.') // "word ," → "word."
     .replace(/\s+for\s+the\.?$/i, '.') // trailing "for the" fragments
     .replace(/\s+with\s+\w+\s*[,.]?$/i, '.') // trailing "with role play ,"
     .trim()
+  const snippetCapitalized = snippetRaw
+    ? snippetRaw.charAt(0).toUpperCase() + snippetRaw.slice(1)
+    : snippetRaw
   // Only use snippet if it looks complete (has a subject + decent length)
-  const snippetStr = snippetRaw && snippetRaw.length > 20 && /\w{3,}/.test(snippetRaw)
-    ? (snippetRaw.endsWith('.') || snippetRaw.endsWith('!') || snippetRaw.endsWith('"') ? snippetRaw : snippetRaw + '.')
+  // and doesn't end mid-clause (looksTruncated) — a truncated quote reads as
+  // more broken than no quote at all, so we fall back to the template's
+  // non-snippet branch instead of shipping a dangling fragment.
+  const snippetStr = snippetCapitalized && snippetCapitalized.length > 20
+    && /\w{3,}/.test(snippetCapitalized) && !looksTruncated(snippetCapitalized)
+    ? (snippetCapitalized.endsWith('.') || snippetCapitalized.endsWith('!') || snippetCapitalized.endsWith('"') ? snippetCapitalized : snippetCapitalized + '.')
     : null
   const type = categoryLabel(v.category)
   const art = article(type)
@@ -566,9 +664,22 @@ function enrichVenue(v) {
   const h3 = lcg(h2)
   const h4 = lcg(h3)
 
-  const p1 = seededPick(P1_TEMPLATES, h1 % P1_TEMPLATES.length)(vData)
-  const p2 = seededPick(P2_TEMPLATES, h2 % P2_TEMPLATES.length)(vData)
-  const p3 = seededPick(P3_TEMPLATES, h3 % P3_TEMPLATES.length)(vData)
+  const outdoor = isOutdoorPlayground(v.category, v.venue_type)
+  const p1Pool = outdoor ? P1_OUTDOOR_TEMPLATES : P1_TEMPLATES
+  const p2Pool = outdoor ? P2_OUTDOOR_TEMPLATES : P2_TEMPLATES
+
+  const p1 = capitalizeSentenceStarts(seededPick(p1Pool, h1 % p1Pool.length)(vData))
+  const p2 = capitalizeSentenceStarts(seededPick(p2Pool, h2 % p2Pool.length)(vData))
+  // P3 (practical visiting tips) stays shared — its sentences are already
+  // gated on confirmed features.* booleans, so an outdoor playground with no
+  // café/parties/SEN data simply gets the plainer opening-hours-style tips.
+  // A couple of P3 variants have "soft play venue(s)/centre" baked into
+  // their fixed text (not just the interpolated type), which reads oddly on
+  // a public park playground — swap it to generic wording for those.
+  let p3 = capitalizeSentenceStarts(seededPick(P3_TEMPLATES, h3 % P3_TEMPLATES.length)(vData))
+  if (outdoor) {
+    p3 = p3.replace(/soft play venues/gi, 'venues like this').replace(/soft play venue/gi, 'venue')
+  }
 
   const description = [p1, p2, p3].filter(Boolean).join('\n\n')
   const whatToExpect = generateWhatToExpect(v, features, city)
