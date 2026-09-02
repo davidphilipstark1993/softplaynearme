@@ -128,16 +128,31 @@ export function SearchForm({
       ;(window as any).gtag('event', 'search', { search_term: postcode.trim() })
     }
 
-    const cleaned = postcode.trim().replace(/\s/g, '')
-    if (cleaned.length >= 5 && !isValidUKPostcode(cleaned)) {
-      // Might be a city name, proceed anyway
-    }
+    const trimmedInput = postcode.trim()
+    const cleaned = trimmedInput.replace(/\s/g, '')
 
     if (onSearch) {
-      onSearch(postcode.trim(), radius)
+      onSearch(trimmedInput, radius)
     } else {
+      // Typing a city/town name and hitting Enter or Search (rather than
+      // picking the dropdown suggestion) used to fall through to
+      // /search?q=..., which only knows how to geocode postcodes — the
+      // user landed on "Please enter a valid UK postcode" for a name the
+      // app's own autocomplete had just offered. Match it the same way
+      // selectSuggestion() does before assuming it's a postcode.
+      if (!isValidUKPostcode(cleaned)) {
+        const cityMatch = AUTOCOMPLETE_ITEMS.find(
+          (item) => item.label.split(',')[0].toLowerCase() === trimmedInput.toLowerCase()
+        )
+        if (cityMatch) {
+          setShowSuggestions(false)
+          router.push(`/soft-play/${cityMatch.slug}`)
+          return
+        }
+      }
+
       const params = new URLSearchParams({
-        q: postcode.trim(),
+        q: trimmedInput,
         radius: radius.toString(),
       })
       router.push(`/search?${params.toString()}`)

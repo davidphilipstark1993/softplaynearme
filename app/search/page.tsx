@@ -1,7 +1,10 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
+import { redirect } from 'next/navigation'
 import { getPool } from '@/lib/pool'
 import { geocodePostcode, parseRadius, formatPostcode, isValidUKPostcode } from '@/lib/geo'
+import { citiesBasic } from '@/lib/cityBasics'
+import { getStaticTowns } from '@/lib/staticTowns'
 import { SearchForm } from '@/components/search/SearchForm'
 import { SearchResults } from '@/components/search/SearchResults'
 import { SearchFilters } from './SearchFilters'
@@ -185,6 +188,19 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
         locationName = formatPostcode(query)
       }
     } else {
+      // Not a postcode — this is how a typed city/town name (e.g. from
+      // pressing Enter instead of picking the autocomplete suggestion)
+      // arrives here. Redirect to the matching city page rather than
+      // showing "enter a valid UK postcode" for a name the app itself
+      // suggested. Falls through to that message only for genuinely
+      // unrecognized input.
+      const trimmedQuery = query.trim().toLowerCase()
+      const cityMatch = citiesBasic.find((c) => c.name.toLowerCase() === trimmedQuery)
+      const townMatch = cityMatch ? null : getStaticTowns().find((t) => t.name.toLowerCase() === trimmedQuery)
+      const slug = cityMatch?.slug || townMatch?.slug
+      if (slug) {
+        redirect(`/soft-play/${slug}`)
+      }
       locationName = query
     }
   }
