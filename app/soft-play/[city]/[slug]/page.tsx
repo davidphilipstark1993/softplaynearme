@@ -45,6 +45,7 @@ import { SpecialSessions } from '@/components/venue/SpecialSessions'
 import { CTAButtons } from '@/components/venue/CTAButtons'
 import { QuickFactsPanel } from '@/components/venue/QuickFactsPanel'
 import { EnquiryForm } from '@/components/venue/EnquiryForm'
+import { ReportIssueLink } from '@/components/venue/ReportIssueLink'
 import { VenueViewTracking } from '@/components/venue/VenueViewTracking'
 
 interface PageProps {
@@ -1092,6 +1093,12 @@ export default async function VenuePage({ params }: PageProps) {
                 {/* Enquiry form — only for venues that exist in our DB (have a real id) */}
                 {typeof venue.id === 'number' && (
                   <EnquiryForm venueId={venue.id} venueName={venue.name} />
+                )}
+
+                {typeof venue.id === 'number' && (
+                  <div className="flex justify-center">
+                    <ReportIssueLink venueId={venue.id} />
+                  </div>
                 )}
 
                 {/* Pricing */}

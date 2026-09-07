@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { RefreshCw, ExternalLink, ShieldCheck } from 'lucide-react'
+import { RefreshCw, ExternalLink, ShieldCheck, Plus } from 'lucide-react'
 import { PLAN_LABELS, type Plan, type PlanStatus } from '@/lib/plans'
 
 interface AdminVenue {
@@ -17,6 +17,7 @@ interface AdminVenue {
   plan_status: PlanStatus
   plan_started_at: string | null
   ad_placements: { homepage?: boolean; city_pages?: string[] } | null
+  needs_review: boolean
 }
 
 const PLANS: Plan[] = ['free', 'premium', 'bespoke']
@@ -30,9 +31,15 @@ export default function AdminVenuesPage() {
   const [total, setTotal] = useState(0)
   const [page, setPage] = useState(1)
   const [search, setSearch] = useState('')
+  const [cityFilter, setCityFilter] = useState('')
+  const [needsReviewOnly, setNeedsReviewOnly] = useState(false)
   const [loading, setLoading] = useState(false)
   const [updating, setUpdating] = useState<number | null>(null)
   const [rowError, setRowError] = useState<Record<number, string>>({})
+  const [showAddForm, setShowAddForm] = useState(false)
+  const [addForm, setAddForm] = useState({ name: '', citySlug: '', address: '', postcode: '', phone: '', website: '' })
+  const [addError, setAddError] = useState('')
+  const [adding, setAdding] = useState(false)
 
   async function login(e: React.FormEvent) {
     e.preventDefault()
@@ -55,6 +62,8 @@ export default function AdminVenuesPage() {
     try {
       const params = new URLSearchParams({ page: String(targetPage) })
       if (targetSearch) params.set('search', targetSearch)
+      if (cityFilter) params.set('city', cityFilter)
+      if (needsReviewOnly) params.set('needsReview', 'true')
       const res = await fetch(`/api/admin/venues?${params.toString()}`)
       if (res.status === 401) { setAuthed(false); return }
       const data = await res.json()
@@ -63,6 +72,29 @@ export default function AdminVenuesPage() {
       setPage(targetPage)
     } finally {
       setLoading(false)
+    }
+  }
+
+  async function addVenue(e: React.FormEvent) {
+    e.preventDefault()
+    setAdding(true)
+    setAddError('')
+    try {
+      const res = await fetch('/api/admin/venues', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(addForm),
+      })
+      const data = await res.json().catch(() => ({}))
+      if (!res.ok) {
+        setAddError(data.error || 'Could not add venue')
+        return
+      }
+      setAddForm({ name: '', citySlug: '', address: '', postcode: '', phone: '', website: '' })
+      setShowAddForm(false)
+      await loadVenues(1, search)
+    } finally {
+      setAdding(false)
     }
   }
 
@@ -141,6 +173,13 @@ export default function AdminVenuesPage() {
               Claims →
             </Link>
             <button
+              onClick={() => setShowAddForm((s) => !s)}
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 px-3 py-2 rounded-lg transition-colors"
+            >
+              <Plus className="w-3.5 h-3.5" />
+              Add Venue
+            </button>
+            <button
               onClick={() => loadVenues()}
               disabled={loading}
               className="inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-slate-900 border border-slate-300 bg-white px-3 py-2 rounded-lg transition-colors"
@@ -151,21 +190,92 @@ export default function AdminVenuesPage() {
           </div>
         </div>
 
+        {showAddForm && (
+          <form
+            onSubmit={addVenue}
+            className="mb-4 bg-white border border-purple-200 rounded-xl p-4 grid gap-3 sm:grid-cols-3"
+          >
+            <input
+              required
+              value={addForm.name}
+              onChange={(e) => setAddForm((f) => ({ ...f, name: e.target.value }))}
+              placeholder="Venue name *"
+              className="border border-slate-300 rounded-lg px-3 py-2 text-sm"
+            />
+            <input
+              required
+              value={addForm.citySlug}
+              onChange={(e) => setAddForm((f) => ({ ...f, citySlug: e.target.value.toLowerCase() }))}
+              placeholder="City slug * (e.g. london)"
+              className="border border-slate-300 rounded-lg px-3 py-2 text-sm"
+            />
+            <input
+              value={addForm.postcode}
+              onChange={(e) => setAddForm((f) => ({ ...f, postcode: e.target.value }))}
+              placeholder="Postcode"
+              className="border border-slate-300 rounded-lg px-3 py-2 text-sm"
+            />
+            <input
+              value={addForm.address}
+              onChange={(e) => setAddForm((f) => ({ ...f, address: e.target.value }))}
+              placeholder="Address"
+              className="border border-slate-300 rounded-lg px-3 py-2 text-sm sm:col-span-2"
+            />
+            <input
+              value={addForm.phone}
+              onChange={(e) => setAddForm((f) => ({ ...f, phone: e.target.value }))}
+              placeholder="Phone"
+              className="border border-slate-300 rounded-lg px-3 py-2 text-sm"
+            />
+            <input
+              value={addForm.website}
+              onChange={(e) => setAddForm((f) => ({ ...f, website: e.target.value }))}
+              placeholder="Website"
+              className="border border-slate-300 rounded-lg px-3 py-2 text-sm sm:col-span-2"
+            />
+            <div className="sm:col-span-1 flex items-center gap-2">
+              <button
+                type="submit"
+                disabled={adding}
+                className="flex-1 text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg disabled:opacity-60"
+              >
+                {adding ? 'Adding…' : 'Add'}
+              </button>
+            </div>
+            {addError && <p className="sm:col-span-3 text-xs text-red-600">{addError}</p>}
+          </form>
+        )}
+
         <form
           onSubmit={(e) => { e.preventDefault(); loadVenues(1, search) }}
-          className="mb-4 flex gap-2"
+          className="mb-4 flex flex-wrap gap-2"
         >
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search venue name…"
-            className="flex-1 border border-slate-300 rounded-lg px-3 py-2 text-sm bg-white"
+            className="flex-1 min-w-[160px] border border-slate-300 rounded-lg px-3 py-2 text-sm bg-white"
           />
+          <input
+            value={cityFilter}
+            onChange={(e) => setCityFilter(e.target.value.toLowerCase())}
+            placeholder="City slug filter…"
+            className="w-40 border border-slate-300 rounded-lg px-3 py-2 text-sm bg-white"
+          />
+          <label className="inline-flex items-center gap-1.5 text-sm text-slate-600 border border-slate-300 rounded-lg px-3 py-2 bg-white">
+            <input
+              type="checkbox"
+              checked={needsReviewOnly}
+              onChange={(e) => setNeedsReviewOnly(e.target.checked)}
+              className="w-4 h-4 rounded border-slate-300 text-purple-600 focus:ring-purple-500"
+            />
+            Needs review only
+          </label>
           <button
             type="submit"
             className="text-sm font-medium text-white bg-slate-900 hover:bg-slate-800 px-4 py-2 rounded-lg"
           >
-            Search
+            Filter
           </button>
         </form>
 
@@ -175,6 +285,7 @@ export default function AdminVenuesPage() {
               <thead className="bg-slate-50 border-b border-slate-200 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">
                 <tr>
                   <th className="px-4 py-3">Venue</th>
+                  <th className="px-4 py-3">Needs review</th>
                   <th className="px-4 py-3">Claimed</th>
                   <th className="px-4 py-3">Plan</th>
                   <th className="px-4 py-3">Status</th>
@@ -201,6 +312,16 @@ export default function AdminVenuesPage() {
                         </a>
                       </div>
                       {rowError[v.id] && <p className="text-xs text-red-600 mt-1">{rowError[v.id]}</p>}
+                    </td>
+                    <td className="px-4 py-3">
+                      <input
+                        type="checkbox"
+                        checked={v.needs_review}
+                        disabled={updating === v.id}
+                        onChange={(e) => updateVenue(v.id, { needsReview: e.target.checked })}
+                        title="Uncheck once you've verified this venue's details"
+                        className="w-4 h-4 rounded border-slate-300 text-amber-600 focus:ring-amber-500"
+                      />
                     </td>
                     <td className="px-4 py-3">
                       {v.claimed_by_owner ? (
@@ -291,7 +412,7 @@ export default function AdminVenuesPage() {
                 ))}
                 {venues.length === 0 && !loading && (
                   <tr>
-                    <td colSpan={8} className="px-4 py-8 text-center text-slate-400">No venues found</td>
+                    <td colSpan={9} className="px-4 py-8 text-center text-slate-400">No venues found</td>
                   </tr>
                 )}
               </tbody>
