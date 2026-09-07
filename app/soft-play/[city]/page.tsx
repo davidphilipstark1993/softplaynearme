@@ -155,6 +155,7 @@ interface Venue {
   review_snippet?: string | null
   last_verified_at?: string | null
   featured?: boolean
+  featured_until?: string | null
   plan?: string
   plan_status?: string
   claimed_by_owner?: boolean
@@ -275,12 +276,17 @@ async function getVenues(citySlug: string, opts: VenueFilters = {}): Promise<Ven
         price_high: 'v.price_to DESC NULLS LAST, avg_rating DESC NULLS LAST',
         name: 'v.name ASC',
       }
-      // Featured (Premium/Bespoke) venues surface first regardless of sort.
-      query += ` GROUP BY v.id ORDER BY v.featured DESC, ${sortMap[sort] ?? sortMap.rating}`
+      // Featured (Premium/Bespoke) venues surface first regardless of sort —
+      // but only while any sponsored placement is still within its
+      // featured_until expiry (NULL means indefinite).
+      query += ` GROUP BY v.id ORDER BY (v.featured AND (v.featured_until IS NULL OR v.featured_until > NOW())) DESC, ${sortMap[sort] ?? sortMap.rating}`
 
       const result = await client.query(query, params)
 
-      let venues: Venue[] = result.rows
+      let venues: Venue[] = result.rows.map((row: Venue) => ({
+        ...row,
+        featured: !!row.featured && (!row.featured_until || new Date(row.featured_until) > new Date()),
+      }))
       if (special.includes('open-now') && venues.length > 0) {
         const { isOpenNow } = await import('@/lib/utils')
         venues = venues.filter((v) => isOpenNow(v.opening_hours as Record<string, unknown>))
@@ -347,6 +353,35 @@ async function getVenues(citySlug: string, opts: VenueFilters = {}): Promise<Ven
   venues.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0))
 
   return applyAreaFilter(venues)
+}
+
+interface SponsoredVenue {
+  id: number
+  name: string
+  slug: string
+}
+
+/**
+ * Bespoke-plan sponsored slot for a specific city page (distinct from the
+ * homepage slot in app/page.tsx) — admin-placed via ad_placements.city_pages,
+ * e.g. {"city_pages": ["london"]}. Live-DB only; degrades to empty on
+ * static builds like the homepage equivalent, so it just doesn't render
+ * rather than erroring.
+ */
+async function getSponsoredCityVenues(citySlug: string): Promise<SponsoredVenue[]> {
+  try {
+    const pool = getPool()
+    const result = await pool.query<SponsoredVenue>(
+      `SELECT id, name, slug FROM venues
+       WHERE city_slug = $1 AND ad_placements -> 'city_pages' ? $1
+       ORDER BY RANDOM()
+       LIMIT 3`,
+      [citySlug]
+    )
+    return result.rows
+  } catch {
+    return []
+  }
 }
 
 export default async function CityPage({ params, searchParams }: PageProps) {
@@ -427,6 +462,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
   // a paid placement, unlike the other categories which need a few to look
   // like a real "best of" grid.
   const featuredVenues = showCurated ? softPlayVenues.filter(v => v.featured).slice(0, 4) : []
+  const sponsoredVenues = showCurated ? await getSponsoredCityVenues(city) : []
   const toddlerVenues = showCurated ? softPlayVenues.filter(v => v.toddler_area).slice(0, 4) : []
   // A minimum review count keeps a single 5-star fluke review from
   // outranking a venue with hundreds of consistently good ones; a maximum
@@ -569,6 +605,32 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                               <span className="font-medium text-slate-700">{Number(venue.avg_rating).toFixed(1)}</span>
                             </div>
                           )}
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {sponsoredVenues.length >= 1 && (
+                <section>
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-amber-700 bg-amber-100 border border-amber-200 rounded-full px-2.5 py-1">
+                      Sponsored
+                    </span>
+                    <span className="text-xs text-slate-400">Placed by our Bespoke partners</span>
+                  </div>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    {sponsoredVenues.map((venue) => (
+                      <Link
+                        key={venue.slug}
+                        href={`/soft-play/${city}/${venue.slug}`}
+                        className="group block"
+                        data-ga-featured={venue.id}
+                      >
+                        <div className="bg-white border-2 border-amber-200 rounded-lg p-4 hover:border-amber-400 hover:shadow-md transition-all h-full flex flex-col">
+                          <span className="text-[10px] font-bold uppercase tracking-wide text-amber-700 mb-2">Sponsored</span>
+                          <p className="font-semibold text-sm text-slate-800 group-hover:text-amber-700 line-clamp-2">{venue.name}</p>
                         </div>
                       </Link>
                     ))}

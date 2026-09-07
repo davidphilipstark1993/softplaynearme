@@ -44,7 +44,7 @@ export async function GET(req: NextRequest) {
 
     params.push(PAGE_SIZE, (page - 1) * PAGE_SIZE)
     const result = await client.query(
-      `SELECT id, name, city_slug, slug, claimed_by_owner, featured,
+      `SELECT id, name, city_slug, slug, claimed_by_owner, featured, featured_until,
               plan, plan_status, plan_started_at, ad_placements
        FROM venues
        ${whereSql}
@@ -67,7 +67,7 @@ export async function PATCH(req: NextRequest) {
     return NextResponse.json({ error: 'Unauthorised' }, { status: 401 })
   }
 
-  const { id, plan, planStatus, featured, adPlacements } = await req.json()
+  const { id, plan, planStatus, featured, featuredUntil, adPlacements } = await req.json()
   if (!id) {
     return NextResponse.json({ error: 'Missing venue id' }, { status: 400 })
   }
@@ -114,6 +114,7 @@ export async function PATCH(req: NextRequest) {
       }
     }
     if (featured !== undefined) set('featured', Boolean(featured))
+    if (featuredUntil !== undefined) set('featured_until', featuredUntil || null)
     if (adPlacements !== undefined) set('ad_placements', JSON.stringify(adPlacements))
 
     if (updates.length === 0) {

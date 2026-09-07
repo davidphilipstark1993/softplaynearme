@@ -114,6 +114,7 @@ export default function EditPage() {
             website: v.website || '',
             description: v.description || '',
             special_notes: v.special_notes || '',
+            lead_notification_email: v.lead_notification_email || '',
             price_from: v.price_from ?? '',
             price_to: v.price_to ?? '',
             price_range: v.price_range || '',
@@ -370,6 +371,22 @@ export default function EditPage() {
             </div>
             <Field label="Website" hint="include https://">
               <Input type="url" value={form.website || ''} onChange={(e) => setField('website', e.target.value)} placeholder="https://yourvenue.co.uk" />
+            </Field>
+          </Section>
+
+          {/* LEAD NOTIFICATIONS */}
+          <Section id="leads" title="Lead Notifications" emoji="📬">
+            <Field
+              label="Notify this email when a parent sends an enquiry"
+              hint="leave blank to use your phone/website contact instead"
+            >
+              <Input
+                type="email"
+                value={form.lead_notification_email || ''}
+                onChange={(e) => setField('lead_notification_email', e.target.value)}
+                maxLength={160}
+                placeholder="bookings@yourvenue.co.uk"
+              />
             </Field>
           </Section>
 

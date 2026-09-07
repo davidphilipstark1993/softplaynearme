@@ -333,9 +333,14 @@ export default async function Home() {
       {featuredVenues.length > 0 && (
         <div className="bg-gradient-to-br from-amber-50 to-purple-50 py-12 px-4 border-b border-slate-200">
           <div className="max-w-7xl mx-auto">
-            <div className="mb-6">
-              <h2 className="text-2xl font-bold text-slate-900">Featured Soft Play Venues</h2>
-              <p className="text-slate-600 mt-1">Highlighted by our Bespoke partners</p>
+            <div className="mb-6 flex items-center gap-2">
+              <div>
+                <h2 className="text-2xl font-bold text-slate-900">Featured Soft Play Venues</h2>
+                <p className="text-slate-600 mt-1">Placed by our Bespoke partners</p>
+              </div>
+              <span className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-amber-700 bg-amber-100 border border-amber-200 rounded-full px-2.5 py-1">
+                Sponsored
+              </span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {featuredVenues.map((venue) => (

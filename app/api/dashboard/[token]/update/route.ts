@@ -42,7 +42,13 @@ const NEW_COLUMNS = [
   `ALTER TABLE venues ADD COLUMN IF NOT EXISTS food_served BOOLEAN DEFAULT false`,
   `ALTER TABLE venues ADD COLUMN IF NOT EXISTS changing_facilities BOOLEAN DEFAULT false`,
   `ALTER TABLE venues ADD COLUMN IF NOT EXISTS role_play_area BOOLEAN DEFAULT false`,
+  `ALTER TABLE venues ADD COLUMN IF NOT EXISTS lead_notification_email VARCHAR(160)`,
 ]
+
+function isValidEmail(e: unknown): boolean {
+  if (!e || e === '') return true // optional — falls back to venue's main contact email
+  return typeof e === 'string' && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)
+}
 
 export async function POST(
   request: NextRequest,
@@ -118,6 +124,9 @@ export async function POST(
     if (body.website && !isValidUrl(body.website)) {
       errors.push('Website must start with https://')
     }
+    if (body.lead_notification_email !== undefined && !isValidEmail(body.lead_notification_email)) {
+      errors.push('Lead notification email must be a valid email address')
+    }
     if (body.main_image_url && !isValidUrl(body.main_image_url)) {
       errors.push('Main image URL must start with https://')
     }
@@ -176,6 +185,9 @@ export async function POST(
     if (body.website !== undefined) set('website', String(body.website).slice(0, 300) || null)
     if (body.description !== undefined) set('description', String(body.description).slice(0, 3000))
     if (body.special_notes !== undefined) set('special_notes', String(body.special_notes).slice(0, 1000) || null)
+    if (body.lead_notification_email !== undefined) {
+      set('lead_notification_email', String(body.lead_notification_email).trim().slice(0, 160) || null)
+    }
 
     // Pricing
     if (body.price_from !== undefined) set('price_from', body.price_from === '' ? null : parseFloat(body.price_from))

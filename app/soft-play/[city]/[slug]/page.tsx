@@ -172,8 +172,12 @@ async function getVenue(citySlug: string, slug: string): Promise<Venue | null> {
         'SELECT * FROM venues WHERE city_slug = $1 AND slug = $2',
         [citySlug, slug]
       )
-      if (result.rows[0]) {
-        return result.rows[0]
+      const row = result.rows[0]
+      if (row) {
+        return {
+          ...row,
+          featured: !!row.featured && (!row.featured_until || new Date(row.featured_until) > new Date()),
+        }
       }
     } finally {
       client.release()

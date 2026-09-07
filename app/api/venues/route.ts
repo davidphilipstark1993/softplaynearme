@@ -129,14 +129,17 @@ export async function GET(request: NextRequest) {
       ${whereSql}
       GROUP BY v.id
       ${hasLocation ? `HAVING (3959 * acos(LEAST(1, GREATEST(-1, cos(radians($1)) * cos(radians(v.lat)) * cos(radians(v.lng) - radians($2)) + sin(radians($1)) * sin(radians(v.lat)))))) <= ${radius}` : ''}
-      ORDER BY ${orderBy}
+      ORDER BY (v.featured AND (v.featured_until IS NULL OR v.featured_until > NOW())) DESC, ${orderBy}
       LIMIT $${limitIdx}
     `
 
     const result = await client.query(sql, params)
 
     // Apply open_now filter client-side (requires parsing opening_hours)
-    let venues = result.rows
+    let venues = result.rows.map((v: any) => ({
+      ...v,
+      featured: !!v.featured && (!v.featured_until || new Date(v.featured_until) > new Date()),
+    }))
     if (filters.includes('open_now')) {
       venues = venues.filter((v: any) => isOpenNow(v.opening_hours))
     }

@@ -12,10 +12,11 @@ interface AdminVenue {
   slug: string
   claimed_by_owner: boolean
   featured: boolean
+  featured_until: string | null
   plan: Plan
   plan_status: PlanStatus
   plan_started_at: string | null
-  ad_placements: { homepage?: boolean } | null
+  ad_placements: { homepage?: boolean; city_pages?: string[] } | null
 }
 
 const PLANS: Plan[] = ['free', 'premium', 'bespoke']
@@ -178,7 +179,9 @@ export default function AdminVenuesPage() {
                   <th className="px-4 py-3">Plan</th>
                   <th className="px-4 py-3">Status</th>
                   <th className="px-4 py-3">Featured</th>
+                  <th className="px-4 py-3">Featured until</th>
                   <th className="px-4 py-3">Homepage ad</th>
+                  <th className="px-4 py-3">Sponsored on city pages</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
@@ -243,6 +246,18 @@ export default function AdminVenuesPage() {
                     </td>
                     <td className="px-4 py-3">
                       <input
+                        type="date"
+                        value={v.featured_until ? v.featured_until.slice(0, 10) : ''}
+                        disabled={updating === v.id}
+                        onChange={(e) =>
+                          updateVenue(v.id, { featuredUntil: e.target.value || null })
+                        }
+                        className="border border-slate-300 rounded-md px-2 py-1.5 text-sm bg-white"
+                        title="Leave blank for indefinite"
+                      />
+                    </td>
+                    <td className="px-4 py-3">
+                      <input
                         type="checkbox"
                         checked={!!v.ad_placements?.homepage}
                         disabled={updating === v.id}
@@ -254,11 +269,29 @@ export default function AdminVenuesPage() {
                         className="w-4 h-4 rounded border-slate-300 text-purple-600 focus:ring-purple-500"
                       />
                     </td>
+                    <td className="px-4 py-3">
+                      <input
+                        type="text"
+                        defaultValue={(v.ad_placements?.city_pages || []).join(', ')}
+                        disabled={updating === v.id}
+                        placeholder="e.g. london, nottingham"
+                        onBlur={(e) => {
+                          const cityPages = e.target.value
+                            .split(',')
+                            .map((s) => s.trim().toLowerCase())
+                            .filter(Boolean)
+                          updateVenue(v.id, {
+                            adPlacements: { ...(v.ad_placements || {}), city_pages: cityPages },
+                          })
+                        }}
+                        className="border border-slate-300 rounded-md px-2 py-1.5 text-sm bg-white w-44"
+                      />
+                    </td>
                   </tr>
                 ))}
                 {venues.length === 0 && !loading && (
                   <tr>
-                    <td colSpan={6} className="px-4 py-8 text-center text-slate-400">No venues found</td>
+                    <td colSpan={8} className="px-4 py-8 text-center text-slate-400">No venues found</td>
                   </tr>
                 )}
               </tbody>

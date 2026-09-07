@@ -50,20 +50,22 @@ export async function POST(
     client = await getPool().connect()
 
     const venueResult = await client.query(
-      `SELECT id, name, email, contact_email, plan, plan_status FROM venues WHERE id = $1 LIMIT 1`,
+      `SELECT id, name, email, contact_email, lead_notification_email, plan, plan_status
+       FROM venues WHERE id = $1 LIMIT 1`,
       [venueId]
     )
     if (venueResult.rows.length === 0) {
       return NextResponse.json({ error: 'Venue not found' }, { status: 404 })
     }
     const venue = venueResult.rows[0]
+    const notifyEmail = venue.lead_notification_email || venue.contact_email || venue.email
 
     const cleanName = name.trim().slice(0, 120)
     const cleanEmail = email.trim().slice(0, 160)
     const cleanPhone = phone?.trim()?.slice(0, 30) || null
     const cleanMessage = message.trim().slice(0, 2000)
 
-    const notifyOwner = isPaidActive(venue) && !!(venue.contact_email || venue.email)
+    const notifyOwner = isPaidActive(venue) && !!notifyEmail
 
     await client.query(
       `INSERT INTO venue_enquiries (venue_id, name, email, phone, message, notified)
@@ -74,7 +76,7 @@ export async function POST(
     if (notifyOwner) {
       try {
         await sendLeadNotificationEmail({
-          to: venue.contact_email || venue.email,
+          to: notifyEmail,
           venueName: venue.name,
           enquirerName: cleanName,
           enquirerEmail: cleanEmail,
