@@ -120,7 +120,7 @@ async function getFeaturedHomepageVenues(): Promise<FeaturedVenue[]> {
 async function getHomepageStats() {
   try {
     const pool = getPool()
-    const [countResult, cityCountResult, recentResult] = await Promise.all([
+    const [countResult, cityCountResult, claimedResult, recentResult] = await Promise.all([
       // "soft play centres" should count genuine soft play only — venue_type
       // buckets trampoline parks/farms/park-playgrounds/other attractions
       // out of the main directory (see lib/venueTypes.ts), so counting all
@@ -129,6 +129,7 @@ async function getHomepageStats() {
       pool.query<{ city_slug: string; cnt: number }>(
         `SELECT city_slug, COUNT(*)::int AS cnt FROM venues v WHERE ${visibleVenueTypeSql()} GROUP BY city_slug`
       ),
+      pool.query<{ total: number }>(`SELECT COUNT(*)::int AS total FROM venues WHERE claimed_by_owner = true`),
       pool.query<RecentVenue>(`
         SELECT v.name, v.town_slug, v.slug,
                COALESCE(v.completeness_score, 0) AS completeness_score
@@ -142,6 +143,7 @@ async function getHomepageStats() {
       `),
     ])
     const totalVenues = countResult.rows[0]?.total ?? 0
+    const claimedVenues = claimedResult.rows[0]?.total ?? 0
     const cityCounts: Record<string, number> = {}
     for (const row of cityCountResult.rows) {
       if (row.city_slug) cityCounts[row.city_slug] = row.cnt
@@ -159,19 +161,19 @@ async function getHomepageStats() {
       ...r,
       city_name: cityNameMap[r.town_slug] ?? r.town_slug,
     }))
-    return { totalVenues, cityCounts, recentVenues }
+    return { totalVenues, claimedVenues, cityCounts, recentVenues }
   } catch {
     // Fall back to static data if DB unavailable
     const cityCounts: Record<string, number> = {}
     for (const city of cities) {
       cityCounts[city.slug] = getStaticSoftPlayCount(city.slug)
     }
-    return { totalVenues: 0, cityCounts, recentVenues: [] as RecentVenue[] }
+    return { totalVenues: 0, claimedVenues: 0, cityCounts, recentVenues: [] as RecentVenue[] }
   }
 }
 
 export default async function Home() {
-  const { totalVenues, cityCounts, recentVenues } = await getHomepageStats()
+  const { totalVenues, claimedVenues, cityCounts, recentVenues } = await getHomepageStats()
   const featuredVenues = await getFeaturedHomepageVenues()
 
   const venueCountDisplay = totalVenues > 0
@@ -437,7 +439,7 @@ export default async function Home() {
 
       {/* Trust signals */}
       <div className="py-10 px-4 bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto grid gap-4 sm:grid-cols-3 text-center">
+        <div className={`max-w-7xl mx-auto grid gap-4 text-center ${claimedVenues > 0 ? 'sm:grid-cols-2 lg:grid-cols-4' : 'sm:grid-cols-3'}`}>
           <Card className="p-5 border-slate-200">
             <p className="text-2xl font-bold text-purple-700">{cities.length}+</p>
             <p className="text-sm text-slate-600">UK towns and cities covered</p>
@@ -446,6 +448,12 @@ export default async function Home() {
             <p className="text-2xl font-bold text-purple-700">{venueCountDisplay}</p>
             <p className="text-sm text-slate-600">venues and listings</p>
           </Card>
+          {claimedVenues > 0 && (
+            <Card className="p-5 border-slate-200">
+              <p className="text-2xl font-bold text-purple-700">{claimedVenues.toLocaleString('en-GB')}</p>
+              <p className="text-sm text-slate-600">venues claimed by their owners</p>
+            </Card>
+          )}
           <Card className="p-5 border-slate-200">
             <p className="text-2xl font-bold text-purple-700">Free</p>
             <p className="text-sm text-slate-600">no sign-up or account needed</p>
