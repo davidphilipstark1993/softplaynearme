@@ -238,9 +238,11 @@ export interface PremiumActivatedEmailOptions {
   ownerName: string
   venueName: string
   dashboardUrl: string
+  billingInterval?: 'month' | 'year'
 }
 
 export async function sendPremiumActivatedEmail(opts: PremiumActivatedEmailOptions): Promise<void> {
+  const priceLine = opts.billingInterval === 'year' ? '&pound;249/year' : '&pound;24.99/month'
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
@@ -255,7 +257,7 @@ export async function sendPremiumActivatedEmail(opts: PremiumActivatedEmailOptio
 
   <div style="background:#fff;border-radius:12px;padding:24px;border:1px solid #e2e8f0;margin-bottom:16px">
     <p style="font-size:14px;color:#334155;margin:0 0 12px">Hi ${opts.ownerName},</p>
-    <p style="font-size:14px;color:#334155;margin:0 0 12px">Your Premium subscription for <strong>${opts.venueName}</strong> is now active — &pound;24.99/month by Direct Debit. You&#x27;ll see the Verified badge, featured placement, and lead notifications live on your listing already.</p>
+    <p style="font-size:14px;color:#334155;margin:0 0 12px">Your Premium subscription for <strong>${opts.venueName}</strong> is now active — ${priceLine} by Direct Debit. You&#x27;ll see the Verified badge, featured placement, and lead notifications live on your listing already.</p>
     <p style="font-size:14px;color:#334155;margin:0">You&#x27;re covered by the Direct Debit Guarantee, and you can cancel any time from your dashboard.</p>
   </div>
 
@@ -478,4 +480,173 @@ export async function sendVerificationEmail(opts: VerificationEmailOptions): Pro
 </html>`
 
   await sendEmail(opts.to, `Verify your email for ${opts.venueName} on Soft Play Near Me`, html)
+}
+
+// ─── Monthly insights (Premium/Bespoke only) ───────────────────────────────────
+
+export interface MonthlyInsightsEmailOptions {
+  to: string
+  ownerName: string
+  venueName: string
+  dashboardUrl: string
+  views: number
+  clicks: number
+  leads: number
+  viewsPrev: number
+  clicksPrev: number
+  leadsPrev: number
+}
+
+function trendText(current: number, previous: number): string {
+  if (previous === 0) return current > 0 ? 'new this month' : ''
+  const change = Math.round(((current - previous) / previous) * 100)
+  if (change === 0) return 'flat vs last month'
+  return `${change > 0 ? '+' : ''}${change}% vs last month`
+}
+
+export async function sendMonthlyInsightsEmail(opts: MonthlyInsightsEmailOptions): Promise<void> {
+  const rows = [
+    ['Page views', opts.views, trendText(opts.views, opts.viewsPrev)],
+    ['Call / directions / website clicks', opts.clicks, trendText(opts.clicks, opts.clicksPrev)],
+    ['Enquiries', opts.leads, trendText(opts.leads, opts.leadsPrev)],
+  ] as [string, number, string][]
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#f8fafc;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#1e293b">
+<div style="max-width:520px;margin:0 auto;padding:32px 16px">
+
+  <div style="background:linear-gradient(135deg,#7c3aed 0%,#db2777 100%);border-radius:16px;padding:28px 28px;text-align:center;margin-bottom:20px">
+    <div style="font-size:32px;margin-bottom:10px">&#x1F4CA;</div>
+    <h1 style="color:#fff;margin:0 0 6px;font-size:18px;font-weight:700">Your monthly insights</h1>
+    <p style="color:rgba(255,255,255,0.85);margin:0;font-size:13px">${opts.venueName} — last 30 days</p>
+  </div>
+
+  <div style="background:#fff;border-radius:12px;padding:24px;border:1px solid #e2e8f0;margin-bottom:16px">
+    <p style="font-size:14px;color:#334155;margin:0 0 16px">Hi ${opts.ownerName}, here&#x27;s how your listing did:</p>
+    ${rows.map(([label, value, trend]) => `
+    <div style="display:flex;align-items:baseline;justify-content:space-between;padding:12px 0;border-bottom:1px solid #f1f5f9">
+      <span style="font-size:13px;color:#64748b">${label}</span>
+      <span style="text-align:right">
+        <span style="font-size:18px;font-weight:700;color:#1e293b">${value}</span>
+        ${trend ? `<span style="font-size:11px;color:#94a3b8;margin-left:6px">${trend}</span>` : ''}
+      </span>
+    </div>`).join('')}
+  </div>
+
+  <a href="${opts.dashboardUrl}" style="display:block;background:#7c3aed;color:#fff;text-decoration:none;padding:14px 24px;border-radius:9px;font-weight:600;font-size:14px;text-align:center;margin-bottom:16px">
+    View Full Dashboard &#x2192;
+  </a>
+
+  <p style="font-size:11px;color:#cbd5e1;text-align:center;margin:0">Soft Play Near Me &#xB7; monthly insights &#xB7; sent to Premium/Bespoke venues only</p>
+</div>
+</body>
+</html>`
+
+  await sendEmail(opts.to, `Your ${opts.venueName} monthly insights — ${opts.views} views, ${opts.leads} enquiries`, html)
+}
+
+// ─── Listing needs attention ────────────────────────────────────────────────────
+
+export interface ListingSlippingEmailOptions {
+  to: string
+  ownerName: string
+  venueName: string
+  dashboardUrl: string
+  completenessScore: number
+  daysSinceVerified: number | null
+  isPaidActive: boolean
+}
+
+export async function sendListingSlippingEmail(opts: ListingSlippingEmailOptions): Promise<void> {
+  const reasons: string[] = []
+  if (opts.completenessScore < 60) {
+    reasons.push(`your listing is only ${opts.completenessScore}% complete`)
+  }
+  if (opts.daysSinceVerified !== null && opts.daysSinceVerified > 90) {
+    reasons.push(`it hasn&#x27;t been updated in ${opts.daysSinceVerified} days`)
+  }
+  const reasonText = reasons.length > 0 ? reasons.join(' and ') : 'it could use a refresh'
+
+  const upsell = opts.isPaidActive
+    ? ''
+    : `<div style="background:#faf5ff;border-radius:10px;padding:16px 20px;border:1px solid #e9d5ff;margin-bottom:16px">
+         <p style="margin:0;font-size:13px;color:#475569">Completed listings rank higher in search, and <a href="${BASE_URL}/pricing" style="color:#7c3aed">Premium</a> venues get featured placement on top of that.</p>
+       </div>`
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#f8fafc;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#1e293b">
+<div style="max-width:520px;margin:0 auto;padding:32px 16px">
+
+  <div style="background:linear-gradient(135deg,#f59e0b 0%,#ef4444 100%);border-radius:16px;padding:28px 28px;text-align:center;margin-bottom:20px">
+    <div style="font-size:32px;margin-bottom:10px">&#x26A0;&#xFE0F;</div>
+    <h1 style="color:#fff;margin:0 0 6px;font-size:18px;font-weight:700">Your listing could use some attention</h1>
+    <p style="color:rgba(255,255,255,0.85);margin:0;font-size:13px">${opts.venueName}</p>
+  </div>
+
+  <div style="background:#fff;border-radius:12px;padding:24px;border:1px solid #e2e8f0;margin-bottom:16px">
+    <p style="font-size:14px;color:#334155;margin:0 0 12px">Hi ${opts.ownerName},</p>
+    <p style="font-size:14px;color:#334155;margin:0 0 12px">We noticed ${reasonText} on Soft Play Near Me. Families are more likely to visit venues with complete, up-to-date listings — photos, opening hours, and prices all matter.</p>
+    <p style="font-size:14px;color:#334155;margin:0">It only takes a couple of minutes to update from your dashboard.</p>
+  </div>
+
+  ${upsell}
+
+  <a href="${opts.dashboardUrl}" style="display:block;background:#0f172a;color:#fff;text-decoration:none;padding:14px 24px;border-radius:9px;font-weight:600;font-size:14px;text-align:center;margin-bottom:16px">
+    Update My Listing &#x2192;
+  </a>
+
+  <p style="font-size:11px;color:#cbd5e1;text-align:center;margin:0">Soft Play Near Me &#xB7; listing reminder</p>
+</div>
+</body>
+</html>`
+
+  await sendEmail(opts.to, `Quick update needed for ${opts.venueName}`, html)
+}
+
+// ─── Annual plan renewal reminder ───────────────────────────────────────────────
+
+export interface RenewalReminderEmailOptions {
+  to: string
+  ownerName: string
+  venueName: string
+  dashboardUrl: string
+  renewsAt: string
+  amount: string
+}
+
+export async function sendRenewalReminderEmail(opts: RenewalReminderEmailOptions): Promise<void> {
+  const renewsDate = new Date(opts.renewsAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#f8fafc;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#1e293b">
+<div style="max-width:520px;margin:0 auto;padding:32px 16px">
+
+  <div style="background:linear-gradient(135deg,#7c3aed 0%,#db2777 100%);border-radius:16px;padding:28px 28px;text-align:center;margin-bottom:20px">
+    <div style="font-size:32px;margin-bottom:10px">&#x1F4C5;</div>
+    <h1 style="color:#fff;margin:0 0 6px;font-size:18px;font-weight:700">Your annual Premium renews soon</h1>
+    <p style="color:rgba(255,255,255,0.85);margin:0;font-size:13px">${opts.venueName}</p>
+  </div>
+
+  <div style="background:#fff;border-radius:12px;padding:24px;border:1px solid #e2e8f0;margin-bottom:16px">
+    <p style="font-size:14px;color:#334155;margin:0 0 12px">Hi ${opts.ownerName},</p>
+    <p style="font-size:14px;color:#334155;margin:0 0 12px">Your Premium subscription for <strong>${opts.venueName}</strong> renews on <strong>${renewsDate}</strong> — ${opts.amount} will be collected by Direct Debit automatically, no action needed.</p>
+    <p style="font-size:14px;color:#334155;margin:0">Want to make changes first? You can review or cancel from your dashboard any time before then.</p>
+  </div>
+
+  <a href="${opts.dashboardUrl}" style="display:block;background:#7c3aed;color:#fff;text-decoration:none;padding:14px 24px;border-radius:9px;font-weight:600;font-size:14px;text-align:center;margin-bottom:16px">
+    Manage My Subscription &#x2192;
+  </a>
+
+  <p style="font-size:11px;color:#cbd5e1;text-align:center;margin:0">Soft Play Near Me &#xB7; renewal reminder</p>
+</div>
+</body>
+</html>`
+
+  await sendEmail(opts.to, `Your ${opts.venueName} Premium renews on ${renewsDate}`, html)
 }

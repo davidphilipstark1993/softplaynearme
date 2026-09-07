@@ -8,6 +8,7 @@ import { formatAddressLine } from '@/lib/sanitize'
 import { ResendVerificationButton } from '@/components/dashboard/ResendVerificationButton'
 import { PlanCard } from '@/components/dashboard/PlanCard'
 import { LeadInbox } from '@/components/dashboard/LeadInbox'
+import { InsightsCard } from '@/components/dashboard/InsightsCard'
 import { isPaidActive } from '@/lib/plans'
 import {
   CheckCircle2, Clock, AlertCircle, ExternalLink,
@@ -38,7 +39,7 @@ export default async function DashboardPage({ params, searchParams }: DashboardP
 
   if (!res.ok) notFound()
 
-  const { claim, venue, enquiries = [] } = await res.json()
+  const { claim, venue, enquiries = [], insights } = await res.json()
   const { score, missing } = computeCompleteness(venue)
   const color = scoreColor(score)
   const label = scoreLabel(score)
@@ -151,6 +152,17 @@ export default async function DashboardPage({ params, searchParams }: DashboardP
             plan={venue.plan || 'free'}
             planStatus={venue.plan_status || 'inactive'}
             stripeCustomerId={venue.stripe_customer_id || null}
+          />
+        )}
+
+        {venue && isPaidActive(venue) && insights && (
+          <InsightsCard
+            views30d={insights.views30d}
+            clicks30d={insights.clicks30d}
+            leads30d={insights.leads30d}
+            viewsPrev30d={insights.viewsPrev30d}
+            clicksPrev30d={insights.clicksPrev30d}
+            leadsPrev30d={insights.leadsPrev30d}
           />
         )}
 

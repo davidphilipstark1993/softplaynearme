@@ -6,6 +6,7 @@ import { Navigation, Phone, Globe, Calendar, ExternalLink } from 'lucide-react'
 import { cleanAddressForDisplay, isValidPostcode } from '@/lib/sanitize'
 
 interface CTAButtonsProps {
+  venueId?: number
   name: string
   address: string | null
   postcode: string
@@ -18,7 +19,14 @@ interface CTAButtonsProps {
   compact?: boolean
 }
 
+const TRACKED_EVENTS: Record<string, string> = {
+  call: 'click_call',
+  directions: 'click_directions',
+  website: 'click_website',
+}
+
 export function CTAButtons({
+  venueId,
   name,
   address,
   postcode,
@@ -30,6 +38,21 @@ export function CTAButtons({
   googlePlaceId,
   compact = false,
 }: CTAButtonsProps) {
+  // First-party click log for the dashboard Insights card / monthly
+  // insights email — fire-and-forget via sendBeacon so it never delays or
+  // blocks the actual navigation (tel:/mailto:/external link).
+  function track(buttonKey: string) {
+    const eventType = TRACKED_EVENTS[buttonKey]
+    if (!eventType || !venueId) return
+    try {
+      navigator.sendBeacon(
+        `/api/venues/${venueId}/track`,
+        new Blob([JSON.stringify({ eventType })], { type: 'application/json' })
+      )
+    } catch {
+      // Beacon API unsupported or blocked — not worth falling back for a background metric.
+    }
+  }
   // Google Maps URL for directions — null when we have no valid destination
   // (no place ID, no coordinates, and no usable address/postcode), so the
   // button can be hidden instead of linking to a broken "destination=·, null"
@@ -125,6 +148,7 @@ export function CTAButtons({
             >
               <a
                 href={button.href}
+                onClick={() => track(button.key)}
                 {...(isExternal
                   ? { target: '_blank', rel: 'noopener noreferrer' }
                   : {})}
@@ -159,7 +183,7 @@ export function CTAButtons({
 
         {directionsUrl && (
           <Button asChild className="w-full" variant={bookingUrl ? 'outline' : 'default'}>
-            <a href={directionsUrl} target="_blank" rel="noopener noreferrer">
+            <a href={directionsUrl} target="_blank" rel="noopener noreferrer" onClick={() => track('directions')}>
               <Navigation className="h-4 w-4" />
               Get Directions
             </a>
@@ -170,7 +194,7 @@ export function CTAButtons({
         <div className="grid grid-cols-2 gap-3">
           {phone && (
             <Button variant="outline" asChild>
-              <a href={getPhoneHref()}>
+              <a href={getPhoneHref()} onClick={() => track('call')}>
                 <Phone className="h-4 w-4" />
                 Call
               </a>
@@ -178,7 +202,7 @@ export function CTAButtons({
           )}
           {website && (
             <Button variant="outline" asChild>
-              <a href={getWebsiteUrl()} target="_blank" rel="noopener noreferrer">
+              <a href={getWebsiteUrl()} target="_blank" rel="noopener noreferrer" onClick={() => track('website')}>
                 <Globe className="h-4 w-4" />
                 Website
               </a>
@@ -190,7 +214,7 @@ export function CTAButtons({
         {phone && (
           <div className="pt-2 border-t">
             <p className="text-sm text-muted-foreground">Phone</p>
-            <a href={getPhoneHref()} className="text-sm font-medium hover:text-purple-600">
+            <a href={getPhoneHref()} className="text-sm font-medium hover:text-purple-600" onClick={() => track('call')}>
               {phone}
             </a>
           </div>

@@ -42,6 +42,7 @@ export async function POST(request: NextRequest) {
     console.error('[webhooks/stripe] Session completed with no claim_id metadata', session.id)
     return NextResponse.json({ received: true })
   }
+  const billingInterval: 'month' | 'year' = session.metadata?.billing_interval === 'year' ? 'year' : 'month'
 
   let client
   try {
@@ -51,6 +52,7 @@ export async function POST(request: NextRequest) {
     const schemaSql = [
       `ALTER TABLE venues ADD COLUMN IF NOT EXISTS stripe_customer_id VARCHAR(50)`,
       `ALTER TABLE venues ADD COLUMN IF NOT EXISTS stripe_subscription_id VARCHAR(50)`,
+      `ALTER TABLE venues ADD COLUMN IF NOT EXISTS billing_interval VARCHAR(10)`,
     ]
     for (const sql of schemaSql) {
       try { await client.query(sql) } catch (e) {
@@ -91,9 +93,18 @@ export async function POST(request: NextRequest) {
         `UPDATE venues
          SET claimed_by_owner = true, plan = 'premium', plan_status = 'active',
              plan_started_at = COALESCE(plan_started_at, CURRENT_TIMESTAMP),
+             plan_renews_at = CURRENT_TIMESTAMP + $5::interval,
+             billing_interval = $6,
              stripe_customer_id = $1, stripe_subscription_id = $2
          WHERE city_slug = $3 AND slug = $4`,
-        [session.customer || null, session.subscription || null, claim.city_slug, claim.venue_slug]
+        [
+          session.customer || null,
+          session.subscription || null,
+          claim.city_slug,
+          claim.venue_slug,
+          billingInterval === 'year' ? '1 year' : '1 month',
+          billingInterval,
+        ]
       )
     }
 
@@ -101,6 +112,7 @@ export async function POST(request: NextRequest) {
       to: claim.email,
       ownerName: claim.name,
       venueName: claim.venue_name,
+      billingInterval,
       dashboardUrl: `${BASE_URL}/dashboard/${claim.access_token}`,
     }).catch((e) => console.error('[webhooks/stripe] confirmation email failed:', e))
 

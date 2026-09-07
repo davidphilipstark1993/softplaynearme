@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { cache } from 'react'
 import { notFound } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -164,7 +165,10 @@ interface Photo {
   is_primary: boolean
 }
 
-async function getVenue(citySlug: string, slug: string): Promise<Venue | null> {
+// Wrapped in React's cache() so generateMetadata() and the page component —
+// both of which call this per request — share one DB round trip instead of
+// querying (and, now, logging a view) twice for the same request.
+const getVenue = cache(async function getVenue(citySlug: string, slug: string): Promise<Venue | null> {
   try {
     const pool = getPool()
     const client = await pool.connect()
@@ -175,6 +179,19 @@ async function getVenue(citySlug: string, slug: string): Promise<Venue | null> {
       )
       const row = result.rows[0]
       if (row) {
+        // First-party view count for the dashboard Insights card / monthly
+        // insights email (see scripts/migrateInsights.mjs) — a rough proxy
+        // for traffic (includes ISR background revalidations, not just
+        // unique visitors), not a replacement for GA4.
+        try {
+          await client.query(
+            `INSERT INTO venue_page_events (venue_id, event_type) VALUES ($1, 'view')`,
+            [row.id]
+          )
+        } catch {
+          // Table may not exist yet in an environment that hasn't run the
+          // migration — never let this break the page render.
+        }
         return {
           ...row,
           featured: !!row.featured && (!row.featured_until || new Date(row.featured_until) > new Date()),
@@ -196,7 +213,7 @@ async function getVenue(citySlug: string, slug: string): Promise<Venue | null> {
   }
 
   return null
-}
+})
 
 function staticToVenue(sv: StaticVenue): Venue {
   return {
@@ -682,6 +699,7 @@ export default async function VenuePage({ params }: PageProps) {
               </div>
               <div className="flex-shrink-0">
                 <CTAButtons
+                  venueId={typeof venue.id === 'number' ? venue.id : undefined}
                   name={venue.name}
                   address={venue.address}
                   postcode={venue.postcode}
@@ -1079,6 +1097,7 @@ export default async function VenuePage({ params }: PageProps) {
 
                 {/* CTA Buttons (full version for sidebar) */}
                 <CTAButtons
+                  venueId={typeof venue.id === 'number' ? venue.id : undefined}
                   name={venue.name}
                   address={venue.address}
                   postcode={venue.postcode}

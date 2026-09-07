@@ -46,6 +46,7 @@ export async function GET(
     }
 
     let enquiries: unknown[] = []
+    let insights = { views30d: 0, clicks30d: 0, leads30d: 0, viewsPrev30d: 0, clicksPrev30d: 0, leadsPrev30d: 0 }
     if (venue) {
       try {
         const enquiriesResult = await client.query(
@@ -57,9 +58,42 @@ export async function GET(
       } catch (e) {
         console.warn('[dashboard] enquiries lookup skipped:', (e as Error).message?.slice(0, 120))
       }
+
+      try {
+        const [eventsResult, leadsResult] = await Promise.all([
+          client.query(
+            `SELECT
+               COUNT(*) FILTER (WHERE event_type = 'view' AND created_at >= NOW() - INTERVAL '30 days') AS views,
+               COUNT(*) FILTER (WHERE event_type LIKE 'click_%' AND created_at >= NOW() - INTERVAL '30 days') AS clicks,
+               COUNT(*) FILTER (WHERE event_type = 'view' AND created_at >= NOW() - INTERVAL '60 days' AND created_at < NOW() - INTERVAL '30 days') AS views_prev,
+               COUNT(*) FILTER (WHERE event_type LIKE 'click_%' AND created_at >= NOW() - INTERVAL '60 days' AND created_at < NOW() - INTERVAL '30 days') AS clicks_prev
+             FROM venue_page_events WHERE venue_id = $1`,
+            [venue.id]
+          ),
+          client.query(
+            `SELECT
+               COUNT(*) FILTER (WHERE created_at >= NOW() - INTERVAL '30 days') AS leads,
+               COUNT(*) FILTER (WHERE created_at >= NOW() - INTERVAL '60 days' AND created_at < NOW() - INTERVAL '30 days') AS leads_prev
+             FROM venue_enquiries WHERE venue_id = $1`,
+            [venue.id]
+          ),
+        ])
+        const ev = eventsResult.rows[0]
+        const ld = leadsResult.rows[0]
+        insights = {
+          views30d: Number(ev?.views ?? 0),
+          clicks30d: Number(ev?.clicks ?? 0),
+          leads30d: Number(ld?.leads ?? 0),
+          viewsPrev30d: Number(ev?.views_prev ?? 0),
+          clicksPrev30d: Number(ev?.clicks_prev ?? 0),
+          leadsPrev30d: Number(ld?.leads_prev ?? 0),
+        }
+      } catch (e) {
+        console.warn('[dashboard] insights lookup skipped:', (e as Error).message?.slice(0, 120))
+      }
     }
 
-    return NextResponse.json({ claim, venue, enquiries })
+    return NextResponse.json({ claim, venue, enquiries, insights })
   } catch (err) {
     console.error('Dashboard GET error:', err)
     return NextResponse.json({ error: 'Server error' }, { status: 500 })
