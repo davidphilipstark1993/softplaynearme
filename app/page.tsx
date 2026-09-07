@@ -16,6 +16,11 @@ import { getTotalVenueCount } from '@/lib/venueStats'
 import { VISIBLE_VENUE_TYPES, visibleVenueTypeSql } from '@/lib/venueTypes'
 import type { Metadata } from 'next'
 
+// Highest-traffic cities in priority order (London first) — used for the
+// homepage's "Popular" quick links, rather than data/cities.json's raw
+// array order which doesn't reflect actual traffic.
+const POPULAR_CITY_SLUGS = ['london', 'nottingham', 'leeds', 'manchester', 'hull']
+
 // Genuine soft play only — matches the live DB query's venue_type filter.
 // Used wherever the static export is the fallback (DB unreachable, or a
 // city not yet represented in the live cityCounts).
@@ -202,7 +207,10 @@ export default async function Home() {
             </p>
             <p className="text-purple-200 text-sm mt-2">
               Popular:{' '}
-              {cities.slice(0, 5).map((city, i) => (
+              {POPULAR_CITY_SLUGS
+                .map((slug) => cities.find((c) => c.slug === slug))
+                .filter((c): c is (typeof cities)[number] => !!c)
+                .map((city, i) => (
                 <span key={city.slug}>
                   {i > 0 && ' \u00B7 '}
                   <Link href={`/soft-play/${city.slug}`} className="underline hover:text-white">
