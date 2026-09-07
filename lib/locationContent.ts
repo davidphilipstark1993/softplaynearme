@@ -394,15 +394,54 @@ export function getLocationContent(
     venueCount,
   })
 
-  // Use hand-written content only when it meets indexable depth requirements.
+  // Use hand-written content when it's substantially real (not a stub), even
+  // if it falls short of 8 FAQs — top up the FAQ list from the generic pool
+  // rather than discarding a genuine, city-specific intro entirely. Previously
+  // this was all-or-nothing at 300 words / 8 FAQs, which silently threw away
+  // decent hand-written intros (200-330 words, 3-6 FAQs) for ~20 cities in
+  // favour of fully generic random template text.
+  const MIN_HANDWRITTEN_INTRO_WORDS = 200
+  const MIN_HANDWRITTEN_FAQS = 3
+  const TARGET_FAQ_COUNT = 8
+
   if (
     cityConfig &&
-    getWordCount(cityConfig.intro) >= 300 &&
-    cityConfig.faqs.length >= 8
+    getWordCount(cityConfig.intro) >= MIN_HANDWRITTEN_INTRO_WORDS &&
+    cityConfig.faqs.length >= MIN_HANDWRITTEN_FAQS
   ) {
+    let faqs = cityConfig.faqs.slice(0, TARGET_FAQ_COUNT)
+    if (faqs.length < TARGET_FAQ_COUNT) {
+      // Word-overlap dedup rather than exact-match — catches near-duplicates
+      // like "Do I need to book X in advance?" vs "Do I need to book X?"
+      // that differ in wording but ask the same question.
+      const STOPWORDS = new Set([
+        'in', 'at', 'to', 'the', 'a', 'an', 'is', 'are', 'i', 'for', 'of', 'my', 'do', 'need', 'there',
+        'soft', 'play', 'centre', 'centres', 'center', 'centers', 'venue', 'venues', 'kids', 'children', 'child',
+        'what', 'can', 'best',
+      ])
+      const questionWords = (q: string, cityName: string) =>
+        new Set(
+          q.toLowerCase()
+            .replace(cityName.toLowerCase(), '')
+            .replace(/[?.,]/g, '')
+            .split(/\s+/)
+            .filter((w) => w && !STOPWORDS.has(w))
+        )
+      const existingWordSets = faqs.map((f) => questionWords(f.question, name))
+      const isDuplicate = (q: string) => {
+        const words = questionWords(q, name)
+        return existingWordSets.some((existing) => {
+          const overlap = [...words].filter((w) => existing.has(w)).length
+          const smaller = Math.min(words.size, existing.size) || 1
+          return overlap / smaller >= 0.6
+        })
+      }
+      const topUp = generated.faqs.filter((f) => !isDuplicate(f.question))
+      faqs = [...faqs, ...topUp].slice(0, TARGET_FAQ_COUNT)
+    }
     return {
       intro: cityConfig.intro,
-      faqs: cityConfig.faqs.slice(0, 8),
+      faqs,
       metaTitle: cityConfig.metaTitle,
       metaDescription: cityConfig.metaDescription,
       h1: `Soft Play in ${name}`,

@@ -20,12 +20,38 @@ const UNRENDERABLE_PHOTO_PATTERNS = [
   /ssl\.gstatic\.com\/local\/servicebusiness\/default_user\.png/,
 ]
 
-/** True if `url` is a real, directly-renderable photo (not empty, not a known-dead/placeholder pattern). */
+/**
+ * Hostnames next/image is configured to optimise (must mirror
+ * `images.remotePatterns` in next.config.ts — next/image throws a hard
+ * render error, not a broken-image fallback, for anything outside this
+ * list). Venue photos get scraped from arbitrary business websites, so any
+ * host outside this allowlist has to be filtered out here rather than
+ * crashing the whole page; found via a live 500 on a Brighton venue whose
+ * photo lived on the venue's own site.
+ */
+const ALLOWED_IMAGE_HOSTS = [
+  'images.unsplash.com',
+  'ssl.gstatic.com',
+  'lh3.googleusercontent.com',
+  'maps.googleapis.com',
+]
+
+function isAllowedImageHost(url: string): boolean {
+  try {
+    const hostname = new URL(url).hostname
+    return ALLOWED_IMAGE_HOSTS.includes(hostname) || hostname.endsWith('.googleusercontent.com')
+  } catch {
+    return false
+  }
+}
+
+/** True if `url` is a real, directly-renderable photo (not empty, not a known-dead/placeholder pattern, and on a host next/image is configured for). */
 export function isUsablePhotoUrl(url: unknown): url is string {
   if (typeof url !== 'string') return false
   const trimmed = url.trim()
   if (!trimmed || trimmed.toLowerCase() === 'nan') return false
   if (!/^https?:\/\//i.test(trimmed)) return false
+  if (!isAllowedImageHost(trimmed)) return false
   return !UNRENDERABLE_PHOTO_PATTERNS.some((p) => p.test(trimmed))
 }
 
