@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
+import { PurchaseTracking } from '@/components/premium/PurchaseTracking'
 import { CheckCircle2, Mail } from 'lucide-react'
 
 export const metadata: Metadata = {
@@ -10,16 +11,22 @@ export const metadata: Metadata = {
 }
 
 interface PremiumSuccessPageProps {
-  searchParams: Promise<{ token?: string }>
+  searchParams: Promise<{ token?: string; session_id?: string; interval?: string }>
 }
 
 export default async function PremiumSuccessPage({ searchParams }: PremiumSuccessPageProps) {
-  const { token } = await searchParams
+  const { token, session_id, interval } = await searchParams
   const dashboardUrl = token ? `/dashboard/${token}` : '/dashboard'
+  const billingInterval = interval === 'year' ? 'year' : 'month'
 
   return (
     <div className="min-h-screen bg-slate-50">
       <Header />
+      <PurchaseTracking
+        sessionId={session_id}
+        value={billingInterval === 'year' ? 249 : 24.99}
+        interval={billingInterval}
+      />
 
       <main className="max-w-xl mx-auto px-4 py-16 sm:py-24 text-center">
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-purple-100 border-4 border-purple-200 mb-5">
@@ -27,7 +34,7 @@ export default async function PremiumSuccessPage({ searchParams }: PremiumSucces
         </div>
         <h1 className="text-3xl font-bold text-slate-900 mb-3">Direct Debit set up 🎉</h1>
         <p className="text-slate-600 text-lg mb-6">
-          Thanks — GoCardless has your mandate. We&apos;re finalising your Premium subscription now;
+          Thanks — Stripe has your Direct Debit mandate. We&apos;re finalising your Premium subscription now;
           this usually takes a minute or two.
         </p>
         <p className="text-sm text-slate-400 flex items-center justify-center gap-1.5 mb-10">

@@ -45,6 +45,7 @@ import { SpecialSessions } from '@/components/venue/SpecialSessions'
 import { CTAButtons } from '@/components/venue/CTAButtons'
 import { QuickFactsPanel } from '@/components/venue/QuickFactsPanel'
 import { EnquiryForm } from '@/components/venue/EnquiryForm'
+import { VenueViewTracking } from '@/components/venue/VenueViewTracking'
 
 interface PageProps {
   params: Promise<{ city: string; slug: string }>
@@ -609,6 +610,12 @@ export default async function VenuePage({ params }: PageProps) {
       <JsonLd data={localBusinessSchema} />
       <JsonLd data={breadcrumbSchema} />
       <JsonLd data={faqSchema} />
+      <VenueViewTracking
+        venueId={venue.id}
+        citySlug={city}
+        venueSlug={slug}
+        plan={(venue as any).plan}
+      />
 
       <div className="min-h-screen bg-slate-50">
         <Header backLink={{ href: `/soft-play/${city}`, label: cityName }} />

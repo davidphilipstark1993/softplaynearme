@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 import { ClaimVenueForm } from '@/components/forms/ClaimVenueForm'
-import { CheckCircle2 } from 'lucide-react'
+import { CheckCircle2, Sparkles } from 'lucide-react'
 
 // The root layout applies `template: "%s | Soft Play Near Me"`, so `title` must
 // NOT repeat the suffix. Social cards bypass the template, so they keep it.
@@ -102,7 +103,7 @@ export default async function AddVenuePage({ searchParams }: AddVenuePageProps) 
 
         {/* Benefits — beneath the form, not above */}
         <div className="bg-purple-50 rounded-2xl border border-purple-100 p-6">
-          <h3 className="font-semibold text-purple-900 mb-4">What you get — completely free</h3>
+          <h3 className="font-semibold text-purple-900 mb-4">What you get — free forever</h3>
           <ul className="space-y-3">
             {BENEFITS.map((b) => (
               <li key={b} className="flex items-start gap-3">
@@ -111,6 +112,14 @@ export default async function AddVenuePage({ searchParams }: AddVenuePageProps) 
               </li>
             ))}
           </ul>
+          <div className="mt-5 pt-5 border-t border-purple-100 flex items-start gap-3">
+            <Sparkles className="w-4 h-4 text-pink-600 flex-shrink-0 mt-0.5" />
+            <p className="text-purple-800 text-sm">
+              Want more visibility? Once you&apos;ve claimed your listing, an optional{' '}
+              <Link href="/pricing" className="font-semibold underline hover:text-purple-900">Premium plan</Link>{' '}
+              adds a verified badge, featured placement, and lead notifications — it&apos;s never required.
+            </p>
+          </div>
         </div>
 
       </main>

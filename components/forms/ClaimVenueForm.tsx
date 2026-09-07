@@ -48,6 +48,11 @@ export function ClaimVenueForm({
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || 'Submission failed')
+      ;(window as unknown as { gtag?: (...args: unknown[]) => void }).gtag?.('event', 'listing_claimed', {
+        city_slug: citySlug || undefined,
+        venue_slug: venueSlug || undefined,
+        is_new_venue: !citySlug || !venueSlug,
+      })
       router.push(`/add-venue/success?token=${data.token}`)
     } catch (err: unknown) {
       setError(

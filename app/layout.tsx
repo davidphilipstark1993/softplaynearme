@@ -165,15 +165,22 @@ export default function RootLayout({
               if (!link) return;
               var href = link.getAttribute('href') || '';
 
+              if (link.dataset.gaFeatured) {
+                gtag('event', 'featured_click', { venue_id: link.dataset.gaFeatured, url: href });
+              }
+
               if (href.startsWith('tel:')) {
                 gtag('event', 'phone_click', { phone: href.replace('tel:', '') });
+                gtag('event', 'click_call', { phone: href.replace('tel:', '') });
               } else if (href.startsWith('mailto:')) {
                 gtag('event', 'email_click', { email: href.replace('mailto:', '').split('?')[0] });
               } else if (link.target === '_blank') {
                 if (href.includes('google.com/maps')) {
                   gtag('event', 'directions_click', { url: href });
+                  gtag('event', 'click_directions', { url: href });
                 } else if (!href.includes('softplaynearme.co.uk')) {
                   gtag('event', 'outbound_click', { url: href });
+                  gtag('event', 'click_website', { url: href });
                 }
               }
             });

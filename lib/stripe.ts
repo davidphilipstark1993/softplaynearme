@@ -20,11 +20,14 @@ export function getStripe(): Stripe {
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://www.softplaynearme.co.uk'
 const PREMIUM_MONTHLY_PENCE = 2499
+const PREMIUM_ANNUAL_PENCE = 24900
+
+export type BillingInterval = 'month' | 'year'
 
 /**
  * Creates a Checkout Session in subscription mode, restricted to UK Bacs
  * Direct Debit. Completing it both collects the mandate and starts the
- * £24.99/mo subscription in one step — Stripe handles the mandate/PCI side
+ * Premium subscription in one step — Stripe handles the mandate/PCI side
  * entirely on its own hosted page; we never see bank details.
  */
 export async function createPremiumCheckoutSession(opts: {
@@ -32,12 +35,16 @@ export async function createPremiumCheckoutSession(opts: {
   venueName: string
   claimId: number
   accessToken: string
+  interval?: BillingInterval
 }): Promise<Stripe.Checkout.Session> {
   const stripe = getStripe()
   const configId = process.env.STRIPE_BACS_PAYMENT_METHOD_CONFIG_ID
   if (!configId) {
     throw new Error('STRIPE_BACS_PAYMENT_METHOD_CONFIG_ID is not set')
   }
+  const interval: BillingInterval = opts.interval === 'year' ? 'year' : 'month'
+  const unitAmount = interval === 'year' ? PREMIUM_ANNUAL_PENCE : PREMIUM_MONTHLY_PENCE
+  const planLabel = interval === 'year' ? 'Premium (annual)' : 'Premium'
 
   return stripe.checkout.sessions.create({
     mode: 'subscription',
@@ -61,10 +68,10 @@ export async function createPremiumCheckoutSession(opts: {
         quantity: 1,
         price_data: {
           currency: 'gbp',
-          unit_amount: PREMIUM_MONTHLY_PENCE,
-          recurring: { interval: 'month' },
+          unit_amount: unitAmount,
+          recurring: { interval },
           product_data: {
-            name: `Soft Play Near Me Premium — ${opts.venueName}`.slice(0, 250),
+            name: `Soft Play Near Me ${planLabel} — ${opts.venueName}`.slice(0, 250),
           },
         },
       },
@@ -72,12 +79,28 @@ export async function createPremiumCheckoutSession(opts: {
     metadata: {
       claim_id: String(opts.claimId),
       venue_name: opts.venueName.slice(0, 200),
+      billing_interval: interval,
     },
-    success_url: `${BASE_URL}/premium/success?token=${opts.accessToken}&session_id={CHECKOUT_SESSION_ID}`,
+    success_url: `${BASE_URL}/premium/success?token=${opts.accessToken}&interval=${interval}&session_id={CHECKOUT_SESSION_ID}`,
     cancel_url: `${BASE_URL}/premium?cancelled=1`,
     // Dashboard label for tracking this checkout flow, per Stripe's current
     // API guidance — needs a random suffix to stay unique.
     integration_identifier: `softplaynearme_premium_${randomLetters(8)}`,
+  })
+}
+
+/**
+ * Opens Stripe's hosted Customer Portal for an existing subscriber to
+ * manage payment details or cancel — no custom cancel/billing UI needed.
+ */
+export async function createBillingPortalSession(opts: {
+  stripeCustomerId: string
+  returnUrl: string
+}): Promise<Stripe.BillingPortal.Session> {
+  const stripe = getStripe()
+  return stripe.billingPortal.sessions.create({
+    customer: opts.stripeCustomerId,
+    return_url: opts.returnUrl,
   })
 }
 

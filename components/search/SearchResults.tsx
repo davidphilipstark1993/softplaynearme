@@ -122,6 +122,7 @@ function VenueCard({
               <Link
                 href={`/soft-play/${venue.city_slug}/${venue.slug}`}
                 className="hover:text-purple-600 transition-colors"
+                data-ga-featured={venue.featured ? venue.id : undefined}
               >
                 <h3 className="font-semibold text-lg leading-tight">{venue.name}</h3>
               </Link>

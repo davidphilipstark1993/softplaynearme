@@ -19,6 +19,7 @@ export function PremiumSignupForm({
 }: PremiumSignupFormProps) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [interval, setInterval] = useState<'month' | 'year'>('month')
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -36,6 +37,7 @@ export function PremiumSignupForm({
       citySlug: citySlug || null,
       venueSlug: venueSlug || null,
       venueUrl: venueUrl || null,
+      interval,
     }
 
     try {
@@ -46,6 +48,10 @@ export function PremiumSignupForm({
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || 'Submission failed')
+      ;(window as unknown as { gtag?: (...args: unknown[]) => void }).gtag?.('event', 'upgrade_started', {
+        plan: 'premium',
+        interval,
+      })
       // Full navigation, not client-side routing — Stripe Checkout is a
       // different origin, and that's where bank details actually get
       // entered. We never see or handle them ourselves.
@@ -70,6 +76,33 @@ export function PremiumSignupForm({
         <Field label="Your email" required>
           <Input name="email" type="email" required placeholder="you@yourvenue.co.uk" maxLength={150} />
         </Field>
+      </div>
+
+      {/* Billing interval */}
+      <div>
+        <label className="mb-1.5 block text-sm font-medium text-slate-700">Billing</label>
+        <div className="inline-flex items-center rounded-lg border border-slate-200 p-0.5 text-sm">
+          <button
+            type="button"
+            onClick={() => setInterval('month')}
+            className={cn(
+              'px-3 py-1.5 rounded-md font-medium transition-colors',
+              interval === 'month' ? 'bg-purple-600 text-white' : 'text-slate-600'
+            )}
+          >
+            Monthly — £24.99/mo
+          </button>
+          <button
+            type="button"
+            onClick={() => setInterval('year')}
+            className={cn(
+              'px-3 py-1.5 rounded-md font-medium transition-colors',
+              interval === 'year' ? 'bg-purple-600 text-white' : 'text-slate-600'
+            )}
+          >
+            Annual — £249/yr <span className="opacity-80">(save ~17%)</span>
+          </button>
+        </div>
       </div>
 
       {/* Venue name */}
@@ -128,8 +161,10 @@ export function PremiumSignupForm({
       </button>
 
       <p className="text-center text-xs text-slate-400">
-        £24.99/month, rolling month-to-month — no fixed term, cancel any time. You&apos;ll set up
-        your Direct Debit securely on Stripe — we never see or store your bank details.
+        {interval === 'year'
+          ? '£249/year, billed annually — cancel any time.'
+          : '£24.99/month, rolling month-to-month — no fixed term, cancel any time.'}{' '}
+        You&apos;ll set up your Direct Debit securely on Stripe — we never see or store your bank details.
       </p>
     </form>
   )

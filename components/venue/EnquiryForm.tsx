@@ -43,6 +43,11 @@ export function EnquiryForm({ venueId, venueName }: EnquiryFormProps) {
         'enquiry_submitted',
         { venue_id: venueId }
       )
+      ;(window as unknown as { gtag?: (...args: unknown[]) => void }).gtag?.(
+        'event',
+        'lead_submitted',
+        { venue_id: venueId }
+      )
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
     } finally {

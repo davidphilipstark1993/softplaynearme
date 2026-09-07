@@ -7,6 +7,8 @@ import { computeCompleteness, scoreColor, scoreLabel } from '@/lib/completeness'
 import { formatAddressLine } from '@/lib/sanitize'
 import { ResendVerificationButton } from '@/components/dashboard/ResendVerificationButton'
 import { PlanCard } from '@/components/dashboard/PlanCard'
+import { LeadInbox } from '@/components/dashboard/LeadInbox'
+import { isPaidActive } from '@/lib/plans'
 import {
   CheckCircle2, Clock, AlertCircle, ExternalLink,
   Pencil, Camera, ListChecks, PoundSterling, FileText, ArrowRight, Mail, Eye,
@@ -36,7 +38,7 @@ export default async function DashboardPage({ params, searchParams }: DashboardP
 
   if (!res.ok) notFound()
 
-  const { claim, venue } = await res.json()
+  const { claim, venue, enquiries = [] } = await res.json()
   const { score, missing } = computeCompleteness(venue)
   const color = scoreColor(score)
   const label = scoreLabel(score)
@@ -148,8 +150,11 @@ export default async function DashboardPage({ params, searchParams }: DashboardP
             venueId={venue.id}
             plan={venue.plan || 'free'}
             planStatus={venue.plan_status || 'inactive'}
+            stripeCustomerId={venue.stripe_customer_id || null}
           />
         )}
+
+        {venue && <LeadInbox enquiries={enquiries} isPaidActive={isPaidActive(venue)} />}
 
         {/* Completeness card */}
         <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 mb-6">

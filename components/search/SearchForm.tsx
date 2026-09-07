@@ -126,6 +126,7 @@ export function SearchForm({
     // Track search event
     if (typeof window !== 'undefined' && (window as any).gtag) {
       ;(window as any).gtag('event', 'search', { search_term: postcode.trim() })
+      ;(window as any).gtag('event', 'search_performed', { search_term: postcode.trim() })
     }
 
     const trimmedInput = postcode.trim()

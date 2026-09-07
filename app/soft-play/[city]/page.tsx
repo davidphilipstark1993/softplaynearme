@@ -552,7 +552,12 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                   </div>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                     {featuredVenues.map((venue) => (
-                      <Link key={venue.slug} href={`/soft-play/${city}/${venue.slug}`} className="group block">
+                      <Link
+                        key={venue.slug}
+                        href={`/soft-play/${city}/${venue.slug}`}
+                        className="group block"
+                        data-ga-featured={venue.id}
+                      >
                         <div className="bg-white border-2 border-purple-200 rounded-lg p-4 hover:border-purple-400 hover:shadow-md transition-all h-full flex flex-col">
                           <span className="inline-flex items-center gap-1 text-xs font-semibold text-purple-700 bg-purple-50 border border-purple-200 rounded-full px-2 py-0.5 mb-2 w-fit">
                             <Sparkles className="w-3 h-3" /> Featured
@@ -679,7 +684,13 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                 return (
                 <Card key={venue.slug} className="group hover:shadow-lg transition-all duration-200 border-slate-200 overflow-hidden h-full flex flex-col">
                   {/* Venue thumbnail banner */}
-                  <Link href={`/soft-play/${city}/${venue.slug}`} className="block" tabIndex={-1} aria-hidden="true">
+                  <Link
+                    href={`/soft-play/${city}/${venue.slug}`}
+                    className="block"
+                    tabIndex={-1}
+                    aria-hidden="true"
+                    data-ga-featured={venue.featured ? venue.id : undefined}
+                  >
                     <div className="h-36 relative overflow-hidden bg-slate-100">
                       {displayImage ? (
                         <Image
@@ -735,7 +746,11 @@ export default async function CityPage({ params, searchParams }: PageProps) {
 
                   <div className="p-5 flex-1 flex flex-col">
                     {/* Venue name */}
-                    <Link href={`/soft-play/${city}/${venue.slug}`} className="hover:text-purple-600 transition-colors">
+                    <Link
+                      href={`/soft-play/${city}/${venue.slug}`}
+                      className="hover:text-purple-600 transition-colors"
+                      data-ga-featured={venue.featured ? venue.id : undefined}
+                    >
                       <h3 className="text-lg font-bold leading-tight line-clamp-2 mb-2">
                         {venue.name}
                       </h3>

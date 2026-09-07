@@ -45,7 +45,21 @@ export async function GET(
       venue = venueResult.rows[0] || null
     }
 
-    return NextResponse.json({ claim, venue })
+    let enquiries: unknown[] = []
+    if (venue) {
+      try {
+        const enquiriesResult = await client.query(
+          `SELECT id, name, email, phone, message, notified, created_at
+           FROM venue_enquiries WHERE venue_id = $1 ORDER BY created_at DESC LIMIT 50`,
+          [venue.id]
+        )
+        enquiries = enquiriesResult.rows
+      } catch (e) {
+        console.warn('[dashboard] enquiries lookup skipped:', (e as Error).message?.slice(0, 120))
+      }
+    }
+
+    return NextResponse.json({ claim, venue, enquiries })
   } catch (err) {
     console.error('Dashboard GET error:', err)
     return NextResponse.json({ error: 'Server error' }, { status: 500 })

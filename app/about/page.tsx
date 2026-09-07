@@ -66,7 +66,7 @@ export default function AboutPage() {
 
           <h2 className="text-xl font-semibold mt-8">For venue owners</h2>
           <p className="text-slate-600">
-            If you run a soft play centre, you can <Link href="/add-venue" className="text-purple-600 hover:underline">add your venue</Link> to our directory completely free. Claiming your listing lets you update your information, add photos, and ensure families see accurate details about your venue. There are no hidden fees or premium tiers.
+            If you run a soft play centre, you can <Link href="/add-venue" className="text-purple-600 hover:underline">add your venue</Link> to our directory completely free — forever. Claiming your listing lets you update your information, add photos, and ensure families see accurate details about your venue, at no cost. If you want extra visibility, we also offer an optional <Link href="/pricing" className="text-purple-600 hover:underline">Premium plan</Link> with a verified badge, featured placement, and lead notifications — but it&apos;s never required.
           </p>
 
           <h2 className="text-xl font-semibold mt-8">Get in touch</h2>

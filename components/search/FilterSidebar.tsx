@@ -81,6 +81,9 @@ export function FilterSidebar({ hasLocation = false, showSort = true, className 
       ;(window as any).gtag('event', 'filter_applied', {
         filter_params: params.toString(),
       })
+      ;(window as any).gtag('event', 'filter_used', {
+        filter_params: params.toString(),
+      })
     }
   }
 

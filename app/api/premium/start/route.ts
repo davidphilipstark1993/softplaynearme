@@ -24,6 +24,7 @@ export async function POST(request: NextRequest) {
       citySlug,
       venueSlug,
       venueUrl,
+      interval,
     } = body || {}
 
     if (!name?.trim() || !email?.trim() || !venueName?.trim()) {
@@ -90,6 +91,7 @@ export async function POST(request: NextRequest) {
       venueName: venueName.trim(),
       claimId,
       accessToken,
+      interval: interval === 'year' ? 'year' : 'month',
     })
 
     await client.query(
