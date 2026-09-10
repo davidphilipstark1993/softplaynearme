@@ -18,6 +18,7 @@ import {
 import { formatDistance } from '@/lib/geo'
 import { getCardQuote, formatLastVerified } from '@/lib/venueCardText'
 import { cn } from '@/lib/utils'
+import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup'
 import { formatAddressLine } from '@/lib/sanitize'
 import { isVerified } from '@/lib/plans'
 import { FeaturedImpression } from '@/components/venue/FeaturedImpression'
@@ -247,9 +248,17 @@ function NoResults({ searchTerm }: { searchTerm?: string }) {
             ? `We couldn't find any soft play venues near "${searchTerm}".`
             : "We couldn't find any soft play venues matching your search."}
         </p>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-muted-foreground mb-6">
           Try adjusting your filters, increasing the search radius, or searching a different location.
         </p>
+        <div className="max-w-sm mx-auto text-left">
+          <NewsletterSignup
+            source="search_empty_state"
+            heading="Find something fun to do with the kids"
+            subtext="We'll email you new venues and family activity ideas as we find them."
+            variant="inline"
+          />
+        </div>
       </CardContent>
     </Card>
   )

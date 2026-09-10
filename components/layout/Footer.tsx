@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { cities } from '@/lib/venues'
+import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup'
 
 const cityDirectory: { region: string; cities: { name: string; slug: string }[] }[] = [
   { region: 'Yorkshire', cities: [
@@ -87,6 +88,14 @@ export function Footer({ minimal = false }: FooterProps) {
   return (
     <footer className="bg-slate-900 text-slate-400 py-12 px-4">
       <div className="max-w-7xl mx-auto">
+        <div className="mb-10 max-w-xl mx-auto">
+          <NewsletterSignup
+            source="footer"
+            offer="both"
+            heading="Get family days out in your inbox"
+            subtext="Weekly soft play picks and family events, straight to your inbox."
+          />
+        </div>
         <div className="grid md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center gap-2 mb-4">

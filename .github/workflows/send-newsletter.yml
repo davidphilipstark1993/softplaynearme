@@ -1,0 +1,54 @@
+# Sunday morning automated newsletter send.
+#
+# All the safety logic (approval required, not already sent, duplicate-send protection) lives
+# server-side in lib/newsletter/send.ts — this workflow is just the trigger. It calls the
+# deployed site's cron endpoint with a bearer token; the endpoint itself decides whether there's
+# anything approved to send and reports back what happened.
+#
+# To change the send time: edit the single cron line below (schedule triggers must be a literal
+# expression — GitHub Actions doesn't support reading a schedule from a repo variable). It's kept
+# to this one line specifically so "configurable" means "edit one obvious line", not buried in
+# application code. Cron is UTC.
+name: Send weekly newsletter
+
+on:
+  schedule:
+    # 08:00 UTC every Sunday — Sunday morning per the weekly send spec.
+    - cron: '0 8 * * 0'
+  workflow_dispatch:
+    inputs:
+      type:
+        description: 'Which newsletter to send (matches an approved, unsent newsletter of this type)'
+        required: true
+        default: 'weekly'
+        type: choice
+        options: [weekly, events]
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger newsletter send
+        env:
+          # Must be the exact same value as the CRON_SECRET env var set on the Vercel project —
+          # this repo secret is how the workflow authenticates to that endpoint.
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+          SITE_URL: ${{ vars.SITE_URL || 'https://www.softplaynearme.co.uk' }}
+          NEWSLETTER_TYPE: ${{ inputs.type || 'weekly' }}
+        run: |
+          if [ -z "$CRON_SECRET" ]; then
+            echo "::error::CRON_SECRET repo secret is not set — see docs/NEWSLETTER.md"
+            exit 1
+          fi
+
+          http_status=$(curl -sS -o response.json -w "%{http_code}" -X POST \
+            "$SITE_URL/api/cron/send-newsletter?type=$NEWSLETTER_TYPE" \
+            -H "Authorization: Bearer $CRON_SECRET")
+
+          echo "HTTP $http_status"
+          cat response.json
+
+          if [ "$http_status" -ge 400 ]; then
+            echo "::error::Newsletter send request failed (HTTP $http_status) — see response above"
+            exit 1
+          fi

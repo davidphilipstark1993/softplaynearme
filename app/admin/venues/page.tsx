@@ -172,6 +172,9 @@ export default function AdminVenuesPage() {
             <Link href="/admin/claims" className="text-sm text-purple-600 hover:underline">
               Claims →
             </Link>
+            <Link href="/admin/newsletter" className="text-sm text-purple-600 hover:underline">
+              Newsletter →
+            </Link>
             <button
               onClick={() => setShowAddForm((s) => !s)}
               className="inline-flex items-center gap-1.5 text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 px-3 py-2 rounded-lg transition-colors"
