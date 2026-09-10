@@ -12,6 +12,8 @@ export interface NewsletterSubscriber {
   status: 'subscribed' | 'unsubscribed'
   source: string | null
   unsubscribe_token: string
+  sendgrid_synced: boolean
+  sendgrid_contact_id: string | null
   subscribed_at: string
   unsubscribed_at: string | null
   created_at: string
@@ -21,6 +23,8 @@ export interface NewsletterSubscriber {
 export interface Newsletter {
   id: number
   type: NewsletterType
+  issue_number: number | null
+  slug: string | null
   week_of: string | null
   subject: string
   intro_html: string | null
@@ -44,6 +48,7 @@ export interface NewsletterItem {
   image_url: string | null
   city_slug: string | null
   event_date: string | null
+  approved: boolean
   display_order: number
   created_at: string
   // Populated by a join when item_type === 'venue'
@@ -62,5 +67,17 @@ export interface NewsletterSend {
   error_message: string | null
   started_at: string
   completed_at: string | null
+  created_at: string
+}
+
+export type NewsletterEventType = 'open' | 'click' | 'bounce' | 'unsubscribe' | 'group_unsubscribe' | 'spamreport'
+
+export interface NewsletterEvent {
+  id: number
+  newsletter_id: number | null
+  event_type: NewsletterEventType
+  email: string
+  url: string | null
+  sendgrid_group_id: number | null
   created_at: string
 }

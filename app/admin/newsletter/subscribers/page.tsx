@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { Download, Mail, Search } from 'lucide-react'
+import { Download, Mail, RefreshCw, Search } from 'lucide-react'
 import type { NewsletterSubscriber } from '@/lib/newsletter/types'
 
 interface Stats {
@@ -10,6 +10,7 @@ interface Stats {
   weekly_subscribed: number
   events_subscribed: number
   total_unsubscribed: number
+  unsynced: number
 }
 
 export default function AdminSubscribersPage() {
@@ -20,6 +21,21 @@ export default function AdminSubscribersPage() {
   const [stats, setStats] = useState<Stats | null>(null)
   const [search, setSearch] = useState('')
   const [total, setTotal] = useState(0)
+  const [syncing, setSyncing] = useState(false)
+  const [syncMsg, setSyncMsg] = useState('')
+
+  async function retrySync() {
+    setSyncing(true)
+    setSyncMsg('')
+    try {
+      const res = await fetch('/api/admin/newsletter/subscribers/retry-sync', { method: 'POST' })
+      const data = await res.json()
+      setSyncMsg(res.ok ? `Synced ${data.synced}/${data.attempted}` : data.error || 'Retry failed')
+      loadSubscribers()
+    } finally {
+      setSyncing(false)
+    }
+  }
 
   async function loadSubscribers(q = search) {
     const params = new URLSearchParams()
@@ -100,6 +116,15 @@ export default function AdminSubscribersPage() {
             <p className="text-slate-500 text-sm mt-0.5">{total} total</p>
           </div>
           <div className="flex items-center gap-3">
+            {stats && stats.unsynced > 0 && (
+              <button
+                onClick={retrySync}
+                disabled={syncing}
+                className="flex items-center gap-2 text-sm border border-amber-300 bg-amber-50 text-amber-700 rounded-lg px-3 py-1.5 hover:bg-amber-100 disabled:opacity-60"
+              >
+                <RefreshCw size={14} className={syncing ? 'animate-spin' : ''} /> Retry SendGrid sync ({stats.unsynced})
+              </button>
+            )}
             <a href="/api/admin/newsletter/subscribers/export" className="btn-outline flex items-center gap-2 text-sm border border-slate-300 rounded-lg px-3 py-1.5 hover:bg-slate-50">
               <Download size={14} /> Export CSV
             </a>
@@ -108,6 +133,8 @@ export default function AdminSubscribersPage() {
             </Link>
           </div>
         </div>
+
+        {syncMsg && <p className="text-xs text-slate-500 mb-4">{syncMsg}</p>}
 
         {stats && (
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
@@ -154,6 +181,7 @@ export default function AdminSubscribersPage() {
                   <th className="text-left px-4 py-3">Lists</th>
                   <th className="text-left px-4 py-3 hidden sm:table-cell">Source</th>
                   <th className="text-left px-4 py-3 hidden sm:table-cell">Joined</th>
+                  <th className="text-left px-4 py-3 hidden sm:table-cell">SendGrid</th>
                   <th className="text-left px-4 py-3">Status</th>
                 </tr>
               </thead>
@@ -167,6 +195,13 @@ export default function AdminSubscribersPage() {
                     <td className="px-4 py-3 hidden sm:table-cell text-xs text-slate-500">{s.source || '—'}</td>
                     <td className="px-4 py-3 hidden sm:table-cell text-xs text-slate-500">
                       {new Date(s.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+                    </td>
+                    <td className="px-4 py-3 hidden sm:table-cell text-xs">
+                      {s.sendgrid_synced ? (
+                        <span className="text-green-600">Synced</span>
+                      ) : (
+                        <span className="text-slate-400">Pending</span>
+                      )}
                     </td>
                     <td className="px-4 py-3">
                       <span

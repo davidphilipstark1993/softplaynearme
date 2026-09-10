@@ -1,3 +1,4 @@
+import { sendAdminOperationalNotification } from '@/lib/email'
 import {
   completeSend,
   getEligibleSubscribers,
@@ -8,9 +9,11 @@ import {
   recordSkippedSend,
   startSend,
 } from './db'
-import { sendNewsletterCampaign } from './sendgrid'
-import { renderNewsletterHtml } from './template'
+import { PREF_URL_TAG, sendNewsletterCampaign, UNSUB_URL_TAG } from './sendgrid'
+import { renderNewsletterHtml, renderNewsletterPlainText } from './template'
 import type { NewsletterType, SendTrigger } from './types'
+
+const BASE_URL = 'https://www.softplaynearme.co.uk'
 
 export interface SendRunResult {
   skipped: boolean
@@ -22,12 +25,13 @@ export interface SendRunResult {
 }
 
 /**
- * The single entry point used by both the Sunday cron route and any manual
- * "send now" admin action. Every safety check lives here so neither caller
- * can bypass it:
+ * The single entry point used by the Sunday send (scripts/newsletter/weekly-send.mjs, run
+ * directly by GitHub Actions) and by the admin "Send now" button — kept as one function so the
+ * two paths can never drift into producing different content for the same newsletter, and so
+ * every safety check lives in one place neither caller can bypass:
  *   1. There must be an approved, not-yet-sent newsletter of this type.
- *   2. startSend() takes the DB-level lock — a concurrent/duplicate call
- *      loses the race and comes back null instead of double-sending.
+ *   2. startSend() takes the DB-level lock — a concurrent/duplicate call loses the race and
+ *      comes back null instead of double-sending.
  */
 export async function runNewsletterSend(
   type: NewsletterType,
@@ -35,7 +39,12 @@ export async function runNewsletterSend(
 ): Promise<SendRunResult> {
   const newsletter = await getNextApprovedNewsletter(type)
   if (!newsletter) {
-    return { skipped: true, reason: `No approved, unsent ${type} newsletter found` }
+    const reason = `No approved, unsent ${type} newsletter found`
+    await sendAdminOperationalNotification(
+      `Newsletter not sent this week — nothing approved (${type})`,
+      `${reason}.\n\nAdd content and approve it at ${BASE_URL}/admin/newsletter whenever it's ready — nothing is sent automatically until you do.`
+    )
+    return { skipped: true, reason }
   }
 
   const send = await startSend(newsletter.id, triggeredBy)
@@ -53,14 +62,37 @@ export async function runNewsletterSend(
     if (subscribers.length === 0) {
       await completeSend(send.id, { status: 'completed', sentCount: 0, failedCount: 0, totalRecipients: 0 })
       await markNewsletterSent(newsletter.id)
+      await sendAdminOperationalNotification(
+        `Newsletter not sent — no active subscribers (issue #${newsletter.issue_number ?? newsletter.id})`,
+        `This week's newsletter ("${newsletter.subject}") was fully approved and its content was generated, but there are no active subscribers on the ${type} list to send it to.`
+      )
       return { skipped: false, newsletterId: newsletter.id, sent: 0, failed: 0, total: 0 }
     }
 
+    const scope = type === 'weekly' ? 'weekly' : 'events'
+    const html = renderNewsletterHtml({
+      newsletter,
+      items,
+      unsubscribeUrl: `${BASE_URL}/api/newsletter/unsubscribe?token=${UNSUB_URL_TAG}&scope=${scope}`,
+      preferencesUrl: `${BASE_URL}/newsletter/preferences?token=${PREF_URL_TAG}`,
+    })
+    const plainText = renderNewsletterPlainText({
+      newsletter,
+      items,
+      unsubscribeUrl: `${BASE_URL}/api/newsletter/unsubscribe?token=${UNSUB_URL_TAG}&scope=${scope}`,
+      preferencesUrl: `${BASE_URL}/newsletter/preferences?token=${PREF_URL_TAG}`,
+    })
+
     const result = await sendNewsletterCampaign(
-      subscribers.map((s) => ({ email: s.email, unsubscribeToken: s.unsubscribe_token })),
+      subscribers.map((s) => ({
+        email: s.email,
+        unsubscribeUrl: `${BASE_URL}/api/newsletter/unsubscribe?token=${s.unsubscribe_token}&scope=${scope}`,
+        preferencesUrl: `${BASE_URL}/newsletter/preferences?token=${s.unsubscribe_token}`,
+      })),
       newsletter.subject,
-      (recipient) =>
-        renderNewsletterHtml({ newsletter, items, unsubscribeToken: recipient.unsubscribeToken }),
+      html,
+      plainText,
+      newsletter.id,
       type
     )
 
@@ -75,8 +107,18 @@ export async function runNewsletterSend(
 
     if (allFailed) {
       await markNewsletterFailed(newsletter.id)
+      await sendAdminOperationalNotification(
+        `Newsletter send FAILED — issue #${newsletter.issue_number ?? newsletter.id}`,
+        `The send for "${newsletter.subject}" failed for all ${subscribers.length} recipients.\n\nErrors:\n${result.errors.join('\n')}`
+      )
     } else {
       await markNewsletterSent(newsletter.id)
+      await sendAdminOperationalNotification(
+        `Newsletter sent — issue #${newsletter.issue_number ?? newsletter.id}`,
+        `"${newsletter.subject}" was sent successfully.\n\nRecipients: ${result.sent} sent, ${result.failed} failed of ${subscribers.length}\nSendGrid message id: ${result.lastMessageId ?? 'n/a'}\nSent at: ${new Date().toISOString()}${
+          newsletter.slug ? `\n\nArchive page: ${BASE_URL}/newsletter/${newsletter.slug}` : ''
+        }`
+      )
     }
 
     return { skipped: false, newsletterId: newsletter.id, sent: result.sent, failed: result.failed, total: subscribers.length }
@@ -84,6 +126,10 @@ export async function runNewsletterSend(
     const message = err instanceof Error ? err.message : 'Unknown error during send'
     await completeSend(send.id, { status: 'failed', sentCount: 0, failedCount: 0, errorMessage: message, totalRecipients: 0 })
     await markNewsletterFailed(newsletter.id)
+    await sendAdminOperationalNotification(
+      `Newsletter send CRASHED — issue #${newsletter.issue_number ?? newsletter.id}`,
+      `The weekly newsletter send job crashed:\n\n${message}`
+    )
     throw err
   }
 }

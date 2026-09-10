@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback } from 'react'
 import { useParams } from 'next/navigation'
 import Link from 'next/link'
-import { Eye, Trash2, Send, CheckCircle2, AlertTriangle, Clock } from 'lucide-react'
+import { Eye, Trash2, Send, CheckCircle2, AlertTriangle, Clock, BadgeCheck } from 'lucide-react'
 import type { Newsletter, NewsletterItem, NewsletterItemType, NewsletterSend, NewsletterStatus } from '@/lib/newsletter/types'
 
 interface VenueResult {
@@ -110,23 +110,20 @@ export default function AdminNewsletterEditorPage() {
     }
   }
 
-  async function transition(status: NewsletterStatus) {
+  async function approveForSending() {
+    if (!confirm('Approve this newsletter for Sunday sending? Editing anything afterwards will require re-approving.')) return
     setTransitionError('')
-    const res = await fetch(`/api/admin/newsletter/${id}/status`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ status }),
-    })
+    const res = await fetch(`/api/admin/newsletter/${id}/status`, { method: 'POST' })
     if (res.ok) {
       load()
     } else {
       const data = await res.json()
-      setTransitionError(data.error || 'Could not change status')
+      setTransitionError(data.error || 'Could not approve')
     }
   }
 
   async function sendNow() {
-    if (!confirm('Send this newsletter to every eligible subscriber right now? This cannot be undone.')) return
+    if (!confirm('Send this newsletter to every eligible subscriber right now, instead of waiting for Sunday? This cannot be undone.')) return
     setSending(true)
     try {
       const res = await fetch(`/api/admin/newsletter/${id}/send`, { method: 'POST' })
@@ -140,7 +137,13 @@ export default function AdminNewsletterEditorPage() {
     }
   }
 
+  async function toggleApproval(itemId: number) {
+    await fetch(`/api/admin/newsletter/items/${itemId}`, { method: 'PATCH' })
+    load()
+  }
+
   async function deleteItem(itemId: number) {
+    if (!confirm('Remove this from the newsletter?')) return
     await fetch(`/api/admin/newsletter/items/${itemId}`, { method: 'DELETE' })
     load()
   }
@@ -173,8 +176,10 @@ export default function AdminNewsletterEditorPage() {
     return <div className="min-h-screen bg-slate-50 flex items-center justify-center text-slate-400">Loading…</div>
   }
 
-  const isEditable = newsletter.status === 'draft' || newsletter.status === 'ready_for_review'
+  const isEditable = newsletter.status !== 'sent'
   const latestSend = sends[0]
+  const approvedVenueCount = items.filter((i) => i.item_type === 'venue' && i.approved).length
+  const readyToApprove = approvedVenueCount === 5 && newsletter.status === 'ready_for_review'
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -257,9 +262,14 @@ export default function AdminNewsletterEditorPage() {
         {isEditable && <ItemForm newsletterId={id} onAdded={load} />}
 
         <div className="bg-white border border-slate-200 rounded-xl p-5 mb-6">
-          <h2 className="text-sm font-semibold text-slate-900 mb-3">
-            Content ({items.length} item{items.length === 1 ? '' : 's'})
-          </h2>
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-sm font-semibold text-slate-900">
+              Content ({items.length} item{items.length === 1 ? '' : 's'})
+            </h2>
+            <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${approvedVenueCount === 5 ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-500'}`}>
+              {approvedVenueCount} / 5 venues ready
+            </span>
+          </div>
           {items.length === 0 ? (
             <p className="text-sm text-slate-400">No content yet — add featured venues, events, offers, news or links above.</p>
           ) : (
@@ -267,16 +277,35 @@ export default function AdminNewsletterEditorPage() {
               {items.map((item) => (
                 <li key={item.id} className="py-3 flex items-start justify-between gap-3">
                   <div>
-                    <span className="text-[10px] uppercase tracking-wide font-semibold text-purple-600">
-                      {ITEM_TYPE_LABELS[item.item_type]}
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] uppercase tracking-wide font-semibold text-purple-600">
+                        {ITEM_TYPE_LABELS[item.item_type]}
+                      </span>
+                      {item.item_type === 'venue' && (
+                        <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${item.approved ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-500'}`}>
+                          {item.approved ? 'Approved' : 'Draft'}
+                        </span>
+                      )}
+                    </div>
                     <p className="text-sm font-medium text-slate-900">{item.title}</p>
                     {item.description && <p className="text-xs text-slate-500 mt-0.5">{item.description}</p>}
                   </div>
                   {isEditable && (
-                    <button onClick={() => deleteItem(item.id)} className="text-slate-300 hover:text-red-500 flex-shrink-0">
-                      <Trash2 className="w-4 h-4" />
-                    </button>
+                    <div className="flex items-center gap-2 flex-shrink-0">
+                      {item.item_type === 'venue' && (
+                        <button
+                          onClick={() => toggleApproval(item.id)}
+                          className={`text-xs px-2.5 py-1 rounded-lg transition-colors ${
+                            item.approved ? 'bg-slate-100 text-slate-500 hover:bg-slate-200' : 'bg-green-100 text-green-700 hover:bg-green-200'
+                          }`}
+                        >
+                          {item.approved ? 'Unapprove' : 'Approve'}
+                        </button>
+                      )}
+                      <button onClick={() => deleteItem(item.id)} className="text-slate-300 hover:text-red-500">
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
                   )}
                 </li>
               ))}
@@ -288,45 +317,31 @@ export default function AdminNewsletterEditorPage() {
         <div className="bg-white border border-slate-200 rounded-xl p-5 mb-6">
           <h2 className="text-sm font-semibold text-slate-900 mb-3">Workflow</h2>
           <div className="flex flex-wrap gap-2">
-            {newsletter.status === 'draft' && (
-              <button onClick={() => transition('ready_for_review')} className="bg-amber-500 hover:bg-amber-600 text-white text-sm font-semibold px-4 py-2 rounded-lg">
-                Submit for review
+            {readyToApprove && (
+              <button onClick={approveForSending} className="inline-flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-lg">
+                <BadgeCheck className="w-4 h-4" /> Approve for Sunday Sending
               </button>
-            )}
-            {newsletter.status === 'ready_for_review' && (
-              <>
-                <button onClick={() => transition('draft')} className="border border-slate-300 text-slate-600 text-sm font-semibold px-4 py-2 rounded-lg">
-                  Back to draft
-                </button>
-                <button onClick={() => transition('approved')} className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2 rounded-lg">
-                  Approve for sending
-                </button>
-              </>
             )}
             {newsletter.status === 'approved' && (
-              <>
-                <button onClick={() => transition('draft')} className="border border-slate-300 text-slate-600 text-sm font-semibold px-4 py-2 rounded-lg">
-                  Revoke approval
-                </button>
-                <button
-                  onClick={sendNow}
-                  disabled={sending}
-                  className="inline-flex items-center gap-1.5 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-4 py-2 rounded-lg disabled:opacity-60"
-                >
-                  <Send className="w-4 h-4" /> {sending ? 'Sending…' : 'Send now'}
-                </button>
-              </>
-            )}
-            {newsletter.status === 'failed' && (
-              <button onClick={() => transition('draft')} className="border border-slate-300 text-slate-600 text-sm font-semibold px-4 py-2 rounded-lg">
-                Move back to draft &amp; retry
+              <button
+                onClick={sendNow}
+                disabled={sending}
+                className="inline-flex items-center gap-1.5 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-4 py-2 rounded-lg disabled:opacity-60"
+              >
+                <Send className="w-4 h-4" /> {sending ? 'Sending…' : 'Send now'}
               </button>
+            )}
+            {!readyToApprove && newsletter.status !== 'approved' && newsletter.status !== 'sent' && (
+              <span className="text-xs text-slate-400 py-2">
+                Approve exactly 5 venue picks above to unlock Sunday sending.
+              </span>
             )}
           </div>
           {newsletter.status === 'approved' && (
             <p className="text-xs text-slate-400 mt-3">
               Approved{newsletter.approved_at ? ` on ${new Date(newsletter.approved_at).toLocaleString('en-GB')}` : ''}. The Sunday
-              automated job will send this automatically — use &ldquo;Send now&rdquo; only to send outside the schedule or retry.
+              automated job will send this automatically — editing anything (including unapproving a venue) drops it back out of
+              approved and requires re-approving. Use &ldquo;Send now&rdquo; only to send outside the schedule or retry.
             </p>
           )}
         </div>

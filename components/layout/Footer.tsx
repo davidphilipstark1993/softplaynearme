@@ -152,6 +152,7 @@ export function Footer({ minimal = false }: FooterProps) {
               <li><Link href="/search?filters=parties" className="hover:text-white transition-colors">Birthday Parties</Link></li>
               <li><Link href="/search?filters=sen" className="hover:text-white transition-colors">SEN Friendly</Link></li>
               <li><Link href="/blog" className="hover:text-white transition-colors">Soft Play Blog</Link></li>
+              <li><Link href="/newsletter" className="hover:text-white transition-colors">Newsletter Archive</Link></li>
               <li><Link href="/add-venue" className="hover:text-white transition-colors">Add Your Venue</Link></li>
             </ul>
           </div>

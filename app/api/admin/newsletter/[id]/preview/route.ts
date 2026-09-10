@@ -15,7 +15,12 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ id: 
   if (!newsletter) return NextResponse.json({ error: 'Not found' }, { status: 404 })
 
   const items = await getNewsletterItems(id)
-  const html = renderNewsletterHtml({ newsletter, items, unsubscribeToken: 'preview-token' })
+  const html = renderNewsletterHtml({
+    newsletter,
+    items,
+    unsubscribeUrl: '#preview-unsubscribe-link',
+    preferencesUrl: '#preview-preferences-link',
+  })
 
   return new NextResponse(html, { headers: { 'Content-Type': 'text/html; charset=utf-8' } })
 }

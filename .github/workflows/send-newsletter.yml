@@ -1,54 +1,45 @@
-# Sunday morning automated newsletter send.
-#
-# All the safety logic (approval required, not already sent, duplicate-send protection) lives
-# server-side in lib/newsletter/send.ts — this workflow is just the trigger. It calls the
-# deployed site's cron endpoint with a bearer token; the endpoint itself decides whether there's
-# anything approved to send and reports back what happened.
-#
-# To change the send time: edit the single cron line below (schedule triggers must be a literal
-# expression — GitHub Actions doesn't support reading a schedule from a repo variable). It's kept
-# to this one line specifically so "configurable" means "edit one obvious line", not buried in
-# application code. Cron is UTC.
-name: Send weekly newsletter
+# Sunday morning automated newsletter send — runs scripts/newsletter/weekly-send.ts directly
+# against Postgres + SendGrid, the same architecture the proven Listen True Crime newsletter
+# system uses (its weekly-newsletter-send.yml), rather than calling back into the deployed site
+# over HTTP. All the actual safety logic (approval required, not already sent, duplicate-send
+# protection) lives in lib/newsletter/send.ts's runNewsletterSend() — this workflow is just the
+# trigger; the script itself decides whether there's anything approved to send.
+name: Weekly Newsletter Send
 
 on:
   schedule:
-    # 08:00 UTC every Sunday — Sunday morning per the weekly send spec.
+    # 08:00 UTC every Sunday — 08:00 GMT in winter / 09:00 BST in summer (UK). GitHub Actions
+    # cron is always UTC and doesn't observe daylight saving, so the local run time drifts by an
+    # hour seasonally. Edit this one line to change the send time.
     - cron: '0 8 * * 0'
-  workflow_dispatch:
-    inputs:
-      type:
-        description: 'Which newsletter to send (matches an approved, unsent newsletter of this type)'
-        required: true
-        default: 'weekly'
-        type: choice
-        options: [weekly, events]
+  workflow_dispatch: {} # manual trigger for testing or a rerun
 
 jobs:
   send:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger newsletter send
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - run: npm install
+
+      - name: Check this week's approved newsletter and send if ready
+        run: npx tsx scripts/newsletter/weekly-send.ts
         env:
-          # Must be the exact same value as the CRON_SECRET env var set on the Vercel project —
-          # this repo secret is how the workflow authenticates to that endpoint.
-          CRON_SECRET: ${{ secrets.CRON_SECRET }}
-          SITE_URL: ${{ vars.SITE_URL || 'https://www.softplaynearme.co.uk' }}
-          NEWSLETTER_TYPE: ${{ inputs.type || 'weekly' }}
-        run: |
-          if [ -z "$CRON_SECRET" ]; then
-            echo "::error::CRON_SECRET repo secret is not set — see docs/NEWSLETTER.md"
-            exit 1
-          fi
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          SENDGRID_API_KEY: ${{ secrets.SENDGRID_API_KEY }}
+          SENDGRID_FROM_EMAIL: ${{ secrets.SENDGRID_FROM_EMAIL }}
+          SENDGRID_FROM_NAME: ${{ secrets.SENDGRID_FROM_NAME }}
+          SENDGRID_UNSUBSCRIBE_GROUP_ID_WEEKLY: ${{ secrets.SENDGRID_UNSUBSCRIBE_GROUP_ID_WEEKLY }}
+          SENDGRID_UNSUBSCRIBE_GROUP_ID_EVENTS: ${{ secrets.SENDGRID_UNSUBSCRIBE_GROUP_ID_EVENTS }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
 
-          http_status=$(curl -sS -o response.json -w "%{http_code}" -X POST \
-            "$SITE_URL/api/cron/send-newsletter?type=$NEWSLETTER_TYPE" \
-            -H "Authorization: Bearer $CRON_SECRET")
-
-          echo "HTTP $http_status"
-          cat response.json
-
-          if [ "$http_status" -ge 400 ]; then
-            echo "::error::Newsletter send request failed (HTTP $http_status) — see response above"
-            exit 1
-          fi
+      # This job only ever sends when the weekly newsletter has exactly 5 individually-approved
+      # venue picks AND has been explicitly "Approved for Sunday Sending" in /admin/newsletter —
+      # both set in the admin UI, never by this workflow. Any other state results in an admin
+      # notification email explaining why nothing was sent, never a send. Duplicate-send
+      # protection is enforced at the database level (a partial unique index on newsletter_sends)
+      # regardless of how many times this job or a manual "Send now" click race each other.

@@ -28,9 +28,23 @@ export default function AdminNewsletterListPage() {
   const [newsletters, setNewsletters] = useState<Newsletter[]>([])
   const [showCreate, setShowCreate] = useState(false)
   const [creating, setCreating] = useState(false)
-  const [newType, setNewType] = useState<'weekly' | 'events'>('weekly')
+  const [newType, setNewType] = useState<'weekly' | 'events'>('events')
   const [newSubject, setNewSubject] = useState('')
   const [newWeekOf, setNewWeekOf] = useState('')
+  const [loadingThisWeek, setLoadingThisWeek] = useState(false)
+
+  async function goToThisWeek() {
+    setLoadingThisWeek(true)
+    try {
+      const res = await fetch('/api/admin/newsletter/this-week')
+      if (res.ok) {
+        const data = await res.json()
+        window.location.href = `/admin/newsletter/${data.newsletter.id}`
+      }
+    } finally {
+      setLoadingThisWeek(false)
+    }
+  }
 
   async function login(e: React.FormEvent) {
     e.preventDefault()
@@ -129,12 +143,19 @@ export default function AdminNewsletterListPage() {
           </div>
         </div>
 
-        <div className="mb-6">
+        <div className="mb-6 flex flex-wrap gap-2">
+          <button
+            onClick={goToThisWeek}
+            disabled={loadingThisWeek}
+            className="inline-flex items-center gap-1.5 bg-slate-900 hover:bg-slate-800 text-white text-sm font-semibold px-4 py-2 rounded-lg disabled:opacity-60"
+          >
+            <Mail className="w-4 h-4" /> {loadingThisWeek ? 'Loading…' : "This week's newsletter"}
+          </button>
           <button
             onClick={() => setShowCreate((s) => !s)}
-            className="inline-flex items-center gap-1.5 bg-purple-600 hover:bg-purple-700 text-white text-sm font-semibold px-4 py-2 rounded-lg"
+            className="inline-flex items-center gap-1.5 border border-slate-300 text-slate-600 hover:bg-slate-50 text-sm font-semibold px-4 py-2 rounded-lg"
           >
-            <Plus className="w-4 h-4" /> New newsletter
+            <Plus className="w-4 h-4" /> New events/offers email
           </button>
         </div>
 

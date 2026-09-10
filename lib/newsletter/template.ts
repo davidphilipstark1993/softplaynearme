@@ -58,14 +58,20 @@ const SECTION_ORDER: NewsletterItem['item_type'][] = ['venue', 'event', 'offer',
 export interface RenderNewsletterOptions {
   newsletter: Newsletter
   items: NewsletterItem[]
-  unsubscribeToken: string
+  /**
+   * Real URLs for a preview or a single-recipient send. For a batched
+   * campaign send (lib/newsletter/sendgrid.ts), pass the literal SendGrid
+   * substitution tags ('-unsub_url-' / '-pref_url-') instead — the HTML is
+   * rendered once and shared across the whole batch, with SendGrid
+   * substituting each recipient's own values per-personalization.
+   */
+  unsubscribeUrl: string
+  preferencesUrl: string
 }
 
 export function renderNewsletterHtml(opts: RenderNewsletterOptions): string {
-  const { newsletter, items, unsubscribeToken } = opts
-  const scope = newsletter.type === 'weekly' ? 'weekly' : 'events'
-  const unsubscribeUrl = `${BASE_URL}/api/newsletter/unsubscribe?token=${unsubscribeToken}&scope=${scope}`
-  const preferencesUrl = `${BASE_URL}/newsletter/preferences?token=${unsubscribeToken}`
+  const { newsletter, items, unsubscribeUrl, preferencesUrl } = opts
+  const scope = newsletter.type === 'weekly' ? 'the weekly newsletter' : 'family events & offers'
 
   const bannerTitle =
     newsletter.type === 'weekly' ? "This week's family guide" : 'Family events & offers'
@@ -119,7 +125,7 @@ export function renderNewsletterHtml(opts: RenderNewsletterOptions): string {
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:8px;border-top:1px solid #e2e8f0;padding-top:18px">
     <tr><td style="text-align:center">
       <p style="font-size:12px;color:#94a3b8;margin:0 0 6px">
-        You're receiving this because you subscribed to ${scope === 'weekly' ? 'the weekly newsletter' : 'family events & offers'} at softplaynearme.co.uk.
+        You're receiving this because you subscribed to ${scope} at softplaynearme.co.uk.
       </p>
       <p style="font-size:12px;margin:0">
         <a href="${unsubscribeUrl}" style="color:#7c3aed">Unsubscribe from this list</a>
@@ -133,4 +139,34 @@ export function renderNewsletterHtml(opts: RenderNewsletterOptions): string {
 </div>
 </body>
 </html>`
+}
+
+export function renderNewsletterPlainText(opts: RenderNewsletterOptions): string {
+  const { newsletter, items, unsubscribeUrl, preferencesUrl } = opts
+  const parts: string[] = [newsletter.subject, '']
+
+  if (newsletter.intro_html) {
+    parts.push(newsletter.intro_html.replace(/<[^>]+>/g, ''), '')
+  }
+
+  for (const type of SECTION_ORDER) {
+    const sectionItems = items.filter((i) => i.item_type === type)
+    if (sectionItems.length === 0) continue
+    parts.push(SECTION_META[type].heading.toUpperCase(), '')
+    for (const item of sectionItems) {
+      parts.push(item.title)
+      if (item.event_date) parts.push(formatEventDate(item.event_date))
+      if (item.description) parts.push(item.description)
+      const url = itemUrl(item)
+      if (url) parts.push(`More info: ${url}`)
+      parts.push('')
+    }
+  }
+
+  parts.push(`Find more soft play near you: ${BASE_URL}`, '')
+  parts.push(`— Soft Play Near Me (${BASE_URL})`)
+  parts.push(`Unsubscribe: ${unsubscribeUrl}`)
+  parts.push(`Manage preferences: ${preferencesUrl}`)
+
+  return parts.join('\n')
 }

@@ -23,14 +23,8 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
   const id = Number((await params).id)
   const existing = await getNewsletter(id)
   if (!existing) return NextResponse.json({ error: 'Not found' }, { status: 404 })
-  // Content is locked once it's out of draft/review — an approved newsletter shouldn't be
-  // editable without going back through review, otherwise "approved" stops meaning the
-  // fact-checked content is what actually ships (Phase 9's fact-check → approval → send order).
-  if (existing.status !== 'draft' && existing.status !== 'ready_for_review') {
-    return NextResponse.json(
-      { error: `Cannot edit a newsletter that is ${existing.status.replace('_', ' ')} — move it back to draft first` },
-      { status: 409 }
-    )
+  if (existing.status === 'sent') {
+    return NextResponse.json({ error: 'A sent newsletter cannot be edited' }, { status: 409 })
   }
 
   const body = await req.json().catch(() => null)

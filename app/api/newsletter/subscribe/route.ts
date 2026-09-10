@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { subscribeEmail } from '@/lib/newsletter/db'
+import { markSubscriberSynced, subscribeEmail } from '@/lib/newsletter/db'
 import { getClientIp, isRateLimited } from '@/lib/newsletter/rateLimit'
+import { pushSendGridContact } from '@/lib/newsletter/sendgrid-contacts'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -41,6 +42,16 @@ export async function POST(req: NextRequest) {
       eventsActivities,
       source: (typeof body.source === 'string' && body.source.slice(0, 100)) || 'unknown',
     })
+
+    // Fire-and-forget — the subscriber row above is already saved regardless of this outcome.
+    // A failure here just leaves sendgrid_synced=false, retried later from the admin
+    // "Retry SendGrid sync" button.
+    if (process.env.SENDGRID_API_KEY) {
+      pushSendGridContact(email)
+        .then((jobId) => markSubscriberSynced(email, jobId))
+        .catch((err) => console.error('[newsletter/subscribe] SendGrid contact sync error:', err))
+    }
+
     return NextResponse.json({
       ok: true,
       outcome,
