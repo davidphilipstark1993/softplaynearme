@@ -532,6 +532,19 @@ export default async function CityPage({ params, searchParams }: PageProps) {
           </div>
         )}
 
+        {/* Newsletter banner */}
+        <div className="bg-white border-b border-slate-200 py-6 px-4">
+          <div className="max-w-2xl mx-auto">
+            <NewsletterSignup
+              source="city_page_banner"
+              offer="events"
+              variant="inline"
+              heading={`Get ${displayName} events, free`}
+              subtext={`Events happening in ${displayName} this month and next — straight to your inbox.`}
+            />
+          </div>
+        </div>
+
         {/* Sticky Filters */}
         <div className="bg-white border-b border-slate-200 py-3 sticky top-16 z-40">
           <div className="max-w-7xl mx-auto px-4 overflow-x-auto">

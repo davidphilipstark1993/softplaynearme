@@ -227,6 +227,19 @@ export default async function Home() {
         </div>
       </div>
 
+      {/* Newsletter banner */}
+      <div className="bg-white py-6 px-4 border-b border-slate-200">
+        <div className="max-w-2xl mx-auto">
+          <NewsletterSignup
+            source="homepage_banner"
+            offer="events"
+            variant="inline"
+            heading="Get local family events, free"
+            subtext="Events happening in your area this month and next — straight to your inbox."
+          />
+        </div>
+      </div>
+
       {/* Quick Filters */}
       <div className="bg-white py-12 border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -515,8 +528,9 @@ export default async function Home() {
         <div className="max-w-lg mx-auto">
           <NewsletterSignup
             source="homepage"
+            offer="both"
             heading="Get Sunday&rsquo;s family guide"
-            subtext="Our weekly pick of soft play venues, family days out and offers — every Sunday morning."
+            subtext="Weekly soft play picks, plus local family events happening this month and next — free."
           />
         </div>
       </div>
