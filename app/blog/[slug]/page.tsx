@@ -9,6 +9,7 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 import { JsonLd } from '@/components/seo/JsonLd'
+import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -143,6 +144,14 @@ export default async function BlogPostPage({ params }: PageProps) {
 
         <div className="mt-10 border-t border-slate-200 pt-6">
           <ShareButtons url={canonical} title={post.title} />
+        </div>
+
+        <div className="mt-8">
+          <NewsletterSignup
+            source="blog_article"
+            heading="Find something fun to do with the kids"
+            subtext="Get our weekly family activity picks and days-out ideas by email."
+          />
         </div>
 
         {relatedPosts.length > 0 && (

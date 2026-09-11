@@ -72,6 +72,16 @@ async function sendEmail(to: string, subject: string, html: string): Promise<voi
   console.error(`[email] FAILED to send "${subject}" to ${to} via both Resend and SendGrid`)
 }
 
+// ─── Admin operational notification (plain text) ──────────────────────────────
+// Used by cron/background jobs (e.g. the weekly newsletter send) to tell the
+// site owner what happened — sent or skipped and why, or failed — without
+// requiring anyone to go dig through logs.
+
+export async function sendAdminOperationalNotification(subject: string, text: string): Promise<void> {
+  const html = `<pre style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;white-space:pre-wrap;font-size:14px;color:#1e293b">${text.replace(/</g, '&lt;')}</pre>`
+  await sendEmail('david@softplaynearme.co.uk', subject, html)
+}
+
 // ─── Welcome email ────────────────────────────────────────────────────────────
 
 export interface WelcomeEmailOptions {

@@ -21,6 +21,7 @@ import { LocationIntro } from '@/components/location/LocationIntro'
 import { getCityOgImage } from '@/lib/cityImages'
 import { formatAddressLine } from '@/lib/sanitize'
 import { FilterSidebar, ActiveFilterBar } from '@/components/search/FilterSidebar'
+import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup'
 import { isSoftPlayVenueType, VISIBLE_VENUE_TYPES, visibleVenueTypeSql } from '@/lib/venueTypes'
 import { getCardQuote, formatLastVerified } from '@/lib/venueCardText'
 import { isVerified } from '@/lib/plans'
@@ -1010,6 +1011,15 @@ export default async function CityPage({ params, searchParams }: PageProps) {
               </dl>
             </section>
           )}
+
+          <section className="mt-12 max-w-xl">
+            <NewsletterSignup
+              source="city_page"
+              offer="both"
+              heading={`Get ${displayName}&rsquo;s family guide`}
+              subtext={`New venues, events and family days out in ${displayName} — every Sunday.`}
+            />
+          </section>
 
             </article> {/* end venue content col */}
           </div> {/* end lg:grid */}

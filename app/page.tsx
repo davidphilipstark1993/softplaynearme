@@ -6,6 +6,7 @@ import { cities } from '@/lib/venues'
 import { getStaticVenuesByTown, getStaticTotalVenueCount } from '@/lib/staticVenues'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
+import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup'
 import { SearchHero } from '@/components/home/SearchHero'
 import { HeroCarousel } from '@/components/home/HeroCarousel'
 import { buildFAQSchema, buildCityListSchema } from '@/lib/schema'
@@ -506,6 +507,17 @@ export default async function Home() {
               </div>
             ))}
           </div>
+        </div>
+      </div>
+
+      {/* Newsletter CTA */}
+      <div className="py-14 px-4">
+        <div className="max-w-lg mx-auto">
+          <NewsletterSignup
+            source="homepage"
+            heading="Get Sunday&rsquo;s family guide"
+            subtext="Our weekly pick of soft play venues, family days out and offers — every Sunday morning."
+          />
         </div>
       </div>
 

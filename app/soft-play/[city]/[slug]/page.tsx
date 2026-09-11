@@ -47,6 +47,7 @@ import { CTAButtons } from '@/components/venue/CTAButtons'
 import { QuickFactsPanel } from '@/components/venue/QuickFactsPanel'
 import { EnquiryForm } from '@/components/venue/EnquiryForm'
 import { ReportIssueLink } from '@/components/venue/ReportIssueLink'
+import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup'
 import { VenueViewTracking } from '@/components/venue/VenueViewTracking'
 
 interface PageProps {
@@ -1177,6 +1178,15 @@ export default async function VenuePage({ params }: PageProps) {
                 </Card>
               </div>
             </div>
+          </div>
+
+          <div className="max-w-2xl mx-auto px-4 pb-12">
+            <NewsletterSignup
+              source="venue_page"
+              offer="both"
+              heading="Never miss a new soft play venue"
+              subtext={`Get new venue alerts for ${cityName} and weekly family day-out ideas.`}
+            />
           </div>
         </main>
 
