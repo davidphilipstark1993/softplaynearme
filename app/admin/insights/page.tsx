@@ -98,6 +98,7 @@ export default function AdminInsightsPage() {
             <p className="text-slate-500 text-sm mt-0.5">Always preview before sending — these go to real venue owners.</p>
           </div>
           <div className="flex gap-3 text-sm">
+            <Link href="/admin" className="text-slate-500 hover:underline">&larr; Admin</Link>
             <Link href="/admin/venues" className="text-purple-600 hover:underline">Venues →</Link>
             <Link href="/admin/claims" className="text-purple-600 hover:underline">Claims →</Link>
           </div>

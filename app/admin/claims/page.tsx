@@ -147,6 +147,9 @@ export default function AdminClaimsPage() {
             </p>
           </div>
           <div className="flex items-center gap-3">
+            <Link href="/admin" className="text-sm text-slate-500 hover:underline">
+              &larr; Admin
+            </Link>
             <Link href="/admin/venues" className="text-sm text-purple-600 hover:underline">
               Venues &amp; Plans →
             </Link>

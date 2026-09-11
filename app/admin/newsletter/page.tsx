@@ -134,11 +134,14 @@ export default function AdminNewsletterListPage() {
             <p className="text-slate-500 text-sm mt-0.5">Weekly roundups and events & offers emails</p>
           </div>
           <div className="flex items-center gap-3">
+            <Link href="/admin" className="text-sm text-slate-500 hover:underline">
+              &larr; Admin
+            </Link>
             <Link href="/admin/newsletter/subscribers" className="text-sm text-purple-600 hover:underline flex items-center gap-1">
               <Users className="w-4 h-4" /> Subscribers
             </Link>
             <Link href="/admin/venues" className="text-sm text-slate-500 hover:underline">
-              &larr; Venues
+              Venues
             </Link>
           </div>
         </div>

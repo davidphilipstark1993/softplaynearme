@@ -169,6 +169,9 @@ export default function AdminVenuesPage() {
             <p className="text-slate-500 text-sm mt-0.5">{total} venues</p>
           </div>
           <div className="flex items-center gap-3">
+            <Link href="/admin" className="text-sm text-slate-500 hover:underline">
+              &larr; Admin
+            </Link>
             <Link href="/admin/claims" className="text-sm text-purple-600 hover:underline">
               Claims →
             </Link>
