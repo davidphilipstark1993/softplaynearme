@@ -15,7 +15,7 @@ export const getTotalVenueCount = cache(async (): Promise<number | null> => {
     // venue_types (trampoline parks, farms, park playgrounds, other family
     // attractions) here would overstate the "soft play centres" claim.
     const { rows } = await pool.query<{ total: number }>(
-      `SELECT COUNT(*)::int AS total FROM venues v WHERE ${visibleVenueTypeSql()}`
+      `SELECT COUNT(*)::int AS total FROM venues v WHERE v.is_active = true AND ${visibleVenueTypeSql()}`
     )
     return rows[0]?.total ?? null
   } catch {

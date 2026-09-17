@@ -18,6 +18,7 @@ interface AdminVenue {
   plan_started_at: string | null
   ad_placements: { homepage?: boolean; city_pages?: string[] } | null
   needs_review: boolean
+  is_active: boolean
 }
 
 const PLANS: Plan[] = ['free', 'premium', 'bespoke']
@@ -291,10 +292,11 @@ export default function AdminVenuesPage() {
               <thead className="bg-slate-50 border-b border-slate-200 text-left text-xs font-semibold uppercase tracking-wider text-slate-500">
                 <tr>
                   <th className="px-4 py-3">Venue</th>
+                  <th className="px-4 py-3" title="Whether this listing is shown publicly — the one true visibility switch">Live on site</th>
                   <th className="px-4 py-3">Needs review</th>
                   <th className="px-4 py-3">Claimed</th>
                   <th className="px-4 py-3">Plan</th>
-                  <th className="px-4 py-3">Status</th>
+                  <th className="px-4 py-3" title="Billing status — does not affect public visibility, see Live on site">Plan status</th>
                   <th className="px-4 py-3">Featured</th>
                   <th className="px-4 py-3">Featured until</th>
                   <th className="px-4 py-3">Homepage ad</th>
@@ -318,6 +320,20 @@ export default function AdminVenuesPage() {
                         </a>
                       </div>
                       {rowError[v.id] && <p className="text-xs text-red-600 mt-1">{rowError[v.id]}</p>}
+                    </td>
+                    <td className="px-4 py-3">
+                      <label className="inline-flex items-center gap-1.5 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={v.is_active}
+                          disabled={updating === v.id}
+                          onChange={(e) => updateVenue(v.id, { isActive: e.target.checked })}
+                          className="w-4 h-4 rounded border-slate-300 text-green-600 focus:ring-green-500"
+                        />
+                        <span className={v.is_active ? 'text-green-700 text-xs' : 'text-slate-400 text-xs'}>
+                          {v.is_active ? 'Live' : 'Hidden'}
+                        </span>
+                      </label>
                     </td>
                     <td className="px-4 py-3">
                       <input

@@ -105,12 +105,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         result = await client.query(`
           SELECT city_slug, slug, updated_at, completeness_score
           FROM venues
+          WHERE is_active = true
         `)
       } catch {
         // Column doesn't exist yet — include all venues without filtering
         result = await client.query(`
           SELECT city_slug, slug, updated_at, NULL::int AS completeness_score
           FROM venues
+          WHERE is_active = true
         `)
       }
 

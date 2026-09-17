@@ -25,7 +25,7 @@ export async function GET(request: NextRequest) {
     const sort = searchParams.get('sort') || (lat && lng ? 'distance' : 'rating')
 
     const params: (string | number)[] = []
-    const where: string[] = []
+    const where: string[] = ['v.is_active = true']
     let distanceSelect = ''
     let orderBy = ''
 

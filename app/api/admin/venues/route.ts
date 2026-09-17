@@ -50,7 +50,8 @@ export async function GET(req: NextRequest) {
     const result = await client.query(
       `SELECT id, name, city_slug, slug, claimed_by_owner, featured, featured_until,
               plan, plan_status, plan_started_at, ad_placements,
-              COALESCE(needs_review, false) AS needs_review
+              COALESCE(needs_review, false) AS needs_review,
+              COALESCE(is_active, true) AS is_active
        FROM venues
        ${whereSql}
        ORDER BY name ASC
@@ -72,7 +73,7 @@ export async function PATCH(req: NextRequest) {
     return NextResponse.json({ error: 'Unauthorised' }, { status: 401 })
   }
 
-  const { id, plan, planStatus, featured, featuredUntil, adPlacements, needsReview } = await req.json()
+  const { id, plan, planStatus, featured, featuredUntil, adPlacements, needsReview, isActive } = await req.json()
   if (!id) {
     return NextResponse.json({ error: 'Missing venue id' }, { status: 400 })
   }
@@ -122,6 +123,7 @@ export async function PATCH(req: NextRequest) {
     if (featuredUntil !== undefined) set('featured_until', featuredUntil || null)
     if (adPlacements !== undefined) set('ad_placements', JSON.stringify(adPlacements))
     if (needsReview !== undefined) set('needs_review', Boolean(needsReview))
+    if (isActive !== undefined) set('is_active', Boolean(isActive))
 
     if (updates.length === 0) {
       return NextResponse.json({ error: 'No valid fields to update' }, { status: 400 })

@@ -56,7 +56,7 @@ async function getFilteredVenues(citySlug: string, filterSlug: FilterSlug): Prom
                 CASE WHEN COUNT(r.id) > 0 THEN COUNT(r.id) ELSE COALESCE(v.reviews_count, 0) END AS review_count
          FROM venues v
          LEFT JOIN reviews r ON r.venue_id = v.id AND r.approved = true
-         WHERE v.city_slug = $1 ${whereExtra}
+         WHERE v.city_slug = $1 AND v.is_active = true ${whereExtra}
          GROUP BY v.id
          ORDER BY avg_rating DESC NULLS LAST, v.reviews_count DESC NULLS LAST, v.name ASC`,
         [citySlug]

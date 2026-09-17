@@ -175,7 +175,7 @@ const getVenue = cache(async function getVenue(citySlug: string, slug: string): 
     const client = await pool.connect()
     try {
       const result = await client.query(
-        'SELECT * FROM venues WHERE city_slug = $1 AND slug = $2',
+        'SELECT * FROM venues WHERE city_slug = $1 AND slug = $2 AND is_active = true',
         [citySlug, slug]
       )
       const row = result.rows[0]
@@ -198,6 +198,12 @@ const getVenue = cache(async function getVenue(citySlug: string, slug: string): 
           featured: !!row.featured && (!row.featured_until || new Date(row.featured_until) > new Date()),
         }
       }
+      // A real query that simply found nothing (wrong slug, or a venue that
+      // exists but is_active = false) must 404 — it must NOT fall through to
+      // the static snapshot below, which has no concept of is_active and
+      // would silently keep serving a deactivated venue from stale data.
+      // Only a genuine DB error (caught below) should fall back to static.
+      return null
     } finally {
       client.release()
     }
@@ -348,7 +354,7 @@ export async function generateStaticParams() {
     const pool = getPool()
     const client = await pool.connect()
     try {
-      const result = await client.query('SELECT city_slug, slug FROM venues')
+      const result = await client.query('SELECT city_slug, slug FROM venues WHERE is_active = true')
       for (const row of result.rows) {
         params.push({ city: row.city_slug, slug: row.slug })
       }
@@ -406,6 +412,7 @@ async function getSimilarVenues(
          FROM venues
          WHERE city_slug = $1
            AND slug != $2
+           AND is_active = true
            AND (
              ($3 AND toddler_area = true) OR
              ($4 AND sen_friendly = true) OR
@@ -453,7 +460,7 @@ async function getNearbyVenues(citySlug: string, excludeSlug: string): Promise<{
     const client = await pool.connect()
     try {
       const result = await client.query(
-        'SELECT name, slug, postcode FROM venues WHERE city_slug = $1 AND slug != $2 ORDER BY name LIMIT 6',
+        'SELECT name, slug, postcode FROM venues WHERE city_slug = $1 AND slug != $2 AND is_active = true ORDER BY name LIMIT 6',
         [citySlug, excludeSlug]
       )
       if (result.rows.length > 0) return result.rows

@@ -106,7 +106,7 @@ async function getFeaturedHomepageVenues(): Promise<FeaturedVenue[]> {
     const pool = getPool()
     const result = await pool.query<{ name: string; city_slug: string; slug: string }>(`
       SELECT name, city_slug, slug FROM venues
-      WHERE ad_placements->>'homepage' = 'true'
+      WHERE is_active = true AND ad_placements->>'homepage' = 'true'
       ORDER BY RANDOM()
       LIMIT 6
     `)
@@ -126,16 +126,17 @@ async function getHomepageStats() {
       // buckets trampoline parks/farms/park-playgrounds/other attractions
       // out of the main directory (see lib/venueTypes.ts), so counting all
       // rows here would overstate the claim with venues that aren't soft play.
-      pool.query<{ total: number }>(`SELECT COUNT(*)::int AS total FROM venues v WHERE ${visibleVenueTypeSql()}`),
+      pool.query<{ total: number }>(`SELECT COUNT(*)::int AS total FROM venues v WHERE v.is_active = true AND ${visibleVenueTypeSql()}`),
       pool.query<{ city_slug: string; cnt: number }>(
-        `SELECT city_slug, COUNT(*)::int AS cnt FROM venues v WHERE ${visibleVenueTypeSql()} GROUP BY city_slug`
+        `SELECT city_slug, COUNT(*)::int AS cnt FROM venues v WHERE v.is_active = true AND ${visibleVenueTypeSql()} GROUP BY city_slug`
       ),
-      pool.query<{ total: number }>(`SELECT COUNT(*)::int AS total FROM venues WHERE claimed_by_owner = true`),
+      pool.query<{ total: number }>(`SELECT COUNT(*)::int AS total FROM venues WHERE is_active = true AND claimed_by_owner = true`),
       pool.query<RecentVenue>(`
         SELECT v.name, v.town_slug, v.slug,
                COALESCE(v.completeness_score, 0) AS completeness_score
         FROM venues v
-        WHERE v.last_verified_at IS NOT NULL
+        WHERE v.is_active = true
+          AND v.last_verified_at IS NOT NULL
           AND v.slug IS NOT NULL
           AND v.town_slug IS NOT NULL
           AND COALESCE(v.completeness_score, 0) >= 40
