@@ -394,6 +394,25 @@ export function getLocationContent(
     venueCount,
   })
 
+  // Hull's copy (2026-09) went through an explicit Fact Checker PASS / Publisher
+  // APPROVED review and is deliberately concise (~145 words) — several price
+  // figures were kept off the intro on purpose to avoid staleness (see
+  // hull-city-hub-copy-2026-09-14.md "Risks / edit me"). It must be used
+  // exactly as approved, never blended with generated filler FAQs/intro text
+  // the way the generic word-count gate below does for other hand-written
+  // cities — that blending is fine for un-fact-checked content, but would
+  // reintroduce unverified claims here. Scoped to this one slug so no other
+  // city's behaviour changes.
+  if (slug === 'hull' && cityConfig) {
+    return {
+      intro: cityConfig.intro,
+      faqs: cityConfig.faqs,
+      metaTitle: cityConfig.metaTitle,
+      metaDescription: cityConfig.metaDescription,
+      h1: `Soft Play in ${name}`,
+    }
+  }
+
   // Use hand-written content when it's substantially real (not a stub), even
   // if it falls short of 8 FAQs — top up the FAQ list from the generic pool
   // rather than discarding a genuine, city-specific intro entirely. Previously
@@ -403,6 +422,19 @@ export function getLocationContent(
   const MIN_HANDWRITTEN_INTRO_WORDS = 200
   const MIN_HANDWRITTEN_FAQS = 3
   const TARGET_FAQ_COUNT = 8
+
+  // metaTitle/metaDescription are a deliberate publisher decision independent of
+  // intro length — an explicit cityConfig override should always win, even for a
+  // short/tightly-fact-checked intro that doesn't clear the hand-written-intro
+  // word threshold below (see Hull, 2026-09: 145-word approved intro would
+  // otherwise have silently fallen back to the generic "{name} Soft Play
+  // Centres & Indoor Play" title, discarding the explicit metaTitle/
+  // metaDescription entirely). Every other city's title/description behaviour
+  // is unchanged — they all set both fields, so this branch always applies.
+  const metaOverride =
+    cityConfig?.metaTitle && cityConfig?.metaDescription
+      ? { metaTitle: cityConfig.metaTitle, metaDescription: cityConfig.metaDescription }
+      : null
 
   if (
     cityConfig &&
@@ -451,7 +483,7 @@ export function getLocationContent(
   return {
     ...generated,
     h1: `Soft Play in ${name}`,
-    metaTitle: `${name} Soft Play Centres & Indoor Play | Soft Play Near Me`,
-    metaDescription: `Find soft play centres in ${name}. Compare venues, check opening times and prices, discover toddler areas, birthday parties, and SEN-friendly sessions near you.`,
+    metaTitle: metaOverride?.metaTitle ?? `${name} Soft Play Centres & Indoor Play | Soft Play Near Me`,
+    metaDescription: metaOverride?.metaDescription ?? `Find soft play centres in ${name}. Compare venues, check opening times and prices, discover toddler areas, birthday parties, and SEN-friendly sessions near you.`,
   }
 }

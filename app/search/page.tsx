@@ -73,7 +73,7 @@ async function searchVenues(
     client = await getPool().connect()
 
     const queryParams: (number | string)[] = [lat, lng]
-    const where: string[] = []
+    const where: string[] = ['v.is_active = true']
 
     const latDegPerMile = 1 / 69.0
     const lngDegPerMile = 1 / (69.0 * Math.cos((lat * Math.PI) / 180))

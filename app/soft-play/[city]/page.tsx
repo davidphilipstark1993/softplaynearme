@@ -18,6 +18,8 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { getLocationContent } from '@/lib/locationContent'
 import { getPostForCity } from '@/lib/blogPosts'
 import { LocationIntro } from '@/components/location/LocationIntro'
+import { CuratedVenueSection } from '@/components/location/CuratedVenueSections'
+import { HULL_CURATED_VENUES } from '@/data/hullCuratedVenues'
 import { getCityOgImage } from '@/lib/cityImages'
 import { formatAddressLine } from '@/lib/sanitize'
 import { FilterSidebar, ActiveFilterBar } from '@/components/search/FilterSidebar'
@@ -51,6 +53,22 @@ export async function generateStaticParams() {
   return allSlugs.map((city) => ({ city }))
 }
 
+const SITE_SUFFIX = ' | Soft Play Near Me'
+
+/**
+ * The root layout applies a `%s | Soft Play Near Me` title template, so a
+ * plain string here gets that suffix appended automatically. Most
+ * cityConfig.metaTitle values don't include it and rely on that. Hull's
+ * approved title (2026-09) is required verbatim including the suffix
+ * ("...| Soft Play Near Me"), which would otherwise double up
+ * ("...| Soft Play Near Me | Soft Play Near Me") — `absolute` opts a single
+ * title out of the parent template. Generic guard so any future city with
+ * an explicit full title doesn't hit the same bug.
+ */
+function metadataTitle(metaTitle: string): string | { absolute: string } {
+  return metaTitle.endsWith(SITE_SUFFIX) ? { absolute: metaTitle } : metaTitle
+}
+
 export async function generateMetadata({ params, searchParams }: PageProps): Promise<Metadata> {
   const { city } = await params
   const { filter, search, age, facilities, price, special, area } = await searchParams
@@ -74,7 +92,7 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
 
     const ogImage = getCityOgImage(city)
     return {
-      title,
+      title: metadataTitle(title),
       description,
       ...(noindex && { robots: { index: false, follow: true } }),
       openGraph: {
@@ -102,7 +120,7 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
   const ogImage = getCityOgImage(city)
 
   return {
-    title: generated.metaTitle,
+    title: metadataTitle(generated.metaTitle),
     description: generated.metaDescription,
     ...(noindex && { robots: { index: false, follow: true } }),
     openGraph: {
@@ -223,7 +241,7 @@ async function getVenues(citySlug: string, opts: VenueFilters = {}): Promise<Ven
                CASE WHEN COUNT(r.id) > 0 THEN COUNT(r.id) ELSE COALESCE(v.reviews_count, 0) END as review_count
         FROM venues v
         LEFT JOIN reviews r ON r.venue_id = v.id AND r.approved = true
-        WHERE v.city_slug = $1
+        WHERE v.city_slug = $1 AND v.is_active = true
       `
       const params: (string | boolean)[] = [citySlug]
 
@@ -374,7 +392,7 @@ async function getSponsoredCityVenues(citySlug: string): Promise<SponsoredVenue[
     const pool = getPool()
     const result = await pool.query<SponsoredVenue>(
       `SELECT id, name, slug FROM venues
-       WHERE city_slug = $1 AND ad_placements -> 'city_pages' ? $1
+       WHERE city_slug = $1 AND is_active = true AND ad_placements -> 'city_pages' ? $1
        ORDER BY RANDOM()
        LIMIT 3`,
       [citySlug]
@@ -1009,6 +1027,15 @@ export default async function CityPage({ params, searchParams }: PageProps) {
 
           {/* Location Intro (SEO content) */}
           <LocationIntro content={intro} locationName={displayName} />
+
+          {/* Hand-curated, fact-checked venue lists — Hull only, see data/hullCuratedVenues.ts */}
+          {city === 'hull' && (
+            <>
+              <CuratedVenueSection group={HULL_CURATED_VENUES.citySection} />
+              <CuratedVenueSection group={HULL_CURATED_VENUES.nearbySection} />
+              <CuratedVenueSection group={HULL_CURATED_VENUES.notSoftPlaySection} />
+            </>
+          )}
 
           {/* FAQs */}
           {faqs.length > 0 && (
