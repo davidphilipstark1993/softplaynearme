@@ -41,8 +41,16 @@ interface PageProps {
     special?: string    // comma-separated: open-now, wheelchair
     sort?: string
     area?: string       // London only: north-london, east-london, etc — see lib/londonAreas.ts
+    page?: string       // 1-indexed pagination of the "All Venues" grid
   }>
 }
+
+// Venue cards (with images, badges, review quotes) are by far the biggest
+// contributor to city-page HTML weight — large cities were rendering 100+ of
+// them on one page (Leeds ~1MB of HTML). Only this many render server-side;
+// the rest are reachable via the pagination links below, which stay crawlable
+// (plain <Link>s, not client-only "load more") so no venue becomes orphaned.
+const VENUES_PER_PAGE = 24
 
 export const revalidate = 3600
 
@@ -71,11 +79,16 @@ function metadataTitle(metaTitle: string): string | { absolute: string } {
 
 export async function generateMetadata({ params, searchParams }: PageProps): Promise<Metadata> {
   const { city } = await params
-  const { filter, search, age, facilities, price, special, area } = await searchParams
+  const { filter, search, age, facilities, price, special, area, page } = await searchParams
   const cityConfig = getCityBySlug(city)
 
-  // Prevent indexing of filtered / searched variations
-  const noindex = !!(filter || search || age || facilities || price || special || area)
+  // Prevent indexing of filtered / searched / paginated variations. Page 1
+  // (the default, whether ?page=1 is explicit or omitted) is the canonical,
+  // indexable page — only page 2+ is noindex,follow, same treatment as every
+  // other query-param variation: still crawlable so venues on later pages
+  // stay reachable, just not a duplicate of page 1's content in the index.
+  const pageNum = Math.max(1, parseInt(page || '1', 10) || 1)
+  const noindex = !!(filter || search || age || facilities || price || special || area || pageNum > 1)
 
   if (!cityConfig) {
     const staticTown = getStaticTownBySlug(city)
@@ -405,7 +418,7 @@ async function getSponsoredCityVenues(citySlug: string): Promise<SponsoredVenue[
 
 export default async function CityPage({ params, searchParams }: PageProps) {
   const { city } = await params
-  const { filter, search, age: ageParam, facilities: facilitiesParam, price, special: specialParam, sort, area } = await searchParams
+  const { filter, search, age: ageParam, facilities: facilitiesParam, price, special: specialParam, sort, area, page: pageParam } = await searchParams
   const cityConfig = getCityBySlug(city)
   const staticTown = getStaticTownBySlug(city)
 
@@ -423,6 +436,29 @@ export default async function CityPage({ params, searchParams }: PageProps) {
 
   const venues = await getVenues(city, { filter, search, age, facilities, price, special, sort, area })
   const nearbyCities = cityConfig ? getNearbyCities(city) : []
+
+  // Pagination — see VENUES_PER_PAGE above for why. Clamp to the real last
+  // page so an out-of-range ?page= doesn't render an empty grid.
+  const totalPages = Math.max(1, Math.ceil(venues.length / VENUES_PER_PAGE))
+  const pageNum = Math.min(Math.max(1, parseInt(pageParam || '1', 10) || 1), totalPages)
+  const pagedVenues = venues.slice((pageNum - 1) * VENUES_PER_PAGE, pageNum * VENUES_PER_PAGE)
+
+  // Preserves every other active filter/sort param while only changing `page`
+  // — used to build crawlable prev/next links.
+  function buildPageHref(targetPage: number): string {
+    const params = new URLSearchParams()
+    if (filter) params.set('filter', filter)
+    if (search) params.set('search', search)
+    if (ageParam) params.set('age', ageParam)
+    if (facilitiesParam) params.set('facilities', facilitiesParam)
+    if (price) params.set('price', price)
+    if (specialParam) params.set('special', specialParam)
+    if (sort) params.set('sort', sort)
+    if (area) params.set('area', area)
+    if (targetPage > 1) params.set('page', String(targetPage))
+    const qs = params.toString()
+    return `/soft-play/${city}${qs ? `?${qs}` : ''}`
+  }
 
   // Popular-areas counts for London — a second, unfiltered fetch so the area
   // pills always show true totals regardless of whatever filters are active.
@@ -450,8 +486,11 @@ export default async function CityPage({ params, searchParams }: PageProps) {
 
   const faqSchema = buildFAQSchema(faqs)
 
+  // Reflects only the venues actually rendered on this page — an ItemList
+  // claiming hundreds of items when the page shows 24 would be inaccurate
+  // structured data, not just a bigger payload.
   const itemListSchema = buildItemListSchema(
-    venues.map(v => ({
+    pagedVenues.map(v => ({
       name: v.name,
       slug: v.slug,
       citySlug: city,
@@ -459,6 +498,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
       postcode: v.postcode,
       avgRating: v.avg_rating ? Number(v.avg_rating) : undefined,
       reviewCount: v.review_count ? Number(v.review_count) : undefined,
+      venueType: v.venue_type,
     })),
     `Soft Play Centres in ${displayName}`
   )
@@ -474,7 +514,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
   // and other family attractions shouldn't rank in soft-play-specific
   // modules even though they may still appear in the main listing.
   const hasActiveFilters = !!(filter || search || age.length || facilities.length || price || special.length || area)
-  const showCurated = !hasActiveFilters && venues.length >= 4
+  const showCurated = !hasActiveFilters && pageNum === 1 && venues.length >= 4
   const softPlayVenues = venues.filter(v => isSoftPlayVenueType(v.venue_type))
   // Featured (Premium/Bespoke) venues get their own spotlight, shown ahead of
   // the others — a single featured venue is still worth surfacing since it's
@@ -589,7 +629,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
         </div>
 
         {/* Main Content */}
-        <main className="max-w-7xl mx-auto px-4 py-8">
+        <main id="main-content" className="max-w-7xl mx-auto px-4 py-8">
           <div className="lg:grid lg:grid-cols-4 lg:gap-8">
 
             {/* Filter sidebar — sticky on desktop, collapsible on mobile */}
@@ -757,6 +797,11 @@ export default async function CityPage({ params, searchParams }: PageProps) {
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-lg font-semibold text-slate-700">
               {showCurated ? `All Soft Play in ${displayName} ` : ''}{venues.length} {venues.length === 1 ? 'venue' : 'venues'}{!showCurated ? ' found' : ''}
+              {totalPages > 1 && (
+                <span className="text-slate-400 font-normal">
+                  {' '}&mdash; showing {(pageNum - 1) * VENUES_PER_PAGE + 1}&ndash;{Math.min(pageNum * VENUES_PER_PAGE, venues.length)}
+                </span>
+              )}
             </h2>
           </div>
 
@@ -772,7 +817,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {venues.map((venue, index) => {
+              {pagedVenues.map((venue, index) => {
                 const hasFeatures = venue.toddler_area || venue.parties || venue.cafe || venue.parking || venue.sen_friendly
                 const displayImage = isUsablePhotoUrl(venue.main_image_url) ? venue.main_image_url : null
                 return (
@@ -936,6 +981,27 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                 </Card>
               )})}
             </div>
+          )}
+
+          {/* Pagination — plain crawlable links, not a client-only "load
+              more", so pages 2+ (and every venue on them) stay reachable to
+              search engines even though only page 1 is indexed. */}
+          {totalPages > 1 && (
+            <nav aria-label="Venue list pages" className="flex items-center justify-center gap-2 mt-8">
+              {pageNum > 1 && (
+                <Link href={buildPageHref(pageNum - 1)}>
+                  <Button variant="outline" size="sm">Previous</Button>
+                </Link>
+              )}
+              <span className="text-sm text-slate-500 px-2">
+                Page {pageNum} of {totalPages}
+              </span>
+              {pageNum < totalPages && (
+                <Link href={buildPageHref(pageNum + 1)}>
+                  <Button variant="outline" size="sm">Next</Button>
+                </Link>
+              )}
+            </nav>
           )}
 
           {/* Blog post link — shown when a guide exists for this city */}
