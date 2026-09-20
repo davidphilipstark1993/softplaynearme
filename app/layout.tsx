@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     default: "Soft Play Near Me | Find Soft Play Centres Across the UK",
     template: "%s | Soft Play Near Me",
   },
-  description: "Find 1,800+ soft play centres near you across the UK. Search by postcode, compare prices, opening times, facilities, photos & reviews. Free directory updated daily by venue owners.",
+  description: "Find 1,800+ soft play centres near you across the UK. Search by postcode, compare prices, opening times and facilities. Free directory, updated daily.",
   keywords: ["soft play near me", "soft play centres", "indoor play", "toddler soft play", "soft play birthday parties", "SEN soft play", "indoor play centres UK"],
   authors: [{ name: "Soft Play Near Me" }],
   creator: "Soft Play Near Me",
@@ -95,6 +95,7 @@ const organizationSchema = {
   sameAs: [
     "https://www.facebook.com/softplaynearme",
     "https://www.instagram.com/softplaynearme",
+    "https://www.tiktok.com/@softplaynearme",
   ],
   contactPoint: {
     "@type": "ContactPoint",

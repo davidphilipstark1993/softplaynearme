@@ -34,7 +34,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const countStr = total
     ? total.toLocaleString('en-GB')
     : `${getStaticTotalVenueCount().toLocaleString('en-GB')}+`
-  const description = `Find ${countStr} soft play centres near you across the UK. Search by postcode, compare prices, opening times, facilities, photos & reviews. Free directory updated daily by venue owners.`
+  const description = `Find ${countStr} soft play centres near you across the UK. Search by postcode, compare prices, opening times and facilities. Free directory, updated daily.`
   // Next.js replaces (does not deep-merge) the whole `openGraph` / `twitter`
   // object when a page defines one, so anything the root layout set here has to
   // be restated. Omitting `card` previously silently downgraded the homepage's

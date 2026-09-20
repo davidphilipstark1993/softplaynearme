@@ -54,7 +54,12 @@ export const filters: FilterConfig[] = [
     slug: 'toddler',
     name: 'Toddler Friendly',
     dbColumn: 'toddler_area',
-    metaTitleTemplate: 'Toddler Soft Play in {city} | Under 3s & Baby Friendly',
+    // No trailing "| ..." clause — the root layout's title template already
+    // appends " | Soft Play Near Me", so a template-level suffix here doubled
+    // up into an 90+ char final title (e.g. "...Southend-on-Sea | Under 3s &
+    // Baby Friendly | Soft Play Near Me"). See app/soft-play/[city]/page.tsx's
+    // metadataTitle() for the one case (Hull) that needs a literal full title.
+    metaTitleTemplate: 'Toddler Soft Play in {city}',
     metaDescriptionTemplate: 'Find toddler-friendly soft play centres in {city} with dedicated baby and under 3s areas. Safe play spaces for your little ones.',
     h1Template: 'Toddler Soft Play in {city}',
     introTemplate: 'Looking for soft play suitable for babies and toddlers in {city}? These venues have dedicated areas for under 3s with age-appropriate equipment.',
@@ -63,7 +68,7 @@ export const filters: FilterConfig[] = [
     slug: 'birthday-parties',
     name: 'Birthday Parties',
     dbColumn: 'parties',
-    metaTitleTemplate: 'Soft Play Birthday Parties in {city} | Party Venues',
+    metaTitleTemplate: 'Soft Play Birthday Parties in {city}',
     metaDescriptionTemplate: 'Book the perfect soft play birthday party in {city}. Compare venues with party packages, food options, and private hire.',
     h1Template: 'Soft Play Birthday Parties in {city}',
     introTemplate: 'Planning a birthday party in {city}? These soft play centres offer party packages, dedicated party rooms, and catering options.',
@@ -72,7 +77,7 @@ export const filters: FilterConfig[] = [
     slug: 'sen-friendly',
     name: 'SEN Friendly',
     dbColumn: 'sen_friendly',
-    metaTitleTemplate: 'SEN Friendly Soft Play in {city} | Sensory Friendly Venues',
+    metaTitleTemplate: 'SEN-Friendly Soft Play in {city}',
     metaDescriptionTemplate: 'Find SEN-friendly soft play centres in {city} with quiet sessions, sensory rooms, and trained staff for children with additional needs.',
     h1Template: 'SEN Friendly Soft Play in {city}',
     introTemplate: 'These soft play centres in {city} cater to children with special educational needs and disabilities, offering quieter sessions and sensory-friendly facilities.',
@@ -81,7 +86,7 @@ export const filters: FilterConfig[] = [
     slug: 'open-now',
     name: 'Open Now',
     dbColumn: null, // Computed from opening_hours
-    metaTitleTemplate: 'Soft Play Open Now in {city} | Open Today',
+    metaTitleTemplate: 'Soft Play Open Now in {city}',
     metaDescriptionTemplate: 'Find soft play centres open right now in {city}. Check opening times and visit today.',
     h1Template: 'Soft Play Open Now in {city}',
     introTemplate: 'Looking for somewhere to take the kids right now? Here are soft play centres currently open in {city}.',
