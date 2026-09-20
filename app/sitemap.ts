@@ -3,6 +3,13 @@ import { getAllCitySlugs, filters } from '@/lib/venues'
 import { getPool } from '@/lib/pool'
 import { getAllStaticTownSlugs, getStaticVenuesByTown } from '@/lib/staticVenues'
 import { blogPosts } from '@/lib/blogPosts'
+import redirectEntries from '@/data/redirects.json'
+
+// Paths that 301/308-redirect elsewhere (see next.config.ts) must never be
+// listed in the sitemap even if a stale/duplicate row for them still exists
+// in the venues table — submitting a URL that immediately redirects is the
+// same mixed signal as submitting a noindex one.
+const REDIRECTED_PATHS = new Set(redirectEntries.map((r) => r.source))
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://www.softplaynearme.co.uk'
@@ -55,6 +62,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'weekly',
       priority: 0.7,
     },
+    {
+      url: `${baseUrl}/pricing`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
   ]
 
   for (const post of blogPosts) {
@@ -80,6 +93,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
 
     for (const filter of filters) {
+      // /open-now pages are noindex,follow (their result set is time-of-day
+      // dependent, so they're never a stable, indexable URL) — listing a
+      // noindex URL in the sitemap is a mixed signal to Google, same reason
+      // thin venue pages are excluded below.
+      if (filter.slug === 'open-now') continue
+
       sitemap.push({
         url: `${baseUrl}/soft-play/${city}/${filter.slug}`,
         lastModified: new Date(),
@@ -120,10 +139,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         const score = venue.completeness_score ?? 100 // unknown → include
         if (score < SITEMAP_MIN_SCORE) continue       // skip truly thin stubs
 
+        const path = `/soft-play/${venue.city_slug}/${venue.slug}`
+        if (REDIRECTED_PATHS.has(path)) continue      // skip stale rows that just 301 elsewhere
+
         const key = `${venue.city_slug}/${venue.slug}`
         addedVenueSlugs.add(key)
         sitemap.push({
-          url: `${baseUrl}/soft-play/${venue.city_slug}/${venue.slug}`,
+          url: `${baseUrl}${path}`,
           lastModified: venue.updated_at || new Date(),
           changeFrequency: 'weekly',
           priority: score >= 60 ? 0.8 : 0.6,
@@ -141,9 +163,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const venues = getStaticVenuesByTown(townSlug)
     for (const venue of venues) {
       const key = `${townSlug}/${venue.slug}`
-      if (!addedVenueSlugs.has(key)) {
+      const path = `/soft-play/${townSlug}/${venue.slug}`
+      if (!addedVenueSlugs.has(key) && !REDIRECTED_PATHS.has(path)) {
         sitemap.push({
-          url: `${baseUrl}/soft-play/${townSlug}/${venue.slug}`,
+          url: `${baseUrl}${path}`,
           // Use the venue's last-verified date so Google knows when data changed
           lastModified: venue.lastVerified ? new Date(venue.lastVerified) : new Date('2026-02-18'),
           changeFrequency: 'weekly',
