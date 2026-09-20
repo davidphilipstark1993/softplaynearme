@@ -50,7 +50,7 @@ export default function ContactPage() {
         </div>
       </div>
 
-      <main className="max-w-2xl mx-auto px-4 py-12">
+      <main id="main-content" className="max-w-2xl mx-auto px-4 py-12">
         <Card className="p-6 sm:p-8 mb-8">
           <h2 className="font-semibold text-lg mb-4">Send us a message</h2>
           <ContactForm />

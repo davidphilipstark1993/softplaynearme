@@ -71,7 +71,7 @@ export default function PricingPage() {
         </div>
       </div>
 
-      <main className="max-w-5xl mx-auto px-4 py-10 sm:py-14">
+      <main id="main-content" className="max-w-5xl mx-auto px-4 py-10 sm:py-14">
 
         {/* Plan cards */}
         <div className="grid gap-6 sm:grid-cols-3 mb-12">

@@ -73,7 +73,7 @@ export default async function AddVenuePage({ searchParams }: AddVenuePageProps) 
         </div>
       </div>
 
-      <main className="max-w-2xl mx-auto px-4 py-10 sm:py-14">
+      <main id="main-content" className="max-w-2xl mx-auto px-4 py-10 sm:py-14">
 
         {/* Form card — the main CTA */}
         <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-7 sm:p-9 mb-8">

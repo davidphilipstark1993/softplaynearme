@@ -60,7 +60,7 @@ export default function BespokePage() {
         </div>
       </div>
 
-      <main className="max-w-2xl mx-auto px-4 py-10 sm:py-14">
+      <main id="main-content" className="max-w-2xl mx-auto px-4 py-10 sm:py-14">
         <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-7 sm:p-9 mb-8">
           <h2 className="text-xl font-bold text-slate-900 mb-1">Get a Bespoke quote</h2>
           <p className="text-slate-500 text-sm mb-6">

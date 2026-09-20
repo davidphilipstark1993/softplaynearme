@@ -74,7 +74,7 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
     <div className="min-h-screen bg-slate-50">
       <Header />
 
-      <main className="max-w-2xl mx-auto px-4 py-12 sm:py-16">
+      <main id="main-content" className="max-w-2xl mx-auto px-4 py-12 sm:py-16">
 
         {/* Hero card */}
         <div className="text-center mb-10">

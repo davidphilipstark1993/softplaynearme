@@ -60,7 +60,7 @@ export default async function NewsletterIssuePage({ params }: { params: Promise<
         </div>
       </div>
 
-      <main className="max-w-2xl mx-auto px-4 py-10">
+      <main id="main-content" className="max-w-2xl mx-auto px-4 py-10">
         {newsletter.intro_html && (
           <div className="prose prose-sm max-w-none mb-8 text-slate-700" dangerouslySetInnerHTML={{ __html: newsletter.intro_html }} />
         )}

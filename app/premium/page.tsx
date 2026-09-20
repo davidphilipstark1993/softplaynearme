@@ -71,7 +71,7 @@ export default async function PremiumPage({ searchParams }: PremiumPageProps) {
         </div>
       </div>
 
-      <main className="max-w-2xl mx-auto px-4 py-10 sm:py-14">
+      <main id="main-content" className="max-w-2xl mx-auto px-4 py-10 sm:py-14">
         {cancelled && (
           <div className="mb-6 rounded-xl bg-amber-50 border border-amber-200 px-4 py-3 text-sm text-amber-800">
             Direct Debit set-up was cancelled — no subscription was created. You can try again below.

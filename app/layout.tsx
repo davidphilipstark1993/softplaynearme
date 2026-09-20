@@ -147,6 +147,12 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:rounded-md focus:bg-purple-600 focus:px-4 focus:py-2 focus:text-white focus:shadow-lg"
+        >
+          Skip to content
+        </a>
         {/* Google Analytics with enhanced event tracking */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-LELV01QR3Z"

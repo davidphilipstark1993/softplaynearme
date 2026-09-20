@@ -14,7 +14,7 @@ export default function BespokeSuccessPage() {
     <div className="min-h-screen bg-slate-50">
       <Header />
 
-      <main className="max-w-xl mx-auto px-4 py-16 sm:py-24 text-center">
+      <main id="main-content" className="max-w-xl mx-auto px-4 py-16 sm:py-24 text-center">
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-amber-100 border-4 border-amber-200 mb-5">
           <CheckCircle2 className="w-8 h-8 text-amber-600" />
         </div>

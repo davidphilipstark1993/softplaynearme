@@ -35,7 +35,7 @@ export default async function NewsletterArchivePage() {
         </div>
       </div>
 
-      <main className="max-w-2xl mx-auto px-4 py-10">
+      <main id="main-content" className="max-w-2xl mx-auto px-4 py-10">
         <div className="mb-10">
           <NewsletterSignup
             source="newsletter_archive_index"

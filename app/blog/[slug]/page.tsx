@@ -116,6 +116,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         />
       )}
 
+      <main id="main-content">
       <article className="mx-auto max-w-3xl px-4 py-10 sm:px-6 lg:px-8">
         <p className="text-sm font-medium text-slate-600">Soft Play Near Me Blog</p>
         <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">{post.title}</h1>
@@ -178,6 +179,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           </Link>
         </div>
       </article>
+      </main>
 
       <Footer />
     </div>

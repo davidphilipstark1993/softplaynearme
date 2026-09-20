@@ -48,7 +48,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <main className="max-w-3xl mx-auto px-4 py-12">
+      <main id="main-content" className="max-w-3xl mx-auto px-4 py-12">
         <div className="prose prose-slate max-w-none space-y-6">
           <p className="text-lg text-slate-700">
             Soft Play Near Me is a free, independent directory of indoor soft play centres across the United Kingdom. We help parents and carers find, compare, and choose the best venues for their families.

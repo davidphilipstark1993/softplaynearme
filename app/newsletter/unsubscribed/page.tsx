@@ -25,7 +25,7 @@ export default async function UnsubscribedPage({
   return (
     <div className="min-h-screen bg-slate-50">
       <Header />
-      <main className="max-w-lg mx-auto px-4 py-20 text-center">
+      <main id="main-content" className="max-w-lg mx-auto px-4 py-20 text-center">
         {ok ? (
           <>
             <CheckCircle2 className="mx-auto mb-4 h-10 w-10 text-green-600" />

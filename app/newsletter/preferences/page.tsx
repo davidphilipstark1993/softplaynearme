@@ -17,7 +17,7 @@ export default async function PreferencesPage({
   return (
     <div className="min-h-screen bg-slate-50">
       <Header />
-      <main className="max-w-lg mx-auto px-4 py-16">
+      <main id="main-content" className="max-w-lg mx-auto px-4 py-16">
         <h1 className="text-2xl font-bold text-slate-900 mb-2 text-center">Email preferences</h1>
         <p className="text-sm text-slate-500 mb-8 text-center">
           Choose which Soft Play Near Me emails you&rsquo;d like to receive.

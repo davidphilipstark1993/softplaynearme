@@ -37,7 +37,7 @@ export default function PrivacyPage() {
       <Header />
       <Breadcrumbs items={[{ label: 'Privacy Policy' }]} />
 
-      <main className="max-w-3xl mx-auto px-4 py-12">
+      <main id="main-content" className="max-w-3xl mx-auto px-4 py-12">
         <h1 className="text-3xl font-bold mb-8">Privacy Policy</h1>
 
         <div className="prose prose-slate max-w-none space-y-6 text-slate-600">

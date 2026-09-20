@@ -28,7 +28,7 @@ export default async function PremiumSuccessPage({ searchParams }: PremiumSucces
         interval={billingInterval}
       />
 
-      <main className="max-w-xl mx-auto px-4 py-16 sm:py-24 text-center">
+      <main id="main-content" className="max-w-xl mx-auto px-4 py-16 sm:py-24 text-center">
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-purple-100 border-4 border-purple-200 mb-5">
           <CheckCircle2 className="w-8 h-8 text-purple-600" />
         </div>

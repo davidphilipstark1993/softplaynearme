@@ -123,6 +123,7 @@ export function FilterSidebar({ hasLocation = false, showSort = true, className 
         {AGE_OPTIONS.map((opt) => (
           <CheckRow
             key={opt.key}
+            name="age"
             label={opt.label}
             checked={age.includes(opt.key)}
             onChange={() => toggleMulti('age', age, opt.key)}
@@ -134,6 +135,7 @@ export function FilterSidebar({ hasLocation = false, showSort = true, className 
         {FACILITY_OPTIONS.map((opt) => (
           <CheckRow
             key={opt.key}
+            name="facilities"
             label={opt.label}
             checked={facilities.includes(opt.key)}
             onChange={() => toggleMulti('facilities', facilities, opt.key)}
@@ -145,6 +147,7 @@ export function FilterSidebar({ hasLocation = false, showSort = true, className 
         {PRICE_OPTIONS.map((opt) => (
           <RadioRow
             key={opt.key}
+            name="price-range"
             label={opt.label}
             checked={price === opt.key}
             onChange={() => update({ price: price === opt.key ? null : opt.key })}
@@ -156,6 +159,7 @@ export function FilterSidebar({ hasLocation = false, showSort = true, className 
         {SPECIAL_OPTIONS.map((opt) => (
           <CheckRow
             key={opt.key}
+            name="special"
             label={opt.label}
             checked={special.includes(opt.key)}
             onChange={() => toggleMulti('special', special, opt.key)}
@@ -334,17 +338,21 @@ function CheckRow({
   label,
   checked,
   onChange,
+  name,
 }: {
   label: string
   checked: boolean
   onChange: () => void
+  name?: string
 }) {
   return (
     <label className="flex items-center gap-2.5 cursor-pointer select-none group">
       <input
         type="checkbox"
+        name={name}
         checked={checked}
         onChange={onChange}
+        aria-label={label}
         className="w-4 h-4 rounded border-slate-300 text-purple-600 focus:ring-purple-500 focus:ring-offset-0"
       />
       <span
@@ -365,17 +373,21 @@ function RadioRow({
   label,
   checked,
   onChange,
+  name,
 }: {
   label: string
   checked: boolean
   onChange: () => void
+  name?: string
 }) {
   return (
     <label className="flex items-center gap-2.5 cursor-pointer select-none group">
       <input
         type="radio"
+        name={name}
         checked={checked}
         onChange={onChange}
+        aria-label={label}
         className="w-4 h-4 border-slate-300 text-purple-600 focus:ring-purple-500 focus:ring-offset-0"
       />
       <span

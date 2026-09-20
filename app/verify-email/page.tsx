@@ -28,7 +28,7 @@ export default async function VerifyEmailPage({ searchParams }: PageProps) {
   return (
     <div className="min-h-screen bg-slate-50">
       <Header />
-      <main className="max-w-md mx-auto px-4 py-16 text-center">
+      <main id="main-content" className="max-w-md mx-auto px-4 py-16 text-center">
         <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
           {isInvalid || isMissing ? (
             <>

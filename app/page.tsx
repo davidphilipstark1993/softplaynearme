@@ -192,7 +192,7 @@ export default async function Home() {
 
       <Header />
 
-      <main>
+      <main id="main-content">
       {/* Hero */}
       <div className="bg-gradient-to-br from-purple-600 via-purple-500 to-pink-500 text-white py-12 sm:py-16 px-4">
         <div className="max-w-7xl mx-auto grid gap-8 lg:grid-cols-2 lg:items-center">

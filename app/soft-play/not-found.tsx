@@ -1,15 +1,25 @@
 import Link from 'next/link'
+import type { Metadata } from 'next'
 import { Button } from '@/components/ui/button'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { cities } from '@/lib/venues'
 import { MapPin } from 'lucide-react'
 
+// See app/not-found.tsx — same reasoning: without this, the root layout's
+// homepage title + canonical would otherwise leak onto this 404 response.
+export const metadata: Metadata = {
+  title: 'Venue or Location Not Found',
+  description: 'The soft play listing or location you were looking for could not be found.',
+  alternates: { canonical: undefined },
+  robots: { index: false, follow: false },
+}
+
 export default function SoftPlayNotFound() {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
       <Header />
-      <div className="flex-1 flex items-center justify-center px-4 py-16">
+      <main id="main-content" className="flex-1 flex items-center justify-center px-4 py-16">
         <div className="text-center max-w-lg">
           <h1 className="text-6xl font-bold text-purple-600 mb-4">404</h1>
           <h2 className="text-2xl font-bold text-slate-900 mb-4">Venue or Location Not Found</h2>
@@ -39,7 +49,7 @@ export default function SoftPlayNotFound() {
             ))}
           </div>
         </div>
-      </div>
+      </main>
       <Footer />
     </div>
   )

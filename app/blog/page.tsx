@@ -38,7 +38,7 @@ export default function BlogIndexPage() {
       <Header />
       <Breadcrumbs items={[{ label: 'Blog' }]} />
 
-      <main className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+      <main id="main-content" className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Soft Play Blog</h1>
         <p className="mt-3 text-base text-slate-700 sm:text-lg">
           Local city guides and practical planning tips for families searching for the best soft play near them.
