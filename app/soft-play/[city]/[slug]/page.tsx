@@ -626,6 +626,7 @@ export default async function VenuePage({ params }: PageProps) {
     imageUrl: galleryPhotos.length > 0 ? galleryPhotos[0].url : undefined,
     citySlug: city,
     venueSlug: slug,
+    venueType: venue.venue_type,
   })
 
   // Breadcrumb schema – uses reusable builder
@@ -747,7 +748,7 @@ export default async function VenuePage({ params }: PageProps) {
         )}
 
         {/* Main Content */}
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <main id="main-content" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Main Column */}
             <article className="lg:col-span-2 space-y-6">
@@ -1149,16 +1150,41 @@ export default async function VenuePage({ params }: PageProps) {
                     </CardHeader>
                     <CardContent>
                       <p className="text-sm text-slate-500 mb-3">
-                        Opening hours not yet confirmed. Contact the venue directly to check times.
+                        Opening hours not confirmed &mdash; check {venue.name}&apos;s
+                        {venue.website ? (
+                          <>
+                            {' '}
+                            <a
+                              href={venue.website.startsWith('http') ? venue.website : `https://${venue.website}`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-purple-600 hover:text-purple-700 underline"
+                            >
+                              own website
+                            </a>
+                          </>
+                        ) : (
+                          ' own website'
+                        )}{' '}
+                        or Facebook page before visiting.
                       </p>
-                      {venue.phone && (
-                        <Button variant="outline" size="sm" asChild>
-                          <a href={`tel:${venue.phone.replace(/\s/g, '')}`}>
-                            <Phone className="h-4 w-4" />
-                            Call to Check
-                          </a>
-                        </Button>
-                      )}
+                      <div className="flex flex-wrap gap-2">
+                        {venue.phone && (
+                          <Button variant="outline" size="sm" asChild>
+                            <a href={`tel:${venue.phone.replace(/\s/g, '')}`}>
+                              <Phone className="h-4 w-4" />
+                              Call to Check
+                            </a>
+                          </Button>
+                        )}
+                        {typeof venue.id === 'number' && (
+                          <Button variant="outline" size="sm" asChild>
+                            <Link href={`/add-venue?venue=${encodeURIComponent(venue.name)}&city=${city}&slug=${slug}`}>
+                              Know the hours? Update this listing
+                            </Link>
+                          </Button>
+                        )}
+                      </div>
                     </CardContent>
                   </Card>
                 )}

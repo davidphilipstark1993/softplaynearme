@@ -38,6 +38,7 @@ interface FilterVenue {
   review_count?: number
   opening_hours?: Record<string, unknown>
   website?: string
+  venue_type?: string | null
 }
 
 async function getFilteredVenues(citySlug: string, filterSlug: FilterSlug): Promise<FilterVenue[]> {
@@ -145,6 +146,7 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
       postcode: v.postcode,
       avgRating: v.avg_rating ? Number(v.avg_rating) : undefined,
       reviewCount: v.review_count ? Number(v.review_count) : undefined,
+      venueType: v.venue_type,
     })),
     `${filterConfig.name} in ${cityName}`
   )
@@ -184,7 +186,7 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
           </div>
         </div>
 
-        <main className="max-w-7xl mx-auto px-4 py-8">
+        <main id="main-content" className="max-w-7xl mx-auto px-4 py-8">
           {/* Count + back link */}
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-xl font-semibold text-slate-800">

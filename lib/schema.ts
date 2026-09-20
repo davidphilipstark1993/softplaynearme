@@ -59,6 +59,35 @@ function parseHoursString(raw: string | { open: string; close: string }): { open
   }
 }
 
+// ── Schema.org @type selection ──────────────────────────────────────────
+
+/**
+ * Map our internal venue_type (lib/venueTypes.ts) to the closest valid
+ * Schema.org LocalBusiness subtype. Previously every venue used
+ * 'SportsActivityLocation' regardless of category — technically valid (it's
+ * a real schema.org type) but a poor semantic fit for an indoor soft play
+ * centre, which isn't a sports facility. 'EntertainmentBusiness' is the
+ * closest official type for a family/children's entertainment venue with no
+ * schema.org type of its own (there is no dedicated "soft play" or
+ * "playground business" type). The non-soft-play categories get their own
+ * closer fit: a trampoline park genuinely is a sports/physical-activity
+ * venue, a play farm or family attraction is best described as a tourist
+ * attraction, and a park playground is literally a Schema.org Park.
+ */
+function getSchemaType(venueType: string | null | undefined): string {
+  switch (venueType) {
+    case 'trampoline-park':
+      return 'SportsActivityLocation'
+    case 'play-farm':
+    case 'family-attraction':
+      return 'TouristAttraction'
+    case 'park-playground':
+      return 'Park'
+    default: // 'indoor', 'pub', null/undefined — genuine soft play centres
+      return 'EntertainmentBusiness'
+  }
+}
+
 // ── Public interfaces ──────────────────────────────────────────────────
 
 export interface LocalBusinessReviewInput {
@@ -87,6 +116,7 @@ export interface LocalBusinessSchemaInput {
   imageUrl?: string
   citySlug: string
   venueSlug: string
+  venueType?: string | null
 }
 
 /**
@@ -123,7 +153,7 @@ export function buildLocalBusinessSchema(input: LocalBusinessSchemaInput) {
 
   const schema: Record<string, any> = {
     '@context': 'https://schema.org',
-    '@type': 'SportsActivityLocation',
+    '@type': getSchemaType(input.venueType),
     '@id': `${venueUrl}#business`,
     name: input.name,
     url: venueUrl,
@@ -326,6 +356,7 @@ export interface ItemListVenue {
   postcode?: string
   avgRating?: number
   reviewCount?: number
+  venueType?: string | null
 }
 
 /**
@@ -355,7 +386,7 @@ export function buildItemListSchema(
         name: venue.name,
         url,
         item: {
-          '@type': 'SportsActivityLocation',
+          '@type': getSchemaType(venue.venueType),
           '@id': `${url}#business`,
           name: venue.name,
           url,
