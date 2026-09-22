@@ -1,9 +1,10 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import Link from 'next/link'
 import { CheckCircle2, XCircle, Clock, ExternalLink, RefreshCw } from 'lucide-react'
 import { cities } from '@/lib/venues'
+import { AdminUnavailable } from '@/components/admin/AdminUnavailable'
 
 interface Claim {
   id: number
@@ -36,6 +37,7 @@ const STATUS_ICONS = {
 
 export default function AdminClaimsPage() {
   const [authed, setAuthed] = useState(false)
+  const [dbError, setDbError] = useState(false)
   const [password, setPassword] = useState('')
   const [loginError, setLoginError] = useState('')
   const [claims, setClaims] = useState<Claim[]>([])
@@ -94,15 +96,26 @@ export default function AdminClaimsPage() {
     }
   }
 
-  useEffect(() => {
-    // Try loading with existing session cookie
-    fetch('/api/admin/claims').then((res) => {
-      if (res.ok) {
-        setAuthed(true)
-        res.json().then((data) => setClaims(data.claims || []))
-      }
-    })
+  const probe = useCallback(() => {
+    setDbError(false)
+    fetch('/api/admin/claims')
+      .then((res) => {
+        if (res.ok) {
+          setAuthed(true)
+          return res.json().then((data) => setClaims(data.claims || []))
+        }
+        if (res.status !== 401) setDbError(true)
+      })
+      .catch(() => setDbError(true))
   }, [])
+
+  useEffect(() => {
+    probe()
+  }, [probe])
+
+  if (dbError) {
+    return <AdminUnavailable onRetry={probe} />
+  }
 
   if (!authed) {
     return (

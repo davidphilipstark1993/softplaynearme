@@ -1,9 +1,10 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import Link from 'next/link'
 import { RefreshCw, ExternalLink, ShieldCheck, Plus } from 'lucide-react'
 import { PLAN_LABELS, type Plan, type PlanStatus } from '@/lib/plans'
+import { AdminUnavailable } from '@/components/admin/AdminUnavailable'
 
 interface AdminVenue {
   id: number
@@ -26,6 +27,7 @@ const PLAN_STATUSES: PlanStatus[] = ['inactive', 'active', 'trialing', 'past_due
 
 export default function AdminVenuesPage() {
   const [authed, setAuthed] = useState(false)
+  const [dbError, setDbError] = useState(false)
   const [password, setPassword] = useState('')
   const [loginError, setLoginError] = useState('')
   const [venues, setVenues] = useState<AdminVenue[]>([])
@@ -119,17 +121,29 @@ export default function AdminVenuesPage() {
     }
   }
 
-  useEffect(() => {
-    fetch('/api/admin/venues').then((res) => {
-      if (res.ok) {
-        setAuthed(true)
-        res.json().then((data) => {
-          setVenues(data.venues || [])
-          setTotal(data.total || 0)
-        })
-      }
-    })
+  const probe = useCallback(() => {
+    setDbError(false)
+    fetch('/api/admin/venues')
+      .then((res) => {
+        if (res.ok) {
+          setAuthed(true)
+          return res.json().then((data) => {
+            setVenues(data.venues || [])
+            setTotal(data.total || 0)
+          })
+        }
+        if (res.status !== 401) setDbError(true)
+      })
+      .catch(() => setDbError(true))
   }, [])
+
+  useEffect(() => {
+    probe()
+  }, [probe])
+
+  if (dbError) {
+    return <AdminUnavailable onRetry={probe} />
+  }
 
   if (!authed) {
     return (

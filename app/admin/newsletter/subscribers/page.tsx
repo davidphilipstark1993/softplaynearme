@@ -1,9 +1,10 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import Link from 'next/link'
 import { Download, Mail, RefreshCw, Search } from 'lucide-react'
 import type { NewsletterSubscriber } from '@/lib/newsletter/types'
+import { AdminUnavailable } from '@/components/admin/AdminUnavailable'
 
 interface Stats {
   total_subscribed: number
@@ -15,6 +16,7 @@ interface Stats {
 
 export default function AdminSubscribersPage() {
   const [authed, setAuthed] = useState(false)
+  const [dbError, setDbError] = useState(false)
   const [password, setPassword] = useState('')
   const [loginError, setLoginError] = useState('')
   const [subscribers, setSubscribers] = useState<NewsletterSubscriber[]>([])
@@ -52,18 +54,26 @@ export default function AdminSubscribersPage() {
     setTotal(data.total || 0)
   }
 
-  useEffect(() => {
-    fetch('/api/admin/newsletter/subscribers').then((res) => {
-      if (res.ok) {
-        setAuthed(true)
-        res.json().then((data) => {
-          setSubscribers(data.subscribers || [])
-          setStats(data.stats || null)
-          setTotal(data.total || 0)
-        })
-      }
-    })
+  const probe = useCallback(() => {
+    setDbError(false)
+    fetch('/api/admin/newsletter/subscribers')
+      .then((res) => {
+        if (res.ok) {
+          setAuthed(true)
+          return res.json().then((data) => {
+            setSubscribers(data.subscribers || [])
+            setStats(data.stats || null)
+            setTotal(data.total || 0)
+          })
+        }
+        if (res.status !== 401) setDbError(true)
+      })
+      .catch(() => setDbError(true))
   }, [])
+
+  useEffect(() => {
+    probe()
+  }, [probe])
 
   async function login(e: React.FormEvent) {
     e.preventDefault()
@@ -79,6 +89,10 @@ export default function AdminSubscribersPage() {
     } else {
       setLoginError('Incorrect password')
     }
+  }
+
+  if (dbError) {
+    return <AdminUnavailable onRetry={probe} />
   }
 
   if (!authed) {

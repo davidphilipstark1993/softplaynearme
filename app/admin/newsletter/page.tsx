@@ -1,9 +1,10 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import Link from 'next/link'
 import { Mail, Plus, Users, Send } from 'lucide-react'
 import type { Newsletter } from '@/lib/newsletter/types'
+import { AdminUnavailable } from '@/components/admin/AdminUnavailable'
 
 const STATUS_STYLES: Record<Newsletter['status'], string> = {
   draft: 'bg-slate-100 text-slate-600',
@@ -23,6 +24,7 @@ const STATUS_LABELS: Record<Newsletter['status'], string> = {
 
 export default function AdminNewsletterListPage() {
   const [authed, setAuthed] = useState(false)
+  const [dbError, setDbError] = useState(false)
   const [password, setPassword] = useState('')
   const [loginError, setLoginError] = useState('')
   const [newsletters, setNewsletters] = useState<Newsletter[]>([])
@@ -32,15 +34,25 @@ export default function AdminNewsletterListPage() {
   const [newSubject, setNewSubject] = useState('')
   const [newWeekOf, setNewWeekOf] = useState('')
   const [loadingThisWeek, setLoadingThisWeek] = useState(false)
+  const [thisWeekError, setThisWeekError] = useState('')
 
   async function goToThisWeek() {
     setLoadingThisWeek(true)
+    setThisWeekError('')
     try {
       const res = await fetch('/api/admin/newsletter/this-week')
       if (res.ok) {
         const data = await res.json()
         window.location.href = `/admin/newsletter/${data.newsletter.id}`
+        return
       }
+      if (res.status === 401) {
+        setAuthed(false)
+      } else {
+        setThisWeekError("Couldn't open this week's newsletter — the database may be temporarily unavailable. Try again shortly.")
+      }
+    } catch {
+      setThisWeekError("Couldn't open this week's newsletter — the database may be temporarily unavailable. Try again shortly.")
     } finally {
       setLoadingThisWeek(false)
     }
@@ -68,18 +80,30 @@ export default function AdminNewsletterListPage() {
       setAuthed(false)
       return
     }
+    if (!res.ok) {
+      setDbError(true)
+      return
+    }
     const data = await res.json()
     setNewsletters(data.newsletters || [])
   }
 
-  useEffect(() => {
-    fetch('/api/admin/newsletter').then((res) => {
-      if (res.ok) {
-        setAuthed(true)
-        res.json().then((data) => setNewsletters(data.newsletters || []))
-      }
-    })
+  const probe = useCallback(() => {
+    setDbError(false)
+    fetch('/api/admin/newsletter')
+      .then((res) => {
+        if (res.ok) {
+          setAuthed(true)
+          return res.json().then((data) => setNewsletters(data.newsletters || []))
+        }
+        if (res.status !== 401) setDbError(true)
+      })
+      .catch(() => setDbError(true))
   }, [])
+
+  useEffect(() => {
+    probe()
+  }, [probe])
 
   async function createNewsletter(e: React.FormEvent) {
     e.preventDefault()
@@ -97,6 +121,10 @@ export default function AdminNewsletterListPage() {
     } finally {
       setCreating(false)
     }
+  }
+
+  if (dbError) {
+    return <AdminUnavailable onRetry={probe} />
   }
 
   if (!authed) {
@@ -161,6 +189,10 @@ export default function AdminNewsletterListPage() {
             <Plus className="w-4 h-4" /> New events/offers email
           </button>
         </div>
+
+        {thisWeekError && (
+          <p className="text-sm text-red-600 mb-4">{thisWeekError}</p>
+        )}
 
         {showCreate && (
           <form onSubmit={createNewsletter} className="bg-white border border-slate-200 rounded-xl p-5 mb-6 grid gap-3 sm:grid-cols-4 items-end">

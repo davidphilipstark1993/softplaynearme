@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation'
 import Link from 'next/link'
 import { Eye, Trash2, Send, CheckCircle2, AlertTriangle, Clock, BadgeCheck } from 'lucide-react'
 import type { Newsletter, NewsletterItem, NewsletterItemType, NewsletterSend, NewsletterStatus } from '@/lib/newsletter/types'
+import { AdminUnavailable } from '@/components/admin/AdminUnavailable'
 
 interface VenueResult {
   id: number
@@ -35,6 +36,7 @@ export default function AdminNewsletterEditorPage() {
   const id = params.id
 
   const [authed, setAuthed] = useState(false)
+  const [dbError, setDbError] = useState(false)
   const [password, setPassword] = useState('')
   const [loginError, setLoginError] = useState('')
 
@@ -52,12 +54,16 @@ export default function AdminNewsletterEditorPage() {
   const [sending, setSending] = useState(false)
 
   const load = useCallback(async () => {
+    setDbError(false)
     const res = await fetch(`/api/admin/newsletter/${id}`)
     if (res.status === 401) {
       setAuthed(false)
       return
     }
-    if (!res.ok) return
+    if (!res.ok) {
+      setDbError(true)
+      return
+    }
     setAuthed(true)
     const data = await res.json()
     setNewsletter(data.newsletter)
@@ -146,6 +152,10 @@ export default function AdminNewsletterEditorPage() {
     if (!confirm('Remove this from the newsletter?')) return
     await fetch(`/api/admin/newsletter/items/${itemId}`, { method: 'DELETE' })
     load()
+  }
+
+  if (dbError) {
+    return <AdminUnavailable onRetry={load} />
   }
 
   if (!authed) {

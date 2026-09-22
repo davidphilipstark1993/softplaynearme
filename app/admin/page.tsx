@@ -1,8 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import Link from 'next/link'
 import { Mail, Users, Building2, FileCheck2, BarChart3 } from 'lucide-react'
+import { AdminUnavailable } from '@/components/admin/AdminUnavailable'
 
 const SECTIONS = [
   { href: '/admin/newsletter', label: 'Newsletter', desc: "This week's issue, approvals, send history", icon: Mail },
@@ -14,16 +15,28 @@ const SECTIONS = [
 
 export default function AdminHomePage() {
   const [authed, setAuthed] = useState(false)
+  const [dbError, setDbError] = useState(false)
   const [password, setPassword] = useState('')
   const [loginError, setLoginError] = useState('')
 
   // Reuses the venues endpoint purely to check for an existing valid admin_session cookie —
   // every /admin/* API route shares the same auth, so any one of them works as a probe.
-  useEffect(() => {
-    fetch('/api/admin/venues').then((res) => {
-      if (res.ok) setAuthed(true)
-    })
+  // A non-401 failure (e.g. the DB rejecting queries once its usage quota is exhausted,
+  // see lib/pool.ts) is a different problem from "not logged in" — surface it as such
+  // instead of bouncing a still-valid session back to the password wall.
+  const probe = useCallback(() => {
+    setDbError(false)
+    fetch('/api/admin/venues')
+      .then((res) => {
+        if (res.ok) setAuthed(true)
+        else if (res.status !== 401) setDbError(true)
+      })
+      .catch(() => setDbError(true))
   }, [])
+
+  useEffect(() => {
+    probe()
+  }, [probe])
 
   async function login(e: React.FormEvent) {
     e.preventDefault()
@@ -38,6 +51,10 @@ export default function AdminHomePage() {
     } else {
       setLoginError('Incorrect password')
     }
+  }
+
+  if (dbError) {
+    return <AdminUnavailable onRetry={probe} />
   }
 
   if (!authed) {
