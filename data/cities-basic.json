@@ -208,5 +208,10 @@
     "slug": "llanelli",
     "name": "Llanelli",
     "county": "Carmarthenshire"
+  },
+  {
+    "slug": "dartford",
+    "name": "Dartford",
+    "county": "Kent"
   }
 ]

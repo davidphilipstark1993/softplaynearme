@@ -1377,5 +1377,22 @@
         "answer": "Yes, Llanelli has soft play options with more nearby in Swansea and across Carmarthenshire."
       }
     ]
+  },
+  {
+    "slug": "dartford",
+    "name": "Dartford",
+    "county": "Kent",
+    "region": "South East",
+    "metaTitle": "Soft Play in Dartford",
+    "metaDescription": "Find soft play centres in Dartford and north Kent. Compare indoor play venues, opening times, and family-friendly facilities.",
+    "h1": "Soft Play Centres in Dartford",
+    "intro": "Explore soft play centres in Dartford for rainy days, toddler sessions, and family fun across north Kent.",
+    "nearbyAreas": ["Gravesend", "Swanley", "Bexleyheath", "Greenhithe", "Bluewater"],
+    "faqs": [
+      {
+        "question": "Are there good soft play centres in Dartford?",
+        "answer": "Yes, Dartford has indoor play options for toddlers and older children, with more nearby in Gravesend, Swanley and Bexleyheath."
+      }
+    ]
   }
 ]
