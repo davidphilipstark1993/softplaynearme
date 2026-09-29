@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { Eye, Trash2, Send, CheckCircle2, AlertTriangle, Clock, BadgeCheck } from 'lucide-react'
 import type { Newsletter, NewsletterItem, NewsletterItemType, NewsletterSend, NewsletterStatus } from '@/lib/newsletter/types'
 import { AdminUnavailable } from '@/components/admin/AdminUnavailable'
+import { isReadyForApproval, readinessHint, WEEKLY_VENUE_PICKS } from '@/lib/newsletter/readiness'
 
 interface VenueResult {
   id: number
@@ -189,7 +190,11 @@ export default function AdminNewsletterEditorPage() {
   const isEditable = newsletter.status !== 'sent'
   const latestSend = sends[0]
   const approvedVenueCount = items.filter((i) => i.item_type === 'venue' && i.approved).length
-  const readyToApprove = approvedVenueCount === 5 && newsletter.status === 'ready_for_review'
+  // Checks 'draft' too: newsletters stuck there under the old venue-only rule get
+  // their status recomputed server-side when approved.
+  const readyToApprove =
+    (newsletter.status === 'draft' || newsletter.status === 'ready_for_review') &&
+    isReadyForApproval(newsletter.type, items)
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -276,9 +281,11 @@ export default function AdminNewsletterEditorPage() {
             <h2 className="text-sm font-semibold text-slate-900">
               Content ({items.length} item{items.length === 1 ? '' : 's'})
             </h2>
-            <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${approvedVenueCount === 5 ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-500'}`}>
-              {approvedVenueCount} / 5 venues ready
-            </span>
+            {newsletter.type === 'weekly' && (
+              <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${approvedVenueCount === WEEKLY_VENUE_PICKS ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-500'}`}>
+                {approvedVenueCount} / {WEEKLY_VENUE_PICKS} venues ready
+              </span>
+            )}
           </div>
           {items.length === 0 ? (
             <p className="text-sm text-slate-400">No content yet — add featured venues, events, offers, news or links above.</p>
@@ -342,9 +349,7 @@ export default function AdminNewsletterEditorPage() {
               </button>
             )}
             {!readyToApprove && newsletter.status !== 'approved' && newsletter.status !== 'sent' && (
-              <span className="text-xs text-slate-400 py-2">
-                Approve exactly 5 venue picks above to unlock Sunday sending.
-              </span>
+              <span className="text-xs text-slate-400 py-2">{readinessHint(newsletter.type)}</span>
             )}
           </div>
           {newsletter.status === 'approved' && (

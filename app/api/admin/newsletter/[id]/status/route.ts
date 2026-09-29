@@ -10,8 +10,8 @@ function isAuthed(req: NextRequest): boolean {
 // 'approved'. Draft <-> ready_for_review is computed automatically from each
 // item's own approval toggle (see lib/newsletter/db.ts recomputeNewsletterStatus) —
 // there's nothing to manually set there. This route only ever does the explicit,
-// separate "sign off on sending" action, and only once exactly 5 venue picks are
-// individually approved. The Sunday cron never calls this — it only reads
+// separate "sign off on sending" action, and only once the newsletter meets its
+// type's readiness rule (lib/newsletter/readiness.ts). The Sunday cron never calls this — it only reads
 // newsletters that are already 'approved'.
 export async function POST(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   if (!isAuthed(req)) return NextResponse.json({ error: 'Unauthorised' }, { status: 401 })

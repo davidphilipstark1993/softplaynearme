@@ -9,6 +9,7 @@ import type {
   NewsletterType,
   SendTrigger,
 } from './types'
+import { isReadyForApproval, readinessHint } from './readiness'
 
 // ─── Subscribers ────────────────────────────────────────────────────────────
 
@@ -320,9 +321,10 @@ export async function updateNewsletterContent(
 }
 
 /**
- * Recomputes a newsletter's status from its own approved-venue-item count:
- * 'ready_for_review' once exactly 5 venue items are individually approved,
- * 'draft' otherwise. Never sets 'approved' itself — only the explicit
+ * Recomputes a newsletter's status from its own items: 'ready_for_review' once
+ * isReadyForApproval() passes for its type (weekly: exactly 5 approved venue
+ * picks; events: any content, with venues approved), 'draft' otherwise.
+ * Never sets 'approved' itself — only the explicit
  * approveForSending() action does that — so calling this after ANY content
  * change (add/edit/delete an item, edit subject/intro) always drops an
  * already-approved newsletter back down to ready_for_review/draft. A
@@ -330,12 +332,17 @@ export async function updateNewsletterContent(
  * approval. Leaves 'sent'/'failed' newsletters alone.
  */
 export async function recomputeNewsletterStatus(newsletterId: number): Promise<{ approvedVenueCount: number; status: NewsletterStatus }> {
-  const result = await getPool().query<{ count: number }>(
-    `SELECT COUNT(*)::int AS count FROM newsletter_items WHERE newsletter_id = $1 AND item_type = 'venue' AND approved = true`,
-    [newsletterId]
-  )
-  const approvedVenueCount = result.rows[0]?.count ?? 0
-  const nextStatus: NewsletterStatus = approvedVenueCount === 5 ? 'ready_for_review' : 'draft'
+  const [newsletterResult, itemsResult] = await Promise.all([
+    getPool().query<{ type: NewsletterType }>(`SELECT type FROM newsletters WHERE id = $1`, [newsletterId]),
+    getPool().query<Pick<NewsletterItem, 'item_type' | 'approved'>>(
+      `SELECT item_type, approved FROM newsletter_items WHERE newsletter_id = $1`,
+      [newsletterId]
+    ),
+  ])
+  const type = newsletterResult.rows[0]?.type ?? 'weekly'
+  const items = itemsResult.rows
+  const approvedVenueCount = items.filter((i) => i.item_type === 'venue' && i.approved).length
+  const nextStatus: NewsletterStatus = isReadyForApproval(type, items) ? 'ready_for_review' : 'draft'
 
   await getPool().query(
     `UPDATE newsletters SET status = $2::varchar, updated_at = NOW()
@@ -352,13 +359,16 @@ export class NotReadyError extends Error {}
  * The explicit, separate "sign off on sending" action — the Sunday job and
  * the admin "Send now" button both refuse to send anything that hasn't been
  * through this. Only reachable once recomputeNewsletterStatus has already
- * put the newsletter in 'ready_for_review' (exactly 5 approved venue picks).
+ * put the newsletter in 'ready_for_review'.
  */
 export async function approveForSending(id: number, approvedBy: string): Promise<Newsletter> {
+  // Recompute first so drafts created before the per-type readiness rule
+  // (e.g. events emails stuck in 'draft') pick up their correct status.
+  await recomputeNewsletterStatus(id)
   const newsletter = await getNewsletter(id)
   if (!newsletter) throw new Error('Newsletter not found')
   if (newsletter.status !== 'ready_for_review') {
-    throw new NotReadyError('Exactly 5 approved venue picks are required before this newsletter can be approved for sending')
+    throw new NotReadyError(readinessHint(newsletter.type))
   }
 
   const result = await getPool().query<Newsletter>(
