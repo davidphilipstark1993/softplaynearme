@@ -1394,5 +1394,226 @@
         "answer": "Yes, Dartford has indoor play options for toddlers and older children, with more nearby in Gravesend, Swanley and Bexleyheath."
       }
     ]
+  },
+  {
+    "slug": "coventry",
+    "name": "Coventry",
+    "county": "West Midlands",
+    "region": "West Midlands",
+    "metaTitle": "Soft Play in Coventry",
+    "metaDescription": "Find soft play centres in Coventry and Warwickshire. Compare indoor play venues, opening times, and family-friendly facilities.",
+    "h1": "Soft Play Centres in Coventry",
+    "intro": "Explore soft play centres in Coventry for rainy days, toddler sessions, and family fun across Warwickshire.",
+    "nearbyAreas": ["Birmingham", "Solihull", "Warwick", "Leamington Spa", "Nuneaton", "Rugby"],
+    "faqs": [
+      {
+        "question": "Are there good soft play centres in Coventry?",
+        "answer": "Yes, Coventry has indoor play options for toddlers and older children, with more nearby in Birmingham, Solihull, Warwick, Leamington Spa, Nuneaton and Rugby."
+      }
+    ]
+  },
+  {
+    "slug": "northampton",
+    "name": "Northampton",
+    "county": "Northamptonshire",
+    "region": "East Midlands",
+    "metaTitle": "Soft Play in Northampton",
+    "metaDescription": "Find soft play centres in Northampton and Northamptonshire. Compare indoor play venues, opening times, and family-friendly facilities.",
+    "h1": "Soft Play Centres in Northampton",
+    "intro": "Explore soft play centres in Northampton for rainy days, toddler sessions, and family fun across Northamptonshire.",
+    "nearbyAreas": ["Kettering", "Wellingborough", "Daventry", "Towcester", "Milton Keynes"],
+    "faqs": [
+      {
+        "question": "Are there good soft play centres in Northampton?",
+        "answer": "Yes, Northampton has indoor play options for toddlers and older children, with more nearby in Kettering, Wellingborough, Daventry, Towcester and Milton Keynes."
+      }
+    ]
+  },
+  {
+    "slug": "belfast",
+    "name": "Belfast",
+    "county": "County Antrim",
+    "region": "Northern Ireland",
+    "metaTitle": "Soft Play in Belfast",
+    "metaDescription": "Find soft play centres in Belfast and County Antrim. Compare indoor play venues, opening times, and family-friendly facilities.",
+    "h1": "Soft Play Centres in Belfast",
+    "intro": "Explore soft play centres in Belfast for rainy days, toddler sessions, and family fun across County Antrim.",
+    "nearbyAreas": ["Lisburn", "Newtownabbey", "Carrickfergus", "Bangor", "Holywood"],
+    "faqs": [
+      {
+        "question": "Are there good soft play centres in Belfast?",
+        "answer": "Yes, Belfast has indoor play options for toddlers and older children, with more nearby in Lisburn, Newtownabbey, Carrickfergus, Bangor and Holywood."
+      }
+    ]
+  },
+  {
+    "slug": "st-austell",
+    "name": "St Austell",
+    "county": "Cornwall",
+    "region": "South West",
+    "metaTitle": "Soft Play in St Austell",
+    "metaDescription": "Find soft play centres in St Austell and mid Cornwall. Compare indoor play venues, opening times, and family-friendly facilities.",
+    "h1": "Soft Play Centres in St Austell",
+    "intro": "Explore soft play centres in St Austell for rainy days, toddler sessions, and family fun across mid Cornwall.",
+    "nearbyAreas": ["Truro", "Newquay", "Bodmin", "Fowey", "Par"],
+    "faqs": [
+      {
+        "question": "Are there good soft play centres in St Austell?",
+        "answer": "Yes, St Austell has indoor play options for toddlers and older children, with more nearby in Truro, Newquay, Bodmin, Fowey and Par."
+      }
+    ]
+  },
+  {
+    "slug": "plymouth",
+    "name": "Plymouth",
+    "county": "Devon",
+    "region": "South West",
+    "metaTitle": "Soft Play in Plymouth",
+    "metaDescription": "Find soft play centres in Plymouth and south Devon. Compare indoor play venues, opening times, and family-friendly facilities.",
+    "h1": "Soft Play Centres in Plymouth",
+    "intro": "Explore soft play centres in Plymouth for rainy days, toddler sessions, and family fun across south Devon.",
+    "nearbyAreas": ["Saltash", "Torpoint", "Ivybridge", "Tavistock", "Plympton"],
+    "faqs": [
+      {
+        "question": "Are there good soft play centres in Plymouth?",
+        "answer": "Yes, Plymouth has indoor play options for toddlers and older children, with more nearby in Saltash, Torpoint, Ivybridge, Tavistock and Plympton."
+      }
+    ]
+  },
+  {
+    "slug": "exeter",
+    "name": "Exeter",
+    "county": "Devon",
+    "region": "South West",
+    "metaTitle": "Soft Play in Exeter",
+    "metaDescription": "Find soft play centres in Exeter and east Devon. Compare indoor play venues, opening times, and family-friendly facilities.",
+    "h1": "Soft Play Centres in Exeter",
+    "intro": "Explore soft play centres in Exeter for rainy days, toddler sessions, and family fun across east Devon.",
+    "nearbyAreas": ["Exmouth", "Topsham", "Crediton", "Newton Abbot", "Cullompton"],
+    "faqs": [
+      {
+        "question": "Are there good soft play centres in Exeter?",
+        "answer": "Yes, Exeter has indoor play options for toddlers and older children, with more nearby in Exmouth, Topsham, Crediton, Newton Abbot and Cullompton."
+      }
+    ]
+  },
+  {
+    "slug": "dundee",
+    "name": "Dundee",
+    "county": "Dundee",
+    "region": "Scotland",
+    "metaTitle": "Soft Play in Dundee",
+    "metaDescription": "Find soft play centres in Dundee and Tayside. Compare indoor play venues, opening times, and family-friendly facilities.",
+    "h1": "Soft Play Centres in Dundee",
+    "intro": "Explore soft play centres in Dundee for rainy days, toddler sessions, and family fun across Tayside.",
+    "nearbyAreas": ["Broughty Ferry", "Monifieth", "Carnoustie", "Arbroath", "Perth"],
+    "faqs": [
+      {
+        "question": "Are there good soft play centres in Dundee?",
+        "answer": "Yes, Dundee has indoor play options for toddlers and older children, with more nearby in Broughty Ferry, Monifieth, Carnoustie, Arbroath and Perth."
+      }
+    ]
+  },
+  {
+    "slug": "chester",
+    "name": "Chester",
+    "county": "Cheshire",
+    "region": "North West",
+    "metaTitle": "Soft Play in Chester",
+    "metaDescription": "Find soft play centres in Chester and west Cheshire. Compare indoor play venues, opening times, and family-friendly facilities.",
+    "h1": "Soft Play Centres in Chester",
+    "intro": "Explore soft play centres in Chester for rainy days, toddler sessions, and family fun across west Cheshire.",
+    "nearbyAreas": ["Ellesmere Port", "Northwich", "Frodsham", "Deeside", "Wrexham"],
+    "faqs": [
+      {
+        "question": "Are there good soft play centres in Chester?",
+        "answer": "Yes, Chester has indoor play options for toddlers and older children, with more nearby in Ellesmere Port, Northwich, Frodsham, Deeside and Wrexham."
+      }
+    ]
+  },
+  {
+    "slug": "derby",
+    "name": "Derby",
+    "county": "Derbyshire",
+    "region": "East Midlands",
+    "metaTitle": "Soft Play in Derby",
+    "metaDescription": "Find soft play centres in Derby and Derbyshire. Compare indoor play venues, opening times, and family-friendly facilities.",
+    "h1": "Soft Play Centres in Derby",
+    "intro": "Explore soft play centres in Derby for rainy days, toddler sessions, and family fun across Derbyshire.",
+    "nearbyAreas": ["Nottingham", "Burton upon Trent", "Belper", "Ilkeston", "Long Eaton"],
+    "faqs": [
+      {
+        "question": "Are there good soft play centres in Derby?",
+        "answer": "Yes, Derby has indoor play options for toddlers and older children, with more nearby in Nottingham, Burton upon Trent, Belper, Ilkeston and Long Eaton."
+      }
+    ]
+  },
+  {
+    "slug": "stirling",
+    "name": "Stirling",
+    "county": "Stirling",
+    "region": "Scotland",
+    "metaTitle": "Soft Play in Stirling",
+    "metaDescription": "Find soft play centres in Stirling and central Scotland. Compare indoor play venues, opening times, and family-friendly facilities.",
+    "h1": "Soft Play Centres in Stirling",
+    "intro": "Explore soft play centres in Stirling for rainy days, toddler sessions, and family fun across central Scotland.",
+    "nearbyAreas": ["Bridge of Allan", "Dunblane", "Alloa", "Falkirk", "Callander"],
+    "faqs": [
+      {
+        "question": "Are there good soft play centres in Stirling?",
+        "answer": "Yes, Stirling has indoor play options for toddlers and older children, with more nearby in Bridge of Allan, Dunblane, Alloa, Falkirk and Callander."
+      }
+    ]
+  },
+  {
+    "slug": "milton-keynes",
+    "name": "Milton Keynes",
+    "county": "Buckinghamshire",
+    "region": "South East",
+    "metaTitle": "Soft Play in Milton Keynes",
+    "metaDescription": "Find soft play centres in Milton Keynes and north Buckinghamshire. Compare indoor play venues, opening times, and family-friendly facilities.",
+    "h1": "Soft Play Centres in Milton Keynes",
+    "intro": "Explore soft play centres in Milton Keynes for rainy days, toddler sessions, and family fun across north Buckinghamshire.",
+    "nearbyAreas": ["Bletchley", "Newport Pagnell", "Olney", "Buckingham", "Northampton"],
+    "faqs": [
+      {
+        "question": "Are there good soft play centres in Milton Keynes?",
+        "answer": "Yes, Milton Keynes has indoor play options for toddlers and older children, with more nearby in Bletchley, Newport Pagnell, Olney, Buckingham and Northampton."
+      }
+    ]
+  },
+  {
+    "slug": "kings-lynn",
+    "name": "King's Lynn",
+    "county": "Norfolk",
+    "region": "East of England",
+    "metaTitle": "Soft Play in King's Lynn",
+    "metaDescription": "Find soft play centres in King's Lynn and west Norfolk. Compare indoor play venues, opening times, and family-friendly facilities.",
+    "h1": "Soft Play Centres in King's Lynn",
+    "intro": "Explore soft play centres in King's Lynn for rainy days, toddler sessions, and family fun across west Norfolk.",
+    "nearbyAreas": ["Downham Market", "Hunstanton", "Swaffham", "Fakenham", "Wisbech"],
+    "faqs": [
+      {
+        "question": "Are there good soft play centres in King's Lynn?",
+        "answer": "Yes, King's Lynn has indoor play options for toddlers and older children, with more nearby in Downham Market, Hunstanton, Swaffham, Fakenham and Wisbech."
+      }
+    ]
+  },
+  {
+    "slug": "oxford",
+    "name": "Oxford",
+    "county": "Oxfordshire",
+    "region": "South East",
+    "metaTitle": "Soft Play in Oxford",
+    "metaDescription": "Find soft play centres in Oxford and Oxfordshire. Compare indoor play venues, opening times, and family-friendly facilities.",
+    "h1": "Soft Play Centres in Oxford",
+    "intro": "Explore soft play centres in Oxford for rainy days, toddler sessions, and family fun across Oxfordshire.",
+    "nearbyAreas": ["Abingdon", "Witney", "Kidlington", "Bicester", "Banbury"],
+    "faqs": [
+      {
+        "question": "Are there good soft play centres in Oxford?",
+        "answer": "Yes, Oxford has indoor play options for toddlers and older children, with more nearby in Abingdon, Witney, Kidlington, Bicester and Banbury."
+      }
+    ]
   }
 ]

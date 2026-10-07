@@ -12,6 +12,12 @@
     "avgRating": "4.4"
   },
   {
+    "name": "Belfast",
+    "slug": "belfast",
+    "venueCount": 1,
+    "avgRating": null
+  },
+  {
     "name": "Beverley",
     "slug": "beverley",
     "venueCount": 2,
@@ -72,10 +78,22 @@
     "avgRating": "4.3"
   },
   {
+    "name": "Chester",
+    "slug": "chester",
+    "venueCount": 1,
+    "avgRating": null
+  },
+  {
     "name": "Colchester",
     "slug": "colchester",
     "venueCount": 22,
     "avgRating": "4.3"
+  },
+  {
+    "name": "Coventry",
+    "slug": "coventry",
+    "venueCount": 2,
+    "avgRating": null
   },
   {
     "name": "Crewe",
@@ -84,10 +102,28 @@
     "avgRating": "4.4"
   },
   {
+    "name": "Derby",
+    "slug": "derby",
+    "venueCount": 1,
+    "avgRating": null
+  },
+  {
+    "name": "Dundee",
+    "slug": "dundee",
+    "venueCount": 1,
+    "avgRating": null
+  },
+  {
     "name": "Edinburgh",
     "slug": "edinburgh",
     "venueCount": 18,
     "avgRating": "4.4"
+  },
+  {
+    "name": "Exeter",
+    "slug": "exeter",
+    "venueCount": 2,
+    "avgRating": null
   },
   {
     "name": "Glasgow",
@@ -132,6 +168,12 @@
     "avgRating": "4.4"
   },
   {
+    "name": "King's Lynn",
+    "slug": "kings-lynn",
+    "venueCount": 1,
+    "avgRating": null
+  },
+  {
     "name": "Leeds",
     "slug": "leeds",
     "venueCount": 55,
@@ -174,6 +216,12 @@
     "avgRating": "4.4"
   },
   {
+    "name": "Milton Keynes",
+    "slug": "milton-keynes",
+    "venueCount": 1,
+    "avgRating": null
+  },
+  {
     "name": "Mossley",
     "slug": "mossley",
     "venueCount": 6,
@@ -186,6 +234,12 @@
     "avgRating": "4.3"
   },
   {
+    "name": "Northampton",
+    "slug": "northampton",
+    "venueCount": 1,
+    "avgRating": null
+  },
+  {
     "name": "Norwich",
     "slug": "norwich",
     "venueCount": 32,
@@ -196,6 +250,18 @@
     "slug": "nottingham",
     "venueCount": 50,
     "avgRating": "4.4"
+  },
+  {
+    "name": "Oxford",
+    "slug": "oxford",
+    "venueCount": 1,
+    "avgRating": null
+  },
+  {
+    "name": "Plymouth",
+    "slug": "plymouth",
+    "venueCount": 1,
+    "avgRating": null
   },
   {
     "name": "Portsmouth",
@@ -220,6 +286,18 @@
     "slug": "southend",
     "venueCount": 25,
     "avgRating": "4.3"
+  },
+  {
+    "name": "St Austell",
+    "slug": "st-austell",
+    "venueCount": 1,
+    "avgRating": null
+  },
+  {
+    "name": "Stirling",
+    "slug": "stirling",
+    "venueCount": 1,
+    "avgRating": null
   },
   {
     "name": "Stoke",

@@ -78,15 +78,16 @@ interface Venue {
   plan?: string
   plan_status?: string
   // Core facility booleans (original columns)
-  cafe: boolean
-  parking: boolean
+  // null = unknown (not confirmed), never rendered as "No"
+  cafe: boolean | null
+  parking: boolean | null
   free_parking?: boolean
-  parties: boolean
-  toddler_area: boolean
-  baby_area: boolean
-  sen_friendly: boolean
-  wheelchair_access: boolean
-  free_wifi: boolean
+  parties: boolean | null
+  toddler_area: boolean | null
+  baby_area: boolean | null
+  sen_friendly: boolean | null
+  wheelchair_access: boolean | null
+  free_wifi: boolean | null
   // Phase 2 facility additions
   sensory_area?: boolean
   role_play_area?: boolean
@@ -237,14 +238,14 @@ function staticToVenue(sv: StaticVenue): Venue {
     description: sv.description || sv.notes || undefined,
     rating: sv.rating ?? undefined,
     reviews_count: sv.reviewCount ?? undefined,
-    cafe: sv.cafe ?? false,
-    parking: sv.parking ?? false,
-    parties: sv.parties ?? false,
-    toddler_area: sv.toddlerArea ?? false,
-    baby_area: sv.babyArea ?? false,
-    sen_friendly: sv.senFriendly ?? false,
-    wheelchair_access: sv.wheelchairAccess ?? false,
-    free_wifi: sv.freeWifi ?? false,
+    cafe: sv.cafe ?? null,
+    parking: sv.parking ?? null,
+    parties: sv.parties ?? null,
+    toddler_area: sv.toddlerArea ?? null,
+    baby_area: sv.babyArea ?? null,
+    sen_friendly: sv.senFriendly ?? null,
+    wheelchair_access: sv.wheelchairAccess ?? null,
+    free_wifi: sv.freeWifi ?? null,
     has_outdoor_play: sv.hasOutdoorPlay ?? false,
     has_party_rooms: sv.hasPartyRooms ?? false,
     has_sen_sessions: sv.hasSenSessions ?? false,
@@ -828,7 +829,7 @@ export default async function VenuePage({ params }: PageProps) {
               {/* Facilities key-value summary — structured for AI extractors,
                   built only from confirmed booleans (never invents facts) */}
               {(() => {
-                const facilityPairs: Array<[string, boolean | undefined]> = [
+                const facilityPairs: Array<[string, boolean | null | undefined]> = [
                   ['Café', venue.cafe],
                   ['Parking', venue.parking],
                   ['Birthday Parties', venue.parties],
@@ -838,7 +839,7 @@ export default async function VenuePage({ params }: PageProps) {
                   ['Wheelchair Access', venue.wheelchair_access],
                   ['Free WiFi', venue.free_wifi],
                 ]
-                const confirmedPairs = facilityPairs.filter(([, v]) => v !== undefined)
+                const confirmedPairs = facilityPairs.filter(([, v]) => v != null)
                 if (confirmedPairs.length === 0) return null
                 return (
                   <section aria-labelledby="facts-heading" className="bg-white rounded-lg border border-slate-200 p-6">
