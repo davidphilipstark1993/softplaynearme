@@ -29,6 +29,7 @@ import { getCardQuote, formatLastVerified } from '@/lib/venueCardText'
 import { isVerified } from '@/lib/plans'
 import { FeaturedImpression } from '@/components/venue/FeaturedImpression'
 import { LONDON_AREAS, getLondonAreaSlug } from '@/lib/londonAreas'
+import { getCityVenueCount } from '@/lib/venueCounts'
 
 interface PageProps {
   params: Promise<{ city: string }>
@@ -323,8 +324,12 @@ async function getVenues(citySlug: string, opts: VenueFilters = {}): Promise<Ven
         const { isOpenNow } = await import('@/lib/utils')
         venues = venues.filter((v) => isOpenNow(v.opening_hours as Record<string, unknown>))
       }
-      venues = applyAreaFilter(venues)
-      if (venues.length > 0) return venues
+      // The query succeeded, so the DB is authoritative even when it returns
+      // nothing (e.g. every venue in a city deactivated, or a filter that
+      // matches none). Falling through to the static export here used to
+      // resurrect venues the DB had removed and made hub counts disagree with
+      // the homepage.
+      return applyAreaFilter(venues)
     } finally {
       client.release()
     }
@@ -335,7 +340,8 @@ async function getVenues(citySlug: string, opts: VenueFilters = {}): Promise<Ven
     }
   }
 
-  // Static data fallback with client-side filtering
+  // Static data fallback (DB unreachable, or SOFTPLAY_STATIC_BUILD=1) with
+  // client-side filtering
   const staticVenues = getStaticVenuesByTown(citySlug)
   let venues = staticVenues.map(staticToDisplayVenue)
 
@@ -435,6 +441,9 @@ export default async function CityPage({ params, searchParams }: PageProps) {
   const special = (specialParam || '').split(',').filter(Boolean)
 
   const venues = await getVenues(city, { filter, search, age, facilities, price, special, sort, area })
+  // Unfiltered venue total for this city, from the same helper the homepage
+  // cards and meta descriptions use (lib/venueCounts.ts).
+  const cityVenueCount = await getCityVenueCount(city)
   const nearbyCities = cityConfig ? getNearbyCities(city) : []
 
   // Pagination — see VENUES_PER_PAGE above for why. Clamp to the real last
@@ -472,7 +481,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
   }
 
   // Use content generator for rich intros and FAQs
-  const locationContent = getLocationContent(city, cityConfig, staticTown, venues.length)
+  const locationContent = getLocationContent(city, cityConfig, staticTown, cityVenueCount)
   const { h1, intro, faqs } = locationContent
 
   const baseUrl = 'https://www.softplaynearme.co.uk'
@@ -515,6 +524,13 @@ export default async function CityPage({ params, searchParams }: PageProps) {
   // modules even though they may still appear in the main listing.
   const hasActiveFilters = !!(filter || search || age.length || facilities.length || price || special.length || area)
   const showCurated = !hasActiveFilters && pageNum === 1 && venues.length >= 4
+  // Headline count: the shared city total when nothing is filtered, otherwise
+  // the size of the filtered result set. In the unfiltered case the list and
+  // the shared total are the same query, so log loudly if they ever diverge.
+  const headlineCount = hasActiveFilters || filter ? venues.length : cityVenueCount
+  if (!hasActiveFilters && !filter && venues.length !== cityVenueCount) {
+    console.warn(`[venue-count] ${city}: list has ${venues.length} venues but shared count is ${cityVenueCount}`)
+  }
   const softPlayVenues = venues.filter(v => isSoftPlayVenueType(v.venue_type))
   // Featured (Premium/Bespoke) venues get their own spotlight, shown ahead of
   // the others — a single featured venue is still worth surfacing since it's
@@ -571,7 +587,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
         {/* Quick facts strip */}
         <div className="bg-white border-b border-slate-200 py-3 px-4">
           <div className="max-w-7xl mx-auto flex flex-wrap gap-x-6 gap-y-1 text-sm">
-            <span><strong className="text-slate-900">{venues.length}</strong> <span className="text-slate-500">{venues.length === 1 ? 'venue' : 'venues'} in {displayName}</span></span>
+            <span><strong className="text-slate-900">{headlineCount}</strong> <span className="text-slate-500">{headlineCount === 1 ? 'venue' : 'venues'} in {displayName}</span></span>
             {city === 'london' && (
               <span><strong className="text-slate-900">£7&ndash;£14</strong> <span className="text-slate-500">per child, typical session &mdash; under-1s usually free</span></span>
             )}
@@ -796,7 +812,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
           {/* All Venues */}
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-lg font-semibold text-slate-700">
-              {showCurated ? `All Soft Play in ${displayName} ` : ''}{venues.length} {venues.length === 1 ? 'venue' : 'venues'}{!showCurated ? ' found' : ''}
+              {showCurated ? `All Soft Play in ${displayName} ` : ''}{headlineCount} {headlineCount === 1 ? 'venue' : 'venues'}{!showCurated ? ' found' : ''}
               {totalPages > 1 && (
                 <span className="text-slate-400 font-normal">
                   {' '}&mdash; showing {(pageNum - 1) * VENUES_PER_PAGE + 1}&ndash;{Math.min(pageNum * VENUES_PER_PAGE, venues.length)}

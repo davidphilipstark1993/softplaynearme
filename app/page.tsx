@@ -3,7 +3,6 @@ import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { cities } from '@/lib/venues'
-import { getStaticVenuesByTown, getStaticTotalVenueCount } from '@/lib/staticVenues'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup'
@@ -13,8 +12,7 @@ import { buildFAQSchema, buildCityListSchema } from '@/lib/schema'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { blogPosts } from '@/lib/blogPosts'
 import { getPool } from '@/lib/pool'
-import { getTotalVenueCount } from '@/lib/venueStats'
-import { VISIBLE_VENUE_TYPES, visibleVenueTypeSql } from '@/lib/venueTypes'
+import { getVenueCounts, formatVenueTotal } from '@/lib/venueCounts'
 import type { Metadata } from 'next'
 
 // Highest-traffic cities in priority order (London first) — used for the
@@ -22,18 +20,15 @@ import type { Metadata } from 'next'
 // array order which doesn't reflect actual traffic.
 const POPULAR_CITY_SLUGS = ['london', 'nottingham', 'leeds', 'manchester', 'hull']
 
-// Genuine soft play only — matches the live DB query's venue_type filter.
-// Used wherever the static export is the fallback (DB unreachable, or a
-// city not yet represented in the live cityCounts).
-function getStaticSoftPlayCount(citySlug: string): number {
-  return getStaticVenuesByTown(citySlug).filter((v) => !v.venueType || (VISIBLE_VENUE_TYPES as readonly string[]).includes(v.venueType)).length
-}
+// The homepage is prerendered at build time (from the static JSON export, see
+// lib/pool.ts STATIC_BUILD). City hubs are rendered on demand from the live
+// database, so without periodic revalidation the homepage's venue counts
+// drift away from the hub pages' counts after any data change in the DB.
+export const revalidate = 3600
 
 export async function generateMetadata(): Promise<Metadata> {
-  const total = await getTotalVenueCount()
-  const countStr = total
-    ? total.toLocaleString('en-GB')
-    : `${getStaticTotalVenueCount().toLocaleString('en-GB')}+`
+  const { total } = await getVenueCounts()
+  const countStr = formatVenueTotal(total)
   const description = `Find ${countStr} soft play centres near you across the UK. Search by postcode, compare prices, opening times and facilities. Free directory, updated daily.`
   // Next.js replaces (does not deep-merge) the whole `openGraph` / `twitter`
   // object when a page defines one, so anything the root layout set here has to
@@ -119,17 +114,13 @@ async function getFeaturedHomepageVenues(): Promise<FeaturedVenue[]> {
 }
 
 async function getHomepageStats() {
+  // Venue counts come from the shared helper (lib/venueCounts.ts) — the same
+  // numbers the city hubs and meta descriptions use. Only the stats that are
+  // unique to the homepage are queried here.
+  const counts = await getVenueCounts()
   try {
     const pool = getPool()
-    const [countResult, cityCountResult, claimedResult, recentResult] = await Promise.all([
-      // "soft play centres" should count genuine soft play only — venue_type
-      // buckets trampoline parks/farms/park-playgrounds/other attractions
-      // out of the main directory (see lib/venueTypes.ts), so counting all
-      // rows here would overstate the claim with venues that aren't soft play.
-      pool.query<{ total: number }>(`SELECT COUNT(*)::int AS total FROM venues v WHERE v.is_active = true AND ${visibleVenueTypeSql()}`),
-      pool.query<{ city_slug: string; cnt: number }>(
-        `SELECT city_slug, COUNT(*)::int AS cnt FROM venues v WHERE v.is_active = true AND ${visibleVenueTypeSql()} GROUP BY city_slug`
-      ),
+    const [claimedResult, recentResult] = await Promise.all([
       pool.query<{ total: number }>(`SELECT COUNT(*)::int AS total FROM venues WHERE is_active = true AND claimed_by_owner = true`),
       pool.query<RecentVenue>(`
         SELECT v.name, v.town_slug, v.slug,
@@ -144,18 +135,7 @@ async function getHomepageStats() {
         LIMIT 6
       `),
     ])
-    const totalVenues = countResult.rows[0]?.total ?? 0
     const claimedVenues = claimedResult.rows[0]?.total ?? 0
-    const cityCounts: Record<string, number> = {}
-    for (const row of cityCountResult.rows) {
-      if (row.city_slug) cityCounts[row.city_slug] = row.cnt
-    }
-    // Supplement with static JSON counts for cities not yet in the DB
-    for (const city of cities) {
-      if (cityCounts[city.slug] === undefined) {
-        cityCounts[city.slug] = getStaticSoftPlayCount(city.slug)
-      }
-    }
     // Attach a display city name to each recent venue
     const cityNameMap: Record<string, string> = {}
     for (const city of cities) cityNameMap[city.slug] = city.name
@@ -163,24 +143,19 @@ async function getHomepageStats() {
       ...r,
       city_name: cityNameMap[r.town_slug] ?? r.town_slug,
     }))
-    return { totalVenues, claimedVenues, cityCounts, recentVenues }
+    return { counts, claimedVenues, recentVenues }
   } catch {
-    // Fall back to static data if DB unavailable
-    const cityCounts: Record<string, number> = {}
-    for (const city of cities) {
-      cityCounts[city.slug] = getStaticSoftPlayCount(city.slug)
-    }
-    return { totalVenues: 0, claimedVenues: 0, cityCounts, recentVenues: [] as RecentVenue[] }
+    // DB unavailable — counts already fell back to the static export.
+    return { counts, claimedVenues: 0, recentVenues: [] as RecentVenue[] }
   }
 }
 
 export default async function Home() {
-  const { totalVenues, claimedVenues, cityCounts, recentVenues } = await getHomepageStats()
+  const { counts, claimedVenues, recentVenues } = await getHomepageStats()
   const featuredVenues = await getFeaturedHomepageVenues()
 
-  const venueCountDisplay = totalVenues > 0
-    ? totalVenues.toLocaleString('en-GB')
-    : `${getStaticTotalVenueCount().toLocaleString('en-GB')}+`
+  const cityCounts = counts.byCity
+  const venueCountDisplay = formatVenueTotal(counts.total)
 
   // ItemList schema for Browse by City section
   const cityListSchema = buildCityListSchema(cities, 'Soft Play by City')
@@ -324,7 +299,7 @@ export default async function Home() {
           <p className="text-slate-600 text-center mb-8">Find soft play centres in your area</p>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {cities.map((city, index) => {
-              const venueCount = cityCounts[city.slug] ?? getStaticSoftPlayCount(city.slug)
+              const venueCount = cityCounts[city.slug] ?? 0
               return (
                 <Link key={city.slug} href={`/soft-play/${city.slug}`} className="group">
                   <Card className="overflow-hidden text-center hover:shadow-lg hover:border-purple-300 transition-all">

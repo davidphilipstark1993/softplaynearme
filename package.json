@@ -7,7 +7,7 @@
     "build": "SOFTPLAY_STATIC_BUILD=1 next build",
     "build:with-db": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "scrape:hull": "node scripts/scrape-hull-softplay.mjs",
     "scrape:cities": "node scripts/scrape-cities.mjs",
     "import:hull": "node scripts/import-softplay-to-neon.mjs",
@@ -30,7 +30,8 @@
     "validate": "node scripts/validate-venues.mjs",
     "validate:fix": "node scripts/validate-venues.mjs --fix",
     "extract:emails": "node scripts/extract-contact-emails.mjs",
-    "extract:emails:dry": "node scripts/extract-contact-emails.mjs --dry-run"
+    "extract:emails:dry": "node scripts/extract-contact-emails.mjs --dry-run",
+    "test": "node --test scripts/*.test.mjs"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",
