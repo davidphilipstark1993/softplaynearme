@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { markSubscriberSynced, subscribeEmail } from '@/lib/newsletter/db'
+import { subscribeEmail, resetConfirmationCooldown } from '@/lib/newsletter/db'
+import { sendNewsletterConfirmationEmail } from '@/lib/email'
 import { getClientIp, isRateLimited } from '@/lib/newsletter/rateLimit'
-import { pushSendGridContact } from '@/lib/newsletter/sendgrid-contacts'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
 
   // Honeypot: a real visitor never fills in a field this name normally isn't shown for.
   if (body.company) {
-    return NextResponse.json({ ok: true, outcome: 'created' })
+    return NextResponse.json({ ok: true, outcome: 'confirmation_sent' })
   }
 
   const email = typeof body.email === 'string' ? body.email.trim() : ''
@@ -36,28 +36,34 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const { subscriber, outcome } = await subscribeEmail({
+    const { subscriber, outcome, sendConfirmation } = await subscribeEmail({
       email,
       weeklyNewsletter,
       eventsActivities,
       source: (typeof body.source === 'string' && body.source.slice(0, 100)) || 'unknown',
     })
 
-    // Fire-and-forget — the subscriber row above is already saved regardless of this outcome.
-    // A failure here just leaves sendgrid_synced=false, retried later from the admin
-    // "Retry SendGrid sync" button.
-    if (process.env.SENDGRID_API_KEY) {
-      pushSendGridContact(email)
-        .then((jobId) => markSubscriberSynced(email, jobId))
-        .catch((err) => console.error('[newsletter/subscribe] SendGrid contact sync error:', err))
+    // Nothing is switched on, and nobody is added to SendGrid, until the owner of the
+    // address clicks the emailed link (see /api/newsletter/confirm). The send is awaited:
+    // a serverless function is frozen once the response goes out, and the visitor needs
+    // to be told honestly if the email didn't go.
+    if (sendConfirmation) {
+      const sent = await sendNewsletterConfirmationEmail({
+        to: email.trim().toLowerCase(),
+        confirmationToken: subscriber.confirmation_token,
+        weekly: subscriber.pending_weekly,
+        events: subscriber.pending_events,
+      })
+      if (!sent) {
+        await resetConfirmationCooldown(email)
+        return NextResponse.json(
+          { error: "We couldn't send your confirmation email. Please try again in a few minutes." },
+          { status: 502 }
+        )
+      }
     }
 
-    return NextResponse.json({
-      ok: true,
-      outcome,
-      weeklyNewsletter: subscriber.weekly_newsletter,
-      eventsActivities: subscriber.events_activities,
-    })
+    return NextResponse.json({ ok: true, outcome })
   } catch (err) {
     console.error('[newsletter/subscribe] error:', err)
     return NextResponse.json({ error: 'Subscription failed — please try again' }, { status: 500 })

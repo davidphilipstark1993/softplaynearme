@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { isUsablePhotoUrl } from '@/lib/imageUtils'
+import { isUsablePhotoUrl, getStockVenueImage } from '@/lib/imageUtils'
 import {
   MapPin,
   Star,
@@ -101,7 +101,17 @@ function VenueCard({
                 sizes="(max-width: 640px) 100vw, 144px"
               />
             ) : (
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-100 to-pink-100" />
+              <>
+                <Image
+                  src={getStockVenueImage(venue.slug)}
+                  alt="Illustrative stock photo of children playing"
+                  fill
+                  loading="lazy"
+                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw, 144px"
+                />
+                <span className="absolute bottom-1 right-1 rounded bg-black/50 px-1 py-0.5 text-[9px] text-white/90">Stock photo</span>
+              </>
             )}
             {(venue.featured || isVerified(venue)) && (
               <div className="absolute top-1.5 left-1.5 flex gap-1">

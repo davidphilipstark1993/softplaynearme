@@ -47,6 +47,17 @@ export function isSoftPlayVenueType(venueType: string | null | undefined): boole
  */
 export const VISIBLE_VENUE_TYPES = ['indoor', 'pub'] as const
 
+/**
+ * True when a venue belongs in the main soft-play directory and may be
+ * indexed / listed in the sitemap. Anything with a venue_type outside
+ * VISIBLE_VENUE_TYPES (park playgrounds, farms, trampoline parks, attractions,
+ * leisure centres, mobile hire, retail) stays reachable by URL but is noindex
+ * and out of the sitemap, so search engines see a focused soft-play site.
+ */
+export function isDirectoryVenueType(venueType: string | null | undefined): boolean {
+  return !venueType || (VISIBLE_VENUE_TYPES as readonly string[]).includes(venueType)
+}
+
 /** SQL fragment for `WHERE <this>` — visible venue_types only. Assumes the venues table/alias is unqualified or aliased as `v`. */
 export function visibleVenueTypeSql(alias = 'v'): string {
   return `(${alias}.venue_type IS NULL OR ${alias}.venue_type IN ('${VISIBLE_VENUE_TYPES.join("','")}'))`

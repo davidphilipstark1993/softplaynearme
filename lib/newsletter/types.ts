@@ -9,9 +9,14 @@ export interface NewsletterSubscriber {
   email: string
   weekly_newsletter: boolean
   events_activities: boolean
-  status: 'subscribed' | 'unsubscribed'
+  status: 'pending' | 'subscribed' | 'unsubscribed'
   source: string | null
   unsubscribe_token: string
+  confirmed_at: string | null
+  confirmation_token: string
+  confirmation_sent_at: string | null
+  pending_weekly: boolean
+  pending_events: boolean
   sendgrid_synced: boolean
   sendgrid_contact_id: string | null
   subscribed_at: string

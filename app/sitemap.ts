@@ -4,6 +4,7 @@ import { getPool } from '@/lib/pool'
 import { getAllStaticTownSlugs, getStaticVenuesByTown } from '@/lib/staticVenues'
 import { blogPosts } from '@/lib/blogPosts'
 import redirectEntries from '@/data/redirects.json'
+import { isDirectoryVenueType } from '@/lib/venueTypes'
 
 // Paths that 301/308-redirect elsewhere (see next.config.ts) must never be
 // listed in the sitemap even if a stale/duplicate row for them still exists
@@ -122,14 +123,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       let result
       try {
         result = await client.query(`
-          SELECT city_slug, slug, updated_at, completeness_score
+          SELECT city_slug, slug, updated_at, completeness_score, venue_type
           FROM venues
           WHERE is_active = true
         `)
       } catch {
         // Column doesn't exist yet — include all venues without filtering
         result = await client.query(`
-          SELECT city_slug, slug, updated_at, NULL::int AS completeness_score
+          SELECT city_slug, slug, updated_at, NULL::int AS completeness_score, NULL::text AS venue_type
           FROM venues
           WHERE is_active = true
         `)
@@ -138,6 +139,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       for (const venue of result.rows) {
         const score = venue.completeness_score ?? 100 // unknown → include
         if (score < SITEMAP_MIN_SCORE) continue       // skip truly thin stubs
+        if (!isDirectoryVenueType(venue.venue_type)) continue // non-soft-play: noindex, so not listed
 
         const path = `/soft-play/${venue.city_slug}/${venue.slug}`
         if (REDIRECTED_PATHS.has(path)) continue      // skip stale rows that just 301 elsewhere
@@ -162,6 +164,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const townSlug of staticTowns) {
     const venues = getStaticVenuesByTown(townSlug)
     for (const venue of venues) {
+      if (!isDirectoryVenueType(venue.venueType)) continue // non-soft-play: noindex, so not listed
       const key = `${townSlug}/${venue.slug}`
       const path = `/soft-play/${townSlug}/${venue.slug}`
       if (!addedVenueSlugs.has(key) && !REDIRECTED_PATHS.has(path)) {

@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { isUsablePhotoUrl } from '@/lib/imageUtils'
+import { isUsablePhotoUrl, getStockVenueImage } from '@/lib/imageUtils'
 import { getCityBySlug, getAllCitySlugs, getNearbyCities, filters } from '@/lib/venues'
 import { MapPin, Star, Coffee, Car, Baby, PartyPopper, Heart, Phone, Globe, Navigation, TrendingUp, CheckCircle2, Sparkles, Compass } from 'lucide-react'
 import type { Metadata } from 'next'
@@ -841,18 +841,17 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                           sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 100vw"
                         />
                       ) : (
-                        <div
-                          className="absolute inset-0"
-                          style={{
-                            background: `linear-gradient(135deg, hsl(${(index * 47 + 262) % 360}, 70%, 55%), hsl(${(index * 47 + 320) % 360}, 60%, 50%))`,
-                          }}
-                        >
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <span className="text-white/20 text-6xl font-bold select-none">
-                              {venue.name.charAt(0)}
-                            </span>
-                          </div>
-                        </div>
+                        <>
+                          <Image
+                            src={getStockVenueImage(venue.slug)}
+                            alt="Illustrative stock photo of children playing"
+                            fill
+                            loading="lazy"
+                            className="object-cover"
+                            sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 100vw"
+                          />
+                          <span className="absolute bottom-1.5 right-1.5 rounded bg-black/50 px-1.5 py-0.5 text-[10px] text-white/90">Stock photo</span>
+                        </>
                       )}
 
                       <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/0 to-black/0" />

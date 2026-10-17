@@ -38,6 +38,7 @@ export function ClaimVenueForm({
       citySlug: citySlug || null,
       venueSlug: venueSlug || null,
       venueUrl: venueUrl || null,
+      company: fd.get('company'), // honeypot
     }
 
     try {
@@ -66,6 +67,15 @@ export function ClaimVenueForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
+      {/* Honeypot — hidden from people and assistive tech; bots fill it in */}
+      <input
+        type="text"
+        name="company"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="absolute left-[-9999px] h-0 w-0 opacity-0"
+      />
       {/* Row 1: Name + Email */}
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Your name" required>

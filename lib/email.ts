@@ -72,6 +72,51 @@ async function sendEmail(to: string, subject: string, html: string): Promise<voi
   console.error(`[email] FAILED to send "${subject}" to ${to} via both Resend and SendGrid`)
 }
 
+// Like sendEmail, but reports whether a provider actually accepted the message. Used where the
+// caller has to tell the visitor the truth about delivery (e.g. the newsletter confirmation).
+async function sendEmailChecked(to: string, subject: string, html: string): Promise<boolean> {
+  if (!RESEND_API_KEY && !SENDGRID_API_KEY) return false
+  if (await sendViaResend(to, subject, html)) return true
+  return sendViaSendGrid(to, subject, html)
+}
+
+// ─── Newsletter double opt-in ─────────────────────────────────────────────────
+
+export interface NewsletterConfirmationOptions {
+  to: string
+  confirmationToken: string
+  weekly: boolean
+  events: boolean
+}
+
+/** Returns false if no provider accepted the email, so the subscribe route can surface the failure. */
+export async function sendNewsletterConfirmationEmail(opts: NewsletterConfirmationOptions): Promise<boolean> {
+  const confirmUrl = `${BASE_URL}/newsletter/confirm?token=${opts.confirmationToken}`
+  const lists = [
+    opts.weekly ? 'the weekly soft play newsletter' : null,
+    opts.events ? 'family events &amp; offers' : null,
+  ].filter(Boolean).join(' and ')
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#f8fafc;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#1e293b">
+<div style="max-width:520px;margin:0 auto;padding:32px 16px">
+  <div style="background:#fff;border-radius:12px;padding:28px 24px;border:1px solid #e2e8f0;text-align:center">
+    <h1 style="margin:0 0 12px;font-size:20px;color:#1e293b">Please confirm your subscription</h1>
+    <p style="margin:0 0 20px;font-size:15px;line-height:1.6;color:#475569">You asked to receive ${lists} from Soft Play Near Me. Click the button to confirm &#8212; you won&#x27;t get any emails until you do. This link expires in 7 days.</p>
+    <a href="${confirmUrl}" style="display:inline-block;background:#9333ea;color:#fff;text-decoration:none;padding:15px 36px;border-radius:9px;font-weight:600;font-size:15px">Confirm my subscription</a>
+    <p style="margin:20px 0 0;font-size:12px;color:#94a3b8">Or copy this link into your browser:<br><span style="color:#6d28d9;word-break:break-all;font-size:11px">${confirmUrl}</span></p>
+  </div>
+  <p style="font-size:12px;color:#94a3b8;text-align:center;margin:16px 0 0">If you didn&#x27;t sign up, just ignore this email and nothing will happen.</p>
+  <p style="font-size:11px;color:#cbd5e1;text-align:center;margin:6px 0 0">Soft Play Near Me &#xB7; hello@softplaynearme.co.uk</p>
+</div>
+</body>
+</html>`
+
+  return sendEmailChecked(opts.to, 'Confirm your Soft Play Near Me subscription', html)
+}
+
 // ─── Admin operational notification (plain text) ──────────────────────────────
 // Used by cron/background jobs (e.g. the weekly newsletter send) to tell the
 // site owner what happened — sent or skipped and why, or failed — without
