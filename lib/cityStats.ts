@@ -53,6 +53,8 @@ export interface CityStats {
   priceRange: { min: number; max: number } | null
   /** Most recent last_verified_at among venues, ISO date, or null. */
   latestVerified: string | null
+  /** Most recent last_verified_at among the venues that publish a price — the date to quote beside a price range. */
+  priceAsOf: string | null
   /** Best-rated venues with at least MIN_REVIEWS_FOR_TOP_RATED reviews, best first. */
   topRated: RatedVenue[]
 }
@@ -91,10 +93,13 @@ export function computeCityStats(venues: StatsVenue[]): CityStats {
     return [from, priceNumber(v.price_to) ?? from]
   })
 
-  const verified = venues
-    .map((v) => (v.last_verified_at ? new Date(v.last_verified_at) : null))
-    .filter((d): d is Date => !!d && !Number.isNaN(d.getTime()))
-    .sort((a, b) => b.getTime() - a.getTime())
+  const latest = (list: StatsVenue[]): string | null => {
+    const dates = list
+      .map((v) => (v.last_verified_at ? new Date(v.last_verified_at) : null))
+      .filter((d): d is Date => !!d && !Number.isNaN(d.getTime()))
+      .sort((a, b) => b.getTime() - a.getTime())
+    return dates.length ? dates[0].toISOString().slice(0, 10) : null
+  }
 
   return {
     total,
@@ -111,7 +116,25 @@ export function computeCityStats(venues: StatsVenue[]): CityStats {
     ageCoverage: share(withAge),
     ratingCoverage: share(withRating),
     priceRange: prices.length ? { min: Math.min(...prices), max: Math.max(...prices) } : null,
-    latestVerified: verified.length ? verified[0].toISOString().slice(0, 10) : null,
+    latestVerified: latest(venues),
+    priceAsOf: latest(venues.filter(hasPrice)),
     topRated: rankTopRated(venues),
   }
+}
+
+/**
+ * Rating used to ORDER venues "by rating". A raw average lets a 5.0 from two
+ * reviews outrank a 4.6 from 300; this pulls small samples toward a typical
+ * score (a Bayesian average with a prior worth MIN_REVIEWS_FOR_TOP_RATED reviews),
+ * so a venue needs real volume to reach the top. Unrated venues return null and
+ * sort last. Only used for ordering — displayed ratings are always the real ones.
+ */
+export const RATING_PRIOR_MEAN = 4.2
+
+export function smoothedRating(rating: number | string | null | undefined, reviews: number | string | null | undefined): number | null {
+  const r = num(rating)
+  const n = num(reviews) ?? 0
+  if (r === null || r <= 0 || n <= 0) return null
+  const m = MIN_REVIEWS_FOR_TOP_RATED
+  return (r * n + RATING_PRIOR_MEAN * m) / (n + m)
 }

@@ -13,9 +13,9 @@ filler_cta,lib/blogPosts.ts,712,check the venue,"d pricing or age limits for mos
 filler_cta,lib/blogPosts.ts,752,check with the venue,we don't hold confirmed age-range data for them — check with the venue.</p>
 filler_cta,lib/blogPosts.ts,775,check with the venue,"we don't hold confirmed age-range data for them — check with the venue."","
 filler_cta,lib/filterContent.ts,40,check the venue page before you visit,"me venues also allow you to bring your own food — check the venue page before you visit.`,"
-filler_cta,lib/filterContent.ts,138,check the venue,end and school holiday hours often differ. Always check the venue's individual page or call ahead to confirm curren
-filler_cta,lib/filterContent.ts,138,confirm current opening times before travelling,"heck the venue's individual page or call ahead to confirm current opening times before travelling.`,"
-filler_cta,lib/locationContent.ts,203,Check the venue\u2019s page on our site for specific parking information and directions,"uire you to use nearby pay-and-display car parks. Check the venue\u2019s page on our site for specific parking information and directions.',"
+filler_cta,lib/filterContent.ts,138,check the venue,"hem; where we don't have hours we say so. Call or check the venue's own website before travelling.`,"
+filler_cta,lib/locationContent.ts,108,check the venue\u2019s own website before you go,"here the venue has published one \u2014 otherwise check the venue\u2019s own website before you go.`,"
+filler_cta,lib/locationContent.ts,116,Check the venue\u2019s own website for its current prices,"s sell multi-visit passes or monthly memberships. Check the venue\u2019s own website for its current prices.`,"
 filler_cta,lib/venueContent.ts,192,"confirm current opening times, admission prices, and any session requirements before your visit","`Contact ${v.name} directly to confirm current opening times, admission prices, and any session requirements before your visit.`"
 filler_cta,lib/venueContent.ts,279,confirm current age guidance,"hildren. Contact the venue ahead of your visit to confirm current age guidance.`,"
 filler_cta,lib/venueContent.ts,286,confirm current session availability and age requirements for younger visitors,".name} has a baby play area. Contact the venue to confirm current session availability and age requirements for younger visitors.`,"

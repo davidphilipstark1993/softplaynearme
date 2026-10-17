@@ -31,11 +31,12 @@ import { isVerified } from '@/lib/plans'
 import { FeaturedImpression } from '@/components/venue/FeaturedImpression'
 import { LONDON_AREAS, getLondonAreaSlug } from '@/lib/londonAreas'
 import { getCityVenueCount } from '@/lib/venueCounts'
-import { computeCityStats } from '@/lib/cityStats'
+import { computeCityStats, rankTopRated, smoothedRating, MIN_REVIEWS_FOR_TOP_RATED, RATING_PRIOR_MEAN } from '@/lib/cityStats'
+import { buildCityIntro, buildCityFaqs } from '@/lib/cityContent'
 import { isOpenNow } from '@/lib/utils'
 import { buildCityMeta } from '@/lib/cityMeta'
 import { hasStructuredHours } from '@/lib/venueFacts'
-import { splitByLocality, groupNearbyByLocality } from '@/lib/localities'
+import { splitByLocality, groupNearbyByLocality, getLocality } from '@/lib/localities'
 import { VENUES_PER_PAGE, totalPagesFor, parsePageParam, hubPagePath, pageWindow } from '@/lib/pagination'
 import { NearbyTowns } from '@/components/location/NearbyTowns'
 import { VenueCardFacts } from '@/components/venue/VenueCardFacts'
@@ -229,6 +230,20 @@ function staticToDisplayVenue(sv: StaticVenue): Venue {
   }
 }
 
+/**
+ * "Sort by rating": featured placements first (as before), then by a smoothed
+ * score so a 5.0 from two reviews can't outrank a 4.6 from hundreds, then name.
+ * Unrated venues come last. See smoothedRating in lib/cityStats.ts.
+ */
+function sortByRating(list: Venue[]): Venue[] {
+  return [...list].sort(
+    (a, b) =>
+      Number(!!b.featured) - Number(!!a.featured) ||
+      (smoothedRating(b.avg_rating, b.review_count) ?? -1) - (smoothedRating(a.avg_rating, a.review_count) ?? -1) ||
+      a.name.localeCompare(b.name)
+  )
+}
+
 async function getVenues(citySlug: string, opts: VenueFilters = {}): Promise<Venue[]> {
   const { filter, search, age = [], facilities = [], price = '', special = [], sort = 'rating', area = '' } = opts
   // London-only postcode-based area filter — not a DB column, so it's
@@ -298,7 +313,10 @@ async function getVenues(citySlug: string, opts: VenueFilters = {}): Promise<Ven
 
       // Sort
       const sortMap: Record<string, string> = {
-        rating: 'avg_rating DESC NULLS LAST, v.reviews_count DESC NULLS LAST, v.name ASC',
+        // 'rating' is ordered in JS after the query (sortByRating) so it can use
+        // the same smoothed score as everything else; the DB just needs a stable
+        // base order here.
+        rating: 'v.name ASC',
         price_low: 'v.price_from ASC NULLS LAST, avg_rating DESC NULLS LAST',
         price_high: 'v.price_to DESC NULLS LAST, avg_rating DESC NULLS LAST',
         name: 'v.name ASC',
@@ -314,6 +332,7 @@ async function getVenues(citySlug: string, opts: VenueFilters = {}): Promise<Ven
         ...row,
         featured: !!row.featured && (!row.featured_until || new Date(row.featured_until) > new Date()),
       }))
+      if (sort === 'rating') venues = sortByRating(venues)
       if (special.includes('open-now') && venues.length > 0) {
         // Venues with no structured hours are never "open now" — isOpenNow()
         // is false for them rather than guessing.
@@ -382,6 +401,7 @@ async function getVenues(citySlug: string, opts: VenueFilters = {}): Promise<Ven
 
   if (sort === 'price_low') venues.sort((a, b) => (a.price_from ?? Infinity) - (b.price_from ?? Infinity))
   else if (sort === 'name') venues.sort((a, b) => a.name.localeCompare(b.name))
+  else venues = sortByRating(venues) // default; the static fallback used to be left in file order
 
   // Featured (Premium/Bespoke) venues surface first regardless of sort —
   // stable sort preserves the ordering above as the secondary key, matching
@@ -516,7 +536,16 @@ export default async function CityPage({ params, searchParams }: PageProps) {
 
   // Use content generator for rich intros and FAQs
   const locationContent = getLocationContent(city, cityConfig, staticTown, cityVenueCount)
-  const { h1, intro, faqs } = locationContent
+  const { h1, intro } = locationContent
+  // Under-heading summary and FAQ are built from this hub's own venues
+  // (lib/cityContent.ts). The unfiltered main list is what they describe, so use
+  // the unfiltered city list, not whatever filter is currently applied.
+  const contentVenues = splitByLocality(city, allCityVenues).core
+  const nearbyTownNames = [...new Set(nearbyVenues.map((v) => getLocality(v)).filter((l): l is string => !!l))]
+  const contentInput = { name: displayName, county, slug: city, venues: contentVenues.map(toStatsVenue), nearbyCount: nearbyVenues.length, nearbyTowns: nearbyTownNames }
+  const heroIntro = buildCityIntro(contentInput)
+  const cityMeta = buildCityMeta(displayName, county, computeCityStats(contentInput.venues))
+  const faqs = buildCityFaqs(contentInput)
 
   const baseUrl = 'https://www.softplaynearme.co.uk'
 
@@ -549,7 +578,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
 
   const collectionPageSchema = buildCollectionPageSchema({
     name: h1,
-    description: locationContent.metaDescription,
+    description: cityMeta.description,
     url: `${baseUrl}/soft-play/${city}`,
   })
 
@@ -586,22 +615,19 @@ export default async function CityPage({ params, searchParams }: PageProps) {
   const featuredVenues = showCurated ? softPlayVenues.filter(v => v.featured).slice(0, 4) : []
   const sponsoredVenues = showCurated ? await getSponsoredCityVenues(city) : []
   const toddlerVenues = showCurated ? softPlayVenues.filter(v => v.toddler_area).slice(0, 4) : []
-  // A minimum review count keeps a single 5-star fluke review from
-  // outranking a venue with hundreds of consistently good ones; a maximum
-  // keeps a review-count outlier (mistagged big attraction, franchise HQ
+  // Top rated: only venues with enough reviews to mean something
+  // (MIN_REVIEWS_FOR_TOP_RATED = 20). A 5.0 from 2 reviews is noise, not a ranking.
+  // A maximum keeps a review-count outlier (mistagged big attraction, franchise HQ
   // listing, etc.) from dominating "most popular" regardless of whether
-  // venue_type classification catches it. See reports/ for the review-count
-  // outlier audit that found several misclassified venues this way.
-  const MIN_REVIEWS_FOR_CURATED = 5
+  // venue_type classification catches it.
+  const MIN_REVIEWS_FOR_POPULAR = 5
   const MAX_REVIEWS_FOR_POPULAR = 5000
-  const topRatedVenues = showCurated
-    ? [...softPlayVenues].filter(v => v.avg_rating && Number(v.avg_rating) > 0 && Number(v.review_count || 0) >= MIN_REVIEWS_FOR_CURATED).sort((a, b) => Number(b.avg_rating || 0) - Number(a.avg_rating || 0)).slice(0, 4)
-    : []
+  const topRatedVenues = showCurated ? rankTopRated(softPlayVenues.map(toStatsVenue), 4) : []
   const cityBlogPost = getPostForCity(displayName)
 
   const mostPopularVenues = showCurated
     ? [...softPlayVenues]
-        .filter(v => v.review_count && Number(v.review_count) >= MIN_REVIEWS_FOR_CURATED && Number(v.review_count) <= MAX_REVIEWS_FOR_POPULAR)
+        .filter(v => v.review_count && Number(v.review_count) >= MIN_REVIEWS_FOR_POPULAR && Number(v.review_count) <= MAX_REVIEWS_FOR_POPULAR)
         .sort((a, b) => Number(b.review_count || 0) - Number(a.review_count || 0))
         .slice(0, 4)
     : []
@@ -625,9 +651,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
         <div className="bg-gradient-to-br from-purple-600 to-pink-500 text-white py-10 sm:py-12 px-4">
           <div className="max-w-7xl mx-auto">
             <h1 className="text-3xl md:text-4xl font-bold mb-3">{h1}</h1>
-            <p className="text-purple-100 text-lg max-w-3xl">
-              Find and compare soft play centres in {displayName}{county ? `, ${county}` : ''}. Browse venues, check facilities, and plan your visit.
-            </p>
+            <p className="text-purple-100 text-lg max-w-3xl">{heroIntro}</p>
           </div>
         </div>
 
@@ -794,19 +818,17 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                 <section>
                   <div className="flex items-center gap-2 mb-3">
                     <Star className="w-5 h-5 text-yellow-500 fill-current" />
-                    <h2 className="text-lg font-semibold text-slate-800">Top Rated Soft Play in {displayName}</h2>
+                    <h2 className="text-lg font-semibold text-slate-800">Top Rated Soft Play in {displayName} <span className="text-sm font-normal text-slate-500">({MIN_REVIEWS_FOR_TOP_RATED}+ reviews)</span></h2>
                   </div>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                     {topRatedVenues.map((venue) => (
                       <Link key={venue.slug} href={`/soft-play/${city}/${venue.slug}`} className="group block">
                         <div className="bg-white border border-slate-200 rounded-lg p-4 hover:border-yellow-300 hover:shadow-md transition-all h-full flex flex-col">
                           <span className="inline-flex items-center gap-1 text-xs font-semibold text-yellow-700 bg-yellow-50 border border-yellow-200 rounded-full px-2 py-0.5 mb-2 w-fit">
-                            <Star className="w-3 h-3 fill-current" /> {Number(venue.avg_rating).toFixed(1)} rated
+                            <Star className="w-3 h-3 fill-current" /> {venue.rating.toFixed(1)} rated
                           </span>
                           <p className="font-semibold text-sm text-slate-800 group-hover:text-yellow-600 line-clamp-2 flex-1">{venue.name}</p>
-                          {venue.review_count && Number(venue.review_count) > 0 && (
-                            <p className="mt-2 text-xs text-slate-500">{Number(venue.review_count).toLocaleString()} reviews</p>
-                          )}
+                          <p className="mt-2 text-xs text-slate-500">{venue.reviews.toLocaleString()} reviews</p>
                         </div>
                       </Link>
                     ))}
