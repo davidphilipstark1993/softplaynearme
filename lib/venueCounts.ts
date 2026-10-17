@@ -109,10 +109,25 @@ export const getVenueCounts = cache(async (): Promise<VenueCounts> => {
   }
 })
 
-export async function getCityVenueCount(citySlug: string): Promise<number> {
-  const { byCity } = await getVenueCounts()
-  return byCity[citySlug] ?? 0
-}
+/**
+ * One hub's main-list venue count. Same rules as getVenueCounts() (it runs the same
+ * tally over the same WHERE clause) but fetches only that city's rows, so a hub or
+ * filter page request doesn't load the whole table just to read one number.
+ */
+export const getCityVenueCount = cache(async (citySlug: string): Promise<number> => {
+  try {
+    const pool = getPool()
+    const { rows } = await pool.query<CountableVenue & { city_slug: string }>(
+      `SELECT v.id, v.city_slug, v.postcode, v.toddler_area, v.parties, v.sen_friendly
+         FROM venues v
+        WHERE v.city_slug = $1 AND v.is_active = true AND ${visibleVenueTypeSql()}`,
+      [citySlug]
+    )
+    return tally(rows, 'db').byCity[citySlug] ?? 0
+  } catch {
+    return (await getVenueCounts()).byCity[citySlug] ?? 0
+  }
+})
 
 /** "1,077" — exact, locale-formatted. No "+" because it is a real count. */
 export function formatVenueTotal(total: number): string {
