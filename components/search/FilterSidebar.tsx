@@ -4,6 +4,7 @@ import { useRouter, useSearchParams, usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { SlidersHorizontal, X, ChevronDown, ChevronUp } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { mergeLegacyFilters } from '@/lib/searchFilters'
 
 // ─── Filter group definitions ────────────────────────────────────────────────
 
@@ -65,7 +66,9 @@ interface FilterSidebarProps {
 export function FilterSidebar({ hasLocation = false, showSort = true, openNowAvailable = true, className, mobileClassName, desktopClassName }: FilterSidebarProps) {
   const router = useRouter()
   const pathname = usePathname()
-  const searchParams = useSearchParams()
+  const rawSearchParams = useSearchParams()
+  // Fold old-style /search?filters=toddler links into the structured params.
+  const searchParams = mergeLegacyFilters(new URLSearchParams(rawSearchParams.toString()))
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const age = parseCSV(searchParams.get('age'))
@@ -252,7 +255,7 @@ export function FilterSidebar({ hasLocation = false, showSort = true, openNowAva
 export function ActiveFilterBar({ className }: { className?: string }) {
   const router = useRouter()
   const pathname = usePathname()
-  const searchParams = useSearchParams()
+  const searchParams = mergeLegacyFilters(new URLSearchParams(useSearchParams().toString()))
 
   const age = parseCSV(searchParams.get('age'))
   const facilities = parseCSV(searchParams.get('facilities'))

@@ -8,6 +8,7 @@ import { getStaticTowns } from '@/lib/staticTowns'
 import { SearchForm } from '@/components/search/SearchForm'
 import { SearchResults } from '@/components/search/SearchResults'
 import { SearchFilters } from './SearchFilters'
+import { mergeLegacyFilters, hasSearchQuery } from '@/lib/searchFilters'
 import { ActiveFilterBar } from '@/components/search/FilterSidebar'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
@@ -25,6 +26,7 @@ interface SearchPageProps {
     price?: string      // single: under5 | 5to8 | over8
     special?: string    // comma-separated: open-now, wheelchair
     sort?: string
+    filters?: string    // legacy: /search?filters=toddler — folded into the params above
   }>
 }
 
@@ -32,12 +34,19 @@ export async function generateMetadata({ searchParams }: SearchPageProps): Promi
   const params = await searchParams
   const query = params.q
 
+  // Every parameterised /search URL is a one-off view (a postcode, a filter, a
+  // sort) with no content of its own to rank — noindex,follow, canonical to the
+  // plain /search. The bare /search landing page stays indexable. The indexable
+  // filter pages are the path versions: /soft-play/{city}/toddler etc.
+  const robots = hasSearchQuery(params) ? { index: false, follow: true } : undefined
+
   if (query) {
     const title = `Soft Play Near ${query} | Find Local Indoor Play Centres`
     const description = `Discover the best soft play centres near ${query}. Find venues with cafes, toddler areas, birthday parties, and more.`
     return {
       title,
       description,
+      robots,
       openGraph: { title, description, url: 'https://www.softplaynearme.co.uk/search', type: 'website', siteName: 'Soft Play Near Me' },
       twitter: { card: 'summary_large_image', title, description },
       alternates: { canonical: 'https://www.softplaynearme.co.uk/search' },
@@ -52,6 +61,7 @@ export async function generateMetadata({ searchParams }: SearchPageProps): Promi
   return {
     title,
     description,
+    robots,
     openGraph: { title: socialTitle, description, url: 'https://www.softplaynearme.co.uk/search', type: 'website', siteName: 'Soft Play Near Me' },
     twitter: { card: 'summary_large_image', title: socialTitle, description },
     alternates: { canonical: 'https://www.softplaynearme.co.uk/search' },
@@ -160,11 +170,12 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   const radiusParam = params.radius
   const sortParam = params.sort || 'distance'
 
-  // Structured filter params
-  const age = (params.age || '').split(',').filter(Boolean)
-  const facilities = (params.facilities || '').split(',').filter(Boolean)
-  const price = params.price || ''
-  const special = (params.special || '').split(',').filter(Boolean)
+  // Structured filter params (old-style ?filters=toddler links are folded in)
+  const merged = mergeLegacyFilters(new URLSearchParams(Object.entries(params).flatMap(([k, v]) => (typeof v === 'string' ? [[k, v]] : []))))
+  const age = (merged.get('age') || '').split(',').filter(Boolean)
+  const facilities = (merged.get('facilities') || '').split(',').filter(Boolean)
+  const price = merged.get('price') || ''
+  const special = (merged.get('special') || '').split(',').filter(Boolean)
 
   const radius = parseRadius(radiusParam)
 

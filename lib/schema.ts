@@ -367,7 +367,9 @@ export interface ItemListVenue {
  */
 export function buildItemListSchema(
   venues: ItemListVenue[],
-  listName: string
+  listName: string,
+  /** Number of items on earlier pages, so page 2 of a paginated list starts at position 25, not 1. */
+  startIndex = 0
 ) {
   if (venues.length === 0) return null
 
@@ -382,7 +384,7 @@ export function buildItemListSchema(
       const url = `${baseUrl}/soft-play/${venue.citySlug}/${venue.slug}`
       const item: Record<string, any> = {
         '@type': 'ListItem',
-        position: i + 1,
+        position: startIndex + i + 1,
         name: venue.name,
         url,
         item: {

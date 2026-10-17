@@ -4,6 +4,8 @@ import { getPool } from '@/lib/pool'
 import { getAllStaticTownSlugs, getStaticVenuesByTown } from '@/lib/staticVenues'
 import { blogPosts } from '@/lib/blogPosts'
 import redirectEntries from '@/data/redirects.json'
+import { getVenueCounts } from '@/lib/venueCounts'
+import { totalPagesFor, hubPagePath } from '@/lib/pagination'
 
 // Paths that 301/308-redirect elsewhere (see next.config.ts) must never be
 // listed in the sitemap even if a stale/duplicate row for them still exists
@@ -83,7 +85,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
   }
 
-  // Add city pages + filter pages
+  // Add city pages (+ their paginated pages) + filter pages
+  const counts = await getVenueCounts()
   for (const city of allCities) {
     sitemap.push({
       url: `${baseUrl}/soft-play/${city}`,
@@ -92,12 +95,27 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     })
 
+    // Pages 2+ of a hub's list are indexable (self-canonical), so they are listed.
+    const pages = totalPagesFor(counts.byCity[city] ?? 0)
+    for (let page = 2; page <= pages; page++) {
+      sitemap.push({
+        url: `${baseUrl}${hubPagePath(city, page)}`,
+        lastModified: new Date(),
+        changeFrequency: 'weekly',
+        priority: 0.5,
+      })
+    }
+
     for (const filter of filters) {
       // /open-now pages are noindex,follow (their result set is time-of-day
       // dependent, so they're never a stable, indexable URL) — listing a
       // noindex URL in the sitemap is a mixed signal to Google, same reason
       // thin venue pages are excluded below.
       if (filter.slug === 'open-now') continue
+      // A filter page with no matching venues is noindex too (see
+      // components/filter/FilterPageContent.tsx) — same rule.
+      const matching = counts.filterCountsByCity[city]?.[filter.slug as 'toddler' | 'birthday-parties' | 'sen-friendly'] ?? 0
+      if (matching === 0) continue
 
       sitemap.push({
         url: `${baseUrl}/soft-play/${city}/${filter.slug}`,

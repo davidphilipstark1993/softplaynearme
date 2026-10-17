@@ -36,6 +36,7 @@ import { isOpenNow } from '@/lib/utils'
 import { buildCityMeta } from '@/lib/cityMeta'
 import { hasStructuredHours } from '@/lib/venueFacts'
 import { splitByLocality, groupNearbyByLocality } from '@/lib/localities'
+import { VENUES_PER_PAGE, totalPagesFor, parsePageParam, hubPagePath, pageWindow } from '@/lib/pagination'
 import { NearbyTowns } from '@/components/location/NearbyTowns'
 import { VenueCardFacts } from '@/components/venue/VenueCardFacts'
 
@@ -53,13 +54,6 @@ interface PageProps {
     page?: string       // 1-indexed pagination of the "All Venues" grid
   }>
 }
-
-// Venue cards (with images, badges, review quotes) are by far the biggest
-// contributor to city-page HTML weight — large cities were rendering 100+ of
-// them on one page (Leeds ~1MB of HTML). Only this many render server-side;
-// the rest are reachable via the pagination links below, which stay crawlable
-// (plain <Link>s, not client-only "load more") so no venue becomes orphaned.
-const VENUES_PER_PAGE = 24
 
 export const revalidate = 3600
 
@@ -88,17 +82,9 @@ function metadataTitle(metaTitle: string): string | { absolute: string } {
 
 export async function generateMetadata({ params, searchParams }: PageProps): Promise<Metadata> {
   const { city } = await params
-  const { filter, search, age, facilities, price, special, area, page } = await searchParams
+  const { filter, search, age, facilities, price, special, area, sort, page } = await searchParams
   const cityConfig = getCityBySlug(city)
   const staticTown = getStaticTownBySlug(city)
-
-  // Prevent indexing of filtered / searched / paginated variations. Page 1
-  // (the default, whether ?page=1 is explicit or omitted) is the canonical,
-  // indexable page — only page 2+ is noindex,follow, same treatment as every
-  // other query-param variation: still crawlable so venues on later pages
-  // stay reachable, just not a duplicate of page 1's content in the index.
-  const pageNum = Math.max(1, parseInt(page || '1', 10) || 1)
-  const noindex = !!(filter || search || age || facilities || price || special || area || pageNum > 1)
 
   if (!cityConfig && !staticTown) {
     // No suffix — the root layout's title template appends it. Never index a
@@ -108,16 +94,34 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
 
   const name = cityConfig?.name || staticTown?.name || city
   const county = cityConfig?.county || ''
+  const baseUrl = 'https://www.softplaynearme.co.uk'
 
   // Title and description are generated from this city's real data, so they
   // never promise prices/hours/ages the venue cards can't show (lib/cityMeta.ts).
   // Stats describe the hub's own main list (nearby-town venues are counted in
   // their own section), so the title's "N Centres" matches the page's heading.
   const { core } = splitByLocality(city, await getCityVenuesAll(city))
-  const { title, description } = buildCityMeta(name, county, computeCityStats(core.map(toStatsVenue)))
+  const meta = buildCityMeta(name, county, computeCityStats(core.map(toStatsVenue)))
+
+  // Any filter / search / sort / area variation is a duplicate view of the same
+  // venues: noindex,follow, canonical to the plain hub.
+  const isVariation = !!(filter || search || age || facilities || price || special || area || sort)
+
+  // Pagination: pages 2+ are real, distinct lists of venues, so each one is
+  // indexable with a canonical pointing at itself (not at page 1) and is listed
+  // in the sitemap. An out-of-range page number is not a page: noindex, canonical
+  // to the last real page.
+  const requested = parsePageParam(page)
+  const totalPages = totalPagesFor(core.length)
+  const pageNum = Math.min(requested, totalPages)
+  const outOfRange = requested > totalPages
+
+  const title = pageNum > 1 ? `${meta.title} – Page ${pageNum}` : meta.title
+  const description = pageNum > 1 ? `${meta.description} Page ${pageNum} of ${totalPages}.` : meta.description
+  const canonical = `${baseUrl}${isVariation ? hubPagePath(city, 1) : hubPagePath(city, pageNum)}`
+  const noindex = isVariation || outOfRange
 
   const ogImage = getCityOgImage(city)
-  const url = `https://www.softplaynearme.co.uk/soft-play/${city}`
   return {
     title,
     description,
@@ -125,7 +129,7 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
     openGraph: {
       title,
       description,
-      url,
+      url: canonical,
       type: 'website',
       siteName: 'Soft Play Near Me',
       images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
@@ -137,7 +141,7 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
       images: [ogImage],
     },
     alternates: {
-      canonical: url,
+      canonical,
     },
   }
 }
@@ -478,8 +482,8 @@ export default async function CityPage({ params, searchParams }: PageProps) {
 
   // Pagination — see VENUES_PER_PAGE above for why. Clamp to the real last
   // page so an out-of-range ?page= doesn't render an empty grid.
-  const totalPages = Math.max(1, Math.ceil(venues.length / VENUES_PER_PAGE))
-  const pageNum = Math.min(Math.max(1, parseInt(pageParam || '1', 10) || 1), totalPages)
+  const totalPages = totalPagesFor(venues.length)
+  const pageNum = Math.min(parsePageParam(pageParam), totalPages)
   const pagedVenues = venues.slice((pageNum - 1) * VENUES_PER_PAGE, pageNum * VENUES_PER_PAGE)
 
   // Preserves every other active filter/sort param while only changing `page`
@@ -539,7 +543,8 @@ export default async function CityPage({ params, searchParams }: PageProps) {
       reviewCount: v.review_count ? Number(v.review_count) : undefined,
       venueType: v.venue_type,
     })),
-    `Soft Play Centres in ${displayName}`
+    `Soft Play Centres in ${displayName}`,
+    (pageNum - 1) * VENUES_PER_PAGE
   )
 
   const collectionPageSchema = buildCollectionPageSchema({
@@ -1038,20 +1043,30 @@ export default async function CityPage({ params, searchParams }: PageProps) {
           )}
 
           {/* Pagination — plain crawlable links, not a client-only "load
-              more", so pages 2+ (and every venue on them) stay reachable to
-              search engines even though only page 1 is indexed. */}
+              more", so every page (and every venue on it) is reachable by a
+              search engine. Pages are indexable and listed in the sitemap. */}
           {totalPages > 1 && (
-            <nav aria-label="Venue list pages" className="flex items-center justify-center gap-2 mt-8">
+            <nav aria-label="Venue list pages" className="flex flex-wrap items-center justify-center gap-2 mt-8">
               {pageNum > 1 && (
-                <Link href={buildPageHref(pageNum - 1)}>
+                <Link href={buildPageHref(pageNum - 1)} rel="prev">
                   <Button variant="outline" size="sm">Previous</Button>
                 </Link>
               )}
-              <span className="text-sm text-slate-500 px-2">
-                Page {pageNum} of {totalPages}
-              </span>
+              {pageWindow(pageNum, totalPages).map((p, i) =>
+                p === null ? (
+                  <span key={`gap-${i}`} className="px-1 text-slate-400" aria-hidden="true">&hellip;</span>
+                ) : p === pageNum ? (
+                  <span key={p} aria-current="page" className="inline-flex h-8 min-w-8 items-center justify-center rounded-md bg-purple-600 px-2 text-sm font-medium text-white">
+                    {p}
+                  </span>
+                ) : (
+                  <Link key={p} href={buildPageHref(p)} aria-label={`Page ${p}`}>
+                    <Button variant="outline" size="sm" className="min-w-8 px-2">{p}</Button>
+                  </Link>
+                )
+              )}
               {pageNum < totalPages && (
-                <Link href={buildPageHref(pageNum + 1)}>
+                <Link href={buildPageHref(pageNum + 1)} rel="next">
                   <Button variant="outline" size="sm">Next</Button>
                 </Link>
               )}

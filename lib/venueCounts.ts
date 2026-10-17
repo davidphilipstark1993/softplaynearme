@@ -1,8 +1,8 @@
 import { cache } from 'react'
 import { getPool } from '@/lib/pool'
-import { visibleVenueTypeSql } from '@/lib/venueTypes'
+import { isVisibleVenueType, visibleVenueTypeSql } from '@/lib/venueTypes'
 import { cities } from '@/lib/venues'
-import { getAllStaticTownSlugs, getStaticCityCounts } from '@/lib/staticVenues'
+import { getAllStaticTownSlugs, getStaticVenuesByTown } from '@/lib/staticVenues'
 import { isNearbyTownVenue } from '@/lib/localities'
 
 /**
@@ -30,7 +30,50 @@ export interface VenueCounts {
   byCity: Record<string, number>
   /** Venues shown in a hub's "Nearby" section rather than its main list. */
   nearbyByCity: Record<string, number>
+  /** Main-list venues per hub that match each path filter (/toddler, /birthday-parties, /sen-friendly). */
+  filterCountsByCity: Record<string, FilterCounts>
   source: 'db' | 'static'
+}
+
+export interface FilterCounts {
+  toddler: number
+  'birthday-parties': number
+  'sen-friendly': number
+}
+
+const emptyFilterCounts = (): FilterCounts => ({ toddler: 0, 'birthday-parties': 0, 'sen-friendly': 0 })
+
+interface CountableVenue {
+  id?: number | null
+  postcode?: string | null
+  toddler_area?: boolean | null
+  parties?: boolean | null
+  sen_friendly?: boolean | null
+}
+
+/** One pass over venues -> every number this module reports. */
+function tally(rows: Array<CountableVenue & { city_slug: string }>, source: 'db' | 'static'): VenueCounts {
+  const byCity: Record<string, number> = {}
+  const nearbyByCity: Record<string, number> = {}
+  const filterCountsByCity: Record<string, FilterCounts> = {}
+  for (const slug of publicCitySlugs()) {
+    byCity[slug] = 0
+    nearbyByCity[slug] = 0
+    filterCountsByCity[slug] = emptyFilterCounts()
+  }
+  for (const r of rows) {
+    if (!(r.city_slug in byCity)) continue // no public hub page for this slug
+    if (isNearbyTownVenue(r.city_slug, r)) {
+      nearbyByCity[r.city_slug]++
+      continue
+    }
+    byCity[r.city_slug]++
+    const f = filterCountsByCity[r.city_slug]
+    if (r.toddler_area) f.toddler++
+    if (r.parties) f['birthday-parties']++
+    if (r.sen_friendly) f['sen-friendly']++
+  }
+  return { total: sumCounts(byCity) + sumCounts(nearbyByCity), byCity, nearbyByCity, filterCountsByCity, source }
 }
 
 function publicCitySlugs(): string[] {
@@ -38,14 +81,12 @@ function publicCitySlugs(): string[] {
 }
 
 function staticCounts(): VenueCounts {
-  const byCity: Record<string, number> = {}
-  const nearbyByCity: Record<string, number> = {}
-  for (const slug of publicCitySlugs()) {
-    const { core, nearby } = getStaticCityCounts(slug)
-    byCity[slug] = core
-    nearbyByCity[slug] = nearby
-  }
-  return { total: sumCounts(byCity) + sumCounts(nearbyByCity), byCity, nearbyByCity, source: 'static' }
+  const rows = publicCitySlugs().flatMap((slug) =>
+    getStaticVenuesByTown(slug)
+      .filter((v) => isVisibleVenueType(v.venueType))
+      .map((v) => ({ city_slug: slug, id: v.id, postcode: v.postcode, toddler_area: v.toddlerArea, parties: v.parties, sen_friendly: v.senFriendly }))
+  )
+  return tally(rows, 'static')
 }
 
 function sumCounts(byCity: Record<string, number>): number {
@@ -56,23 +97,12 @@ function sumCounts(byCity: Record<string, number>): number {
 export const getVenueCounts = cache(async (): Promise<VenueCounts> => {
   try {
     const pool = getPool()
-    const { rows } = await pool.query<{ id: number; city_slug: string; postcode: string | null }>(
-      `SELECT v.id, v.city_slug, v.postcode
+    const { rows } = await pool.query<CountableVenue & { city_slug: string }>(
+      `SELECT v.id, v.city_slug, v.postcode, v.toddler_area, v.parties, v.sen_friendly
          FROM venues v
         WHERE v.is_active = true AND ${visibleVenueTypeSql()} AND v.city_slug IS NOT NULL`
     )
-    const byCity: Record<string, number> = {}
-    const nearbyByCity: Record<string, number> = {}
-    for (const slug of publicCitySlugs()) {
-      byCity[slug] = 0
-      nearbyByCity[slug] = 0
-    }
-    for (const r of rows) {
-      if (!(r.city_slug in byCity)) continue // no public hub page for this slug
-      if (isNearbyTownVenue(r.city_slug, r)) nearbyByCity[r.city_slug]++
-      else byCity[r.city_slug]++
-    }
-    return { total: sumCounts(byCity) + sumCounts(nearbyByCity), byCity, nearbyByCity, source: 'db' }
+    return tally(rows, 'db')
   } catch {
     // DB unavailable (or SOFTPLAY_STATIC_BUILD=1): fall back to the JSON export.
     return staticCounts()

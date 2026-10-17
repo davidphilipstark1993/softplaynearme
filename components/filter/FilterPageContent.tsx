@@ -18,6 +18,8 @@ import { isOpenNow } from '@/lib/utils'
 import { hasStructuredHours } from '@/lib/venueFacts'
 import { isVisibleVenueType, visibleVenueTypeSql } from '@/lib/venueTypes'
 import { splitByLocality, groupNearbyByLocality } from '@/lib/localities'
+import { buildFilterMeta, isDataFilter } from '@/lib/filterMeta'
+import { getCityVenueCount } from '@/lib/venueCounts'
 import { getFilterContent, type FilterSlug } from '@/lib/filterContent'
 import { getCardQuote, formatLastVerified } from '@/lib/venueCardText'
 import { VenueCardFacts } from '@/components/venue/VenueCardFacts'
@@ -134,6 +136,16 @@ async function getFilteredVenues(citySlug: string, filterSlug: FilterSlug): Prom
   return { venues, hoursDataAvailable: true }
 }
 
+/** Narrow a filter-page venue to what lib/cityStats.ts ranks on. */
+function toStatsVenue(v: FilterVenue) {
+  return {
+    name: v.name,
+    slug: v.slug,
+    avg_rating: v.avg_rating ?? null,
+    review_count: v.review_count ?? null,
+  }
+}
+
 interface FilterPageContentProps {
   citySlug: string
   filterSlug: FilterSlug
@@ -156,7 +168,11 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
 
   const cityName = cityConfig.name
   const h1 = filterConfig.h1Template.replace('{city}', cityName)
-  const intro = filterConfig.introTemplate.replace('{city}', cityName)
+  // Short, data-driven intro (counts and best-rated names for THIS city) for the
+  // data filters; the time-dependent "open now" page keeps its template.
+  const intro = isDataFilter(filterSlug)
+    ? buildFilterMeta(filterSlug, cityName, cityConfig.county, venues.map(toStatsVenue), await getCityVenueCount(citySlug)).intro
+    : filterConfig.introTemplate.replace('{city}', cityName)
   const faqs = content.faqs(cityName)
   const advice = content.advice(cityName)
 
@@ -489,8 +505,12 @@ export async function buildFilterMetadata(citySlug: string, filterSlug: FilterSl
   const { venues: fetched } = await getFilteredVenues(citySlug, filterSlug)
   const { core: venues } = splitByLocality(citySlug, fetched)
 
-  const title = filterConfig.metaTitleTemplate.replace('{city}', cityConfig.name)
-  const description = filterConfig.metaDescriptionTemplate.replace('{city}', cityConfig.name)
+  // Unique per city: counts and best-rated names from this city's matching venues.
+  const generated = isDataFilter(filterSlug)
+    ? buildFilterMeta(filterSlug, cityConfig.name, cityConfig.county, venues.map(toStatsVenue), await getCityVenueCount(citySlug))
+    : null
+  const title = generated?.title ?? filterConfig.metaTitleTemplate.replace('{city}', cityConfig.name)
+  const description = generated?.description ?? filterConfig.metaDescriptionTemplate.replace('{city}', cityConfig.name)
   const canonicalUrl = `https://www.softplaynearme.co.uk/soft-play/${citySlug}/${filterSlug}`
 
   return {
