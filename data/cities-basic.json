@@ -213,5 +213,70 @@
     "slug": "dartford",
     "name": "Dartford",
     "county": "Kent"
+  },
+  {
+    "slug": "coventry",
+    "name": "Coventry",
+    "county": "West Midlands"
+  },
+  {
+    "slug": "northampton",
+    "name": "Northampton",
+    "county": "Northamptonshire"
+  },
+  {
+    "slug": "belfast",
+    "name": "Belfast",
+    "county": "County Antrim"
+  },
+  {
+    "slug": "st-austell",
+    "name": "St Austell",
+    "county": "Cornwall"
+  },
+  {
+    "slug": "plymouth",
+    "name": "Plymouth",
+    "county": "Devon"
+  },
+  {
+    "slug": "exeter",
+    "name": "Exeter",
+    "county": "Devon"
+  },
+  {
+    "slug": "dundee",
+    "name": "Dundee",
+    "county": "Dundee"
+  },
+  {
+    "slug": "chester",
+    "name": "Chester",
+    "county": "Cheshire"
+  },
+  {
+    "slug": "derby",
+    "name": "Derby",
+    "county": "Derbyshire"
+  },
+  {
+    "slug": "stirling",
+    "name": "Stirling",
+    "county": "Stirling"
+  },
+  {
+    "slug": "milton-keynes",
+    "name": "Milton Keynes",
+    "county": "Buckinghamshire"
+  },
+  {
+    "slug": "kings-lynn",
+    "name": "King's Lynn",
+    "county": "Norfolk"
+  },
+  {
+    "slug": "oxford",
+    "name": "Oxford",
+    "county": "Oxfordshire"
   }
 ]

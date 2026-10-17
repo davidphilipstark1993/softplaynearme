@@ -220,7 +220,7 @@ export default function AdminSubscribersPage() {
                     <td className="px-4 py-3">
                       <span
                         className={`text-xs font-medium px-2 py-1 rounded-full ${
-                          s.status === 'subscribed' ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-500'
+                          s.status === 'subscribed' ? 'bg-green-100 text-green-700' : s.status === 'pending' ? 'bg-amber-100 text-amber-700' : 'bg-slate-100 text-slate-500'
                         }`}
                       >
                         {s.status}

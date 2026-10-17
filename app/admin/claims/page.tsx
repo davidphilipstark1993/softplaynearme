@@ -23,6 +23,22 @@ interface Claim {
   message: string | null
 }
 
+const FREE_MAIL = new Set(['gmail.com', 'googlemail.com', 'yahoo.com', 'yahoo.co.uk', 'hotmail.com', 'hotmail.co.uk', 'outlook.com', 'live.com', 'icloud.com', 'aol.com', 'btinternet.com', 'sky.com'])
+
+/** Ownership signal for the reviewer: does the claimant's email domain match the venue's own website? */
+function emailDomainSignal(email: string, website: string | null): { label: string; style: string } {
+  const emailDomain = email.split('@')[1]?.toLowerCase() ?? ''
+  let siteHost = ''
+  try { siteHost = website ? new URL(website).hostname.replace(/^www\./, '').toLowerCase() : '' } catch { /* ignore bad URL */ }
+  if (siteHost && emailDomain && (emailDomain === siteHost || siteHost.endsWith('.' + emailDomain) || emailDomain.endsWith('.' + siteHost))) {
+    return { label: 'Email domain matches venue website', style: 'bg-green-50 text-green-700 border-green-200' }
+  }
+  if (FREE_MAIL.has(emailDomain)) {
+    return { label: 'Free-mail address: ask for proof', style: 'bg-amber-50 text-amber-700 border-amber-200' }
+  }
+  return { label: siteHost ? 'Email domain differs from venue website' : 'No venue website to compare', style: 'bg-red-50 text-red-600 border-red-200' }
+}
+
 const STATUS_STYLES = {
   pending:  'bg-amber-50 text-amber-700 border-amber-200',
   approved: 'bg-green-50 text-green-700 border-green-200',
@@ -215,6 +231,14 @@ export default function AdminClaimsPage() {
                             <CheckCircle2 className="w-3 h-3" /> Email verified
                           </span>
                         )}
+                        {(() => {
+                          const sig = emailDomainSignal(claim.email, claim.venue_website)
+                          return (
+                            <span className={`inline-flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-full border ${sig.style}`}>
+                              {sig.label}
+                            </span>
+                          )
+                        })()}
                         {claim.plan_interest === 'bespoke' && (
                           <span className="inline-flex items-center gap-1 text-xs font-medium px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200">
                             Bespoke enquiry

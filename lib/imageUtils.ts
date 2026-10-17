@@ -78,3 +78,24 @@ export function shimmerDataURL(w: number, h: number): string {
   const base64 = Buffer.from(svg).toString('base64')
   return `data:image/svg+xml;base64,${base64}`
 }
+
+/**
+ * Illustrative stock photos (Unsplash License, no attribution required) shown
+ * when a venue has no usable photo of its own. Files live in
+ * public/images/stock/. Each was opened and checked to show children playing
+ * indoors/in a ball pit. Never use these in structured data or OG images —
+ * they are not photos of the venue.
+ */
+const STOCK_VENUE_IMAGES = [
+  '/images/stock/play-1.jpg',
+  '/images/stock/play-2.jpg',
+  '/images/stock/play-3.jpg',
+] as const
+
+/** Deterministic pick so a venue keeps the same stock photo across renders and cards/pages. */
+export function getStockVenueImage(seed: string | number): string {
+  const s = String(seed)
+  let h = 0
+  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0
+  return STOCK_VENUE_IMAGES[h % STOCK_VENUE_IMAGES.length]
+}

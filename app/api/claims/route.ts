@@ -1,11 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getPool } from '@/lib/pool'
+import { getClientIp, isRateLimited as isIpRateLimited } from '@/lib/newsletter/rateLimit'
 import { sendWelcomeEmail, sendVerificationEmail, sendAdminClaimNotification } from '@/lib/email'
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export async function POST(request: NextRequest) {
   let client
   try {
+    if (isIpRateLimited(getClientIp(request.headers))) {
+      return NextResponse.json({ error: 'Too many requests — please try again shortly' }, { status: 429 })
+    }
+
     const body = await request.json()
+    // Honeypot: hidden field a real visitor never fills in. Pretend success so bots don't retry.
+    if (body?.company) {
+      return NextResponse.json({ success: true, token: '' })
+    }
     const {
       name,
       email,
@@ -24,45 +35,29 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Name, email, and venue name are required' }, { status: 400 })
     }
 
+    if (!EMAIL_RE.test(email.trim()) || email.length > 160 || name.length > 120 || venueName.length > 255) {
+      return NextResponse.json({ error: 'Please check your details and try again' }, { status: 400 })
+    }
+
     const isBespoke = planInterest === 'bespoke'
 
     client = await getPool().connect()
 
-    // Schema setup — each statement is individually non-fatal so a DDL permission
-    // error or pre-existing column never kills the request.
-    const schemaSql = [
-      `CREATE TABLE IF NOT EXISTS venue_claims (
-        id                 SERIAL PRIMARY KEY,
-        name               VARCHAR(120) NOT NULL,
-        email              VARCHAR(160) NOT NULL,
-        venue_name         VARCHAR(255) NOT NULL,
-        venue_address      TEXT,
-        venue_phone        VARCHAR(30),
-        venue_website      VARCHAR(500),
-        city_slug          VARCHAR(100),
-        venue_slug         VARCHAR(255),
-        venue_url          VARCHAR(500),
-        proof              VARCHAR(500),
-        message            TEXT,
-        access_token       UUID UNIQUE NOT NULL DEFAULT gen_random_uuid(),
-        verification_token UUID UNIQUE DEFAULT gen_random_uuid(),
-        email_verified     BOOLEAN DEFAULT FALSE,
-        status             VARCHAR(30) DEFAULT 'pending',
-        created_at         TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-      )`,
-      `ALTER TABLE venue_claims ADD COLUMN IF NOT EXISTS venue_address TEXT`,
-      `ALTER TABLE venue_claims ADD COLUMN IF NOT EXISTS venue_phone VARCHAR(30)`,
-      `ALTER TABLE venue_claims ADD COLUMN IF NOT EXISTS venue_website VARCHAR(500)`,
-      `ALTER TABLE venue_claims ADD COLUMN IF NOT EXISTS access_token UUID UNIQUE DEFAULT gen_random_uuid()`,
-      `ALTER TABLE venue_claims ADD COLUMN IF NOT EXISTS verification_token UUID UNIQUE DEFAULT gen_random_uuid()`,
-      `ALTER TABLE venue_claims ADD COLUMN IF NOT EXISTS email_verified BOOLEAN DEFAULT FALSE`,
-      `ALTER TABLE venue_claims ADD COLUMN IF NOT EXISTS plan_interest VARCHAR(20) DEFAULT 'free'`,
-    ]
-
-    for (const sql of schemaSql) {
-      try { await client.query(sql) } catch (e) {
-        console.warn('[claims] Schema step skipped:', (e as Error).message?.slice(0, 120))
-      }
+    // Abuse limits that hold across serverless instances (counted from the claims
+    // table itself, unlike an in-memory map). Tables/columns are created by
+    // scripts/migrateClaims.mjs, not here.
+    const cleanEmail = email.trim().toLowerCase()
+    const recent = await client.query(
+      `SELECT
+         COUNT(*) FILTER (WHERE email = $1 AND created_at > NOW() - INTERVAL '1 hour')::int AS by_email,
+         COUNT(*) FILTER (WHERE venue_name ILIKE $2 AND created_at > NOW() - INTERVAL '24 hours')::int AS by_venue,
+         COUNT(*) FILTER (WHERE created_at > NOW() - INTERVAL '1 hour')::int AS total
+       FROM venue_claims`,
+      [cleanEmail, venueName.trim()]
+    )
+    const counts = recent.rows[0] as { by_email: number; by_venue: number; total: number }
+    if (counts.by_email >= 3 || counts.by_venue >= 5 || counts.total >= 40) {
+      return NextResponse.json({ error: 'Too many requests — please try again later' }, { status: 429 })
     }
 
     const result = await client.query(
@@ -74,7 +69,7 @@ export async function POST(request: NextRequest) {
                  COALESCE(verification_token::text, '') AS verification_token`,
       [
         name.trim(),
-        email.trim().toLowerCase(),
+        cleanEmail,
         venueName.trim(),
         venueAddress?.trim() || null,
         venuePhone?.trim() || null,

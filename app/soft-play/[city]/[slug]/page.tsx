@@ -26,9 +26,11 @@ import { buildLocalBusinessSchema, buildBreadcrumbSchema, buildFAQSchema } from 
 import { JsonLd } from '@/components/seo/JsonLd'
 import { getStoredReviews } from '@/lib/reviewsStore'
 import { isVerified } from '@/lib/plans'
+import { isDirectoryVenueType } from '@/lib/venueTypes'
 import { ReviewSection } from '@/components/venue/ReviewSection'
 import { cleanAddressForDisplay, formatAddressLine } from '@/lib/sanitize'
-import { isUsablePhotoUrl } from '@/lib/imageUtils'
+import { isUsablePhotoUrl, getStockVenueImage } from '@/lib/imageUtils'
+import Image from 'next/image'
 import {
   generateVenueDescription,
   generateVenueMetaDescription,
@@ -78,15 +80,16 @@ interface Venue {
   plan?: string
   plan_status?: string
   // Core facility booleans (original columns)
-  cafe: boolean
-  parking: boolean
+  // null = unknown (not confirmed), never rendered as "No"
+  cafe: boolean | null
+  parking: boolean | null
   free_parking?: boolean
-  parties: boolean
-  toddler_area: boolean
-  baby_area: boolean
-  sen_friendly: boolean
-  wheelchair_access: boolean
-  free_wifi: boolean
+  parties: boolean | null
+  toddler_area: boolean | null
+  baby_area: boolean | null
+  sen_friendly: boolean | null
+  wheelchair_access: boolean | null
+  free_wifi: boolean | null
   // Phase 2 facility additions
   sensory_area?: boolean
   role_play_area?: boolean
@@ -237,20 +240,21 @@ function staticToVenue(sv: StaticVenue): Venue {
     description: sv.description || sv.notes || undefined,
     rating: sv.rating ?? undefined,
     reviews_count: sv.reviewCount ?? undefined,
-    cafe: sv.cafe ?? false,
-    parking: sv.parking ?? false,
-    parties: sv.parties ?? false,
-    toddler_area: sv.toddlerArea ?? false,
-    baby_area: sv.babyArea ?? false,
-    sen_friendly: sv.senFriendly ?? false,
-    wheelchair_access: sv.wheelchairAccess ?? false,
-    free_wifi: sv.freeWifi ?? false,
+    cafe: sv.cafe ?? null,
+    parking: sv.parking ?? null,
+    parties: sv.parties ?? null,
+    toddler_area: sv.toddlerArea ?? null,
+    baby_area: sv.babyArea ?? null,
+    sen_friendly: sv.senFriendly ?? null,
+    wheelchair_access: sv.wheelchairAccess ?? null,
+    free_wifi: sv.freeWifi ?? null,
     has_outdoor_play: sv.hasOutdoorPlay ?? false,
     has_party_rooms: sv.hasPartyRooms ?? false,
     has_sen_sessions: sv.hasSenSessions ?? false,
     price_from: sv.priceFrom ?? undefined,
     price_to: sv.priceTo ?? undefined,
     main_image_url: sv.mainImageUrl ?? undefined,
+    venue_type: sv.venueType ?? undefined,
     featured: sv.featured ?? false,
     _mapsUrl: sv.mapsUrl,
     _isStatic: true,
@@ -503,7 +507,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   // Noindex very thin pages (name + address only, no useful content)
   const score = venue.completeness_score ??
     computeCompletenessScore({ ...venue, city: cityName, county })
-  const shouldNoindex = score < NOINDEX_THRESHOLD
+  // Non-soft-play venue types stay reachable but are never indexed (lib/venueTypes.ts).
+  const shouldNoindex = score < NOINDEX_THRESHOLD || !isDirectoryVenueType(venue.venue_type)
 
   return {
     title,
@@ -732,17 +737,24 @@ export default async function VenuePage({ params }: PageProps) {
           </div>
         ) : (
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <div className="bg-slate-100 border-2 border-dashed border-slate-300 rounded-xl p-8 text-center">
-              <Camera className="w-12 h-12 mx-auto text-slate-400 mb-3" />
-              <p className="font-semibold text-slate-700 mb-2">No photos yet</p>
-              <p className="text-sm text-slate-500 mb-4">
-                Are you the owner of {venue.name}? Add photos to help families choose your venue.
-              </p>
-              <Button variant="outline" asChild>
-                <a href={`mailto:info@softplaynearme.co.uk?subject=Photos%20for%20${encodeURIComponent(venue.name)}`}>
-                  Submit Photos
+            <div className="relative h-48 sm:h-64 overflow-hidden rounded-xl bg-slate-100">
+              <Image
+                src={getStockVenueImage(venue.slug)}
+                alt="Illustrative stock photo of children playing"
+                fill
+                priority
+                className="object-cover"
+                sizes="(min-width: 1280px) 1200px, 100vw"
+              />
+              <div className="absolute inset-x-0 bottom-0 flex flex-wrap items-center justify-between gap-2 bg-gradient-to-t from-black/70 to-transparent px-4 py-3 text-xs text-white">
+                <span>Illustrative stock photo, not {venue.name}.</span>
+                <a
+                  className="underline"
+                  href={`mailto:info@softplaynearme.co.uk?subject=Photos%20for%20${encodeURIComponent(venue.name)}`}
+                >
+                  Owner? Submit real photos
                 </a>
-              </Button>
+              </div>
             </div>
           </div>
         )}
@@ -828,7 +840,7 @@ export default async function VenuePage({ params }: PageProps) {
               {/* Facilities key-value summary — structured for AI extractors,
                   built only from confirmed booleans (never invents facts) */}
               {(() => {
-                const facilityPairs: Array<[string, boolean | undefined]> = [
+                const facilityPairs: Array<[string, boolean | null | undefined]> = [
                   ['Café', venue.cafe],
                   ['Parking', venue.parking],
                   ['Birthday Parties', venue.parties],
@@ -838,7 +850,7 @@ export default async function VenuePage({ params }: PageProps) {
                   ['Wheelchair Access', venue.wheelchair_access],
                   ['Free WiFi', venue.free_wifi],
                 ]
-                const confirmedPairs = facilityPairs.filter(([, v]) => v !== undefined)
+                const confirmedPairs = facilityPairs.filter(([, v]) => v != null)
                 if (confirmedPairs.length === 0) return null
                 return (
                   <section aria-labelledby="facts-heading" className="bg-white rounded-lg border border-slate-200 p-6">

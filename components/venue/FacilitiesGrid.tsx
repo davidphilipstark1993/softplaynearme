@@ -21,9 +21,9 @@ import {
 } from 'lucide-react'
 
 interface FacilitiesData {
-  cafe?: boolean
-  parking?: boolean
-  parties?: boolean
+  cafe?: boolean | null
+  parking?: boolean | null
+  parties?: boolean | null
   party_rooms?: boolean
   toddler_area?: boolean
   baby_area?: boolean
@@ -37,7 +37,7 @@ interface FacilitiesData {
   baby_change?: boolean
   // legacy keys — kept for backwards compatibility
   baby_changing?: boolean
-  [key: string]: boolean | undefined
+  [key: string]: boolean | null | undefined
 }
 
 interface FacilitiesGridProps {
@@ -46,11 +46,11 @@ interface FacilitiesGridProps {
   cafe?: boolean
   parking?: boolean
   parties?: boolean
-  toddlerArea?: boolean
-  babyArea?: boolean
-  senFriendly?: boolean
-  wheelchairAccess?: boolean
-  freeWifi?: boolean
+  toddlerArea?: boolean | null
+  babyArea?: boolean | null
+  senFriendly?: boolean | null
+  wheelchairAccess?: boolean | null
+  freeWifi?: boolean | null
   /** When true, render a fallback card instead of null when no data is available */
   showEmptyState?: boolean
 }
@@ -119,7 +119,7 @@ export function FacilitiesGrid({
 
   // Check if we have any facilities to display
   const hasFacilities = FACILITY_CONFIG.some(
-    (f) => mergedFacilities[f.key] !== undefined
+    (f) => mergedFacilities[f.key] != null
   )
 
   if (!hasFacilities) {

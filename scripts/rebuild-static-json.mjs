@@ -106,14 +106,14 @@ async function main() {
       rating: v.rating ? Number(v.rating) : null,
       reviewCount: v.reviews_count || null,
       // Facilities
-      cafe: Boolean(v.cafe),
-      parking: Boolean(v.parking),
-      parties: Boolean(v.parties),
-      toddlerArea: Boolean(v.toddler_area),
-      babyArea: Boolean(v.baby_area),
-      senFriendly: Boolean(v.sen_friendly),
-      wheelchairAccess: Boolean(v.wheelchair_access),
-      freeWifi: Boolean(v.free_wifi),
+      cafe: v.cafe == null ? null : Boolean(v.cafe), // null = unknown, keep it that way
+      parking: v.parking == null ? null : Boolean(v.parking), // null = unknown, keep it that way
+      parties: v.parties == null ? null : Boolean(v.parties), // null = unknown, keep it that way
+      toddlerArea: v.toddler_area == null ? null : Boolean(v.toddler_area), // null = unknown, keep it that way
+      babyArea: v.baby_area == null ? null : Boolean(v.baby_area), // null = unknown, keep it that way
+      senFriendly: v.sen_friendly == null ? null : Boolean(v.sen_friendly), // null = unknown, keep it that way
+      wheelchairAccess: v.wheelchair_access == null ? null : Boolean(v.wheelchair_access), // null = unknown, keep it that way
+      freeWifi: v.free_wifi == null ? null : Boolean(v.free_wifi), // null = unknown, keep it that way
       hasOutdoorPlay: Boolean(v.has_outdoor_play),
       hasPartyRooms: Boolean(v.has_party_rooms),
       hasSenSessions: Boolean(v.has_sen_sessions),

@@ -13,7 +13,7 @@ import { isReadyForApproval, readinessHint } from './readiness'
 
 // ─── Subscribers ────────────────────────────────────────────────────────────
 
-export type SubscribeOutcome = 'created' | 'updated' | 'already_subscribed'
+export type SubscribeOutcome = 'confirmation_sent' | 'already_subscribed'
 
 export interface SubscribeInput {
   email: string
@@ -22,14 +22,24 @@ export interface SubscribeInput {
   source: string
 }
 
+/** Minimum gap between confirmation emails to one address, so the form can't be used to mail-bomb someone. */
+const CONFIRMATION_COOLDOWN_MINUTES = 5
+/** How long a confirmation link stays valid after it was sent. */
+export const CONFIRMATION_TTL_DAYS = 7
+
 /**
- * Upserts by email so the same address never gets a second row. If the
- * subscriber already receives everything being requested, no write happens
- * and the caller gets 'already_subscribed' back.
+ * Double opt-in. Upserts by email so the same address never gets a second row,
+ * but never switches a list on: the requested lists are parked in
+ * pending_weekly / pending_events and only applied by confirmByToken() once
+ * the address owner clicks the emailed link. Already-confirmed subscribers who
+ * ask for an extra list go through the same confirmation.
+ *
+ * `sendConfirmation` tells the caller whether an email should go out now
+ * (false when one was sent within the cooldown, or nothing new was requested).
  */
 export async function subscribeEmail(
   input: SubscribeInput
-): Promise<{ subscriber: NewsletterSubscriber; outcome: SubscribeOutcome }> {
+): Promise<{ subscriber: NewsletterSubscriber; outcome: SubscribeOutcome; sendConfirmation: boolean }> {
   const email = input.email.trim().toLowerCase()
   const client = await getPool().connect()
   try {
@@ -40,12 +50,13 @@ export async function subscribeEmail(
 
     if (existing.rows.length === 0) {
       const inserted = await client.query<NewsletterSubscriber>(
-        `INSERT INTO newsletter_subscribers (email, weekly_newsletter, events_activities, source, status)
-         VALUES ($1, $2, $3, $4, 'subscribed')
+        `INSERT INTO newsletter_subscribers
+           (email, weekly_newsletter, events_activities, pending_weekly, pending_events, source, status, confirmation_sent_at)
+         VALUES ($1, false, false, $2, $3, $4, 'pending', NOW())
          RETURNING *`,
         [email, input.weeklyNewsletter, input.eventsActivities, input.source]
       )
-      return { subscriber: inserted.rows[0], outcome: 'created' }
+      return { subscriber: inserted.rows[0], outcome: 'confirmation_sent', sendConfirmation: true }
     }
 
     const current = existing.rows[0]
@@ -55,21 +66,78 @@ export async function subscribeEmail(
       (!input.eventsActivities || current.events_activities)
 
     if (alreadyHasEverythingRequested) {
-      return { subscriber: current, outcome: 'already_subscribed' }
+      return { subscriber: current, outcome: 'already_subscribed', sendConfirmation: false }
     }
 
+    const recentlySent =
+      current.confirmation_sent_at != null &&
+      Date.now() - new Date(current.confirmation_sent_at).getTime() < CONFIRMATION_COOLDOWN_MINUTES * 60 * 1000
+
+    // Only the lists not already live are parked as pending. A fresh token is
+    // issued whenever an email goes out, so older links stop working.
     const updated = await client.query<NewsletterSubscriber>(
       `UPDATE newsletter_subscribers SET
-         weekly_newsletter = weekly_newsletter OR $2,
-         events_activities = events_activities OR $3,
-         status = 'subscribed',
-         unsubscribed_at = NULL,
+         pending_weekly = pending_weekly OR ($2 AND NOT weekly_newsletter),
+         pending_events = pending_events OR ($3 AND NOT events_activities),
+         status = CASE WHEN status = 'unsubscribed' THEN 'pending' ELSE status END,
+         confirmation_token = CASE WHEN $4 THEN confirmation_token ELSE encode(gen_random_bytes(24), 'hex') END,
+         confirmation_sent_at = CASE WHEN $4 THEN confirmation_sent_at ELSE NOW() END,
          updated_at = NOW()
        WHERE email = $1
        RETURNING *`,
-      [email, input.weeklyNewsletter, input.eventsActivities]
+      [email, input.weeklyNewsletter, input.eventsActivities, recentlySent]
     )
-    return { subscriber: updated.rows[0], outcome: 'updated' }
+    return { subscriber: updated.rows[0], outcome: 'confirmation_sent', sendConfirmation: !recentlySent }
+  } finally {
+    client.release()
+  }
+}
+
+/** Called when the confirmation email failed to send, so a retry isn't blocked by the cooldown. */
+export async function resetConfirmationCooldown(email: string): Promise<void> {
+  await getPool().query(
+    `UPDATE newsletter_subscribers SET confirmation_sent_at = NULL WHERE email = $1 AND (status <> 'subscribed' OR pending_weekly OR pending_events)`,
+    [email.trim().toLowerCase()]
+  )
+}
+
+export type ConfirmResult =
+  | { ok: true; subscriber: NewsletterSubscriber }
+  | { ok: false; reason: 'invalid' | 'expired' }
+
+/** Applies the pending list choices and marks the address confirmed. Idempotent for an already-confirmed link. */
+export async function confirmByToken(token: string): Promise<ConfirmResult> {
+  const client = await getPool().connect()
+  try {
+    const found = await client.query<NewsletterSubscriber>(
+      `SELECT * FROM newsletter_subscribers WHERE confirmation_token = $1`,
+      [token]
+    )
+    if (found.rows.length === 0) return { ok: false, reason: 'invalid' }
+    const current = found.rows[0]
+
+    const nothingPending = !current.pending_weekly && !current.pending_events
+    if (nothingPending && current.status === 'subscribed') return { ok: true, subscriber: current }
+
+    const sentAt = current.confirmation_sent_at ? new Date(current.confirmation_sent_at).getTime() : 0
+    if (Date.now() - sentAt > CONFIRMATION_TTL_DAYS * 24 * 60 * 60 * 1000) return { ok: false, reason: 'expired' }
+
+    const confirmed = await client.query<NewsletterSubscriber>(
+      `UPDATE newsletter_subscribers SET
+         weekly_newsletter = weekly_newsletter OR pending_weekly,
+         events_activities = events_activities OR pending_events,
+         pending_weekly = false,
+         pending_events = false,
+         status = 'subscribed',
+         confirmed_at = COALESCE(confirmed_at, NOW()),
+         subscribed_at = NOW(),
+         unsubscribed_at = NULL,
+         updated_at = NOW()
+       WHERE confirmation_token = $1
+       RETURNING *`,
+      [token]
+    )
+    return { ok: true, subscriber: confirmed.rows[0] }
   } finally {
     client.release()
   }
@@ -101,6 +169,7 @@ export async function unsubscribeByToken(
       const result = await client.query<NewsletterSubscriber>(
         `UPDATE newsletter_subscribers SET
            status = 'unsubscribed', weekly_newsletter = false, events_activities = false,
+           pending_weekly = false, pending_events = false,
            unsubscribed_at = NOW(), updated_at = NOW()
          WHERE unsubscribe_token = $1 RETURNING *`,
         [token]
@@ -112,6 +181,8 @@ export async function unsubscribeByToken(
     const result = await client.query<NewsletterSubscriber>(
       `UPDATE newsletter_subscribers SET
          ${column} = false,
+         pending_weekly = CASE WHEN $2 = 'weekly_newsletter' THEN false ELSE pending_weekly END,
+         pending_events = CASE WHEN $2 = 'events_activities' THEN false ELSE pending_events END,
          status = CASE WHEN NOT (
            CASE WHEN $2 = 'weekly_newsletter' THEN events_activities ELSE weekly_newsletter END
          ) THEN 'unsubscribed' ELSE status END,

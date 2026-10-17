@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { isUsablePhotoUrl } from '@/lib/imageUtils'
+import { isUsablePhotoUrl, getStockVenueImage } from '@/lib/imageUtils'
 import { Badge } from '@/components/ui/badge'
 import { getCityBySlug, getFilterBySlug, getNearbyCities } from '@/lib/venues'
 import { getStaticVenuesByTown } from '@/lib/staticVenues'
@@ -235,16 +235,17 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
                             loading="lazy"
                           />
                         ) : (
-                          <div
-                            className="absolute inset-0"
-                            style={{
-                              background: `linear-gradient(135deg, hsl(${(index * 47 + 262) % 360}, 70%, 55%), hsl(${(index * 47 + 320) % 360}, 60%, 50%))`,
-                            }}
-                          >
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white/20 text-5xl font-bold select-none">{venue.name.charAt(0)}</span>
-                            </div>
-                          </div>
+                          <>
+                            <Image
+                              src={getStockVenueImage(venue.slug)}
+                              alt="Illustrative stock photo of children playing"
+                              fill
+                              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                              className="object-cover"
+                              loading="lazy"
+                            />
+                            <span className="absolute bottom-1.5 right-1.5 rounded bg-black/50 px-1.5 py-0.5 text-[10px] text-white/90">Stock photo</span>
+                          </>
                         )}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                         {venue.avg_rating && Number(venue.avg_rating) > 0 ? (

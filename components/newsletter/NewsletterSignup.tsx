@@ -66,12 +66,12 @@ export function NewsletterSignup({
       <div className={cn('rounded-xl border border-purple-200 bg-purple-50 px-5 py-4 text-center', className)}>
         <CheckCircle2 className="mx-auto mb-2 h-6 w-6 text-purple-600" />
         <p className="text-sm font-semibold text-slate-900">
-          {status === 'already' ? "You're already subscribed" : "You're on the list!"}
+          {status === 'already' ? "You're already subscribed" : 'Check your inbox to confirm'}
         </p>
         <p className="mt-1 text-xs text-slate-500">
           {status === 'already'
             ? 'That email is already signed up — no action needed.'
-            : "Keep an eye on your inbox — we'll send our next update soon."}
+            : "We've sent you a confirmation email. Click the link inside to finish subscribing — check your spam folder if it doesn't arrive."}
         </p>
       </div>
     )
