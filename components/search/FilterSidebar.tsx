@@ -49,11 +49,17 @@ export const SORT_OPTIONS_NO_LOCATION = [
 
 interface FilterSidebarProps {
   hasLocation?: boolean
+  /**
+   * Whether any venue in the current result set has structured opening hours.
+   * When false the "Open Now" option is hidden — it could only ever return
+   * nothing, which reads as "nowhere is open" rather than "we don't know".
+   */
+  openNowAvailable?: boolean
   showSort?: boolean
   className?: string
 }
 
-export function FilterSidebar({ hasLocation = false, showSort = true, className }: FilterSidebarProps) {
+export function FilterSidebar({ hasLocation = false, showSort = true, openNowAvailable = true, className }: FilterSidebarProps) {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -156,7 +162,7 @@ export function FilterSidebar({ hasLocation = false, showSort = true, className 
       </FilterSection>
 
       <FilterSection title="Special">
-        {SPECIAL_OPTIONS.map((opt) => (
+        {SPECIAL_OPTIONS.filter((opt) => opt.key !== 'open-now' || openNowAvailable).map((opt) => (
           <CheckRow
             key={opt.key}
             name="special"

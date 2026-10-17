@@ -29,7 +29,7 @@ export const revalidate = 3600
 export async function generateMetadata(): Promise<Metadata> {
   const { total } = await getVenueCounts()
   const countStr = formatVenueTotal(total)
-  const description = `Find ${countStr} soft play centres near you across the UK. Search by postcode, compare prices, opening times and facilities. Free directory, updated daily.`
+  const description = `Find ${countStr} soft play centres near you across the UK. Search by postcode and compare facilities, reviews and contact details. Free directory.`
   // Next.js replaces (does not deep-merge) the whole `openGraph` / `twitter`
   // object when a page defines one, so anything the root layout set here has to
   // be restated. Omitting `card` previously silently downgraded the homepage's
@@ -58,8 +58,11 @@ const HOME_FAQS = [
     answer: 'Most soft play centres welcome children from babies up to around 11-12 years old. Many have separate areas for toddlers (under 3s or 4s) to ensure they can play safely away from older children.',
   },
   {
+    // TODO(owner): replace with a sourced typical price range (and its date) once
+    // enough venues publish prices — only a handful of listings hold a price today,
+    // so no range is quoted rather than an unsupported one.
     question: 'How much does soft play cost?',
-    answer: 'Prices typically range from \u00A34-10 per child for a standard session. Many venues offer discounts for siblings, and under 1s often go free. Off-peak sessions are usually cheaper than weekends and school holidays.',
+    answer: 'Prices vary by venue, the child\u2019s age and the time of day, and many venues price babies, siblings and peak or off-peak sessions differently. We show a starting price on a venue\u2019s listing only where the venue has published one \u2014 otherwise check the venue\u2019s own website or call before you go.',
   },
   {
     question: 'What should I bring to soft play?',
@@ -176,7 +179,7 @@ export default async function Home() {
               Find the Best Soft Play Centres Near You
             </h1>
             <p className="text-purple-100 text-lg mb-8">
-              Search {venueCountDisplay} indoor play centres across the UK. Compare facilities, check opening times, and find the perfect venue for your family.
+              Search {venueCountDisplay} indoor play centres across the UK. Compare facilities and reviews, see opening hours where venues have published them, and find the right venue for your family.
             </p>
 
             <SearchHero />
@@ -252,7 +255,7 @@ export default async function Home() {
               <ol className="space-y-5">
                 {[
                   { step: '1', title: 'Search by location', desc: 'Enter your postcode or city to find venues nearby' },
-                  { step: '2', title: 'Compare venues', desc: 'Check facilities, prices, opening times, and reviews' },
+                  { step: '2', title: 'Compare venues', desc: 'Check facilities, ratings and reviews, plus opening hours and prices where venues list them' },
                   { step: '3', title: 'Visit and enjoy', desc: 'Confirm opening times with the venue, get directions, and go' },
                 ].map(({ step, title, desc }) => (
                   <li key={step} className="flex gap-3">
@@ -484,7 +487,7 @@ export default async function Home() {
           <div className="grid md:grid-cols-3 gap-8">
             {[
               { icon: Search, title: 'Easy to Search', desc: 'Find soft play centres by postcode or location. Filter by facilities, distance, and special features.' },
-              { icon: Clock, title: 'Up-to-Date Info', desc: 'Check opening times, prices, and facilities before you visit. See what\u2019s open now.' },
+              { icon: Clock, title: 'Honest Listings', desc: 'Every listing shows facilities, ratings and contact details. Opening hours and prices appear where venues have published them \u2014 and we say so when they haven\u2019t.' },
               { icon: Heart, title: 'Family Focused', desc: 'Built by parents, for parents. We understand what matters when choosing a soft play venue.' },
             ].map(({ icon: Icon, title, desc }) => (
               <div key={title} className="text-center">

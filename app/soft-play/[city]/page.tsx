@@ -1,3 +1,4 @@
+import { cache } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
@@ -30,6 +31,11 @@ import { isVerified } from '@/lib/plans'
 import { FeaturedImpression } from '@/components/venue/FeaturedImpression'
 import { LONDON_AREAS, getLondonAreaSlug } from '@/lib/londonAreas'
 import { getCityVenueCount } from '@/lib/venueCounts'
+import { computeCityStats } from '@/lib/cityStats'
+import { isOpenNow } from '@/lib/utils'
+import { buildCityMeta } from '@/lib/cityMeta'
+import { hasStructuredHours } from '@/lib/venueFacts'
+import { VenueCardFacts } from '@/components/venue/VenueCardFacts'
 
 interface PageProps {
   params: Promise<{ city: string }>
@@ -82,6 +88,7 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
   const { city } = await params
   const { filter, search, age, facilities, price, special, area, page } = await searchParams
   const cityConfig = getCityBySlug(city)
+  const staticTown = getStaticTownBySlug(city)
 
   // Prevent indexing of filtered / searched / paginated variations. Page 1
   // (the default, whether ?page=1 is explicit or omitted) is the canonical,
@@ -91,68 +98,42 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
   const pageNum = Math.max(1, parseInt(page || '1', 10) || 1)
   const noindex = !!(filter || search || age || facilities || price || special || area || pageNum > 1)
 
-  if (!cityConfig) {
-    const staticTown = getStaticTownBySlug(city)
-    if (!staticTown) {
-      // No suffix — the root layout's title template appends it. Never index a
-      // not-found response, otherwise it inherits the root `index: true`.
-      return { title: 'City Not Found', robots: { index: false, follow: false } }
-    }
-
-    // Use content generator for unique meta titles/descriptions
-    const generated = getLocationContent(city, undefined, staticTown)
-    const title = generated.metaTitle
-    const description = generated.metaDescription
-
-    const ogImage = getCityOgImage(city)
-    return {
-      title: metadataTitle(title),
-      description,
-      ...(noindex && { robots: { index: false, follow: true } }),
-      openGraph: {
-        title,
-        description,
-        url: `https://www.softplaynearme.co.uk/soft-play/${city}`,
-        type: 'website',
-        siteName: 'Soft Play Near Me',
-        images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
-      },
-      twitter: {
-        card: 'summary_large_image',
-        title,
-        description,
-        images: [ogImage],
-      },
-      alternates: {
-        canonical: `https://www.softplaynearme.co.uk/soft-play/${city}`,
-      },
-    }
+  if (!cityConfig && !staticTown) {
+    // No suffix — the root layout's title template appends it. Never index a
+    // not-found response, otherwise it inherits the root `index: true`.
+    return { title: 'City Not Found', robots: { index: false, follow: false } }
   }
 
-  // Use content generator for richer meta if hand-written is thin
-  const generated = getLocationContent(city, cityConfig, null)
-  const ogImage = getCityOgImage(city)
+  const name = cityConfig?.name || staticTown?.name || city
+  const county = cityConfig?.county || ''
 
+  // Title and description are generated from this city's real data, so they
+  // never promise prices/hours/ages the venue cards can't show (lib/cityMeta.ts).
+  const venues = await getCityVenuesAll(city)
+  const { title, description } = buildCityMeta(name, county, computeCityStats(venues.map(toStatsVenue)))
+
+  const ogImage = getCityOgImage(city)
+  const url = `https://www.softplaynearme.co.uk/soft-play/${city}`
   return {
-    title: metadataTitle(generated.metaTitle),
-    description: generated.metaDescription,
+    title,
+    description,
     ...(noindex && { robots: { index: false, follow: true } }),
     openGraph: {
-      title: generated.metaTitle,
-      description: generated.metaDescription,
-      url: `https://www.softplaynearme.co.uk/soft-play/${city}`,
+      title,
+      description,
+      url,
       type: 'website',
       siteName: 'Soft Play Near Me',
-      images: [{ url: ogImage, width: 1200, height: 630, alt: generated.metaTitle }],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
     },
     twitter: {
       card: 'summary_large_image',
-      title: generated.metaTitle,
-      description: generated.metaDescription,
+      title,
+      description,
       images: [ogImage],
     },
     alternates: {
-      canonical: `https://www.softplaynearme.co.uk/soft-play/${city}`,
+      canonical: url,
     },
   }
 }
@@ -178,7 +159,11 @@ interface Venue {
   wheelchair_access?: boolean
   price_from?: number | null
   price_to?: number | null
+  age_range_min?: number | null
+  age_range_max?: number | null
+  age_ranges?: string[] | null
   opening_hours?: unknown
+  opening_hours_text?: string | null
   avg_rating?: number
   review_count?: number
   mapsUrl?: string
@@ -228,6 +213,7 @@ function staticToDisplayVenue(sv: StaticVenue): Venue {
     wheelchair_access: sv.wheelchairAccess ?? false,
     price_from: sv.priceFrom ?? null,
     price_to: sv.priceTo ?? null,
+    opening_hours_text: sv.openingHoursText || null,
     isStatic: true,
     last_verified_at: sv.lastVerified || undefined,
     featured: sv.featured ?? false,
@@ -321,7 +307,8 @@ async function getVenues(citySlug: string, opts: VenueFilters = {}): Promise<Ven
         featured: !!row.featured && (!row.featured_until || new Date(row.featured_until) > new Date()),
       }))
       if (special.includes('open-now') && venues.length > 0) {
-        const { isOpenNow } = await import('@/lib/utils')
+        // Venues with no structured hours are never "open now" — isOpenNow()
+        // is false for them rather than guessing.
         venues = venues.filter((v) => isOpenNow(v.opening_hours as Record<string, unknown>))
       }
       // The query succeeded, so the DB is authoritative even when it returns
@@ -372,6 +359,9 @@ async function getVenues(citySlug: string, opts: VenueFilters = {}): Promise<Ven
   if (price === '5to8') venues = venues.filter((v) => v.price_from != null && v.price_from >= 5 && v.price_from <= 8)
   if (price === 'over8') venues = venues.filter((v) => v.price_from != null && v.price_from > 8)
   if (special.includes('wheelchair')) venues = venues.filter((v) => v.wheelchair_access)
+  // The static export only carries free-text hours, which can't be checked
+  // against the clock — so without the DB nothing can honestly be "open now".
+  if (special.includes('open-now')) venues = venues.filter((v) => isOpenNow(v.opening_hours as Record<string, unknown> | null))
 
   if (search) {
     const q = search.toLowerCase()
@@ -391,6 +381,31 @@ async function getVenues(citySlug: string, opts: VenueFilters = {}): Promise<Ven
   venues.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0))
 
   return applyAreaFilter(venues)
+}
+
+/** Unfiltered venue list for a city, shared (per request) by metadata and page. */
+const getCityVenuesAll = cache(async (citySlug: string): Promise<Venue[]> => getVenues(citySlug, {}))
+
+/** Narrow a display venue to the shape lib/cityStats.ts works on. */
+function toStatsVenue(v: Venue) {
+  return {
+    name: v.name,
+    slug: v.slug,
+    avg_rating: v.avg_rating ?? null,
+    review_count: v.review_count ?? null,
+    toddler_area: v.toddler_area,
+    baby_area: v.baby_area,
+    sen_friendly: v.sen_friendly,
+    parties: v.parties,
+    price_from: v.price_from,
+    price_to: v.price_to,
+    age_range_min: v.age_range_min,
+    age_range_max: v.age_range_max,
+    age_ranges: v.age_ranges,
+    opening_hours: v.opening_hours,
+    opening_hours_text: v.opening_hours_text,
+    last_verified_at: v.last_verified_at,
+  }
 }
 
 interface SponsoredVenue {
@@ -444,6 +459,12 @@ export default async function CityPage({ params, searchParams }: PageProps) {
   // Unfiltered venue total for this city, from the same helper the homepage
   // cards and meta descriptions use (lib/venueCounts.ts).
   const cityVenueCount = await getCityVenueCount(city)
+  // "Open Now" only works for venues with structured hours. If none of this
+  // city's venues have any, offering the filter would just return nothing (or,
+  // worse, imply an answer) — hide it instead.
+  const allCityVenues = await getCityVenuesAll(city)
+  const openNowAvailable = allCityVenues.some((v) => hasStructuredHours(v.opening_hours))
+  const visibleFilters = filters.filter((f) => f.slug !== 'open-now' || openNowAvailable)
   const nearbyCities = cityConfig ? getNearbyCities(city) : []
 
   // Pagination — see VENUES_PER_PAGE above for why. Clamp to the real last
@@ -628,7 +649,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                   All Venues
                 </Button>
               </Link>
-              {filters.map((f) => (
+              {visibleFilters.map((f) => (
                 <Link key={f.slug} href={`/soft-play/${city}/${f.slug}`}>
                   <Button variant="outline" size="sm">
                     {f.name}
@@ -652,11 +673,11 @@ export default async function CityPage({ params, searchParams }: PageProps) {
             <aside className="lg:col-span-1 mb-6 lg:mb-0">
               {/* Mobile sticky filter bar */}
               <div className="lg:hidden sticky top-[104px] z-30 bg-white border border-slate-200 rounded-xl px-4 py-3 mb-4 shadow-sm">
-                <FilterSidebar showSort />
+                <FilterSidebar showSort openNowAvailable={openNowAvailable} />
               </div>
               {/* Desktop sidebar */}
               <div className="hidden lg:block sticky top-24">
-                <FilterSidebar showSort />
+                <FilterSidebar showSort openNowAvailable={openNowAvailable} />
               </div>
             </aside>
 
@@ -834,7 +855,8 @@ export default async function CityPage({ params, searchParams }: PageProps) {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {pagedVenues.map((venue, index) => {
-                const hasFeatures = venue.toddler_area || venue.parties || venue.cafe || venue.parking || venue.sen_friendly
+                const hasFeatures = venue.toddler_area || venue.baby_area || venue.parties || venue.cafe || venue.parking || venue.sen_friendly
+                const verifiedOn = formatLastVerified(venue.last_verified_at)
                 const displayImage = isUsablePhotoUrl(venue.main_image_url) ? venue.main_image_url : null
                 return (
                 <Card key={venue.slug} className="group hover:shadow-lg transition-all duration-200 border-slate-200 overflow-hidden h-full flex flex-col">
@@ -917,6 +939,9 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                       <span className="truncate">{venue.address || venue.postcode}</span>
                     </div>
 
+                    {/* Practical facts — hours/price only when we hold them */}
+                    <VenueCardFacts venue={venue} />
+
                     {/* Genuine review quote only — never the generic AI description */}
                     {getCardQuote(venue.review_snippet) && (
                       <p className="text-slate-600 text-sm mb-3 line-clamp-2 italic">
@@ -930,6 +955,11 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                         {venue.toddler_area && (
                           <Badge variant="outline" className="text-xs gap-1 border-blue-200 text-blue-700 bg-blue-50">
                             <Baby className="w-3 h-3" /> Toddler
+                          </Badge>
+                        )}
+                        {venue.baby_area && (
+                          <Badge variant="outline" className="text-xs gap-1 border-blue-200 text-blue-700 bg-blue-50">
+                            <Baby className="w-3 h-3" /> Baby area
                           </Badge>
                         )}
                         {venue.parties && (
@@ -955,9 +985,9 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                       </div>
                     )}
 
-                    {formatLastVerified(venue.last_verified_at) && (
+                    {verifiedOn && (
                       <p className="text-xs text-slate-400 mt-2">
-                        Verified {formatLastVerified(venue.last_verified_at)}
+                        Verified {verifiedOn}
                       </p>
                     )}
                   </div>
@@ -1041,7 +1071,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
           <section aria-labelledby="category-heading" className="mt-12">
             <h2 id="category-heading" className="text-xl font-semibold mb-4">Browse by Category in {displayName}</h2>
             <div className="flex flex-wrap gap-2">
-              {filters.map((f) => (
+              {visibleFilters.map((f) => (
                 <Link key={f.slug} href={`/soft-play/${city}/${f.slug}`}>
                   <Badge variant="outline" className="hover:bg-purple-50 hover:border-purple-300 cursor-pointer py-1.5 px-3">
                     {f.name} in {displayName}

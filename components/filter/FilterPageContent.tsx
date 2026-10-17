@@ -15,8 +15,11 @@ import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 import { buildBreadcrumbSchema, buildFAQSchema, buildItemListSchema, buildCollectionPageSchema } from '@/lib/schema'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { isOpenNow } from '@/lib/utils'
+import { hasStructuredHours } from '@/lib/venueFacts'
+import { isVisibleVenueType, visibleVenueTypeSql } from '@/lib/venueTypes'
 import { getFilterContent, type FilterSlug } from '@/lib/filterContent'
 import { getCardQuote, formatLastVerified } from '@/lib/venueCardText'
+import { VenueCardFacts } from '@/components/venue/VenueCardFacts'
 
 interface FilterVenue {
   id: number
@@ -37,11 +40,23 @@ interface FilterVenue {
   avg_rating?: number
   review_count?: number
   opening_hours?: Record<string, unknown>
+  opening_hours_text?: string | null
+  price_from?: number | null
+  price_to?: number | null
+  age_range_min?: number | null
+  age_range_max?: number | null
+  age_ranges?: string[] | null
   website?: string
   venue_type?: string | null
 }
 
-async function getFilteredVenues(citySlug: string, filterSlug: FilterSlug): Promise<FilterVenue[]> {
+interface FilteredVenues {
+  venues: FilterVenue[]
+  /** Whether any venue in the city has structured hours — i.e. whether "open now" can be answered at all. */
+  hoursDataAvailable: boolean
+}
+
+async function getFilteredVenues(citySlug: string, filterSlug: FilterSlug): Promise<FilteredVenues> {
   const filterConfig = getFilterBySlug(filterSlug)
   const dbColumn = filterConfig?.dbColumn ?? null
 
@@ -49,7 +64,9 @@ async function getFilteredVenues(citySlug: string, filterSlug: FilterSlug): Prom
     const pool = getPool()
     const client = await pool.connect()
     try {
-      // Build WHERE clause — open-now fetches all venues and filters client-side
+      // Same scope as the city hub's main listing (genuine soft play only, see
+      // lib/venueTypes.ts) so "N toddler-friendly venues" here matches the hub.
+      // Open-now fetches all venues and filters client-side.
       const whereExtra = dbColumn ? `AND v.${dbColumn} = true` : ''
       const result = await client.query<FilterVenue>(
         `SELECT v.*,
@@ -57,7 +74,7 @@ async function getFilteredVenues(citySlug: string, filterSlug: FilterSlug): Prom
                 CASE WHEN COUNT(r.id) > 0 THEN COUNT(r.id) ELSE COALESCE(v.reviews_count, 0) END AS review_count
          FROM venues v
          LEFT JOIN reviews r ON r.venue_id = v.id AND r.approved = true
-         WHERE v.city_slug = $1 AND v.is_active = true ${whereExtra}
+         WHERE v.city_slug = $1 AND v.is_active = true AND ${visibleVenueTypeSql()} ${whereExtra}
          GROUP BY v.id
          ORDER BY avg_rating DESC NULLS LAST, v.reviews_count DESC NULLS LAST, v.name ASC`,
         [citySlug]
@@ -65,9 +82,12 @@ async function getFilteredVenues(citySlug: string, filterSlug: FilterSlug): Prom
       const rows = result.rows
 
       if (filterSlug === 'open-now') {
-        return rows.filter((v) => isOpenNow(v.opening_hours ?? null))
+        return {
+          venues: rows.filter((v) => isOpenNow(v.opening_hours ?? null)),
+          hoursDataAvailable: rows.some((v) => hasStructuredHours(v.opening_hours)),
+        }
       }
-      if (rows.length > 0) return rows
+      if (rows.length > 0) return { venues: rows, hoursDataAvailable: true }
     } finally {
       client.release()
     }
@@ -78,14 +98,18 @@ async function getFilteredVenues(citySlug: string, filterSlug: FilterSlug): Prom
     }
   }
 
-  // Static data fallback
-  const staticVenues = getStaticVenuesByTown(citySlug)
+  // Static data fallback. The static export only has free-text hours, which
+  // can't be checked against the clock, so "open now" can't be answered here.
+  // (This used to fall through and list EVERY venue as open now.)
+  if (filterSlug === 'open-now') return { venues: [], hoursDataAvailable: false }
+
+  const staticVenues = getStaticVenuesByTown(citySlug).filter((v) => isVisibleVenueType(v.venueType))
   let filtered = staticVenues
   if (filterSlug === 'toddler') filtered = staticVenues.filter((v) => v.toddlerArea)
   else if (filterSlug === 'birthday-parties') filtered = staticVenues.filter((v) => v.parties)
   else if (filterSlug === 'sen-friendly') filtered = staticVenues.filter((v) => v.senFriendly)
 
-  return filtered.map((v) => ({
+  const venues = filtered.map((v) => ({
     id: 0,
     name: v.name,
     slug: v.slug,
@@ -102,7 +126,11 @@ async function getFilteredVenues(citySlug: string, filterSlug: FilterSlug): Prom
     avg_rating: v.rating ?? undefined,
     review_count: v.reviewCount ?? undefined,
     last_verified_at: v.lastVerified || undefined,
+    opening_hours_text: v.openingHoursText || null,
+    price_from: v.priceFrom ?? null,
+    price_to: v.priceTo ?? null,
   }))
+  return { venues, hoursDataAvailable: true }
 }
 
 interface FilterPageContentProps {
@@ -118,7 +146,7 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
     notFound()
   }
 
-  const venues = await getFilteredVenues(citySlug, filterSlug)
+  const { venues, hoursDataAvailable } = await getFilteredVenues(citySlug, filterSlug)
   const content = getFilterContent(filterSlug)
   const nearbyCities = getNearbyCities(citySlug).slice(0, 6)
 
@@ -205,10 +233,22 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
                   ? <span className="text-slate-400 scale-[3]">{primaryBadgeIcon}</span>
                   : <MapPin className="w-8 h-8 text-slate-300" />}
               </div>
-              <h3 className="text-xl font-semibold text-slate-700 mb-2">No {filterConfig.name.toLowerCase()} venues listed yet</h3>
-              <p className="text-slate-500 mb-6 max-w-sm mx-auto">
-                Check back soon, or view all soft play venues in {cityName}.
-              </p>
+              {filterSlug === 'open-now' && !hoursDataAvailable ? (
+                <>
+                  <h3 className="text-xl font-semibold text-slate-700 mb-2">Opening hours not available yet</h3>
+                  <p className="text-slate-500 mb-6 max-w-sm mx-auto">
+                    We don&apos;t hold checkable opening hours for {cityName} venues, so we can&apos;t say which are open right now.
+                    Each venue page shows whatever hours we do have.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <h3 className="text-xl font-semibold text-slate-700 mb-2">No {filterConfig.name.toLowerCase()} venues listed yet</h3>
+                  <p className="text-slate-500 mb-6 max-w-sm mx-auto">
+                    Check back soon, or view all soft play venues in {cityName}.
+                  </p>
+                </>
+              )}
               <Link href={`/soft-play/${citySlug}`}>
                 <Button className="bg-purple-600 hover:bg-purple-700">View All Venues in {cityName}</Button>
               </Link>
@@ -268,6 +308,8 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
                         <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
                         <span className="truncate">{venue.address || venue.postcode}</span>
                       </div>
+
+                      <VenueCardFacts venue={venue} />
 
                       {getCardQuote(venue.review_snippet) && (
                         <p className="text-slate-600 text-sm mb-3 line-clamp-2 italic">
@@ -419,7 +461,7 @@ export async function buildFilterMetadata(citySlug: string, filterSlug: FilterSl
   }
 
   const content = getFilterContent(filterSlug)
-  const venues = await getFilteredVenues(citySlug, filterSlug)
+  const { venues } = await getFilteredVenues(citySlug, filterSlug)
 
   const title = filterConfig.metaTitleTemplate.replace('{city}', cityConfig.name)
   const description = filterConfig.metaDescriptionTemplate.replace('{city}', cityConfig.name)
@@ -428,8 +470,10 @@ export async function buildFilterMetadata(citySlug: string, filterSlug: FilterSl
   return {
     title,
     description,
-    // Noindex thin pages — no matching venues in this city for this filter
-    ...(venues.length === 0 && { robots: { index: false, follow: true } }),
+    // Noindex thin pages (no matching venues in this city for this filter) and
+    // "open now" always: its result set changes by the minute, so it is never a
+    // stable page worth indexing (it is also left out of the sitemap).
+    ...((venues.length === 0 || filterSlug === 'open-now') && { robots: { index: false, follow: true } }),
     openGraph: {
       title,
       description,

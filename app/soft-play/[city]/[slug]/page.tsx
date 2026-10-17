@@ -49,6 +49,7 @@ import { EnquiryForm } from '@/components/venue/EnquiryForm'
 import { ReportIssueLink } from '@/components/venue/ReportIssueLink'
 import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup'
 import { VenueViewTracking } from '@/components/venue/VenueViewTracking'
+import { cleanHoursText, hasOpeningHours, hasPrice } from '@/lib/venueFacts'
 
 interface PageProps {
   params: Promise<{ city: string; slug: string }>
@@ -69,6 +70,7 @@ interface Venue {
   booking_url?: string
   description?: string
   opening_hours?: Record<string, string>
+  opening_hours_text?: string | null
   price_range?: string
   price_from?: number
   price_to?: number
@@ -248,6 +250,7 @@ function staticToVenue(sv: StaticVenue): Venue {
     has_outdoor_play: sv.hasOutdoorPlay ?? false,
     has_party_rooms: sv.hasPartyRooms ?? false,
     has_sen_sessions: sv.hasSenSessions ?? false,
+    opening_hours_text: sv.openingHoursText || undefined,
     price_from: sv.priceFrom ?? undefined,
     price_to: sv.priceTo ?? undefined,
     main_image_url: sv.mainImageUrl ?? undefined,
@@ -494,7 +497,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const county = cityConfig?.county || ''
 
   // Use stored overrides when available, fall back to generated copy
-  const title = venue.seo_title || `${venue.name} – Soft Play in ${cityName} | Hours & Prices`
+  // Only promise what the page can show: hours and/or prices when we hold them.
+  const promised = [
+    hasOpeningHours(venue) ? 'Hours' : null,
+    hasPrice(venue) ? 'Prices' : null,
+  ].filter(Boolean).join(' & ')
+  const title = venue.seo_title || `${venue.name} – Soft Play in ${cityName}${promised ? ` | ${promised}` : ''}`
   const description =
     venue.meta_description ||
     venue.description ||
@@ -762,7 +770,7 @@ export default async function VenuePage({ params }: PageProps) {
                 priceFrom={venue.price_from}
                 priceTo={venue.price_to}
                 priceRange={venue.price_range}
-                hasOpeningHours={!!venue.opening_hours}
+                hasOpeningHours={hasOpeningHours(venue)}
                 cafe={venue.cafe}
                 parking={venue.parking}
                 parties={venue.parties}
@@ -1140,6 +1148,30 @@ export default async function VenuePage({ params }: PageProps) {
                 {/* Opening Hours */}
                 {venue.opening_hours ? (
                   <OpeningHours hours={venue.opening_hours} />
+                ) : cleanHoursText(venue.opening_hours_text) ? (
+                  // No structured hours, but we do hold the venue's listed hours as
+                  // text — show them as listed rather than claiming nothing is known.
+                  <Card>
+                    <CardHeader className="pb-4">
+                      <CardTitle className="flex items-center gap-2 text-lg">
+                        <Clock className="h-5 w-5 text-purple-600" />
+                        Opening Hours
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="space-y-1 text-sm text-slate-700">
+                        {cleanHoursText(venue.opening_hours_text)
+                          .split(/\s*[|;]\s*/)
+                          .filter(Boolean)
+                          .map((line) => (
+                            <li key={line}>{line}</li>
+                          ))}
+                      </ul>
+                      <p className="mt-3 text-xs text-slate-500">
+                        Hours as listed for {venue.name} &mdash; confirm with the venue before travelling, especially in school holidays.
+                      </p>
+                    </CardContent>
+                  </Card>
                 ) : (
                   <Card>
                     <CardHeader className="pb-4">

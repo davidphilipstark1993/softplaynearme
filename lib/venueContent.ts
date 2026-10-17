@@ -213,7 +213,13 @@ export function generateVenueMetaDescription(v: VenueContentInput): string {
     desc += ` Includes ${highlights}.`
   }
 
-  desc += ' Find opening hours, prices, directions, and more.'
+  // Only promise what the page will actually show.
+  const shown = [
+    v.opening_hours && Object.keys(v.opening_hours).length > 0 ? 'opening hours' : null,
+    v.price_from ? 'prices' : null,
+    'directions',
+  ].filter(Boolean) as string[]
+  desc += ` Find ${listItems(shown)} and contact details.`
 
   // Trim to 160 chars max
   if (desc.length > 160) {
