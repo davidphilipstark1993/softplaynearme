@@ -648,19 +648,6 @@ export default async function CityPage({ params, searchParams }: PageProps) {
           </div>
         )}
 
-        {/* Newsletter banner */}
-        <div className="bg-white border-b border-slate-200 py-6 px-4">
-          <div className="max-w-2xl mx-auto">
-            <NewsletterSignup
-              source="city_page_banner"
-              offer="events"
-              variant="inline"
-              heading={`Get ${displayName} events, free`}
-              subtext={`Events happening in ${displayName} this month and next — straight to your inbox.`}
-            />
-          </div>
-        </div>
-
         {/* Sticky Filters */}
         <div className="bg-white border-b border-slate-200 py-3 sticky top-16 z-40">
           <div className="max-w-7xl mx-auto px-4 overflow-x-auto">
@@ -690,16 +677,16 @@ export default async function CityPage({ params, searchParams }: PageProps) {
         <main id="main-content" className="max-w-7xl mx-auto px-4 py-8">
           <div className="lg:grid lg:grid-cols-4 lg:gap-8">
 
-            {/* Filter sidebar — sticky on desktop, collapsible on mobile */}
+            {/* Filter sidebar: one instance, laid out responsively — a sticky
+                collapsible bar on mobile, a sticky panel on desktop. (It used to
+                be rendered twice, putting two full copies of the filters in the HTML.) */}
             <aside className="lg:col-span-1 mb-6 lg:mb-0">
-              {/* Mobile sticky filter bar */}
-              <div className="lg:hidden sticky top-[104px] z-30 bg-white border border-slate-200 rounded-xl px-4 py-3 mb-4 shadow-sm">
-                <FilterSidebar showSort openNowAvailable={openNowAvailable} />
-              </div>
-              {/* Desktop sidebar */}
-              <div className="hidden lg:block sticky top-24">
-                <FilterSidebar showSort openNowAvailable={openNowAvailable} />
-              </div>
+              <FilterSidebar
+                showSort
+                openNowAvailable={openNowAvailable}
+                mobileClassName="sticky top-[104px] z-30 bg-white border border-slate-200 rounded-xl px-4 py-3 mb-4 shadow-sm"
+                desktopClassName="sticky top-24"
+              />
             </aside>
 
             {/* Venue content */}

@@ -255,14 +255,8 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             {/* Sidebar — sticky on desktop, collapsible bar on mobile (order-1 = top on mobile) */}
             <aside className="lg:col-span-1 order-1">
-              {/* Mobile sticky filter bar */}
-              <div className="lg:hidden sticky top-16 z-30 bg-white border border-slate-200 rounded-xl px-4 py-3 mb-4 shadow-sm">
-                <SearchFilters hasLocation={!!(lat && lng)} />
-              </div>
-              {/* Desktop sidebar */}
-              <div className="hidden lg:block sticky top-24">
-                <SearchFilters hasLocation={!!(lat && lng)} />
-              </div>
+              {/* One filter component, laid out responsively (sticky bar on mobile, panel on desktop) */}
+              <SearchFilters hasLocation={!!(lat && lng)} />
             </aside>
 
             <div className="lg:col-span-3 order-2">

@@ -57,9 +57,12 @@ interface FilterSidebarProps {
   openNowAvailable?: boolean
   showSort?: boolean
   className?: string
+  /** Extra classes for the mobile bar / desktop panel wrappers (e.g. sticky positioning). */
+  mobileClassName?: string
+  desktopClassName?: string
 }
 
-export function FilterSidebar({ hasLocation = false, showSort = true, openNowAvailable = true, className }: FilterSidebarProps) {
+export function FilterSidebar({ hasLocation = false, showSort = true, openNowAvailable = true, className, mobileClassName, desktopClassName }: FilterSidebarProps) {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -187,7 +190,7 @@ export function FilterSidebar({ hasLocation = false, showSort = true, openNowAva
   return (
     <>
       {/* Mobile: sticky collapsible bar */}
-      <div className={cn('lg:hidden', className)}>
+      <div className={cn('lg:hidden', className, mobileClassName)}>
         <button
           onClick={() => setMobileOpen((o) => !o)}
           className="flex w-full items-center gap-2 text-sm font-medium text-slate-700"
@@ -215,7 +218,7 @@ export function FilterSidebar({ hasLocation = false, showSort = true, openNowAva
       </div>
 
       {/* Desktop: full sidebar panel */}
-      <div className={cn('hidden lg:block', className)}>
+      <div className={cn('hidden lg:block', className, desktopClassName)}>
         <div className="bg-white rounded-xl border border-slate-200 p-5">
           <div className="flex items-center justify-between mb-5">
             <h2 className="font-semibold text-slate-900 flex items-center gap-2 text-sm">
