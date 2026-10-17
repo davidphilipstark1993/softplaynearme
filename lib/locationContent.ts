@@ -141,7 +141,7 @@ const INTRO_P5: string[] = [
 
   `{name} is well-positioned for families who want to explore different soft play venues across {county}. With options in {nearbyLinks}, you could try a different venue each week. Each one has its own character and specialities, so it's worth visiting a few to find your family's favourite.`,
 
-  `Our {name} soft play guide is updated regularly with new venues, changed opening times, and updated facilities. We work with local venue owners to keep information accurate. If you're a venue owner in {name} or {county}, you can claim your listing for free and manage your own profile.`,
+  `Venue details change, and the people best placed to keep them right are the venues themselves. If you run a soft play venue in {name} or {county}, you can claim your listing for free and manage your own profile \u2014 hours, photos and facilities \u2014 and if we've missed a venue, you can add it.`,
 
   `Choosing the right soft play in {name} depends on what your family needs. Some parents prioritise a good cafe and comfortable seating, others want the biggest climbing frame. [Search for venues near you](/search) and use our filters to compare what matters most to you across all the options in {county}.`,
 ]

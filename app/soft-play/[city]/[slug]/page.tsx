@@ -626,8 +626,11 @@ export default async function VenuePage({ params }: PageProps) {
     openingHours: venue.opening_hours,
     priceFrom: venue.price_from,
     priceTo: venue.price_to,
-    avgRating: avgRating > 0 ? avgRating : undefined,
-    reviewCount: reviews.length > 0 ? reviews.length : ((venue as any).reviews_count || undefined),
+    // AggregateRating only from reviews left on this site (shown in the Reviews
+    // section). The Google Maps rating in the header is third-party data: it stays
+    // visible (labelled "Google reviews") but is not put in structured data.
+    avgRating: reviews.length > 0 ? avgRating : undefined,
+    reviewCount: reviews.length > 0 ? reviews.length : undefined,
     reviews: reviews.length > 0
       ? reviews.slice(0, 10).map((review) => ({
           reviewerName: review.reviewer_name,

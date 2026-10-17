@@ -552,7 +552,6 @@ export default async function CityPage({ params, searchParams }: PageProps) {
   // Use reusable schema builders from lib/schema.ts
   const breadcrumbSchema = buildBreadcrumbSchema([
     { name: 'Home', url: baseUrl },
-    ...(county ? [{ name: county }] : []),
     { name: `Soft Play in ${displayName}`, url: `${baseUrl}/soft-play/${city}` },
   ])
 
@@ -642,10 +641,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
       <div className="min-h-screen bg-slate-50">
         <Header />
 
-        <Breadcrumbs items={[
-          ...(county ? [{ label: county }] : []),
-          { label: `Soft Play in ${displayName}` },
-        ]} />
+        <Breadcrumbs items={[{ label: `Soft Play in ${displayName}` }]} />
 
         {/* Hero */}
         <div className="bg-gradient-to-br from-purple-600 to-pink-500 text-white py-10 sm:py-12 px-4">
