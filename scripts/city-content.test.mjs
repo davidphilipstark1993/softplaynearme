@@ -42,19 +42,27 @@ test('FAQ: 4-6 questions, answered from data, no invented figures', { skip }, as
     for (const f of faqs) {
       assert.ok(f.question.endsWith('?'))
       assert.ok(f.answer.length > 20)
-      // any £ amount in an answer must be one of the sample's real prices
-      for (const m of f.answer.matchAll(/£(\d+(?:\.\d+)?)/g)) assert.ok(['6.50', '6.5', '8'].includes(m[1]), `unexpected price £${m[1]}`)
+      // any £ amount must be one of the sample's real prices or a figure from the labelled UK-wide guide (lib/typicalCosts.ts)
+      for (const m of f.answer.matchAll(/£(\d+(?:\.\d+)?)/g)) assert.ok(['6.50', '6.5', '8', '4', '10', '14', '135', '270'].includes(m[1]), `unexpected price £${m[1]}`)
     }
   }
   assert.deepEqual(buildCityFaqs({ name: 'Empty', county: '', slug: 'e', venues: [] }), [])
 })
 
-test('FAQ: price answer quotes no typical range when there is no price data', { skip }, async () => {
+test('FAQ: with no price data the cost answer uses only the labelled UK-wide guide', { skip }, async () => {
   const { buildCityFaqs } = await import('../lib/cityContent.ts')
   const faqs = buildCityFaqs({ name: 'Testville', county: '', slug: 't', venues: sample.slice(1) })
   const price = faqs.find((f) => /cost/i.test(f.question))
   assert.ok(price)
-  assert.doesNotMatch(price.answer, /£|\d+\s*(to|-)\s*\d+/)
+  assert.match(price.answer, /UK-wide guide \(published venue prices, checked October 2026\)/)
+  assert.doesNotMatch(price.answer, /Published prices (run|are)/, 'no city-specific price claim without data')
+})
+
+test('parties and opening-hours answers carry the labelled guide too', { skip }, async () => {
+  const { buildCityFaqs } = await import('../lib/cityContent.ts')
+  const faqs = buildCityFaqs({ name: 'Testville', county: '', slug: 't', venues: [v({ name: 'P', slug: 'p', parties: true })] })
+  assert.match(faqs.find((f) => /party/i.test(f.question)).answer, /UK-wide guide.*party typically costs about £10–£14 per child/)
+  assert.match(faqs.find((f) => /opening hours/i.test(f.question)).answer, /most soft play centres open around 9:30am/)
 })
 
 test('smoothed rating: small samples cannot outrank large ones', { skip }, async () => {

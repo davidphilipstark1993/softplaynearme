@@ -204,9 +204,15 @@
     "avgRating": "4.4"
   },
   {
+    "name": "Scunthorpe",
+    "slug": "scunthorpe",
+    "venueCount": 3,
+    "avgRating": "4.4"
+  },
+  {
     "name": "Sheffield",
     "slug": "doncaster",
-    "venueCount": 28,
+    "venueCount": 25,
     "avgRating": "4.4"
   },
   {

@@ -6,6 +6,7 @@
  */
 import { MIN_REVIEWS_FOR_TOP_RATED, computeCityStats, rankTopRated, type StatsVenue } from './cityStats'
 import { hasOpeningHours, formatPrice } from './venueFacts'
+import { TYPICAL_SESSION_SENTENCE, TYPICAL_PARTY_SENTENCE, TYPICAL_HOURS_SENTENCE } from './typicalCosts'
 
 export interface CityContentVenue extends StatsVenue {
   review_count?: number | string | null
@@ -136,8 +137,8 @@ export function buildCityFaqs(input: CityContentInput): Faq[] {
   faqs.push({
     question: `Can I book a birthday party at soft play in ${name}?`,
     answer: parties.length
-      ? `${parties.length} of ${n} ${name} venues are listed as offering birthday parties, including ${list(sampleNames(parties))}. Party packages, prices and availability are set by each venue, so ask them directly.`
-      : `None of the ${n} venues we list in ${name} are currently marked as offering birthday parties. Some may still take party bookings, so ask the venue.`,
+      ? `${parties.length} of ${n} ${name} venues are listed as offering birthday parties, including ${list(sampleNames(parties))}. Package contents, prices and availability are set by each venue, so ask them directly. ${TYPICAL_PARTY_SENTENCE}`
+      : `None of the ${n} venues we list in ${name} are currently marked as offering birthday parties. Some may still take party bookings, so ask the venue. ${TYPICAL_PARTY_SENTENCE}`,
   })
 
   const sen = venues.filter((v) => v.sen_friendly)
@@ -148,15 +149,14 @@ export function buildCityFaqs(input: CityContentInput): Faq[] {
       : `None of the ${n} venues we list in ${name} are currently marked as SEN-friendly. Some venues run quiet or sensory sessions without advertising them, so it is worth asking.`,
   })
 
-  // TODO(owner): once enough venues publish prices (or you supply a sourced typical range
-  // and date), this answer can quote a city-wide range. Until then it states only what the
-  // listings hold and quotes no "typical" figure.
+  // City-specific published prices (if any) come first and are labelled as such;
+  // the UK-wide guide (lib/typicalCosts.ts) follows, clearly labelled as a guide.
   const price = priceSentence(stats)
   faqs.push({
     question: `How much does soft play cost in ${name}?`,
     answer: price
-      ? `${price} ${n > stats.withPrice ? `The other ${n - stats.withPrice} ${n - stats.withPrice === 1 ? 'venue has' : 'venues have'} no published price in our listings. ` : ''}Prices change, so check each venue's own website before you go.`
-      : `We don't yet hold published prices for ${name} venues, so we don't quote a typical cost. Prices vary by venue, the child's age and the time of day — check each venue's own website before you go.`,
+      ? `${price} ${n > stats.withPrice ? `The other ${n - stats.withPrice} ${n - stats.withPrice === 1 ? 'venue has' : 'venues have'} no published price in our listings. ` : ''}${TYPICAL_SESSION_SENTENCE} Check each venue's own website for current prices.`
+      : `We don't hold published prices for ${name} venues yet. ${TYPICAL_SESSION_SENTENCE} Check each venue's own website for current prices.`,
   })
 
   if (!stats.topRated.length && faqs.length < 6) {
@@ -164,8 +164,8 @@ export function buildCityFaqs(input: CityContentInput): Faq[] {
     faqs.push({
       question: `What are the opening hours of soft play centres in ${name}?`,
       answer: withHours
-        ? `${withHours} of ${n} ${name} venues have opening hours listed on their page. Hours change in school holidays, so check with the venue before you travel.`
-        : `We don't yet hold opening hours for ${name} venues. Check a venue's own website or call before you travel.`,
+        ? `${withHours} of ${n} ${name} venues have opening hours listed on their page. ${TYPICAL_HOURS_SENTENCE}`
+        : `We don't yet hold opening hours for ${name} venues. ${TYPICAL_HOURS_SENTENCE} Check a venue's own website or call before you travel.`,
     })
   }
 

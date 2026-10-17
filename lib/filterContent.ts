@@ -3,6 +3,8 @@
  * Used by the shared FilterPageContent component.
  */
 
+import { TYPICAL_PARTY_SENTENCE, TYPICAL_HOURS_SENTENCE } from './typicalCosts'
+
 export type FilterSlug = 'toddler' | 'birthday-parties' | 'sen-friendly' | 'open-now'
 
 export interface FilterAdvice {
@@ -63,7 +65,7 @@ const filterContentMap: Record<FilterSlug, FilterContentConfig> = {
     faqs: (cityName) => [
       {
         question: `How much do soft play birthday parties cost in ${cityName}?`,
-        answer: `Party prices are set by each venue and vary by package, day of the week and number of children. Packages at soft play centres usually include play time, a party room and food, and sometimes party bags, but what is included differs — so ask the venues you like in ${cityName} for a current quote. We don't quote a typical price because we only list prices venues have published.`,
+        answer: `Party prices are set by each venue and vary by package, day and number of children, so ask the venues you like in ${cityName} for a current quote. ${TYPICAL_PARTY_SENTENCE}`,
       },
       {
         question: `How far in advance should I book a soft play party in ${cityName}?`,
@@ -135,7 +137,7 @@ const filterContentMap: Record<FilterSlug, FilterContentConfig> = {
     faqs: (cityName) => [
       {
         question: `What time do soft play centres open in ${cityName}?`,
-        answer: `Opening hours vary by venue and change in school holidays and on bank holidays. We show a venue's hours on its page where the venue has published them; where we don't have hours we say so. Call or check the venue's own website before travelling.`,
+        answer: `${TYPICAL_HOURS_SENTENCE} We show a venue's hours on its page where the venue has published them, and say so where we don't have them. Call or check the venue's own website before travelling.`,
       },
       {
         question: `Are soft play centres in ${cityName} open at weekends?`,

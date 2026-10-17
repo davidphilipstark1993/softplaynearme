@@ -11,6 +11,7 @@
  */
 
 import type { CityConfig } from './venues'
+import { TYPICAL_SESSION_SENTENCE } from './typicalCosts'
 import { getRegionForCounty, getCityBySlug, cities } from './venues'
 
 // ── Types ──────────────────────────────────────────────────────────────
@@ -105,7 +106,7 @@ const INTRO_P2: string[] = [
 ]
 
 const INTRO_P3: string[] = [
-  `Prices at soft play centres in {name} vary by venue, by the child\u2019s age, and by whether you visit at a peak or off-peak time. Some venues price babies, toddlers and older children differently, and many offer sibling discounts, multi-visit passes or membership. Venue pages show a starting price where the venue has published one \u2014 otherwise check the venue\u2019s own website before you go.`,
+  `Prices at soft play centres in {name} vary by venue, by the child\u2019s age, and by whether you visit at a peak or off-peak time. ${TYPICAL_SESSION_SENTENCE} Many venues offer sibling discounts, multi-visit passes or membership. Venue pages show a starting price where the venue has published one \u2014 otherwise check the venue\u2019s own website before you go.`,
 
   `Planning your visit? Most soft play centres in {name} don't require booking for general play sessions, though it's increasingly common during busy periods like weekends and school holidays. Birthday parties almost always need to be booked in advance — especially at popular venues where weekends fill up quickly.`,
 
@@ -113,7 +114,7 @@ const INTRO_P3: string[] = [
 
   `Before heading out, it's useful to know what to bring. Socks are essential at almost every soft play in {name} (grip socks are ideal). A change of clothes for younger children is sensible, along with a water bottle. Many venues allow you to bring your own snacks, though most also have cafes on-site.`,
 
-  `Soft play sessions in {name} are priced in different ways: per child, by age band, by session length, or as unlimited play. Off-peak weekday sessions are often cheaper than weekends and school holidays, and some venues sell multi-visit passes or monthly memberships. Check the venue\u2019s own website for its current prices.`,
+  `Soft play sessions in {name} are priced in different ways: per child, by age band, by session length, or as unlimited play. Off-peak weekday sessions are often cheaper than weekends and school holidays, and some venues sell multi-visit passes or monthly memberships. ${TYPICAL_SESSION_SENTENCE}`,
 
   `Getting to soft play in {name} depends on the venue — parking and public transport links vary, so check each venue\u2019s page for directions. If you're driving from the surrounding {county} area, journey times are usually short. Check individual venue pages for directions and parking information.`,
 ]

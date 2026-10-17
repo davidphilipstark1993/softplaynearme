@@ -16,7 +16,7 @@
   },
   {
     "source": "/soft-play/hull/old-farmhouse-wacky-warehouse-hull",
-    "destination": "/soft-play/doncaster/old-farmhouse-wacky-warehouse-doncaster",
+    "destination": "/soft-play/scunthorpe/old-farmhouse-wacky-warehouse",
     "permanent": true
   },
   {
@@ -321,7 +321,7 @@
   },
   {
     "source": "/soft-play/hull/play-avenue-ltd-lincoln",
-    "destination": "/soft-play/doncaster/play-avenue-ltd-doncaster",
+    "destination": "/soft-play/scunthorpe/play-avenue-ltd",
     "permanent": true
   },
   {
@@ -341,12 +341,12 @@
   },
   {
     "source": "/soft-play/hull/the-pink-pig-farm-hull",
-    "destination": "/soft-play/doncaster/the-pink-pig-farm-doncaster",
+    "destination": "/soft-play/scunthorpe/the-pink-pig-farm",
     "permanent": true
   },
   {
     "source": "/soft-play/hull/cheeky-chimps-hull",
-    "destination": "/soft-play/doncaster/cheeky-chimps-doncaster",
+    "destination": "/soft-play/scunthorpe/cheeky-chimps",
     "permanent": true
   },
   {
@@ -361,7 +361,7 @@
   },
   {
     "source": "/soft-play/hull/airkings-trampoline-park-hull",
-    "destination": "/soft-play/doncaster/airkings-trampoline-park-doncaster",
+    "destination": "/soft-play/scunthorpe/airkings-trampoline-park",
     "permanent": true
   },
   {
@@ -2351,7 +2351,7 @@
   },
   {
     "source": "/soft-play/doncaster/airkings-trampoline-park-hull",
-    "destination": "/soft-play/doncaster/airkings-trampoline-park-doncaster",
+    "destination": "/soft-play/scunthorpe/airkings-trampoline-park",
     "permanent": true
   },
   {
@@ -2361,7 +2361,7 @@
   },
   {
     "source": "/soft-play/doncaster/cheeky-chimps-hull",
-    "destination": "/soft-play/doncaster/cheeky-chimps-doncaster",
+    "destination": "/soft-play/scunthorpe/cheeky-chimps",
     "permanent": true
   },
   {
@@ -2376,12 +2376,12 @@
   },
   {
     "source": "/soft-play/doncaster/old-farmhouse-wacky-warehouse-hull",
-    "destination": "/soft-play/doncaster/old-farmhouse-wacky-warehouse-doncaster",
+    "destination": "/soft-play/scunthorpe/old-farmhouse-wacky-warehouse",
     "permanent": true
   },
   {
     "source": "/soft-play/doncaster/play-avenue-ltd-lincoln",
-    "destination": "/soft-play/doncaster/play-avenue-ltd-doncaster",
+    "destination": "/soft-play/scunthorpe/play-avenue-ltd",
     "permanent": true
   },
   {
@@ -2406,7 +2406,7 @@
   },
   {
     "source": "/soft-play/doncaster/the-pink-pig-farm-hull",
-    "destination": "/soft-play/doncaster/the-pink-pig-farm-doncaster",
+    "destination": "/soft-play/scunthorpe/the-pink-pig-farm",
     "permanent": true
   },
   {
@@ -3402,6 +3402,31 @@
   {
     "source": "/soft-play/york/toddler-sense-york-york",
     "destination": "/soft-play/york/toddler-sense",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/doncaster/airkings-trampoline-park-doncaster",
+    "destination": "/soft-play/scunthorpe/airkings-trampoline-park",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/doncaster/cheeky-chimps-doncaster",
+    "destination": "/soft-play/scunthorpe/cheeky-chimps",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/doncaster/old-farmhouse-wacky-warehouse-doncaster",
+    "destination": "/soft-play/scunthorpe/old-farmhouse-wacky-warehouse",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/doncaster/play-avenue-ltd-doncaster",
+    "destination": "/soft-play/scunthorpe/play-avenue-ltd",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/doncaster/the-pink-pig-farm-doncaster",
+    "destination": "/soft-play/scunthorpe/the-pink-pig-farm",
     "permanent": true
   }
 ]

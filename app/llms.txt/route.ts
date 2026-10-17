@@ -3,6 +3,7 @@ import { blogPosts } from '@/lib/blogPosts'
 import { getVenueCounts } from '@/lib/venueCounts'
 import { MIN_REVIEWS_FOR_TOP_RATED } from '@/lib/cityStats'
 import { VENUES_PER_PAGE } from '@/lib/pagination'
+import { TYPICAL_SESSION_SENTENCE, TYPICAL_PARTY_SENTENCE, TYPICAL_HOURS_SENTENCE } from '@/lib/typicalCosts'
 
 // Rebuilt hourly from the same venue counts the site shows (lib/venueCounts.ts),
 // so this file can't quote a different number from the homepage.
@@ -14,11 +15,6 @@ const SITE = 'https://www.softplaynearme.co.uk'
  * /llms.txt — a plain-text map of the site for language models and answer engines
  * (https://llmstxt.org): what the directory is, how far to trust each kind of
  * fact in it, and where the important pages are.
- *
- * TODO(owner): the "Where the data comes from" paragraph describes the process as
- * the codebase implements it (Google Places data + venue websites, owner claims,
- * per-listing verified dates). Check it matches how you actually verify venues
- * before relying on it.
  */
 export async function GET() {
   const counts = await getVenueCounts()
@@ -46,6 +42,13 @@ export async function GET() {
     '- Missing information is shown as missing: if a page says hours or prices are not available, they are unknown — not zero, not closed. We do not estimate prices, opening hours or age ranges.',
     `- Ratings are visitor ratings with the number of reviews behind them. "Top rated" lists only include venues with ${MIN_REVIEWS_FOR_TOP_RATED} or more reviews.`,
     '- Counts on city pages are venues in that town; venues in surrounding towns are listed separately under "Soft play near …".',
+    '',
+    '## Typical costs and hours (UK-wide guide, not venue data)',
+    '',
+    `- ${TYPICAL_SESSION_SENTENCE}`,
+    `- ${TYPICAL_PARTY_SENTENCE}`,
+    `- ${TYPICAL_HOURS_SENTENCE}`,
+    '- Venue pages show a venue\'s own price or hours only when the venue has published them; those always override this guide.',
     '',
     '## City pages',
     '',

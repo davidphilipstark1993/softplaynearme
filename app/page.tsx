@@ -13,6 +13,7 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { blogPosts } from '@/lib/blogPosts'
 import { getPool } from '@/lib/pool'
 import { getVenueCounts, formatVenueTotal } from '@/lib/venueCounts'
+import { TYPICAL_SESSION_SENTENCE } from '@/lib/typicalCosts'
 import type { Metadata } from 'next'
 
 // Highest-traffic cities in priority order (London first) — used for the
@@ -58,11 +59,8 @@ const HOME_FAQS = [
     answer: 'Most soft play centres welcome children from babies up to around 11-12 years old. Many have separate areas for toddlers (under 3s or 4s) to ensure they can play safely away from older children.',
   },
   {
-    // TODO(owner): replace with a sourced typical price range (and its date) once
-    // enough venues publish prices — only a handful of listings hold a price today,
-    // so no range is quoted rather than an unsupported one.
     question: 'How much does soft play cost?',
-    answer: 'Prices vary by venue, the child\u2019s age and the time of day, and many venues price babies, siblings and peak or off-peak sessions differently. We show a starting price on a venue\u2019s listing only where the venue has published one \u2014 otherwise check the venue\u2019s own website or call before you go.',
+    answer: `${TYPICAL_SESSION_SENTENCE} Prices vary by venue, age and time of day. We show a starting price on a venue\u2019s listing only where the venue has published one \u2014 otherwise check the venue\u2019s own website before you go.`,
   },
   {
     question: 'What should I bring to soft play?',

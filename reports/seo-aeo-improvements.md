@@ -18,7 +18,7 @@ export in `data/generated/` — see "Read this first".
      (dry-run without flags first). Until it runs, the new URLs render from the static JSON
      (works, but without DB-only data such as on-site reviews) and old URLs still resolve in
      the DB. Run it as part of the deploy.
-   - Nothing else writes to the DB.
+   - Scunthorpe hub: `phase7-02-create-town-hub.mjs … --execute --db` (see below). Nothing else writes to the DB.
 3. The hub pages look different: **Hull now says 20 venues, not 33.** 13 venues in Hessle,
    Cottingham, Anlaby, Hedon, Brough, Beverley, Hornsea and Withernsea moved to a "Soft play
    near Hull" section on the same page (their URLs did not change). That is the "nearby, not
@@ -67,8 +67,7 @@ ItemList, CollectionPage on hubs, EntertainmentBusiness on venues. Fixed:
 
 Highlights worth a look in the location CSV: 8 Lincolnshire/Notts/East Riding venues filed under
 **Doncaster** (Brigg, Scunthorpe ×3, Cleethorpes, Grimsby, Retford, Goole). **Scunthorpe has exactly
-3 venues → by your 3-venue rule it qualifies for its own hub**; I did not create it because it needs a
-DB reassignment of 3 venues. Southampton (`SO`) venues in the Portsmouth hub are *not* told to move
+3 venues → by your 3-venue rule it qualifies for its own hub** — now created (see below). Southampton (`SO`) venues in the Portsmouth hub are *not* told to move
 to Southend — `_geo.mjs` maps `SO` to `southend`, a known collision.
 
 ## Decisions I made that you may want to reverse
@@ -89,19 +88,23 @@ to Southend — `_geo.mjs` maps `SO` to `southend`, a known collision.
   Two existing redirect rules point from pages the JSON still lists (`brighton/kidzone-at-missionfiit-hailsham`,
   `york/flying-legends-wacky-warehouse-york`) — merged duplicates in the DB, stale in the export.
 
-## `TODO(owner)` — everything that needs your input
+## Open questions — resolved with researched averages (Oct 2026 update)
 
-1. `app/page.tsx` — homepage "How much does soft play cost?" quotes no price range because the data can't
-   support one. Supply a sourced typical range *and its date* if you want one.
-2. `lib/cityContent.ts` — each hub's cost FAQ quotes only the prices venues publish; same decision, per city.
-3. `app/llms.txt/route.ts` — check the "Where the data comes from" paragraph describes how you really verify venues.
+You asked me to answer the open items myself using average times and prices. Done:
 
-Also for your call (not marked in code): create a Scunthorpe hub; the two stale redirect rules above;
-which hand-written city FAQs, if any, to re-add; whether to opt into `--scope=all`.
+- **Typical costs and hours** (`lib/typicalCosts.ts`, researched October 2026 from prices and hours published by UK venues, cross-checked against our own listings):
+  - **Play session:** about **£4–£8 per child** (council/community venues £2–£6; London and large commercial centres £8–£10+; babies often free or a few pounds).
+  - **Birthday party:** about **£10–£14 per child** (published range £6–£14), usually 6–10 child minimum; exclusive hire of a play area **£135–£270** flat.
+  - **Opening hours:** most centres open about **9:30am** and close about **5:30pm** on weekdays — the median across ~2,400 weekday entries in our own listings; the middle half open 9:00–9:30am and close 3:15–6:00pm.
+  - Always worded as a *"UK-wide guide (published venue prices, checked October 2026)"*, never as a venue's or city's own figure; a venue's or city's published numbers come first and override it. Used in the homepage and every hub's cost / party / hours FAQ (and the matching FAQPage JSON-LD), the birthday-party and open-now filter FAQs, the template city intros, and `/llms.txt`. To refresh, update `RESEARCHED` and the figures in that one file.
+  - Caveat: these are drawn from a sample of published listings, not a national survey.
+- **`/llms.txt` data paragraph:** checked against the codebase (Google Places import, venue-website enrichment, free owner claims with a Verified badge, per-listing verified dates) and kept; no `TODO(owner)` markers remain anywhere in the code.
+- **Scunthorpe hub created** (`phase7-02-create-town-hub.mjs`): it had exactly 3 soft play venues, filed under Doncaster. Cheeky Chimps, Old Farmhouse Wacky Warehouse and Play Avenue (plus Airkings and The Pink Pig Farm, non-soft-play) moved to `/soft-play/scunthorpe/…` with 301s from the old URLs and city-suffix-free slugs; Doncaster drops from 28 to 25. The location checker now maps DN15–17 to Scunthorpe. **Production DB step:** `node scripts/migrations/phase7-02-create-town-hub.mjs --town=Scunthorpe --nearby=Doncaster,Lincoln,Hull --execute --db`.
+- **Still my call, unchanged:** slug scope stays at the 116 repeated-city slugs (`--scope=all` is the opt-in for the rest); hand-written city FAQs stay out of view; the two stale redirect rules are left because they reflect merges that exist in the DB.
 
 ## Post-deploy checks
 
-1. **Database:** `node scripts/migrations/phase7-01-dedupe-city-in-slugs.mjs --execute --db` (dry-run first).
+1. **Database (both steps, dry-run first):** `node scripts/migrations/phase7-01-dedupe-city-in-slugs.mjs --execute --db`, then the Scunthorpe command above.
 2. **Rich Results Test** (https://search.google.com/test/rich-results) on `/soft-play/hull` and a venue page,
    e.g. `/soft-play/hull/our-imagination-station-hull`. Expect: Breadcrumbs, FAQ and Local business/Organization
    valid; the hub page has an ItemList. Locally the same checks run with

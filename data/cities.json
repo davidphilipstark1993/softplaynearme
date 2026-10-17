@@ -1394,5 +1394,21 @@
         "answer": "Yes, Dartford has indoor play options for toddlers and older children, with more nearby in Gravesend, Swanley and Bexleyheath."
       }
     ]
+  },
+  {
+    "slug": "scunthorpe",
+    "name": "Scunthorpe",
+    "county": "Lincolnshire",
+    "region": "East Midlands",
+    "metaTitle": "Soft Play in Scunthorpe",
+    "metaDescription": "Find soft play centres in Scunthorpe, Lincolnshire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Scunthorpe",
+    "intro": "Soft play centres in Scunthorpe and the surrounding area of Lincolnshire.",
+    "nearbyAreas": [
+      "Doncaster",
+      "Lincoln",
+      "Hull"
+    ],
+    "faqs": []
   }
 ]
