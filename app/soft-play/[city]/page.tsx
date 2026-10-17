@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { isUsablePhotoUrl } from '@/lib/imageUtils'
-import { getCityBySlug, getAllCitySlugs, getNearbyCities, filters } from '@/lib/venues'
+import { getCityBySlug, getAllCitySlugs, getNearbyCities, filters, cities } from '@/lib/venues'
 import { MapPin, Star, Coffee, Car, Baby, PartyPopper, Heart, Phone, Globe, Navigation, TrendingUp, CheckCircle2, Sparkles, Compass } from 'lucide-react'
 import type { Metadata } from 'next'
 import { getPool, STATIC_BUILD } from '@/lib/pool'
@@ -35,6 +35,8 @@ import { computeCityStats } from '@/lib/cityStats'
 import { isOpenNow } from '@/lib/utils'
 import { buildCityMeta } from '@/lib/cityMeta'
 import { hasStructuredHours } from '@/lib/venueFacts'
+import { splitByLocality, groupNearbyByLocality } from '@/lib/localities'
+import { NearbyTowns } from '@/components/location/NearbyTowns'
 import { VenueCardFacts } from '@/components/venue/VenueCardFacts'
 
 interface PageProps {
@@ -109,8 +111,10 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
 
   // Title and description are generated from this city's real data, so they
   // never promise prices/hours/ages the venue cards can't show (lib/cityMeta.ts).
-  const venues = await getCityVenuesAll(city)
-  const { title, description } = buildCityMeta(name, county, computeCityStats(venues.map(toStatsVenue)))
+  // Stats describe the hub's own main list (nearby-town venues are counted in
+  // their own section), so the title's "N Centres" matches the page's heading.
+  const { core } = splitByLocality(city, await getCityVenuesAll(city))
+  const { title, description } = buildCityMeta(name, county, computeCityStats(core.map(toStatsVenue)))
 
   const ogImage = getCityOgImage(city)
   const url = `https://www.softplaynearme.co.uk/soft-play/${city}`
@@ -455,7 +459,12 @@ export default async function CityPage({ params, searchParams }: PageProps) {
   const facilities = (facilitiesParam || '').split(',').filter(Boolean)
   const special = (specialParam || '').split(',').filter(Boolean)
 
-  const venues = await getVenues(city, { filter, search, age, facilities, price, special, sort, area })
+  const fetchedVenues = await getVenues(city, { filter, search, age, facilities, price, special, sort, area })
+  // Main list = the hub's own town. Venues in surrounding towns (Hessle,
+  // Cottingham… for Hull) go in the separate Nearby section instead of being
+  // listed twice. The 'other family activities' view isn't split.
+  const { core: venues, nearby: nearbyVenues } =
+    filter === 'other' ? { core: fetchedVenues, nearby: [] as typeof fetchedVenues } : splitByLocality(city, fetchedVenues)
   // Unfiltered venue total for this city, from the same helper the homepage
   // cards and meta descriptions use (lib/venueCounts.ts).
   const cityVenueCount = await getCityVenueCount(city)
@@ -545,6 +554,18 @@ export default async function CityPage({ params, searchParams }: PageProps) {
   // modules even though they may still appear in the main listing.
   const hasActiveFilters = !!(filter || search || age.length || facilities.length || price || special.length || area)
   const showCurated = !hasActiveFilters && pageNum === 1 && venues.length >= 4
+  const showNearby = !hasActiveFilters && !filter && pageNum === 1
+  const nearbyGroups = showNearby ? groupNearbyByLocality(city, nearbyVenues) : []
+  // Every nearby area is a real link or isn't shown: a town with its own hub
+  // links there; a town whose venues are in the Nearby section above links to
+  // that block; anything else (no hub, no venues) is left out rather than
+  // rendered as dead text.
+  const nearbyAreaLinks = nearbyAreas.flatMap((area) => {
+    const hub = nearbyCities.find((c) => c.name === area)
+    if (hub) return [{ area, href: `/soft-play/${hub.slug}` }]
+    const group = nearbyGroups.find((g) => g.locality.toLowerCase() === area.toLowerCase())
+    return group ? [{ area, href: `#${group.anchor}` }] : []
+  })
   // Headline count: the shared city total when nothing is filtered, otherwise
   // the size of the filtered result set. In the unfiltered case the list and
   // the shared total are the same query, so log loudly if they ever diverge.
@@ -1111,28 +1132,28 @@ export default async function CityPage({ params, searchParams }: PageProps) {
             </section>
           )}
 
+          {/* Nearby towns: venues just outside the hub, listed once, here */}
+          {showNearby && (
+            <NearbyTowns
+              cityName={displayName}
+              citySlug={city}
+              groups={nearbyGroups}
+              hubSlugFor={(locality) => cities.find((c) => c.name.toLowerCase() === locality.toLowerCase())?.slug ?? null}
+            />
+          )}
+
           {/* Nearby Areas */}
-          {(nearbyCities.length > 0 || nearbyAreas.length > 0) && (
+          {nearbyAreaLinks.length > 0 && (
             <section aria-labelledby="nearby-areas-heading" className="mt-12">
               <h2 id="nearby-areas-heading" className="text-xl font-semibold mb-4">Nearby Areas</h2>
               <div className="flex flex-wrap gap-2">
-                {nearbyAreas.map((area) => {
-                  const nearbyCity = nearbyCities.find(c => c.name === area)
-                  if (nearbyCity) {
-                    return (
-                      <Link key={area} href={`/soft-play/${nearbyCity.slug}`}>
-                        <Badge variant="outline" className="hover:bg-purple-50 hover:border-purple-300 cursor-pointer py-1.5 px-3">
-                          {area}
-                        </Badge>
-                      </Link>
-                    )
-                  }
-                  return (
-                    <Badge key={area} variant="outline" className="text-slate-400 py-1.5 px-3">
+                {nearbyAreaLinks.map(({ area, href }) => (
+                  <Link key={area} href={href}>
+                    <Badge variant="outline" className="hover:bg-purple-50 hover:border-purple-300 cursor-pointer py-1.5 px-3">
                       {area}
                     </Badge>
-                  )
-                })}
+                  </Link>
+                ))}
               </div>
             </section>
           )}

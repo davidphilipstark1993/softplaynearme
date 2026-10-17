@@ -50,6 +50,7 @@ import { ReportIssueLink } from '@/components/venue/ReportIssueLink'
 import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup'
 import { VenueViewTracking } from '@/components/venue/VenueViewTracking'
 import { cleanHoursText, hasOpeningHours, hasPrice } from '@/lib/venueFacts'
+import { getLocality } from '@/lib/localities'
 
 interface PageProps {
   params: Promise<{ city: string; slug: string }>
@@ -257,7 +258,8 @@ function staticToVenue(sv: StaticVenue): Venue {
     featured: sv.featured ?? false,
     _mapsUrl: sv.mapsUrl,
     _isStatic: true,
-  } as Venue & { _mapsUrl?: string; _isStatic?: boolean }
+    _staticId: sv.id,
+  } as Venue & { _mapsUrl?: string; _isStatic?: boolean; _staticId?: number }
 }
 
 async function getReviews(venueId: number, citySlug: string, venueSlug: string): Promise<Review[]> {
@@ -495,6 +497,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const cityName = cityConfig?.name || staticTown?.name || city
   const county = cityConfig?.county || ''
+  // The town the venue is really in (Hessle for a HU13 venue filed under Hull).
+  const homeTown = getLocality({ id: venue.id || (venue as { _staticId?: number })._staticId, postcode: venue.postcode }) ?? cityName
 
   // Use stored overrides when available, fall back to generated copy
   // Only promise what the page can show: hours and/or prices when we hold them.
@@ -502,11 +506,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     hasOpeningHours(venue) ? 'Hours' : null,
     hasPrice(venue) ? 'Prices' : null,
   ].filter(Boolean).join(' & ')
-  const title = venue.seo_title || `${venue.name} – Soft Play in ${cityName}${promised ? ` | ${promised}` : ''}`
+  const title = venue.seo_title || `${venue.name} – Soft Play in ${homeTown}${promised ? ` | ${promised}` : ''}`
   const description =
     venue.meta_description ||
     venue.description ||
-    generateVenueMetaDescription({ ...venue, city: cityName, county })
+    generateVenueMetaDescription({ ...venue, city: homeTown, county: homeTown === cityName ? county : '' })
 
   // Noindex very thin pages (name + address only, no useful content)
   const score = venue.completeness_score ??
@@ -552,6 +556,7 @@ export default async function VenuePage({ params }: PageProps) {
 
   const cityName = cityConfig?.name || staticTown?.name || city
   const county = cityConfig?.county || ''
+  const homeTown = getLocality({ id: venue.id || (venue as { _staticId?: number })._staticId, postcode: venue.postcode }) ?? cityName
   const isStaticVenue = (venue as any)._isStatic === true
 
   // Fetch all related data in parallel
@@ -591,7 +596,7 @@ export default async function VenuePage({ params }: PageProps) {
       : []
 
   // ── Content generation ─────────────────────────────────────────────────
-  const venueContentInput = { ...venue, city: cityName, county }
+  const venueContentInput = { ...venue, city: homeTown, county: homeTown === cityName ? county : '' }
 
   // Use stored description if available, otherwise generate one
   const displayDescription = venue.description || generateVenueDescription(venueContentInput)
@@ -612,7 +617,7 @@ export default async function VenuePage({ params }: PageProps) {
     name: venue.name,
     description: venue.description,
     address: venue.address,
-    city: cityName,
+    city: homeTown,
     postcode: venue.postcode,
     phone: venue.phone,
     website: venue.website,
@@ -681,7 +686,7 @@ export default async function VenuePage({ params }: PageProps) {
                   )}
                 </div>
                 <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
-                  {venue.name} <span className="text-purple-200 font-normal text-xl sm:text-2xl md:text-3xl">| Soft Play in {cityName}</span>
+                  {venue.name} <span className="text-purple-200 font-normal text-xl sm:text-2xl md:text-3xl">| Soft Play in {homeTown}</span>
                 </h1>
                 {formatAddressLine(venue.address, venue.postcode) && (
                   <div className="flex items-center gap-2 text-purple-100">

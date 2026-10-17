@@ -8,8 +8,10 @@
 import venuesByTownData from '@/data/generated/venuesByTown.json'
 import townsData from '@/data/generated/towns.json'
 import { isVisibleVenueType } from '@/lib/venueTypes'
+import { splitByLocality } from '@/lib/localities'
 
 export interface StaticVenue {
+  id?: number
   town: string
   townSlug: string
   name: string
@@ -120,21 +122,27 @@ export function getAllStaticTownSlugs(): string[] {
 }
 
 /**
- * Number of genuine soft play venues (see lib/venueTypes.ts) the static export
- * holds for one town. This is the static-data twin of the live-DB count in
- * lib/venueCounts.ts — same venue_type rule, so the two can only differ when
- * the JSON export itself is stale, never because of a different definition.
+ * Genuine soft play venues (see lib/venueTypes.ts) the static export holds for
+ * one town, split the way the hub page splits them: `core` are the town's own
+ * venues (the main list and the headline count), `nearby` are venues in
+ * surrounding towns shown in the hub's separate "Nearby" section (see
+ * lib/localities.ts). Static-data twin of lib/venueCounts.ts — same rules, so
+ * the two can only differ when the JSON export itself is stale.
  */
-export function getStaticSoftPlayCount(townSlug: string): number {
-  return getStaticVenuesByTown(townSlug).filter((v) => isVisibleVenueType(v.venueType)).length
+export function getStaticCityCounts(townSlug: string): { core: number; nearby: number } {
+  const visible = getStaticVenuesByTown(townSlug).filter((v) => isVisibleVenueType(v.venueType))
+  const { core, nearby } = splitByLocality(townSlug, visible)
+  return { core: core.length, nearby: nearby.length }
 }
 
 /**
- * Total soft play venue count across all towns in the static export. Used as
- * the display fallback wherever the live DB count is unavailable (e.g. during
- * SOFTPLAY_STATIC_BUILD builds). Derived from the venues themselves rather than
- * the pre-aggregated towns.json so it can never drift from the per-city counts.
+ * Total soft play venues across all towns in the static export (core + nearby:
+ * every listing appears on some page). Derived from the venues themselves
+ * rather than the pre-aggregated towns.json so it can never drift.
  */
 export function getStaticTotalVenueCount(): number {
-  return Object.keys(venuesByTown).reduce((sum, slug) => sum + getStaticSoftPlayCount(slug), 0)
+  return Object.keys(venuesByTown).reduce((sum, slug) => {
+    const { core, nearby } = getStaticCityCounts(slug)
+    return sum + core + nearby
+  }, 0)
 }

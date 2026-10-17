@@ -14,6 +14,10 @@
  * category notes that don't map onto the generic venue-card template. Do
  * not add prices/hours here beyond what's already approved — see the
  * source markdown's "NEEDS SOURCE" list for what's deliberately withheld.
+ *
+ * 2026-10: Lincolnshire venues (FunForest in Brigg, Magical Castle in
+ * Cleethorpes, Time 4 Play in Grimsby) were removed from `nearbySection` — they
+ * are not in Hull or East Yorkshire. Only East Yorkshire venues belong here.
  */
 
 export interface CuratedVenue {
@@ -54,7 +58,7 @@ export const HULL_CURATED_VENUES: {
   },
   nearbySection: {
     heading: 'Near Hull / East Yorkshire',
-    intro: 'A short drive from Hull opens more options across East Yorkshire and neighbouring towns.',
+    intro: 'A short drive from Hull opens more options across East Yorkshire.',
     venues: [
       { name: 'Our Imagination Station', url: 'https://www.ourimaginationstation.co.uk/', category: 'Soft play · Hessle', note: 'Check the Hessle site for prices and sessions.' },
       { name: 'Jack in the Box Soft Play and Role Play', url: 'https://www.jackintheboxclub.co.uk/', category: 'Soft play · Beverley', note: 'With separate role play. Timed and term-time tariffs are published on their times-and-prices page — confirm before you go.' },
@@ -62,10 +66,7 @@ export const HULL_CURATED_VENUES: {
       { name: 'The Secret Village', url: 'https://thesecretvillage.co.uk/', category: 'Role play · Anlaby', note: 'Check the venue for session length, prices, and booking.' },
       { name: 'Kingstown Wacky Warehouse', url: 'https://www.wackywarehouse.co.uk/play-area/east-riding-yorkshire/kingstown-hotel', category: 'Soft play · Hedon', note: 'Official examples include around £5 general play / £3.50 for tots — confirm on the Greene King / Wacky Warehouse page.' },
       { name: 'Beach Cove Adventure Play Area', url: 'https://hornseavillage.com/food-leisure/beach-cove/', category: 'Soft play · Hornsea', note: 'Indoor + outdoor at Hornsea Village. Check the venue for indoor and all-access options.' },
-      { name: 'FunForest', url: 'http://www.funforest.co.uk/', category: 'Soft play · Brigg', note: 'Official examples: ages 1–4 £5.75 · 5–11 £7.75 · under-1 £1 — confirm on the venue site before you go.' },
       { name: 'Candy Kingdom', url: 'https://www.candy-kingdom.com/', category: 'Soft play / indoor adventure · Carnaby / Bridlington', note: 'Admission costs are published on the official site (term-time vs weekend/holiday rates) — check their admission page.' },
-      { name: 'Magical Castle', url: 'https://www.magicalcastle.co.uk/', category: 'Soft play · Cleethorpes', note: 'Opening times and prices are on the official site — confirm session slots before you travel.' },
-      { name: 'Time 4 Play', url: 'https://timeforplay.co.uk/', category: 'Soft play · Grimsby', note: 'At Unit 2b Gala Retail Park, Sheepfold Street, Grimsby DN32 9AB (not Pasture Street). Check the play-centre page for peak/off-peak prices and session length.' },
     ],
   },
   notSoftPlaySection: {

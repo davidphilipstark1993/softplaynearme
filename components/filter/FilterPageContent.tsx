@@ -17,6 +17,7 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { isOpenNow } from '@/lib/utils'
 import { hasStructuredHours } from '@/lib/venueFacts'
 import { isVisibleVenueType, visibleVenueTypeSql } from '@/lib/venueTypes'
+import { splitByLocality, groupNearbyByLocality } from '@/lib/localities'
 import { getFilterContent, type FilterSlug } from '@/lib/filterContent'
 import { getCardQuote, formatLastVerified } from '@/lib/venueCardText'
 import { VenueCardFacts } from '@/components/venue/VenueCardFacts'
@@ -146,7 +147,10 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
     notFound()
   }
 
-  const { venues, hoursDataAvailable } = await getFilteredVenues(citySlug, filterSlug)
+  const { venues: fetched, hoursDataAvailable } = await getFilteredVenues(citySlug, filterSlug)
+  // Same split as the hub: the town's own venues first, surrounding towns after.
+  const { core: venues, nearby: nearbyVenues } = splitByLocality(citySlug, fetched)
+  const nearbyGroups = groupNearbyByLocality(citySlug, nearbyVenues)
   const content = getFilterContent(filterSlug)
   const nearbyCities = getNearbyCities(citySlug).slice(0, 6)
 
@@ -191,6 +195,137 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
       : filterSlug === 'sen-friendly'
         ? <Heart className="w-3 h-3" />
         : null
+
+  // One venue card, shared by the main grid and the nearby-towns grids.
+  const renderCard = (venue: FilterVenue, index: number) => {
+        const displayImage = isUsablePhotoUrl(venue.main_image_url) ? venue.main_image_url : null
+        return (
+          <Card
+            key={venue.slug}
+            className="group hover:shadow-lg transition-all duration-200 border-slate-200 overflow-hidden flex flex-col h-full"
+          >
+            {/* Thumbnail */}
+            <Link href={`/soft-play/${citySlug}/${venue.slug}`} tabIndex={-1} aria-hidden="true">
+              <div className="h-32 relative overflow-hidden bg-slate-100 flex-shrink-0">
+                {displayImage ? (
+                  <Image
+                    src={displayImage}
+                    alt={`${venue.name} soft play`}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background: `linear-gradient(135deg, hsl(${(index * 47 + 262) % 360}, 70%, 55%), hsl(${(index * 47 + 320) % 360}, 60%, 50%))`,
+                    }}
+                  >
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="text-white/20 text-5xl font-bold select-none">{venue.name.charAt(0)}</span>
+                    </div>
+                  </div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                {venue.avg_rating && Number(venue.avg_rating) > 0 ? (
+                  <div className="absolute top-2 right-2 flex items-center gap-1 bg-white/95 backdrop-blur-sm px-2 py-1 rounded-full shadow text-xs font-bold">
+                    <Star className="w-3 h-3 text-yellow-400 fill-current" />
+                    <span className="text-slate-800">{Number(venue.avg_rating).toFixed(1)}</span>
+                    {venue.review_count && Number(venue.review_count) > 0 && (
+                      <span className="text-slate-400 font-normal">({Number(venue.review_count).toLocaleString()})</span>
+                    )}
+                  </div>
+                ) : null}
+              </div>
+            </Link>
+
+            <div className="p-5 flex-1 flex flex-col">
+              <Link href={`/soft-play/${citySlug}/${venue.slug}`} className="hover:text-purple-600 transition-colors">
+                <h3 className="text-lg font-bold leading-tight line-clamp-2 mb-2">{venue.name}</h3>
+              </Link>
+
+              <div className="flex items-center gap-1.5 text-sm text-slate-500 mb-3">
+                <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
+                <span className="truncate">{venue.address || venue.postcode}</span>
+              </div>
+
+              <VenueCardFacts venue={venue} />
+
+              {getCardQuote(venue.review_snippet) && (
+                <p className="text-slate-600 text-sm mb-3 line-clamp-2 italic">
+                  &ldquo;{getCardQuote(venue.review_snippet)}&rdquo;
+                </p>
+              )}
+
+              {/* Feature badges — highlight the filter-relevant one */}
+              <div className="flex flex-wrap gap-1.5 mt-auto pt-2">
+                {filterSlug === 'toddler' && venue.toddler_area && (
+                  <Badge variant="outline" className={`text-xs gap-1 ${content.badgeClasses}`}>
+                    <Baby className="w-3 h-3" /> Toddler Area
+                  </Badge>
+                )}
+                {filterSlug === 'birthday-parties' && venue.parties && (
+                  <Badge variant="outline" className={`text-xs gap-1 ${content.badgeClasses}`}>
+                    <PartyPopper className="w-3 h-3" /> Birthday Parties
+                  </Badge>
+                )}
+                {filterSlug === 'sen-friendly' && venue.sen_friendly && (
+                  <Badge variant="outline" className={`text-xs gap-1 ${content.badgeClasses}`}>
+                    <Heart className="w-3 h-3" /> SEN Friendly
+                  </Badge>
+                )}
+                {/* Secondary badges */}
+                {filterSlug !== 'toddler' && venue.toddler_area && (
+                  <Badge variant="outline" className="text-xs gap-1 border-blue-200 text-blue-700 bg-blue-50">
+                    <Baby className="w-3 h-3" /> Toddler
+                  </Badge>
+                )}
+                {filterSlug !== 'birthday-parties' && venue.parties && (
+                  <Badge variant="outline" className="text-xs gap-1 border-pink-200 text-pink-700 bg-pink-50">
+                    <PartyPopper className="w-3 h-3" /> Parties
+                  </Badge>
+                )}
+                {filterSlug !== 'sen-friendly' && venue.sen_friendly && (
+                  <Badge variant="outline" className="text-xs gap-1 border-green-200 text-green-700 bg-green-50">
+                    <Heart className="w-3 h-3" /> SEN
+                  </Badge>
+                )}
+                {venue.cafe && (
+                  <Badge variant="outline" className="text-xs gap-1">
+                    <Coffee className="w-3 h-3" /> Cafe
+                  </Badge>
+                )}
+                {venue.parking && (
+                  <Badge variant="outline" className="text-xs gap-1">
+                    <Car className="w-3 h-3" /> Parking
+                  </Badge>
+                )}
+              </div>
+
+              {formatLastVerified(venue.last_verified_at) && (
+                <p className="text-xs text-slate-400 mt-2">
+                  Verified {formatLastVerified(venue.last_verified_at)}
+                </p>
+              )}
+            </div>
+
+            <div className="px-5 py-3 bg-slate-50 border-t border-slate-100 flex gap-2">
+              <Button asChild className="flex-1 bg-purple-600 hover:bg-purple-700" size="sm">
+                <Link href={`/soft-play/${citySlug}/${venue.slug}`}>View Details</Link>
+              </Button>
+              {venue.website && (
+                <Button variant="outline" size="sm" asChild>
+                  <a href={venue.website} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${venue.name} website`}>
+                    <Globe className="w-4 h-4" />
+                  </a>
+                </Button>
+              )}
+            </div>
+          </Card>
+        )
+  }
 
   return (
     <>
@@ -255,136 +390,26 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {venues.map((venue, index) => {
-                const displayImage = isUsablePhotoUrl(venue.main_image_url) ? venue.main_image_url : null
-                return (
-                  <Card
-                    key={venue.slug}
-                    className="group hover:shadow-lg transition-all duration-200 border-slate-200 overflow-hidden flex flex-col h-full"
-                  >
-                    {/* Thumbnail */}
-                    <Link href={`/soft-play/${citySlug}/${venue.slug}`} tabIndex={-1} aria-hidden="true">
-                      <div className="h-32 relative overflow-hidden bg-slate-100 flex-shrink-0">
-                        {displayImage ? (
-                          <Image
-                            src={displayImage}
-                            alt={`${venue.name} soft play`}
-                            fill
-                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                            className="object-cover transition-transform duration-300 group-hover:scale-105"
-                            loading="lazy"
-                          />
-                        ) : (
-                          <div
-                            className="absolute inset-0"
-                            style={{
-                              background: `linear-gradient(135deg, hsl(${(index * 47 + 262) % 360}, 70%, 55%), hsl(${(index * 47 + 320) % 360}, 60%, 50%))`,
-                            }}
-                          >
-                            <div className="absolute inset-0 flex items-center justify-center">
-                              <span className="text-white/20 text-5xl font-bold select-none">{venue.name.charAt(0)}</span>
-                            </div>
-                          </div>
-                        )}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-                        {venue.avg_rating && Number(venue.avg_rating) > 0 ? (
-                          <div className="absolute top-2 right-2 flex items-center gap-1 bg-white/95 backdrop-blur-sm px-2 py-1 rounded-full shadow text-xs font-bold">
-                            <Star className="w-3 h-3 text-yellow-400 fill-current" />
-                            <span className="text-slate-800">{Number(venue.avg_rating).toFixed(1)}</span>
-                            {venue.review_count && Number(venue.review_count) > 0 && (
-                              <span className="text-slate-400 font-normal">({Number(venue.review_count).toLocaleString()})</span>
-                            )}
-                          </div>
-                        ) : null}
-                      </div>
-                    </Link>
-
-                    <div className="p-5 flex-1 flex flex-col">
-                      <Link href={`/soft-play/${citySlug}/${venue.slug}`} className="hover:text-purple-600 transition-colors">
-                        <h3 className="text-lg font-bold leading-tight line-clamp-2 mb-2">{venue.name}</h3>
-                      </Link>
-
-                      <div className="flex items-center gap-1.5 text-sm text-slate-500 mb-3">
-                        <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
-                        <span className="truncate">{venue.address || venue.postcode}</span>
-                      </div>
-
-                      <VenueCardFacts venue={venue} />
-
-                      {getCardQuote(venue.review_snippet) && (
-                        <p className="text-slate-600 text-sm mb-3 line-clamp-2 italic">
-                          &ldquo;{getCardQuote(venue.review_snippet)}&rdquo;
-                        </p>
-                      )}
-
-                      {/* Feature badges — highlight the filter-relevant one */}
-                      <div className="flex flex-wrap gap-1.5 mt-auto pt-2">
-                        {filterSlug === 'toddler' && venue.toddler_area && (
-                          <Badge variant="outline" className={`text-xs gap-1 ${content.badgeClasses}`}>
-                            <Baby className="w-3 h-3" /> Toddler Area
-                          </Badge>
-                        )}
-                        {filterSlug === 'birthday-parties' && venue.parties && (
-                          <Badge variant="outline" className={`text-xs gap-1 ${content.badgeClasses}`}>
-                            <PartyPopper className="w-3 h-3" /> Birthday Parties
-                          </Badge>
-                        )}
-                        {filterSlug === 'sen-friendly' && venue.sen_friendly && (
-                          <Badge variant="outline" className={`text-xs gap-1 ${content.badgeClasses}`}>
-                            <Heart className="w-3 h-3" /> SEN Friendly
-                          </Badge>
-                        )}
-                        {/* Secondary badges */}
-                        {filterSlug !== 'toddler' && venue.toddler_area && (
-                          <Badge variant="outline" className="text-xs gap-1 border-blue-200 text-blue-700 bg-blue-50">
-                            <Baby className="w-3 h-3" /> Toddler
-                          </Badge>
-                        )}
-                        {filterSlug !== 'birthday-parties' && venue.parties && (
-                          <Badge variant="outline" className="text-xs gap-1 border-pink-200 text-pink-700 bg-pink-50">
-                            <PartyPopper className="w-3 h-3" /> Parties
-                          </Badge>
-                        )}
-                        {filterSlug !== 'sen-friendly' && venue.sen_friendly && (
-                          <Badge variant="outline" className="text-xs gap-1 border-green-200 text-green-700 bg-green-50">
-                            <Heart className="w-3 h-3" /> SEN
-                          </Badge>
-                        )}
-                        {venue.cafe && (
-                          <Badge variant="outline" className="text-xs gap-1">
-                            <Coffee className="w-3 h-3" /> Cafe
-                          </Badge>
-                        )}
-                        {venue.parking && (
-                          <Badge variant="outline" className="text-xs gap-1">
-                            <Car className="w-3 h-3" /> Parking
-                          </Badge>
-                        )}
-                      </div>
-
-                      {formatLastVerified(venue.last_verified_at) && (
-                        <p className="text-xs text-slate-400 mt-2">
-                          Verified {formatLastVerified(venue.last_verified_at)}
-                        </p>
-                      )}
-                    </div>
-
-                    <div className="px-5 py-3 bg-slate-50 border-t border-slate-100 flex gap-2">
-                      <Button asChild className="flex-1 bg-purple-600 hover:bg-purple-700" size="sm">
-                        <Link href={`/soft-play/${citySlug}/${venue.slug}`}>View Details</Link>
-                      </Button>
-                      {venue.website && (
-                        <Button variant="outline" size="sm" asChild>
-                          <a href={venue.website} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${venue.name} website`}>
-                            <Globe className="w-4 h-4" />
-                          </a>
-                        </Button>
-                      )}
-                    </div>
-                  </Card>
-                )
-              })}
+              {venues.map(renderCard)}
             </div>
+          )}
+
+          {/* Venues in surrounding towns — same filter, kept apart from the town's own list */}
+          {nearbyGroups.length > 0 && (
+            <section aria-labelledby="filter-nearby-heading" className="mt-12">
+              <h2 id="filter-nearby-heading" className="text-xl font-semibold mb-2">
+                {filterConfig.name} near {cityName}
+              </h2>
+              <p className="text-slate-600 mb-6">Just outside {cityName}, in nearby towns.</p>
+              {nearbyGroups.map((group) => (
+                <div key={group.locality} className="mb-8">
+                  <h3 className="text-lg font-semibold text-slate-800 mb-3">{group.locality}</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {group.venues.map(renderCard)}
+                  </div>
+                </div>
+              ))}
+            </section>
           )}
 
           {/* Helpful Advice Section */}
@@ -461,7 +486,8 @@ export async function buildFilterMetadata(citySlug: string, filterSlug: FilterSl
   }
 
   const content = getFilterContent(filterSlug)
-  const { venues } = await getFilteredVenues(citySlug, filterSlug)
+  const { venues: fetched } = await getFilteredVenues(citySlug, filterSlug)
+  const { core: venues } = splitByLocality(citySlug, fetched)
 
   const title = filterConfig.metaTitleTemplate.replace('{city}', cityConfig.name)
   const description = filterConfig.metaDescriptionTemplate.replace('{city}', cityConfig.name)
