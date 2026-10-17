@@ -13,16 +13,11 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { venueSlug } from './lib/venue-slug.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.join(__dirname, '..')
 const OUTPUT_DIR = path.join(ROOT, 'data', 'generated')
-
-function slugify(text) {
-  return text.toString().toLowerCase().trim()
-    .replace(/&/g, 'and').replace(/[^\w\s-]/g, '')
-    .replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^-+|-+$/g, '')
-}
 
 function venue(townSlug, town, name, address, postcode, opts = {}) {
   return {
@@ -30,7 +25,7 @@ function venue(townSlug, town, name, address, postcode, opts = {}) {
     town,
     townSlug,
     name,
-    slug: slugify(name) + '-' + townSlug,
+    slug: venueSlug(name, townSlug),
     address,
     postcode,
     lat: opts.lat || null,

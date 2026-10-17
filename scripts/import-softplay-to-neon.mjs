@@ -11,6 +11,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import pg from 'pg';
+import { venueSlug } from './lib/venue-slug.mjs';
 
 const { Pool } = pg;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -36,15 +37,12 @@ if (!fs.existsSync(CONFIG.csvFile)) {
 }
 
 /**
- * Generate URL-safe slug from name and city
+ * Generate the URL slug for a venue: the name only. The city is already in the
+ * URL path (/soft-play/{city}/{slug}), so it is not repeated here — see
+ * scripts/lib/venue-slug.mjs.
  */
 function generateSlug(name, city) {
-  const combined = `${name} ${city}`;
-  return combined
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)/g, '')
-    .substring(0, 100);
+  return venueSlug(name, String(city).toLowerCase());
 }
 
 /**

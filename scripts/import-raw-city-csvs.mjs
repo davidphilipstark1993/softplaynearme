@@ -32,6 +32,7 @@
  *   [15] ah5Ghc 3     → review snippet part 3
  */
 
+import { venueSlug } from './lib/venue-slug.mjs'
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -567,7 +568,7 @@ function buildVenue(row, cityMeta) {
   const seoSummary = generateSeoSummary({ name, city, citySlug, normCategory, features, rating, reviewCount })
   const tags = generateTags({ city, citySlug, normCategory, features, rating, reviewCount })
 
-  const slug = slugify(`${name}-${city}`)
+  const slug = venueSlug(name, citySlug)
   const mapsUrlKey = normalizeMapsKey(googleMapsUrl)
   const dedupeKey = `${name.toLowerCase()}|${address.toLowerCase()}|${city.toLowerCase()}`
 
