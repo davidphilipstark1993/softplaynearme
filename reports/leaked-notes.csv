@@ -1,0 +1,35 @@
+category,file,line,matched,context
+filler_cta,app/page.tsx,65,check the venue\u2019s own website or call before you go,"here the venue has published one \u2014 otherwise check the venue\u2019s own website or call before you go.',"
+filler_cta,data/cities.json,26,check the venue,"venues typically cater up to age 11 or 12. Always check the venue's age limits before visiting."""
+filler_cta,data/cities.json,42,check the venue,street parking or nearby pay-and-display. Always check the venue's website for parking details before travelling b
+filler_cta,data/cities.json,62,check the venue\u2019s own website before you go,"entres use peak/off-peak or book-only pricing, so check the venue\u2019s own website before you go."","
+filler_cta,data/cities.json,79,Check the venue page for age guidance and under-1s policy,"ger frames and inflatable parks suit a wider mix. Check the venue page for age guidance and under-1s policy."""
+filler_cta,data/cities.json,87,Check the venue page for directions and parking notes,"arks; out-of-town sites may have on-site parking. Check the venue page for directions and parking notes."""
+filler_cta,data/cities.json,189,check the venue,"children separate from the bigger frames. Always check the venue's age policy before visiting."""
+filler_cta,data/cities.json,742,check the venue,"walk-ins are usually possible mid-morning. Always check the venue's website as booking policies vary."""
+filler_cta,lib/blogPosts.ts,234,check the venue,"s for the Sheffield venues, so rather than guess: check the venue's own page or website before booking. Each listin"
+filler_cta,lib/blogPosts.ts,374,check the venue,"red almost everywhere — grippy socks ideally, but check the venue. A few centres sell them at the door for around £"
+filler_cta,lib/blogPosts.ts,712,check the venue,"d pricing or age limits for most Leeds venues, so check the venue's own page or website before booking rather than"
+filler_cta,lib/blogPosts.ts,752,check with the venue,we don't hold confirmed age-range data for them — check with the venue.</p>
+filler_cta,lib/blogPosts.ts,775,check with the venue,"we don't hold confirmed age-range data for them — check with the venue."","
+filler_cta,lib/filterContent.ts,40,check the venue page before you visit,"me venues also allow you to bring your own food — check the venue page before you visit.`,"
+filler_cta,lib/filterContent.ts,138,check the venue,"hem; where we don't have hours we say so. Call or check the venue's own website before travelling.`,"
+filler_cta,lib/locationContent.ts,108,check the venue\u2019s own website before you go,"here the venue has published one \u2014 otherwise check the venue\u2019s own website before you go.`,"
+filler_cta,lib/locationContent.ts,116,Check the venue\u2019s own website for its current prices,"s sell multi-visit passes or monthly memberships. Check the venue\u2019s own website for its current prices.`,"
+filler_cta,lib/venueContent.ts,192,"confirm current opening times, admission prices, and any session requirements before your visit","`Contact ${v.name} directly to confirm current opening times, admission prices, and any session requirements before your visit.`"
+filler_cta,lib/venueContent.ts,279,confirm current age guidance,"hildren. Contact the venue ahead of your visit to confirm current age guidance.`,"
+filler_cta,lib/venueContent.ts,286,confirm current session availability and age requirements for younger visitors,".name} has a baby play area. Contact the venue to confirm current session availability and age requirements for younger visitors.`,"
+filler_cta,lib/venueContent.ts,302,"check with the venue before you visit, especially if you have a younger child in tow","en't confirmed on our listing yet — worth a quick check with the venue before you visit, especially if you have a younger child in tow.`,"
+filler_cta,lib/venueContent.ts,316,Check with the venue for current menu and hours,"site, so there's no need to bring your own food. Check with the venue for current menu and hours.`,"
+filler_cta,lib/venueContent.ts,339,Check with the venue regarding parking charges,.free_parking ? ' Free parking is available.' : ' Check with the venue regarding parking charges.'
+filler_cta,lib/venueContent.ts,377,check with the venue before you travel is the safest bet,"ires booking isn't confirmed on our end — a quick check with the venue before you travel is the safest bet.`,"
+filler_cta,lib/venueContent.ts,413,confirm current availability and any session requirements,"ed as having a sensory area. Contact the venue to confirm current availability and any session requirements.`,"
+data_disclosure,lib/blogPosts.ts,234,"We don't hold confirmed pricing, age limits or party-package details for the Sheffield venues, so rather than guess: che","<p>We don't hold confirmed pricing, age limits or party-package details for the Sheffield venues, so rather than guess: check the venue's own page or website before booking. Each listin"
+data_disclosure,lib/blogPosts.ts,277,"We don't hold confirmed prices for Sheffield venues, so check each centre","<p>We don't hold confirmed prices for Sheffield venues, so check each centre's page or website directly. As general context, U"
+data_disclosure,lib/blogPosts.ts,712,"We don't hold confirmed pricing or age limits for most Leeds venues, so check the venue","<p>We don't hold confirmed pricing or age limits for most Leeds venues, so check the venue's own page or website before booking rather than"
+data_disclosure,lib/blogPosts.ts,714,"in our data, which means unknown rather than absent — most soft play centres do parties, so ask","where else the facilities fields are simply blank in our data, which means unknown rather than absent — most soft play centres do parties, so ask.</p>"
+data_disclosure,lib/blogPosts.ts,752,in our data that confirms a dedicated baby area alongside SEN-friendly facilities and sensory sessions,e Play Lounge in Morley is the only Leeds listing in our data that confirms a dedicated baby area alongside SEN-friendly facilities and sensory sessions. Kids Club House and Little Burrowers are also po
+data_disclosure,lib/blogPosts.ts,752,we don't hold confirmed age-range data for them — check with the venue,"rrowers are also popular with under-fives, though we don't hold confirmed age-range data for them — check with the venue.</p>"
+data_disclosure,lib/blogPosts.ts,755,"We don't hold confirmed prices for Leeds venues, so check each centre","<p>We don't hold confirmed prices for Leeds venues, so check each centre's page or website directly. As general context, U"
+data_disclosure,lib/blogPosts.ts,775,in our data that confirms a dedicated baby area alongside SEN-friendly facilities and sensory sessions,e Play Lounge in Morley is the only Leeds listing in our data that confirms a dedicated baby area alongside SEN-friendly facilities and sensory sessions. Kids Club House and Little Burrowers are also po
+data_disclosure,lib/blogPosts.ts,775,we don't hold confirmed age-range data for them — check with the venue,"rrowers are also popular with under-fives, though we don't hold confirmed age-range data for them — check with the venue."","

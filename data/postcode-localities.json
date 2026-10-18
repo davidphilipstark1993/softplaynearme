@@ -1,0 +1,38 @@
+{
+  "_readme": "Home town (locality) for postcode districts, used so a venue is described by the town it is actually in rather than by the hub it is filed under (e.g. Our Imagination Station is in Hessle, HU13, even though its URL lives under /soft-play/hull). Only districts whose town is well known are listed; a district not listed means 'unknown', and unknown is never guessed. HU10 spans Anlaby, Willerby and Kirk Ella - use venueOverrides for precision. Extend this file (and hubs) to cover other regions; scripts/check-location-mismatches.mjs reports what still needs a decision.",
+  "districts": {
+    "HU1": "Hull", "HU2": "Hull", "HU3": "Hull", "HU4": "Hull", "HU5": "Hull",
+    "HU6": "Hull", "HU7": "Hull", "HU8": "Hull", "HU9": "Hull",
+    "HU10": "Anlaby", "HU11": "Bilton", "HU12": "Hedon", "HU13": "Hessle",
+    "HU14": "North Ferriby", "HU15": "Brough", "HU16": "Cottingham",
+    "HU17": "Beverley", "HU18": "Hornsea", "HU19": "Withernsea",
+    "DN1": "Doncaster", "DN2": "Doncaster", "DN3": "Doncaster", "DN4": "Doncaster",
+    "DN5": "Doncaster", "DN6": "Doncaster", "DN7": "Doncaster", "DN8": "Doncaster",
+    "DN9": "Doncaster", "DN10": "Doncaster", "DN11": "Doncaster", "DN12": "Doncaster",
+    "DN14": "Goole", "DN15": "Scunthorpe", "DN16": "Scunthorpe", "DN17": "Scunthorpe",
+    "DN18": "Barton-upon-Humber", "DN19": "Barrow upon Humber", "DN20": "Brigg",
+    "DN21": "Gainsborough", "DN22": "Retford",
+    "DN31": "Grimsby", "DN32": "Grimsby", "DN33": "Grimsby", "DN34": "Grimsby",
+    "DN35": "Cleethorpes", "DN36": "Grimsby", "DN37": "Grimsby", "DN38": "Brigg",
+    "DN39": "Ulceby", "DN40": "Immingham", "DN41": "Grimsby"
+  },
+  "venueOverrides": {
+    "18": "Anlaby"
+  },
+  "counties": {
+    "Anlaby": "East Yorkshire", "Bilton": "East Yorkshire", "Hedon": "East Yorkshire",
+    "Hessle": "East Yorkshire", "North Ferriby": "East Yorkshire", "Brough": "East Yorkshire",
+    "Cottingham": "East Yorkshire", "Beverley": "East Yorkshire", "Hornsea": "East Yorkshire",
+    "Withernsea": "East Yorkshire", "Hull": "East Yorkshire", "Doncaster": "South Yorkshire",
+    "Goole": "East Yorkshire", "Scunthorpe": "Lincolnshire", "Barton-upon-Humber": "Lincolnshire",
+    "Barrow upon Humber": "Lincolnshire", "Brigg": "Lincolnshire", "Gainsborough": "Lincolnshire",
+    "Retford": "Nottinghamshire", "Grimsby": "Lincolnshire", "Cleethorpes": "Lincolnshire",
+    "Ulceby": "Lincolnshire", "Immingham": "Lincolnshire"
+  },
+  "hubs": {
+    "hull": {
+      "core": ["Hull"],
+      "nearby": ["Anlaby", "Bilton", "Hedon", "Hessle", "North Ferriby", "Brough", "Cottingham", "Beverley", "Hornsea", "Withernsea"]
+    }
+  }
+}

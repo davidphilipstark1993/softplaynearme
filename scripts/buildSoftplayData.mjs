@@ -14,6 +14,7 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { stripTrailingCity } from './lib/venue-slug.mjs'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -111,7 +112,8 @@ function transformVenue(row, townSlug, venueSlugSet) {
   const name = row['Venue Name'] || ''
   if (!name) return null
 
-  const baseSlug = slugify(name)
+  // The city is already in the URL path, so it is not repeated in the slug.
+  const baseSlug = stripTrailingCity(slugify(name), townSlug)
   const slug = ensureUniqueSlug(baseSlug, venueSlugSet)
 
   return {

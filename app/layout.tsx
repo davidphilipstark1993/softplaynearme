@@ -16,22 +16,18 @@ export const viewport: Viewport = {
   themeColor: "#9333ea",
 };
 
-// Intentionally static, not generateMetadata() with a live DB count: the
-// root layout runs once per statically-generated page (2,300+ of them),
-// and React's cache() only dedupes within a single page's render, not
-// across pages — a DB-backed root layout would mean one extra query per
-// page at build time. The homepage itself (app/page.tsx) already computes
-// its own description from real data and overrides this default; every
-// other route type (city/venue/filter/blog/static pages) also sets its
-// own description. This root-level text is a rarely-seen fallback, not
-// worth thousands of build-time queries to keep exactly in sync.
+// Intentionally static and number-free: the root layout runs once per
+// statically-generated page (2,000+ of them), so a DB-backed count here would
+// cost one query per page at build time — and a hardcoded count goes stale
+// (this said "1,800+" while the homepage said 1,077). The homepage computes
+// its own description from lib/venueCounts.ts and overrides this default;
+// every other route type also sets its own description.
 export const metadata: Metadata = {
   title: {
     default: "Soft Play Near Me | Find Soft Play Centres Across the UK",
     template: "%s | Soft Play Near Me",
   },
-  description: "Find 1,800+ soft play centres near you across the UK. Search by postcode, compare prices, opening times and facilities. Free directory, updated daily.",
-  keywords: ["soft play near me", "soft play centres", "indoor play", "toddler soft play", "soft play birthday parties", "SEN soft play", "indoor play centres UK"],
+  description: "Find soft play centres near you across the UK. Search by postcode and compare facilities, reviews and contact details. Free directory.",
   authors: [{ name: "Soft Play Near Me" }],
   creator: "Soft Play Near Me",
   metadataBase: new URL("https://www.softplaynearme.co.uk"),
@@ -44,7 +40,7 @@ export const metadata: Metadata = {
     url: "https://www.softplaynearme.co.uk",
     siteName: "Soft Play Near Me",
     title: "Soft Play Near Me | Find Soft Play Centres Across the UK",
-    description: "Find 1,800+ soft play centres near you across the UK. Search by postcode, compare prices, opening times, facilities and reviews. Free directory.",
+    description: "Find soft play centres near you across the UK. Search by postcode and compare facilities, reviews and contact details. Free directory.",
     images: ["/opengraph-image"],
   },
   twitter: {
@@ -75,9 +71,9 @@ const organizationSchema = {
   url: "https://www.softplaynearme.co.uk",
   logo: {
     "@type": "ImageObject",
-    url: "https://www.softplaynearme.co.uk/opengraph-image",
-    width: 1200,
-    height: 630,
+    url: "https://www.softplaynearme.co.uk/brand/logo-full.png",
+    width: 960,
+    height: 852,
   },
   description: "UK directory helping families find the best soft play centres near them",
   areaServed: {

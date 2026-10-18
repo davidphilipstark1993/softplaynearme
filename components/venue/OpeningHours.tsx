@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Clock } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { ukNow } from '@/lib/ukTime'
 
 interface OpeningHoursObject {
   open: string
@@ -44,8 +45,7 @@ const DAYS = [
 ]
 
 function getTodayKey(): string {
-  const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
-  return days[new Date().getDay()]
+  return ukNow().dayKey
 }
 
 function isOpenNow(hours: OpeningHoursData | null): boolean {
@@ -58,8 +58,7 @@ function isOpenNow(hours: OpeningHoursData | null): boolean {
     return false
   }
 
-  const now = new Date()
-  const currentMinutes = now.getHours() * 60 + now.getMinutes()
+  const currentMinutes = ukNow().minutes
 
   // Parse hours like "9:00am - 6:00pm" or "09:00 - 18:00"
   const timeMatch = todayHours.match(/(\d{1,2}):?(\d{2})?\s*(am|pm)?\s*[-–]\s*(\d{1,2}):?(\d{2})?\s*(am|pm)?/i)

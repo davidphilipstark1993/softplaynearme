@@ -17,11 +17,13 @@ const nextConfig: NextConfig = {
   // Populated by scripts/migrations/*.mjs when they run against the DB —
   // starts empty, safe to ship ahead of those migrations actually running.
   async redirects() {
-    return redirectEntries as Array<{
-      source: string;
-      destination: string;
-      permanent: boolean;
-    }>;
+    // Explicit 301s. `permanent: true` makes Next emit 308 — equivalent for
+    // search engines, but the rules (and our docs) say 301, so say it.
+    return (redirectEntries as Array<{ source: string; destination: string }>).map(({ source, destination }) => ({
+      source,
+      destination,
+      statusCode: 301 as const,
+    }));
   },
 };
 

@@ -76,6 +76,8 @@ const POSTCODE_DISTRICT_TO_CITY = {
   YO26: ['york'], YO30: ['york'], YO31: ['york'], YO32: ['york'],
   YO41: ['york'], YO42: ['york'], YO43: ['york'], YO51: ['york'],
   YO60: ['york'], YO61: ['york'], YO62: ['york'],
+  // DN15-DN17 = Scunthorpe (own hub since phase 7-02), not Doncaster
+  DN15: ['scunthorpe'], DN16: ['scunthorpe'], DN17: ['scunthorpe'],
   // S (Sheffield postcode area): S70-S75 = Barnsley, not Sheffield
   S70: ['barnsley'], S71: ['barnsley'], S72: ['barnsley'],
   S73: ['barnsley'], S74: ['barnsley'], S75: ['barnsley'],

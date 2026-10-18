@@ -49,6 +49,8 @@ import { EnquiryForm } from '@/components/venue/EnquiryForm'
 import { ReportIssueLink } from '@/components/venue/ReportIssueLink'
 import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup'
 import { VenueViewTracking } from '@/components/venue/VenueViewTracking'
+import { cleanHoursText, hasOpeningHours, hasPrice } from '@/lib/venueFacts'
+import { getLocality } from '@/lib/localities'
 
 interface PageProps {
   params: Promise<{ city: string; slug: string }>
@@ -69,6 +71,7 @@ interface Venue {
   booking_url?: string
   description?: string
   opening_hours?: Record<string, string>
+  opening_hours_text?: string | null
   price_range?: string
   price_from?: number
   price_to?: number
@@ -248,13 +251,15 @@ function staticToVenue(sv: StaticVenue): Venue {
     has_outdoor_play: sv.hasOutdoorPlay ?? false,
     has_party_rooms: sv.hasPartyRooms ?? false,
     has_sen_sessions: sv.hasSenSessions ?? false,
+    opening_hours_text: sv.openingHoursText || undefined,
     price_from: sv.priceFrom ?? undefined,
     price_to: sv.priceTo ?? undefined,
     main_image_url: sv.mainImageUrl ?? undefined,
     featured: sv.featured ?? false,
     _mapsUrl: sv.mapsUrl,
     _isStatic: true,
-  } as Venue & { _mapsUrl?: string; _isStatic?: boolean }
+    _staticId: sv.id,
+  } as Venue & { _mapsUrl?: string; _isStatic?: boolean; _staticId?: number }
 }
 
 async function getReviews(venueId: number, citySlug: string, venueSlug: string): Promise<Review[]> {
@@ -492,13 +497,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const cityName = cityConfig?.name || staticTown?.name || city
   const county = cityConfig?.county || ''
+  // The town the venue is really in (Hessle for a HU13 venue filed under Hull).
+  const homeTown = getLocality({ id: venue.id || (venue as { _staticId?: number })._staticId, postcode: venue.postcode }) ?? cityName
 
   // Use stored overrides when available, fall back to generated copy
-  const title = venue.seo_title || `${venue.name} – Soft Play in ${cityName} | Hours & Prices`
+  // Only promise what the page can show: hours and/or prices when we hold them.
+  const promised = [
+    hasOpeningHours(venue) ? 'Hours' : null,
+    hasPrice(venue) ? 'Prices' : null,
+  ].filter(Boolean).join(' & ')
+  const title = venue.seo_title || `${venue.name} – Soft Play in ${homeTown}${promised ? ` | ${promised}` : ''}`
   const description =
     venue.meta_description ||
     venue.description ||
-    generateVenueMetaDescription({ ...venue, city: cityName, county })
+    generateVenueMetaDescription({ ...venue, city: homeTown, county: homeTown === cityName ? county : '' })
 
   // Noindex very thin pages (name + address only, no useful content)
   const score = venue.completeness_score ??
@@ -544,6 +556,7 @@ export default async function VenuePage({ params }: PageProps) {
 
   const cityName = cityConfig?.name || staticTown?.name || city
   const county = cityConfig?.county || ''
+  const homeTown = getLocality({ id: venue.id || (venue as { _staticId?: number })._staticId, postcode: venue.postcode }) ?? cityName
   const isStaticVenue = (venue as any)._isStatic === true
 
   // Fetch all related data in parallel
@@ -583,7 +596,7 @@ export default async function VenuePage({ params }: PageProps) {
       : []
 
   // ── Content generation ─────────────────────────────────────────────────
-  const venueContentInput = { ...venue, city: cityName, county }
+  const venueContentInput = { ...venue, city: homeTown, county: homeTown === cityName ? county : '' }
 
   // Use stored description if available, otherwise generate one
   const displayDescription = venue.description || generateVenueDescription(venueContentInput)
@@ -604,7 +617,7 @@ export default async function VenuePage({ params }: PageProps) {
     name: venue.name,
     description: venue.description,
     address: venue.address,
-    city: cityName,
+    city: homeTown,
     postcode: venue.postcode,
     phone: venue.phone,
     website: venue.website,
@@ -613,8 +626,11 @@ export default async function VenuePage({ params }: PageProps) {
     openingHours: venue.opening_hours,
     priceFrom: venue.price_from,
     priceTo: venue.price_to,
-    avgRating: avgRating > 0 ? avgRating : undefined,
-    reviewCount: reviews.length > 0 ? reviews.length : ((venue as any).reviews_count || undefined),
+    // AggregateRating only from reviews left on this site (shown in the Reviews
+    // section). The Google Maps rating in the header is third-party data: it stays
+    // visible (labelled "Google reviews") but is not put in structured data.
+    avgRating: reviews.length > 0 ? avgRating : undefined,
+    reviewCount: reviews.length > 0 ? reviews.length : undefined,
     reviews: reviews.length > 0
       ? reviews.slice(0, 10).map((review) => ({
           reviewerName: review.reviewer_name,
@@ -673,7 +689,7 @@ export default async function VenuePage({ params }: PageProps) {
                   )}
                 </div>
                 <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
-                  {venue.name} <span className="text-purple-200 font-normal text-xl sm:text-2xl md:text-3xl">| Soft Play in {cityName}</span>
+                  {venue.name} <span className="text-purple-200 font-normal text-xl sm:text-2xl md:text-3xl">| Soft Play in {homeTown}</span>
                 </h1>
                 {formatAddressLine(venue.address, venue.postcode) && (
                   <div className="flex items-center gap-2 text-purple-100">
@@ -762,7 +778,7 @@ export default async function VenuePage({ params }: PageProps) {
                 priceFrom={venue.price_from}
                 priceTo={venue.price_to}
                 priceRange={venue.price_range}
-                hasOpeningHours={!!venue.opening_hours}
+                hasOpeningHours={hasOpeningHours(venue)}
                 cafe={venue.cafe}
                 parking={venue.parking}
                 parties={venue.parties}
@@ -1140,6 +1156,30 @@ export default async function VenuePage({ params }: PageProps) {
                 {/* Opening Hours */}
                 {venue.opening_hours ? (
                   <OpeningHours hours={venue.opening_hours} />
+                ) : cleanHoursText(venue.opening_hours_text) ? (
+                  // No structured hours, but we do hold the venue's listed hours as
+                  // text — show them as listed rather than claiming nothing is known.
+                  <Card>
+                    <CardHeader className="pb-4">
+                      <CardTitle className="flex items-center gap-2 text-lg">
+                        <Clock className="h-5 w-5 text-purple-600" />
+                        Opening Hours
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="space-y-1 text-sm text-slate-700">
+                        {cleanHoursText(venue.opening_hours_text)
+                          .split(/\s*[|;]\s*/)
+                          .filter(Boolean)
+                          .map((line) => (
+                            <li key={line}>{line}</li>
+                          ))}
+                      </ul>
+                      <p className="mt-3 text-xs text-slate-500">
+                        Hours as listed for {venue.name} &mdash; confirm with the venue before travelling, especially in school holidays.
+                      </p>
+                    </CardContent>
+                  </Card>
                 ) : (
                   <Card>
                     <CardHeader className="pb-4">

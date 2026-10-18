@@ -59,7 +59,7 @@
     "metaTitle": "Soft Play in Hull 2026: Centres, Prices & Ages | Soft Play Near Me",
     "metaDescription": "Compare soft play centres in Hull and East Yorkshire — prices, ages, and facilities. Verified local indoor play for toddlers and older kids.",
     "h1": "Soft Play in Hull",
-    "intro": "Looking for soft play in Hull or nearby in East Yorkshire? This page helps parents compare indoor play centres — classic soft play, role-play villages, climbing venues with soft play, and inflatable parks — so you can match the outing to your child's age, energy, and how far you want to travel.\n\nWe include Hull city options first, then centres a short drive away across East Yorkshire and neighbouring towns. Each listing notes the category (soft play, role play, climbing + soft play, or inflatable park) and links to the official site so you can check prices, ages, and booking rules yourself.\n\nVenues here are drawn from our local fact-check work against official websites. We do not invent tariffs or hours. Details change, and some centres use peak/off-peak or book-only pricing, so always confirm on the venue page or with the centre before you go.",
+    "intro": "Looking for soft play in Hull or nearby in East Yorkshire? This page helps parents compare indoor play centres — classic soft play, role-play villages, climbing venues with soft play, and inflatable parks — so you can match the outing to your child's age, energy, and how far you want to travel.\n\nWe include Hull city options first, then centres a short drive away across East Yorkshire and neighbouring towns. Each listing notes the category (soft play, role play, climbing + soft play, or inflatable park) and links to the official site so you can check prices, ages, and booking rules yourself.\n\nPrices and opening hours change, and some centres use peak/off-peak or book-only pricing, so check the venue\u2019s own website before you go.",
     "nearbyAreas": [
       "Beverley",
       "Bridlington",
@@ -1394,5 +1394,21 @@
         "answer": "Yes, Dartford has indoor play options for toddlers and older children, with more nearby in Gravesend, Swanley and Bexleyheath."
       }
     ]
+  },
+  {
+    "slug": "scunthorpe",
+    "name": "Scunthorpe",
+    "county": "Lincolnshire",
+    "region": "East Midlands",
+    "metaTitle": "Soft Play in Scunthorpe",
+    "metaDescription": "Find soft play centres in Scunthorpe, Lincolnshire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Scunthorpe",
+    "intro": "Soft play centres in Scunthorpe and the surrounding area of Lincolnshire.",
+    "nearbyAreas": [
+      "Doncaster",
+      "Lincoln",
+      "Hull"
+    ],
+    "faqs": []
   }
 ]

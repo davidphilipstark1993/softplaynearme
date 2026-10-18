@@ -1,3 +1,4 @@
+import { cache } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
@@ -5,7 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { isUsablePhotoUrl } from '@/lib/imageUtils'
-import { getCityBySlug, getAllCitySlugs, getNearbyCities, filters } from '@/lib/venues'
+import { getCityBySlug, getAllCitySlugs, getNearbyCities, filters, cities } from '@/lib/venues'
 import { MapPin, Star, Coffee, Car, Baby, PartyPopper, Heart, Phone, Globe, Navigation, TrendingUp, CheckCircle2, Sparkles, Compass } from 'lucide-react'
 import type { Metadata } from 'next'
 import { getPool, STATIC_BUILD } from '@/lib/pool'
@@ -29,6 +30,16 @@ import { getCardQuote, formatLastVerified } from '@/lib/venueCardText'
 import { isVerified } from '@/lib/plans'
 import { FeaturedImpression } from '@/components/venue/FeaturedImpression'
 import { LONDON_AREAS, getLondonAreaSlug } from '@/lib/londonAreas'
+import { getCityVenueCount } from '@/lib/venueCounts'
+import { computeCityStats, rankTopRated, smoothedRating, MIN_REVIEWS_FOR_TOP_RATED, RATING_PRIOR_MEAN } from '@/lib/cityStats'
+import { buildCityIntro, buildCityFaqs } from '@/lib/cityContent'
+import { isOpenNow } from '@/lib/utils'
+import { buildCityMeta } from '@/lib/cityMeta'
+import { hasStructuredHours } from '@/lib/venueFacts'
+import { splitByLocality, groupNearbyByLocality, getLocality } from '@/lib/localities'
+import { VENUES_PER_PAGE, totalPagesFor, parsePageParam, hubPagePath, pageWindow } from '@/lib/pagination'
+import { NearbyTowns } from '@/components/location/NearbyTowns'
+import { VenueCardFacts } from '@/components/venue/VenueCardFacts'
 
 interface PageProps {
   params: Promise<{ city: string }>
@@ -44,13 +55,6 @@ interface PageProps {
     page?: string       // 1-indexed pagination of the "All Venues" grid
   }>
 }
-
-// Venue cards (with images, badges, review quotes) are by far the biggest
-// contributor to city-page HTML weight — large cities were rendering 100+ of
-// them on one page (Leeds ~1MB of HTML). Only this many render server-side;
-// the rest are reachable via the pagination links below, which stay crawlable
-// (plain <Link>s, not client-only "load more") so no venue becomes orphaned.
-const VENUES_PER_PAGE = 24
 
 export const revalidate = 3600
 
@@ -79,79 +83,66 @@ function metadataTitle(metaTitle: string): string | { absolute: string } {
 
 export async function generateMetadata({ params, searchParams }: PageProps): Promise<Metadata> {
   const { city } = await params
-  const { filter, search, age, facilities, price, special, area, page } = await searchParams
+  const { filter, search, age, facilities, price, special, area, sort, page } = await searchParams
   const cityConfig = getCityBySlug(city)
+  const staticTown = getStaticTownBySlug(city)
 
-  // Prevent indexing of filtered / searched / paginated variations. Page 1
-  // (the default, whether ?page=1 is explicit or omitted) is the canonical,
-  // indexable page — only page 2+ is noindex,follow, same treatment as every
-  // other query-param variation: still crawlable so venues on later pages
-  // stay reachable, just not a duplicate of page 1's content in the index.
-  const pageNum = Math.max(1, parseInt(page || '1', 10) || 1)
-  const noindex = !!(filter || search || age || facilities || price || special || area || pageNum > 1)
-
-  if (!cityConfig) {
-    const staticTown = getStaticTownBySlug(city)
-    if (!staticTown) {
-      // No suffix — the root layout's title template appends it. Never index a
-      // not-found response, otherwise it inherits the root `index: true`.
-      return { title: 'City Not Found', robots: { index: false, follow: false } }
-    }
-
-    // Use content generator for unique meta titles/descriptions
-    const generated = getLocationContent(city, undefined, staticTown)
-    const title = generated.metaTitle
-    const description = generated.metaDescription
-
-    const ogImage = getCityOgImage(city)
-    return {
-      title: metadataTitle(title),
-      description,
-      ...(noindex && { robots: { index: false, follow: true } }),
-      openGraph: {
-        title,
-        description,
-        url: `https://www.softplaynearme.co.uk/soft-play/${city}`,
-        type: 'website',
-        siteName: 'Soft Play Near Me',
-        images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
-      },
-      twitter: {
-        card: 'summary_large_image',
-        title,
-        description,
-        images: [ogImage],
-      },
-      alternates: {
-        canonical: `https://www.softplaynearme.co.uk/soft-play/${city}`,
-      },
-    }
+  if (!cityConfig && !staticTown) {
+    // No suffix — the root layout's title template appends it. Never index a
+    // not-found response, otherwise it inherits the root `index: true`.
+    return { title: 'City Not Found', robots: { index: false, follow: false } }
   }
 
-  // Use content generator for richer meta if hand-written is thin
-  const generated = getLocationContent(city, cityConfig, null)
-  const ogImage = getCityOgImage(city)
+  const name = cityConfig?.name || staticTown?.name || city
+  const county = cityConfig?.county || ''
+  const baseUrl = 'https://www.softplaynearme.co.uk'
 
+  // Title and description are generated from this city's real data, so they
+  // never promise prices/hours/ages the venue cards can't show (lib/cityMeta.ts).
+  // Stats describe the hub's own main list (nearby-town venues are counted in
+  // their own section), so the title's "N Centres" matches the page's heading.
+  const { core } = splitByLocality(city, await getCityVenuesAll(city))
+  const meta = buildCityMeta(name, county, computeCityStats(core.map(toStatsVenue)))
+
+  // Any filter / search / sort / area variation is a duplicate view of the same
+  // venues: noindex,follow, canonical to the plain hub.
+  const isVariation = !!(filter || search || age || facilities || price || special || area || sort)
+
+  // Pagination: pages 2+ are real, distinct lists of venues, so each one is
+  // indexable with a canonical pointing at itself (not at page 1) and is listed
+  // in the sitemap. An out-of-range page number is not a page: noindex, canonical
+  // to the last real page.
+  const requested = parsePageParam(page)
+  const totalPages = totalPagesFor(core.length)
+  const pageNum = Math.min(requested, totalPages)
+  const outOfRange = requested > totalPages
+
+  const title = pageNum > 1 ? `${meta.title} – Page ${pageNum}` : meta.title
+  const description = pageNum > 1 ? `${meta.description} Page ${pageNum} of ${totalPages}.` : meta.description
+  const canonical = `${baseUrl}${isVariation ? hubPagePath(city, 1) : hubPagePath(city, pageNum)}`
+  const noindex = isVariation || outOfRange
+
+  const ogImage = getCityOgImage(city)
   return {
-    title: metadataTitle(generated.metaTitle),
-    description: generated.metaDescription,
+    title,
+    description,
     ...(noindex && { robots: { index: false, follow: true } }),
     openGraph: {
-      title: generated.metaTitle,
-      description: generated.metaDescription,
-      url: `https://www.softplaynearme.co.uk/soft-play/${city}`,
+      title,
+      description,
+      url: canonical,
       type: 'website',
       siteName: 'Soft Play Near Me',
-      images: [{ url: ogImage, width: 1200, height: 630, alt: generated.metaTitle }],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
     },
     twitter: {
       card: 'summary_large_image',
-      title: generated.metaTitle,
-      description: generated.metaDescription,
+      title,
+      description,
       images: [ogImage],
     },
     alternates: {
-      canonical: `https://www.softplaynearme.co.uk/soft-play/${city}`,
+      canonical,
     },
   }
 }
@@ -177,7 +168,11 @@ interface Venue {
   wheelchair_access?: boolean
   price_from?: number | null
   price_to?: number | null
+  age_range_min?: number | null
+  age_range_max?: number | null
+  age_ranges?: string[] | null
   opening_hours?: unknown
+  opening_hours_text?: string | null
   avg_rating?: number
   review_count?: number
   mapsUrl?: string
@@ -227,11 +222,26 @@ function staticToDisplayVenue(sv: StaticVenue): Venue {
     wheelchair_access: sv.wheelchairAccess ?? false,
     price_from: sv.priceFrom ?? null,
     price_to: sv.priceTo ?? null,
+    opening_hours_text: sv.openingHoursText || null,
     isStatic: true,
     last_verified_at: sv.lastVerified || undefined,
     featured: sv.featured ?? false,
     venue_type: sv.venueType ?? null,
   }
+}
+
+/**
+ * "Sort by rating": featured placements first (as before), then by a smoothed
+ * score so a 5.0 from two reviews can't outrank a 4.6 from hundreds, then name.
+ * Unrated venues come last. See smoothedRating in lib/cityStats.ts.
+ */
+function sortByRating(list: Venue[]): Venue[] {
+  return [...list].sort(
+    (a, b) =>
+      Number(!!b.featured) - Number(!!a.featured) ||
+      (smoothedRating(b.avg_rating, b.review_count) ?? -1) - (smoothedRating(a.avg_rating, a.review_count) ?? -1) ||
+      a.name.localeCompare(b.name)
+  )
 }
 
 async function getVenues(citySlug: string, opts: VenueFilters = {}): Promise<Venue[]> {
@@ -303,7 +313,10 @@ async function getVenues(citySlug: string, opts: VenueFilters = {}): Promise<Ven
 
       // Sort
       const sortMap: Record<string, string> = {
-        rating: 'avg_rating DESC NULLS LAST, v.reviews_count DESC NULLS LAST, v.name ASC',
+        // 'rating' is ordered in JS after the query (sortByRating) so it can use
+        // the same smoothed score as everything else; the DB just needs a stable
+        // base order here.
+        rating: 'v.name ASC',
         price_low: 'v.price_from ASC NULLS LAST, avg_rating DESC NULLS LAST',
         price_high: 'v.price_to DESC NULLS LAST, avg_rating DESC NULLS LAST',
         name: 'v.name ASC',
@@ -319,12 +332,18 @@ async function getVenues(citySlug: string, opts: VenueFilters = {}): Promise<Ven
         ...row,
         featured: !!row.featured && (!row.featured_until || new Date(row.featured_until) > new Date()),
       }))
+      if (sort === 'rating') venues = sortByRating(venues)
       if (special.includes('open-now') && venues.length > 0) {
-        const { isOpenNow } = await import('@/lib/utils')
+        // Venues with no structured hours are never "open now" — isOpenNow()
+        // is false for them rather than guessing.
         venues = venues.filter((v) => isOpenNow(v.opening_hours as Record<string, unknown>))
       }
-      venues = applyAreaFilter(venues)
-      if (venues.length > 0) return venues
+      // The query succeeded, so the DB is authoritative even when it returns
+      // nothing (e.g. every venue in a city deactivated, or a filter that
+      // matches none). Falling through to the static export here used to
+      // resurrect venues the DB had removed and made hub counts disagree with
+      // the homepage.
+      return applyAreaFilter(venues)
     } finally {
       client.release()
     }
@@ -335,7 +354,8 @@ async function getVenues(citySlug: string, opts: VenueFilters = {}): Promise<Ven
     }
   }
 
-  // Static data fallback with client-side filtering
+  // Static data fallback (DB unreachable, or SOFTPLAY_STATIC_BUILD=1) with
+  // client-side filtering
   const staticVenues = getStaticVenuesByTown(citySlug)
   let venues = staticVenues.map(staticToDisplayVenue)
 
@@ -366,6 +386,9 @@ async function getVenues(citySlug: string, opts: VenueFilters = {}): Promise<Ven
   if (price === '5to8') venues = venues.filter((v) => v.price_from != null && v.price_from >= 5 && v.price_from <= 8)
   if (price === 'over8') venues = venues.filter((v) => v.price_from != null && v.price_from > 8)
   if (special.includes('wheelchair')) venues = venues.filter((v) => v.wheelchair_access)
+  // The static export only carries free-text hours, which can't be checked
+  // against the clock — so without the DB nothing can honestly be "open now".
+  if (special.includes('open-now')) venues = venues.filter((v) => isOpenNow(v.opening_hours as Record<string, unknown> | null))
 
   if (search) {
     const q = search.toLowerCase()
@@ -378,6 +401,7 @@ async function getVenues(citySlug: string, opts: VenueFilters = {}): Promise<Ven
 
   if (sort === 'price_low') venues.sort((a, b) => (a.price_from ?? Infinity) - (b.price_from ?? Infinity))
   else if (sort === 'name') venues.sort((a, b) => a.name.localeCompare(b.name))
+  else venues = sortByRating(venues) // default; the static fallback used to be left in file order
 
   // Featured (Premium/Bespoke) venues surface first regardless of sort —
   // stable sort preserves the ordering above as the secondary key, matching
@@ -385,6 +409,31 @@ async function getVenues(citySlug: string, opts: VenueFilters = {}): Promise<Ven
   venues.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0))
 
   return applyAreaFilter(venues)
+}
+
+/** Unfiltered venue list for a city, shared (per request) by metadata and page. */
+const getCityVenuesAll = cache(async (citySlug: string): Promise<Venue[]> => getVenues(citySlug, {}))
+
+/** Narrow a display venue to the shape lib/cityStats.ts works on. */
+function toStatsVenue(v: Venue) {
+  return {
+    name: v.name,
+    slug: v.slug,
+    avg_rating: v.avg_rating ?? null,
+    review_count: v.review_count ?? null,
+    toddler_area: v.toddler_area,
+    baby_area: v.baby_area,
+    sen_friendly: v.sen_friendly,
+    parties: v.parties,
+    price_from: v.price_from,
+    price_to: v.price_to,
+    age_range_min: v.age_range_min,
+    age_range_max: v.age_range_max,
+    age_ranges: v.age_ranges,
+    opening_hours: v.opening_hours,
+    opening_hours_text: v.opening_hours_text,
+    last_verified_at: v.last_verified_at,
+  }
 }
 
 interface SponsoredVenue {
@@ -434,13 +483,27 @@ export default async function CityPage({ params, searchParams }: PageProps) {
   const facilities = (facilitiesParam || '').split(',').filter(Boolean)
   const special = (specialParam || '').split(',').filter(Boolean)
 
-  const venues = await getVenues(city, { filter, search, age, facilities, price, special, sort, area })
+  const fetchedVenues = await getVenues(city, { filter, search, age, facilities, price, special, sort, area })
+  // Main list = the hub's own town. Venues in surrounding towns (Hessle,
+  // Cottingham… for Hull) go in the separate Nearby section instead of being
+  // listed twice. The 'other family activities' view isn't split.
+  const { core: venues, nearby: nearbyVenues } =
+    filter === 'other' ? { core: fetchedVenues, nearby: [] as typeof fetchedVenues } : splitByLocality(city, fetchedVenues)
+  // Unfiltered venue total for this city, from the same helper the homepage
+  // cards and meta descriptions use (lib/venueCounts.ts).
+  const cityVenueCount = await getCityVenueCount(city)
+  // "Open Now" only works for venues with structured hours. If none of this
+  // city's venues have any, offering the filter would just return nothing (or,
+  // worse, imply an answer) — hide it instead.
+  const allCityVenues = await getCityVenuesAll(city)
+  const openNowAvailable = allCityVenues.some((v) => hasStructuredHours(v.opening_hours))
+  const visibleFilters = filters.filter((f) => f.slug !== 'open-now' || openNowAvailable)
   const nearbyCities = cityConfig ? getNearbyCities(city) : []
 
   // Pagination — see VENUES_PER_PAGE above for why. Clamp to the real last
   // page so an out-of-range ?page= doesn't render an empty grid.
-  const totalPages = Math.max(1, Math.ceil(venues.length / VENUES_PER_PAGE))
-  const pageNum = Math.min(Math.max(1, parseInt(pageParam || '1', 10) || 1), totalPages)
+  const totalPages = totalPagesFor(venues.length)
+  const pageNum = Math.min(parsePageParam(pageParam), totalPages)
   const pagedVenues = venues.slice((pageNum - 1) * VENUES_PER_PAGE, pageNum * VENUES_PER_PAGE)
 
   // Preserves every other active filter/sort param while only changing `page`
@@ -472,15 +535,23 @@ export default async function CityPage({ params, searchParams }: PageProps) {
   }
 
   // Use content generator for rich intros and FAQs
-  const locationContent = getLocationContent(city, cityConfig, staticTown, venues.length)
-  const { h1, intro, faqs } = locationContent
+  const locationContent = getLocationContent(city, cityConfig, staticTown, cityVenueCount)
+  const { h1, intro } = locationContent
+  // Under-heading summary and FAQ are built from this hub's own venues
+  // (lib/cityContent.ts). The unfiltered main list is what they describe, so use
+  // the unfiltered city list, not whatever filter is currently applied.
+  const contentVenues = splitByLocality(city, allCityVenues).core
+  const nearbyTownNames = [...new Set(nearbyVenues.map((v) => getLocality(v)).filter((l): l is string => !!l))]
+  const contentInput = { name: displayName, county, slug: city, venues: contentVenues.map(toStatsVenue), nearbyCount: nearbyVenues.length, nearbyTowns: nearbyTownNames }
+  const heroIntro = buildCityIntro(contentInput)
+  const cityMeta = buildCityMeta(displayName, county, computeCityStats(contentInput.venues))
+  const faqs = buildCityFaqs(contentInput)
 
   const baseUrl = 'https://www.softplaynearme.co.uk'
 
   // Use reusable schema builders from lib/schema.ts
   const breadcrumbSchema = buildBreadcrumbSchema([
     { name: 'Home', url: baseUrl },
-    ...(county ? [{ name: county }] : []),
     { name: `Soft Play in ${displayName}`, url: `${baseUrl}/soft-play/${city}` },
   ])
 
@@ -500,12 +571,13 @@ export default async function CityPage({ params, searchParams }: PageProps) {
       reviewCount: v.review_count ? Number(v.review_count) : undefined,
       venueType: v.venue_type,
     })),
-    `Soft Play Centres in ${displayName}`
+    `Soft Play Centres in ${displayName}`,
+    (pageNum - 1) * VENUES_PER_PAGE
   )
 
   const collectionPageSchema = buildCollectionPageSchema({
     name: h1,
-    description: locationContent.metaDescription,
+    description: cityMeta.description,
     url: `${baseUrl}/soft-play/${city}`,
   })
 
@@ -515,6 +587,25 @@ export default async function CityPage({ params, searchParams }: PageProps) {
   // modules even though they may still appear in the main listing.
   const hasActiveFilters = !!(filter || search || age.length || facilities.length || price || special.length || area)
   const showCurated = !hasActiveFilters && pageNum === 1 && venues.length >= 4
+  const showNearby = !hasActiveFilters && !filter && pageNum === 1
+  const nearbyGroups = showNearby ? groupNearbyByLocality(city, nearbyVenues) : []
+  // Every nearby area is a real link or isn't shown: a town with its own hub
+  // links there; a town whose venues are in the Nearby section above links to
+  // that block; anything else (no hub, no venues) is left out rather than
+  // rendered as dead text.
+  const nearbyAreaLinks = nearbyAreas.flatMap((area) => {
+    const hub = nearbyCities.find((c) => c.name === area)
+    if (hub) return [{ area, href: `/soft-play/${hub.slug}` }]
+    const group = nearbyGroups.find((g) => g.locality.toLowerCase() === area.toLowerCase())
+    return group ? [{ area, href: `#${group.anchor}` }] : []
+  })
+  // Headline count: the shared city total when nothing is filtered, otherwise
+  // the size of the filtered result set. In the unfiltered case the list and
+  // the shared total are the same query, so log loudly if they ever diverge.
+  const headlineCount = hasActiveFilters || filter ? venues.length : cityVenueCount
+  if (!hasActiveFilters && !filter && venues.length !== cityVenueCount) {
+    console.warn(`[venue-count] ${city}: list has ${venues.length} venues but shared count is ${cityVenueCount}`)
+  }
   const softPlayVenues = venues.filter(v => isSoftPlayVenueType(v.venue_type))
   // Featured (Premium/Bespoke) venues get their own spotlight, shown ahead of
   // the others — a single featured venue is still worth surfacing since it's
@@ -523,22 +614,19 @@ export default async function CityPage({ params, searchParams }: PageProps) {
   const featuredVenues = showCurated ? softPlayVenues.filter(v => v.featured).slice(0, 4) : []
   const sponsoredVenues = showCurated ? await getSponsoredCityVenues(city) : []
   const toddlerVenues = showCurated ? softPlayVenues.filter(v => v.toddler_area).slice(0, 4) : []
-  // A minimum review count keeps a single 5-star fluke review from
-  // outranking a venue with hundreds of consistently good ones; a maximum
-  // keeps a review-count outlier (mistagged big attraction, franchise HQ
+  // Top rated: only venues with enough reviews to mean something
+  // (MIN_REVIEWS_FOR_TOP_RATED = 20). A 5.0 from 2 reviews is noise, not a ranking.
+  // A maximum keeps a review-count outlier (mistagged big attraction, franchise HQ
   // listing, etc.) from dominating "most popular" regardless of whether
-  // venue_type classification catches it. See reports/ for the review-count
-  // outlier audit that found several misclassified venues this way.
-  const MIN_REVIEWS_FOR_CURATED = 5
+  // venue_type classification catches it.
+  const MIN_REVIEWS_FOR_POPULAR = 5
   const MAX_REVIEWS_FOR_POPULAR = 5000
-  const topRatedVenues = showCurated
-    ? [...softPlayVenues].filter(v => v.avg_rating && Number(v.avg_rating) > 0 && Number(v.review_count || 0) >= MIN_REVIEWS_FOR_CURATED).sort((a, b) => Number(b.avg_rating || 0) - Number(a.avg_rating || 0)).slice(0, 4)
-    : []
+  const topRatedVenues = showCurated ? rankTopRated(softPlayVenues.map(toStatsVenue), 4) : []
   const cityBlogPost = getPostForCity(displayName)
 
   const mostPopularVenues = showCurated
     ? [...softPlayVenues]
-        .filter(v => v.review_count && Number(v.review_count) >= MIN_REVIEWS_FOR_CURATED && Number(v.review_count) <= MAX_REVIEWS_FOR_POPULAR)
+        .filter(v => v.review_count && Number(v.review_count) >= MIN_REVIEWS_FOR_POPULAR && Number(v.review_count) <= MAX_REVIEWS_FOR_POPULAR)
         .sort((a, b) => Number(b.review_count || 0) - Number(a.review_count || 0))
         .slice(0, 4)
     : []
@@ -553,25 +641,20 @@ export default async function CityPage({ params, searchParams }: PageProps) {
       <div className="min-h-screen bg-slate-50">
         <Header />
 
-        <Breadcrumbs items={[
-          ...(county ? [{ label: county }] : []),
-          { label: `Soft Play in ${displayName}` },
-        ]} />
+        <Breadcrumbs items={[{ label: `Soft Play in ${displayName}` }]} />
 
         {/* Hero */}
         <div className="bg-gradient-to-br from-purple-600 to-pink-500 text-white py-10 sm:py-12 px-4">
           <div className="max-w-7xl mx-auto">
             <h1 className="text-3xl md:text-4xl font-bold mb-3">{h1}</h1>
-            <p className="text-purple-100 text-lg max-w-3xl">
-              Find and compare soft play centres in {displayName}{county ? `, ${county}` : ''}. Browse venues, check facilities, and plan your visit.
-            </p>
+            <p className="text-purple-100 text-lg max-w-3xl">{heroIntro}</p>
           </div>
         </div>
 
         {/* Quick facts strip */}
         <div className="bg-white border-b border-slate-200 py-3 px-4">
           <div className="max-w-7xl mx-auto flex flex-wrap gap-x-6 gap-y-1 text-sm">
-            <span><strong className="text-slate-900">{venues.length}</strong> <span className="text-slate-500">{venues.length === 1 ? 'venue' : 'venues'} in {displayName}</span></span>
+            <span><strong className="text-slate-900">{headlineCount}</strong> <span className="text-slate-500">{headlineCount === 1 ? 'venue' : 'venues'} in {displayName}</span></span>
             {city === 'london' && (
               <span><strong className="text-slate-900">£7&ndash;£14</strong> <span className="text-slate-500">per child, typical session &mdash; under-1s usually free</span></span>
             )}
@@ -590,19 +673,6 @@ export default async function CityPage({ params, searchParams }: PageProps) {
           </div>
         )}
 
-        {/* Newsletter banner */}
-        <div className="bg-white border-b border-slate-200 py-6 px-4">
-          <div className="max-w-2xl mx-auto">
-            <NewsletterSignup
-              source="city_page_banner"
-              offer="events"
-              variant="inline"
-              heading={`Get ${displayName} events, free`}
-              subtext={`Events happening in ${displayName} this month and next — straight to your inbox.`}
-            />
-          </div>
-        </div>
-
         {/* Sticky Filters */}
         <div className="bg-white border-b border-slate-200 py-3 sticky top-16 z-40">
           <div className="max-w-7xl mx-auto px-4 overflow-x-auto">
@@ -612,7 +682,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                   All Venues
                 </Button>
               </Link>
-              {filters.map((f) => (
+              {visibleFilters.map((f) => (
                 <Link key={f.slug} href={`/soft-play/${city}/${f.slug}`}>
                   <Button variant="outline" size="sm">
                     {f.name}
@@ -632,16 +702,16 @@ export default async function CityPage({ params, searchParams }: PageProps) {
         <main id="main-content" className="max-w-7xl mx-auto px-4 py-8">
           <div className="lg:grid lg:grid-cols-4 lg:gap-8">
 
-            {/* Filter sidebar — sticky on desktop, collapsible on mobile */}
+            {/* Filter sidebar: one instance, laid out responsively — a sticky
+                collapsible bar on mobile, a sticky panel on desktop. (It used to
+                be rendered twice, putting two full copies of the filters in the HTML.) */}
             <aside className="lg:col-span-1 mb-6 lg:mb-0">
-              {/* Mobile sticky filter bar */}
-              <div className="lg:hidden sticky top-[104px] z-30 bg-white border border-slate-200 rounded-xl px-4 py-3 mb-4 shadow-sm">
-                <FilterSidebar showSort />
-              </div>
-              {/* Desktop sidebar */}
-              <div className="hidden lg:block sticky top-24">
-                <FilterSidebar showSort />
-              </div>
+              <FilterSidebar
+                showSort
+                openNowAvailable={openNowAvailable}
+                mobileClassName="sticky top-[104px] z-30 bg-white border border-slate-200 rounded-xl px-4 py-3 mb-4 shadow-sm"
+                desktopClassName="sticky top-24"
+              />
             </aside>
 
             {/* Venue content */}
@@ -744,19 +814,17 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                 <section>
                   <div className="flex items-center gap-2 mb-3">
                     <Star className="w-5 h-5 text-yellow-500 fill-current" />
-                    <h2 className="text-lg font-semibold text-slate-800">Top Rated Soft Play in {displayName}</h2>
+                    <h2 className="text-lg font-semibold text-slate-800">Top Rated Soft Play in {displayName} <span className="text-sm font-normal text-slate-500">({MIN_REVIEWS_FOR_TOP_RATED}+ reviews)</span></h2>
                   </div>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                     {topRatedVenues.map((venue) => (
                       <Link key={venue.slug} href={`/soft-play/${city}/${venue.slug}`} className="group block">
                         <div className="bg-white border border-slate-200 rounded-lg p-4 hover:border-yellow-300 hover:shadow-md transition-all h-full flex flex-col">
                           <span className="inline-flex items-center gap-1 text-xs font-semibold text-yellow-700 bg-yellow-50 border border-yellow-200 rounded-full px-2 py-0.5 mb-2 w-fit">
-                            <Star className="w-3 h-3 fill-current" /> {Number(venue.avg_rating).toFixed(1)} rated
+                            <Star className="w-3 h-3 fill-current" /> {venue.rating.toFixed(1)} rated
                           </span>
                           <p className="font-semibold text-sm text-slate-800 group-hover:text-yellow-600 line-clamp-2 flex-1">{venue.name}</p>
-                          {venue.review_count && Number(venue.review_count) > 0 && (
-                            <p className="mt-2 text-xs text-slate-500">{Number(venue.review_count).toLocaleString()} reviews</p>
-                          )}
+                          <p className="mt-2 text-xs text-slate-500">{venue.reviews.toLocaleString()} reviews</p>
                         </div>
                       </Link>
                     ))}
@@ -796,7 +864,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
           {/* All Venues */}
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-lg font-semibold text-slate-700">
-              {showCurated ? `All Soft Play in ${displayName} ` : ''}{venues.length} {venues.length === 1 ? 'venue' : 'venues'}{!showCurated ? ' found' : ''}
+              {showCurated ? `All Soft Play in ${displayName} ` : ''}{headlineCount} {headlineCount === 1 ? 'venue' : 'venues'}{!showCurated ? ' found' : ''}
               {totalPages > 1 && (
                 <span className="text-slate-400 font-normal">
                   {' '}&mdash; showing {(pageNum - 1) * VENUES_PER_PAGE + 1}&ndash;{Math.min(pageNum * VENUES_PER_PAGE, venues.length)}
@@ -818,7 +886,8 @@ export default async function CityPage({ params, searchParams }: PageProps) {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {pagedVenues.map((venue, index) => {
-                const hasFeatures = venue.toddler_area || venue.parties || venue.cafe || venue.parking || venue.sen_friendly
+                const hasFeatures = venue.toddler_area || venue.baby_area || venue.parties || venue.cafe || venue.parking || venue.sen_friendly
+                const verifiedOn = formatLastVerified(venue.last_verified_at)
                 const displayImage = isUsablePhotoUrl(venue.main_image_url) ? venue.main_image_url : null
                 return (
                 <Card key={venue.slug} className="group hover:shadow-lg transition-all duration-200 border-slate-200 overflow-hidden h-full flex flex-col">
@@ -901,6 +970,9 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                       <span className="truncate">{venue.address || venue.postcode}</span>
                     </div>
 
+                    {/* Practical facts — hours/price only when we hold them */}
+                    <VenueCardFacts venue={venue} />
+
                     {/* Genuine review quote only — never the generic AI description */}
                     {getCardQuote(venue.review_snippet) && (
                       <p className="text-slate-600 text-sm mb-3 line-clamp-2 italic">
@@ -914,6 +986,11 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                         {venue.toddler_area && (
                           <Badge variant="outline" className="text-xs gap-1 border-blue-200 text-blue-700 bg-blue-50">
                             <Baby className="w-3 h-3" /> Toddler
+                          </Badge>
+                        )}
+                        {venue.baby_area && (
+                          <Badge variant="outline" className="text-xs gap-1 border-blue-200 text-blue-700 bg-blue-50">
+                            <Baby className="w-3 h-3" /> Baby area
                           </Badge>
                         )}
                         {venue.parties && (
@@ -939,9 +1016,9 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                       </div>
                     )}
 
-                    {formatLastVerified(venue.last_verified_at) && (
+                    {verifiedOn && (
                       <p className="text-xs text-slate-400 mt-2">
-                        Verified {formatLastVerified(venue.last_verified_at)}
+                        Verified {verifiedOn}
                       </p>
                     )}
                   </div>
@@ -984,20 +1061,30 @@ export default async function CityPage({ params, searchParams }: PageProps) {
           )}
 
           {/* Pagination — plain crawlable links, not a client-only "load
-              more", so pages 2+ (and every venue on them) stay reachable to
-              search engines even though only page 1 is indexed. */}
+              more", so every page (and every venue on it) is reachable by a
+              search engine. Pages are indexable and listed in the sitemap. */}
           {totalPages > 1 && (
-            <nav aria-label="Venue list pages" className="flex items-center justify-center gap-2 mt-8">
+            <nav aria-label="Venue list pages" className="flex flex-wrap items-center justify-center gap-2 mt-8">
               {pageNum > 1 && (
-                <Link href={buildPageHref(pageNum - 1)}>
+                <Link href={buildPageHref(pageNum - 1)} rel="prev">
                   <Button variant="outline" size="sm">Previous</Button>
                 </Link>
               )}
-              <span className="text-sm text-slate-500 px-2">
-                Page {pageNum} of {totalPages}
-              </span>
+              {pageWindow(pageNum, totalPages).map((p, i) =>
+                p === null ? (
+                  <span key={`gap-${i}`} className="px-1 text-slate-400" aria-hidden="true">&hellip;</span>
+                ) : p === pageNum ? (
+                  <span key={p} aria-current="page" className="inline-flex h-8 min-w-8 items-center justify-center rounded-md bg-purple-600 px-2 text-sm font-medium text-white">
+                    {p}
+                  </span>
+                ) : (
+                  <Link key={p} href={buildPageHref(p)} aria-label={`Page ${p}`}>
+                    <Button variant="outline" size="sm" className="min-w-8 px-2">{p}</Button>
+                  </Link>
+                )
+              )}
               {pageNum < totalPages && (
-                <Link href={buildPageHref(pageNum + 1)}>
+                <Link href={buildPageHref(pageNum + 1)} rel="next">
                   <Button variant="outline" size="sm">Next</Button>
                 </Link>
               )}
@@ -1025,7 +1112,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
           <section aria-labelledby="category-heading" className="mt-12">
             <h2 id="category-heading" className="text-xl font-semibold mb-4">Browse by Category in {displayName}</h2>
             <div className="flex flex-wrap gap-2">
-              {filters.map((f) => (
+              {visibleFilters.map((f) => (
                 <Link key={f.slug} href={`/soft-play/${city}/${f.slug}`}>
                   <Badge variant="outline" className="hover:bg-purple-50 hover:border-purple-300 cursor-pointer py-1.5 px-3">
                     {f.name} in {displayName}
@@ -1065,28 +1152,28 @@ export default async function CityPage({ params, searchParams }: PageProps) {
             </section>
           )}
 
+          {/* Nearby towns: venues just outside the hub, listed once, here */}
+          {showNearby && (
+            <NearbyTowns
+              cityName={displayName}
+              citySlug={city}
+              groups={nearbyGroups}
+              hubSlugFor={(locality) => cities.find((c) => c.name.toLowerCase() === locality.toLowerCase())?.slug ?? null}
+            />
+          )}
+
           {/* Nearby Areas */}
-          {(nearbyCities.length > 0 || nearbyAreas.length > 0) && (
+          {nearbyAreaLinks.length > 0 && (
             <section aria-labelledby="nearby-areas-heading" className="mt-12">
               <h2 id="nearby-areas-heading" className="text-xl font-semibold mb-4">Nearby Areas</h2>
               <div className="flex flex-wrap gap-2">
-                {nearbyAreas.map((area) => {
-                  const nearbyCity = nearbyCities.find(c => c.name === area)
-                  if (nearbyCity) {
-                    return (
-                      <Link key={area} href={`/soft-play/${nearbyCity.slug}`}>
-                        <Badge variant="outline" className="hover:bg-purple-50 hover:border-purple-300 cursor-pointer py-1.5 px-3">
-                          {area}
-                        </Badge>
-                      </Link>
-                    )
-                  }
-                  return (
-                    <Badge key={area} variant="outline" className="text-slate-400 py-1.5 px-3">
+                {nearbyAreaLinks.map(({ area, href }) => (
+                  <Link key={area} href={href}>
+                    <Badge variant="outline" className="hover:bg-purple-50 hover:border-purple-300 cursor-pointer py-1.5 px-3">
                       {area}
                     </Badge>
-                  )
-                })}
+                  </Link>
+                ))}
               </div>
             </section>
           )}

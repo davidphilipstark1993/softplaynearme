@@ -29,7 +29,7 @@ const HUB_COORDS = {
   llanelli: [51.6809, -4.1626], london: [51.5074, -0.1278], manchester: [53.4808, -2.2426],
   mossley: [53.5178, -2.0413], newcastle: [54.9783, -1.6178], norwich: [52.6309, 1.2974],
   nottingham: [52.9548, -1.1581], portsmouth: [50.8198, -1.0880], sheffield: [53.3811, -1.4701],
-  southend: [51.5459, 0.7077], stoke: [53.0027, -2.1794], sunderland: [54.9069, -1.3838],
+  scunthorpe: [53.5786, -0.6548], southend: [51.5459, 0.7077], stoke: [53.0027, -2.1794], sunderland: [54.9069, -1.3838],
   swansea: [51.6214, -3.9436], worthing: [50.8180, -0.3714], york: [53.9600, -1.0873],
 }
 

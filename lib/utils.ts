@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
+import { ukNow } from "./ukTime"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -32,30 +33,30 @@ function normalizeDayHours(value: unknown): { open: string; close: string } | nu
 export function isOpenNow(openingHours: Record<string, unknown> | null): boolean {
   if (!openingHours) return false
 
-  const now = new Date()
-  const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
-  const today = days[now.getDay()]
-  const hours = normalizeDayHours(openingHours[today])
+  // UK local time, not the server's (UTC) clock — see lib/ukTime.ts.
+  const { dayKey, minutes } = ukNow()
+  const hours = normalizeDayHours(openingHours[dayKey])
 
   if (!hours || hours.open === 'closed') return false
 
-  const currentTime = now.getHours() * 100 + now.getMinutes()
-  const openTime = parseInt(hours.open.replace(':', ''))
-  const closeTime = parseInt(hours.close.replace(':', ''))
+  const toMinutes = (hhmm: string) => {
+    const [h, m] = hhmm.split(':').map((n) => parseInt(n, 10))
+    return h * 60 + (m || 0)
+  }
 
-  return currentTime >= openTime && currentTime < closeTime
+  return minutes >= toMinutes(hours.open) && minutes < toMinutes(hours.close)
 }
 
 /**
- * Format opening hours for display
+ * Format today's opening hours for display. Returns 'Hours not available' when
+ * the venue has no usable hours data at all — never implies "closed".
  */
 export function formatOpeningHours(openingHours: Record<string, unknown> | null): string {
   if (!openingHours) return 'Hours not available'
 
-  const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
-  const now = new Date()
-  const today = days[(now.getDay() + 6) % 7] // Adjust for Monday start
-  const hours = normalizeDayHours(openingHours[today])
+  const { dayKey } = ukNow()
+  if (!(dayKey in openingHours)) return 'Hours not available'
+  const hours = normalizeDayHours(openingHours[dayKey])
 
   if (!hours || hours.open === 'closed') return 'Closed today'
 

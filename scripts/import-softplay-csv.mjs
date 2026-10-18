@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import pg from 'pg'
+import { venueSlug } from './lib/venue-slug.mjs'
 
 const { Pool } = pg
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -316,7 +317,7 @@ function buildPayload(row, cityLookup) {
 
   return {
     name,
-    slug: slugify(`${name}-${city}`),
+    slug: venueSlug(name, citySlug),
     citySlug,
     city,
     town: '',

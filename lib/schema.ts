@@ -105,11 +105,17 @@ export interface LocalBusinessSchemaInput {
   postcode: string
   phone?: string
   website?: string
-  lat?: number
-  lng?: number
+  lat?: number | string
+  lng?: number | string
   openingHours?: Record<string, string | { open: string; close: string }> | null
   priceFrom?: number
   priceTo?: number
+  /**
+   * Pass avgRating/reviewCount ONLY when they come from first-party reviews
+   * shown on the page. Google's review-snippet rules forbid marking up ratings
+   * scraped from another site (e.g. a Google Maps rating), so those stay visible
+   * text but out of the structured data.
+   */
   avgRating?: number
   reviewCount?: number
   reviews?: LocalBusinessReviewInput[]
@@ -169,9 +175,6 @@ export function buildLocalBusinessSchema(input: LocalBusinessSchemaInput) {
       ...(input.postcode ? { postalCode: input.postcode } : {}),
       addressCountry: 'GB',
     },
-    publisher: {
-      '@id': 'https://www.softplaynearme.co.uk/#organization',
-    },
   }
 
   if (input.description) {
@@ -186,11 +189,14 @@ export function buildLocalBusinessSchema(input: LocalBusinessSchemaInput) {
     schema.sameAs = [input.website]
   }
 
-  if (input.lat && input.lng) {
+  // Static-export coordinates are strings ("53.7457"); schema.org wants numbers.
+  const lat = Number(input.lat)
+  const lng = Number(input.lng)
+  if (Number.isFinite(lat) && Number.isFinite(lng) && lat !== 0 && lng !== 0) {
     schema.geo = {
       '@type': 'GeoCoordinates',
-      latitude: input.lat,
-      longitude: input.lng,
+      latitude: lat,
+      longitude: lng,
     }
   }
 
@@ -361,13 +367,17 @@ export interface ItemListVenue {
 
 /**
  * Build a Schema.org ItemList JSON-LD object for a list of venues.
- * Used on city/town pages to give Google structured listing data.
- * Embeds address and aggregateRating per item (when available) so
- * answer engines can extract venue facts without a second page fetch.
+ * Used on city/town pages. Each entry has a position, name and url (what
+ * Google's list/carousel markup needs) plus a minimal nested entity — type,
+ * @id (the same id the venue's own page uses), name, url and address. Ratings are
+ * deliberately NOT repeated here: they belong on the venue's own page, where the
+ * reviews behind them are shown.
  */
 export function buildItemListSchema(
   venues: ItemListVenue[],
-  listName: string
+  listName: string,
+  /** Number of items on earlier pages, so page 2 of a paginated list starts at position 25, not 1. */
+  startIndex = 0
 ) {
   if (venues.length === 0) return null
 
@@ -382,7 +392,7 @@ export function buildItemListSchema(
       const url = `${baseUrl}/soft-play/${venue.citySlug}/${venue.slug}`
       const item: Record<string, any> = {
         '@type': 'ListItem',
-        position: i + 1,
+        position: startIndex + i + 1,
         name: venue.name,
         url,
         item: {
@@ -396,15 +406,6 @@ export function buildItemListSchema(
               streetAddress: cleanAddressForDisplay(venue.address)!,
               ...(venue.postcode && { postalCode: venue.postcode }),
               addressCountry: 'GB',
-            },
-          }),
-          ...(venue.avgRating && venue.reviewCount && venue.reviewCount > 0 && {
-            aggregateRating: {
-              '@type': 'AggregateRating',
-              ratingValue: venue.avgRating.toFixed(1),
-              reviewCount: venue.reviewCount,
-              bestRating: 5,
-              worstRating: 1,
             },
           }),
         },

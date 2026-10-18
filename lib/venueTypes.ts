@@ -51,3 +51,15 @@ export const VISIBLE_VENUE_TYPES = ['indoor', 'pub'] as const
 export function visibleVenueTypeSql(alias = 'v'): string {
   return `(${alias}.venue_type IS NULL OR ${alias}.venue_type IN ('${VISIBLE_VENUE_TYPES.join("','")}'))`
 }
+
+/**
+ * In-memory twin of {@link visibleVenueTypeSql}: true for a venue_type the main
+ * directory counts and lists (null/unset counts as the legacy 'indoor'
+ * default, exactly like the SQL's `venue_type IS NULL`). Use this wherever the
+ * static JSON export is the data source, so a static count can never use a
+ * different rule from the live-DB count.
+ */
+export function isVisibleVenueType(venueType: string | null | undefined): boolean {
+  if (!venueType) return true
+  return (VISIBLE_VENUE_TYPES as readonly string[]).includes(venueType)
+}

@@ -30,6 +30,10 @@ if (!DB_URL) {
   process.exit(1)
 }
 
+// Keep in step with VISIBLE_VENUE_TYPES in lib/venueTypes.ts (the single source
+// of truth for what counts as genuine soft play).
+const VISIBLE_VENUE_TYPES = ['indoor', 'pub']
+
 function slugify(text) {
   return text.toString().toLowerCase().trim()
     .replace(/&/g, 'and').replace(/[^\w\s-]/g, '')
@@ -42,7 +46,10 @@ async function main() {
   const pool = new Pool({ connectionString: DB_URL, ssl: { rejectUnauthorized: false } })
   const client = await pool.connect()
 
-  // Fetch all non-closed venues
+  // Fetch all non-closed, active venues. is_active (added in phase 6-01) is the
+  // real public-visibility switch — the live site filters on it everywhere, so
+  // the export must too, or hub pages (live DB) and the statically-built
+  // homepage (this export) report different venue counts.
   const { rows: dbVenues } = await client.query(`
     SELECT
       id, name, slug, city_slug, town, address, postcode, lat, lng,
@@ -56,6 +63,7 @@ async function main() {
       main_image_url, featured, venue_type
     FROM venues
     WHERE status IS DISTINCT FROM 'closed_permanently'
+      AND is_active = true
     ORDER BY city_slug, name
   `)
 
@@ -159,10 +167,10 @@ async function main() {
       name: townNames[slug] || titleCase(slug),
       slug,
       // Genuine soft play only — matches the live DB query's venue_type
-      // filter (app/page.tsx, lib/venueStats.ts) so the count doesn't
+      // filter (lib/venueCounts.ts) so the count doesn't
       // flip-flop between what a fresh SOFTPLAY_STATIC_BUILD=1 deploy bakes
       // in and what ISR revalidation later computes from the live DB.
-      venueCount: venues.filter(v => v.venueType === 'indoor' || v.venueType === 'pub').length,
+      venueCount: venues.filter(v => VISIBLE_VENUE_TYPES.includes(v.venueType)).length,
       avgRating: venues.filter(v => v.rating).length > 0
         ? (venues.reduce((s, v) => s + (v.rating || 0), 0) / venues.filter(v => v.rating).length).toFixed(1)
         : null,

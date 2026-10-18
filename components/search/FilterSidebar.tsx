@@ -4,6 +4,7 @@ import { useRouter, useSearchParams, usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { SlidersHorizontal, X, ChevronDown, ChevronUp } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { mergeLegacyFilters } from '@/lib/searchFilters'
 
 // ─── Filter group definitions ────────────────────────────────────────────────
 
@@ -49,14 +50,25 @@ export const SORT_OPTIONS_NO_LOCATION = [
 
 interface FilterSidebarProps {
   hasLocation?: boolean
+  /**
+   * Whether any venue in the current result set has structured opening hours.
+   * When false the "Open Now" option is hidden — it could only ever return
+   * nothing, which reads as "nowhere is open" rather than "we don't know".
+   */
+  openNowAvailable?: boolean
   showSort?: boolean
   className?: string
+  /** Extra classes for the mobile bar / desktop panel wrappers (e.g. sticky positioning). */
+  mobileClassName?: string
+  desktopClassName?: string
 }
 
-export function FilterSidebar({ hasLocation = false, showSort = true, className }: FilterSidebarProps) {
+export function FilterSidebar({ hasLocation = false, showSort = true, openNowAvailable = true, className, mobileClassName, desktopClassName }: FilterSidebarProps) {
   const router = useRouter()
   const pathname = usePathname()
-  const searchParams = useSearchParams()
+  const rawSearchParams = useSearchParams()
+  // Fold old-style /search?filters=toddler links into the structured params.
+  const searchParams = mergeLegacyFilters(new URLSearchParams(rawSearchParams.toString()))
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const age = parseCSV(searchParams.get('age'))
@@ -156,7 +168,7 @@ export function FilterSidebar({ hasLocation = false, showSort = true, className 
       </FilterSection>
 
       <FilterSection title="Special">
-        {SPECIAL_OPTIONS.map((opt) => (
+        {SPECIAL_OPTIONS.filter((opt) => opt.key !== 'open-now' || openNowAvailable).map((opt) => (
           <CheckRow
             key={opt.key}
             name="special"
@@ -181,7 +193,7 @@ export function FilterSidebar({ hasLocation = false, showSort = true, className 
   return (
     <>
       {/* Mobile: sticky collapsible bar */}
-      <div className={cn('lg:hidden', className)}>
+      <div className={cn('lg:hidden', className, mobileClassName)}>
         <button
           onClick={() => setMobileOpen((o) => !o)}
           className="flex w-full items-center gap-2 text-sm font-medium text-slate-700"
@@ -209,7 +221,7 @@ export function FilterSidebar({ hasLocation = false, showSort = true, className 
       </div>
 
       {/* Desktop: full sidebar panel */}
-      <div className={cn('hidden lg:block', className)}>
+      <div className={cn('hidden lg:block', className, desktopClassName)}>
         <div className="bg-white rounded-xl border border-slate-200 p-5">
           <div className="flex items-center justify-between mb-5">
             <h2 className="font-semibold text-slate-900 flex items-center gap-2 text-sm">
@@ -243,7 +255,7 @@ export function FilterSidebar({ hasLocation = false, showSort = true, className 
 export function ActiveFilterBar({ className }: { className?: string }) {
   const router = useRouter()
   const pathname = usePathname()
-  const searchParams = useSearchParams()
+  const searchParams = mergeLegacyFilters(new URLSearchParams(useSearchParams().toString()))
 
   const age = parseCSV(searchParams.get('age'))
   const facilities = parseCSV(searchParams.get('facilities'))

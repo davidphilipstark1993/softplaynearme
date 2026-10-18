@@ -3,6 +3,8 @@
  * Used by the shared FilterPageContent component.
  */
 
+import { TYPICAL_PARTY_SENTENCE, TYPICAL_HOURS_SENTENCE } from './typicalCosts'
+
 export type FilterSlug = 'toddler' | 'birthday-parties' | 'sen-friendly' | 'open-now'
 
 export interface FilterAdvice {
@@ -63,7 +65,7 @@ const filterContentMap: Record<FilterSlug, FilterContentConfig> = {
     faqs: (cityName) => [
       {
         question: `How much do soft play birthday parties cost in ${cityName}?`,
-        answer: `Birthday party packages at soft play centres in ${cityName} typically cost between £10 and £15 per child. Most packages include dedicated play time, a private party room, food, and sometimes party bags. Prices vary by venue, day of the week, and package tier — contact venues directly for current pricing.`,
+        answer: `Party prices are set by each venue and vary by package, day and number of children, so ask the venues you like in ${cityName} for a current quote. ${TYPICAL_PARTY_SENTENCE}`,
       },
       {
         question: `How far in advance should I book a soft play party in ${cityName}?`,
@@ -135,7 +137,7 @@ const filterContentMap: Record<FilterSlug, FilterContentConfig> = {
     faqs: (cityName) => [
       {
         question: `What time do soft play centres open in ${cityName}?`,
-        answer: `Most soft play centres in ${cityName} open between 9:00am and 10:00am and close between 5:00pm and 6:00pm. Weekend and school holiday hours often differ. Always check the venue's individual page or call ahead to confirm current opening times before travelling.`,
+        answer: `${TYPICAL_HOURS_SENTENCE} We show a venue's hours on its page where the venue has published them, and say so where we don't have them. Call or check the venue's own website before travelling.`,
       },
       {
         question: `Are soft play centres in ${cityName} open at weekends?`,
