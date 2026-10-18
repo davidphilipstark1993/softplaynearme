@@ -80,13 +80,14 @@ function publicCitySlugs(): string[] {
   return [...new Set([...cities.map((c) => c.slug), ...getAllStaticTownSlugs()])]
 }
 
+function staticRows(slug: string) {
+  return getStaticVenuesByTown(slug)
+    .filter((v) => isVisibleVenueType(v.venueType))
+    .map((v) => ({ city_slug: slug, id: v.id, postcode: v.postcode, toddler_area: v.toddlerArea, parties: v.parties, sen_friendly: v.senFriendly }))
+}
+
 function staticCounts(): VenueCounts {
-  const rows = publicCitySlugs().flatMap((slug) =>
-    getStaticVenuesByTown(slug)
-      .filter((v) => isVisibleVenueType(v.venueType))
-      .map((v) => ({ city_slug: slug, id: v.id, postcode: v.postcode, toddler_area: v.toddlerArea, parties: v.parties, sen_friendly: v.senFriendly }))
-  )
-  return tally(rows, 'static')
+  return tally(publicCitySlugs().flatMap(staticRows), 'static')
 }
 
 function sumCounts(byCity: Record<string, number>): number {
@@ -102,7 +103,14 @@ export const getVenueCounts = cache(async (): Promise<VenueCounts> => {
          FROM venues v
         WHERE v.is_active = true AND ${visibleVenueTypeSql()} AND v.city_slug IS NOT NULL`
     )
-    return tally(rows, 'db')
+    // A hub with no rows at all in the DB (e.g. a hub just added to the site before its
+    // venues were moved in the DB) falls back to the export so it isn't shown empty.
+    // Once the DB has rows for it, the DB is authoritative again.
+    const inDb = new Set(rows.map((r) => r.city_slug))
+    const supplement = publicCitySlugs()
+      .filter((slug) => !inDb.has(slug))
+      .flatMap((slug) => staticRows(slug))
+    return tally([...rows, ...supplement], 'db')
   } catch {
     // DB unavailable (or SOFTPLAY_STATIC_BUILD=1): fall back to the JSON export.
     return staticCounts()
@@ -123,7 +131,8 @@ export const getCityVenueCount = cache(async (citySlug: string): Promise<number>
         WHERE v.city_slug = $1 AND v.is_active = true AND ${visibleVenueTypeSql()}`,
       [citySlug]
     )
-    return tally(rows, 'db').byCity[citySlug] ?? 0
+    // No DB rows for this hub at all -> use the export (see getVenueCounts).
+    return tally(rows.length ? rows : staticRows(citySlug), 'db').byCity[citySlug] ?? 0
   } catch {
     return (await getVenueCounts()).byCity[citySlug] ?? 0
   }
