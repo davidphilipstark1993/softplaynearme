@@ -343,7 +343,14 @@ async function getVenues(citySlug: string, opts: VenueFilters = {}): Promise<Ven
       // matches none). Falling through to the static export here used to
       // resurrect venues the DB had removed and made hub counts disagree with
       // the homepage.
-      return applyAreaFilter(venues)
+      // Exception: no filters applied and the hub has no active rows at all (a hub added
+      // to the site before its venues were moved in the DB). Use the export for it.
+      const unfiltered = !filter && !search && !age.length && !facilities.length && !price && !special.length && !area
+      if (venues.length === 0 && unfiltered && getStaticVenuesByTown(citySlug).length > 0) {
+        // fall through to the static export below
+      } else {
+        return applyAreaFilter(venues)
+      }
     } finally {
       client.release()
     }
