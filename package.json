@@ -31,6 +31,8 @@
     "validate:fix": "node scripts/validate-venues.mjs --fix",
     "extract:emails": "node scripts/extract-contact-emails.mjs",
     "extract:emails:dry": "node scripts/extract-contact-emails.mjs --dry-run",
+    "outreach:sync": "node scripts/outreach/backlink-outreach.mjs sync",
+    "outreach:send": "node scripts/outreach/backlink-outreach.mjs send",
     "test": "node --test scripts/*.test.mjs"
   },
   "dependencies": {

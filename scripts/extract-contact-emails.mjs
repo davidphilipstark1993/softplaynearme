@@ -16,6 +16,7 @@
  *   node scripts/extract-contact-emails.mjs --limit 50
  *   node scripts/extract-contact-emails.mjs --dry-run
  *   node scripts/extract-contact-emails.mjs --skip-existing   (skip venues that already have contact_email)
+ *   node scripts/extract-contact-emails.mjs --from-json       (no database: read data/generated/venues.json, CSV only)
  */
 
 import fs from 'fs'
@@ -29,7 +30,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 // ── Config ────────────────────────────────────────────────────────────────────
 
 const DB_URL = process.env.DATABASE_URL
-if (!DB_URL) { console.error('DATABASE_URL not set'); process.exit(1) }
 
 const CONCURRENCY = 4
 const TIMEOUT_MS  = 12000
@@ -49,6 +49,10 @@ const CITY_FILTER    = args.city   ?? null
 const LIMIT          = args.limit  ? Number(args.limit) : 99999
 const DRY_RUN        = args['dry-run'] === 'true'
 const SKIP_EXISTING  = args['skip-existing'] === 'true'
+const FROM_JSON      = args['from-json'] === 'true'
+const OUT_PATH       = args.out ?? path.join(__dirname, '..', 'venue-contact-emails.csv')
+
+if (!DB_URL && !FROM_JSON) { console.error('DATABASE_URL not set (or pass --from-json)'); process.exit(1) }
 
 // ── Email priority ─────────────────────────────────────────────────────────────
 // Matched left-to-right; first match wins.
@@ -56,7 +60,7 @@ const PRIORITY_PREFIXES = ['info', 'bookings', 'booking', 'contact', 'hello', 'e
 const JUNK_DOMAINS   = ['example.com', 'domain.com', 'website.com', 'yourdomain.com', 'yoursite.com',
                         'wixpress.com', 'sentry.io', 'w3.org',
                         'schema.org', 'google.com', 'apple.com', 'facebook.com', 'instagram.com']
-const JUNK_PREFIXES  = ['noreply', 'no-reply', 'donotreply', 'support@', 'admin@wordpress', 'postmaster']
+const JUNK_PREFIXES  = ['noreply', 'no-reply', 'donotreply', 'support@', 'admin@wordpress', 'postmaster', 'counterfraud']
 // Personal-email providers small businesses genuinely use as their contact
 // address — an email on one of these isn't "off-domain" in the way an email
 // on some other unrelated *business's* domain is.
@@ -95,8 +99,9 @@ function extractEmails(html) {
   const text = stripTags(html)
   while ((m = EMAIL_RE.exec(text)) !== null) found.add(m[1].toLowerCase())
 
-  // Filter junk
-  return [...found].filter((e) => {
+  // Normalise (URL-encoded spaces left on mailto: links, www. mistakenly included in the domain), then filter junk
+  const cleaned = [...found].map((e) => e.replace(/^(?:%20|[^a-z0-9])+/, '').replace('@www.', '@'))
+  return [...new Set(cleaned)].filter((e) => {
     const [local, domain] = e.split('@')
     if (!domain) return false
     if (JUNK_DOMAINS.some((d) => domain.endsWith(d))) return false
@@ -272,10 +277,10 @@ function csvEscape(v) {
 // ── Main ──────────────────────────────────────────────────────────────────────
 
 async function main() {
-  const pool = new Pool({ connectionString: DB_URL, ssl: { rejectUnauthorized: false }, max: 3 })
+  const pool = FROM_JSON ? null : new Pool({ connectionString: DB_URL, ssl: { rejectUnauthorized: false }, max: 3 })
 
   // Ensure column exists
-  if (!DRY_RUN) {
+  if (!DRY_RUN && !FROM_JSON) {
     await pool.query(`ALTER TABLE venues ADD COLUMN IF NOT EXISTS contact_email VARCHAR(160)`)
     console.log('✓ contact_email column ready')
   }
@@ -286,14 +291,24 @@ async function main() {
   if (CITY_FILTER) { values.push(CITY_FILTER); conditions.push(`v.city_slug = $${values.length}`) }
   if (SKIP_EXISTING) conditions.push(`(v.contact_email IS NULL OR v.contact_email = '')`)
 
-  const { rows: venues } = await pool.query(
-    `SELECT v.id, v.name, v.website, v.city_slug, v.slug, v.contact_email
-     FROM venues v
-     WHERE ${conditions.join(' AND ')}
-     ORDER BY v.name
-     LIMIT $${values.length + 1}`,
-    [...values, LIMIT]
-  )
+  let venues
+  if (FROM_JSON) {
+    const all = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'generated', 'venues.json'), 'utf8'))
+    venues = all
+      .filter((v) => v.website && (!CITY_FILTER || v.townSlug === CITY_FILTER))
+      .map((v) => ({ id: v.id, name: v.name, website: v.website, city_slug: v.townSlug, slug: v.slug, contact_email: null }))
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .slice(0, LIMIT)
+  } else {
+    ;({ rows: venues } = await pool.query(
+      `SELECT v.id, v.name, v.website, v.city_slug, v.slug, v.contact_email
+       FROM venues v
+       WHERE ${conditions.join(' AND ')}
+       ORDER BY v.name
+       LIMIT $${values.length + 1}`,
+      [...values, LIMIT]
+    ))
+  }
 
   console.log(`\nFound ${venues.length} venues to process\n`)
 
@@ -317,7 +332,7 @@ async function main() {
       noEmail.push({ name: venue.name, website: venue.website })
     }
 
-    if (!DRY_RUN && best && best !== venue.contact_email) {
+    if (!DRY_RUN && !FROM_JSON && best && best !== venue.contact_email) {
       try {
         await pool.query(
           `UPDATE venues SET contact_email = $1 WHERE id = $2`,
@@ -329,17 +344,17 @@ async function main() {
       }
     }
 
-    results.push({ name: venue.name, website: venue.website, email: best ?? '', allEmails: emails })
+    results.push({ name: venue.name, website: venue.website, email: best ?? '', city: venue.city_slug, slug: venue.slug, allEmails: emails })
     await delay(DELAY_MS)
   }
 
   await runWithConcurrency(venues, processVenue, CONCURRENCY)
 
   // ── Output CSV ────────────────────────────────────────────────────────────
-  const csvPath = path.join(__dirname, '..', 'venue-contact-emails.csv')
+  const csvPath = OUT_PATH
   const rows = [
-    ['Venue Name', 'Website', 'Email'],
-    ...results.map((r) => [r.name, r.website, r.email]),
+    ['Venue Name', 'Website', 'Email', 'City', 'Slug'],
+    ...results.map((r) => [r.name, r.website, r.email, r.city ?? '', r.slug ?? '']),
   ]
   fs.writeFileSync(csvPath, rows.map((r) => r.map(csvEscape).join(',')).join('\n'))
   console.log(`\n✓ CSV written → ${csvPath}`)
@@ -360,7 +375,7 @@ async function main() {
     }
   }
 
-  await pool.end()
+  await pool?.end()
 }
 
 main().catch((err) => { console.error(err); process.exit(1) })
