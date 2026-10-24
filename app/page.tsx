@@ -30,12 +30,15 @@ export const revalidate = 3600
 export async function generateMetadata(): Promise<Metadata> {
   const { total } = await getVenueCounts()
   const countStr = formatVenueTotal(total)
-  const description = `Find ${countStr} soft play centres near you across the UK. Search by postcode and compare facilities, reviews and contact details. Free directory.`
+  const description = `Find ${countStr} indoor soft play centres near you across the UK. Compare reviews, toddler areas, party options and facilities by town or postcode. Free directory.`
   // Next.js replaces (does not deep-merge) the whole `openGraph` / `twitter`
   // object when a page defines one, so anything the root layout set here has to
   // be restated. Omitting `card` previously silently downgraded the homepage's
   // Twitter/X card from summary_large_image to the default small `summary`.
   return {
+    // `absolute` skips the layout's "| Soft Play Near Me" suffix, which would
+    // repeat the brand phrase that is already the lead of the title.
+    title: { absolute: 'Soft Play Near Me – Find Indoor Soft Play Centres Across the UK' },
     description,
     openGraph: {
       type: 'website',
@@ -157,6 +160,12 @@ export default async function Home() {
 
   const cityCounts = counts.byCity
   const venueCountDisplay = formatVenueTotal(counts.total)
+  // Hubs with the most venues first: these are the pages that can actually
+  // satisfy a "soft play near me" search, so they get the homepage's text links.
+  const topCitiesByVenues = [...cities]
+    .filter((c) => (cityCounts[c.slug] ?? 0) > 0)
+    .sort((a, b) => (cityCounts[b.slug] ?? 0) - (cityCounts[a.slug] ?? 0))
+    .slice(0, 16)
 
   // ItemList schema for Browse by City section
   const cityListSchema = buildCityListSchema(cities, 'Soft Play by City')
@@ -174,7 +183,7 @@ export default async function Home() {
         <div className="max-w-7xl mx-auto grid gap-8 lg:grid-cols-2 lg:items-center">
           <div className="text-center lg:text-left">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6">
-              Find the Best Soft Play Centres Near You
+              Soft Play Near Me: Find the Best Indoor Soft Play Centres
             </h1>
             <p className="text-purple-100 text-lg mb-8">
               Search {venueCountDisplay} indoor play centres across the UK. Compare facilities and reviews, see opening hours where venues have published them, and find the right venue for your family.
@@ -531,6 +540,37 @@ export default async function Home() {
             <p>
               Accessibility is increasingly important to families, and a growing number of venues now run <Link href="/search?filters=sen" className="text-purple-600 underline underline-offset-2 hover:text-purple-700">SEN-friendly sessions</Link> with reduced noise, lower lighting, and smaller group sizes. These quieter sessions give children with additional needs the chance to play in a more comfortable environment.
             </p>
+            <p>
+              Looking for soft play centres near you? These are the areas with the most listings, each with its own guide to toddler-friendly, party and SEN-friendly venues:
+            </p>
+            <ul className="grid gap-x-6 gap-y-2 sm:grid-cols-2 text-sm">
+              {topCitiesByVenues.map((city) => (
+                <li key={city.slug}>
+                  <Link href={`/soft-play/${city.slug}`} className="text-purple-600 font-medium underline underline-offset-2 hover:text-purple-700">
+                    Soft play in {city.name}
+                  </Link>{' '}
+                  <span className="text-slate-500">({cityCounts[city.slug]})</span>
+                  {(counts.filterCountsByCity[city.slug]?.toddler ?? 0) > 0 && (
+                    <>
+                      {' \u00B7 '}
+                      <Link href={`/soft-play/${city.slug}/toddler`} className="text-slate-600 underline underline-offset-2 hover:text-purple-700">toddler</Link>
+                    </>
+                  )}
+                  {(counts.filterCountsByCity[city.slug]?.['birthday-parties'] ?? 0) > 0 && (
+                    <>
+                      {' \u00B7 '}
+                      <Link href={`/soft-play/${city.slug}/birthday-parties`} className="text-slate-600 underline underline-offset-2 hover:text-purple-700">parties</Link>
+                    </>
+                  )}
+                  {(counts.filterCountsByCity[city.slug]?.['sen-friendly'] ?? 0) > 0 && (
+                    <>
+                      {' \u00B7 '}
+                      <Link href={`/soft-play/${city.slug}/sen-friendly`} className="text-slate-600 underline underline-offset-2 hover:text-purple-700">SEN-friendly</Link>
+                    </>
+                  )}
+                </li>
+              ))}
+            </ul>
             <p>
               Soft Play Near Me was created to help families find the right venue quickly and easily. We focus on accurate, up-to-date information so you can check opening times, compare facilities, and plan your visit with confidence. Venue owners can <Link href="/add-venue" className="text-purple-600 underline underline-offset-2 hover:text-purple-700">claim their listing for free</Link> to manage their profile, add photos, and keep their information current.
             </p>

@@ -69,11 +69,20 @@ export function buildCityDescription(name: string, county: string, stats: CitySt
     ? ` Includes ${claims.join(', ')} and facilities.`
     : ' Includes facilities, ratings where available and contact details.'
 
+  // A named, rated venue is the most clickable thing a snippet can carry — it
+  // is real and different for every city. Only venues with enough reviews to
+  // be a fair "top rated" are used (stats.topRated). Preferred when it fits
+  // alongside at least one fact; otherwise fall back to the facts alone.
+  const top = stats.topRated[0]
+  const topSentence = top && top.name.length <= 40 ? ` Top rated: ${top.name} (${top.rating.toFixed(1)}\u2605).` : ''
+
   // Drop facts from the end until it fits — never truncate mid-phrase.
-  for (let n = facts.length; n >= 0; n--) {
-    const body = n > 0 ? `${lead}: ${facts.slice(0, n).join(', ')}.` : `${lead}.`
-    const text = `${body}${tail}`
-    if (text.length <= MAX_DESCRIPTION) return text
+  for (const withTop of topSentence ? [true, false] : [false]) {
+    for (let n = facts.length; n >= (withTop && facts.length ? 1 : 0); n--) {
+      const body = n > 0 ? `${lead}: ${facts.slice(0, n).join(', ')}.` : `${lead}.`
+      const text = `${body}${withTop ? topSentence : ''}${tail}`
+      if (text.length <= MAX_DESCRIPTION) return text
+    }
   }
   return `${lead}.`
 }

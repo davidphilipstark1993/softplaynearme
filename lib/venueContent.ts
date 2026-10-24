@@ -475,3 +475,23 @@ export function computeCompletenessScore(v: VenueContentInput & {
 
 /** Minimum score required for a page to be indexed by search engines. */
 export const NOINDEX_THRESHOLD = 20
+
+/**
+ * venue_types that are real, visitable places but not soft play: public park
+ * playgrounds, leisure centres, mobile/equipment hire, retail. They stay
+ * reachable (the "Other family activities" tab, direct links) but are never
+ * indexed or listed in the sitemap: they are not what anyone searching "soft
+ * play near me" wants, and as a group they are thin (park playgrounds average
+ * a completeness score of 45). Hundreds of low-value indexable URLs is what
+ * Search Console files under "Crawled / Discovered – currently not indexed".
+ */
+const NOINDEX_VENUE_TYPES = ['park-playground', 'leisure-centre', 'mobile-hire', 'retail']
+
+/**
+ * The single indexability rule for a venue page. The page's robots meta and the
+ * sitemap both call this, so the sitemap can never list a noindex URL.
+ */
+export function isVenueIndexable(score: number, venueType?: string | null): boolean {
+  if (venueType && NOINDEX_VENUE_TYPES.includes(venueType)) return false
+  return score >= NOINDEX_THRESHOLD
+}

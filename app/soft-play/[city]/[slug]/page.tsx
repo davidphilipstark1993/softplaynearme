@@ -34,7 +34,7 @@ import {
   generateVenueMetaDescription,
   generateVenueFAQs,
   computeCompletenessScore,
-  NOINDEX_THRESHOLD,
+  isVenueIndexable,
 } from '@/lib/venueContent'
 
 import { PhotoGallery } from '@/components/venue/PhotoGallery'
@@ -256,6 +256,7 @@ function staticToVenue(sv: StaticVenue): Venue {
     price_to: sv.priceTo ?? undefined,
     main_image_url: sv.mainImageUrl ?? undefined,
     featured: sv.featured ?? false,
+    venue_type: sv.venueType,
     _mapsUrl: sv.mapsUrl,
     _isStatic: true,
     _staticId: sv.id,
@@ -515,7 +516,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   // Noindex very thin pages (name + address only, no useful content)
   const score = venue.completeness_score ??
     computeCompletenessScore({ ...venue, city: cityName, county })
-  const shouldNoindex = score < NOINDEX_THRESHOLD
+  const shouldNoindex = !isVenueIndexable(score, venue.venue_type)
 
   return {
     title,

@@ -5,6 +5,7 @@ import { getAllStaticTownSlugs, getStaticVenuesByTown } from '@/lib/staticVenues
 import { blogPosts } from '@/lib/blogPosts'
 import redirectEntries from '@/data/redirects.json'
 import { getVenueCounts } from '@/lib/venueCounts'
+import { isVenueIndexable } from '@/lib/venueContent'
 import { totalPagesFor, hubPagePath } from '@/lib/pagination'
 
 // Paths that 301/308-redirect elsewhere (see next.config.ts) must never be
@@ -12,6 +13,13 @@ import { totalPagesFor, hubPagePath } from '@/lib/pagination'
 // in the venues table — submitting a URL that immediately redirects is the
 // same mixed signal as submitting a noindex one.
 const REDIRECTED_PATHS = new Set(redirectEntries.map((r) => r.source))
+
+// `npm run build` sets SOFTPLAY_STATIC_BUILD=1, which skips the DB. A sitemap
+// prerendered that way lists whatever slugs the static export holds — and the
+// export had drifted from the DB, so ~320 sitemap URLs were 404s. Rendering on
+// request makes the DB (the thing venue pages actually 404 against) the source
+// of truth; the static export is only a fallback when the DB is unreachable.
+export const dynamic = 'force-dynamic'
 
 /** A usable Date, or undefined — never "now" as a stand-in for "unknown". */
 function toDate(value: unknown): Date | undefined {
@@ -44,12 +52,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const allCities = [...new Set([...dbCities, ...staticTowns])]
 
   // ── Venues (DB first, then anything only in the static export) ──────────
-  // Thin pages (completeness_score below the noindex threshold) are left out so
-  // we never submit a URL that carries a noindex directive.
-  const SITEMAP_MIN_SCORE = 20 // matches NOINDEX_THRESHOLD in lib/venueContent.ts
+  // Pages the venue template noindexes (isVenueIndexable) are left out so we
+  // never submit a URL that carries a noindex directive.
   const venueEntries: MetadataRoute.Sitemap = []
   const addedVenueKeys = new Set<string>()
   const cityLastMod = new Map<string, Date>()
+  let dbAvailable = false
   const bumpCity = (citySlug: string, d: Date | undefined) => {
     const merged = later(cityLastMod.get(citySlug), d)
     if (merged) cityLastMod.set(citySlug, merged)
@@ -64,25 +72,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       let result
       try {
         result = await client.query(`
-          SELECT city_slug, slug, updated_at, completeness_score
+          SELECT city_slug, slug, updated_at, completeness_score, venue_type
           FROM venues
           WHERE is_active = true
         `)
       } catch {
         // Column doesn't exist yet — include all venues without filtering
         result = await client.query(`
-          SELECT city_slug, slug, updated_at, NULL::int AS completeness_score
+          SELECT city_slug, slug, updated_at, NULL::int AS completeness_score, venue_type
           FROM venues
           WHERE is_active = true
         `)
       }
 
+      dbAvailable = true
       for (const venue of result.rows) {
         const updated = toDate(venue.updated_at)
         bumpCity(venue.city_slug, updated)
 
         const score = venue.completeness_score ?? 100 // unknown → include
-        if (score < SITEMAP_MIN_SCORE) continue       // skip truly thin stubs
+        if (!isVenueIndexable(score, venue.venue_type)) continue // same rule as the page's noindex
 
         const path = `/soft-play/${venue.city_slug}/${venue.slug}`
         if (REDIRECTED_PATHS.has(path)) continue      // skip stale rows that just 301 elsewhere
@@ -102,7 +111,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // DB unavailable - will use static data below
   }
 
-  for (const townSlug of staticTowns) {
+  // Only when the DB could not be read. If it answered, it is authoritative:
+  // a venue absent from it is renamed, merged or deactivated and its page 404s
+  // or redirects, so the static export must not resurrect it here.
+  for (const townSlug of dbAvailable ? [] : staticTowns) {
     for (const venue of getStaticVenuesByTown(townSlug)) {
       const verified = toDate(venue.lastVerified)
       bumpCity(townSlug, verified)
@@ -143,6 +155,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const hubEntries: MetadataRoute.Sitemap = []
   let siteLastMod: Date | undefined
   for (const city of allCities) {
+    // A hub with no venues renders an empty shell — don't ask Google to index it.
+    if ((counts.byCity[city] ?? 0) === 0) continue
+
     const lastModified = cityLastMod.get(city)
     siteLastMod = later(siteLastMod, lastModified)
 
