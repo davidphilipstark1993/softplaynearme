@@ -30,7 +30,7 @@ const BATCH_SIZE = 900 // SendGrid personalizations cap is 1000 per request
 
 const FROM_EMAIL = process.env.SENDGRID_FROM_EMAIL || 'david@softplaynearme.co.uk'
 const FROM_NAME = process.env.SENDGRID_FROM_NAME || 'Soft Play Near Me'
-const REPLY_TO = 'hello@softplaynearme.co.uk'
+const REPLY_TO = 'david@softplaynearme.co.uk'
 const ASM_GROUP = process.env.SENDGRID_UNSUBSCRIBE_GROUP_ID_OUTREACH
 
 const [command, ...rest] = process.argv.slice(2)
@@ -47,6 +47,12 @@ const args = Object.fromEntries(
 const CSV_PATH = path.resolve(args.csv ?? path.join(__dirname, '..', '..', 'contacts', 'venue-contact-emails.csv'))
 const LIST_NAME = args['list-name'] ?? 'Venue backlink outreach'
 const LIMIT = args.limit ? Number(args.limit) : Infinity
+// Addresses already emailed live (gitignored with the rest of contacts/), so a later run never repeats them.
+const SENT_LOG = path.resolve(__dirname, '..', '..', 'contacts', 'venue-outreach-sent.txt')
+// Addresses to never email (replies saying "not a soft play", closed venues, etc.). One per line, # for comments.
+const EXCLUDE_LOG = path.resolve(__dirname, '..', '..', 'contacts', 'venue-outreach-exclude.txt')
+const excluded = () => new Set(fs.existsSync(EXCLUDE_LOG) ? fs.readFileSync(EXCLUDE_LOG, 'utf8').split('\n').map((l) => l.split('#')[0].trim().toLowerCase()).filter(Boolean) : [])
+const alreadySent = () => new Set(fs.existsSync(SENT_LOG) ? fs.readFileSync(SENT_LOG, 'utf8').split('\n').filter(Boolean) : [])
 
 // ── CSV ───────────────────────────────────────────────────────────────────────
 
@@ -103,30 +109,24 @@ function cleanVenueName(name) {
 
 // ── Email content ─────────────────────────────────────────────────────────────
 
-const SUBJECT = 'A free newsletter feature for your soft play centre'
+const SUBJECT = 'Quick favour from Soft Play Near Me'
 
 function buildBodies() {
   const text = `Hi -venue_name- team,
 
-I run Soft Play Near Me (${SITE}), a UK directory that helps parents find soft play centres near them. -venue_name- is already listed, free of charge, here:
+David here from Soft Play Near Me (${SITE}). We've got you listed on the site: -venue_url-
 
--venue_url-
+Quick favour: would you be up for adding a link back to us from your website? A footer link or a "useful links" page is perfect, something like:
 
-I'm getting in touch with a small request: would you be willing to add a link to ${SITE} on your website? A footer link, or a line on a "useful links" or parents page, would be perfect. For example:
+  Looking for more soft play nearby? Soft Play Near Me — ${SITE}
 
-  Looking for more soft play nearby? Visit Soft Play Near Me — ${SITE}
+As a thank you, I'll give -venue_name- a shout-out in our newsletter to local parents. Just reply with the page the link's on and I'll get it sorted.
 
-In return, we'll feature -venue_name- in our newsletter, which goes out to local parents looking for places to take their children.
-
-If you're happy to help, just reply to this email with the page your link is on and I'll get your newsletter feature scheduled.
-
-Thanks so much for your time,
+Cheers,
 David
 Soft Play Near Me
-${SITE}
 
----
-You're receiving this one-off email because -venue_name- is listed on Soft Play Near Me and we found this address on your website. If you'd rather not hear from us, just reply "no thanks" and we won't contact you again.`
+P.S. This is a one-off email because we found this address on your website. If you'd rather not hear from us, just reply "no thanks" and that's that.`
 
   const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;')
   const paras = text.split('\n\n').map((p) => {
@@ -184,13 +184,14 @@ async function sync() {
 }
 
 async function send() {
-  let recipients = loadRecipients().slice(0, LIMIT)
+  const sentBefore = alreadySent(), skip = excluded()
+  let recipients = loadRecipients().filter((r) => !sentBefore.has(r.email) && !skip.has(r.email)).slice(0, LIMIT)
   const { text, html } = buildBodies()
 
   if (args['test-to']) {
     recipients = [{ email: args['test-to'], venueName: 'Example Soft Play', venueUrl: `${SITE}/soft-play/hull`, extraVenues: 0 }]
   } else if (args.confirm !== 'true') {
-    console.log(`DRY RUN — would email ${recipients.length} venues. Pass --confirm to send, or --test-to you@example.com to send one test.\n`)
+    console.log(`DRY RUN — would email ${recipients.length} venues (${sentBefore.size} already sent, skipped). Pass --confirm to send, or --test-to you@example.com to send one test.\n`)
     console.log(`Subject: ${SUBJECT}\n`)
     const r = recipients[0]
     console.log(`To: ${r?.email}\n\n${text.replaceAll('-venue_name-', r?.venueName).replaceAll('-venue_url-', r?.venueUrl)}`)
@@ -218,6 +219,7 @@ async function send() {
     try {
       await sg('POST', '/mail/send', body)
       sent += batch.length
+      if (!args['test-to']) fs.appendFileSync(SENT_LOG, batch.map((r) => r.email).join('\n') + '\n')
     } catch (err) {
       failed += batch.length
       console.error(err.message)
