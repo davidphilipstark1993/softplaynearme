@@ -198,6 +198,11 @@ const getVenue = cache(async function getVenue(citySlug: string, slug: string): 
         }
         return {
           ...row,
+          // Imports left a few rows holding the literal "nan" / "https://nan"
+          // placeholder; treat those as no website so no dead link renders.
+          website: /^(https?:\/\/)?(nan|none|null)\/?$/i.test(String(row.website ?? '').trim())
+            ? null
+            : row.website,
           featured: !!row.featured && (!row.featured_until || new Date(row.featured_until) > new Date()),
         }
       }
