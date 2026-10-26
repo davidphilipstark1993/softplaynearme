@@ -97,14 +97,23 @@ export const sussexPosts: BlogPost[] = [
 
 <h2>Inside Brighton and Hove</h2>
 <ul>
+  <li>${v(HUB_B, 'level-up-soft-play', 'Level Up')} — at Withdean Sports Complex. It has a main play frame, a sensory toddler zone for ages 0–3, party rooms and SEN sessions; sessions last 1 hour 30 minutes and socks must be worn.</li>
   <li>${v(HUB_B, 'funplex', 'Funplex')} — Brighton, BN2.</li>
   <li>${v(HUB_B, 'playcafe-brighton', 'Playcafe')} — Brighton, BN1.</li>
   <li>${v(HUB_B, 'funplay-leisure', 'FunPlay Leisure')} — Brighton Marina.</li>
   <li>${v(HUB_B, 'palace-play', 'Palace Play')} — on Brighton Palace Pier.</li>
 </ul>
-<p>We could not read details such as age ranges or party packages for these from their own sites, so we don't state them; check the venue before you travel.</p>
+<p>We could not read details such as age ranges or party packages for Funplex, Playcafe, FunPlay Leisure or Palace Play from their own sites, so we don't state them; check the venue before you travel.</p>
+
+<h2>Weekly community soft play sessions</h2>
+<ul>
+  <li>${v(HUB_B, 'hangleton-community-centre-soft-play', 'Hangleton Community Centre')} (Hove) lists children's soft play 9:30am–2pm, Monday to Friday, at £2 per family.</li>
+  <li>${v(HUB_B, 'old-boat-corner-soft-play', 'Old Boat Corner')} (Hollingbury) lists soft play on Tuesday and Wednesday mornings, 9:30am–12pm, at £3.50.</li>
+  <li>${v(HUB_B, 'king-alfred-soft-play-sessions', 'King Alfred Leisure Centre')} (Hove) lists soft play on Tuesdays (9am–12:30pm) and Fridays, from £5.25 for one child.</li>
+</ul>
 
 <h2>Worth the drive</h2>
+<p>${v(HUB_B, 'meridian-mayhem', 'Meridian Mayhem')} in Peacehaven is a new multi-level indoor play and soft play centre for babies up to 12-year-olds, with a baby and toddler zone, a first-floor café, party rooms and SEND sessions. Booking online is recommended at weekends and in school holidays.</p>
 <p>${v(HUB_B, 'monkey-bizness-lewes', 'Monkey Bizness in Lewes')} publishes three party packages (Funky Monkey, Mega Monkey and Pizza Party), each for a minimum of 12 children and 2 hours, with 90 minutes of play.</p>
 <p>${v(HUB_B, 'sharkys', "Sharky's")}, at Henfield Leisure Centre, lists SEN sessions on the first and third Thursday of each month and is a nut-free site with a café. Its website says sessions are often fully booked.</p>
 <p>${v(HUB_B, 'the-doves-play-barn', 'The Doves Play Barn')} at Furner's Green, near Uckfield, describes a toddler-safe area alongside hidden spaces, rope bridges and slides, with a café. It says it is open seven days a week, 9am to 5pm.</p>
@@ -122,7 +131,7 @@ export const sussexPosts: BlogPost[] = [
     faq: [
       {
         q: 'Is there much soft play in Brighton itself?',
-        a: 'Not a lot. Inside Brighton and Hove we list Funplex, Playcafe, FunPlay Leisure at Brighton Marina and Palace Play on Brighton Palace Pier. Most larger venues are in Lewes, Henfield, Burgess Hill and Uckfield.',
+        a: 'Not a lot. Inside Brighton and Hove we list Level Up at Withdean, Funplex, Playcafe, FunPlay Leisure at Brighton Marina and Palace Play on Brighton Palace Pier, plus weekly community soft play sessions. Larger venues are in Peacehaven, Lewes, Henfield, Burgess Hill and Uckfield.',
       },
       {
         q: 'Is there SEN-friendly soft play near Brighton?',
@@ -130,7 +139,7 @@ export const sussexPosts: BlogPost[] = [
       },
       {
         q: 'Where can I have a kids party near Brighton?',
-        a: "Monkey Bizness in Lewes publishes three party packages for a minimum of 12 children. Sharky's, The Doves Play Barn and Jumpin Fun also have party pages. Check each venue for prices.",
+        a: "Monkey Bizness in Lewes publishes three party packages for a minimum of 12 children. Meridian Mayhem in Peacehaven publishes four party packages, and Level Up has party rooms. Sharky's, The Doves Play Barn and Jumpin Fun also have party pages. Check each venue for prices.",
       },
     ],
   },

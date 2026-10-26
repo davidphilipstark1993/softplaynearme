@@ -95,13 +95,13 @@ const GUIDES: Record<string, HubGuide> = {
       {
         heading: 'Soft play in Brighton and Hove: a local guide',
         paragraphs: [
-          "Brighton and Hove has few traditional indoor soft play centres in our directory. Inside the city we list Funplex (Brighton, BN2), Playcafe (BN1), FunPlay Leisure at Brighton Marina and Palace Play on Brighton Palace Pier. Most larger venues are a drive away in Lewes, Henfield, Burgess Hill and Uckfield, and are listed under nearby towns.",
+          "Brighton and Hove has few traditional indoor soft play centres. Inside the city we list [Level Up](/soft-play/brighton/level-up-soft-play) at Withdean Sports Complex, Funplex (BN2), Playcafe (BN1), FunPlay Leisure at Brighton Marina and Palace Play on Brighton Palace Pier, plus weekly soft play sessions at community venues: Hangleton Community Centre, Old Boat Corner in Hollingbury and King Alfred Leisure Centre in Hove. Most larger venues are a drive away in Peacehaven, Lewes, Henfield, Burgess Hill and Uckfield, and are listed under nearby towns.",
         ],
       },
       {
         heading: 'Toddlers and babies',
         paragraphs: [
-          "[The Doves Play Barn](/soft-play/brighton/the-doves-play-barn) at Furner's Green, near Uckfield, describes a toddler-safe area alongside hidden spaces, rope bridges and slides, with a café, and says it is open seven days a week, 9am to 5pm.",
+          "[Level Up](/soft-play/brighton/level-up-soft-play) at Withdean describes a sensory toddler zone for ages 0–3, and [Meridian Mayhem](/soft-play/brighton/meridian-mayhem) in Peacehaven has a baby and toddler zone for children aged 5 and under. [The Doves Play Barn](/soft-play/brighton/the-doves-play-barn) at Furner's Green, near Uckfield, describes a toddler-safe area alongside hidden spaces, rope bridges and slides, with a café, and says it is open seven days a week, 9am to 5pm.",
         ],
       },
       {
@@ -119,7 +119,7 @@ const GUIDES: Record<string, HubGuide> = {
       {
         heading: 'Trampoline and inflatable parks',
         paragraphs: [
-          "We don't list an open trampoline park in Brighton and Hove: Google shows Sky High Trampoline Park in Peacehaven as permanently closed. The nearest we list is Jumpin Fun in Burgess Hill, an inflatable park with a mega slide, ball pit and ninja course, which is not a trampoline park.",
+          "We don't list an open trampoline park in Brighton and Hove: Google shows Sky High Trampoline Park in Peacehaven as permanently closed, and the indoor play centre [Meridian Mayhem](/soft-play/brighton/meridian-mayhem) now operates in Peacehaven. The nearest bounce-style venue we list is Jumpin Fun in Burgess Hill, an inflatable park with a mega slide, ball pit and ninja course, which is not a trampoline park.",
         ],
       },
     ],

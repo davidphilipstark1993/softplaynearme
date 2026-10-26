@@ -55,6 +55,8 @@
     "BN1": "Brighton",
     "BN2": "Brighton",
     "BN3": "Hove",
+    "BN9": "Newhaven",
+    "BN10": "Peacehaven",
     "BN11": "Worthing",
     "BN13": "Worthing",
     "BN14": "Worthing",
@@ -116,6 +118,8 @@
     "Burgess Hill": "West Sussex",
     "Southwick": "West Sussex",
     "Hurstpierpoint": "West Sussex",
+    "Peacehaven": "East Sussex",
+    "Newhaven": "East Sussex",
     "Worthing": "West Sussex",
     "Goring-by-Sea": "West Sussex",
     "Lancing": "West Sussex",
@@ -154,7 +158,9 @@
         "Southwick",
         "Furner's Green",
         "Cooksbridge",
-        "Hurstpierpoint"
+        "Hurstpierpoint",
+        "Peacehaven",
+        "Newhaven"
       ]
     },
     "worthing": {
