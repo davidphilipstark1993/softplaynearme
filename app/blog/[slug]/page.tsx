@@ -125,6 +125,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm text-slate-500">
           <span>Published {new Date(post.publishedAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
           <span>· Updated {new Date(post.updatedAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+          {post.verifiedOn && <span>· By the Soft Play Near Me team, venue facts verified {post.verifiedOn}</span>}
         </div>
 
         <div className="mt-10">

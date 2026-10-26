@@ -680,83 +680,73 @@
     "permanent": true
   },
   {
-    "source": "/soft-play/hastings/treasure-island-adventure-park-hastings",
-    "destination": "/soft-play/brighton/treasure-island-adventure-park-hastings",
-    "permanent": true
-  },
-  {
-    "source": "/soft-play/hastings/knockhatch-adventure-park-hastings",
-    "destination": "/soft-play/brighton/knockhatch-adventure-park-hastings",
-    "permanent": true
-  },
-  {
     "source": "/soft-play/hastings/branching-out-adventures-hastings",
     "destination": "/soft-play/brighton",
     "permanent": true
   },
   {
     "source": "/soft-play/hastings/peacehaven-leisure-centre-hastings",
-    "destination": "/soft-play/brighton/peacehaven-leisure-centre-hastings",
+    "destination": "/soft-play/brighton",
     "permanent": true
   },
   {
     "source": "/soft-play/hastings/lewes-leisure-centre-hastings",
-    "destination": "/soft-play/brighton/lewes-leisure-centre-hastings",
+    "destination": "/soft-play/brighton",
     "permanent": true
   },
   {
     "source": "/soft-play/hastings/the-downs-leisure-centre-hastings",
-    "destination": "/soft-play/brighton/the-downs-leisure-centre-hastings",
+    "destination": "/soft-play/brighton",
     "permanent": true
   },
   {
     "source": "/soft-play/hastings/vancouver-road-play-area-hastings",
-    "destination": "/soft-play/brighton/vancouver-road-play-area-hastings",
+    "destination": "/soft-play/hastings",
     "permanent": true
   },
   {
     "source": "/soft-play/hastings/seaside-rec-playground-hastings",
-    "destination": "/soft-play/brighton/seaside-rec-playground-hastings",
+    "destination": "/soft-play/hastings",
     "permanent": true
   },
   {
     "source": "/soft-play/hastings/play-park-hastings",
-    "destination": "/soft-play/brighton/play-park-hastings",
+    "destination": "/soft-play/brighton",
     "permanent": true
   },
   {
     "source": "/soft-play/hastings/samoa-way-play-area-hastings",
-    "destination": "/soft-play/brighton/samoa-way-play-area-hastings",
+    "destination": "/soft-play/hastings",
     "permanent": true
   },
   {
     "source": "/soft-play/hastings/western-road-play-area-hastings",
-    "destination": "/soft-play/brighton/western-road-play-area-hastings",
+    "destination": "/soft-play/hastings",
     "permanent": true
   },
   {
     "source": "/soft-play/hastings/battle-road-play-area-hastings",
-    "destination": "/soft-play/brighton/battle-road-play-area-hastings",
+    "destination": "/soft-play/hastings",
     "permanent": true
   },
   {
     "source": "/soft-play/hastings/family-amusements-hastings",
-    "destination": "/soft-play/brighton/family-amusements-hastings",
+    "destination": "/soft-play/hastings",
     "permanent": true
   },
   {
     "source": "/soft-play/hastings/channel-view-road-play-area-hastings",
-    "destination": "/soft-play/brighton/channel-view-road-play-area-hastings",
+    "destination": "/soft-play/hastings",
     "permanent": true
   },
   {
     "source": "/soft-play/hastings/gardener-close-play-area-hastings",
-    "destination": "/soft-play/brighton/gardener-close-play-area-hastings",
+    "destination": "/soft-play/hastings",
     "permanent": true
   },
   {
     "source": "/soft-play/hastings/shinewater-sports-centre-hastings",
-    "destination": "/soft-play/brighton/shinewater-sports-centre-hastings",
+    "destination": "/soft-play/hastings",
     "permanent": true
   },
   {
@@ -765,18 +755,13 @@
     "permanent": true
   },
   {
-    "source": "/soft-play/hastings/sharnfold-farm-hastings",
-    "destination": "/soft-play/brighton/sharnfold-farm-hastings",
-    "permanent": true
-  },
-  {
     "source": "/soft-play/hastings/the-sovereign-centre-hastings",
-    "destination": "/soft-play/brighton/the-sovereign-centre-hastings",
+    "destination": "/soft-play/hastings",
     "permanent": true
   },
   {
     "source": "/soft-play/hastings/hampden-park-sports-centre-hastings",
-    "destination": "/soft-play/brighton/hampden-park-sports-centre-hastings",
+    "destination": "/soft-play/hastings",
     "permanent": true
   },
   {
@@ -1531,12 +1516,12 @@
   },
   {
     "source": "/soft-play/hastings/childrens-playground",
-    "destination": "/soft-play/brighton/childrens-playground",
+    "destination": "/soft-play/brighton",
     "permanent": true
   },
   {
     "source": "/soft-play/hastings/the-hub-peacehaven",
-    "destination": "/soft-play/brighton/the-hub-peacehaven",
+    "destination": "/soft-play/brighton",
     "permanent": true
   },
   {
@@ -1556,7 +1541,7 @@
   },
   {
     "source": "/soft-play/brighton/puppet-castle-and-softplay",
-    "destination": "/soft-play/worthing/puppet-castle-and-softplay",
+    "destination": "/soft-play/bognor-regis/puppet-castle-and-softplay",
     "permanent": true
   },
   {
@@ -1566,7 +1551,7 @@
   },
   {
     "source": "/soft-play/brighton/shweet-soft-play",
-    "destination": "/soft-play/worthing/shweet-soft-play",
+    "destination": "/soft-play/bognor-regis/shweet-soft-play",
     "permanent": true
   },
   {
@@ -1581,7 +1566,7 @@
   },
   {
     "source": "/soft-play/brighton/little-lions-active-play",
-    "destination": "/soft-play/worthing/little-lions-active-play",
+    "destination": "/soft-play/worthing",
     "permanent": true
   },
   {
@@ -1721,12 +1706,12 @@
   },
   {
     "source": "/soft-play/brighton/bounce-about-sussex-bouncy-castle-soft-play-hire-brighton",
-    "destination": "/soft-play/worthing/bounce-about-sussex-bouncy-castle-soft-play-hire-brighton",
+    "destination": "/soft-play/worthing",
     "permanent": true
   },
   {
     "source": "/soft-play/brighton/leisure-centre-playground-brighton",
-    "destination": "/soft-play/worthing/leisure-centre-playground-brighton",
+    "destination": "/soft-play/worthing",
     "permanent": true
   },
   {
@@ -1736,7 +1721,7 @@
   },
   {
     "source": "/soft-play/hastings/forest-fields-play-area-hastings",
-    "destination": "/soft-play/brighton/forest-fields-play-area-hastings",
+    "destination": "/soft-play/brighton",
     "permanent": true
   },
   {
@@ -2196,7 +2181,7 @@
   },
   {
     "source": "/soft-play/brighton/battle-road-play-area-brighton",
-    "destination": "/soft-play/brighton/battle-road-play-area-hastings",
+    "destination": "/soft-play/hastings",
     "permanent": true
   },
   {
@@ -2211,92 +2196,92 @@
   },
   {
     "source": "/soft-play/brighton/channel-view-road-play-area-brighton",
-    "destination": "/soft-play/brighton/channel-view-road-play-area-hastings",
+    "destination": "/soft-play/hastings",
     "permanent": true
   },
   {
     "source": "/soft-play/brighton/family-amusements-brighton",
-    "destination": "/soft-play/brighton/family-amusements-hastings",
+    "destination": "/soft-play/hastings",
     "permanent": true
   },
   {
     "source": "/soft-play/brighton/forest-fields-play-area-brighton",
-    "destination": "/soft-play/brighton/forest-fields-play-area-hastings",
+    "destination": "/soft-play/brighton",
     "permanent": true
   },
   {
     "source": "/soft-play/brighton/gardener-close-play-area-brighton",
-    "destination": "/soft-play/brighton/gardener-close-play-area-hastings",
+    "destination": "/soft-play/hastings",
     "permanent": true
   },
   {
     "source": "/soft-play/brighton/hampden-park-sports-centre-brighton",
-    "destination": "/soft-play/brighton/hampden-park-sports-centre-hastings",
+    "destination": "/soft-play/hastings",
     "permanent": true
   },
   {
     "source": "/soft-play/brighton/knockhatch-adventure-park-brighton",
-    "destination": "/soft-play/brighton/knockhatch-adventure-park-hastings",
+    "destination": "/soft-play/hastings/knockhatch-adventure-park-hastings",
     "permanent": true
   },
   {
     "source": "/soft-play/brighton/lewes-leisure-centre-brighton",
-    "destination": "/soft-play/brighton/lewes-leisure-centre-hastings",
+    "destination": "/soft-play/brighton",
     "permanent": true
   },
   {
     "source": "/soft-play/brighton/peacehaven-leisure-centre-brighton",
-    "destination": "/soft-play/brighton/peacehaven-leisure-centre-hastings",
+    "destination": "/soft-play/brighton",
     "permanent": true
   },
   {
     "source": "/soft-play/brighton/play-park-brighton",
-    "destination": "/soft-play/brighton/play-park-hastings",
+    "destination": "/soft-play/brighton",
     "permanent": true
   },
   {
     "source": "/soft-play/brighton/samoa-way-play-area-brighton",
-    "destination": "/soft-play/brighton/samoa-way-play-area-hastings",
+    "destination": "/soft-play/hastings",
     "permanent": true
   },
   {
     "source": "/soft-play/brighton/seaside-rec-playground-brighton",
-    "destination": "/soft-play/brighton/seaside-rec-playground-hastings",
+    "destination": "/soft-play/hastings",
     "permanent": true
   },
   {
     "source": "/soft-play/brighton/sharnfold-farm-brighton",
-    "destination": "/soft-play/brighton/sharnfold-farm-hastings",
+    "destination": "/soft-play/hastings/sharnfold-farm-hastings",
     "permanent": true
   },
   {
     "source": "/soft-play/brighton/shinewater-sports-centre-brighton",
-    "destination": "/soft-play/brighton/shinewater-sports-centre-hastings",
+    "destination": "/soft-play/hastings",
     "permanent": true
   },
   {
     "source": "/soft-play/brighton/the-downs-leisure-centre-brighton",
-    "destination": "/soft-play/brighton/the-downs-leisure-centre-hastings",
+    "destination": "/soft-play/brighton",
     "permanent": true
   },
   {
     "source": "/soft-play/brighton/the-sovereign-centre-brighton",
-    "destination": "/soft-play/brighton/the-sovereign-centre-hastings",
+    "destination": "/soft-play/hastings",
     "permanent": true
   },
   {
     "source": "/soft-play/brighton/treasure-island-adventure-park-brighton",
-    "destination": "/soft-play/brighton/treasure-island-adventure-park-hastings",
+    "destination": "/soft-play/hastings/treasure-island-adventure-park-hastings",
     "permanent": true
   },
   {
     "source": "/soft-play/brighton/vancouver-road-play-area-brighton",
-    "destination": "/soft-play/brighton/vancouver-road-play-area-hastings",
+    "destination": "/soft-play/hastings",
     "permanent": true
   },
   {
     "source": "/soft-play/brighton/western-road-play-area-brighton",
-    "destination": "/soft-play/brighton/western-road-play-area-hastings",
+    "destination": "/soft-play/hastings",
     "permanent": true
   },
   {
@@ -2781,12 +2766,12 @@
   },
   {
     "source": "/soft-play/worthing/bounce-about-sussex-bouncy-castle-soft-play-hire-worthing",
-    "destination": "/soft-play/worthing/bounce-about-sussex-bouncy-castle-soft-play-hire-brighton",
+    "destination": "/soft-play/worthing",
     "permanent": true
   },
   {
     "source": "/soft-play/worthing/leisure-centre-playground-worthing",
-    "destination": "/soft-play/worthing/leisure-centre-playground-brighton",
+    "destination": "/soft-play/worthing",
     "permanent": true
   },
   {
@@ -4277,6 +4262,246 @@
   {
     "source": "/soft-play/york/yorkshire-spa-retreat-york",
     "destination": "/soft-play/york",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/the-little-play-village",
+    "destination": "/soft-play/worthing/the-little-play-village",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/the-lighthouse-soft-play-and-cafe",
+    "destination": "/soft-play/worthing/the-lighthouse-soft-play-and-cafe",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/hope-hive",
+    "destination": "/soft-play/worthing/hope-hive",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/little-street-childrens-role-play",
+    "destination": "/soft-play/chichester/little-street-childrens-role-play",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/worthing/shweet-soft-play",
+    "destination": "/soft-play/bognor-regis/shweet-soft-play",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/worthing/puppet-castle-and-softplay",
+    "destination": "/soft-play/bognor-regis/puppet-castle-and-softplay",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/treasure-island-adventure-park-hastings",
+    "destination": "/soft-play/hastings/treasure-island-adventure-park-hastings",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/knockhatch-adventure-park-hastings",
+    "destination": "/soft-play/hastings/knockhatch-adventure-park-hastings",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/sharnfold-farm-hastings",
+    "destination": "/soft-play/hastings/sharnfold-farm-hastings",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/childrens-playground",
+    "destination": "/soft-play/brighton",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/the-hub-peacehaven",
+    "destination": "/soft-play/brighton",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/peacehaven-leisure-centre-hastings",
+    "destination": "/soft-play/brighton",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/lewes-leisure-centre-hastings",
+    "destination": "/soft-play/brighton",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/the-downs-leisure-centre-hastings",
+    "destination": "/soft-play/brighton",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/play-park-hastings",
+    "destination": "/soft-play/brighton",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/bolnore-wood-woods-end-play-area-brighton",
+    "destination": "/soft-play/brighton",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/forest-fields-play-area-hastings",
+    "destination": "/soft-play/brighton",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/lindfield-common-play-area-brighton",
+    "destination": "/soft-play/brighton",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/sky-lark-play-area-brighton",
+    "destination": "/soft-play/brighton",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/the-dolphin-brighton",
+    "destination": "/soft-play/brighton",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/the-triangle-brighton",
+    "destination": "/soft-play/brighton",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/speedyinflatables-bouncy-castle-sussex-soft-play-hire-brighton",
+    "destination": "/soft-play/brighton",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/king-alfred-leisure-centre-brighton",
+    "destination": "/soft-play/brighton",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/playpark-brighton",
+    "destination": "/soft-play/brighton",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/portslade-sports-centre-brighton",
+    "destination": "/soft-play/brighton",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/henfield-leisure-centre-brighton",
+    "destination": "/soft-play/brighton/sharkys",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/play-dreams-soft-play",
+    "destination": "/soft-play/brighton",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/vancouver-road-play-area-hastings",
+    "destination": "/soft-play/hastings",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/seaside-rec-playground-hastings",
+    "destination": "/soft-play/hastings",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/samoa-way-play-area-hastings",
+    "destination": "/soft-play/hastings",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/western-road-play-area-hastings",
+    "destination": "/soft-play/hastings",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/battle-road-play-area-hastings",
+    "destination": "/soft-play/hastings",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/family-amusements-hastings",
+    "destination": "/soft-play/hastings",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/channel-view-road-play-area-hastings",
+    "destination": "/soft-play/hastings",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/gardener-close-play-area-hastings",
+    "destination": "/soft-play/hastings",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/shinewater-sports-centre-hastings",
+    "destination": "/soft-play/hastings",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/the-sovereign-centre-hastings",
+    "destination": "/soft-play/hastings",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/hampden-park-sports-centre-hastings",
+    "destination": "/soft-play/hastings",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/missionfiit-activity-hub",
+    "destination": "/soft-play/hastings/kidzone-at-missionfiit-hailsham",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/the-family-fun-centre",
+    "destination": "/soft-play/portsmouth",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/hill-barn-playground-brighton",
+    "destination": "/soft-play/worthing",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/queens-street-playground-brighton",
+    "destination": "/soft-play/worthing",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/waterwise-playground-brighton",
+    "destination": "/soft-play/worthing",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/worthing-leisure-centre-brighton",
+    "destination": "/soft-play/worthing",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/bounce-mania-ltd-brighton",
+    "destination": "/soft-play/worthing",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/worthing/bounce-about-sussex-bouncy-castle-soft-play-hire-brighton",
+    "destination": "/soft-play/worthing",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/worthing/leisure-centre-playground-brighton",
+    "destination": "/soft-play/worthing",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/worthing/little-lions-active-play",
+    "destination": "/soft-play/worthing",
     "permanent": true
   }
 ]

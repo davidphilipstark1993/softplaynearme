@@ -18,6 +18,9 @@ import {
 } from 'lucide-react'
 import type { Metadata } from 'next'
 import { getPool, STATIC_BUILD } from '@/lib/pool'
+import { getHubGuide } from '@/lib/hubGuides'
+import { calculateDistance, formatDistance, getBoundingBox } from '@/lib/geo'
+import { visibleVenueTypeSql } from '@/lib/venueTypes'
 import { getStaticVenue, getStaticTownBySlug, getStaticVenuesByTown, getAllStaticTownSlugs, type StaticVenue } from '@/lib/staticVenues'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
@@ -464,6 +467,41 @@ async function getSimilarVenues(
     }))
 }
 
+interface NearestVenue { name: string; slug: string; citySlug: string; area: string | null; miles: number }
+
+/**
+ * The closest soft play venues by straight-line distance, crossing hub boundaries (a Worthing
+ * venue can list Littlehampton or Brighton ones). Only genuine soft play types, only active
+ * rows, within 25 miles. Returns [] if the venue has no coordinates or the DB is unavailable.
+ */
+async function getNearestVenues(from: { id?: number; lat?: number | null; lng?: number | null }, limit = 6): Promise<NearestVenue[]> {
+  const lat = Number(from.lat)
+  const lng = Number(from.lng)
+  if (!Number.isFinite(lat) || !Number.isFinite(lng) || (lat === 0 && lng === 0)) return []
+  try {
+    const box = getBoundingBox({ lat, lng }, 25)
+    const { rows } = await getPool().query(
+      `SELECT id, name, slug, city_slug, postcode, lat, lng FROM venues v
+        WHERE v.is_active = true AND ${visibleVenueTypeSql()} AND v.id <> $1
+          AND v.lat BETWEEN $2 AND $3 AND v.lng BETWEEN $4 AND $5`,
+      [from.id ?? -1, box.minLat, box.maxLat, box.minLng, box.maxLng]
+    )
+    return rows
+      .map((r: { id: number; name: string; slug: string; city_slug: string; postcode: string | null; lat: string; lng: string }) => ({
+        name: r.name,
+        slug: r.slug,
+        citySlug: r.city_slug,
+        area: getLocality({ id: r.id, postcode: r.postcode }),
+        miles: calculateDistance({ lat, lng }, { lat: Number(r.lat), lng: Number(r.lng) }),
+      }))
+      .filter((r: NearestVenue) => r.miles <= 25)
+      .sort((a: NearestVenue, b: NearestVenue) => a.miles - b.miles)
+      .slice(0, limit)
+  } catch {
+    return []
+  }
+}
+
 /** Get nearby venues in the same city (excluding this one) */
 async function getNearbyVenues(citySlug: string, excludeSlug: string): Promise<{ name: string; slug: string; postcode: string }[]> {
   try {
@@ -571,13 +609,15 @@ export default async function VenuePage({ params }: PageProps) {
     sen_friendly: venue.sen_friendly ?? false,
     parties: venue.parties ?? false,
   }
-  const [reviews, pricing, sessions, photos, nearbyVenues, similarVenues] = await Promise.all([
+  const guideHub = !!getHubGuide(city)
+  const [reviews, pricing, sessions, photos, nearbyVenues, similarVenues, nearestVenues] = await Promise.all([
     getReviews(venue.id, city, slug),
     getPricing(venue.id),
     getSessions(venue.id),
     getPhotos(venue.id),
     getNearbyVenues(city, slug),
     getSimilarVenues(city, slug, venueTags),
+    guideHub ? getNearestVenues(venue) : Promise.resolve([] as NearestVenue[]),
   ])
 
   // Derive section label from the venue's primary feature tag
@@ -654,7 +694,8 @@ export default async function VenuePage({ params }: PageProps) {
   // Breadcrumb schema – uses reusable builder
   const breadcrumbSchema = buildBreadcrumbSchema([
     { name: 'Home', url: baseUrl },
-    { name: `Soft Play in ${cityName}`, url: `${baseUrl}/soft-play/${city}` },
+    ...(guideHub ? [{ name: 'Soft Play', url: `${baseUrl}/soft-play` }] : []),
+    { name: guideHub ? cityName : `Soft Play in ${cityName}`, url: `${baseUrl}/soft-play/${city}` },
     { name: venue.name, url: `${baseUrl}/soft-play/${city}/${slug}` },
   ])
 
@@ -674,7 +715,7 @@ export default async function VenuePage({ params }: PageProps) {
         <Header backLink={{ href: `/soft-play/${city}`, label: cityName }} />
 
         <Breadcrumbs items={[
-          ...(county ? [{ label: county }] : []),
+          ...(guideHub ? [{ label: 'Soft Play', href: '/soft-play' }] : county ? [{ label: county }] : []),
           { label: cityName, href: `/soft-play/${city}` },
           { label: venue.name },
         ]} />
@@ -973,8 +1014,37 @@ export default async function VenuePage({ params }: PageProps) {
                 googleReviewCount={(venue as any).reviews_count}
               />
 
+              {/* Closest soft play by distance, across hub boundaries (hubs with a guide) */}
+              {guideHub && nearestVenues.length > 0 && (
+                <section aria-labelledby="nearest-heading" className="bg-white rounded-lg border border-slate-200 p-6">
+                  <h2 id="nearest-heading" className="font-semibold text-lg mb-4">More soft play near {venue.name}</h2>
+                  <ul className="grid sm:grid-cols-2 gap-3">
+                    {nearestVenues.map((nv) => (
+                      <li key={`${nv.citySlug}/${nv.slug}`}>
+                        <Link
+                          href={`/soft-play/${nv.citySlug}/${nv.slug}`}
+                          className="flex items-center gap-3 p-3 rounded-lg border border-slate-100 hover:border-purple-300 hover:bg-purple-50 transition-colors"
+                        >
+                          <MapPin className="w-4 h-4 text-purple-500 flex-shrink-0" aria-hidden="true" />
+                          <div className="min-w-0">
+                            <p className="font-medium text-sm truncate">{nv.name}</p>
+                            <p className="text-xs text-slate-500">{[nv.area, `${formatDistance(nv.miles)} away`].filter(Boolean).join(' · ')}</p>
+                          </div>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                  <Link
+                    href={`/soft-play/${city}`}
+                    className="block text-center text-sm text-purple-600 hover:text-purple-700 font-medium mt-4"
+                  >
+                    All soft play in {cityName}
+                  </Link>
+                </section>
+              )}
+
               {/* Nearby Venues */}
-              {nearbyVenues.length > 0 && (
+              {!guideHub && nearbyVenues.length > 0 && (
                 <section aria-labelledby="nearby-heading" className="bg-white rounded-lg border border-slate-200 p-6">
                   <h2 id="nearby-heading" className="font-semibold text-lg mb-4">Nearby Soft Play in {cityName}</h2>
                   <div className="grid sm:grid-cols-2 gap-3">

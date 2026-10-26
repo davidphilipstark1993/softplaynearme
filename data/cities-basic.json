@@ -218,5 +218,15 @@
     "slug": "scunthorpe",
     "name": "Scunthorpe",
     "county": "Lincolnshire"
+  },
+  {
+    "slug": "bognor-regis",
+    "name": "Bognor Regis",
+    "county": "West Sussex"
+  },
+  {
+    "slug": "chichester",
+    "name": "Chichester",
+    "county": "West Sussex"
   }
 ]

@@ -7,6 +7,7 @@ import redirectEntries from '@/data/redirects.json'
 import { getVenueCounts } from '@/lib/venueCounts'
 import { isVenueIndexable } from '@/lib/venueContent'
 import { totalPagesFor, hubPagePath } from '@/lib/pagination'
+import { minFilterVenues } from '@/lib/hubGuides'
 
 // Paths that 301/308-redirect elsewhere (see next.config.ts) must never be
 // listed in the sitemap even if a stale/duplicate row for them still exists
@@ -188,7 +189,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       // A filter page with no matching venues is noindex too (see
       // components/filter/FilterPageContent.tsx) — same rule.
       const matching = counts.filterCountsByCity[city]?.[filter.slug as 'toddler' | 'birthday-parties' | 'sen-friendly'] ?? 0
-      if (matching === 0) continue
+      if (matching < minFilterVenues(city)) continue
 
       hubEntries.push({
         url: `${baseUrl}/soft-play/${city}/${filter.slug}`,
@@ -202,6 +203,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // ── Top-level pages ─────────────────────────────────────────────────────
   const topLevel: MetadataRoute.Sitemap = [
     { url: baseUrl, lastModified: siteLastMod, changeFrequency: 'weekly', priority: 1 },
+    { url: `${baseUrl}/soft-play`, changeFrequency: 'weekly', priority: 0.8 },
     { url: `${baseUrl}/search`, changeFrequency: 'weekly', priority: 0.8 },
     { url: `${baseUrl}/add-venue`, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${baseUrl}/about`, changeFrequency: 'monthly', priority: 0.5 },

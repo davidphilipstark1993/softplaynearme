@@ -1410,5 +1410,39 @@
       "Hull"
     ],
     "faqs": []
+  },
+  {
+    "slug": "bognor-regis",
+    "name": "Bognor Regis",
+    "county": "West Sussex",
+    "region": "South East",
+    "metaTitle": "Soft Play in Bognor Regis",
+    "metaDescription": "Find soft play centres in and around Bognor Regis, West Sussex. Compare indoor play venues, ratings and facilities.",
+    "h1": "Soft Play in Bognor Regis",
+    "intro": "Soft play centres in Bognor Regis and nearby Barnham on the West Sussex coast.",
+    "nearbyAreas": ["Barnham", "Littlehampton", "Chichester", "Worthing"],
+    "faqs": [
+      {
+        "question": "Is there soft play in Bognor Regis?",
+        "answer": "We list soft play in Bognor Regis and nearby Barnham. Check each venue's page for current details before you visit."
+      }
+    ]
+  },
+  {
+    "slug": "chichester",
+    "name": "Chichester",
+    "county": "West Sussex",
+    "region": "South East",
+    "metaTitle": "Soft Play in Chichester",
+    "metaDescription": "Find soft play centres in and around Chichester, West Sussex. Compare indoor play venues, ratings and facilities.",
+    "h1": "Soft Play in Chichester",
+    "intro": "Family play venues in and around Chichester, West Sussex.",
+    "nearbyAreas": ["Bognor Regis", "Portsmouth", "Littlehampton"],
+    "faqs": [
+      {
+        "question": "Is there soft play in Chichester?",
+        "answer": "We list family play venues near Chichester. We do not currently list a conventional soft play centre in the city itself."
+      }
+    ]
   }
 ]

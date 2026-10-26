@@ -1,0 +1,21 @@
+{
+  "takenAt": "2026-10-26T21:03:24.624Z",
+  "rows": [
+    {
+      "id": 901,
+      "slug": "the-little-play-village",
+      "name": "The Little Play Village",
+      "city_slug": "worthing",
+      "venue_type": "indoor",
+      "updated_at": "2026-10-26T21:03:24.180Z"
+    },
+    {
+      "id": 902,
+      "slug": "little-street-childrens-role-play",
+      "name": "Little Street (Children’s Role Play)",
+      "city_slug": "chichester",
+      "venue_type": "indoor",
+      "updated_at": "2026-10-26T21:03:10.182Z"
+    }
+  ]
+}

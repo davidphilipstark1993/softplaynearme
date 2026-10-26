@@ -37,6 +37,7 @@ const args = Object.fromEntries(
     if (arg === '--commit') pairs.push(['commit', true])
     else if (arg === '--use-cache') pairs.push(['useCache', true])
     else if (arg.startsWith('--city=')) pairs.push(['city', arg.replace('--city=', '')])
+    else if (arg.startsWith('--catchment-miles=')) pairs.push(['catchmentMiles', arg.replace('--catchment-miles=', '')])
     return pairs
   }, [])
 )
@@ -74,6 +75,31 @@ const CITY_CENTRES = {
   nottingham: [
     { name: 'Nottingham', lat: 52.9548, lng: -1.1581, radius: 14000 },
   ],
+  brighton: [
+    { name: 'Brighton', lat: 50.8225, lng: -0.1372, radius: 7000 },
+  ],
+  worthing: [
+    { name: 'Worthing', lat: 50.8180, lng: -0.3714, radius: 8000 },
+  ],
+}
+
+// Catchment guard. Text Search treats location/radius as a *bias*, so a search for
+// "soft play Brighton" returns Lewes, Eastbourne, Worthing and Bognor places too. The
+// old script stamped every one of them city_slug = <searched city> (the "city-stamping"
+// bug that put Peacehaven and Lewes venues under /brighton/). A place whose own
+// coordinates are further than this from every search centre of the requested city is
+// NOT inserted; it is listed so you can re-run with the right --city (or add a hub).
+const CATCHMENT_MILES = Number(args.catchmentMiles ?? 12)
+function milesBetween(lat1, lng1, lat2, lng2) {
+  const toRad = (d) => (d * Math.PI) / 180
+  const a = Math.sin(toRad(lat2 - lat1) / 2) ** 2 +
+    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(toRad(lng2 - lng1) / 2) ** 2
+  return 3958.8 * 2 * Math.asin(Math.sqrt(a))
+}
+function withinCatchment(place) {
+  const loc = place.geometry?.location
+  if (!loc) return false // no coordinates: cannot show it belongs here, leave it for review
+  return centres.some((c) => milesBetween(c.lat, c.lng, loc.lat, loc.lng) <= CATCHMENT_MILES)
 }
 
 const centres = CITY_CENTRES[citySlug]
@@ -205,11 +231,16 @@ async function main() {
   }
 
   const addressMatches = []
+  const outsideCatchment = []
   const candidates = [...seen.values()].filter((p) => {
     if (knownPlaceIds.has(p.place_id)) return false
     if (knownNames.has(normalizeName(p.name))) return false
     if (!looksLikeSoftPlay(p)) return false
     if (p.business_status === 'CLOSED_PERMANENTLY') return false
+    if (!withinCatchment(p)) {
+      outsideCatchment.push(p)
+      return false
+    }
     if (knownAddresses.has(normalizeAddress(p.formatted_address))) {
       addressMatches.push(p)
       return false
@@ -219,6 +250,10 @@ async function main() {
 
   console.log(`\n${seen.size} unique places found across all queries.`)
   console.log(`${candidates.length} are new, look like genuine soft play venues, and aren't permanently closed.`)
+  if (outsideCatchment.length > 0) {
+    console.log(`${outsideCatchment.length} excluded — further than ${CATCHMENT_MILES} miles from ${cityDisplayName}'s search centre(s), so they belong to another town (not filed under ${citySlug}):`)
+    for (const p of outsideCatchment) console.log(`  ~ ${p.name} — ${p.formatted_address}`)
+  }
   if (addressMatches.length > 0) {
     console.log(`${addressMatches.length} excluded — same street address as an existing venue under a different name (likely a rename/rebrand, needs a human look, not an auto-insert):`)
     for (const p of addressMatches) console.log(`  ? ${p.name} — ${p.formatted_address}`)

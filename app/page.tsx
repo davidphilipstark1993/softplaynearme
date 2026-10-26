@@ -19,7 +19,7 @@ import type { Metadata } from 'next'
 // Highest-traffic cities in priority order (London first) — used for the
 // homepage's "Popular" quick links, rather than data/cities.json's raw
 // array order which doesn't reflect actual traffic.
-const POPULAR_CITY_SLUGS = ['london', 'nottingham', 'leeds', 'manchester', 'hull']
+const POPULAR_CITY_SLUGS = ['london', 'nottingham', 'leeds', 'manchester', 'hull', 'brighton', 'worthing']
 
 // The homepage is prerendered at build time (from the static JSON export, see
 // lib/pool.ts STATIC_BUILD). City hubs are rendered on demand from the live

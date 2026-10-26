@@ -1,3 +1,5 @@
+import { sussexPosts } from './blogPostsSussex'
+
 export interface BlogFaq {
   q: string
   a: string
@@ -22,6 +24,8 @@ export interface BlogPost {
    * Clear the flag once the guide is rewritten against real venue data.
    */
   noindex?: boolean
+  /** Date the venue facts in the post were last checked against venue sites (display text). */
+  verifiedOn?: string
 }
 
 export const posts: BlogPost[] = [
@@ -1581,84 +1585,6 @@ export const posts: BlogPost[] = [
       {
         q: 'Which Bournemouth soft play centres have a café?',
         a: '9 venues confirm an on-site café, including Lollipops Café, Kids Play Cafe - Charminster and Wild Ones Play Cafe.',
-      },
-    ],
-  },
-  {
-    slug: 'best-soft-play-in-brighton',
-    title: 'Best Soft Play in Brighton (2026 Parent Guide)',
-    city: 'Brighton',
-    excerpt: 'A guide to soft play in Brighton built from real data: 17 venues, the best-reviewed (The Little Play Village, 5.0 stars), and which ones confirm a café, toddler area, parties or SEN-friendly sessions.',
-    publishedAt: '2026-02-18T00:00:00.000Z',
-    updatedAt: '2026-10-24T00:00:00.000Z',
-    datePublished: '2026-02-18T00:00:00.000Z',
-    dateModified: '2026-10-24T00:00:00.000Z',
-    contentHtml: `<p>We list 17 soft play venues in and around Brighton, and 12 of them have 20 or more Google reviews — enough to say something fair about how families rate them.</p>
-
-<p>This guide only states what we hold real data for: ratings, review counts, locations and confirmed facilities. We leave out prices, age limits and opening times, because they change often and are best checked with the venue directly before you set off.</p>
-
-<blockquote>
-  <p>👉 <strong><a href="/soft-play/brighton">Browse every soft play venue in Brighton with ratings and facilities</a></strong></p>
-</blockquote>
-
-<h2>The best-reviewed soft play in Brighton</h2>
-<p><a href="/soft-play/brighton/the-little-play-village" class="text-purple-700 hover:underline">The Little Play Village</a> has the highest rating of any venue with 20+ reviews, at 5.0 stars — ranked below by rating, then by how many people have reviewed them:</p>
-<ul>
-  <li><strong><a href="/soft-play/brighton/the-little-play-village" class="text-purple-700 hover:underline">The Little Play Village</a></strong> — 5.0 stars from 43 reviews.</li>
-  <li><strong><a href="/soft-play/brighton/playcafe-brighton" class="text-purple-700 hover:underline">Playcafe</a></strong> — 4.9 stars from 23 reviews.</li>
-  <li><strong><a href="/soft-play/brighton/hope-hive" class="text-purple-700 hover:underline">Hope Hive</a></strong> — 4.8 stars from 108 reviews.</li>
-  <li><strong><a href="/soft-play/brighton/the-lighthouse-soft-play-and-cafe" class="text-purple-700 hover:underline">The Lighthouse Soft Play and Cafe</a></strong> — 4.8 stars from 33 reviews.</li>
-  <li><strong><a href="/soft-play/brighton/beechwood-hall-rural-park-hastings" class="text-purple-700 hover:underline">Beechwood Hall &amp; Rural Park</a></strong> — 4.6 stars from 88 reviews.</li>
-</ul>
-
-<h2>The busiest venues</h2>
-<p>Review volume is a good proxy for how many families actually go. <a href="/soft-play/brighton/jumpin-fun-inflatable-park-burgess-hill" class="text-purple-700 hover:underline">Jumpin Fun Inflatable Park Burgess Hill</a> is the most-reviewed on our list with 1,523 reviews at 4.5 stars, followed by <a href="/soft-play/brighton/monkey-bizness-lewes" class="text-purple-700 hover:underline">Monkey Bizness Lewes</a> (1,015 reviews, 4.2 stars), <a href="/soft-play/brighton/funplex" class="text-purple-700 hover:underline">Funplex.</a> (493 reviews, 3.8 stars) and <a href="/soft-play/brighton/sharkys" class="text-purple-700 hover:underline">Sharky's</a> (276 reviews, 4.4 stars).</p>
-
-<h2>Where the confirmed facilities are</h2>
-<p>Facility information is patchy across smaller venues, so these lists show only what is confirmed on each listing — a venue missing from a list may well have the facility, it just isn’t confirmed in our data.</p>
-<ul>
-  <li><strong>On-site café</strong> (4 of 17): <strong><a href="/soft-play/brighton/sharkys" class="text-purple-700 hover:underline">Sharky's</a></strong>, <strong><a href="/soft-play/brighton/barneys-play" class="text-purple-700 hover:underline">Barney's Play</a></strong>, <strong><a href="/soft-play/brighton/the-lighthouse-soft-play-and-cafe" class="text-purple-700 hover:underline">The Lighthouse Soft Play and Cafe</a></strong> and <strong><a href="/soft-play/brighton/playcafe-brighton" class="text-purple-700 hover:underline">Playcafe</a></strong>.</li>
-  <li><strong>Birthday parties</strong> (1): <strong><a href="/soft-play/brighton/play-dreams-soft-play" class="text-purple-700 hover:underline">Play Dreams Soft Play</a></strong>.</li>
-  <li><strong>SEN-friendly</strong> (2): <strong><a href="/soft-play/brighton/barneys-play" class="text-purple-700 hover:underline">Barney's Play</a></strong> and <strong><a href="/soft-play/brighton/hope-hive" class="text-purple-700 hover:underline">Hope Hive</a></strong>.</li>
-  <li><strong>On-site parking</strong> (1): <strong><a href="/soft-play/brighton/beechwood-hall-rural-park-hastings" class="text-purple-700 hover:underline">Beechwood Hall &amp; Rural Park</a></strong>.</li>
-</ul>
-
-<h2>Which one to try first</h2>
-<p><strong>Highest rated:</strong> <a href="/soft-play/brighton/the-little-play-village" class="text-purple-700 hover:underline">The Little Play Village</a> (5.0 stars, 43 reviews).</p>
-<p><strong>Most popular:</strong> <a href="/soft-play/brighton/jumpin-fun-inflatable-park-burgess-hill" class="text-purple-700 hover:underline">Jumpin Fun Inflatable Park Burgess Hill</a> (1,523 reviews).</p>
-<p><strong>If you want a proper café:</strong> <a href="/soft-play/brighton/playcafe-brighton" class="text-purple-700 hover:underline">Playcafe</a> (4.9 stars, café confirmed).</p>
-<p><strong>For SEN-friendly play:</strong> <a href="/soft-play/brighton/barneys-play" class="text-purple-700 hover:underline">Barney's Play</a> (4.3 stars) — call ahead to confirm current session times.</p>
-
-<h2>Before you go</h2>
-<p>Socks are required at nearly every soft play centre, and policies on grip socks, adult entry and booking vary by venue. For weekends and school holidays, booking ahead is safer than turning up. Check the venue’s own website or phone for current prices, session times and any age limits.</p>
-
-<blockquote>
-  <p>👉 <strong><a href="/soft-play/brighton">See the full Brighton directory</a></strong> · More: <a href="/soft-play/brighton/birthday-parties">birthday party venues in Brighton</a> and <a href="/soft-play/brighton/sen-friendly">SEN-friendly soft play in Brighton</a></p>
-</blockquote>`,
-    faq: [
-      {
-        q: 'How many soft play centres are there in Brighton?',
-        a: 'We list 17 soft play venues in and around Brighton. 12 have 20 or more Google reviews.',
-      },
-      {
-        q: 'What is the best-rated soft play in Brighton?',
-        a: 'The Little Play Village has the highest rating of any venue with 20+ reviews: 5.0 stars from 43 reviews.',
-      },
-      {
-        q: 'Which Brighton soft play has the most reviews?',
-        a: 'Jumpin Fun Inflatable Park Burgess Hill is the most-reviewed on our list, with 1,523 reviews at 4.5 stars.',
-      },
-      {
-        q: 'Where can I book a soft play birthday party in Brighton?',
-        a: '1 venue on our list confirm party facilities, including Play Dreams Soft Play. Check prices and availability with the venue directly.',
-      },
-      {
-        q: 'Is there SEN-friendly soft play in Brighton?',
-        a: 'Barney\'s Play and Hope Hive are listed as SEN-friendly. Session times change often, so call the venue to confirm before you visit.',
-      },
-      {
-        q: 'Which Brighton soft play centres have a café?',
-        a: '4 venues confirm an on-site café, including Sharky\'s, Barney\'s Play and The Lighthouse Soft Play and Cafe.',
       },
     ],
   },
@@ -5415,6 +5341,8 @@ export const posts: BlogPost[] = [
   },
 ]
 
+posts.push(...sussexPosts)
+
 export const blogPosts: BlogPost[] = posts
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
@@ -5424,6 +5352,11 @@ export function getPostBySlug(slug: string): BlogPost | undefined {
 /** Returns the blog post for a given city name (case-insensitive), if one exists. */
 export function getPostForCity(city: string): BlogPost | undefined {
   return posts.find((post) => post.city.toLowerCase() === city.toLowerCase())
+}
+
+/** All indexable posts for a city, in list order. */
+export function getPostsForCity(city: string): BlogPost[] {
+  return posts.filter((post) => !post.noindex && post.city.toLowerCase() === city.toLowerCase())
 }
 
 /** Returns up to `limit` other posts (excluding the current slug), preferring same city. */

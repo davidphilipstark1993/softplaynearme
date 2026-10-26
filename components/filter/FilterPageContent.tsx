@@ -18,6 +18,7 @@ import { isOpenNow } from '@/lib/utils'
 import { hasStructuredHours } from '@/lib/venueFacts'
 import { isVisibleVenueType, visibleVenueTypeSql } from '@/lib/venueTypes'
 import { splitByLocality, groupNearbyByLocality } from '@/lib/localities'
+import { minFilterVenues } from '@/lib/hubGuides'
 import { buildFilterMeta, isDataFilter } from '@/lib/filterMeta'
 import { getCityVenueCount } from '@/lib/venueCounts'
 import { getFilterContent, type FilterSlug } from '@/lib/filterContent'
@@ -519,7 +520,7 @@ export async function buildFilterMetadata(citySlug: string, filterSlug: FilterSl
     // Noindex thin pages (no matching venues in this city for this filter) and
     // "open now" always: its result set changes by the minute, so it is never a
     // stable page worth indexing (it is also left out of the sitemap).
-    ...((venues.length === 0 || filterSlug === 'open-now') && { robots: { index: false, follow: true } }),
+    ...((venues.length < minFilterVenues(citySlug) || filterSlug === 'open-now') && { robots: { index: false, follow: true } }),
     openGraph: {
       title,
       description,

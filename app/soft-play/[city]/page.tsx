@@ -17,7 +17,7 @@ import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 import { buildBreadcrumbSchema, buildFAQSchema, buildItemListSchema, buildCollectionPageSchema } from '@/lib/schema'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { getLocationContent } from '@/lib/locationContent'
-import { getPostForCity } from '@/lib/blogPosts'
+import { getPostForCity, getPostsForCity } from '@/lib/blogPosts'
 import { LocationIntro } from '@/components/location/LocationIntro'
 import { CuratedVenueSection } from '@/components/location/CuratedVenueSections'
 import { HULL_CURATED_VENUES } from '@/data/hullCuratedVenues'
@@ -40,6 +40,10 @@ import { splitByLocality, groupNearbyByLocality, getLocality } from '@/lib/local
 import { VENUES_PER_PAGE, totalPagesFor, parsePageParam, hubPagePath, pageWindow } from '@/lib/pagination'
 import { NearbyTowns } from '@/components/location/NearbyTowns'
 import { VenueCardFacts } from '@/components/venue/VenueCardFacts'
+import { VenueComparisonTable } from '@/components/location/VenueComparisonTable'
+import { HubGuide, NearbyHubs } from '@/components/location/HubGuide'
+import { NearTown } from '@/components/location/NearTown'
+import { getHubGuide, buildGuideTitle, buildAnswerFirst, MAX_FAQS } from '@/lib/hubGuides'
 
 interface PageProps {
   params: Promise<{ city: string }>
@@ -117,14 +121,19 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
   const pageNum = Math.min(requested, totalPages)
   const outOfRange = requested > totalPages
 
-  const title = pageNum > 1 ? `${meta.title} – Page ${pageNum}` : meta.title
+  // Hubs with an editorial guide (lib/hubGuides.ts) use the long-form title with the live N.
+  const guideTitle = getHubGuide(city) && core.length > 0 ? buildGuideTitle(name, core.length, new Date().getFullYear()) : null
+  const titleText = guideTitle ?? meta.title
+  const title = pageNum > 1 ? `${titleText} – Page ${pageNum}` : titleText
   const description = pageNum > 1 ? `${meta.description} Page ${pageNum} of ${totalPages}.` : meta.description
   const canonical = `${baseUrl}${isVariation ? hubPagePath(city, 1) : hubPagePath(city, pageNum)}`
-  const noindex = isVariation || outOfRange
+  // A hub with no soft play centre of its own (only family attractions) is not worth indexing yet.
+  const noindex = isVariation || outOfRange || !core.some((v) => isSoftPlayVenueType((v as { venue_type?: string | null }).venue_type))
 
   const ogImage = getCityOgImage(city)
   return {
-    title,
+    // The guide title already reads as a full title; opt out of the "| Soft Play Near Me" template.
+    title: guideTitle ? { absolute: title } : title,
     description,
     ...(noindex && { robots: { index: false, follow: true } }),
     openGraph: {
@@ -176,11 +185,14 @@ interface Venue {
   avg_rating?: number
   review_count?: number
   mapsUrl?: string
+  lat?: number | string | null
+  lng?: number | string | null
   notes?: string
   isStatic?: boolean
   venue_type?: string | null
   review_snippet?: string | null
   last_verified_at?: string | null
+  updated_at?: string | Date | null
   featured?: boolean
   featured_until?: string | null
   plan?: string
@@ -504,7 +516,17 @@ export default async function CityPage({ params, searchParams }: PageProps) {
   // worse, imply an answer) — hide it instead.
   const allCityVenues = await getCityVenuesAll(city)
   const openNowAvailable = allCityVenues.some((v) => hasStructuredHours(v.opening_hours))
-  const visibleFilters = filters.filter((f) => f.slug !== 'open-now' || openNowAvailable)
+  // On hubs with a guide, a category link only shows when at least 2 venues are in it.
+  const guideHub = !!getHubGuide(city)
+  const coreForFilters = splitByLocality(city, allCityVenues).core
+  const filterSupport: Record<string, number> = {
+    toddler: coreForFilters.filter((v) => v.toddler_area).length,
+    'birthday-parties': coreForFilters.filter((v) => v.parties).length,
+    'sen-friendly': coreForFilters.filter((v) => v.sen_friendly).length,
+  }
+  const visibleFilters = filters.filter(
+    (f) => (f.slug !== 'open-now' || openNowAvailable) && (!guideHub || !(f.slug in filterSupport) || filterSupport[f.slug] >= 2)
+  )
   const nearbyCities = cityConfig ? getNearbyCities(city) : []
 
   // Pagination — see VENUES_PER_PAGE above for why. Clamp to the real last
@@ -552,13 +574,33 @@ export default async function CityPage({ params, searchParams }: PageProps) {
   const contentInput = { name: displayName, county, slug: city, venues: contentVenues.map(toStatsVenue), nearbyCount: nearbyVenues.length, nearbyTowns: nearbyTownNames }
   const heroIntro = buildCityIntro(contentInput)
   const cityMeta = buildCityMeta(displayName, county, computeCityStats(contentInput.venues))
-  const faqs = buildCityFaqs(contentInput)
+  const guide = getHubGuide(city)
+  const genericFaqs = buildCityFaqs(contentInput)
+  // A guide's own party question replaces the generic one; the rest of the generic FAQ fills what room is left.
+  const guideHasParty = !!guide?.faqs.some((f) => /part(y|ies)/i.test(f.question))
+  const faqs = guide
+    ? [
+        ...genericFaqs.filter((f) => !(guideHasParty && /birthday party/i.test(f.question))).slice(0, MAX_FAQS - guide.faqs.length),
+        ...guide.faqs,
+      ]
+    : genericFaqs
+  const answerFirst = guide ? buildAnswerFirst({ name: displayName, venues: contentVenues.map((v) => ({ ...toStatsVenue(v), area: getLocality(v) })), nearbyCount: nearbyVenues.length, nearbyTowns: nearbyTownNames }) : null
+  // Newest real change to any main-list venue (DB updated_at; static export: last verified).
+  const lastUpdatedMs = contentVenues.reduce((max, v) => {
+    const t = new Date((v.updated_at ?? v.last_verified_at ?? '') as string).getTime()
+    return Number.isFinite(t) && t > max ? t : max
+  }, 0)
+  const lastUpdated = guide && lastUpdatedMs ? new Date(lastUpdatedMs).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/London' }) : null
+  const comparisonVenues = guide
+    ? contentVenues.map((v) => ({ ...toStatsVenue(v), parties: v.parties, area: getLocality(v) }))
+    : []
 
   const baseUrl = 'https://www.softplaynearme.co.uk'
 
   // Use reusable schema builders from lib/schema.ts
   const breadcrumbSchema = buildBreadcrumbSchema([
     { name: 'Home', url: baseUrl },
+    ...(guide ? [{ name: 'Soft Play', url: `${baseUrl}/soft-play` }] : []),
     { name: `Soft Play in ${displayName}`, url: `${baseUrl}/soft-play/${city}` },
   ])
 
@@ -630,6 +672,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
   const MAX_REVIEWS_FOR_POPULAR = 5000
   const topRatedVenues = showCurated ? rankTopRated(softPlayVenues.map(toStatsVenue), 4) : []
   const cityBlogPost = getPostForCity(displayName)
+  const moreCityPosts = guide ? getPostsForCity(displayName).filter((p) => p.slug !== cityBlogPost?.slug) : []
 
   const mostPopularVenues = showCurated
     ? [...softPlayVenues]
@@ -648,13 +691,13 @@ export default async function CityPage({ params, searchParams }: PageProps) {
       <div className="min-h-screen bg-slate-50">
         <Header />
 
-        <Breadcrumbs items={[{ label: `Soft Play in ${displayName}` }]} />
+        <Breadcrumbs items={[...(guide ? [{ label: 'Soft Play', href: '/soft-play' }] : []), { label: `Soft Play in ${displayName}` }]} />
 
         {/* Hero */}
         <div className="bg-gradient-to-br from-purple-600 to-pink-500 text-white py-10 sm:py-12 px-4">
           <div className="max-w-7xl mx-auto">
             <h1 className="text-3xl md:text-4xl font-bold mb-3">{h1}</h1>
-            <p className="text-purple-100 text-lg max-w-3xl">{heroIntro}</p>
+            <p className="text-purple-100 text-lg max-w-3xl">{answerFirst ?? heroIntro}</p>
           </div>
         </div>
 
@@ -662,6 +705,9 @@ export default async function CityPage({ params, searchParams }: PageProps) {
         <div className="bg-white border-b border-slate-200 py-3 px-4">
           <div className="max-w-7xl mx-auto flex flex-wrap gap-x-6 gap-y-1 text-sm">
             <span><strong className="text-slate-900">{headlineCount}</strong> <span className="text-slate-500">{headlineCount === 1 ? 'venue' : 'venues'} in {displayName}</span></span>
+            {lastUpdated && (
+              <span className="text-slate-500">Last updated <time dateTime={new Date(lastUpdatedMs).toISOString()}>{lastUpdated}</time></span>
+            )}
             {city === 'london' && (
               <span><strong className="text-slate-900">£7&ndash;£14</strong> <span className="text-slate-500">per child, typical session &mdash; under-1s usually free</span></span>
             )}
@@ -1098,6 +1144,13 @@ export default async function CityPage({ params, searchParams }: PageProps) {
             </nav>
           )}
 
+          {guide && !hasActiveFilters && pageNum === 1 && (
+            <>
+              <VenueComparisonTable citySlug={city} cityName={displayName} venues={comparisonVenues} />
+              <HubGuide guide={guide} cityName={displayName} />
+            </>
+          )}
+
           {/* Blog post link — shown when a guide exists for this city */}
           {cityBlogPost && (
             <div className="mt-12">
@@ -1112,6 +1165,15 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                 </div>
                 <span className="text-purple-500 mt-1 shrink-0">→</span>
               </Link>
+              {moreCityPosts.length > 0 && (
+                <ul className="mt-3 space-y-1 text-sm">
+                  {moreCityPosts.map((p) => (
+                    <li key={p.slug}>
+                      <Link href={`/blog/${p.slug}`} className="text-purple-700 underline hover:text-purple-900">{p.title}</Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           )}
 
@@ -1184,6 +1246,19 @@ export default async function CityPage({ params, searchParams }: PageProps) {
               </div>
             </section>
           )}
+
+          {guide?.nearTowns && !hasActiveFilters && pageNum === 1 &&
+            guide.nearTowns.map((t) => (
+              <NearTown
+                key={t.name}
+                town={t.name}
+                centre={t}
+                hubSlug={city}
+                venues={[...contentVenues, ...nearbyVenues].filter((v) => isSoftPlayVenueType(v.venue_type)).map((v) => ({ slug: v.slug, name: v.name, lat: v.lat, lng: v.lng, area: getLocality(v) }))}
+              />
+            ))}
+
+          {guide && !hasActiveFilters && pageNum === 1 && <NearbyHubs hubs={guide.nearbyHubs} cityName={displayName} />}
 
           {/* Location Intro (SEO content) */}
           <LocationIntro content={intro} locationName={displayName} />
