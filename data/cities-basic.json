@@ -228,5 +228,310 @@
     "slug": "chichester",
     "name": "Chichester",
     "county": "West Sussex"
+  },
+  {
+    "slug": "high-wycombe",
+    "name": "High Wycombe",
+    "county": "Buckinghamshire"
+  },
+  {
+    "slug": "barnstaple",
+    "name": "Barnstaple",
+    "county": "Devon"
+  },
+  {
+    "slug": "plymouth",
+    "name": "Plymouth",
+    "county": "Plymouth"
+  },
+  {
+    "slug": "skegness",
+    "name": "Skegness",
+    "county": "Lincolnshire"
+  },
+  {
+    "slug": "northampton",
+    "name": "Northampton",
+    "county": "West Northamptonshire"
+  },
+  {
+    "slug": "luton",
+    "name": "Luton",
+    "county": "Central Bedfordshire"
+  },
+  {
+    "slug": "hemel-hempstead",
+    "name": "Hemel Hempstead",
+    "county": "Hertfordshire"
+  },
+  {
+    "slug": "cambridge",
+    "name": "Cambridge",
+    "county": "Cambridgeshire"
+  },
+  {
+    "slug": "ware",
+    "name": "Ware",
+    "county": "Hertfordshire"
+  },
+  {
+    "slug": "harlow",
+    "name": "Harlow",
+    "county": "Essex"
+  },
+  {
+    "slug": "hitchin",
+    "name": "Hitchin",
+    "county": "Hertfordshire"
+  },
+  {
+    "slug": "hatfield",
+    "name": "Hatfield",
+    "county": "Hertfordshire"
+  },
+  {
+    "slug": "bishop-auckland",
+    "name": "Bishop Auckland",
+    "county": "County Durham"
+  },
+  {
+    "slug": "morpeth",
+    "name": "Morpeth",
+    "county": "Northumberland"
+  },
+  {
+    "slug": "seahouses",
+    "name": "Seahouses",
+    "county": "Northumberland"
+  },
+  {
+    "slug": "carlisle",
+    "name": "Carlisle",
+    "county": "Cumberland"
+  },
+  {
+    "slug": "barnoldswick",
+    "name": "Barnoldswick",
+    "county": "Lancashire"
+  },
+  {
+    "slug": "antrim",
+    "name": "Antrim",
+    "county": "Antrim and Newtownabbey"
+  },
+  {
+    "slug": "derry-londonderry",
+    "name": "Derry / Londonderry",
+    "county": "Derry and Strabane"
+  },
+  {
+    "slug": "omagh",
+    "name": "Omagh",
+    "county": "Fermanagh and Omagh"
+  },
+  {
+    "slug": "lisburn",
+    "name": "Lisburn",
+    "county": "Lisburn and Castlereagh"
+  },
+  {
+    "slug": "peterhead",
+    "name": "Peterhead",
+    "county": "Aberdeenshire"
+  },
+  {
+    "slug": "forfar",
+    "name": "Forfar",
+    "county": "Angus"
+  },
+  {
+    "slug": "falkirk",
+    "name": "Falkirk",
+    "county": "Falkirk"
+  },
+  {
+    "slug": "cupar",
+    "name": "Cupar",
+    "county": "Fife"
+  },
+  {
+    "slug": "coldstream",
+    "name": "Coldstream",
+    "county": "Scottish Borders"
+  },
+  {
+    "slug": "aylesbury",
+    "name": "Aylesbury",
+    "county": "Buckinghamshire"
+  },
+  {
+    "slug": "fleet",
+    "name": "Fleet",
+    "county": "Hampshire"
+  },
+  {
+    "slug": "milton-keynes",
+    "name": "Milton Keynes",
+    "county": "Milton Keynes"
+  },
+  {
+    "slug": "dorking",
+    "name": "Dorking",
+    "county": "Surrey"
+  },
+  {
+    "slug": "egham",
+    "name": "Egham",
+    "county": "Surrey"
+  },
+  {
+    "slug": "guildford",
+    "name": "Guildford",
+    "county": "Surrey"
+  },
+  {
+    "slug": "slough",
+    "name": "Slough & Windsor",
+    "county": "Berkshire"
+  },
+  {
+    "slug": "cheltenham",
+    "name": "Cheltenham",
+    "county": "Gloucestershire"
+  },
+  {
+    "slug": "falmouth",
+    "name": "Falmouth",
+    "county": "Cornwall"
+  },
+  {
+    "slug": "bude",
+    "name": "Bude",
+    "county": "Cornwall"
+  },
+  {
+    "slug": "cirencester",
+    "name": "Cirencester",
+    "county": "Gloucestershire"
+  },
+  {
+    "slug": "bridport",
+    "name": "Bridport",
+    "county": "Dorset"
+  },
+  {
+    "slug": "exmouth",
+    "name": "Exmouth",
+    "county": "Devon"
+  },
+  {
+    "slug": "yeovil",
+    "name": "Yeovil",
+    "county": "Somerset"
+  },
+  {
+    "slug": "swindon",
+    "name": "Swindon",
+    "county": "Swindon"
+  },
+  {
+    "slug": "salisbury",
+    "name": "Salisbury",
+    "county": "Wiltshire"
+  },
+  {
+    "slug": "aberaeron",
+    "name": "Aberaeron",
+    "county": "Ceredigion"
+  },
+  {
+    "slug": "hereford",
+    "name": "Hereford",
+    "county": "Herefordshire"
+  },
+  {
+    "slug": "rugby",
+    "name": "Rugby",
+    "county": "Warwickshire"
+  },
+  {
+    "slug": "worcester",
+    "name": "Worcester",
+    "county": "Worcestershire"
+  },
+  {
+    "slug": "portrush",
+    "name": "Portrush",
+    "county": "Causeway Coast and Glens"
+  },
+  {
+    "slug": "banbury",
+    "name": "Banbury",
+    "county": "Oxfordshire"
+  },
+  {
+    "slug": "llandudno",
+    "name": "Llandudno",
+    "county": "Conwy"
+  },
+  {
+    "slug": "st-neots",
+    "name": "St Neots",
+    "county": "Cambridgeshire"
+  },
+  {
+    "slug": "ballynahinch",
+    "name": "Ballynahinch",
+    "county": "Newry, Mourne and Down"
+  },
+  {
+    "slug": "galashiels",
+    "name": "Galashiels",
+    "county": "Scottish Borders"
+  },
+  {
+    "slug": "ayr",
+    "name": "Ayr & Prestwick",
+    "county": "South Ayrshire"
+  },
+  {
+    "slug": "wokingham",
+    "name": "Wokingham",
+    "county": "Berkshire"
+  },
+  {
+    "slug": "horley",
+    "name": "Horley",
+    "county": "Surrey"
+  },
+  {
+    "slug": "broadstairs",
+    "name": "Broadstairs",
+    "county": "Kent"
+  },
+  {
+    "slug": "helston",
+    "name": "Helston",
+    "county": "Cornwall"
+  },
+  {
+    "slug": "dorchester",
+    "name": "Dorchester",
+    "county": "Dorset"
+  },
+  {
+    "slug": "rhyl",
+    "name": "Rhyl",
+    "county": "Conwy"
+  },
+  {
+    "slug": "dumfries",
+    "name": "Dumfries",
+    "county": ""
+  },
+  {
+    "slug": "taunton",
+    "name": "Taunton",
+    "county": ""
   }
 ]
