@@ -1,0 +1,717 @@
+[
+ {
+  "slug": "high-wycombe",
+  "name": "High Wycombe",
+  "county": "Buckinghamshire",
+  "region": "South East",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "barnstaple",
+  "name": "Barnstaple",
+  "county": "Devon",
+  "region": "South West",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "plymouth",
+  "name": "Plymouth",
+  "county": "Plymouth",
+  "region": "South West",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "skegness",
+  "name": "Skegness",
+  "county": "Lincolnshire",
+  "region": "East Midlands",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "northampton",
+  "name": "Northampton",
+  "county": "West Northamptonshire",
+  "region": "East Midlands",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "luton",
+  "name": "Luton",
+  "county": "Central Bedfordshire",
+  "region": "East of England",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "hemel-hempstead",
+  "name": "Hemel Hempstead",
+  "county": "Hertfordshire",
+  "region": "East of England",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "cambridge",
+  "name": "Cambridge",
+  "county": "Cambridgeshire",
+  "region": "East of England",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "ware",
+  "name": "Ware",
+  "county": "Hertfordshire",
+  "region": "East of England",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "harlow",
+  "name": "Harlow",
+  "county": "Essex",
+  "region": "East of England",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "hitchin",
+  "name": "Hitchin",
+  "county": "Hertfordshire",
+  "region": "East of England",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "hatfield",
+  "name": "Hatfield",
+  "county": "Hertfordshire",
+  "region": "East of England",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "bishop-auckland",
+  "name": "Bishop Auckland",
+  "county": "County Durham",
+  "region": "North East",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "morpeth",
+  "name": "Morpeth",
+  "county": "Northumberland",
+  "region": "North East",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "seahouses",
+  "name": "Seahouses",
+  "county": "Northumberland",
+  "region": "North East",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "carlisle",
+  "name": "Carlisle",
+  "county": "Cumberland",
+  "region": "North West",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "barnoldswick",
+  "name": "Barnoldswick",
+  "county": "Lancashire",
+  "region": "North West",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "antrim",
+  "name": "Antrim",
+  "county": "Antrim and Newtownabbey",
+  "region": "Northern Ireland",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "derry-londonderry",
+  "name": "Derry / Londonderry",
+  "county": "Derry and Strabane",
+  "region": "Northern Ireland",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "omagh",
+  "name": "Omagh",
+  "county": "Fermanagh and Omagh",
+  "region": "Northern Ireland",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "lisburn",
+  "name": "Lisburn",
+  "county": "Lisburn and Castlereagh",
+  "region": "Northern Ireland",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "peterhead",
+  "name": "Peterhead",
+  "county": "Aberdeenshire",
+  "region": "Scotland",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "forfar",
+  "name": "Forfar",
+  "county": "Angus",
+  "region": "Scotland",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "falkirk",
+  "name": "Falkirk",
+  "county": "Falkirk",
+  "region": "Scotland",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "cupar",
+  "name": "Cupar",
+  "county": "Fife",
+  "region": "Scotland",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "coldstream",
+  "name": "Coldstream",
+  "county": "Scottish Borders",
+  "region": "Scotland",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "aylesbury",
+  "name": "Aylesbury",
+  "county": "Buckinghamshire",
+  "region": "South East",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "fleet",
+  "name": "Fleet",
+  "county": "Hampshire",
+  "region": "South East",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "milton-keynes",
+  "name": "Milton Keynes",
+  "county": "Milton Keynes",
+  "region": "South East",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "dorking",
+  "name": "Dorking",
+  "county": "Surrey",
+  "region": "South East",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "egham",
+  "name": "Egham",
+  "county": "Surrey",
+  "region": "South East",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "guildford",
+  "name": "Guildford",
+  "county": "Surrey",
+  "region": "South East",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "slough",
+  "name": "Slough & Windsor",
+  "county": "Berkshire",
+  "region": "South East",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "cheltenham",
+  "name": "Cheltenham",
+  "county": "Gloucestershire",
+  "region": "South West",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "falmouth",
+  "name": "Falmouth",
+  "county": "Cornwall",
+  "region": "South West",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "bude",
+  "name": "Bude",
+  "county": "Cornwall",
+  "region": "South West",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "cirencester",
+  "name": "Cirencester",
+  "county": "Gloucestershire",
+  "region": "South West",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "bridport",
+  "name": "Bridport",
+  "county": "Dorset",
+  "region": "South West",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "exmouth",
+  "name": "Exmouth",
+  "county": "Devon",
+  "region": "South West",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "yeovil",
+  "name": "Yeovil",
+  "county": "Somerset",
+  "region": "South West",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "swindon",
+  "name": "Swindon",
+  "county": "Swindon",
+  "region": "South West",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "salisbury",
+  "name": "Salisbury",
+  "county": "Wiltshire",
+  "region": "South West",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "aberaeron",
+  "name": "Aberaeron",
+  "county": "Ceredigion",
+  "region": "Wales",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "hereford",
+  "name": "Hereford",
+  "county": "Herefordshire",
+  "region": "West Midlands",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "rugby",
+  "name": "Rugby",
+  "county": "Warwickshire",
+  "region": "West Midlands",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "worcester",
+  "name": "Worcester",
+  "county": "Worcestershire",
+  "region": "West Midlands",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "portrush",
+  "name": "Portrush",
+  "county": "Causeway Coast and Glens",
+  "region": "Northern Ireland",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "banbury",
+  "name": "Banbury",
+  "county": "Oxfordshire",
+  "region": "South East",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "llandudno",
+  "name": "Llandudno",
+  "county": "Conwy",
+  "region": "Wales",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "st-neots",
+  "name": "St Neots",
+  "county": "Cambridgeshire",
+  "region": "East of England",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "ballynahinch",
+  "name": "Ballynahinch",
+  "county": "Newry, Mourne and Down",
+  "region": "Northern Ireland",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "galashiels",
+  "name": "Galashiels",
+  "county": "Scottish Borders",
+  "region": "Scotland",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "ayr",
+  "name": "Ayr & Prestwick",
+  "county": "South Ayrshire",
+  "region": "Scotland",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "wokingham",
+  "name": "Wokingham",
+  "county": "Berkshire",
+  "region": "South East",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "horley",
+  "name": "Horley",
+  "county": "Surrey",
+  "region": "South East",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "broadstairs",
+  "name": "Broadstairs",
+  "county": "Kent",
+  "region": "South East",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "helston",
+  "name": "Helston",
+  "county": "Cornwall",
+  "region": "South West",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "dorchester",
+  "name": "Dorchester",
+  "county": "Dorset",
+  "region": "South West",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "rhyl",
+  "name": "Rhyl",
+  "county": "Conwy",
+  "region": "Wales",
+  "country": "United Kingdom"
+ },
+ {
+  "slug": "dumfries",
+  "name": "Dumfries",
+  "county": "",
+  "region": "Scotland",
+  "country": null
+ },
+ {
+  "slug": "taunton",
+  "name": "Taunton",
+  "county": "",
+  "region": "South West",
+  "country": null
+ },
+ {
+  "slug": "london",
+  "name": "London",
+  "county": "Greater London",
+  "region": "London"
+ },
+ {
+  "slug": "hull",
+  "name": "Hull",
+  "county": "East Yorkshire",
+  "region": "Yorkshire"
+ },
+ {
+  "slug": "beverley",
+  "name": "Beverley",
+  "county": "East Yorkshire",
+  "region": "Yorkshire"
+ },
+ {
+  "slug": "york",
+  "name": "York",
+  "county": "North Yorkshire",
+  "region": "Yorkshire"
+ },
+ {
+  "slug": "leeds",
+  "name": "Leeds",
+  "county": "West Yorkshire",
+  "region": "Yorkshire"
+ },
+ {
+  "slug": "sheffield",
+  "name": "Sheffield",
+  "county": "South Yorkshire",
+  "region": "Yorkshire"
+ },
+ {
+  "slug": "bridlington",
+  "name": "Bridlington",
+  "county": "East Yorkshire",
+  "region": "Yorkshire"
+ },
+ {
+  "slug": "brighton",
+  "name": "Brighton",
+  "county": "East Sussex",
+  "region": "South East"
+ },
+ {
+  "slug": "bournemouth",
+  "name": "Bournemouth",
+  "county": "Dorset",
+  "region": "South West"
+ },
+ {
+  "slug": "norwich",
+  "name": "Norwich",
+  "county": "Norfolk",
+  "region": "East of England"
+ },
+ {
+  "slug": "colchester",
+  "name": "Colchester",
+  "county": "Essex",
+  "region": "East of England"
+ },
+ {
+  "slug": "huddersfield",
+  "name": "Huddersfield",
+  "county": "West Yorkshire",
+  "region": "Yorkshire"
+ },
+ {
+  "slug": "manchester",
+  "name": "Manchester",
+  "county": "Greater Manchester",
+  "region": "North West"
+ },
+ {
+  "slug": "birmingham",
+  "name": "Birmingham",
+  "county": "West Midlands",
+  "region": "West Midlands"
+ },
+ {
+  "slug": "liverpool",
+  "name": "Liverpool",
+  "county": "Merseyside",
+  "region": "North West"
+ },
+ {
+  "slug": "nottingham",
+  "name": "Nottingham",
+  "county": "Nottinghamshire",
+  "region": "East Midlands"
+ },
+ {
+  "slug": "bristol",
+  "name": "Bristol",
+  "county": "Bristol",
+  "region": "South West"
+ },
+ {
+  "slug": "newcastle",
+  "name": "Newcastle",
+  "county": "Tyne and Wear",
+  "region": "North East"
+ },
+ {
+  "slug": "cardiff",
+  "name": "Cardiff",
+  "county": "Cardiff",
+  "region": "Wales"
+ },
+ {
+  "slug": "edinburgh",
+  "name": "Edinburgh",
+  "county": "City of Edinburgh",
+  "region": "Scotland"
+ },
+ {
+  "slug": "glasgow",
+  "name": "Glasgow",
+  "county": "City of Glasgow",
+  "region": "Scotland"
+ },
+ {
+  "slug": "leicester",
+  "name": "Leicester",
+  "county": "Leicestershire",
+  "region": "East Midlands"
+ },
+ {
+  "slug": "portsmouth",
+  "name": "Portsmouth",
+  "county": "Hampshire",
+  "region": "South East"
+ },
+ {
+  "slug": "swansea",
+  "name": "Swansea",
+  "county": "Swansea",
+  "region": "Wales"
+ },
+ {
+  "slug": "sunderland",
+  "name": "Sunderland",
+  "county": "Tyne and Wear",
+  "region": "North East"
+ },
+ {
+  "slug": "stoke",
+  "name": "Stoke-on-Trent",
+  "county": "Staffordshire",
+  "region": "West Midlands"
+ },
+ {
+  "slug": "blackpool",
+  "name": "Blackpool",
+  "county": "Lancashire",
+  "region": "North West"
+ },
+ {
+  "slug": "ipswich",
+  "name": "Ipswich",
+  "county": "Suffolk",
+  "region": "East of England"
+ },
+ {
+  "slug": "lincoln",
+  "name": "Lincoln",
+  "county": "Lincolnshire",
+  "region": "East Midlands"
+ },
+ {
+  "slug": "doncaster",
+  "name": "Doncaster",
+  "county": "South Yorkshire",
+  "region": "Yorkshire and the Humber"
+ },
+ {
+  "slug": "southend",
+  "name": "Southend-on-Sea",
+  "county": "Essex",
+  "region": "East of England"
+ },
+ {
+  "slug": "hastings",
+  "name": "Hastings",
+  "county": "East Sussex",
+  "region": "South East"
+ },
+ {
+  "slug": "aberdeen",
+  "name": "Aberdeen",
+  "county": "Aberdeenshire",
+  "region": "Scotland"
+ },
+ {
+  "slug": "inverness",
+  "name": "Inverness",
+  "county": "Highland",
+  "region": "Scotland"
+ },
+ {
+  "slug": "barnsley",
+  "name": "Barnsley",
+  "county": "South Yorkshire",
+  "region": "Yorkshire and the Humber"
+ },
+ {
+  "slug": "bolton",
+  "name": "Bolton",
+  "county": "Greater Manchester",
+  "region": "North West"
+ },
+ {
+  "slug": "bradford",
+  "name": "Bradford",
+  "county": "West Yorkshire",
+  "region": "Yorkshire and the Humber"
+ },
+ {
+  "slug": "halifax",
+  "name": "Halifax",
+  "county": "West Yorkshire",
+  "region": "Yorkshire and the Humber"
+ },
+ {
+  "slug": "crewe",
+  "name": "Crewe",
+  "county": "Cheshire",
+  "region": "North West"
+ },
+ {
+  "slug": "worthing",
+  "name": "Worthing",
+  "county": "West Sussex",
+  "region": "South East"
+ },
+ {
+  "slug": "mossley",
+  "name": "Mossley",
+  "county": "Greater Manchester",
+  "region": "North West"
+ },
+ {
+  "slug": "llanelli",
+  "name": "Llanelli",
+  "county": "Carmarthenshire",
+  "region": "Wales"
+ },
+ {
+  "slug": "dartford",
+  "name": "Dartford",
+  "county": "Kent",
+  "region": "South East"
+ },
+ {
+  "slug": "scunthorpe",
+  "name": "Scunthorpe",
+  "county": "Lincolnshire",
+  "region": "East Midlands"
+ },
+ {
+  "slug": "bognor-regis",
+  "name": "Bognor Regis",
+  "county": "West Sussex",
+  "region": "South East"
+ },
+ {
+  "slug": "chichester",
+  "name": "Chichester",
+  "county": "West Sussex",
+  "region": "South East"
+ },
+ {
+  "slug": "matlock",
+  "name": "Matlock",
+  "county": "Derbyshire",
+  "region": "East Midlands"
+ },
+ {
+  "slug": "peterborough",
+  "name": "Peterborough",
+  "county": "Cambridgeshire",
+  "region": "East of England"
+ }
+]

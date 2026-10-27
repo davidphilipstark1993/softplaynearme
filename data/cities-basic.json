@@ -533,5 +533,15 @@
     "slug": "taunton",
     "name": "Taunton",
     "county": ""
+  },
+  {
+    "slug": "matlock",
+    "name": "Matlock",
+    "county": "Derbyshire"
+  },
+  {
+    "slug": "peterborough",
+    "name": "Peterborough",
+    "county": "Cambridgeshire"
   }
 ]

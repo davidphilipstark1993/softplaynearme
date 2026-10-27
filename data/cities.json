@@ -2603,5 +2603,43 @@
         "answer": "We list soft play centres in and around Taunton. Check each venue's page for current details before you visit."
       }
     ]
+  },
+  {
+    "slug": "matlock",
+    "name": "Matlock",
+    "county": "Derbyshire",
+    "region": "East Midlands",
+    "metaTitle": "Soft Play in Matlock",
+    "metaDescription": "Find soft play centres in and around Matlock, Derbyshire. Compare indoor play venues, ratings and facilities.",
+    "h1": "Soft Play in Matlock",
+    "intro": "Soft play centres in and around Matlock, Derbyshire.",
+    "nearbyAreas": [
+      "Matlock"
+    ],
+    "faqs": [
+      {
+        "question": "Is there soft play in Matlock?",
+        "answer": "We list soft play centres in and around Matlock. Check each venue's page for current details before you visit."
+      }
+    ]
+  },
+  {
+    "slug": "peterborough",
+    "name": "Peterborough",
+    "county": "Cambridgeshire",
+    "region": "East of England",
+    "metaTitle": "Soft Play in Peterborough",
+    "metaDescription": "Find soft play centres in and around Peterborough, Cambridgeshire. Compare indoor play venues, ratings and facilities.",
+    "h1": "Soft Play in Peterborough",
+    "intro": "Soft play centres in and around Peterborough, Cambridgeshire.",
+    "nearbyAreas": [
+      "Peterborough"
+    ],
+    "faqs": [
+      {
+        "question": "Is there soft play in Peterborough?",
+        "answer": "We list soft play centres in and around Peterborough. Check each venue's page for current details before you visit."
+      }
+    ]
   }
 ]
