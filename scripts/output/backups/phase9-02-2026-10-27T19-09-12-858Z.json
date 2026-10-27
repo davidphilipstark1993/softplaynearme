@@ -1,0 +1,105 @@
+{
+  "takenAt": "2026-10-27T19:09:12.875Z",
+  "rows": [
+    {
+      "id": 919,
+      "address": "Latchetts Farm",
+      "postcode": "",
+      "email": null,
+      "contact_email": "thedovesplaybarn@gmail.com",
+      "age_range_min": null,
+      "age_range_max": null,
+      "price_from": null,
+      "pricing_hint": null,
+      "membership_available": false,
+      "cafe": true,
+      "parties": true,
+      "party_info": null,
+      "description": "The Doves Play Barn is an activity play barn at Heaven Farm, Furner’s Green, near Uckfield. Built from sustainable wood, it has hidden spaces, rope bridges, slides and a toddler-safe area, plus a café, inflatables and parties. Its website says it is open seven days a week, 9am to 5pm. Checked against the venue’s website on 25 October 2026.",
+      "meta_description": "The Doves Play Barn is an activity play barn at Heaven Farm, Furner’s Green, near Uckfield. Built from sustainable wood, it has hidden spaces, rope…"
+    },
+    {
+      "id": 900,
+      "postcode": "",
+      "email": null,
+      "contact_email": "info@funplex.co.uk",
+      "price_from": null,
+      "pricing_hint": null,
+      "parties": false,
+      "toddler_area": false,
+      "multi_level_play": false,
+      "has_multi_level_play": false,
+      "party_info": null,
+      "description": "Funplex is an indoor play centre at Unit 2b, The Hyde Business Park, Auckland Drive, Brighton.",
+      "meta_description": "Funplex is an indoor play centre at Unit 2b, The Hyde Business Park, Auckland Drive, Brighton."
+    },
+    {
+      "id": 886,
+      "postcode": "",
+      "price_from": null,
+      "pricing_hint": null,
+      "parties": false,
+      "cafe": false,
+      "toddler_area": false,
+      "party_info": null,
+      "description": "Palace Play is a children’s play venue on Brighton Palace Pier, Madeira Drive.",
+      "meta_description": "Palace Play is a children’s play venue on Brighton Palace Pier, Madeira Drive."
+    },
+    {
+      "id": 1449,
+      "address": "Brighton Rd",
+      "postcode": "BN6 9TU",
+      "phone": null,
+      "email": null,
+      "contact_email": null,
+      "website": null,
+      "price_from": null,
+      "pricing_hint": null,
+      "membership_available": false,
+      "cafe": false,
+      "opening_hours": null,
+      "opening_hours_text": null,
+      "description": "Washbrooks Family Farm is a soft play centre based in Brighton, East Sussex. Highly rated and very popular — a welcoming play venue that offers indoor facilities for children of varying ages in a safe and supervised environment.\n\nThe climbing structures are incredible with air bouncing pockets to jump on.\n\nTo get the most out of a visit to Washbrooks Family Farm, check their current session times and prices online before you go — these are updated regularly.",
+      "meta_description": "Looking for soft play in Brighton? Washbrooks Family Farm offers indoor play for children. Rated 4.6/5 by 1,533 families. See full details here."
+    },
+    {
+      "id": 792,
+      "email": null,
+      "contact_email": null
+    },
+    {
+      "id": 908,
+      "postcode": ""
+    },
+    {
+      "id": 1622,
+      "venue_type": "indoor",
+      "postcode": "BN8 4SP",
+      "website": null,
+      "description": "Beechwood Hall & Rural Park is at Beechwood Lane, Cooksbridge, near Lewes."
+    },
+    {
+      "id": 914,
+      "venue_type": "indoor",
+      "phone": ""
+    },
+    {
+      "id": 1458,
+      "venue_type": "indoor",
+      "email": null,
+      "contact_email": null,
+      "website": null,
+      "opening_hours_text": null,
+      "pricing_hint": null,
+      "description": "Playcafe is a café with a children’s play area on St Matthias Path, Brighton."
+    }
+  ],
+  "insertedIds": [
+    1957,
+    1958
+  ],
+  "insertedSlugs": [
+    "goddenwick-farm-play-barn",
+    "blackberry-farm-park"
+  ]
+}

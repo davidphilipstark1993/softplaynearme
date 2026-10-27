@@ -95,7 +95,7 @@ const GUIDES: Record<string, HubGuide> = {
       {
         heading: 'Soft play in Brighton and Hove: a local guide',
         paragraphs: [
-          "Brighton and Hove has few traditional indoor soft play centres. Inside the city we list [Level Up](/soft-play/brighton/level-up-soft-play) at Withdean Sports Complex, Funplex (BN2), Playcafe (BN1), FunPlay Leisure at Brighton Marina and Palace Play on Brighton Palace Pier, plus weekly soft play sessions at community venues: Hangleton Community Centre, Old Boat Corner in Hollingbury and King Alfred Leisure Centre in Hove. Most larger venues are a drive away in Peacehaven, Lewes, Henfield, Burgess Hill and Uckfield, and are listed under nearby towns.",
+          "Brighton and Hove has few traditional indoor soft play centres. Inside the city we list [Level Up](/soft-play/brighton/level-up-soft-play) at Withdean Sports Complex, Funplex (BN2) and Palace Play on Brighton Palace Pier, plus weekly soft play sessions at community venues: Hangleton Community Centre, Old Boat Corner in Hollingbury and King Alfred Leisure Centre in Hove. Most larger venues are a drive away in Peacehaven, Lewes, Henfield, Burgess Hill, Uckfield and Lindfield, and are listed under nearby towns. Playcafé, a term-time toddler café at St Matthias Church, and FunPlay Leisure at Brighton Marina are listed under other family activities.",
         ],
       },
       {

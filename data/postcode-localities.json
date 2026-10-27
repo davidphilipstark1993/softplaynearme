@@ -75,7 +75,7 @@
     "908": "Southwick",
     "919": "Furner's Green",
     "1622": "Cooksbridge",
-    "1449": "Hurstpierpoint",
+    "1449": "Hurstpierpoint", "1957": "Lindfield", "1958": "Whitesmith",
     "881": "Worthing",
     "901": "Goring-by-Sea",
     "894": "Worthing",
@@ -120,6 +120,8 @@
     "Hurstpierpoint": "West Sussex",
     "Peacehaven": "East Sussex",
     "Newhaven": "East Sussex",
+    "Whitesmith": "East Sussex",
+    "Lindfield": "West Sussex",
     "Worthing": "West Sussex",
     "Goring-by-Sea": "West Sussex",
     "Lancing": "West Sussex",
@@ -160,7 +162,9 @@
         "Cooksbridge",
         "Hurstpierpoint",
         "Peacehaven",
-        "Newhaven"
+        "Newhaven",
+        "Lindfield",
+        "Whitesmith"
       ]
     },
     "worthing": {

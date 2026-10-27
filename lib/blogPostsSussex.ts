@@ -98,12 +98,10 @@ export const sussexPosts: BlogPost[] = [
 <h2>Inside Brighton and Hove</h2>
 <ul>
   <li>${v(HUB_B, 'level-up-soft-play', 'Level Up')} — at Withdean Sports Complex. It has a main play frame, a sensory toddler zone for ages 0–3, party rooms and SEN sessions; sessions last 1 hour 30 minutes and socks must be worn.</li>
-  <li>${v(HUB_B, 'funplex', 'Funplex')} — Brighton, BN2.</li>
-  <li>${v(HUB_B, 'playcafe-brighton', 'Playcafe')} — Brighton, BN1.</li>
-  <li>${v(HUB_B, 'funplay-leisure', 'FunPlay Leisure')} — Brighton Marina.</li>
-  <li>${v(HUB_B, 'palace-play', 'Palace Play')} — on Brighton Palace Pier.</li>
+  <li>${v(HUB_B, 'funplex', 'Funplex')} — Brighton, BN2. Multi-level play frames, three slides, a four-cannon ball area and a two-level toddler area; £9.95 at peak times (weekends, inset days, school holidays), £7.45 in term time, adults £2.25.</li>
+  <li>${v(HUB_B, 'palace-play', 'Palace Play')} — on Brighton Palace Pier. £6.50 under 0.9m, £9 over 0.9m, all day; nobody over 1.5m.</li>
 </ul>
-<p>We could not read details such as age ranges or party packages for Funplex, Playcafe, FunPlay Leisure or Palace Play from their own sites, so we don't state them; check the venue before you travel.</p>
+<p>Playcafé (a term-time toddler café at St Matthias Church) and FunPlay Leisure at Brighton Marina are listed under other family activities rather than as soft play. Prices are as published on 27 October 2026; check before you travel.</p>
 
 <h2>Weekly community soft play sessions</h2>
 <ul>
@@ -131,7 +129,7 @@ export const sussexPosts: BlogPost[] = [
     faq: [
       {
         q: 'Is there much soft play in Brighton itself?',
-        a: 'Not a lot. Inside Brighton and Hove we list Level Up at Withdean, Funplex, Playcafe, FunPlay Leisure at Brighton Marina and Palace Play on Brighton Palace Pier, plus weekly community soft play sessions. Larger venues are in Peacehaven, Lewes, Henfield, Burgess Hill and Uckfield.',
+        a: 'Not a lot. Inside Brighton and Hove we list Level Up at Withdean, Funplex and Palace Play on Brighton Palace Pier, plus weekly community soft play sessions. Larger venues are in Peacehaven, Lewes, Henfield, Burgess Hill, Uckfield and Lindfield.',
       },
       {
         q: 'Is there SEN-friendly soft play near Brighton?',
@@ -231,7 +229,7 @@ export const sussexPosts: BlogPost[] = [
     contentHtml: `<p>Indoor options on our list, with only the facts the venues publish (checked ${CHECKED}). Ring before you go: wet days fill venues up.</p>
 
 <h2>In Brighton and Hove</h2>
-<p>${v(HUB_B, 'funplex', 'Funplex')} (BN2), ${v(HUB_B, 'playcafe-brighton', 'Playcafe')} (BN1), ${v(HUB_B, 'funplay-leisure', 'FunPlay Leisure')} (Brighton Marina) and ${v(HUB_B, 'palace-play', 'Palace Play')} (Brighton Palace Pier) are the indoor play options we list in the city. Check each one's current opening before you travel.</p>
+<p>${v(HUB_B, 'funplex', 'Funplex')} (BN2) and ${v(HUB_B, 'palace-play', 'Palace Play')} (Brighton Palace Pier) are the indoor play options we list in the city, alongside Level Up at Withdean. ${v(HUB_B, 'playcafe-brighton', 'Playcafé')} is a term-time toddler café at St Matthias Church. Check each one's current opening before you travel.</p>
 
 <h2>Worth the drive</h2>
 <ul>
@@ -248,7 +246,7 @@ export const sussexPosts: BlogPost[] = [
     faq: [
       {
         q: 'What can you do with kids in Brighton when it rains?',
-        a: 'Indoor play options include Funplex, Playcafe, FunPlay Leisure at Brighton Marina and Palace Play on Brighton Palace Pier. Bigger venues are in Lewes, Henfield, Burgess Hill and near Uckfield.',
+        a: 'Indoor play options include Level Up, Funplex and Palace Play on Brighton Palace Pier. Bigger venues are in Lewes, Henfield, Burgess Hill and near Uckfield and Lindfield.',
       },
     ],
   },
