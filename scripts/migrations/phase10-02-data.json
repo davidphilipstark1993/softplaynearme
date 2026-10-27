@@ -1,0 +1,564 @@
+[
+ {
+  "name": "Dinotropolis Soft Play",
+  "slug": "dinotropolis-soft-play",
+  "city_slug": "dartford",
+  "venue_type": "indoor",
+  "town": "Dartford",
+  "postcode": "DA9 9SG",
+  "addr": "Dinotropolis, Upper Thames Walk, Bluewater Pkwy, Dartford, Greenhithe DA9 9SG",
+  "website": "https://www.dinotropolis.co.uk/",
+  "phone": "01322 876127",
+  "email": null,
+  "lat": 51.4372914,
+  "lng": 0.270833,
+  "pid": "ChIJM6TuibSx2EcRSusmzsyF9eg",
+  "rating": 3.3,
+  "n": 620,
+  "description": "Dinotropolis at Bluewater is a dinosaur-themed soft play centre with three storeys of soft play in the Dino Jungle, the Raptor Run and a creative area called Discovery Cove. Entry for children aged 19 months and over is \u00a317 (\u00a316.50 booked online), babies aged 0 to 18 months are \u00a33 online, and adults pay \u00a37 (\u00a36.50 online); all visitors, adults included, need a pass. Peak times are weekends, bank holidays and school holidays. Gold and Silver party packages are \u00a335 and \u00a328 per child, with a private party room and host. There are adult-only soft play sessions for ages 16 and over (\u00a310 for two hours) on Thursday and Friday evenings and Saturday night, with photo ID required.",
+  "pricing_hint": "Children 19 months+ \u00a317 (\u00a316.50 online); babies 0\u201318 months \u00a33 online; adults \u00a37 (\u00a36.50 online)",
+  "price_from": 3,
+  "age_min": 0,
+  "age_max": 15,
+  "party_info": "Silver \u00a328 and Gold \u00a335 per party child guest, plus \u00a36.50 per additional adult; includes a private party room and a dedicated host.",
+  "flags": {
+   "parties": true,
+   "toddler_area": true,
+   "party_rooms": true,
+   "multi_level_play": true
+  },
+  "sources": [
+   "https://www.dinotropolis.co.uk/"
+  ],
+  "gh": [
+   "Monday: 10:00\u202fAM\u2009\u2013\u20096:30\u202fPM",
+   "Tuesday: 10:00\u202fAM\u2009\u2013\u20096:30\u202fPM",
+   "Wednesday: 10:00\u202fAM\u2009\u2013\u20096:30\u202fPM",
+   "Thursday: 10:00\u202fAM\u2009\u2013\u20096:30\u202fPM",
+   "Friday: 10:00\u202fAM\u2009\u2013\u20096:30\u202fPM",
+   "Saturday: 9:00\u202fAM\u2009\u2013\u20096:30\u202fPM",
+   "Sunday: 9:00\u202fAM\u2009\u2013\u20096:30\u202fPM"
+  ]
+ },
+ {
+  "name": "Kassiopi Cove Indoor Soft Play",
+  "slug": "kassiopi-cove-indoor-soft-play",
+  "city_slug": "dartford",
+  "venue_type": "indoor",
+  "town": "Bexley",
+  "postcode": "DA8 1RF",
+  "addr": "2 Colebrook St, Erith DA8 1RF",
+  "website": "https://kassiopi-cove.co.uk/",
+  "phone": "01322 342717",
+  "email": null,
+  "lat": 51.4803408,
+  "lng": 0.18171769999999998,
+  "pid": "ChIJyRRhK9Gv2EcR08lyshKKKyc",
+  "rating": 4.2,
+  "n": 570,
+  "description": "Kassiopi Cove is a pirate-themed indoor soft play centre in Erith with fast slides, ball pits, swings and spinning interactive play. Children\u2019s parties are offered with party packages; unofficial parties cannot bring in food, party bags or balloons. Prices and opening times are on the venue\u2019s own website.",
+  "pricing_hint": null,
+  "price_from": null,
+  "age_min": null,
+  "age_max": null,
+  "party_info": null,
+  "flags": {
+   "parties": true
+  },
+  "sources": [
+   "https://kassiopi-cove.co.uk/"
+  ],
+  "gh": [
+   "Monday: 10:00\u202fAM\u2009\u2013\u20095:00\u202fPM",
+   "Tuesday: 10:00\u202fAM\u2009\u2013\u20095:00\u202fPM",
+   "Wednesday: 10:00\u202fAM\u2009\u2013\u20095:00\u202fPM",
+   "Thursday: 10:00\u202fAM\u2009\u2013\u20095:00\u202fPM",
+   "Friday: 10:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+   "Saturday: 10:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+   "Sunday: 10:00\u202fAM\u2009\u2013\u20094:00\u202fPM"
+  ]
+ },
+ {
+  "name": "Cookie Island Ilford",
+  "slug": "cookie-island-ilford",
+  "city_slug": "london",
+  "venue_type": "indoor",
+  "town": "Redbridge",
+  "postcode": "IG1 1RS",
+  "addr": "3rd Floor, The Exchange Mall, High Rd, Ilford IG1 1RS",
+  "website": "https://cookiesisland.com/ilford/home",
+  "phone": "075 0722 6532",
+  "email": null,
+  "lat": 51.5590726,
+  "lng": 0.072145,
+  "pid": "ChIJN178LwCn2EcRZwqHhWuUlTQ",
+  "rating": 3.7,
+  "n": 35,
+  "description": "Cookie Island is a soft play centre on the third floor of The Exchange Mall in Ilford. Sessions last 90 minutes: Monday to Saturday at 9:30, 11:30, 1:30, 3:30 and 5:30, and Sunday at 11:30, 1:30 and 3:30. The website lists a caf\u00e9, parties, parent and toddler sessions and autism-friendly sessions; prices are on its booking page.",
+  "pricing_hint": null,
+  "price_from": null,
+  "age_min": null,
+  "age_max": null,
+  "party_info": null,
+  "flags": {
+   "parties": true,
+   "cafe": true
+  },
+  "sources": [
+   "https://cookiesisland.com/ilford/home"
+  ],
+  "gh": [
+   "Monday: 9:30\u202fAM\u2009\u2013\u20097:00\u202fPM",
+   "Tuesday: 9:30\u202fAM\u2009\u2013\u20097:00\u202fPM",
+   "Wednesday: 9:30\u202fAM\u2009\u2013\u20097:00\u202fPM",
+   "Thursday: 9:30\u202fAM\u2009\u2013\u20097:00\u202fPM",
+   "Friday: 9:30\u202fAM\u2009\u2013\u20097:00\u202fPM",
+   "Saturday: 9:30\u202fAM\u2009\u2013\u20097:00\u202fPM",
+   "Sunday: 11:30\u202fAM\u2009\u2013\u20095:00\u202fPM"
+  ],
+  "hours_override": {
+   "json": {
+    "monday": {
+     "open": "09:30",
+     "close": "19:00"
+    },
+    "tuesday": {
+     "open": "09:30",
+     "close": "19:00"
+    },
+    "wednesday": {
+     "open": "09:30",
+     "close": "19:00"
+    },
+    "thursday": {
+     "open": "09:30",
+     "close": "19:00"
+    },
+    "friday": {
+     "open": "09:30",
+     "close": "19:00"
+    },
+    "saturday": {
+     "open": "09:30",
+     "close": "19:00"
+    },
+    "sunday": {
+     "open": "11:30",
+     "close": "17:00"
+    }
+   },
+   "text": "Monday to Saturday 9:30am\u20137pm; Sunday 11:30am\u20135pm. 90-minute sessions."
+  }
+ },
+ {
+  "name": "The Den at Fox & Kit",
+  "slug": "the-den-at-fox-and-kit",
+  "city_slug": "bristol",
+  "venue_type": "indoor",
+  "town": "Midsomer Norton",
+  "postcode": "BA3 2DB",
+  "addr": "5-8 Holly Court, Midsomer Norton, Radstock BA3 2DB",
+  "website": "https://www.foxandkitcafe.com/",
+  "phone": "01761 568384",
+  "email": null,
+  "lat": 51.285609799999996,
+  "lng": -2.4814943,
+  "pid": "ChIJNxTmu8gpckgRML-zdmZgXmg",
+  "rating": 4.8,
+  "n": 38,
+  "description": "The Den at Fox & Kit in Midsomer Norton is a spacious soft play area next to a parent-friendly caf\u00e9 serving coffee, rolls, toasties and cakes. It is booked online, party information is on the website, and the venue says it is open six days a week until spring, including Sundays. Prices and ages are on the venue\u2019s own website.",
+  "pricing_hint": null,
+  "price_from": null,
+  "age_min": null,
+  "age_max": null,
+  "party_info": null,
+  "flags": {
+   "cafe": true,
+   "parties": true
+  },
+  "sources": [
+   "https://www.foxandkitcafe.com/"
+  ],
+  "gh": [
+   "Monday: 10:00\u202fAM\u2009\u2013\u20093:30\u202fPM",
+   "Tuesday: 10:00\u202fAM\u2009\u2013\u20093:30\u202fPM",
+   "Wednesday: Closed",
+   "Thursday: 10:00\u202fAM\u2009\u2013\u20093:30\u202fPM",
+   "Friday: 10:00\u202fAM\u2009\u2013\u20093:30\u202fPM",
+   "Saturday: 10:00\u202fAM\u2009\u2013\u20092:30\u202fPM",
+   "Sunday: 10:00\u202fAM\u2009\u2013\u20092:30\u202fPM"
+  ]
+ },
+ {
+  "name": "Brocksbushes Play Barn",
+  "slug": "brocksbushes-play-barn",
+  "city_slug": "newcastle",
+  "venue_type": "indoor",
+  "town": "Northumberland",
+  "postcode": "NE43 7UB",
+  "addr": "Brocksbushes Farm Shop, Stocksfield NE43 7UB",
+  "website": "https://www.brocksbushes.co.uk/pages/play-barn",
+  "phone": "01434 633100",
+  "email": "support@brocksbushes.co.uk",
+  "lat": 54.969080999999996,
+  "lng": -1.9659492,
+  "pid": "ChIJzYkzbwDFfUgRTyU9oheLMw4",
+  "rating": 4.6,
+  "n": 323,
+  "description": "The Play Barn at Brocksbushes Farm Shop, Stocksfield, has four levels of soft play and climbing for ages 0 to 11, including Little Brocks for under-4s, a 4-lane astra slide, trampolines, a climbing wall, cave crawls and role-play rooms. Children aged 1 to 11 pay \u00a38.50 at peak times (weekends and school holidays) or \u00a36.50 off-peak; 6 to 12 months \u00a32.50; under-6-months free. One adult is free with each paying child and up to three more adults pay \u00a32.50 each. Socks are required (\u00a31.75 at the counter). A family caf\u00e9, free parking and birthday parties from \u00a312.50 per child are offered.",
+  "pricing_hint": "Children 1\u201311 \u00a38.50 peak / \u00a36.50 off-peak; 6\u201312 months \u00a32.50; under 6 months free; one adult free per paying child",
+  "price_from": 2.5,
+  "age_min": 0,
+  "age_max": 11,
+  "party_info": "Birthday parties from \u00a312.50 per child, with a private party area, food and drink package and dedicated host.",
+  "flags": {
+   "cafe": true,
+   "parties": true,
+   "toddler_area": true,
+   "baby_area": true,
+   "multi_level_play": true,
+   "free_parking": true,
+   "parking": true
+  },
+  "sources": [
+   "https://www.brocksbushes.co.uk/pages/play-barn"
+  ],
+  "gh": [
+   "Monday: 9:30\u202fAM\u2009\u2013\u20094:30\u202fPM",
+   "Tuesday: 9:30\u202fAM\u2009\u2013\u20094:30\u202fPM",
+   "Wednesday: 9:30\u202fAM\u2009\u2013\u20094:30\u202fPM",
+   "Thursday: 9:30\u202fAM\u2009\u2013\u20094:30\u202fPM",
+   "Friday: 9:30\u202fAM\u2009\u2013\u20094:30\u202fPM",
+   "Saturday: 9:30\u202fAM\u2009\u2013\u20094:30\u202fPM",
+   "Sunday: 9:30\u202fAM\u2009\u2013\u20094:30\u202fPM"
+  ],
+  "hours_override": {
+   "json": null,
+   "text": "Sessions: 9:30\u201311:30, 12:00\u20132:00 and 2:30\u20134:30 at peak times (weekends and school holidays); off-peak term-time weekday sessions are listed on the venue\u2019s website."
+  }
+ },
+ {
+  "name": "Play Patch Community Soft Play",
+  "slug": "play-patch-community-soft-play",
+  "city_slug": "bristol",
+  "venue_type": "indoor",
+  "town": "Bristol, City Of",
+  "postcode": "BS7 9FB",
+  "addr": "The Hub, Fedden Buildings, Gainsborough Square, Lockleaze, Bristol BS7 9FB",
+  "website": "https://www.lockleazent.co.uk/project/play-patch/",
+  "phone": "0117 914 1129",
+  "email": "playpatch@lockleazent.co.uk",
+  "lat": 51.490055999999996,
+  "lng": -2.5626298,
+  "pid": "ChIJ4yNx0dmRcUgReK4bPFnQZjk",
+  "rating": 4.9,
+  "n": 239,
+  "description": "Play Patch is a community soft play centre run by Lockleaze Neighbourhood Trust at The Hub, Gainsborough Square, Lockleaze, for families with children under five. Caf\u00e9 sessions run Monday to Friday (9\u201311am, 11:30am\u20131:30pm and 2\u20134pm) and cost \u00a32.50 per adult or child over five months when pre-booked (plus a 50p booking fee) or \u00a33 walk-in; babes in arms are free. Birthday parties are \u00a3175 for exclusive use of the soft play, toys, caf\u00e9 area and toilets, in weekend slots. The caf\u00e9 serves home-cooked meals, hot drinks and treats.",
+  "pricing_hint": "\u00a32.50 per adult or child over 5 months when pre-booked (+50p fee); \u00a33 walk-in; babes in arms free",
+  "price_from": 2.5,
+  "age_min": 0,
+  "age_max": 4,
+  "party_info": "\u00a3175 for exclusive use of the soft play, toys, caf\u00e9 area and toilets; Saturday and Sunday slots of 1.5 hours party time plus set-up and clean-up.",
+  "flags": {
+   "cafe": true,
+   "parties": true,
+   "toddler_area": true
+  },
+  "sources": [
+   "https://www.lockleazent.co.uk/project/play-patch/"
+  ],
+  "gh": [
+   "Monday: 9:00\u2009\u2013\u200911:00\u202fAM, 11:30\u202fAM\u2009\u2013\u20091:30\u202fPM, 2:00\u2009\u2013\u20094:00\u202fPM",
+   "Tuesday: 9:00\u2009\u2013\u200911:00\u202fAM, 11:30\u202fAM\u2009\u2013\u20091:30\u202fPM, 2:00\u2009\u2013\u20094:00\u202fPM",
+   "Wednesday: 9:00\u2009\u2013\u200911:00\u202fAM, 11:30\u202fAM\u2009\u2013\u20091:30\u202fPM, 2:00\u2009\u2013\u20094:00\u202fPM",
+   "Thursday: 9:00\u2009\u2013\u200911:00\u202fAM, 11:30\u202fAM\u2009\u2013\u20091:30\u202fPM, 2:00\u2009\u2013\u20094:00\u202fPM",
+   "Friday: 9:00\u2009\u2013\u200911:00\u202fAM, 11:30\u202fAM\u2009\u2013\u20091:30\u202fPM, 2:00\u2009\u2013\u20094:00\u202fPM",
+   "Saturday: Closed",
+   "Sunday: Closed"
+  ],
+  "hours_override": {
+   "json": null,
+   "text": "Caf\u00e9 sessions Monday to Friday 9\u201311am, 11:30am\u20131:30pm and 2\u20134pm; party slots at weekends."
+  }
+ },
+ {
+  "name": "The Pod Soft Play at YMCA Hawker",
+  "slug": "the-pod-soft-play-ymca-hawker",
+  "city_slug": "london",
+  "venue_type": "indoor",
+  "town": "Kingston Upon Thames",
+  "postcode": "KT2 5BH",
+  "addr": "The Pod, Hawker Centre, Lower Ham Road, Kingston upon Thames KT2 5BH",
+  "website": "https://ymcastpaulsgroup.org/soft-play-at-the-pod-kingston/",
+  "phone": "020 8296 9747",
+  "email": "venniceayethman@ymcaspg.org",
+  "lat": 51.4268601,
+  "lng": -0.30930730000000006,
+  "pid": "ChIJTWCcGJsLdkgR0OBU0rswrmU",
+  "rating": 4.7,
+  "n": 18,
+  "description": "The Pod is a two-storey soft play centre at YMCA Hawker, Lower Ham Road, Kingston, for children aged 11 and under, with a sensory room for under-2s and children with SEND. Entry is \u00a37.50 per child including one accompanying adult, plus \u00a32.50 for each additional adult; sessions are walk-in only, paid at reception, and last two hours (up to 1 hour 45 minutes when busy). A riverside caf\u00e9 serves hot meals, drinks and snacks, and children\u2019s parties are offered. Hours on the YMCA website: Monday to Wednesday 9am\u20135pm, Thursday (term time) 11:15am\u20135pm, Friday 9am\u20133pm (5pm if there is no party booking).",
+  "pricing_hint": "\u00a37.50 per child including one accompanying adult; additional adults \u00a32.50",
+  "price_from": 7.5,
+  "age_min": 0,
+  "age_max": 11,
+  "party_info": "Parties are booked through the YMCA\u2019s online booking account; party queries go to the Pod team.",
+  "flags": {
+   "cafe": true,
+   "parties": true,
+   "sen_friendly": true,
+   "sensory_area": true,
+   "multi_level_play": true
+  },
+  "sources": [
+   "https://ymcastpaulsgroup.org/soft-play-at-the-pod-kingston/"
+  ],
+  "gh": [
+   "Monday: 9:00\u202fAM\u2009\u2013\u20095:00\u202fPM",
+   "Tuesday: 9:00\u202fAM\u2009\u2013\u20095:00\u202fPM",
+   "Wednesday: 9:00\u202fAM\u2009\u2013\u20095:00\u202fPM",
+   "Thursday: 11:15\u202fAM\u2009\u2013\u20095:00\u202fPM",
+   "Friday: 9:00\u202fAM\u2009\u2013\u20093:00\u202fPM",
+   "Saturday: 8:15\u2009\u2013\u20099:45\u202fAM",
+   "Sunday: 8:15\u2009\u2013\u20099:45\u202fAM"
+  ],
+  "hours_override": {
+   "json": {
+    "monday": {
+     "open": "09:00",
+     "close": "17:00"
+    },
+    "tuesday": {
+     "open": "09:00",
+     "close": "17:00"
+    },
+    "wednesday": {
+     "open": "09:00",
+     "close": "17:00"
+    },
+    "thursday": {
+     "open": "11:15",
+     "close": "17:00"
+    },
+    "friday": {
+     "open": "09:00",
+     "close": "15:00"
+    }
+   },
+   "text": "Monday to Wednesday 9am\u20135pm; Thursday (term time) 11:15am\u20135pm; Friday 9am\u20133pm (5pm if no party booking). Weekend hours are listed on the YMCA website."
+  }
+ },
+ {
+  "name": "Soft Play at Hilton Community Centre",
+  "slug": "soft-play-hilton-community-centre-inverness",
+  "city_slug": "inverness",
+  "venue_type": "indoor",
+  "town": "Highland",
+  "postcode": "IV2 4HT",
+  "addr": "Hilton Village, Old Town Road, Inverness IV2 4HT",
+  "website": "https://www.highlifehighland.com/community-centres/hilton-community-centre",
+  "phone": "01463 644337",
+  "email": null,
+  "lat": 57.4597225,
+  "lng": -4.2139064,
+  "pid": "ChIJW6ev-mlxj0gRcQCrGSJPhL0",
+  "rating": null,
+  "n": null,
+  "description": "Hilton Community Centre in Inverness has a jungle-themed indoor soft play area for children aged 5 and under, open weekdays according to High Life Highland. Prices and session times are not published on the centre\u2019s page; call the centre to check.",
+  "pricing_hint": null,
+  "price_from": null,
+  "age_min": 0,
+  "age_max": 5,
+  "party_info": null,
+  "flags": {},
+  "sources": [
+   "https://www.highlifehighland.com/community-centres/hilton-community-centre"
+  ],
+  "gh": [
+   "Monday: 9:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+   "Tuesday: 9:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+   "Wednesday: 9:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+   "Thursday: 9:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+   "Friday: 9:00\u202fAM\u2009\u2013\u200910:00\u202fPM",
+   "Saturday: 9:00\u202fAM\u2009\u2013\u20094:00\u202fPM",
+   "Sunday: Closed"
+  ],
+  "hours_override": {
+   "json": null,
+   "text": "Soft play open weekdays; session times not published online."
+  }
+ },
+ {
+  "name": "Soft Play at Musselburgh Sports Centre",
+  "slug": "soft-play-musselburgh-sports-centre",
+  "city_slug": "edinburgh",
+  "venue_type": "indoor",
+  "town": "East Lothian",
+  "postcode": "EH21 7AS",
+  "addr": "101 Newbigging, Musselburgh EH21 7AS",
+  "website": "https://enjoyleisure.com/venues-and-facilities/sports-and-leisure-centres/musselburgh-sports-centre/",
+  "phone": "0131 653 5208",
+  "email": null,
+  "lat": 55.939324299999996,
+  "lng": -3.0484967,
+  "pid": "ChIJ2Q39U9K7h0gRrlD8-fVhdw4",
+  "rating": null,
+  "n": null,
+  "description": "Musselburgh Sports Centre has a soft play area for little ones, run by Enjoy Leisure, with soft play birthday parties available to book. Prices are on the centre\u2019s price list and session times can change for private bookings, so check the Enjoy Leisure website before you go.",
+  "pricing_hint": null,
+  "price_from": null,
+  "age_min": null,
+  "age_max": null,
+  "party_info": null,
+  "flags": {
+   "parties": true
+  },
+  "sources": [
+   "https://enjoyleisure.com/venues-and-facilities/sports-and-leisure-centres/musselburgh-sports-centre/"
+  ],
+  "gh": [
+   "Monday: 7:00\u202fAM\u2009\u2013\u20099:30\u202fPM",
+   "Tuesday: 8:00\u202fAM\u2009\u2013\u20099:30\u202fPM",
+   "Wednesday: 7:00\u202fAM\u2009\u2013\u20099:30\u202fPM",
+   "Thursday: 8:00\u202fAM\u2009\u2013\u20099:30\u202fPM",
+   "Friday: 7:00\u202fAM\u2009\u2013\u20099:30\u202fPM",
+   "Saturday: 9:00\u202fAM\u2009\u2013\u20094:30\u202fPM",
+   "Sunday: 9:00\u202fAM\u2009\u2013\u20094:30\u202fPM"
+  ],
+  "hours_override": {
+   "json": null,
+   "text": "Soft play times vary; check the centre\u2019s website."
+  }
+ },
+ {
+  "name": "The Ark PlayCentre",
+  "slug": "the-ark-playcentre-cwmbran",
+  "city_slug": "cardiff",
+  "venue_type": "indoor",
+  "town": "Cwmbran",
+  "postcode": "NP44 3BA",
+  "addr": "Cwmbran NP44 3BA",
+  "website": "https://www.thearkcwmbran.co.uk/",
+  "phone": null,
+  "email": null,
+  "lat": 51.6540162,
+  "lng": -3.0299307,
+  "pid": "ChIJX8N0YHDfcUgRieNConN9iqY",
+  "rating": 4.2,
+  "n": 22,
+  "description": "The Ark PlayCentre in Cwmbran offers soft play sessions for children aged 0 to 6 on Tuesday to Friday, with two sessions a day; adults must be booked in for the children they bring, and adult entry is free. Food and drink from Victory Caf\u00e9 can be enjoyed inside during sessions. Parties for up to 24 children with exclusive use can be booked in advance, and there is free parking. Session times and prices are on the venue\u2019s website.",
+  "pricing_hint": null,
+  "price_from": null,
+  "age_min": 0,
+  "age_max": 6,
+  "party_info": null,
+  "flags": {
+   "cafe": true,
+   "parties": true,
+   "free_parking": true,
+   "parking": true
+  },
+  "sources": [
+   "https://www.thearkcwmbran.co.uk/"
+  ],
+  "gh": [
+   "Monday: 9:45\u202fAM\u2009\u2013\u20092:00\u202fPM",
+   "Tuesday: 9:45\u202fAM\u2009\u2013\u20092:00\u202fPM",
+   "Wednesday: 9:45\u202fAM\u2009\u2013\u20092:00\u202fPM",
+   "Thursday: 9:45\u202fAM\u2009\u2013\u20092:00\u202fPM",
+   "Friday: 9:45\u202fAM\u2009\u2013\u20092:00\u202fPM",
+   "Saturday: Closed",
+   "Sunday: Closed"
+  ],
+  "hours_override": {
+   "json": null,
+   "text": "Tuesday to Friday, two sessions a day; times on the venue\u2019s website."
+  }
+ },
+ {
+  "name": "Discovery Village",
+  "slug": "discovery-village",
+  "city_slug": "bournemouth",
+  "venue_type": "family-attraction",
+  "town": "Bournemouth, Christchurch And Poole",
+  "postcode": "BH23 6BA",
+  "addr": "Merritown Ln, Christchurch BH23 6BA",
+  "website": "https://discoveryvillage.co.uk/",
+  "phone": "01202 798399",
+  "email": "hello@discoveryvillage.co.uk",
+  "lat": 50.774733399999995,
+  "lng": -1.8445226,
+  "pid": "ChIJMypjcDCZc0gRc060iBIDY2U",
+  "rating": 4.9,
+  "n": 299,
+  "description": "Discovery Village in Christchurch is an indoor role play centre for ages 1 to 8, with nine themed role play areas including a vets, fire station, beauty salon and building site; it calls itself a calmer alternative to soft play. Two-hour play sessions are offered, with birthday party packages, a family caf\u00e9 and free parking.",
+  "pricing_hint": null,
+  "price_from": null,
+  "age_min": 1,
+  "age_max": 8,
+  "party_info": null,
+  "flags": {
+   "cafe": true,
+   "parties": true,
+   "role_play": true,
+   "free_parking": true,
+   "parking": true
+  },
+  "sources": [
+   "https://discoveryvillage.co.uk/"
+  ],
+  "gh": [
+   "Monday: 9:30\u202fAM\u2009\u2013\u20092:30\u202fPM",
+   "Tuesday: 9:30\u202fAM\u2009\u2013\u20092:30\u202fPM",
+   "Wednesday: 9:30\u202fAM\u2009\u2013\u20092:30\u202fPM",
+   "Thursday: 9:30\u202fAM\u2009\u2013\u20092:30\u202fPM",
+   "Friday: 9:30\u202fAM\u2009\u2013\u20092:30\u202fPM",
+   "Saturday: 9:30\u202fAM\u2009\u2013\u20095:00\u202fPM",
+   "Sunday: 9:30\u202fAM\u2009\u2013\u20095:00\u202fPM"
+  ]
+ },
+ {
+  "name": "Thistles & Tykes",
+  "slug": "thistles-and-tykes",
+  "city_slug": "glasgow",
+  "venue_type": "family-attraction",
+  "town": "Renfrewshire",
+  "postcode": "PA4 8PD",
+  "addr": "18 Fulbar St, Renfrew PA4 8PD",
+  "website": "https://www.thistlesandtykes.co.uk/",
+  "phone": null,
+  "email": "callum@thistlesandtykes.co.uk",
+  "lat": 55.8794668,
+  "lng": -4.387673200000001,
+  "pid": "ChIJZ-PGTD1PiEgRV5VuHy_u4Zw",
+  "rating": 4.6,
+  "n": 85,
+  "description": "Thistles & Tykes in Renfrew is a role-play caf\u00e9 and play centre for children aged 12 months to 5 years, built around Thistle Town, a miniature village with a theatre, vets, laundrette, supermarket and auto shop. Play sessions run daily at 9:15am, 11:15am and 1:15pm, each 1 hour 30 minutes, and the caf\u00e9 serves coffee, cakes and snacks. Parties can be booked.",
+  "pricing_hint": null,
+  "price_from": null,
+  "age_min": 1,
+  "age_max": 5,
+  "party_info": null,
+  "flags": {
+   "cafe": true,
+   "parties": true,
+   "role_play": true
+  },
+  "sources": [
+   "https://www.thistlesandtykes.co.uk/"
+  ],
+  "gh": [
+   "Monday: 9:15\u202fAM\u2009\u2013\u20092:45\u202fPM",
+   "Tuesday: 9:15\u202fAM\u2009\u2013\u20092:45\u202fPM",
+   "Wednesday: 9:15\u202fAM\u2009\u2013\u20092:45\u202fPM",
+   "Thursday: Closed",
+   "Friday: 9:15\u202fAM\u2009\u2013\u20092:45\u202fPM",
+   "Saturday: 9:15\u202fAM\u2009\u2013\u20092:45\u202fPM",
+   "Sunday: 9:15\u202fAM\u2009\u2013\u20092:45\u202fPM"
+  ],
+  "hours_override": {
+   "json": null,
+   "text": "Play sessions daily at 9:15am, 11:15am and 1:15pm (1 hour 30 minutes each)."
+  }
+ }
+]
