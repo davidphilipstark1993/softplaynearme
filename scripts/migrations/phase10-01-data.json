@@ -1,0 +1,467 @@
+[
+ {
+  "name": "Party 'N' Play",
+  "slug": "party-n-play",
+  "city_slug": "cardiff",
+  "town": "Newport",
+  "postcode": "NP19 0BH",
+  "gaddr": "136, 140 Corporation Rd, Newport NP19 0BH",
+  "website": "https://partyplaynewport.co.uk/",
+  "phone": "07707 995596",
+  "email": null,
+  "hours": [
+   "Monday: 10:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+   "Tuesday: 10:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+   "Wednesday: 10:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+   "Thursday: 10:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+   "Friday: 10:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+   "Saturday: 10:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+   "Sunday: 10:00\u202fAM\u2009\u2013\u20096:00\u202fPM"
+  ],
+  "rating": 4.5,
+  "n": 137,
+  "lat": 51.587379299999995,
+  "lng": -2.9848032,
+  "pid": "ChIJ5TYqfsHmcUgROSbN40OgdCY",
+  "flags": {
+   "cafe": true,
+   "parties": true,
+   "toddler_area": false
+  },
+  "type": "indoor soft play centre"
+ },
+ {
+  "name": "ZunoPlay",
+  "slug": "zunoplay",
+  "city_slug": "swansea",
+  "town": "Swansea",
+  "postcode": "SA5 4BB",
+  "gaddr": "Unit 15a Pontardulais Rd, Cadle, Fforest-fach, Swansea SA5 4BB",
+  "website": "https://zunoplay.co.uk/",
+  "phone": "01792 978230",
+  "email": "hello@zunoplay.com",
+  "hours": [
+   "Monday: 10:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+   "Tuesday: 10:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+   "Wednesday: 10:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+   "Thursday: 10:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+   "Friday: 10:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+   "Saturday: 10:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+   "Sunday: 10:00\u202fAM\u2009\u2013\u20094:00\u202fPM"
+  ],
+  "rating": 4.4,
+  "n": 16,
+  "lat": 51.6503851,
+  "lng": -3.9911366999999998,
+  "pid": "ChIJu-3vL9L1bkgRJn8WfmiM-GU",
+  "flags": {
+   "cafe": true,
+   "parties": true,
+   "toddler_area": false
+  },
+  "type": "indoor soft play centre"
+ },
+ {
+  "name": "Bambino City",
+  "slug": "bambino-city",
+  "city_slug": "london",
+  "town": "Barking And Dagenham",
+  "postcode": "RM9 6FJ",
+  "gaddr": "Unit 4, Bygraves House, Merrielands Cres, Dagenham RM9 6FJ",
+  "website": "https://www.bambinocity.co.uk/",
+  "phone": "07745 204061",
+  "email": "info@bambinocity.co.uk",
+  "hours": [
+   "Monday: 9:30\u202fAM\u2009\u2013\u20097:00\u202fPM",
+   "Tuesday: 9:30\u202fAM\u2009\u2013\u20097:00\u202fPM",
+   "Wednesday: 9:30\u202fAM\u2009\u2013\u20097:00\u202fPM",
+   "Thursday: 9:30\u202fAM\u2009\u2013\u20097:00\u202fPM",
+   "Friday: 9:30\u202fAM\u2009\u2013\u20097:00\u202fPM",
+   "Saturday: 9:30\u202fAM\u2009\u2013\u20097:00\u202fPM",
+   "Sunday: 9:30\u202fAM\u2009\u2013\u20097:00\u202fPM"
+  ],
+  "rating": 4.5,
+  "n": 324,
+  "lat": 51.5301767,
+  "lng": 0.1456374,
+  "pid": "ChIJpeEhpmWl2EcRbZ1Er2AFaq8",
+  "flags": {
+   "cafe": false,
+   "parties": true,
+   "toddler_area": false
+  },
+  "type": "indoor soft play centre"
+ },
+ {
+  "name": "Ladybird Softplay & Cafe",
+  "slug": "ladybird-softplay-and-cafe",
+  "city_slug": "london",
+  "town": "London",
+  "postcode": "N20 0BA",
+  "gaddr": "93 Russell Ln, London N20 0BA, UK",
+  "website": "https://www.ladybirdsoftplay.com/",
+  "phone": "020 3935 9255",
+  "email": null,
+  "hours": [
+   "Monday: 9:30\u202fAM\u2009\u2013\u20095:00\u202fPM",
+   "Tuesday: 9:30\u202fAM\u2009\u2013\u20095:00\u202fPM",
+   "Wednesday: 9:30\u202fAM\u2009\u2013\u20095:00\u202fPM",
+   "Thursday: 9:30\u202fAM\u2009\u2013\u20095:00\u202fPM",
+   "Friday: 9:30\u202fAM\u2009\u2013\u20094:00\u202fPM",
+   "Saturday: Closed",
+   "Sunday: Closed"
+  ],
+  "rating": 4.8,
+  "n": 70,
+  "lat": 51.6302557,
+  "lng": -0.1564807,
+  "pid": "ChIJOzsk2N0ZdkgRb1NeSYPYZfY",
+  "flags": {
+   "cafe": false,
+   "parties": false,
+   "toddler_area": false
+  },
+  "type": "indoor soft play centre"
+ },
+ {
+  "name": "Kubz Klub",
+  "slug": "kubz-klub",
+  "city_slug": "london",
+  "town": "Greenwich",
+  "postcode": "SE9 1BE",
+  "gaddr": "13, The Arcade, London SE9 1BE",
+  "website": "https://www.kubzklub.co.uk/",
+  "phone": "020 8331 2632",
+  "email": null,
+  "hours": [
+   "Monday: 9:00\u202fAM\u2009\u2013\u20095:30\u202fPM",
+   "Tuesday: 9:00\u202fAM\u2009\u2013\u20095:30\u202fPM",
+   "Wednesday: 9:00\u202fAM\u2009\u2013\u20095:30\u202fPM",
+   "Thursday: 9:00\u202fAM\u2009\u2013\u20095:30\u202fPM",
+   "Friday: 9:00\u202fAM\u2009\u2013\u20096:30\u202fPM",
+   "Saturday: 9:00\u202fAM\u2009\u2013\u20096:30\u202fPM",
+   "Sunday: 9:00\u202fAM\u2009\u2013\u20096:30\u202fPM"
+  ],
+  "rating": 4.3,
+  "n": 382,
+  "lat": 51.450412799999995,
+  "lng": 0.058441200000000006,
+  "pid": "ChIJGe4nXFip2EcRGh2SMxt_25c",
+  "flags": {
+   "cafe": false,
+   "parties": false,
+   "toddler_area": false
+  },
+  "type": "indoor soft play centre"
+ },
+ {
+  "name": "Two Plus Cafe",
+  "slug": "two-plus-cafe",
+  "city_slug": "london",
+  "town": "Hammersmith And Fulham",
+  "postcode": "W3 7FW",
+  "gaddr": "Unit 16, Edison Court, Warple Way, London W3 7FW",
+  "website": "https://www.twopluscafe.com/",
+  "phone": "020 3340 8413",
+  "email": null,
+  "hours": [
+   "Monday: 8:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+   "Tuesday: 8:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+   "Wednesday: 8:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+   "Thursday: 8:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+   "Friday: 8:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+   "Saturday: 8:00\u202fAM\u2009\u2013\u20096:00\u202fPM",
+   "Sunday: 10:00\u202fAM\u2009\u2013\u20096:00\u202fPM"
+  ],
+  "rating": 4.6,
+  "n": 194,
+  "lat": 51.5028107,
+  "lng": -0.25331129999999996,
+  "pid": "ChIJd3lzGAAPdkgR3QLFJvSeP4o",
+  "flags": {
+   "cafe": false,
+   "parties": false,
+   "toddler_area": false
+  },
+  "type": "indoor soft play centre"
+ },
+ {
+  "name": "Twiko-Twiko",
+  "slug": "twiko-twiko",
+  "city_slug": "london",
+  "town": "Richmond Upon Thames",
+  "postcode": "SW13 0DP",
+  "gaddr": "9 Brookfield Mews, London SW13 0DP",
+  "website": "https://twiko-twiko.co.uk/",
+  "phone": "07526 005400",
+  "email": "Hello@twiko-twiko.co.uk",
+  "hours": [
+   "Monday: 9:00\u202fAM\u2009\u2013\u20094:50\u202fPM",
+   "Tuesday: 9:00\u202fAM\u2009\u2013\u20094:50\u202fPM",
+   "Wednesday: 9:00\u202fAM\u2009\u2013\u20094:50\u202fPM",
+   "Thursday: 9:00\u202fAM\u2009\u2013\u20094:50\u202fPM",
+   "Friday: 9:00\u202fAM\u2009\u2013\u20094:50\u202fPM",
+   "Saturday: 9:00\u202fAM\u2009\u2013\u20094:50\u202fPM",
+   "Sunday: Closed"
+  ],
+  "rating": 4.7,
+  "n": 70,
+  "lat": 51.467754199999995,
+  "lng": -0.2537368,
+  "pid": "ChIJQQPe6o4PdkgRFKGb-04u1n0",
+  "flags": {
+   "cafe": false,
+   "parties": true,
+   "toddler_area": false
+  },
+  "type": "indoor soft play centre"
+ },
+ {
+  "name": "Rendezvous softplay",
+  "slug": "rendezvous-softplay",
+  "city_slug": "london",
+  "town": "London",
+  "postcode": "SE17 3AD",
+  "gaddr": "Newington Estates Hall, 77 Canterbury Pl, London SE17 3AD",
+  "website": "https://www.rendezvoussoftplay.com/",
+  "phone": "07427 950047",
+  "email": null,
+  "hours": [
+   "Monday: Closed",
+   "Tuesday: 10:00\u2009\u2013\u200911:30\u202fAM",
+   "Wednesday: Closed",
+   "Thursday: Closed",
+   "Friday: Closed",
+   "Saturday: Closed",
+   "Sunday: Closed"
+  ],
+  "rating": 5,
+  "n": 20,
+  "lat": 51.491026899999994,
+  "lng": -0.1013289,
+  "pid": "ChIJkeUPd7oFdkgR5nfJZ0-1e8M",
+  "flags": {
+   "cafe": false,
+   "parties": false,
+   "toddler_area": false
+  },
+  "type": "indoor soft play centre"
+ },
+ {
+  "name": "The Little Luxe Soft Play Centre LTD",
+  "slug": "the-little-luxe-soft-play-centre-ltd",
+  "city_slug": "manchester",
+  "town": "Bury",
+  "postcode": "BL8 1AT",
+  "gaddr": "Unit 2 Woodhill St, Bury BL8 1AT",
+  "website": "https://littleluxesoftplay.com/",
+  "phone": "07512 598728",
+  "email": "littleluxesoftplay@outlook.com",
+  "hours": [
+   "Monday: 9:00\u202fAM\u2009\u2013\u20093:00\u202fPM",
+   "Tuesday: 9:00\u202fAM\u2009\u2013\u20093:00\u202fPM",
+   "Wednesday: 9:00\u202fAM\u2009\u2013\u20093:00\u202fPM",
+   "Thursday: 9:00\u202fAM\u2009\u2013\u20093:00\u202fPM",
+   "Friday: 9:00\u202fAM\u2009\u2013\u20093:00\u202fPM",
+   "Saturday: 9:00\u202fAM\u2009\u2013\u20093:00\u202fPM",
+   "Sunday: 9:00\u202fAM\u2009\u2013\u20093:00\u202fPM"
+  ],
+  "rating": 4.9,
+  "n": 43,
+  "lat": 53.6005118,
+  "lng": -2.3074125,
+  "pid": "ChIJsUt4HYule0gRvQbKdoqbsqg",
+  "flags": {
+   "cafe": false,
+   "parties": true,
+   "toddler_area": false
+  },
+  "type": "indoor soft play centre"
+ },
+ {
+  "name": "The Play Hut",
+  "slug": "the-play-hut",
+  "city_slug": "crewe",
+  "town": "Congleton",
+  "postcode": "CW12 1PN",
+  "gaddr": "Riverdane Rd, Buglawton, Congleton CW12 1PN",
+  "website": "https://www.theplayhutcongleton.co.uk/launch",
+  "phone": "01260 228539",
+  "email": null,
+  "hours": [
+   "Monday: 9:30\u202fAM\u2009\u2013\u20093:00\u202fPM",
+   "Tuesday: 9:30\u202fAM\u2009\u2013\u20093:00\u202fPM",
+   "Wednesday: 9:30\u202fAM\u2009\u2013\u20093:00\u202fPM",
+   "Thursday: 9:30\u202fAM\u2009\u2013\u20093:00\u202fPM",
+   "Friday: 9:30\u202fAM\u2009\u2013\u20093:00\u202fPM",
+   "Saturday: 9:30\u202fAM\u2009\u2013\u20095:00\u202fPM",
+   "Sunday: 9:30\u202fAM\u2009\u2013\u20093:00\u202fPM"
+  ],
+  "rating": 4.8,
+  "n": 92,
+  "lat": 53.1703656,
+  "lng": -2.2029216,
+  "pid": "ChIJeyxjGNRFekgRdOXxL6rG6K8",
+  "flags": {
+   "cafe": false,
+   "parties": true,
+   "toddler_area": true
+  },
+  "type": "indoor soft play centre"
+ },
+ {
+  "name": "Kinderworld Play Barn",
+  "slug": "kinderworld-play-barn",
+  "city_slug": "blackpool",
+  "town": "Sefton",
+  "postcode": "PR9 7BL",
+  "gaddr": "169 Bispham Rd, Southport PR9 7BL",
+  "website": "https://kinderworld.co.uk/the-playbarn/",
+  "phone": "01704 214272",
+  "email": "gen@kinderworld.co.uk",
+  "hours": [
+   "Monday: 10:00\u202fAM\u2009\u2013\u20092:30\u202fPM",
+   "Tuesday: 10:00\u202fAM\u2009\u2013\u20092:30\u202fPM",
+   "Wednesday: 10:00\u202fAM\u2009\u2013\u20092:30\u202fPM",
+   "Thursday: 10:00\u202fAM\u2009\u2013\u20092:30\u202fPM",
+   "Friday: 10:00\u202fAM\u2009\u2013\u20092:30\u202fPM",
+   "Saturday: 9:00\u202fAM\u2009\u2013\u20098:00\u202fPM",
+   "Sunday: 9:00\u202fAM\u2009\u2013\u20097:00\u202fPM"
+  ],
+  "rating": 4.6,
+  "n": 19,
+  "lat": 53.64846,
+  "lng": -2.9682348,
+  "pid": "ChIJq6ofulc-e0gREnDqX02y5CI",
+  "flags": {
+   "cafe": true,
+   "parties": true,
+   "toddler_area": false
+  },
+  "type": "indoor soft play centre"
+ },
+ {
+  "name": "Hoodles Playbarn",
+  "slug": "hoodles-playbarn",
+  "city_slug": "aberdeen",
+  "town": "Aberdeenshire",
+  "postcode": "AB51 0BB",
+  "gaddr": "North Mains of Barra Cottage, Oldmeldrum, Inverurie AB51 0BB",
+  "website": "https://hoodles.uk/",
+  "phone": "01651 873813",
+  "email": null,
+  "hours": [
+   "Monday: 9:30\u202fAM\u2009\u2013\u20095:00\u202fPM",
+   "Tuesday: 9:30\u202fAM\u2009\u2013\u20095:00\u202fPM",
+   "Wednesday: 9:30\u202fAM\u2009\u2013\u20095:00\u202fPM",
+   "Thursday: 9:30\u202fAM\u2009\u2013\u20095:00\u202fPM",
+   "Friday: 9:30\u202fAM\u2009\u2013\u20095:00\u202fPM",
+   "Saturday: 9:00\u202fAM\u2009\u2013\u20094:30\u202fPM",
+   "Sunday: 10:00\u202fAM\u2009\u2013\u20093:30\u202fPM"
+  ],
+  "rating": 4.3,
+  "n": 477,
+  "lat": 57.3272209,
+  "lng": -2.3377697,
+  "pid": "ChIJKRLdkkBqhEgRBZr3x8rX0Sg",
+  "flags": {
+   "cafe": true,
+   "parties": true,
+   "toddler_area": false
+  },
+  "type": "indoor soft play centre"
+ },
+ {
+  "name": "Leaping Lemurs Soft Play",
+  "slug": "leaping-lemurs-soft-play",
+  "city_slug": "edinburgh",
+  "town": "West Lothian",
+  "postcode": "EH55 8PT",
+  "gaddr": "Polbeth, West Calder EH55 8PT",
+  "website": "https://fivesisterszoo.co.uk/leaping-lemurs-soft-play/",
+  "phone": "01506 872200",
+  "email": "enquiries@fivesisterszoo.co.uk",
+  "hours": [
+   "Monday: 10:00\u202fAM\u2009\u2013\u20095:00\u202fPM",
+   "Tuesday: 10:00\u202fAM\u2009\u2013\u20095:00\u202fPM",
+   "Wednesday: 10:00\u202fAM\u2009\u2013\u20095:00\u202fPM",
+   "Thursday: 10:00\u202fAM\u2009\u2013\u20095:00\u202fPM",
+   "Friday: 10:00\u202fAM\u2009\u2013\u20095:00\u202fPM",
+   "Saturday: 10:00\u202fAM\u2009\u2013\u20095:00\u202fPM",
+   "Sunday: 10:00\u202fAM\u2009\u2013\u20095:00\u202fPM"
+  ],
+  "rating": 4.1,
+  "n": 69,
+  "lat": 55.8624547,
+  "lng": -3.5612245999999996,
+  "pid": "ChIJRUwp3Nzeh0gRnctGNVUOzQY",
+  "flags": {
+   "cafe": false,
+   "parties": true,
+   "toddler_area": false
+  },
+  "type": "indoor soft play centre"
+ },
+ {
+  "name": "Oakie Doke\u2019s Playhouse",
+  "slug": "oakie-dokes-playhouse",
+  "city_slug": "dartford",
+  "town": "Sevenoaks",
+  "postcode": "TN14 5EL",
+  "gaddr": "Block 5, Unit 2, Vestry Industrial Estate, Vestry Rd, Sevenoaks TN14 5EL",
+  "website": "https://oakiedokesplayhouse.co.uk/",
+  "phone": null,
+  "email": "oakiedokesplayhouse@outlook.com",
+  "hours": [
+   "Monday: 9:30\u202fAM\u2009\u2013\u20093:00\u202fPM",
+   "Tuesday: 9:30\u202fAM\u2009\u2013\u20095:00\u202fPM",
+   "Wednesday: 9:30\u202fAM\u2009\u2013\u20093:00\u202fPM",
+   "Thursday: 9:30\u202fAM\u2009\u2013\u20095:00\u202fPM",
+   "Friday: 9:30\u202fAM\u2009\u2013\u20095:00\u202fPM",
+   "Saturday: 9:30\u202fAM\u2009\u2013\u20091:00\u202fPM",
+   "Sunday: 9:30\u202fAM\u2009\u2013\u20093:30\u202fPM"
+  ],
+  "rating": 4.7,
+  "n": 75,
+  "lat": 51.2981105,
+  "lng": 0.1956899,
+  "pid": "ChIJBR-usyBN30cRhdlSXmsZ5i8",
+  "flags": {
+   "cafe": false,
+   "parties": true,
+   "toddler_area": false
+  },
+  "type": "indoor soft play centre"
+ },
+ {
+  "name": "Little Red Fox Play Cafe",
+  "slug": "little-red-fox-play-cafe",
+  "city_slug": "stoke",
+  "town": "Stafford",
+  "postcode": "ST16 2NR",
+  "gaddr": "38a Gaolgate St, Stafford ST16 2NR",
+  "website": "https://www.littleredfoxplaycafe.co.uk/",
+  "phone": "01785 332183",
+  "email": "littleredfoxplaycafe@hotmail.com",
+  "hours": [
+   "Monday: 9:30\u202fAM\u2009\u2013\u20093:00\u202fPM",
+   "Tuesday: 9:30\u202fAM\u2009\u2013\u20093:00\u202fPM",
+   "Wednesday: 9:30\u202fAM\u2009\u2013\u20093:00\u202fPM",
+   "Thursday: 9:30\u202fAM\u2009\u2013\u20093:00\u202fPM",
+   "Friday: 9:30\u202fAM\u2009\u2013\u20093:00\u202fPM",
+   "Saturday: 10:00\u202fAM\u2009\u2013\u20091:30\u202fPM",
+   "Sunday: Closed"
+  ],
+  "rating": 4.7,
+  "n": 67,
+  "lat": 52.8078595,
+  "lng": -2.1177270999999998,
+  "pid": "ChIJU_lWZwBxekgRFHjtyEr5fXM",
+  "flags": {
+   "cafe": true,
+   "parties": true,
+   "toddler_area": false
+  },
+  "type": "play caf\u00e9"
+ }
+]
