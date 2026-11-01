@@ -5,10 +5,10 @@ import { Footer } from '@/components/layout/Footer'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 import { CheckCircle2, X, Sparkles, Building2 } from 'lucide-react'
 
-const TITLE = 'Pricing'
-const SOCIAL_TITLE = 'Pricing | Soft Play Near Me'
+const TITLE = 'Free Venue Listings & Premium Plans'
+const SOCIAL_TITLE = 'Free Venue Listings & Premium Plans | Soft Play Near Me'
 const DESCRIPTION =
-  'Basic listings are free forever on Soft Play Near Me. Upgrade to Premium or Bespoke for a Verified badge, featured placement, and lead notifications.'
+  "List your soft play centre free forever, or upgrade to Premium or Bespoke for a Verified badge, featured placement and lead alerts. See plans and prices."
 const URL = 'https://www.softplaynearme.co.uk/pricing'
 
 export const metadata: Metadata = {

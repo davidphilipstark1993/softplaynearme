@@ -7,10 +7,10 @@ import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 
 // The root layout applies `template: "%s | Soft Play Near Me"`, so `title` must
 // NOT repeat the suffix. Social cards bypass the template, so they keep it.
-const TITLE = 'About Us'
-const SOCIAL_TITLE = 'About Us | Soft Play Near Me'
+const TITLE = 'Free Parent-Built Soft Play Directory'
+const SOCIAL_TITLE = 'Free Parent-Built Soft Play Directory | Soft Play Near Me'
 const DESCRIPTION =
-  'Soft Play Near Me is a free UK directory helping families find the best indoor soft play centres. Built by parents, for parents.'
+  "Soft Play Near Me is a free UK directory of indoor soft play centres, built by parents for parents. Meet the team and see how to claim or correct a listing."
 const URL = 'https://www.softplaynearme.co.uk/about'
 
 export const metadata: Metadata = {

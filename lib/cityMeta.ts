@@ -7,10 +7,10 @@
  */
 import { MIN_COVERAGE_FOR_CLAIM, type CityStats } from './cityStats'
 
-const TITLE_SUFFIX = ' | Soft Play Near Me'
-/** Titles longer than this (including the suffix) get truncated in results. */
-const MAX_TITLE = 70
-const MAX_DESCRIPTION = 160
+const BRAND_SUFFIX = ' | Soft Play Near Me'
+/** Titles longer than this get truncated in results. */
+const MAX_TITLE = 60
+const MAX_DESCRIPTION = 155
 
 export interface CityMeta {
   title: string
@@ -32,19 +32,28 @@ function joinClaims(claims: string[]): string {
   return `${claims.slice(0, -1).join(', ')} & ${claims[claims.length - 1]}`
 }
 
-export function buildCityTitle(name: string, stats: CityStats): string {
+/**
+ * `Soft Play London: 63 Centres, Hours & Reviews (2026)`. This is the complete
+ * <title> (the page opts out of the site template): the brand is appended only
+ * when there is room. Claims (Hours, Reviews, Prices, Ages) appear only when
+ * enough of the city's venues carry that data.
+ */
+export function buildCityTitle(name: string, stats: CityStats, year = new Date().getFullYear()): string {
   const centres = `${stats.total} ${stats.total === 1 ? 'Centre' : 'Centres'}`
+  if (stats.total === 0) return `Soft Play ${name}`
   const claims = supportedClaims(stats)
-  // Richest title that fits: up to two claims, then one, then none.
-  for (const n of [2, 1, 0]) {
-    const picked = claims.slice(0, n)
-    const title =
-      stats.total > 0
-        ? `Soft Play in ${name}: ${centres}${picked.length === 1 ? ` & ${picked[0]}` : picked.length ? `, ${joinClaims(picked)}` : ''}`
-        : `Soft Play in ${name}`
-    if (title.length + TITLE_SUFFIX.length <= MAX_TITLE) return title
+  // Richest title that fits: two claims then one then none, each with the year first.
+  for (const withYear of [true, false]) {
+    for (const n of [2, 1, 0]) {
+      const picked = claims.slice(0, n)
+      const claimText = picked.length === 1 ? ` & ${picked[0]}` : picked.length ? `, ${joinClaims(picked)}` : ''
+      const title = `Soft Play ${name}: ${centres}${claimText}${withYear ? ` (${year})` : ''}`
+      if (title.length <= MAX_TITLE) {
+        return title.length + BRAND_SUFFIX.length <= MAX_TITLE ? title + BRAND_SUFFIX : title
+      }
+    }
   }
-  return `Soft Play in ${name}`
+  return `Soft Play ${name}`
 }
 
 function plural(n: number, singular: string, pluralForm = `${singular}s`): string {

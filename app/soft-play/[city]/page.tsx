@@ -1,4 +1,5 @@
 import { cache } from 'react'
+import { trimMeta } from '@/lib/metaLength'
 import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
@@ -125,15 +126,15 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
   const guideTitle = getHubGuide(city) && core.length > 0 ? buildGuideTitle(name, core.length, new Date().getFullYear()) : null
   const titleText = guideTitle ?? meta.title
   const title = pageNum > 1 ? `${titleText} – Page ${pageNum}` : titleText
-  const description = pageNum > 1 ? `${meta.description} Page ${pageNum} of ${totalPages}.` : meta.description
+  const description = pageNum > 1 ? trimMeta(`${meta.description} Page ${pageNum} of ${totalPages}.`) : meta.description
   const canonical = `${baseUrl}${isVariation ? hubPagePath(city, 1) : hubPagePath(city, pageNum)}`
   // A hub with no soft play centre of its own (only family attractions) is not worth indexing yet.
   const noindex = isVariation || outOfRange || !core.some((v) => isSoftPlayVenueType((v as { venue_type?: string | null }).venue_type))
 
   const ogImage = getCityOgImage(city)
   return {
-    // The guide title already reads as a full title; opt out of the "| Soft Play Near Me" template.
-    title: guideTitle ? { absolute: title } : title,
+    // Both the guide title and buildCityTitle() are complete titles; opt out of the "| Soft Play Near Me" template.
+    title: { absolute: title },
     description,
     ...(noindex && { robots: { index: false, follow: true } }),
     openGraph: {

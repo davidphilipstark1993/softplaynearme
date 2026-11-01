@@ -19,7 +19,8 @@ test('no price data -> no "Prices" in title or description', { skip }, async () 
   const venues = Array.from({ length: 10 }, (_, i) => mk({ slug: `v${i}`, opening_hours_text: 'Monday: 9:00 AM – 5:00 PM' }))
   const { title, description } = buildCityMeta('Hull', 'East Yorkshire', computeCityStats(venues))
   assert.doesNotMatch(title + description, /price/i)
-  assert.match(title, /^Soft Play in Hull: 10 Centres/)
+  assert.match(title, /^Soft Play Hull: 10 Centres, Hours & Reviews/)
+  assert.ok(title.length <= 60, title)
 })
 
 test('"Prices" returns once at least half the venues publish one', { skip }, async () => {

@@ -30,7 +30,9 @@ export const revalidate = 3600
 export async function generateMetadata(): Promise<Metadata> {
   const { total } = await getVenueCounts()
   const countStr = formatVenueTotal(total)
-  const description = `Find ${countStr} indoor soft play centres near you across the UK. Compare reviews, toddler areas, party options and facilities by town or postcode. Free directory.`
+  // "1,100+" rather than the exact figure: a stable headline number that stays true as venues come and go.
+  const roundedStr = `${(Math.floor(total / 100) * 100).toLocaleString('en-GB')}+`
+  const description = `Search ${countStr} indoor soft play centres across the UK by postcode. Compare hours, reviews, toddler areas & parties. Free parent-built directory.`
   // Next.js replaces (does not deep-merge) the whole `openGraph` / `twitter`
   // object when a page defines one, so anything the root layout set here has to
   // be restated. Omitting `card` previously silently downgraded the homepage's
@@ -38,14 +40,14 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     // `absolute` skips the layout's "| Soft Play Near Me" suffix, which would
     // repeat the brand phrase that is already the lead of the title.
-    title: { absolute: 'Soft Play Near Me – Find Indoor Soft Play Centres Across the UK' },
+    title: { absolute: `Soft Play Near Me: ${roundedStr} UK Centres | Free Directory` },
     description,
     openGraph: {
       type: 'website',
       locale: 'en_GB',
       url: 'https://www.softplaynearme.co.uk',
       siteName: 'Soft Play Near Me',
-      title: 'Soft Play Near Me | Find Soft Play Centres Across the UK',
+      title: `Soft Play Near Me: ${roundedStr} UK Centres | Free Directory`,
       description,
     },
     twitter: {

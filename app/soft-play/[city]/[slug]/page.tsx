@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { trimMeta } from '@/lib/metaLength'
 import { cache } from 'react'
 import { notFound } from 'next/navigation'
 import { Button } from '@/components/ui/button'
@@ -551,10 +552,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     hasPrice(venue) ? 'Prices' : null,
   ].filter(Boolean).join(' & ')
   const title = venue.seo_title || `${venue.name} – Soft Play in ${homeTown}${promised ? ` | ${promised}` : ''}`
-  const description =
+  const description = trimMeta(
     venue.meta_description ||
     venue.description ||
     generateVenueMetaDescription({ ...venue, city: homeTown, county: homeTown === cityName ? county : '' })
+  )
 
   // Noindex very thin pages (name + address only, no useful content)
   const score = venue.completeness_score ??

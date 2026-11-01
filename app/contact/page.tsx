@@ -9,10 +9,10 @@ import { ContactForm } from '@/components/forms/ContactForm'
 
 // The root layout applies `template: "%s | Soft Play Near Me"`, so `title` must
 // NOT repeat the suffix. Social cards bypass the template, so they keep it.
-const TITLE = 'Contact Us'
-const SOCIAL_TITLE = 'Contact Us | Soft Play Near Me'
+const TITLE = 'Report, Suggest or Claim a Venue'
+const SOCIAL_TITLE = 'Report, Suggest or Claim a Venue | Soft Play Near Me'
 const DESCRIPTION =
-  'Get in touch with the Soft Play Near Me team. Report an error, suggest a venue, or claim your listing.'
+  "Spotted a mistake or know a soft play centre we've missed? Contact the Soft Play Near Me team to report an error, suggest a venue or claim your listing."
 const URL = 'https://www.softplaynearme.co.uk/contact'
 
 export const metadata: Metadata = {

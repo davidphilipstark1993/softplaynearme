@@ -8,10 +8,10 @@ import { CheckCircle2, Sparkles } from 'lucide-react'
 
 // The root layout applies `template: "%s | Soft Play Near Me"`, so `title` must
 // NOT repeat the suffix. Social cards bypass the template, so they keep it.
-const TITLE = 'Claim Your Venue'
-const SOCIAL_TITLE = 'Claim Your Venue | Soft Play Near Me'
+const TITLE = 'Claim or Add Your Soft Play Centre Free'
+const SOCIAL_TITLE = 'Claim or Add Your Soft Play Centre Free | Soft Play Near Me'
 const DESCRIPTION =
-  'Claim or add your soft play centre on Soft Play Near Me for free. Reach thousands of families and manage your listing from your own dashboard.'
+  "Claim or add your soft play centre to our UK directory for free. Update hours, photos and facilities from your own dashboard and get found by local parents."
 const URL = 'https://www.softplaynearme.co.uk/add-venue'
 
 export const metadata: Metadata = {

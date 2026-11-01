@@ -11,8 +11,8 @@ export const revalidate = 3600
 export async function generateMetadata(): Promise<Metadata> {
   const counts = await getVenueCounts()
   return {
-    title: 'Soft Play Near Me: Browse by Town and City',
-    description: `Browse ${formatVenueTotal(counts.total)} UK soft play centres by town and city, with ratings, facilities and contact details.`,
+    title: `Soft Play by Town & City: ${formatVenueTotal(counts.total)} UK Centres`,
+    description: `Browse ${formatVenueTotal(counts.total)} UK soft play centres by town and city. Compare ratings, facilities and contact details, then find the right centre near you.`,
     alternates: { canonical: 'https://www.softplaynearme.co.uk/soft-play' },
   }
 }

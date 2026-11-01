@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { trimMeta } from '@/lib/metaLength'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getPostBySlug, getRelatedPosts, posts } from '@/lib/blogPosts'
@@ -38,7 +39,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   // cards don't go through the template, so they keep the suffix explicitly.
   const title = post.title
   const socialTitle = `${post.title} | Soft Play Near Me`
-  const description = post.excerpt
+  const description = trimMeta(post.excerpt)
   const canonical = `https://www.softplaynearme.co.uk/blog/${post.slug}`
   const ogImage = getBlogOgImage(post.city)
 

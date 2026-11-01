@@ -6,14 +6,14 @@ import { Footer } from '@/components/layout/Footer'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 
 export const metadata: Metadata = {
-  title: 'Soft Play Blog',
-  description: 'City guides, planning tips, and practical advice for families searching for soft play centres across the UK.',
+  title: 'Soft Play City Guides & Parent Tips',
+  description: 'Honest soft play city guides and practical tips for parents: where to go, what to expect, and which centres suit toddlers, parties and SEN.',
   alternates: {
     canonical: 'https://www.softplaynearme.co.uk/blog',
   },
   openGraph: {
-    title: 'Soft Play Blog | Soft Play Near Me',
-    description: 'City guides, planning tips, and practical advice for families searching for soft play centres across the UK.',
+    title: 'Soft Play City Guides & Parent Tips | Soft Play Near Me',
+    description: 'Honest soft play city guides and practical tips for parents: where to go, what to expect, and which centres suit toddlers, parties and SEN.',
     url: 'https://www.softplaynearme.co.uk/blog',
     type: 'website',
     siteName: 'Soft Play Near Me',
@@ -21,8 +21,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Soft Play Blog | Soft Play Near Me',
-    description: 'City guides, planning tips, and practical advice for families searching for soft play centres across the UK.',
+    title: 'Soft Play City Guides & Parent Tips | Soft Play Near Me',
+    description: 'Honest soft play city guides and practical tips for parents: where to go, what to expect, and which centres suit toddlers, parties and SEN.',
     images: ['/opengraph-image'],
   },
 }
