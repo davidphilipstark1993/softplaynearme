@@ -10,7 +10,7 @@ import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 const TITLE = 'Free Parent-Built Soft Play Directory'
 const SOCIAL_TITLE = 'Free Parent-Built Soft Play Directory | Soft Play Near Me'
 const DESCRIPTION =
-  "Soft Play Near Me is a free UK directory of indoor soft play centres, built by parents for parents. Meet the team and see how to claim or correct a listing."
+  "Soft Play Near Me is a free UK directory of indoor soft play centres, built by parents for parents. Meet the team and see how to claim or fix a listing."
 const URL = 'https://www.softplaynearme.co.uk/about'
 
 export const metadata: Metadata = {

@@ -11,7 +11,7 @@ import { CheckCircle2, Sparkles } from 'lucide-react'
 const TITLE = 'Claim or Add Your Soft Play Centre Free'
 const SOCIAL_TITLE = 'Claim or Add Your Soft Play Centre Free | Soft Play Near Me'
 const DESCRIPTION =
-  "Claim or add your soft play centre to our UK directory for free. Update hours, photos and facilities from your own dashboard and get found by local parents."
+  "Claim or add your soft play centre to our UK directory for free. Update hours, photos and facilities from your own dashboard and be found by local parents."
 const URL = 'https://www.softplaynearme.co.uk/add-venue'
 
 export const metadata: Metadata = {
