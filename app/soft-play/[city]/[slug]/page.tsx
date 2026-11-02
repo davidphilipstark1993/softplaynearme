@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { buildVenueTitle, isBoilerplateSeoTitle } from '@/lib/venueTitle'
 import { trimMeta } from '@/lib/metaLength'
 import { cache } from 'react'
 import { notFound } from 'next/navigation'
@@ -545,13 +546,18 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   // The town the venue is really in (Hessle for a HU13 venue filed under Hull).
   const homeTown = getLocality({ id: venue.id || (venue as { _staticId?: number })._staticId, postcode: venue.postcode }) ?? cityName
 
-  // Use stored overrides when available, fall back to generated copy
-  // Only promise what the page can show: hours and/or prices when we hold them.
-  const promised = [
-    hasOpeningHours(venue) ? 'Hours' : null,
-    hasPrice(venue) ? 'Prices' : null,
-  ].filter(Boolean).join(' & ')
-  const title = venue.seo_title || `${venue.name} – Soft Play in ${homeTown}${promised ? ` | ${promised}` : ''}`
+  // A hand-written seo_title wins; the bulk-generated boilerplate is replaced by a short, data-backed title.
+  const title =
+    venue.seo_title && !isBoilerplateSeoTitle(venue.seo_title)
+      ? venue.seo_title
+      : buildVenueTitle({
+          name: venue.name,
+          town: homeTown,
+          venueType: venue.venue_type,
+          hasHours: hasOpeningHours(venue),
+          hasPrice: hasPrice(venue),
+          hasReviews: (venue.review_count ?? 0) > 0,
+        })
   const description = trimMeta(
     venue.meta_description ||
     venue.description ||
@@ -564,7 +570,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const shouldNoindex = !isVenueIndexable(score, venue.venue_type)
 
   return {
-    title,
+    title: { absolute: title },
     description,
     robots: shouldNoindex
       ? { index: false, follow: true }

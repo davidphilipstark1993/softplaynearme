@@ -15,6 +15,7 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { stripTrailingCity } from './lib/venue-slug.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.join(__dirname, '..')
@@ -127,7 +128,8 @@ function elementToVenue(el, city, existingSlugs) {
   const name = tags.name || tags['name:en'] || ''
   if (!name) return null
 
-  const baseSlug = slugify(name) + '-' + city.slug
+  // Name only: the URL already carries the city (scripts/lib/venue-slug.mjs).
+  const baseSlug = stripTrailingCity(slugify(name), city.slug)
   let slug = baseSlug
   let n = 1
   while (existingSlugs.has(slug)) slug = `${baseSlug}-${n++}`

@@ -203,7 +203,10 @@ export const sussexPosts: BlogPost[] = [
 </ul>
 <p>We couldn't read toddler details for the soft play centres inside Brighton and Hove, so we don't make claims about them; see the ${link(HUB_B, 'Brighton directory')} and check with the venue.</p>
 
-<p>More: ${link('/blog/best-soft-play-in-worthing', 'Worthing soft play guide')} · ${link('/blog/best-soft-play-in-brighton', 'Brighton soft play guide')}.</p>`,
+<p>More: ${link('/blog/best-soft-play-in-worthing', 'Worthing soft play guide')} · ${link('/blog/best-soft-play-in-brighton', 'Brighton soft play guide')}.</p>
+
+<p>Planning further afield? See our <a href="/blog/baby-and-toddler-soft-play-uk" class="text-purple-700 hover:underline">UK baby and toddler soft play guide</a>.</p>
+`,
     faq: [
       {
         q: 'Is there baby soft play near Worthing?',

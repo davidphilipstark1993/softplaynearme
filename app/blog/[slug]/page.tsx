@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { cities } from '@/lib/venues'
 import { trimMeta } from '@/lib/metaLength'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -44,7 +45,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const ogImage = getBlogOgImage(post.city)
 
   return {
-    title,
+    // Drop the " | Soft Play Near Me" template suffix when it would push the title past ~60 characters.
+    title: title.length + ' | Soft Play Near Me'.length > 60 ? { absolute: title } : title,
     description,
     alternates: {
       canonical,
@@ -94,6 +96,22 @@ export default async function BlogPostPage({ params }: PageProps) {
     ? buildFAQSchema(post.faq.map((f) => ({ question: f.q, answer: f.a })))
     : null
 
+  // Guides that carry a venue table also publish it as an ItemList (first link in each table row).
+  const listedVenues = [...post.contentHtml.matchAll(/<tr><td><a href="(\/soft-play\/[^"]+)"[^>]*>([^<]+)<\/a>/g)].map((m) => ({
+    name: m[2].replace(/&amp;/g, '&'),
+    url: `https://www.softplaynearme.co.uk${m[1]}`,
+  }))
+  const itemListSchema = listedVenues.length >= 3
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        name: post.title,
+        numberOfItems: listedVenues.length,
+        itemListElement: listedVenues.map((v, i) => ({ '@type': 'ListItem', position: i + 1, name: v.name, url: v.url })),
+      }
+    : null
+  const hubForPost = cities.find((c) => c.name.toLowerCase() === post.city.toLowerCase())
+
   const breadcrumbSchema = buildBreadcrumbSchema([
     { name: 'Home', url: 'https://www.softplaynearme.co.uk' },
     { name: 'Blog', url: 'https://www.softplaynearme.co.uk/blog' },
@@ -110,6 +128,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema).replace(/</g, '\\u003c') }}
       />
+      {itemListSchema && <JsonLd data={itemListSchema} />}
       {faqSchema && (
         <script
           type="application/ld+json"
@@ -145,7 +164,19 @@ export default async function BlogPostPage({ params }: PageProps) {
           </div>
         </section>
 
-        <div className="mt-10 border-t border-slate-200 pt-6">
+        <p className="mt-10 text-slate-700">
+          {hubForPost ? (
+            <Link href={`/soft-play/${hubForPost.slug}`} className="font-semibold text-purple-700 hover:underline">
+              See every soft play centre in {hubForPost.name} →
+            </Link>
+          ) : (
+            <Link href="/soft-play" className="font-semibold text-purple-700 hover:underline">
+              Browse soft play by town and city →
+            </Link>
+          )}
+        </p>
+
+        <div className="mt-6 border-t border-slate-200 pt-6">
           <ShareButtons url={canonical} title={post.title} />
         </div>
 

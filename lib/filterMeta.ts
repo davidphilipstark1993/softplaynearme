@@ -70,7 +70,9 @@ export function buildFilterMeta(
   const names = top.map((v) => v.name)
   const where = county && !county.toLowerCase().includes(cityName.toLowerCase()) ? `${cityName}, ${county}` : cityName
 
-  const title = n > 0 ? `${p.titleStem} in ${cityName}: ${plural(n, 'Venue')}` : `${p.titleStem} in ${cityName}`
+  // A complete <title> (the page opts out of the site template); the brand goes on only if it still fits in 60.
+  const stem = n > 0 ? `${p.titleStem} in ${cityName}: ${plural(n, 'Venue')}` : `${p.titleStem} in ${cityName}`
+  const title = stem.length + ' | Soft Play Near Me'.length <= 60 ? `${stem} | Soft Play Near Me` : stem
 
   if (n === 0) {
     return {
@@ -82,10 +84,10 @@ export function buildFilterMeta(
 
   const lead = `${plural(n, 'soft play centre')} in ${where} ${p.descriptor}`
   const including = names.length ? `, including ${list(names)}` : ''
-  const tail = ' See ratings, facilities and contact details.'
+  const tail = slug === 'birthday-parties' ? ' Compare ratings and contact details, then ask for a party quote.' : ' See ratings, facilities and contact details.'
   // Richest description that fits 160 characters: names + tail, names, tail, bare.
   const description =
-    [`${lead}${including}.${tail}`, `${lead}${including}.`, `${lead}.${tail}`, `${lead}.`].find((d) => d.length <= 160) ?? `${lead}.`
+    [`${lead}${including}.${tail}`, `${lead}${including}.`, `${lead}.${tail}`, `${lead}.`].find((d) => d.length <= 155) ?? `${lead}.`
 
   const rated = top.length
     ? ` Best rated (${MIN_REVIEWS_FOR_TOP_RATED}+ reviews): ${list(top.map((v) => `${v.name} (${v.rating.toFixed(1)}, ${v.reviews.toLocaleString('en-GB')} reviews)`))}.`

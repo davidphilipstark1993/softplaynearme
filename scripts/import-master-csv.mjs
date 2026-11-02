@@ -11,6 +11,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import pg from 'pg';
+import { venueSlug } from './lib/venue-slug.mjs';
 
 const { Pool } = pg;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -54,13 +55,11 @@ const CITY_SLUG_MAP = {
 /**
  * Generate URL-safe slug from name
  */
-function generateSlug(name, city) {
-  const combined = `${name} ${city}`;
-  return combined
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/(^-|-$)/g, '')
-    .substring(0, 100);
+function generateSlug(name, citySlug) {
+  // Name only. The URL is already /soft-play/{city}/{slug}, and `city` here is the
+  // CSV's search town, not necessarily where the venue is, so appending it produced
+  // slugs like party-and-play-glasgow for a Birmingham venue. See scripts/lib/venue-slug.mjs.
+  return venueSlug(name, citySlug);
 }
 
 /**
@@ -205,7 +204,7 @@ async function upsertVenue(client, row) {
   }
 
   const citySlug = CITY_SLUG_MAP[town.toLowerCase()] || town.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-  const slug = generateSlug(name, town);
+  const slug = generateSlug(name, citySlug);
   const postcode = extractPostcode(address);
   const { lat, lng } = extractCoordinates(googleMapsUrl);
 

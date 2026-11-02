@@ -585,7 +585,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
         ...guide.faqs,
       ]
     : genericFaqs
-  const answerFirst = guide ? buildAnswerFirst({ name: displayName, venues: contentVenues.map((v) => ({ ...toStatsVenue(v), area: getLocality(v) })), nearbyCount: nearbyVenues.length, nearbyTowns: nearbyTownNames }) : null
+  const answerFirst = guide || city === 'london' ? buildAnswerFirst({ name: displayName, venues: contentVenues.map((v) => ({ ...toStatsVenue(v), area: getLocality(v) })), nearbyCount: nearbyVenues.length, nearbyTowns: nearbyTownNames }) : null
   // Newest real change to any main-list venue (DB updated_at; static export: last verified).
   const lastUpdatedMs = contentVenues.reduce((max, v) => {
     const t = new Date((v.updated_at ?? v.last_verified_at ?? '') as string).getTime()
@@ -715,6 +715,18 @@ export default async function CityPage({ params, searchParams }: PageProps) {
           </div>
         </div>
 
+        {city === 'london' && cityBlogPost && (
+          <div className="bg-purple-50 border-b border-purple-100 py-3 px-4">
+            <div className="max-w-7xl mx-auto text-sm text-purple-900">
+              Not sure where to start?{' '}
+              <Link href={`/blog/${cityBlogPost.slug}`} className="font-semibold underline hover:text-purple-700">
+                Read our guide to the best soft play in London
+              </Link>{' '}
+              — venues compared by rating, toddler areas, parties and SEN sessions.
+            </div>
+          </div>
+        )}
+
         {city === 'hull' && (
           <div className="bg-purple-50 border-b border-purple-100 py-3 px-4">
             <div className="max-w-7xl mx-auto text-sm text-purple-900">
@@ -839,6 +851,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                   <div className="flex items-center gap-2 mb-3">
                     <Baby className="w-5 h-5 text-blue-600" />
                     <h2 className="text-lg font-semibold text-slate-800">Best for Toddlers in {displayName}</h2>
+                    <Link href="/blog/baby-and-toddler-soft-play-uk" className="ml-auto text-sm font-medium text-purple-700 hover:underline">UK baby &amp; toddler guide</Link>
                   </div>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                     {toddlerVenues.map((venue) => (

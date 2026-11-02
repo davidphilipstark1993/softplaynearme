@@ -33,27 +33,23 @@ function joinClaims(claims: string[]): string {
 }
 
 /**
- * `Soft Play London: 63 Centres, Hours & Reviews (2026)`. This is the complete
+ * `Soft Play in London: 63 Centres, Hours & Reviews`. This is the complete
  * <title> (the page opts out of the site template): the brand is appended only
  * when there is room. Claims (Hours, Reviews, Prices, Ages) appear only when
  * enough of the city's venues carry that data.
  */
-export function buildCityTitle(name: string, stats: CityStats, year = new Date().getFullYear()): string {
+export function buildCityTitle(name: string, stats: CityStats): string {
   const centres = `${stats.total} ${stats.total === 1 ? 'Centre' : 'Centres'}`
-  if (stats.total === 0) return `Soft Play ${name}`
+  if (stats.total === 0) return `Soft Play in ${name}`
   const claims = supportedClaims(stats)
-  // Richest title that fits: two claims then one then none, each with the year first.
-  for (const withYear of [true, false]) {
-    for (const n of [2, 1, 0]) {
-      const picked = claims.slice(0, n)
-      const claimText = picked.length === 1 ? ` & ${picked[0]}` : picked.length ? `, ${joinClaims(picked)}` : ''
-      const title = `Soft Play ${name}: ${centres}${claimText}${withYear ? ` (${year})` : ''}`
-      if (title.length <= MAX_TITLE) {
-        return title.length + BRAND_SUFFIX.length <= MAX_TITLE ? title + BRAND_SUFFIX : title
-      }
-    }
+  // Richest title that fits: two claims, then one, then none. No year, so it never goes stale.
+  for (const n of [2, 1, 0]) {
+    const picked = claims.slice(0, n)
+    const claimText = picked.length === 1 ? ` & ${picked[0]}` : picked.length ? `, ${joinClaims(picked)}` : ''
+    const title = `Soft Play in ${name}: ${centres}${claimText}`
+    if (title.length <= MAX_TITLE) return title.length + BRAND_SUFFIX.length <= MAX_TITLE ? title + BRAND_SUFFIX : title
   }
-  return `Soft Play ${name}`
+  return `Soft Play in ${name}`
 }
 
 function plural(n: number, singular: string, pluralForm = `${singular}s`): string {

@@ -515,7 +515,7 @@ export async function buildFilterMetadata(citySlug: string, filterSlug: FilterSl
   const canonicalUrl = `https://www.softplaynearme.co.uk/soft-play/${citySlug}/${filterSlug}`
 
   return {
-    title,
+    title: { absolute: title },
     description,
     // Noindex thin pages (no matching venues in this city for this filter) and
     // "open now" always: its result set changes by the minute, so it is never a
