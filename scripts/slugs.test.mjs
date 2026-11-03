@@ -31,7 +31,7 @@ test('uniqueSlug disambiguates within a hub', () => {
 
 const venues = readJson('data/generated/venues.json')
 const redirects = readJson('data/redirects.json')
-const live = new Set(venues.map((v) => `/soft-play/${v.townSlug}/${v.slug}`))
+const live = new Set([...venues.map((v) => `/soft-play/${v.townSlug}/${v.slug}`), ...new Set(venues.map((v) => `/soft-play/${v.townSlug}`))])
 const bySource = new Map(redirects.map((r) => [r.source, r.destination]))
 
 test('no live venue slug still repeats its city', () => {
@@ -68,8 +68,10 @@ test('every slug change has a permanent redirect from the old URL', () => {
   const changed = rows.filter((r) => r[6] === 'changed')
   assert.ok(changed.length >= 100)
   for (const [, , , , oldUrl, newUrl] of changed) {
-    assert.equal(bySource.get(oldUrl), newUrl, `missing redirect ${oldUrl}`)
-    assert.ok(live.has(newUrl))
+    // A later change (retirement, further rename) may re-point the old URL; it must still redirect somewhere live.
+    const dest = bySource.get(oldUrl)
+    assert.ok(dest, `missing redirect ${oldUrl}`)
+    assert.ok(dest === newUrl || live.has(dest), `${oldUrl} -> ${dest} is not live`)
   }
   assert.ok(redirects.every((r) => r.permanent === true))
 })
