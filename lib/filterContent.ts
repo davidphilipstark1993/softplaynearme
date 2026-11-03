@@ -69,11 +69,11 @@ const filterContentMap: Record<FilterSlug, FilterContentConfig> = {
       },
       {
         question: `How far in advance should I book a soft play party in ${cityName}?`,
-        answer: `We recommend booking at least 3–4 weeks in advance, especially for weekend slots. Popular venues in ${cityName} fill up quickly during school holidays and half-terms. Most venues now offer online booking so you can check and reserve availability easily.`,
+        answer: `Book as early as you can, especially for weekend slots and school holidays, when party slots tend to go first. Lead times are set by each venue, so ask the ${cityName} venues you like how far ahead they take bookings.`,
       },
       {
         question: `What is included in a soft play birthday party package?`,
-        answer: `Most party packages in ${cityName} include a set amount of play time (usually 1–2 hours in the main frame), exclusive use of a party room for the food portion, children's food (pizza, sandwiches, or hot dogs), drinks, and sometimes party bags. Some venues include a dedicated party host.`,
+        answer: `Packages differ between venues, so check what is included. Common items are a set amount of play time, a party room for the food, children's food and drinks, and sometimes party bags or a party host.`,
       },
       {
         question: `Can parents stay during a soft play birthday party?`,
@@ -87,7 +87,7 @@ const filterContentMap: Record<FilterSlug, FilterContentConfig> = {
     advice: (cityName) => ({
       heading: `How to Plan a Soft Play Birthday Party in ${cityName}`,
       tips: [
-        'Book 3–4 weeks ahead for weekends; popular venues fill up fast during school holidays.',
+        'Book early for weekends and school holidays, and ask each venue how far ahead it takes bookings.',
         'Ask explicitly whether the party room is exclusively yours or shared — this varies between venues.',
         'Clarify exactly what\'s in the package: food choices, party bags, invitations, and host time differ significantly.',
         'Confirm the venue\'s cake policy before ordering — most allow homemade cakes but some charge a cutting fee.',

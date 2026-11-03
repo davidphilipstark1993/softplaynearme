@@ -6,6 +6,8 @@
 // use name-only slugs (scripts/lib/venue-slug.mjs); this migration repairs the rows already
 // in the database. The URL is /soft-play/{city}/{slug}, so the city never belongs in the slug.
 //
+// It also strips a city that is repeated at the end of the slug in its own folder (…-aberdeen-aberdeen).
+//
 // Dry run (default): writes reports/slug-fixes.csv for review and changes nothing.
 // --execute: backs up, UPDATEs venues.slug and appends 301s to data/redirects.json.
 // --rollback=<backup file> [--execute]: restores old slugs and removes the redirects it added.
@@ -19,8 +21,8 @@
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
-import { getPool, EXECUTE, appendRedirects } from './_lib.mjs'
-import { slugify, stripTrailingCity, RESERVED_VENUE_SLUGS } from '../lib/venue-slug.mjs'
+import { getPool, EXECUTE } from './_lib.mjs'
+import { slugify, stripTrailingCity, trailingCityCount, RESERVED_VENUE_SLUGS } from '../lib/venue-slug.mjs'
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const BASE = '/soft-play'
@@ -60,6 +62,27 @@ function rewriteInternalLinks(fixes, write = EXECUTE) {
   return count
 }
 
+/**
+ * Merge the new 301s into data/redirects.json without creating chains or shadowing live pages:
+ * an existing redirect that points at a slug we are renaming is re-pointed at the new URL, and an
+ * existing redirect whose source is now a live (renamed-to) URL is dropped.
+ */
+function mergeRedirects(fixes) {
+  const existing = JSON.parse(fs.readFileSync(REDIRECTS, 'utf8'))
+  const renamed = new Map(fixes.map((f) => [`${BASE}/${f.city}/${f.oldSlug}`, `${BASE}/${f.city}/${f.newSlug}`]))
+  const nowLive = new Set(renamed.values())
+  let retargeted = 0, dropped = 0
+  const kept = []
+  for (const r of existing) {
+    if (nowLive.has(r.source)) { dropped++; continue }
+    if (renamed.has(r.destination)) { kept.push({ ...r, destination: renamed.get(r.destination) }); retargeted++; continue }
+    kept.push(r)
+  }
+  const bySource = new Map(kept.map((r) => [r.source, r]))
+  for (const [source, destination] of renamed) bySource.set(source, { source, destination, permanent: true })
+  return { merged: [...bySource.values()], added: bySource.size - kept.length, retargeted, dropped, before: existing }
+}
+
 const pool = await getPool()
 try {
   if (rb) {
@@ -67,9 +90,13 @@ try {
     console.log(`${EXECUTE ? 'ROLLBACK' : 'DRY RUN rollback'}: ${backup.length} venues`)
     if (EXECUTE) {
       for (const b of backup) await pool.query('UPDATE venues SET slug=$1, updated_at=CURRENT_TIMESTAMP WHERE id=$2 AND slug=$3', [b.oldSlug, b.id, b.newSlug])
-      const drop = new Set(backup.map((b) => `${BASE}/${b.city}/${b.oldSlug}`))
-      const kept = JSON.parse(fs.readFileSync(REDIRECTS, 'utf8')).filter((r) => !drop.has(r.source))
-      fs.writeFileSync(REDIRECTS, JSON.stringify(kept, null, 2) + '\n')
+      const before = rb.replace(/\.json$/, '.redirects-before.json')
+      if (fs.existsSync(before)) fs.writeFileSync(REDIRECTS, JSON.stringify(JSON.parse(fs.readFileSync(before, 'utf8')), null, 2) + '\n')
+      else {
+        const drop = new Set(backup.map((b) => `${BASE}/${b.city}/${b.oldSlug}`))
+        const kept = JSON.parse(fs.readFileSync(REDIRECTS, 'utf8')).filter((r) => !drop.has(r.source))
+        fs.writeFileSync(REDIRECTS, JSON.stringify(kept, null, 2) + '\n')
+      }
     }
     process.exit(0)
   }
@@ -101,7 +128,9 @@ try {
       if (!x) break
       s = s.slice(0, -(x.length + 1)); removed.push(x)
     }
-    if (!removed.length) continue
+    // Also repair slugs that repeat their own city (…-aberdeen-aberdeen); the city is already in the path.
+    if (!removed.length && trailingCityCount(s, r.city_slug) < 2) continue
+    if (!removed.length) removed.push(`${r.city_slug} (repeated)`)
     s = stripTrailingCity(s, r.city_slug)
     if (RESERVED_VENUE_SLUGS.has(s) || s.length < 3) continue
     let note = ''
@@ -145,9 +174,13 @@ try {
     for (const f of fixes) await pool.query('UPDATE venues SET slug=$1, updated_at=CURRENT_TIMESTAMP WHERE id=$2 AND slug=$3', [f.newSlug, f.id, f.oldSlug])
     const rewritten = rewriteInternalLinks(fixes)
     console.log(`Rewrote ${rewritten} internal link(s) in source files to the new URLs.`)
-    const added = appendRedirects(fixes.map((f) => ({ source: `${BASE}/${f.city}/${f.oldSlug}`, destination: `${BASE}/${f.city}/${f.newSlug}`, permanent: true })))
-    console.log(`APPLIED. ${added} redirects added. Undo: --rollback=${path.relative(ROOT, file)} --execute`)
+    const m = mergeRedirects(fixes)
+    fs.writeFileSync(file.replace(/\.json$/, '.redirects-before.json'), JSON.stringify(m.before, null, 1))
+    fs.writeFileSync(REDIRECTS, JSON.stringify(m.merged, null, 2) + '\n')
+    console.log(`APPLIED. ${m.added} redirects added, ${m.retargeted} existing re-pointed to avoid chains, ${m.dropped} dropped because the URL is now a live page. Undo: --rollback=${path.relative(ROOT, file)} --execute`)
   } else {
+    const m = mergeRedirects(fixes)
+    console.log(`Redirects: ${m.added} would be added, ${m.retargeted} existing re-pointed to avoid chains, ${m.dropped} dropped (URL becomes a live page).`)
     console.log(`Internal links in source files that would be rewritten: ${rewriteInternalLinks(fixes, false)}`)
     console.log('DRY RUN: nothing written to the database or data/redirects.json. Re-run with --execute.')
   }

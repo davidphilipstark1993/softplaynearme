@@ -709,9 +709,6 @@ export default async function CityPage({ params, searchParams }: PageProps) {
             {lastUpdated && (
               <span className="text-slate-500">Last updated <time dateTime={new Date(lastUpdatedMs).toISOString()}>{lastUpdated}</time></span>
             )}
-            {city === 'london' && (
-              <span><strong className="text-slate-900">£7&ndash;£14</strong> <span className="text-slate-500">per child, typical session &mdash; under-1s usually free</span></span>
-            )}
           </div>
         </div>
 
