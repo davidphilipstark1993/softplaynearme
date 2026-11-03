@@ -59,6 +59,12 @@ if (!citySlug) {
 // radius each, so outer boroughs actually get searched rather than losing
 // out to central London on every query.
 const CITY_CENTRES = {
+  belfast: [
+    { name: 'Belfast', lat: 54.5973, lng: -5.9301, radius: 8000 },
+    { name: 'North Belfast & Newtownabbey', lat: 54.6500, lng: -5.9100, radius: 8000 },
+    { name: 'East Belfast & Dundonald', lat: 54.5950, lng: -5.8500, radius: 8000 },
+    { name: 'South Belfast & Lisburn Road', lat: 54.5450, lng: -5.9500, radius: 8000 },
+  ],
   london: [
     { name: 'Central London', lat: 51.5155, lng: -0.0922, radius: 6000 },
     { name: 'North London', lat: 51.5837, lng: -0.1097, radius: 8000 },
