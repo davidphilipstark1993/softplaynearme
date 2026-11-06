@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { CheckCircle2, Loader2, Mail } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
+import { AdSlot } from '@/components/ads/AdSlot'
 
 type Variant = 'card' | 'inline' | 'compact'
 
@@ -63,7 +64,8 @@ export function NewsletterSignup({
 
   if (status === 'success' || status === 'already') {
     return (
-      <div className={cn('rounded-xl border border-purple-200 bg-purple-50 px-5 py-4 text-center', className)}>
+      <div className={className}>
+      <div className="rounded-xl border border-purple-200 bg-purple-50 px-5 py-4 text-center">
         <CheckCircle2 className="mx-auto mb-2 h-6 w-6 text-purple-600" />
         <p className="text-sm font-semibold text-slate-900">
           {status === 'already' ? "You're already subscribed" : "You're on the list!"}
@@ -73,6 +75,8 @@ export function NewsletterSignup({
             ? 'That email is already signed up — no action needed.'
             : "Keep an eye on your inbox — we'll send our next update soon."}
         </p>
+      </div>
+      <AdSlot placement="newsletter_confirmation" className="mt-4 text-left" />
       </div>
     )
   }

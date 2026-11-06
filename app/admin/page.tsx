@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback } from 'react'
 import Link from 'next/link'
-import { Mail, Users, Building2, FileCheck2, BarChart3 } from 'lucide-react'
+import { Mail, Users, Building2, FileCheck2, BarChart3, Megaphone } from 'lucide-react'
 import { AdminUnavailable } from '@/components/admin/AdminUnavailable'
 
 const SECTIONS = [
@@ -10,6 +10,7 @@ const SECTIONS = [
   { href: '/admin/newsletter/subscribers', label: 'Newsletter Subscribers', desc: 'Subscriber list, stats, SendGrid sync', icon: Users },
   { href: '/admin/venues', label: 'Venues & Plans', desc: 'Manage listings, plans, featured placement', icon: Building2 },
   { href: '/admin/claims', label: 'Claims', desc: 'Venue ownership claims awaiting review', icon: FileCheck2 },
+  { href: '/admin/ads', label: 'Advertisements', desc: 'Cross-promote your other sites: adverts, placements, analytics', icon: Megaphone },
   { href: '/admin/insights', label: 'Insights', desc: 'Monthly stats, renewals, slipping listings', icon: BarChart3 },
 ]
 

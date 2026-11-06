@@ -6,6 +6,7 @@ import { cities } from '@/lib/venues'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup'
+import { AdSlot } from '@/components/ads/AdSlot'
 import { SearchHero } from '@/components/home/SearchHero'
 import { HeroCarousel } from '@/components/home/HeroCarousel'
 import { buildFAQSchema, buildCityListSchema } from '@/lib/schema'
@@ -339,6 +340,9 @@ export default async function Home() {
         </div>
       </div>
 
+      {/* Cross-promotion advert (managed in /admin/ads) — renders nothing when none is live */}
+      <AdSlot placement="home_promo" className="mx-auto max-w-5xl px-4 pb-12 sm:px-6" />
+
       {/* Featured Venues — Bespoke plan homepage ad placement */}
       {featuredVenues.length > 0 && (
         <div className="bg-gradient-to-br from-amber-50 to-purple-50 py-12 px-4 border-b border-slate-200">
@@ -410,6 +414,9 @@ export default async function Home() {
           </div>
         </div>
       )}
+
+      {/* Cross-promotion advert between the venue sections and the owner CTA */}
+      <AdSlot placement="home_between" className="mx-auto max-w-5xl px-4 py-12 sm:px-6" />
 
       {/* Venue Owners CTA */}
       <div className="bg-green-50 py-16 px-4 border-y border-green-100">

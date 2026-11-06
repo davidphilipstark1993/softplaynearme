@@ -26,6 +26,7 @@ import { getCityOgImage } from '@/lib/cityImages'
 import { formatAddressLine } from '@/lib/sanitize'
 import { FilterSidebar, ActiveFilterBar } from '@/components/search/FilterSidebar'
 import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup'
+import { AdSlot } from '@/components/ads/AdSlot'
 import { isSoftPlayVenueType, VISIBLE_VENUE_TYPES, visibleVenueTypeSql } from '@/lib/venueTypes'
 import { getCardQuote, formatLastVerified } from '@/lib/venueCardText'
 import { isVerified } from '@/lib/plans'
@@ -1187,6 +1188,9 @@ export default async function CityPage({ params, searchParams }: PageProps) {
               )}
             </div>
           )}
+
+          {/* Cross-promotion advert — after the listings, never inside them */}
+          <AdSlot placement="city_page" city={city} className="mt-12" />
 
           {/* Category Links */}
           <section aria-labelledby="category-heading" className="mt-12">

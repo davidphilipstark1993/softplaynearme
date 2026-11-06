@@ -53,6 +53,7 @@ import { QuickFactsPanel } from '@/components/venue/QuickFactsPanel'
 import { EnquiryForm } from '@/components/venue/EnquiryForm'
 import { ReportIssueLink } from '@/components/venue/ReportIssueLink'
 import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup'
+import { AdSlot } from '@/components/ads/AdSlot'
 import { VenueViewTracking } from '@/components/venue/VenueViewTracking'
 import { cleanHoursText, hasOpeningHours, hasPrice } from '@/lib/venueFacts'
 import { getLocality } from '@/lib/localities'
@@ -1336,6 +1337,8 @@ export default async function VenuePage({ params }: PageProps) {
               </div>
             </div>
           </div>
+
+          <AdSlot placement="venue_page" city={city} className="max-w-4xl mx-auto px-4 pb-10" />
 
           <div className="max-w-2xl mx-auto px-4 pb-12">
             <NewsletterSignup

@@ -12,6 +12,7 @@ import { Footer } from '@/components/layout/Footer'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 import { JsonLd } from '@/components/seo/JsonLd'
 import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup'
+import { AdSlot } from '@/components/ads/AdSlot'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -179,6 +180,8 @@ export default async function BlogPostPage({ params }: PageProps) {
         <div className="mt-6 border-t border-slate-200 pt-6">
           <ShareButtons url={canonical} title={post.title} />
         </div>
+
+        <AdSlot placement="blog_post" className="mt-10" />
 
         <div className="mt-8">
           <NewsletterSignup
