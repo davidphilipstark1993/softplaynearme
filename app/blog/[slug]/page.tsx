@@ -40,14 +40,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   // page title must NOT repeat the suffix — doing so rendered it twice. Social
   // cards don't go through the template, so they keep the suffix explicitly.
   const title = post.title
-  const socialTitle = `${post.title} | Soft Play Near Me`
-  const description = trimMeta(post.excerpt)
+  const socialTitle = post.metaTitle ?? `${post.title} | Soft Play Near Me`
+  // An explicit metaDescription is hand-written copy, so it gets a little more room than the 155 default.
+  const description = post.metaDescription ? trimMeta(post.metaDescription, 160) : trimMeta(post.excerpt)
   const canonical = `https://www.softplaynearme.co.uk/blog/${post.slug}`
   const ogImage = getBlogOgImage(post.city)
 
   return {
     // Drop the " | Soft Play Near Me" template suffix when it would push the title past ~60 characters.
-    title: title.length + ' | Soft Play Near Me'.length > 60 ? { absolute: title } : title,
+    title: post.metaTitle
+      ? { absolute: post.metaTitle }
+      : title.length + ' | Soft Play Near Me'.length > 60 ? { absolute: title } : title,
     description,
     alternates: {
       canonical,

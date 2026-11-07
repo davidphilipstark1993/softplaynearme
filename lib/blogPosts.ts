@@ -1,5 +1,6 @@
 import { sussexPosts } from './blogPostsSussex'
 import { ukPosts } from './blogPostsUk'
+import { senPosts } from './blogPostsSen'
 import { cityGuidePosts } from './blogPostsCities'
 
 export interface BlogFaq {
@@ -28,6 +29,10 @@ export interface BlogPost {
   noindex?: boolean
   /** Date the venue facts in the post were last checked against venue sites (display text). */
   verifiedOn?: string
+  /** Full <title> (suffix included) when it must differ from the on-page H1 `title`. */
+  metaTitle?: string
+  /** Meta/OG description when it must differ from the on-page lead paragraph `excerpt`. */
+  metaDescription?: string
 }
 
 export const posts: BlogPost[] = [
@@ -4656,7 +4661,7 @@ export const posts: BlogPost[] = [
   },
 ]
 
-posts.push(...sussexPosts, ...ukPosts, ...cityGuidePosts)
+posts.push(...sussexPosts, ...ukPosts, ...senPosts, ...cityGuidePosts)
 
 export const blogPosts: BlogPost[] = posts
 
