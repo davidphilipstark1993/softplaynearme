@@ -544,5 +544,10 @@
     "name": "Peterborough",
     "county": "Cambridgeshire"
   },
-  {"slug": "belfast", "name": "Belfast", "county": "Belfast"}
+  {"slug": "belfast", "name": "Belfast", "county": "Belfast"},
+  {
+    "slug": "shrewsbury",
+    "name": "Shrewsbury",
+    "county": "Shropshire"
+  }
 ]

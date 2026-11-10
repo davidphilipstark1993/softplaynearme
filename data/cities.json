@@ -2663,5 +2663,21 @@
         "answer": "We list soft play centres in and around Belfast. Check each venue's page for current details before you visit."
       }
     ]
+  },
+  {
+    "slug": "shrewsbury",
+    "name": "Shrewsbury",
+    "county": "Shropshire",
+    "region": "West Midlands",
+    "metaTitle": "Soft Play in Shrewsbury",
+    "metaDescription": "Find soft play centres in Shrewsbury, Shropshire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Shrewsbury",
+    "intro": "Soft play centres in Shrewsbury and the surrounding area of Shropshire.",
+    "nearbyAreas": [
+      "Birmingham",
+      "Worcester",
+      "Stoke-on-Trent"
+    ],
+    "faqs": []
   }
 ]
