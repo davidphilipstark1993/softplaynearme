@@ -549,5 +549,10 @@
     "slug": "shrewsbury",
     "name": "Shrewsbury",
     "county": "Shropshire"
+  },
+  {
+    "slug": "lancaster",
+    "name": "Lancaster",
+    "county": "Lancashire"
   }
 ]

@@ -2679,5 +2679,21 @@
       "Stoke-on-Trent"
     ],
     "faqs": []
+  },
+  {
+    "slug": "lancaster",
+    "name": "Lancaster",
+    "county": "Lancashire",
+    "region": "North West",
+    "metaTitle": "Soft Play in Lancaster",
+    "metaDescription": "Find soft play centres in Lancaster, Lancashire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Lancaster",
+    "intro": "Soft play centres in Lancaster and the surrounding area of Lancashire.",
+    "nearbyAreas": [
+      "Blackpool",
+      "Carlisle",
+      "Bolton"
+    ],
+    "faqs": []
   }
 ]

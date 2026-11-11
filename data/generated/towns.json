@@ -420,6 +420,12 @@
     "avgRating": null
   },
   {
+    "name": "Lancaster",
+    "slug": "lancaster",
+    "venueCount": 1,
+    "avgRating": null
+  },
+  {
     "name": "Leeds",
     "slug": "leeds",
     "venueCount": 52,
