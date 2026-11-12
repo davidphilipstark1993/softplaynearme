@@ -250,6 +250,13 @@ async function senderIsConfirmed(email) {
   return (json?.results ?? []).some((s) => String(s.from_email).toLowerCase() === email.toLowerCase() && s.verified === true)
 }
 
+/** Banner logo, attached inline (Content-ID `spnm-logo`) so it shows without hosting or remote-image loading. */
+const LOGO_FILE = path.join(HERE, 'assets', 'soft-play-near-me-email-logo.png')
+export const LOGO_CID = 'spnm-logo'
+export function logoAttachment() {
+  return { content: fs.readFileSync(LOGO_FILE).toString('base64'), type: 'image/png', filename: 'soft-play-near-me.png', disposition: 'inline', content_id: LOGO_CID }
+}
+
 export function buildPayload({ to, from, replyTo, name, subject, text, html, groupId, city, venueId, kind }) {
   return {
     personalizations: [{ to: [{ email: to }], custom_args: { campaign: `claim-${city}`, venue_id: String(venueId), kind } }],
@@ -260,6 +267,8 @@ export function buildPayload({ to, from, replyTo, name, subject, text, html, gro
       { type: 'text/plain', value: text },
       { type: 'text/html', value: html },
     ],
+    // Only attach the logo if this letter actually shows it.
+    ...(html.includes(`cid:${LOGO_CID}`) ? { attachments: [logoAttachment()] } : {}),
     categories: ['venue-claim-campaign', `claim-${city}`],
     asm: { group_id: Number(groupId) },
     // Tracking explicitly off: no open pixel, no rewritten links, no SendGrid footer (the unsubscribe link is in the body).

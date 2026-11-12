@@ -89,6 +89,20 @@ test('warm-up caps and the SendGrid payload (tracking off, ASM group, reply-to)'
   assert.deepEqual(p.content.map((c) => c.type), ['text/plain', 'text/html'])
 })
 
+test('the logo banner is an inline attachment the HTML points at, and only attached when used', () => {
+  assert.match(htmlTemplate, /<img src="cid:spnm-logo" alt="Soft Play Near Me"/)
+  assert.doesNotMatch(textTemplate, /cid:/)
+  const base = { to: 'x@y.co.uk', from: 'david@softplaynearme.co.uk', replyTo: 'david@softplaynearme.co.uk', name: 'David', subject: 's', text: 't', groupId: '1', city: 'hull', venueId: 1, kind: 'test' }
+  const withLogo = cc.buildPayload({ ...base, html: htmlTemplate })
+  assert.equal(withLogo.attachments.length, 1)
+  assert.equal(withLogo.attachments[0].content_id, 'spnm-logo')
+  assert.equal(withLogo.attachments[0].disposition, 'inline')
+  assert.equal(withLogo.attachments[0].type, 'image/png')
+  assert.ok(Buffer.from(withLogo.attachments[0].content, 'base64').subarray(1, 4).toString() === 'PNG')
+  assert.ok(withLogo.attachments[0].content.length < 120_000, 'keep the email light')
+  assert.equal(cc.buildPayload({ ...base, html: '<p>no logo</p>' }).attachments, undefined)
+})
+
 test('--send and --test-to refuse to run without key, ASM group and postal address (and never reach the network)', () => {
   const env = { PATH: process.env.PATH, HOME: process.env.HOME }
   const csv = path.join(fs.mkdtempSync(path.join(process.env.TMPDIR || '/tmp', 'claim-')), 'hull.csv')
