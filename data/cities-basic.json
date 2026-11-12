@@ -598,5 +598,10 @@
     "slug": "hamilton",
     "name": "Hamilton",
     "county": "South Lanarkshire"
+  },
+  {
+    "slug": "perth",
+    "name": "Perth",
+    "county": "Perth and Kinross"
   }
 ]

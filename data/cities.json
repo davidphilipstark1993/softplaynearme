@@ -2824,5 +2824,22 @@
       "Ayr"
     ],
     "faqs": []
+  },
+  {
+    "slug": "perth",
+    "name": "Perth",
+    "county": "Perth and Kinross",
+    "region": "Scotland",
+    "metaTitle": "Soft Play in Perth",
+    "metaDescription": "Find soft play centres in Perth, Perth and Kinross. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Perth",
+    "intro": "Soft play centres in Perth and the surrounding area of Perth and Kinross.",
+    "nearbyAreas": [
+      "Cupar",
+      "Forfar",
+      "Falkirk",
+      "Edinburgh"
+    ],
+    "faqs": []
   }
 ]
