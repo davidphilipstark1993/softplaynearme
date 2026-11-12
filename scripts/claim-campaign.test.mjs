@@ -92,6 +92,12 @@ test('a venue listed on another hub is skipped: the Hull letter quotes the Hull 
   assert.match(skipped.find((s) => s.r.venue_id === '3').reason, /Hull letter quotes the Hull page/)
 })
 
+test('a withdrawn-ISP address (Karoo) is flagged, not dropped', () => {
+  assert.equal(cc.isLikelyStale('info@kgvcottingham.karoo.co.uk'), true)
+  assert.equal(cc.isLikelyStale('info@letsplayhull.com'), false)
+  assert.equal(cc.classify(cc.toRecipients([row({ email: 'info@kgvcottingham.karoo.co.uk' })], 'hull'), ctx()).send.length, 1)
+})
+
 test('warm-up caps and the SendGrid payload (tracking off, ASM group, reply-to)', () => {
   assert.deepEqual([0, 1, 2, 3, 4, 5, 9].map(cc.dayCapFor), [20, 40, 80, 120, 200, 200, 200])
   const p = cc.buildPayload({ to: 'x@y.co.uk', from: 'david@softplaynearme.co.uk', replyTo: 'david@softplaynearme.co.uk', name: 'David', subject: 's', text: 't', html: 'h', groupId: '123', city: 'hull', venueId: 14, kind: 'campaign' })

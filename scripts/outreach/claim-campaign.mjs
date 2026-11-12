@@ -99,6 +99,10 @@ export function emailDomain(email) {
   return email.split('@')[1]?.toLowerCase() ?? ''
 }
 
+/** Addresses that are valid but likely dead (a withdrawn ISP's mailbox): still sent to, but flagged in the dry run. */
+export const STALE_DOMAINS = ['karoo.co.uk']
+export const isLikelyStale = (email) => STALE_DOMAINS.some((d) => emailDomain(email).endsWith(d))
+
 export function isPlaceholderEmail(email) {
   return PLACEHOLDER_DOMAINS.has(emailDomain(email))
 }
@@ -389,7 +393,7 @@ async function main() {
     console.log(`DRY RUN — nothing is sent. City: ${city.name}. CSV: ${path.relative(ROOT, csvPath)}`)
     console.log(`\n${recipients.length} rows in the CSV: ${send.length} would be emailed, ${skipped.length} skipped.\n`)
     console.log('Would email:')
-    for (const r of send) console.log(`  #${r.venue_id}  ${r.venue_name}  <${r.email}>\n         ${r.listing_url}`)
+    for (const r of send) console.log(`  #${r.venue_id}  ${r.venue_name}  <${r.email}>${isLikelyStale(r.email) ? '   ⚠ stale ISP domain, may bounce' : ''}\n         ${r.listing_url}`)
     if (skipped.length) {
       console.log('\nSkipped:')
       for (const { r, reason } of skipped) console.log(`  #${r.venue_id}  ${r.venue_name}  <${r.email}> — ${reason}`)
