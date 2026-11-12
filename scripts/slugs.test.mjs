@@ -49,53 +49,17 @@ test('slugs are unique within each hub and never shadow a filter route', () => {
   }
 })
 
-// Static export is older than the Neon listings for venues refiled onto new
-// town hubs in the 11 Nov 2026 SEO audit. data/generated/venues.json and
-// venuesByTown.json are too large for the usual push_files path (~3MB limit),
-// so these destinations are not in the snapshot yet. Drop this list once the
-// snapshots are updated (also clears the pre-existing Lancaster count mismatch).
-const pendingRefiles = new Map([
-  ['/soft-play/northampton/my-happy-play-cafe', '/soft-play/wellingborough/my-happy-play-cafe'],
-  ['/soft-play/worcester/little-olives-play-cafe', '/soft-play/malvern/little-olives-play-cafe'],
-  ['/soft-play/edinburgh/jungle-tumble-play-cafe-edinburgh', '/soft-play/musselburgh/jungle-tumble-play-cafe'],
-  ['/soft-play/musselburgh/jungle-tumble-play-cafe-edinburgh', '/soft-play/musselburgh/jungle-tumble-play-cafe'],
-  ['/soft-play/edinburgh/soft-play-musselburgh-sports-centre', '/soft-play/musselburgh/soft-play-musselburgh-sports-centre'],
-  ['/soft-play/ipswich/the-snug-play-cafe', '/soft-play/harwich/the-snug-play-cafe'],
-  ['/soft-play/colchester/the-snug-play-cafe', '/soft-play/harwich/the-snug-play-cafe'],
-  ['/soft-play/manchester/baby-bears-play-cafe', '/soft-play/oldham/baby-bears-play-cafe'],
-  ['/soft-play/sheffield/baby-bears-play-cafe', '/soft-play/oldham/baby-bears-play-cafe'],
-  ['/soft-play/antrim/little-izzies-play-cafe', '/soft-play/randalstown/little-izzies-play-cafe'],
-  ['/soft-play/stoke/little-red-fox-play-cafe', '/soft-play/stafford/little-red-fox-play-cafe'],
-  ['/soft-play/stoke/doddys-soft-play-cafe', '/soft-play/stafford/doddys-soft-play-cafe'],
-  ['/soft-play/glasgow/juniors-play-cafe-hamilton', '/soft-play/hamilton/juniors-play-cafe-hamilton'],
-  ['/soft-play/bradford/petit-pois-play-cafe-bradford', '/soft-play/bradford'],
-  ['/soft-play/birmingham/tiny-tims-purple-planet-indoor-soft-play', '/soft-play/coventry/tiny-tims-purple-planet-indoor-soft-play'],
-  ['/soft-play/birmingham/the-cube-coventry', '/soft-play/coventry/the-cube-coventry'],
-  ['/soft-play/birmingham/little-brown-mouse-play-cafe', '/soft-play/cannock/little-brown-mouse-play-cafe'],
-  ['/soft-play/edinburgh/jabberwocky-soft-play', '/soft-play/haddington/jabberwocky-soft-play'],
-  ['/soft-play/edinburgh/leaping-lemurs-soft-play', '/soft-play/west-calder/leaping-lemurs-soft-play'],
-  ['/soft-play/leeds/gravity-active-castleford-xscape', '/soft-play/castleford/gravity-active-castleford-xscape'],
-  ['/soft-play/manchester/the-little-luxe-soft-play-centre-ltd', '/soft-play/bury/the-little-luxe-soft-play-centre-ltd'],
-  ['/soft-play/newcastle/krazy-kingdom', '/soft-play/stanley/krazy-kingdom'],
-  ['/soft-play/newcastle/brocksbushes-play-barn', '/soft-play/stocksfield/brocksbushes-play-barn'],
-  ['/soft-play/nottingham/vikings-play-centre', '/soft-play/loughborough/vikings-play-centre'],
-  ['/soft-play/bristol/the-den-at-fox-and-kit', '/soft-play/midsomer-norton/the-den-at-fox-and-kit'],
-  ['/soft-play/london/kidabulous', '/soft-play/sunbury-on-thames/kidabulous'],
-  ['/soft-play/london/the-barnyard-soft-play', '/soft-play/swanley/the-barnyard-soft-play'],
-])
-const pendingDestinations = new Set(pendingRefiles.values())
-
 test('redirects: no chains, no loops, every destination is a live page', () => {
   for (const [source, destination] of bySource) {
     assert.notEqual(source, destination, `self-redirect ${source}`)
     assert.ok(!bySource.has(destination), `chain ${source} -> ${destination} -> ${bySource.get(destination)}`)
-    assert.ok(live.has(destination) || pendingDestinations.has(destination), `${source} redirects to ${destination}, which is not a live page`)
+    assert.ok(live.has(destination), `${source} redirects to ${destination}, which is not a live page`)
   }
 })
 
 test('a page that still exists only redirects if that is a known, deliberate merge', () => {
   // Static export is older than the DB for these two merged duplicates (see reports/duplicate-candidates.csv).
-  const allowed = new Set(['/soft-play/brighton/kidzone-at-missionfiit-hailsham', '/soft-play/york/flying-legends-wacky-warehouse-york', ...pendingRefiles.keys()])
+  const allowed = new Set(['/soft-play/brighton/kidzone-at-missionfiit-hailsham', '/soft-play/york/flying-legends-wacky-warehouse-york'])
   for (const source of bySource.keys()) if (live.has(source)) assert.ok(allowed.has(source), `${source} is live but redirects`)
 })
 

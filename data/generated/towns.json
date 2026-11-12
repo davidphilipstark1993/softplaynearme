@@ -12,12 +12,6 @@
     "avgRating": "4.4"
   },
   {
-    "name": "Antrim",
-    "slug": "antrim",
-    "venueCount": 1,
-    "avgRating": "4.9"
-  },
-  {
     "name": "Aylesbury",
     "slug": "aylesbury",
     "venueCount": 1,
@@ -74,8 +68,8 @@
   {
     "name": "Birmingham",
     "slug": "birmingham",
-    "venueCount": 76,
-    "avgRating": "4.4"
+    "venueCount": 73,
+    "avgRating": "4.3"
   },
   {
     "name": "Bishop Auckland",
@@ -110,7 +104,7 @@
   {
     "name": "Bradford",
     "slug": "bradford",
-    "venueCount": 13,
+    "venueCount": 12,
     "avgRating": "4.4"
   },
   {
@@ -134,7 +128,7 @@
   {
     "name": "Bristol",
     "slug": "bristol",
-    "venueCount": 19,
+    "venueCount": 18,
     "avgRating": "4.5"
   },
   {
@@ -150,10 +144,22 @@
     "avgRating": "3.9"
   },
   {
+    "name": "Bury",
+    "slug": "bury",
+    "venueCount": 1,
+    "avgRating": "4.9"
+  },
+  {
     "name": "Cambridge",
     "slug": "cambridge",
     "venueCount": 2,
     "avgRating": "4.8"
+  },
+  {
+    "name": "Cannock",
+    "slug": "cannock",
+    "venueCount": 1,
+    "avgRating": "4.9"
   },
   {
     "name": "Cardiff",
@@ -166,6 +172,12 @@
     "slug": "carlisle",
     "venueCount": 1,
     "avgRating": "4.4"
+  },
+  {
+    "name": "Castleford",
+    "slug": "castleford",
+    "venueCount": 1,
+    "avgRating": "3.9"
   },
   {
     "name": "Cheltenham",
@@ -206,8 +218,8 @@
   {
     "name": "Coventry",
     "slug": "coventry",
-    "venueCount": 2,
-    "avgRating": null
+    "venueCount": 4,
+    "avgRating": "4.7"
   },
   {
     "name": "Crewe",
@@ -266,7 +278,7 @@
   {
     "name": "Edinburgh",
     "slug": "edinburgh",
-    "venueCount": 19,
+    "venueCount": 15,
     "avgRating": "4.4"
   },
   {
@@ -320,8 +332,14 @@
   {
     "name": "Glasgow",
     "slug": "glasgow",
-    "venueCount": 21,
+    "venueCount": 20,
     "avgRating": "4.2"
+  },
+  {
+    "name": "Great Malvern",
+    "slug": "malvern",
+    "venueCount": 1,
+    "avgRating": "4.9"
   },
   {
     "name": "Guildford",
@@ -330,16 +348,34 @@
     "avgRating": "4.9"
   },
   {
+    "name": "Haddington",
+    "slug": "haddington",
+    "venueCount": 1,
+    "avgRating": "4.2"
+  },
+  {
     "name": "Halifax",
     "slug": "halifax",
     "venueCount": 15,
     "avgRating": "4.5"
   },
   {
+    "name": "Hamilton",
+    "slug": "hamilton",
+    "venueCount": 1,
+    "avgRating": "4.6"
+  },
+  {
     "name": "Harlow",
     "slug": "harlow",
     "venueCount": 1,
     "avgRating": "4.1"
+  },
+  {
+    "name": "Harwich",
+    "slug": "harwich",
+    "venueCount": 1,
+    "avgRating": "5.0"
   },
   {
     "name": "Hastings",
@@ -410,7 +446,7 @@
   {
     "name": "Ipswich",
     "slug": "ipswich",
-    "venueCount": 19,
+    "venueCount": 18,
     "avgRating": "4.5"
   },
   {
@@ -428,7 +464,7 @@
   {
     "name": "Leeds",
     "slug": "leeds",
-    "venueCount": 52,
+    "venueCount": 51,
     "avgRating": "4.4"
   },
   {
@@ -470,7 +506,13 @@
   {
     "name": "London",
     "slug": "london",
-    "venueCount": 63,
+    "venueCount": 61,
+    "avgRating": "4.4"
+  },
+  {
+    "name": "Loughborough",
+    "slug": "loughborough",
+    "venueCount": 1,
     "avgRating": "4.4"
   },
   {
@@ -482,14 +524,20 @@
   {
     "name": "Manchester",
     "slug": "manchester",
-    "venueCount": 45,
-    "avgRating": "4.4"
+    "venueCount": 43,
+    "avgRating": "4.3"
   },
   {
     "name": "Matlock",
     "slug": "matlock",
     "venueCount": 1,
     "avgRating": "4.4"
+  },
+  {
+    "name": "Midsomer Norton",
+    "slug": "midsomer-norton",
+    "venueCount": 1,
+    "avgRating": "4.8"
   },
   {
     "name": "Milton Keynes",
@@ -510,16 +558,22 @@
     "avgRating": "4.4"
   },
   {
+    "name": "Musselburgh",
+    "slug": "musselburgh",
+    "venueCount": 2,
+    "avgRating": "4.7"
+  },
+  {
     "name": "Newcastle",
     "slug": "newcastle",
-    "venueCount": 33,
+    "venueCount": 31,
     "avgRating": "4.3"
   },
   {
     "name": "Northampton",
     "slug": "northampton",
-    "venueCount": 4,
-    "avgRating": "4.7"
+    "venueCount": 3,
+    "avgRating": "4.6"
   },
   {
     "name": "Norwich",
@@ -530,8 +584,14 @@
   {
     "name": "Nottingham",
     "slug": "nottingham",
-    "venueCount": 50,
+    "venueCount": 49,
     "avgRating": "4.4"
+  },
+  {
+    "name": "Oldham",
+    "slug": "oldham",
+    "venueCount": 1,
+    "avgRating": "5.0"
   },
   {
     "name": "Omagh",
@@ -542,6 +602,12 @@
   {
     "name": "Oxford",
     "slug": "oxford",
+    "venueCount": 1,
+    "avgRating": null
+  },
+  {
+    "name": "Perth",
+    "slug": "perth",
     "venueCount": 1,
     "avgRating": null
   },
@@ -576,9 +642,15 @@
     "avgRating": "4.4"
   },
   {
+    "name": "Randalstown",
+    "slug": "randalstown",
+    "venueCount": 1,
+    "avgRating": "4.9"
+  },
+  {
     "name": "Rhyl",
     "slug": "rhyl",
-    "venueCount": 1,
+    "venueCount": 2,
     "avgRating": "4.6"
   },
   {
@@ -654,22 +726,52 @@
     "avgRating": "4.6"
   },
   {
+    "name": "Stafford",
+    "slug": "stafford",
+    "venueCount": 2,
+    "avgRating": "4.8"
+  },
+  {
+    "name": "Stanley",
+    "slug": "stanley",
+    "venueCount": 1,
+    "avgRating": "4.3"
+  },
+  {
     "name": "Stirling",
     "slug": "stirling",
     "venueCount": 1,
     "avgRating": null
   },
   {
+    "name": "Stocksfield",
+    "slug": "stocksfield",
+    "venueCount": 1,
+    "avgRating": "4.6"
+  },
+  {
     "name": "Stoke",
     "slug": "stoke",
-    "venueCount": 17,
+    "venueCount": 15,
     "avgRating": "4.3"
+  },
+  {
+    "name": "Sunbury-on-Thames",
+    "slug": "sunbury-on-thames",
+    "venueCount": 1,
+    "avgRating": "4.1"
   },
   {
     "name": "Sunderland",
     "slug": "sunderland",
     "venueCount": 18,
     "avgRating": "4.4"
+  },
+  {
+    "name": "Swanley",
+    "slug": "swanley",
+    "venueCount": 1,
+    "avgRating": "4.0"
   },
   {
     "name": "Swansea",
@@ -696,6 +798,18 @@
     "avgRating": "4.3"
   },
   {
+    "name": "Wellingborough",
+    "slug": "wellingborough",
+    "venueCount": 1,
+    "avgRating": "4.9"
+  },
+  {
+    "name": "West Calder",
+    "slug": "west-calder",
+    "venueCount": 1,
+    "avgRating": "4.1"
+  },
+  {
     "name": "Wokingham",
     "slug": "wokingham",
     "venueCount": 1,
@@ -704,8 +818,8 @@
   {
     "name": "Worcester",
     "slug": "worcester",
-    "venueCount": 2,
-    "avgRating": "4.6"
+    "venueCount": 1,
+    "avgRating": "4.2"
   },
   {
     "name": "Worthing",
