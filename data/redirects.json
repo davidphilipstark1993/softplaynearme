@@ -1411,7 +1411,7 @@
   },
   {
     "source": "/soft-play/york/gravity-active-castleford-xscape-york",
-    "destination": "/soft-play/leeds/gravity-active-castleford-xscape",
+    "destination": "/soft-play/castleford/gravity-active-castleford-xscape",
     "permanent": true
   },
   {
@@ -2421,7 +2421,7 @@
   },
   {
     "source": "/soft-play/leeds/gravity-active-castleford-xscape-leeds",
-    "destination": "/soft-play/leeds/gravity-active-castleford-xscape",
+    "destination": "/soft-play/castleford/gravity-active-castleford-xscape",
     "permanent": true
   },
   {
@@ -4351,7 +4351,7 @@
   },
   {
     "source": "/soft-play/leeds/gravity-active-castleford-xscape-york",
-    "destination": "/soft-play/leeds/gravity-active-castleford-xscape",
+    "destination": "/soft-play/castleford/gravity-active-castleford-xscape",
     "permanent": true
   },
   {
@@ -5472,6 +5472,71 @@
   {
     "source": "/soft-play/bradford/petit-pois-play-cafe-bradford",
     "destination": "/soft-play/bradford",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/birmingham/tiny-tims-purple-planet-indoor-soft-play",
+    "destination": "/soft-play/coventry/tiny-tims-purple-planet-indoor-soft-play",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/birmingham/the-cube-coventry",
+    "destination": "/soft-play/coventry/the-cube-coventry",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/birmingham/little-brown-mouse-play-cafe",
+    "destination": "/soft-play/cannock/little-brown-mouse-play-cafe",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/edinburgh/jabberwocky-soft-play",
+    "destination": "/soft-play/haddington/jabberwocky-soft-play",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/edinburgh/leaping-lemurs-soft-play",
+    "destination": "/soft-play/west-calder/leaping-lemurs-soft-play",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/leeds/gravity-active-castleford-xscape",
+    "destination": "/soft-play/castleford/gravity-active-castleford-xscape",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/manchester/the-little-luxe-soft-play-centre-ltd",
+    "destination": "/soft-play/bury/the-little-luxe-soft-play-centre-ltd",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/newcastle/krazy-kingdom",
+    "destination": "/soft-play/stanley/krazy-kingdom",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/newcastle/brocksbushes-play-barn",
+    "destination": "/soft-play/stocksfield/brocksbushes-play-barn",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/nottingham/vikings-play-centre",
+    "destination": "/soft-play/loughborough/vikings-play-centre",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/bristol/the-den-at-fox-and-kit",
+    "destination": "/soft-play/midsomer-norton/the-den-at-fox-and-kit",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/london/kidabulous",
+    "destination": "/soft-play/sunbury-on-thames/kidabulous",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/london/the-barnyard-soft-play",
+    "destination": "/soft-play/swanley/the-barnyard-soft-play",
     "permanent": true
   }
 ]

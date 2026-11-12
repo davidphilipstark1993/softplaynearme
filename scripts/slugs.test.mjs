@@ -69,6 +69,19 @@ const pendingRefiles = new Map([
   ['/soft-play/stoke/doddys-soft-play-cafe', '/soft-play/stafford/doddys-soft-play-cafe'],
   ['/soft-play/glasgow/juniors-play-cafe-hamilton', '/soft-play/hamilton/juniors-play-cafe-hamilton'],
   ['/soft-play/bradford/petit-pois-play-cafe-bradford', '/soft-play/bradford'],
+  ['/soft-play/birmingham/tiny-tims-purple-planet-indoor-soft-play', '/soft-play/coventry/tiny-tims-purple-planet-indoor-soft-play'],
+  ['/soft-play/birmingham/the-cube-coventry', '/soft-play/coventry/the-cube-coventry'],
+  ['/soft-play/birmingham/little-brown-mouse-play-cafe', '/soft-play/cannock/little-brown-mouse-play-cafe'],
+  ['/soft-play/edinburgh/jabberwocky-soft-play', '/soft-play/haddington/jabberwocky-soft-play'],
+  ['/soft-play/edinburgh/leaping-lemurs-soft-play', '/soft-play/west-calder/leaping-lemurs-soft-play'],
+  ['/soft-play/leeds/gravity-active-castleford-xscape', '/soft-play/castleford/gravity-active-castleford-xscape'],
+  ['/soft-play/manchester/the-little-luxe-soft-play-centre-ltd', '/soft-play/bury/the-little-luxe-soft-play-centre-ltd'],
+  ['/soft-play/newcastle/krazy-kingdom', '/soft-play/stanley/krazy-kingdom'],
+  ['/soft-play/newcastle/brocksbushes-play-barn', '/soft-play/stocksfield/brocksbushes-play-barn'],
+  ['/soft-play/nottingham/vikings-play-centre', '/soft-play/loughborough/vikings-play-centre'],
+  ['/soft-play/bristol/the-den-at-fox-and-kit', '/soft-play/midsomer-norton/the-den-at-fox-and-kit'],
+  ['/soft-play/london/kidabulous', '/soft-play/sunbury-on-thames/kidabulous'],
+  ['/soft-play/london/the-barnyard-soft-play', '/soft-play/swanley/the-barnyard-soft-play'],
 ])
 const pendingDestinations = new Set(pendingRefiles.values())
 
