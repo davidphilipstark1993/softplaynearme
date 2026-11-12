@@ -1,0 +1,25 @@
+Hi {{venue_name}} team,
+
+How are you? I hope business is good!
+
+I'm David, and I run Soft Play Near Me, a free UK directory for indoor soft play. You're already listed here: {{listing_url}}
+
+I'm writing because our Hull page (https://www.softplaynearme.co.uk/soft-play/hull) appeared 4,576 times in Google searches between 1 August and 31 October 2026.
+
+If any of your details are wrong or missing, you can claim the listing for free and update it yourself. We review claims within two working days. You'll get a dashboard where you can upload photos (up to 10), set your opening hours, add prices and session types, and keep your website, phone number and a short description up to date.
+
+The claim form is here: {{claim_url}}
+
+If you have a booking page you'd like parents to use, reply with the link and I'll add a Book Now button to your listing. That's something I do by hand at the moment, because it isn't in the dashboard yet.
+
+It's optional, and there's no subscription. Happy to answer anything if you reply.
+
+Thanks,
+David
+Soft Play Near Me
+https://www.softplaynearme.co.uk
+david@softplaynearme.co.uk
+
+If you'd rather I didn't email you again about claiming your listing, reply "no thanks" or use this unsubscribe link: {{unsubscribe_url}}
+
+Soft Play Near Me, {{POSTAL_ADDRESS}}
