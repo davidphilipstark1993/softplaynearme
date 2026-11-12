@@ -36,7 +36,7 @@ import { getCityVenueCount } from '@/lib/venueCounts'
 import { computeCityStats, rankTopRated, smoothedRating, MIN_REVIEWS_FOR_TOP_RATED, RATING_PRIOR_MEAN } from '@/lib/cityStats'
 import { buildCityIntro, buildCityFaqs } from '@/lib/cityContent'
 import { isOpenNow } from '@/lib/utils'
-import { buildCityMeta } from '@/lib/cityMeta'
+import { buildCityMeta, buildOverrideMeta } from '@/lib/cityMeta'
 import { hasStructuredHours } from '@/lib/venueFacts'
 import { splitByLocality, groupNearbyByLocality, getLocality } from '@/lib/localities'
 import { VENUES_PER_PAGE, totalPagesFor, parsePageParam, hubPagePath, pageWindow } from '@/lib/pagination'
@@ -45,7 +45,7 @@ import { VenueCardFacts } from '@/components/venue/VenueCardFacts'
 import { VenueComparisonTable } from '@/components/location/VenueComparisonTable'
 import { HubGuide, NearbyHubs } from '@/components/location/HubGuide'
 import { NearTown } from '@/components/location/NearTown'
-import { getHubGuide, buildGuideTitle, buildAnswerFirst, MAX_FAQS } from '@/lib/hubGuides'
+import { getHubGuide, buildDataGuide, buildGuideTitle, buildAnswerFirst, MAX_FAQS } from '@/lib/hubGuides'
 
 interface PageProps {
   params: Promise<{ city: string }>
@@ -108,7 +108,10 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
   // Stats describe the hub's own main list (nearby-town venues are counted in
   // their own section), so the title's "N Centres" matches the page's heading.
   const { core } = splitByLocality(city, await getCityVenuesAll(city))
-  const meta = buildCityMeta(name, county, computeCityStats(core.map(toStatsVenue)))
+  const cityStatsForMeta = computeCityStats(core.map(toStatsVenue))
+  // Per-hub "near me" overrides (lib/cityMeta.ts) win over both the guide title and the generated one.
+  const override = buildOverrideMeta(city, name, cityStatsForMeta)
+  const meta = override ?? buildCityMeta(name, county, cityStatsForMeta)
 
   // Any filter / search / sort / area variation is a duplicate view of the same
   // venues: noindex,follow, canonical to the plain hub.
@@ -124,7 +127,7 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
   const outOfRange = requested > totalPages
 
   // Hubs with an editorial guide (lib/hubGuides.ts) use the long-form title with the live N.
-  const guideTitle = getHubGuide(city) && core.length > 0 ? buildGuideTitle(name, core.length, new Date().getFullYear()) : null
+  const guideTitle = !override && getHubGuide(city) && core.length > 0 ? buildGuideTitle(name, core.length, new Date().getFullYear()) : null
   const titleText = guideTitle ?? meta.title
   const title = pageNum > 1 ? `${titleText} – Page ${pageNum}` : titleText
   const description = pageNum > 1 ? trimMeta(`${meta.description} Page ${pageNum} of ${totalPages}.`) : meta.description
@@ -575,8 +578,17 @@ export default async function CityPage({ params, searchParams }: PageProps) {
   const nearbyTownNames = [...new Set(nearbyVenues.map((v) => getLocality(v)).filter((l): l is string => !!l))]
   const contentInput = { name: displayName, county, slug: city, venues: contentVenues.map(toStatsVenue), nearbyCount: nearbyVenues.length, nearbyTowns: nearbyTownNames }
   const heroIntro = buildCityIntro(contentInput)
-  const cityMeta = buildCityMeta(displayName, county, computeCityStats(contentInput.venues))
-  const guide = getHubGuide(city)
+  const cityStatsForSchema = computeCityStats(contentInput.venues)
+  const cityMeta = buildOverrideMeta(city, displayName, cityStatsForSchema) ?? buildCityMeta(displayName, county, cityStatsForSchema)
+  // Hand-verified guide (Worthing, Brighton) or, for large hubs, one built from the listings (lib/hubGuides.ts).
+  const guide =
+    getHubGuide(city) ??
+    buildDataGuide(
+      city,
+      displayName,
+      contentVenues.map((v) => ({ ...toStatsVenue(v), postcode: v.postcode, area: getLocality(v), baby_area: v.baby_area })),
+      getPostForCity(displayName)
+    )
   const genericFaqs = buildCityFaqs(contentInput)
   // A guide's own party question replaces the generic one; the rest of the generic FAQ fills what room is left.
   const guideHasParty = !!guide?.faqs.some((f) => /part(y|ies)/i.test(f.question))
@@ -593,7 +605,8 @@ export default async function CityPage({ params, searchParams }: PageProps) {
     return Number.isFinite(t) && t > max ? t : max
   }, 0)
   const lastUpdated = guide && lastUpdatedMs ? new Date(lastUpdatedMs).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/London' }) : null
-  const comparisonVenues = guide
+  // The full comparison table is for the small hand-verified guide hubs; on a 60+ venue hub it would be a wall of rows.
+  const comparisonVenues = guide && guide.kind !== 'listings'
     ? contentVenues.map((v) => ({ ...toStatsVenue(v), parties: v.parties, area: getLocality(v) }))
     : []
 

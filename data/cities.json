@@ -66,12 +66,7 @@
       "Driffield",
       "Goole",
       "Scunthorpe",
-      "Grimsby",
-      "Hessle",
-      "Cottingham",
-      "Anlaby",
-      "Willerby",
-      "Brough"
+      "Grimsby"
     ],
     "faqs": [
       {
@@ -471,14 +466,7 @@
     "metaDescription": "Compare soft play centres across Birmingham and the West Midlands — prices, facilities, SEN sessions and parent tips.",
     "h1": "Soft Play in Birmingham",
     "intro": "Birmingham is the UK's second-largest city and has one of the youngest population profiles in the country — which means soft play in Birmingham is a serious business. The city and the wider West Midlands region have a large number of indoor play venues, ranging from enormous adventure centres with multi-storey frames to smaller, neighbourhood-level spaces ideal for babies and toddlers. Whatever part of Birmingham you're in, there's usually something within a manageable drive.\n\nThe soft play venues in Birmingham vary widely in scale and quality. The larger centres — particularly those around the Solihull corridor, Sutton Coldfield, and the major retail parks — tend to be the most comprehensively equipped, with separate toddler zones, dedicated baby areas, good cafe facilities, and party rooms. Smaller venues in inner-city areas can be more modest but often have a warmer, more community-oriented atmosphere and better pricing.\n\nSoft play in Birmingham typically costs £5–£10 per child for a standard session. Under-1s are free at most venues. The city's large family population means that weekend slots at well-regarded venues fill quickly — pre-booking online is the sensible approach. Weekday mornings, particularly mid-week, are significantly quieter and often cheaper. School holiday periods bring peak demand, so plan accordingly.\n\nBirmingham has a growing range of [SEN-friendly soft play provision](/soft-play/birmingham/sen-friendly), reflecting the city's diverse family community. Several venues run regular quiet sessions, and some have permanent sensory rooms. Demand for SEN sessions is high — follow venues on social media for the latest availability. For [birthday parties in Birmingham](/soft-play/birmingham/birthday-parties), the city is well served by large venues with comprehensive packages. Expect to pay from £150–£400 for a full party package depending on venue and guest numbers.\n\nThe wider West Midlands — Solihull, Wolverhampton, Coventry, Walsall, and Dudley — extends the options further. Our directory covers soft play across the region, so you can find the right venue whether you're in Birmingham city or the surrounding areas.",
-    "nearbyAreas": [
-      "Solihull",
-      "Sutton Coldfield",
-      "Coventry",
-      "Wolverhampton",
-      "Walsall",
-      "Dudley"
-    ],
+    "nearbyAreas": ["Solihull", "Sutton Coldfield", "Coventry", "Wolverhampton", "Walsall", "Dudley", "West Bromwich", "Halesowen", "Smethwick", "Tipton", "Wythall"],
     "faqs": [
       {
         "question": "What age is soft play suitable for in Birmingham?",
@@ -2846,6 +2834,614 @@
       "Forfar",
       "Falkirk",
       "Edinburgh"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "coventry",
+    "name": "Coventry",
+    "county": "West Midlands",
+    "region": "West Midlands",
+    "metaTitle": "Soft Play in Coventry",
+    "metaDescription": "Find soft play centres in Coventry, West Midlands. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Coventry",
+    "intro": "Soft play centres in Coventry and the surrounding area of West Midlands.",
+    "nearbyAreas": [
+      "Rugby",
+      "Birmingham",
+      "Leicester",
+      "Northampton"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "cannock",
+    "name": "Cannock",
+    "county": "Staffordshire",
+    "region": "West Midlands",
+    "metaTitle": "Soft Play in Cannock",
+    "metaDescription": "Find soft play centres in Cannock, Staffordshire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Cannock",
+    "intro": "Soft play centres in Cannock and the surrounding area of Staffordshire.",
+    "nearbyAreas": [
+      "Stafford",
+      "Birmingham",
+      "Stoke-on-Trent",
+      "Shrewsbury"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "haddington",
+    "name": "Haddington",
+    "county": "East Lothian",
+    "region": "Scotland",
+    "metaTitle": "Soft Play in Haddington",
+    "metaDescription": "Find soft play centres in Haddington, East Lothian. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Haddington",
+    "intro": "Soft play centres in Haddington and the surrounding area of East Lothian.",
+    "nearbyAreas": [
+      "Musselburgh",
+      "Edinburgh",
+      "Galashiels",
+      "Coldstream"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "west-calder",
+    "name": "West Calder",
+    "county": "West Lothian",
+    "region": "Scotland",
+    "metaTitle": "Soft Play in West Calder",
+    "metaDescription": "Find soft play centres in West Calder, West Lothian. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in West Calder",
+    "intro": "Soft play centres in West Calder and the surrounding area of West Lothian.",
+    "nearbyAreas": [
+      "Edinburgh",
+      "Falkirk",
+      "Hamilton",
+      "Musselburgh"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "castleford",
+    "name": "Castleford",
+    "county": "West Yorkshire",
+    "region": "Yorkshire",
+    "metaTitle": "Soft Play in Castleford",
+    "metaDescription": "Find soft play centres in Castleford, West Yorkshire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Castleford",
+    "intro": "Soft play centres in Castleford and the surrounding area of West Yorkshire.",
+    "nearbyAreas": [
+      "Leeds",
+      "Barnsley",
+      "Huddersfield",
+      "York"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "bury",
+    "name": "Bury",
+    "county": "Greater Manchester",
+    "region": "North West",
+    "metaTitle": "Soft Play in Bury",
+    "metaDescription": "Find soft play centres in Bury, Greater Manchester. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Bury",
+    "intro": "Soft play centres in Bury and the surrounding area of Greater Manchester.",
+    "nearbyAreas": [
+      "Bolton",
+      "Manchester",
+      "Oldham",
+      "Mossley"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "stanley",
+    "name": "Stanley",
+    "county": "County Durham",
+    "region": "North East",
+    "metaTitle": "Soft Play in Stanley",
+    "metaDescription": "Find soft play centres in Stanley, County Durham. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Stanley",
+    "intro": "Soft play centres in Stanley and the surrounding area of County Durham.",
+    "nearbyAreas": [
+      "Newcastle",
+      "Sunderland",
+      "Bishop Auckland",
+      "Morpeth"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "stocksfield",
+    "name": "Stocksfield",
+    "county": "Northumberland",
+    "region": "North East",
+    "metaTitle": "Soft Play in Stocksfield",
+    "metaDescription": "Find soft play centres in Stocksfield, Northumberland. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Stocksfield",
+    "intro": "Soft play centres in Stocksfield and the surrounding area of Northumberland.",
+    "nearbyAreas": [
+      "Newcastle",
+      "Morpeth",
+      "Carlisle",
+      "Bishop Auckland"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "loughborough",
+    "name": "Loughborough",
+    "county": "Leicestershire",
+    "region": "East Midlands",
+    "metaTitle": "Soft Play in Loughborough",
+    "metaDescription": "Find soft play centres in Loughborough, Leicestershire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Loughborough",
+    "intro": "Soft play centres in Loughborough and the surrounding area of Leicestershire.",
+    "nearbyAreas": [
+      "Leicester",
+      "Nottingham",
+      "Matlock",
+      "Rugby"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "midsomer-norton",
+    "name": "Midsomer Norton",
+    "county": "Somerset",
+    "region": "South West",
+    "metaTitle": "Soft Play in Midsomer Norton",
+    "metaDescription": "Find soft play centres in Midsomer Norton, Somerset. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Midsomer Norton",
+    "intro": "Soft play centres in Midsomer Norton and the surrounding area of Somerset.",
+    "nearbyAreas": [
+      "Bristol",
+      "Yeovil",
+      "Taunton",
+      "Salisbury"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "sunbury-on-thames",
+    "name": "Sunbury-on-Thames",
+    "county": "Surrey",
+    "region": "South East",
+    "metaTitle": "Soft Play in Sunbury-on-Thames",
+    "metaDescription": "Find soft play centres in Sunbury-on-Thames, Surrey. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Sunbury-on-Thames",
+    "intro": "Soft play centres in Sunbury-on-Thames and the surrounding area of Surrey.",
+    "nearbyAreas": [
+      "London",
+      "Egham",
+      "Slough & Windsor",
+      "Guildford"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "swanley",
+    "name": "Swanley",
+    "county": "Kent",
+    "region": "South East",
+    "metaTitle": "Soft Play in Swanley",
+    "metaDescription": "Find soft play centres in Swanley, Kent. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Swanley",
+    "intro": "Soft play centres in Swanley and the surrounding area of Kent.",
+    "nearbyAreas": [
+      "Dartford",
+      "London",
+      "Broadstairs",
+      "Horley"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "solihull",
+    "name": "Solihull",
+    "county": "West Midlands",
+    "region": "West Midlands",
+    "metaTitle": "Soft Play in Solihull",
+    "metaDescription": "Find soft play centres in Solihull, West Midlands. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Solihull",
+    "intro": "Soft play centres in Solihull and the surrounding area of West Midlands.",
+    "nearbyAreas": [
+      "Wythall",
+      "Birmingham",
+      "Alvechurch",
+      "Barnt Green"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "stourbridge",
+    "name": "Stourbridge",
+    "county": "West Midlands",
+    "region": "West Midlands",
+    "metaTitle": "Soft Play in Stourbridge",
+    "metaDescription": "Find soft play centres in Stourbridge, West Midlands. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Stourbridge",
+    "intro": "Soft play centres in Stourbridge and the surrounding area of West Midlands.",
+    "nearbyAreas": [
+      "Dudley",
+      "Halesowen",
+      "Smethwick",
+      "Himley",
+      "Birmingham"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "walsall",
+    "name": "Walsall",
+    "county": "West Midlands",
+    "region": "West Midlands",
+    "metaTitle": "Soft Play in Walsall",
+    "metaDescription": "Find soft play centres in Walsall, West Midlands. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Walsall",
+    "intro": "Soft play centres in Walsall and the surrounding area of West Midlands.",
+    "nearbyAreas": [
+      "Willenhall",
+      "Aldridge",
+      "West Bromwich",
+      "Wolverhampton",
+      "Birmingham"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "dudley",
+    "name": "Dudley",
+    "county": "West Midlands",
+    "region": "West Midlands",
+    "metaTitle": "Soft Play in Dudley",
+    "metaDescription": "Find soft play centres in Dudley, West Midlands. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Dudley",
+    "intro": "Soft play centres in Dudley and the surrounding area of West Midlands.",
+    "nearbyAreas": [
+      "Tipton",
+      "Himley",
+      "Stourbridge",
+      "Smethwick",
+      "Birmingham"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "nuneaton",
+    "name": "Nuneaton",
+    "county": "Warwickshire",
+    "region": "West Midlands",
+    "metaTitle": "Soft Play in Nuneaton",
+    "metaDescription": "Find soft play centres in Nuneaton, Warwickshire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Nuneaton",
+    "intro": "Soft play centres in Nuneaton and the surrounding area of Warwickshire.",
+    "nearbyAreas": [
+      "Coventry",
+      "Rugby",
+      "Middleton",
+      "Tamworth",
+      "Birmingham"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "tamworth",
+    "name": "Tamworth",
+    "county": "Staffordshire",
+    "region": "West Midlands",
+    "metaTitle": "Soft Play in Tamworth",
+    "metaDescription": "Find soft play centres in Tamworth, Staffordshire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Tamworth",
+    "intro": "Soft play centres in Tamworth and the surrounding area of Staffordshire.",
+    "nearbyAreas": [
+      "Middleton",
+      "Aldridge",
+      "Walsall",
+      "Cannock",
+      "Birmingham"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "west-bromwich",
+    "name": "West Bromwich",
+    "county": "West Midlands",
+    "region": "West Midlands",
+    "metaTitle": "Soft Play in West Bromwich",
+    "metaDescription": "Find soft play centres in West Bromwich, West Midlands. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in West Bromwich",
+    "intro": "Soft play centres in West Bromwich and the surrounding area of West Midlands.",
+    "nearbyAreas": [
+      "Tipton",
+      "Walsall",
+      "Smethwick",
+      "Dudley",
+      "Birmingham"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "wolverhampton",
+    "name": "Wolverhampton",
+    "county": "West Midlands",
+    "region": "West Midlands",
+    "metaTitle": "Soft Play in Wolverhampton",
+    "metaDescription": "Find soft play centres in Wolverhampton, West Midlands. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Wolverhampton",
+    "intro": "Soft play centres in Wolverhampton and the surrounding area of West Midlands.",
+    "nearbyAreas": [
+      "Willenhall",
+      "Himley",
+      "Walsall",
+      "Dudley",
+      "Birmingham"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "wombourne",
+    "name": "Wombourne",
+    "county": "Staffordshire",
+    "region": "West Midlands",
+    "metaTitle": "Soft Play in Wombourne",
+    "metaDescription": "Find soft play centres in Wombourne, Staffordshire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Wombourne",
+    "intro": "Soft play centres in Wombourne and the surrounding area of Staffordshire.",
+    "nearbyAreas": [
+      "Himley",
+      "Dudley",
+      "Stourbridge",
+      "Tipton",
+      "Birmingham"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "aldridge",
+    "name": "Aldridge",
+    "county": "West Midlands",
+    "region": "West Midlands",
+    "metaTitle": "Soft Play in Aldridge",
+    "metaDescription": "Find soft play centres in Aldridge, West Midlands. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Aldridge",
+    "intro": "Soft play centres in Aldridge and the surrounding area of West Midlands.",
+    "nearbyAreas": [
+      "Walsall",
+      "Cannock",
+      "Willenhall",
+      "West Bromwich",
+      "Birmingham"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "halesowen",
+    "name": "Halesowen",
+    "county": "West Midlands",
+    "region": "West Midlands",
+    "metaTitle": "Soft Play in Halesowen",
+    "metaDescription": "Find soft play centres in Halesowen, West Midlands. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Halesowen",
+    "intro": "Soft play centres in Halesowen and the surrounding area of West Midlands.",
+    "nearbyAreas": [
+      "Smethwick",
+      "Stourbridge",
+      "Tipton",
+      "Dudley",
+      "Birmingham"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "kidderminster",
+    "name": "Kidderminster",
+    "county": "Worcestershire",
+    "region": "West Midlands",
+    "metaTitle": "Soft Play in Kidderminster",
+    "metaDescription": "Find soft play centres in Kidderminster, Worcestershire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Kidderminster",
+    "intro": "Soft play centres in Kidderminster and the surrounding area of Worcestershire.",
+    "nearbyAreas": [
+      "Stourbridge",
+      "Halesowen",
+      "Cleobury Mortimer",
+      "Wombourne",
+      "Birmingham"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "alvechurch",
+    "name": "Alvechurch",
+    "county": "Worcestershire",
+    "region": "West Midlands",
+    "metaTitle": "Soft Play in Alvechurch",
+    "metaDescription": "Find soft play centres in Alvechurch, Worcestershire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Alvechurch",
+    "intro": "Soft play centres in Alvechurch and the surrounding area of Worcestershire.",
+    "nearbyAreas": [
+      "Barnt Green",
+      "Wythall",
+      "Halesowen",
+      "Solihull",
+      "Birmingham"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "barnt-green",
+    "name": "Barnt Green",
+    "county": "Worcestershire",
+    "region": "West Midlands",
+    "metaTitle": "Soft Play in Barnt Green",
+    "metaDescription": "Find soft play centres in Barnt Green, Worcestershire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Barnt Green",
+    "intro": "Soft play centres in Barnt Green and the surrounding area of Worcestershire.",
+    "nearbyAreas": [
+      "Alvechurch",
+      "Wythall",
+      "Halesowen",
+      "Smethwick",
+      "Birmingham"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "himley",
+    "name": "Himley",
+    "county": "Staffordshire",
+    "region": "West Midlands",
+    "metaTitle": "Soft Play in Himley",
+    "metaDescription": "Find soft play centres in Himley, Staffordshire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Himley",
+    "intro": "Soft play centres in Himley and the surrounding area of Staffordshire.",
+    "nearbyAreas": [
+      "Dudley",
+      "Wombourne",
+      "Tipton",
+      "Stourbridge",
+      "Birmingham"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "middleton",
+    "name": "Middleton",
+    "county": "Warwickshire",
+    "region": "West Midlands",
+    "metaTitle": "Soft Play in Middleton",
+    "metaDescription": "Find soft play centres in Middleton, Warwickshire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Middleton",
+    "intro": "Soft play centres in Middleton and the surrounding area of Warwickshire.",
+    "nearbyAreas": [
+      "Tamworth",
+      "Aldridge",
+      "Birmingham",
+      "Walsall"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "smethwick",
+    "name": "Smethwick",
+    "county": "West Midlands",
+    "region": "West Midlands",
+    "metaTitle": "Soft Play in Smethwick",
+    "metaDescription": "Find soft play centres in Smethwick, West Midlands. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Smethwick",
+    "intro": "Soft play centres in Smethwick and the surrounding area of West Midlands.",
+    "nearbyAreas": [
+      "Halesowen",
+      "Tipton",
+      "Dudley",
+      "West Bromwich",
+      "Birmingham"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "tipton",
+    "name": "Tipton",
+    "county": "West Midlands",
+    "region": "West Midlands",
+    "metaTitle": "Soft Play in Tipton",
+    "metaDescription": "Find soft play centres in Tipton, West Midlands. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Tipton",
+    "intro": "Soft play centres in Tipton and the surrounding area of West Midlands.",
+    "nearbyAreas": [
+      "Dudley",
+      "Smethwick",
+      "West Bromwich",
+      "Himley",
+      "Birmingham"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "willenhall",
+    "name": "Willenhall",
+    "county": "West Midlands",
+    "region": "West Midlands",
+    "metaTitle": "Soft Play in Willenhall",
+    "metaDescription": "Find soft play centres in Willenhall, West Midlands. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Willenhall",
+    "intro": "Soft play centres in Willenhall and the surrounding area of West Midlands.",
+    "nearbyAreas": [
+      "Walsall",
+      "Wolverhampton",
+      "Cannock",
+      "Aldridge",
+      "Birmingham"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "wythall",
+    "name": "Wythall",
+    "county": "Worcestershire",
+    "region": "West Midlands",
+    "metaTitle": "Soft Play in Wythall",
+    "metaDescription": "Find soft play centres in Wythall, Worcestershire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Wythall",
+    "intro": "Soft play centres in Wythall and the surrounding area of Worcestershire.",
+    "nearbyAreas": [
+      "Alvechurch",
+      "Solihull",
+      "Barnt Green",
+      "Birmingham"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "telford",
+    "name": "Telford",
+    "county": "Shropshire",
+    "region": "West Midlands",
+    "metaTitle": "Soft Play in Telford",
+    "metaDescription": "Find soft play centres in Telford, Shropshire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Telford",
+    "intro": "Soft play centres in Telford and the surrounding area of Shropshire.",
+    "nearbyAreas": [
+      "Shifnal",
+      "Wombourne"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "shifnal",
+    "name": "Shifnal",
+    "county": "Shropshire",
+    "region": "West Midlands",
+    "metaTitle": "Soft Play in Shifnal",
+    "metaDescription": "Find soft play centres in Shifnal, Shropshire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Shifnal",
+    "intro": "Soft play centres in Shifnal and the surrounding area of Shropshire.",
+    "nearbyAreas": [
+      "Telford",
+      "Wombourne",
+      "Himley",
+      "Wolverhampton",
+      "Birmingham"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "cleobury-mortimer",
+    "name": "Cleobury Mortimer",
+    "county": "Shropshire",
+    "region": "West Midlands",
+    "metaTitle": "Soft Play in Cleobury Mortimer",
+    "metaDescription": "Find soft play centres in Cleobury Mortimer, Shropshire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Cleobury Mortimer",
+    "intro": "Soft play centres in Cleobury Mortimer and the surrounding area of Shropshire.",
+    "nearbyAreas": [
+      "Kidderminster"
     ],
     "faqs": []
   },
