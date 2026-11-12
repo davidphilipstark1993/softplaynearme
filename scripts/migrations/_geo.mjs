@@ -69,13 +69,15 @@ const POSTCODE_DISTRICT_TO_CITY = {
   HU17: ['beverley'],
   // YO (York postcode area): YO15/16 = Bridlington & Filey; YO8/30/32 etc = York side
   YO15: ['bridlington'], YO16: ['bridlington'],
-  // YO25 = Driffield, East Riding — same council area as Bridlington and
-  // closer to it (~11mi) than York (~28mi) or the declared-but-unmapped Beverley (~13mi)
-  YO25: ['bridlington'],
+  // YO25 = Driffield, which has its own hub since the 12 Nov 2026 Hull-area sweep
+  YO25: ['driffield'],
   YO8: ['york'], YO19: ['york'], YO23: ['york'], YO24: ['york'],
   YO26: ['york'], YO30: ['york'], YO31: ['york'], YO32: ['york'],
   YO41: ['york'], YO42: ['york'], YO43: ['york'], YO51: ['york'],
   YO60: ['york'], YO61: ['york'], YO62: ['york'],
+  // South Humber / Goole towns with their own hubs (Hull-area sweep, 12 Nov 2026); only the
+  // districts that hold a moved venue, the rest of DN stays doncaster
+  DN14: ['goole'], DN20: ['brigg'], DN32: ['grimsby'], DN35: ['cleethorpes'],
   // DN15-DN17 = Scunthorpe (own hub since phase 7-02), not Doncaster
   DN15: ['scunthorpe'], DN16: ['scunthorpe'], DN17: ['scunthorpe'],
   // Birmingham-area towns that have their own hub since the 12 Nov 2026 sweep (towns from

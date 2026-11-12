@@ -80,7 +80,13 @@
   {
     "name": "Beverley",
     "slug": "beverley",
-    "venueCount": 2,
+    "venueCount": 3,
+    "avgRating": "4.4"
+  },
+  {
+    "name": "Beverley",
+    "slug": "beverley",
+    "venueCount": 3,
     "avgRating": "4.4"
   },
   {
@@ -128,14 +134,20 @@
   {
     "name": "Bridlington",
     "slug": "bridlington",
-    "venueCount": 7,
-    "avgRating": "3.9"
+    "venueCount": 6,
+    "avgRating": "3.8"
   },
   {
     "name": "Bridport",
     "slug": "bridport",
     "venueCount": 2,
     "avgRating": "4.5"
+  },
+  {
+    "name": "Brigg",
+    "slug": "brigg",
+    "venueCount": 1,
+    "avgRating": "4.4"
   },
   {
     "name": "Brighton",
@@ -228,6 +240,12 @@
     "avgRating": "4.5"
   },
   {
+    "name": "Cleethorpes",
+    "slug": "cleethorpes",
+    "venueCount": 1,
+    "avgRating": "4.4"
+  },
+  {
     "name": "Cleobury Mortimer",
     "slug": "cleobury-mortimer",
     "venueCount": 1,
@@ -292,6 +310,12 @@
     "slug": "dorking",
     "venueCount": 1,
     "avgRating": "3.9"
+  },
+  {
+    "name": "Driffield",
+    "slug": "driffield",
+    "venueCount": 1,
+    "avgRating": "5.0"
   },
   {
     "name": "Dudley",
@@ -372,10 +396,22 @@
     "avgRating": "4.2"
   },
   {
+    "name": "Goole",
+    "slug": "goole",
+    "venueCount": 1,
+    "avgRating": "3.8"
+  },
+  {
     "name": "Great Malvern",
     "slug": "malvern",
     "venueCount": 1,
     "avgRating": "4.9"
+  },
+  {
+    "name": "Grimsby",
+    "slug": "grimsby",
+    "venueCount": 1,
+    "avgRating": "4.2"
   },
   {
     "name": "Guildford",
@@ -482,7 +518,7 @@
   {
     "name": "Hull",
     "slug": "hull",
-    "venueCount": 27,
+    "venueCount": 26,
     "avgRating": "4.4"
   },
   {
@@ -746,7 +782,7 @@
   {
     "name": "Sheffield",
     "slug": "doncaster",
-    "venueCount": 23,
+    "venueCount": 19,
     "avgRating": "4.4"
   },
   {
