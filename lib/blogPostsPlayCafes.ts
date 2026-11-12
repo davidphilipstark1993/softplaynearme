@@ -29,7 +29,7 @@ export const playCafePosts: BlogPost[] = [
 
 <h2>How is a play café different from a soft play centre?</h2>
 <ul>
-  <li><strong>Age range.</strong> Play cafés tend to aim at younger children. ${v('newcastle/brood-play-cafe-newcastle', 'brood Play Cafe')} says it suits newborns to pre-school age, and ${v('manchester/baby-bears-play-cafe', 'Baby Bear’s Play Cafe')} in Oldham is for children aged 0 to 7. Big soft play centres usually cater for older children too.</li>
+  <li><strong>Age range.</strong> Play cafés tend to aim at younger children. ${v('newcastle/brood-play-cafe-newcastle', 'brood Play Cafe')} says it suits newborns to pre-school age, and ${v('oldham/baby-bears-play-cafe', 'Baby Bear’s Play Cafe')} in Oldham is for children aged 0 to 7. Big soft play centres usually cater for older children too.</li>
   <li><strong>Size and noise.</strong> Spaces are smaller, so it is easier to keep an eye on little ones from your table.</li>
   <li><strong>Timed sessions.</strong> Most play cafés sell sessions rather than all-day entry (more on this below).</li>
   <li><strong>Food and drink.</strong> The café is a big part of the visit, and many cafés also run baby classes, sensory sessions and parties.</li>
@@ -37,16 +37,16 @@ export const playCafePosts: BlogPost[] = [
 <p>If your children are older or you want big slides and climbing frames, a larger centre may suit better. Browse the ${link('/soft-play', 'directory by town and city')} to compare both.</p>
 
 <h2>Do you need to book a play café?</h2>
-<p>Usually, yes, or at least it is wise. ${v('london/littleville-role-play-cafe', 'Littleville')} in Orpington strongly recommends booking online, especially at weekends. ${v('bournemouth/mini-monsters-childrens-play-cafe-0-5-years', 'Mini Monsters')} in Bournemouth accepts walk-ins only when there is space, and recommends booking to guarantee entry, especially on bad-weather days. ${v('edinburgh/jungle-tumble-play-cafe-edinburgh', 'Jungle Tumble Play Cafe')} in Musselburgh takes walk-ins at any time but suggests calling ahead at weekends in case of private parties.</p>
-<p>Weekends are where you are most likely to be caught out, because many play cafés close for exclusive party hire. ${v('worcester/little-olives-play-cafe', 'Little Olive’s Play Cafe')} in Great Malvern, for example, opens on Sundays only for private bookings and pop-up sessions.</p>
+<p>Usually, yes, or at least it is wise. ${v('london/littleville-role-play-cafe', 'Littleville')} in Orpington strongly recommends booking online, especially at weekends. ${v('bournemouth/mini-monsters-childrens-play-cafe-0-5-years', 'Mini Monsters')} in Bournemouth accepts walk-ins only when there is space, and recommends booking to guarantee entry, especially on bad-weather days. ${v('musselburgh/jungle-tumble-play-cafe', 'Jungle Tumble Play Cafe')} in Musselburgh takes walk-ins at any time but suggests calling ahead at weekends in case of private parties.</p>
+<p>Weekends are where you are most likely to be caught out, because many play cafés close for exclusive party hire. ${v('malvern/little-olives-play-cafe', 'Little Olive’s Play Cafe')} in Great Malvern, for example, opens on Sundays only for private bookings and pop-up sessions.</p>
 
 <h2>How long is a play café session?</h2>
-<p>In the cafés we checked, most sessions ran from 75 minutes to two hours. Littleville’s sessions are 75 minutes, Mini Monsters’ walk-in sessions last 1.5 hours, and ${v('northampton/my-happy-play-cafe', 'My Happy Play Cafe')} in Wellingborough mostly runs two-hour sessions, such as 9:30 to 11:30. Some are longer: Nikki’s Little Play Cafe lists a term-time weekday session from 10:00 to 12:30.</p>
+<p>In the cafés we checked, most sessions ran from 75 minutes to two hours. Littleville’s sessions are 75 minutes, Mini Monsters’ walk-in sessions last 1.5 hours, and ${v('wellingborough/my-happy-play-cafe', 'My Happy Play Cafe')} in Wellingborough mostly runs two-hour sessions, such as 9:30 to 11:30. Some are longer: Nikki’s Little Play Cafe lists a term-time weekday session from 10:00 to 12:30.</p>
 
 <h2>How much does a play café cost?</h2>
 <p>Prices vary by venue and change over time, so check before you go. These are the prices published on the cafés’ own websites when we checked on 11 November 2026:</p>
 <ul>
-  <li>${v('antrim/little-izzies-play-cafe', 'Little Izzies Play Cafe')}, Randalstown: child admission £7.95, pre-walkers £5, non-crawlers free (the site also advertises sessions from £5 an hour).</li>
+  <li>${v('randalstown/little-izzies-play-cafe', 'Little Izzies Play Cafe')}, Randalstown: child admission £7.95, pre-walkers £5, non-crawlers free (the site also advertises sessions from £5 an hour).</li>
   <li>Nikki’s Little Play Cafe, Dorchester: ages 1 to 6 £9 (£8.50 if pre-booked online), under-1s £5 (£4.50 online), and babies 3 months and under free with a paying sibling.</li>
   <li>${v('cardiff/tyfu-play-cafe', 'Tyfu Play')}, Whitchurch, Cardiff: child aged 2 to 8 £8.95 on weekdays and £9.95 at weekends, with one adult included.</li>
   <li>Little Olive’s Play Cafe, Great Malvern: toddlers and children aged 1 and over £9.75, under-1s £6.75, with one adult included.</li>
@@ -59,7 +59,7 @@ export const playCafePosts: BlogPost[] = [
   <li><strong>London:</strong> ${v('london/millie-maisie-play-caf', 'Millie &amp; Maisie Play Café')}, a soft play café in Clapham Old Town that also runs classes and parties.</li>
   <li><strong>South East:</strong> ${v('portsmouth/southsea-play-cafe-ltd', 'Southsea Play Cafe')} on Osborne Road, Southsea, which lists opening hours of 9:30am to 3:30pm, seven days a week, though days vary with private bookings.</li>
   <li><strong>South West:</strong> Nikki’s Little Play Cafe at Brewery Square, Dorchester, a calmer, sensory-sympathetic space for under-7s.</li>
-  <li><strong>East of England:</strong> ${v('ipswich/the-snug-play-cafe', 'The Snug Play Cafe')} in Harwich, which calls itself a micro play café.</li>
+  <li><strong>East of England:</strong> ${v('harwich/the-snug-play-cafe', 'The Snug Play Cafe')} in Harwich, which calls itself a micro play café.</li>
   <li><strong>East Midlands:</strong> My Happy Play Cafe in Wellingborough, with soft play, a play frame and a free play section.</li>
   <li><strong>West Midlands:</strong> Little Olive’s Play Cafe in Great Malvern, with a woodland-themed soft play, a role play village and a sensory nest.</li>
   <li><strong>Yorkshire and the Humber:</strong> Tots Explore in Barnsley, an under-5s play café run by a team it says is made up of qualified teachers and nursery practitioners.</li>
@@ -72,7 +72,7 @@ export const playCafePosts: BlogPost[] = [
 
 <h2>What should I bring to a play café?</h2>
 <ul>
-  <li><strong>Socks</strong> for your child. ${v('stoke/little-red-fox-play-cafe', 'Little Red Fox Play Cafe')} in Stafford reminds visitors not to forget them, and sells socks if you do.</li>
+  <li><strong>Socks</strong> for your child. ${v('stafford/little-red-fox-play-cafe', 'Little Red Fox Play Cafe')} in Stafford reminds visitors not to forget them, and sells socks if you do.</li>
   <li><strong>Your booking confirmation</strong>, and a note of the session end time.</li>
   <li><strong>Nappies, wipes and a change of clothes</strong> for babies and toddlers.</li>
   <li><strong>Payment for the café.</strong> Most play cafés sell food and drink, and some don’t allow outside food: Little Red Fox and Tyfu Play both say no outside food (Tyfu allows baby food), so check the venue’s rules before bringing your own snacks.</li>

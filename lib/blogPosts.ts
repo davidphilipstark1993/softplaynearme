@@ -1141,9 +1141,9 @@ export const posts: BlogPost[] = [
     city: 'Ipswich',
     excerpt: 'A guide to soft play in Ipswich built from real data: 14 venues, the best-reviewed (The Play Den, 5.0 stars), and which ones confirm a café, toddler area, parties or SEN-friendly sessions.',
     publishedAt: '2026-02-18T00:00:00.000Z',
-    updatedAt: '2026-10-24T00:00:00.000Z',
+    updatedAt: '2026-11-11T00:00:00.000Z',
     datePublished: '2026-02-18T00:00:00.000Z',
-    dateModified: '2026-10-24T00:00:00.000Z',
+    dateModified: '2026-11-11T00:00:00.000Z',
     contentHtml: `<p>We list 14 soft play venues in and around Ipswich, and 10 of them have 20 or more Google reviews — enough to say something fair about how families rate them.</p>
 
 <p>This guide only states what we hold real data for: ratings, review counts, locations and confirmed facilities. We leave out prices, age limits and opening times, because they change often and are best checked with the venue directly before you set off.</p>
@@ -1168,7 +1168,7 @@ export const posts: BlogPost[] = [
 <h2>Where the confirmed facilities are</h2>
 <p>Facility information is patchy across smaller venues, so these lists show only what is confirmed on each listing — a venue missing from a list may well have the facility, it just isn’t confirmed in our data.</p>
 <ul>
-  <li><strong>On-site café</strong> (2 of 14): <strong><a href="/soft-play/ipswich/oliver-hayward-playbarn-and-cafe" class="text-purple-700 hover:underline">Oliver Hayward Playbarn &amp; Cafe</a></strong> and <strong><a href="/soft-play/ipswich/the-snug-play-cafe" class="text-purple-700 hover:underline">The Snug play cafe</a></strong>.</li>
+  <li><strong>On-site café</strong> (1): <strong><a href="/soft-play/ipswich/oliver-hayward-playbarn-and-cafe" class="text-purple-700 hover:underline">Oliver Hayward Playbarn &amp; Cafe</a></strong>.</li>
   <li><strong>Dedicated toddler area</strong> (1): <strong><a href="/soft-play/ipswich/mid-suffolk-play-world" class="text-purple-700 hover:underline">Mid-Suffolk Play World</a></strong>.</li>
   <li><strong>Baby area</strong> (1): <strong><a href="/soft-play/ipswich/mid-suffolk-play-world" class="text-purple-700 hover:underline">Mid-Suffolk Play World</a></strong>.</li>
   <li><strong>Birthday parties</strong> (2): <strong><a href="/soft-play/ipswich/goals-ipswich" class="text-purple-700 hover:underline">Goals Ipswich</a></strong> and <strong><a href="/soft-play/ipswich/suffolk-soft-play" class="text-purple-700 hover:underline">Suffolk Soft Play</a></strong>.</li>
@@ -1599,9 +1599,9 @@ export const posts: BlogPost[] = [
     city: 'Edinburgh',
     excerpt: 'A guide to soft play in Edinburgh built from real data: 15 venues, the best-reviewed (MakeBelieve - The Baby Play Place, 4.9 stars), and which ones confirm a café, toddler area, parties or SEN-friendly sessions.',
     publishedAt: '2026-02-25T00:00:00.000Z',
-    updatedAt: '2026-10-24T00:00:00.000Z',
+    updatedAt: '2026-11-11T00:00:00.000Z',
     datePublished: '2026-02-25T00:00:00.000Z',
-    dateModified: '2026-10-24T00:00:00.000Z',
+    dateModified: '2026-11-11T00:00:00.000Z',
     contentHtml: `<p>We list 15 soft play venues in and around Edinburgh, and 13 of them have 20 or more Google reviews — enough to say something fair about how families rate them.</p>
 
 <p>This guide only states what we hold real data for: ratings, review counts, locations and confirmed facilities. We leave out prices, age limits and opening times, because they change often and are best checked with the venue directly before you set off.</p>
@@ -1615,7 +1615,6 @@ export const posts: BlogPost[] = [
 <ul>
   <li><strong><a href="/soft-play/edinburgh/makebelieve-the-baby-play-place-edinburgh" class="text-purple-700 hover:underline">MakeBelieve - The Baby Play Place</a></strong> — 4.9 stars from 42 reviews.</li>
   <li><strong><a href="/soft-play/edinburgh/scrambles-soft-play-edinburgh" class="text-purple-700 hover:underline">Scrambles Soft Play</a></strong> — 4.8 stars from 40 reviews.</li>
-  <li><strong><a href="/soft-play/edinburgh/jungle-tumble-play-cafe-edinburgh" class="text-purple-700 hover:underline">Jungle Tumble Play Cafe</a></strong> — 4.7 stars from 156 reviews.</li>
   <li><strong><a href="/soft-play/edinburgh/house-of-fun-soft-play-edinburgh" class="text-purple-700 hover:underline">House of Fun Soft Play</a></strong> — 4.6 stars from 50 reviews.</li>
   <li><strong><a href="/soft-play/edinburgh/little-farmers-edinburgh" class="text-purple-700 hover:underline">Little Farmers</a></strong> — 4.5 stars from 135 reviews.</li>
 </ul>
@@ -1626,10 +1625,10 @@ export const posts: BlogPost[] = [
 <h2>Where the confirmed facilities are</h2>
 <p>Facility information is patchy across smaller venues, so these lists show only what is confirmed on each listing — a venue missing from a list may well have the facility, it just isn’t confirmed in our data.</p>
 <ul>
-  <li><strong>On-site café</strong> (4 of 15): <strong><a href="/soft-play/edinburgh/timetwisters-play-centre-edinburgh" class="text-purple-700 hover:underline">Timetwisters Play Centre</a></strong>, <strong><a href="/soft-play/edinburgh/jungle-tumble-play-cafe-edinburgh" class="text-purple-700 hover:underline">Jungle Tumble Play Cafe</a></strong>, <strong><a href="/soft-play/edinburgh/clambers-edinburgh" class="text-purple-700 hover:underline">Clambers</a></strong> and <strong><a href="/soft-play/edinburgh/scrambles-soft-play-edinburgh" class="text-purple-700 hover:underline">Scrambles Soft Play</a></strong>.</li>
+  <li><strong>On-site café</strong> (3 of 15): <strong><a href="/soft-play/edinburgh/timetwisters-play-centre-edinburgh" class="text-purple-700 hover:underline">Timetwisters Play Centre</a></strong>, <strong><a href="/soft-play/edinburgh/clambers-edinburgh" class="text-purple-700 hover:underline">Clambers</a></strong> and <strong><a href="/soft-play/edinburgh/scrambles-soft-play-edinburgh" class="text-purple-700 hover:underline">Scrambles Soft Play</a></strong>.</li>
   <li><strong>Dedicated toddler area</strong> (1): <strong><a href="/soft-play/edinburgh/makebelieve-the-baby-play-place-edinburgh" class="text-purple-700 hover:underline">MakeBelieve - The Baby Play Place</a></strong>.</li>
   <li><strong>Baby area</strong> (1): <strong><a href="/soft-play/edinburgh/makebelieve-the-baby-play-place-edinburgh" class="text-purple-700 hover:underline">MakeBelieve - The Baby Play Place</a></strong>.</li>
-  <li><strong>Birthday parties</strong> (3): <strong><a href="/soft-play/edinburgh/wonder-world-soft-play-and-kids-group-party-venue-edinburgh-leith-edinburgh" class="text-purple-700 hover:underline">Wonder World Soft Play and Kids &amp; Group Party Venue Edinburgh (Leith)</a></strong>, <strong><a href="/soft-play/edinburgh/jungle-tumble-play-cafe-edinburgh" class="text-purple-700 hover:underline">Jungle Tumble Play Cafe</a></strong> and <strong><a href="/soft-play/edinburgh/makebelieve-the-baby-play-place-edinburgh" class="text-purple-700 hover:underline">MakeBelieve - The Baby Play Place</a></strong>.</li>
+  <li><strong>Birthday parties</strong> (2): <strong><a href="/soft-play/edinburgh/wonder-world-soft-play-and-kids-group-party-venue-edinburgh-leith-edinburgh" class="text-purple-700 hover:underline">Wonder World Soft Play and Kids &amp; Group Party Venue Edinburgh (Leith)</a></strong> and <strong><a href="/soft-play/edinburgh/makebelieve-the-baby-play-place-edinburgh" class="text-purple-700 hover:underline">MakeBelieve - The Baby Play Place</a></strong>.</li>
   <li><strong>Wheelchair access</strong> (1): <strong><a href="/soft-play/edinburgh/ryze" class="text-purple-700 hover:underline">Ryze Edinburgh</a></strong>.</li>
 </ul>
 

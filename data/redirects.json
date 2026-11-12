@@ -1511,7 +1511,7 @@
   },
   {
     "source": "/soft-play/colchester/the-snug-play-cafe",
-    "destination": "/soft-play/ipswich/the-snug-play-cafe",
+    "destination": "/soft-play/harwich/the-snug-play-cafe",
     "permanent": true
   },
   {
@@ -1621,7 +1621,7 @@
   },
   {
     "source": "/soft-play/sheffield/baby-bears-play-cafe",
-    "destination": "/soft-play/manchester/baby-bears-play-cafe",
+    "destination": "/soft-play/oldham/baby-bears-play-cafe",
     "permanent": true
   },
   {
@@ -5412,6 +5412,66 @@
   {
     "source": "/soft-play/swansea/ninja-warrior-uk-adventure-park-swansea-swansea",
     "destination": "/soft-play/swansea/ninja-warrior-uk-adventure-park",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/northampton/my-happy-play-cafe",
+    "destination": "/soft-play/wellingborough/my-happy-play-cafe",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/worcester/little-olives-play-cafe",
+    "destination": "/soft-play/malvern/little-olives-play-cafe",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/edinburgh/jungle-tumble-play-cafe-edinburgh",
+    "destination": "/soft-play/musselburgh/jungle-tumble-play-cafe",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/musselburgh/jungle-tumble-play-cafe-edinburgh",
+    "destination": "/soft-play/musselburgh/jungle-tumble-play-cafe",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/edinburgh/soft-play-musselburgh-sports-centre",
+    "destination": "/soft-play/musselburgh/soft-play-musselburgh-sports-centre",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/ipswich/the-snug-play-cafe",
+    "destination": "/soft-play/harwich/the-snug-play-cafe",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/manchester/baby-bears-play-cafe",
+    "destination": "/soft-play/oldham/baby-bears-play-cafe",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/antrim/little-izzies-play-cafe",
+    "destination": "/soft-play/randalstown/little-izzies-play-cafe",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/stoke/little-red-fox-play-cafe",
+    "destination": "/soft-play/stafford/little-red-fox-play-cafe",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/stoke/doddys-soft-play-cafe",
+    "destination": "/soft-play/stafford/doddys-soft-play-cafe",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/glasgow/juniors-play-cafe-hamilton",
+    "destination": "/soft-play/hamilton/juniors-play-cafe-hamilton",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/bradford/petit-pois-play-cafe-bradford",
+    "destination": "/soft-play/bradford",
     "permanent": true
   }
 ]

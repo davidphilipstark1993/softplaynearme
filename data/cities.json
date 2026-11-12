@@ -2695,5 +2695,134 @@
       "Bolton"
     ],
     "faqs": []
+  },
+  {
+    "slug": "wellingborough",
+    "name": "Wellingborough",
+    "county": "North Northamptonshire",
+    "region": "East Midlands",
+    "metaTitle": "Soft Play in Wellingborough",
+    "metaDescription": "Find soft play centres in Wellingborough, North Northamptonshire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Wellingborough",
+    "intro": "Soft play centres in Wellingborough and the surrounding area of North Northamptonshire.",
+    "nearbyAreas": [
+      "Northampton",
+      "Milton Keynes",
+      "Leicester"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "malvern",
+    "name": "Malvern",
+    "county": "Worcestershire",
+    "region": "West Midlands",
+    "metaTitle": "Soft Play in Malvern",
+    "metaDescription": "Find soft play centres in Malvern, Worcestershire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Malvern",
+    "intro": "Soft play centres in Malvern and the surrounding area of Worcestershire.",
+    "nearbyAreas": [
+      "Worcester",
+      "Hereford",
+      "Cheltenham"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "musselburgh",
+    "name": "Musselburgh",
+    "county": "East Lothian",
+    "region": "Scotland",
+    "metaTitle": "Soft Play in Musselburgh",
+    "metaDescription": "Find soft play centres in Musselburgh, East Lothian. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Musselburgh",
+    "intro": "Soft play centres in Musselburgh and the surrounding area of East Lothian.",
+    "nearbyAreas": [
+      "Edinburgh",
+      "Falkirk",
+      "Galashiels"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "harwich",
+    "name": "Harwich",
+    "county": "Essex",
+    "region": "East of England",
+    "metaTitle": "Soft Play in Harwich",
+    "metaDescription": "Find soft play centres in Harwich, Essex. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Harwich",
+    "intro": "Soft play centres in Harwich and the surrounding area of Essex.",
+    "nearbyAreas": [
+      "Colchester",
+      "Ipswich",
+      "Southend"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "oldham",
+    "name": "Oldham",
+    "county": "Greater Manchester",
+    "region": "North West",
+    "metaTitle": "Soft Play in Oldham",
+    "metaDescription": "Find soft play centres in Oldham, Greater Manchester. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Oldham",
+    "intro": "Soft play centres in Oldham and the surrounding area of Greater Manchester.",
+    "nearbyAreas": [
+      "Manchester",
+      "Mossley",
+      "Huddersfield",
+      "Bolton"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "randalstown",
+    "name": "Randalstown",
+    "county": "Antrim and Newtownabbey",
+    "region": "Northern Ireland",
+    "metaTitle": "Soft Play in Randalstown",
+    "metaDescription": "Find soft play centres in Randalstown, County Antrim. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Randalstown",
+    "intro": "Soft play centres in Randalstown and the surrounding area of County Antrim.",
+    "nearbyAreas": [
+      "Antrim",
+      "Belfast",
+      "Ballynahinch"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "stafford",
+    "name": "Stafford",
+    "county": "Staffordshire",
+    "region": "West Midlands",
+    "metaTitle": "Soft Play in Stafford",
+    "metaDescription": "Find soft play centres in Stafford, Staffordshire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Stafford",
+    "intro": "Soft play centres in Stafford and the surrounding area of Staffordshire.",
+    "nearbyAreas": [
+      "Stoke-on-Trent",
+      "Birmingham",
+      "Crewe"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "hamilton",
+    "name": "Hamilton",
+    "county": "South Lanarkshire",
+    "region": "Scotland",
+    "metaTitle": "Soft Play in Hamilton",
+    "metaDescription": "Find soft play centres in Hamilton, South Lanarkshire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Hamilton",
+    "intro": "Soft play centres in Hamilton and the surrounding area of South Lanarkshire.",
+    "nearbyAreas": [
+      "Glasgow",
+      "Falkirk",
+      "Ayr"
+    ],
+    "faqs": []
   }
 ]

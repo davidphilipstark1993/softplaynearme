@@ -544,7 +544,11 @@
     "name": "Peterborough",
     "county": "Cambridgeshire"
   },
-  {"slug": "belfast", "name": "Belfast", "county": "Belfast"},
+  {
+    "slug": "belfast",
+    "name": "Belfast",
+    "county": "Belfast"
+  },
   {
     "slug": "shrewsbury",
     "name": "Shrewsbury",
@@ -554,5 +558,45 @@
     "slug": "lancaster",
     "name": "Lancaster",
     "county": "Lancashire"
+  },
+  {
+    "slug": "wellingborough",
+    "name": "Wellingborough",
+    "county": "North Northamptonshire"
+  },
+  {
+    "slug": "malvern",
+    "name": "Malvern",
+    "county": "Worcestershire"
+  },
+  {
+    "slug": "musselburgh",
+    "name": "Musselburgh",
+    "county": "East Lothian"
+  },
+  {
+    "slug": "harwich",
+    "name": "Harwich",
+    "county": "Essex"
+  },
+  {
+    "slug": "oldham",
+    "name": "Oldham",
+    "county": "Greater Manchester"
+  },
+  {
+    "slug": "randalstown",
+    "name": "Randalstown",
+    "county": "Antrim and Newtownabbey"
+  },
+  {
+    "slug": "stafford",
+    "name": "Stafford",
+    "county": "Staffordshire"
+  },
+  {
+    "slug": "hamilton",
+    "name": "Hamilton",
+    "county": "South Lanarkshire"
   }
 ]
