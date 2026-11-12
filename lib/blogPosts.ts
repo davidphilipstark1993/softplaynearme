@@ -2198,13 +2198,13 @@ export const posts: BlogPost[] = [
 <ul>
   <li><strong><a href="/soft-play/leicester/petite-street-play-village-leicester" class="text-purple-700 hover:underline">Petite Street Play village</a></strong> — 4.9 stars from 125 reviews.</li>
   <li><strong><a href="/soft-play/leicester/jungle-bugs-soft-play-leicester" class="text-purple-700 hover:underline">Jungle Bugs Soft Play</a></strong> — 4.9 stars from 123 reviews.</li>
-  <li><strong><a href="/soft-play/leicester/cheeky-monkeys-playcentre-leicester" class="text-purple-700 hover:underline">Cheeky Monkeys Playcentre</a></strong> — 4.8 stars from 124 reviews.</li>
+  <li><strong><a href="/soft-play/nuneaton/cheeky-monkeys-playcentre-leicester" class="text-purple-700 hover:underline">Cheeky Monkeys Playcentre</a></strong> — 4.8 stars from 124 reviews.</li>
   <li><strong><a href="/soft-play/leicester/the-hub-cafe-soft-play-leicester" class="text-purple-700 hover:underline">The Hub (Cafe &amp; Soft Play)</a></strong> — 4.8 stars from 106 reviews.</li>
   <li><strong><a href="/soft-play/leicester/smallville-roleplay-leicester" class="text-purple-700 hover:underline">Smallville Roleplay</a></strong> — 4.7 stars from 68 reviews.</li>
 </ul>
 
 <h2>The busiest venues</h2>
-<p>Review volume is a good proxy for how many families actually go. <a href="/soft-play/leicester/bermuda-adventure-soft-play-world-leicester" class="text-purple-700 hover:underline">Bermuda Adventure Soft Play World</a> is the most-reviewed on our list with 1,153 reviews at 4.3 stars, followed by <a href="/soft-play/leicester/jungle-madness-leicester" class="text-purple-700 hover:underline">Jungle Madness</a> (740 reviews, 4.3 stars), <a href="/soft-play/leicester/360-play-leicester-family-entertainment-centre-and-party-venue-leicester" class="text-purple-700 hover:underline">360 Play Leicester - Family Entertainment Centre and Party Venue</a> (561 reviews, 3.8 stars) and <a href="/soft-play/leicester/enderby-leisure-golf-centre-leicester" class="text-purple-700 hover:underline">Enderby Leisure &amp; Golf Centre</a> (356 reviews, 3.9 stars).</p>
+<p>Review volume is a good proxy for how many families actually go. <a href="/soft-play/nuneaton/bermuda-adventure-soft-play-world-leicester" class="text-purple-700 hover:underline">Bermuda Adventure Soft Play World</a> is the most-reviewed on our list with 1,153 reviews at 4.3 stars, followed by <a href="/soft-play/leicester/jungle-madness-leicester" class="text-purple-700 hover:underline">Jungle Madness</a> (740 reviews, 4.3 stars), <a href="/soft-play/leicester/360-play-leicester-family-entertainment-centre-and-party-venue-leicester" class="text-purple-700 hover:underline">360 Play Leicester - Family Entertainment Centre and Party Venue</a> (561 reviews, 3.8 stars) and <a href="/soft-play/leicester/enderby-leisure-golf-centre-leicester" class="text-purple-700 hover:underline">Enderby Leisure &amp; Golf Centre</a> (356 reviews, 3.9 stars).</p>
 
 <h2>Where the confirmed facilities are</h2>
 <p>Facility information is patchy across smaller venues, so these lists show only what is confirmed on each listing — a venue missing from a list may well have the facility, it just isn’t confirmed in our data.</p>
@@ -2216,7 +2216,7 @@ export const posts: BlogPost[] = [
 
 <h2>Which one to try first</h2>
 <p><strong>Highest rated:</strong> <a href="/soft-play/leicester/petite-street-play-village-leicester" class="text-purple-700 hover:underline">Petite Street Play village</a> (4.9 stars, 125 reviews).</p>
-<p><strong>Most popular:</strong> <a href="/soft-play/leicester/bermuda-adventure-soft-play-world-leicester" class="text-purple-700 hover:underline">Bermuda Adventure Soft Play World</a> (1,153 reviews).</p>
+<p><strong>Most popular:</strong> <a href="/soft-play/nuneaton/bermuda-adventure-soft-play-world-leicester" class="text-purple-700 hover:underline">Bermuda Adventure Soft Play World</a> (1,153 reviews).</p>
 <p><strong>If you want a proper café:</strong> <a href="/soft-play/leicester/the-hub-cafe-soft-play-leicester" class="text-purple-700 hover:underline">The Hub (Cafe &amp; Soft Play)</a> (4.8 stars, café confirmed).</p>
 <p><strong>For a birthday party:</strong> <a href="/soft-play/leicester/jungle-madness-leicester" class="text-purple-700 hover:underline">Jungle Madness</a> (4.3 stars, party facilities confirmed).</p>
 
