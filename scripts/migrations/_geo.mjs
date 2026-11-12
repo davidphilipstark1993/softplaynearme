@@ -69,15 +69,34 @@ const POSTCODE_DISTRICT_TO_CITY = {
   HU17: ['beverley'],
   // YO (York postcode area): YO15/16 = Bridlington & Filey; YO8/30/32 etc = York side
   YO15: ['bridlington'], YO16: ['bridlington'],
-  // YO25 = Driffield, East Riding — same council area as Bridlington and
-  // closer to it (~11mi) than York (~28mi) or the declared-but-unmapped Beverley (~13mi)
-  YO25: ['bridlington'],
+  // YO25 = Driffield, which has its own hub since the 12 Nov 2026 Hull-area sweep
+  YO25: ['driffield'],
   YO8: ['york'], YO19: ['york'], YO23: ['york'], YO24: ['york'],
   YO26: ['york'], YO30: ['york'], YO31: ['york'], YO32: ['york'],
   YO41: ['york'], YO42: ['york'], YO43: ['york'], YO51: ['york'],
   YO60: ['york'], YO61: ['york'], YO62: ['york'],
+  // South Humber / Goole towns with their own hubs (Hull-area sweep, 12 Nov 2026); only the
+  // districts that hold a moved venue, the rest of DN stays doncaster
+  DN14: ['goole'], DN20: ['brigg'], DN32: ['grimsby'], DN35: ['cleethorpes'],
   // DN15-DN17 = Scunthorpe (own hub since phase 7-02), not Doncaster
   DN15: ['scunthorpe'], DN16: ['scunthorpe'], DN17: ['scunthorpe'],
+  // Birmingham-area towns that have their own hub since the 12 Nov 2026 sweep (towns from
+  // postcodes.io, as recorded in reports/birmingham-area-venue-sweep-2026-11-12.md). Only
+  // districts that hold a retagged venue are listed; B, WS, WV, DY and TF otherwise stay
+  // "birmingham" below. B78 holds both Drayton Bassett (Tamworth hub) and Middleton.
+  B37: ['solihull'], B90: ['solihull'], B91: ['solihull'], B92: ['solihull'],
+  B45: ['barnt-green'], B47: ['wythall'], B48: ['alvechurch'],
+  B62: ['halesowen'], B63: ['halesowen'], B65: ['smethwick'],
+  B70: ['west-bromwich'], B71: ['west-bromwich'],
+  B77: ['tamworth'], B78: ['tamworth', 'middleton'], B79: ['tamworth'], WS14: ['tamworth'],
+  CV10: ['nuneaton'], CV11: ['nuneaton'],
+  DY1: ['dudley'], DY2: ['dudley'], DY6: ['dudley'], DY3: ['himley'], DY4: ['tipton'],
+  DY5: ['stourbridge'], DY8: ['stourbridge'],
+  DY10: ['kidderminster'], DY11: ['kidderminster'], DY14: ['cleobury-mortimer'],
+  WS1: ['walsall'], WS2: ['walsall'], WS9: ['aldridge'], WS11: ['cannock'],
+  WV1: ['wolverhampton'], WV10: ['wolverhampton'], WV11: ['wolverhampton'], WV14: ['wolverhampton'],
+  WV5: ['wombourne'], WV12: ['willenhall'],
+  TF4: ['telford'], TF7: ['telford'], TF11: ['shifnal'],
   // S (Sheffield postcode area): S70-S75 = Barnsley, not Sheffield
   S70: ['barnsley'], S71: ['barnsley'], S72: ['barnsley'],
   S73: ['barnsley'], S74: ['barnsley'], S75: ['barnsley'],

@@ -603,5 +603,205 @@
     "slug": "perth",
     "name": "Perth",
     "county": "Perth and Kinross"
+  },
+  {
+    "slug": "coventry",
+    "name": "Coventry",
+    "county": "West Midlands"
+  },
+  {
+    "slug": "cannock",
+    "name": "Cannock",
+    "county": "Staffordshire"
+  },
+  {
+    "slug": "haddington",
+    "name": "Haddington",
+    "county": "East Lothian"
+  },
+  {
+    "slug": "west-calder",
+    "name": "West Calder",
+    "county": "West Lothian"
+  },
+  {
+    "slug": "castleford",
+    "name": "Castleford",
+    "county": "West Yorkshire"
+  },
+  {
+    "slug": "bury",
+    "name": "Bury",
+    "county": "Greater Manchester"
+  },
+  {
+    "slug": "stanley",
+    "name": "Stanley",
+    "county": "County Durham"
+  },
+  {
+    "slug": "stocksfield",
+    "name": "Stocksfield",
+    "county": "Northumberland"
+  },
+  {
+    "slug": "loughborough",
+    "name": "Loughborough",
+    "county": "Leicestershire"
+  },
+  {
+    "slug": "midsomer-norton",
+    "name": "Midsomer Norton",
+    "county": "Somerset"
+  },
+  {
+    "slug": "sunbury-on-thames",
+    "name": "Sunbury-on-Thames",
+    "county": "Surrey"
+  },
+  {
+    "slug": "swanley",
+    "name": "Swanley",
+    "county": "Kent"
+  },
+  {
+    "slug": "solihull",
+    "name": "Solihull",
+    "county": "West Midlands"
+  },
+  {
+    "slug": "stourbridge",
+    "name": "Stourbridge",
+    "county": "West Midlands"
+  },
+  {
+    "slug": "walsall",
+    "name": "Walsall",
+    "county": "West Midlands"
+  },
+  {
+    "slug": "dudley",
+    "name": "Dudley",
+    "county": "West Midlands"
+  },
+  {
+    "slug": "nuneaton",
+    "name": "Nuneaton",
+    "county": "Warwickshire"
+  },
+  {
+    "slug": "tamworth",
+    "name": "Tamworth",
+    "county": "Staffordshire"
+  },
+  {
+    "slug": "west-bromwich",
+    "name": "West Bromwich",
+    "county": "West Midlands"
+  },
+  {
+    "slug": "wolverhampton",
+    "name": "Wolverhampton",
+    "county": "West Midlands"
+  },
+  {
+    "slug": "wombourne",
+    "name": "Wombourne",
+    "county": "Staffordshire"
+  },
+  {
+    "slug": "aldridge",
+    "name": "Aldridge",
+    "county": "West Midlands"
+  },
+  {
+    "slug": "halesowen",
+    "name": "Halesowen",
+    "county": "West Midlands"
+  },
+  {
+    "slug": "kidderminster",
+    "name": "Kidderminster",
+    "county": "Worcestershire"
+  },
+  {
+    "slug": "alvechurch",
+    "name": "Alvechurch",
+    "county": "Worcestershire"
+  },
+  {
+    "slug": "barnt-green",
+    "name": "Barnt Green",
+    "county": "Worcestershire"
+  },
+  {
+    "slug": "himley",
+    "name": "Himley",
+    "county": "Staffordshire"
+  },
+  {
+    "slug": "middleton",
+    "name": "Middleton",
+    "county": "Warwickshire"
+  },
+  {
+    "slug": "smethwick",
+    "name": "Smethwick",
+    "county": "West Midlands"
+  },
+  {
+    "slug": "tipton",
+    "name": "Tipton",
+    "county": "West Midlands"
+  },
+  {
+    "slug": "willenhall",
+    "name": "Willenhall",
+    "county": "West Midlands"
+  },
+  {
+    "slug": "wythall",
+    "name": "Wythall",
+    "county": "Worcestershire"
+  },
+  {
+    "slug": "telford",
+    "name": "Telford",
+    "county": "Shropshire"
+  },
+  {
+    "slug": "shifnal",
+    "name": "Shifnal",
+    "county": "Shropshire"
+  },
+  {
+    "slug": "cleobury-mortimer",
+    "name": "Cleobury Mortimer",
+    "county": "Shropshire"
+  },
+  {
+    "slug": "grimsby",
+    "name": "Grimsby",
+    "county": "Lincolnshire"
+  },
+  {
+    "slug": "cleethorpes",
+    "name": "Cleethorpes",
+    "county": "Lincolnshire"
+  },
+  {
+    "slug": "brigg",
+    "name": "Brigg",
+    "county": "Lincolnshire"
+  },
+  {
+    "slug": "driffield",
+    "name": "Driffield",
+    "county": "East Yorkshire"
+  },
+  {
+    "slug": "goole",
+    "name": "Goole",
+    "county": "East Yorkshire"
   }
 ]

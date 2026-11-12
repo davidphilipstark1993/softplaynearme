@@ -41,10 +41,11 @@ test('Cottingham and Anlaby venues are nearby towns of Hull, not Hull', () => {
   for (const t of ['Cottingham', 'Hessle', 'Anlaby']) assert.ok(towns.has(t), `${t} missing`)
 })
 
-test('Lincolnshire venues are flagged wherever they are filed', () => {
+test('Lincolnshire venues are no longer filed under a Yorkshire hub (Hull-area sweep, Nov 2026)', () => {
+  // They used to sit under Doncaster/Hull and were flagged; they now live on Lincolnshire hubs
+  // (Scunthorpe, Grimsby, Cleethorpes, Brigg), so the checker has nothing left to flag for them.
   const lincs = rows.filter((x) => x.issue === 'different_county' && /Lincolnshire/.test(x.suggested_action))
-  assert.ok(lincs.length >= 1)
-  assert.ok(lincs.every((x) => x.hub !== 'hull'))
+  assert.deepEqual(lincs.map((x) => `${x.hub}:${x.name}`), [])
 })
 
 test('the Hull page copy no longer lists Lincolnshire venues', () => {
