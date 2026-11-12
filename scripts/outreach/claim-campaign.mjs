@@ -171,6 +171,8 @@ export function classify(recipients, ctx) {
   for (const r of recipients) {
     if (!EMAIL_OK.test(r.email)) { skip(r, 'invalid email format'); continue }
     if (r.claimed) { skip(r, 'already claimed'); continue }
+    // The letter quotes this city page's impressions, so it only goes to venues listed on that page.
+    if (ctx.listingPrefix && !r.listing_url.startsWith(ctx.listingPrefix)) { skip(r, `listed on /soft-play/${r.city_slug}/, not ${ctx.listingPrefix.replace(SITE, '')} — the ${ctx.cityName} letter quotes the ${ctx.cityName} page, so this venue needs a letter of its own`); continue }
     if (isPlaceholderEmail(r.email) && !ctx.includePlaceholders) { skip(r, `placeholder address (${emailDomain(r.email)}) — confirm it, then pass --include-placeholders`); continue }
     if (ctx.suppressed.has(r.email)) { skip(r, 'on the local suppression list (said no thanks / added by hand)'); continue }
     if (ctx.excluded.has(r.email)) { skip(r, 'on an exclude file (recent outreach / opted out)'); continue }
@@ -332,6 +334,8 @@ async function main() {
   const accepted = sentRows.filter((r) => r.kind === 'campaign' && /^2\d\d$|^accepted$/.test(r.status))
   const thirtyDaysAgo = Date.now() - 30 * 86400000
   const ctx = {
+    cityName: city.name,
+    listingPrefix: `${SITE}/soft-play/${city.slug}/`,
     includePlaceholders: args['include-placeholders'] === true,
     allowDuplicateEmail: args['allow-duplicate-email'] === true,
     suppressed: new Set(readLines(path.join(DATA_DIR, 'suppression.txt'))),

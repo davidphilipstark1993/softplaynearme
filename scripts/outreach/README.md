@@ -31,7 +31,7 @@ Export with the SQL in the venue-claim email report (`city_slug = 'hull'`) to `c
 The claim and listing URLs are built by the script from name/city/slug (percent-encoded exactly like the listing page's Claim button).
 
 ### Skipped, with the reason printed
-invalid email · already claimed · placeholder domain (`mysite.com`, `example.com`, `email.com`, `test.com`, `domain.com`, `yourvenue.co.uk`;
+listed under a different hub than the letter's city (the Hull letter quotes the Hull page's impressions, so a Beverley or Scunthorpe venue needs a letter of its own) · invalid email · already claimed · placeholder domain (`mysite.com`, `example.com`, `email.com`, `test.com`, `domain.com`, `yourvenue.co.uk`;
 `--include-placeholders` after you've confirmed the address) · local suppression list · `--exclude-file` / the older backlink outreach logs ·
 SendGrid bounces, blocks, invalid, spam reports, global and outreach-group unsubscribes · already sent for this campaign and `venue_id` ·
 emailed by this campaign in the last 30 days · second venue with the same email on the same day (`--allow-duplicate-email` to override).

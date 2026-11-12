@@ -80,6 +80,18 @@ test('skip rules: placeholder, claimed, suppressed, duplicate same-day, already 
   assert.equal(cc.classify(rows.slice(0, 1), ctx({ recentlyContacted: new Set(['info@letsplayhull.com']) })).send.length, 0)
 })
 
+test('a venue listed on another hub is skipped: the Hull letter quotes the Hull page only', () => {
+  const rows = cc.toRecipients([
+    row({ venue_id: '1' }),
+    row({ venue_id: '2', email: 'a@x.co.uk', city_slug: 'beverley', slug: 'let-loose-yorkshire' }),
+    row({ venue_id: '3', email: 'b@x.co.uk', city_slug: 'scunthorpe', slug: 'play-avenue-ltd' }),
+  ], 'hull')
+  const { send, skipped } = cc.classify(rows, ctx({ cityName: 'Hull', listingPrefix: 'https://www.softplaynearme.co.uk/soft-play/hull/' }))
+  assert.deepEqual(send.map((r) => r.venue_id), ['1'])
+  assert.match(skipped.find((s) => s.r.venue_id === '2').reason, /needs a letter of its own/)
+  assert.match(skipped.find((s) => s.r.venue_id === '3').reason, /Hull letter quotes the Hull page/)
+})
+
 test('warm-up caps and the SendGrid payload (tracking off, ASM group, reply-to)', () => {
   assert.deepEqual([0, 1, 2, 3, 4, 5, 9].map(cc.dayCapFor), [20, 40, 80, 120, 200, 200, 200])
   const p = cc.buildPayload({ to: 'x@y.co.uk', from: 'david@softplaynearme.co.uk', replyTo: 'david@softplaynearme.co.uk', name: 'David', subject: 's', text: 't', html: 'h', groupId: '123', city: 'hull', venueId: 14, kind: 'campaign' })
