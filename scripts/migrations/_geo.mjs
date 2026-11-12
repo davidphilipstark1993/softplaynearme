@@ -78,6 +78,23 @@ const POSTCODE_DISTRICT_TO_CITY = {
   YO60: ['york'], YO61: ['york'], YO62: ['york'],
   // DN15-DN17 = Scunthorpe (own hub since phase 7-02), not Doncaster
   DN15: ['scunthorpe'], DN16: ['scunthorpe'], DN17: ['scunthorpe'],
+  // Birmingham-area towns that have their own hub since the 12 Nov 2026 sweep (towns from
+  // postcodes.io, as recorded in reports/birmingham-area-venue-sweep-2026-11-12.md). Only
+  // districts that hold a retagged venue are listed; B, WS, WV, DY and TF otherwise stay
+  // "birmingham" below. B78 holds both Drayton Bassett (Tamworth hub) and Middleton.
+  B37: ['solihull'], B90: ['solihull'], B91: ['solihull'], B92: ['solihull'],
+  B45: ['barnt-green'], B47: ['wythall'], B48: ['alvechurch'],
+  B62: ['halesowen'], B63: ['halesowen'], B65: ['smethwick'],
+  B70: ['west-bromwich'], B71: ['west-bromwich'],
+  B77: ['tamworth'], B78: ['tamworth', 'middleton'], B79: ['tamworth'], WS14: ['tamworth'],
+  CV10: ['nuneaton'], CV11: ['nuneaton'],
+  DY1: ['dudley'], DY2: ['dudley'], DY6: ['dudley'], DY3: ['himley'], DY4: ['tipton'],
+  DY5: ['stourbridge'], DY8: ['stourbridge'],
+  DY10: ['kidderminster'], DY11: ['kidderminster'], DY14: ['cleobury-mortimer'],
+  WS1: ['walsall'], WS2: ['walsall'], WS9: ['aldridge'], WS11: ['cannock'],
+  WV1: ['wolverhampton'], WV10: ['wolverhampton'], WV11: ['wolverhampton'], WV14: ['wolverhampton'],
+  WV5: ['wombourne'], WV12: ['willenhall'],
+  TF4: ['telford'], TF7: ['telford'], TF11: ['shifnal'],
   // S (Sheffield postcode area): S70-S75 = Barnsley, not Sheffield
   S70: ['barnsley'], S71: ['barnsley'], S72: ['barnsley'],
   S73: ['barnsley'], S74: ['barnsley'], S75: ['barnsley'],

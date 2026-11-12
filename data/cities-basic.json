@@ -663,5 +663,120 @@
     "slug": "swanley",
     "name": "Swanley",
     "county": "Kent"
+  },
+  {
+    "slug": "solihull",
+    "name": "Solihull",
+    "county": "West Midlands"
+  },
+  {
+    "slug": "stourbridge",
+    "name": "Stourbridge",
+    "county": "West Midlands"
+  },
+  {
+    "slug": "walsall",
+    "name": "Walsall",
+    "county": "West Midlands"
+  },
+  {
+    "slug": "dudley",
+    "name": "Dudley",
+    "county": "West Midlands"
+  },
+  {
+    "slug": "nuneaton",
+    "name": "Nuneaton",
+    "county": "Warwickshire"
+  },
+  {
+    "slug": "tamworth",
+    "name": "Tamworth",
+    "county": "Staffordshire"
+  },
+  {
+    "slug": "west-bromwich",
+    "name": "West Bromwich",
+    "county": "West Midlands"
+  },
+  {
+    "slug": "wolverhampton",
+    "name": "Wolverhampton",
+    "county": "West Midlands"
+  },
+  {
+    "slug": "wombourne",
+    "name": "Wombourne",
+    "county": "Staffordshire"
+  },
+  {
+    "slug": "aldridge",
+    "name": "Aldridge",
+    "county": "West Midlands"
+  },
+  {
+    "slug": "halesowen",
+    "name": "Halesowen",
+    "county": "West Midlands"
+  },
+  {
+    "slug": "kidderminster",
+    "name": "Kidderminster",
+    "county": "Worcestershire"
+  },
+  {
+    "slug": "alvechurch",
+    "name": "Alvechurch",
+    "county": "Worcestershire"
+  },
+  {
+    "slug": "barnt-green",
+    "name": "Barnt Green",
+    "county": "Worcestershire"
+  },
+  {
+    "slug": "himley",
+    "name": "Himley",
+    "county": "Staffordshire"
+  },
+  {
+    "slug": "middleton",
+    "name": "Middleton",
+    "county": "Warwickshire"
+  },
+  {
+    "slug": "smethwick",
+    "name": "Smethwick",
+    "county": "West Midlands"
+  },
+  {
+    "slug": "tipton",
+    "name": "Tipton",
+    "county": "West Midlands"
+  },
+  {
+    "slug": "willenhall",
+    "name": "Willenhall",
+    "county": "West Midlands"
+  },
+  {
+    "slug": "wythall",
+    "name": "Wythall",
+    "county": "Worcestershire"
+  },
+  {
+    "slug": "telford",
+    "name": "Telford",
+    "county": "Shropshire"
+  },
+  {
+    "slug": "shifnal",
+    "name": "Shifnal",
+    "county": "Shropshire"
+  },
+  {
+    "slug": "cleobury-mortimer",
+    "name": "Cleobury Mortimer",
+    "county": "Shropshire"
   }
 ]
