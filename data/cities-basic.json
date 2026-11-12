@@ -603,5 +603,30 @@
     "slug": "perth",
     "name": "Perth",
     "county": "Perth and Kinross"
+  },
+  {
+    "slug": "grimsby",
+    "name": "Grimsby",
+    "county": "Lincolnshire"
+  },
+  {
+    "slug": "cleethorpes",
+    "name": "Cleethorpes",
+    "county": "Lincolnshire"
+  },
+  {
+    "slug": "brigg",
+    "name": "Brigg",
+    "county": "Lincolnshire"
+  },
+  {
+    "slug": "driffield",
+    "name": "Driffield",
+    "county": "East Yorkshire"
+  },
+  {
+    "slug": "goole",
+    "name": "Goole",
+    "county": "East Yorkshire"
   }
 ]

@@ -1,17 +1,17 @@
 [
   {
     "source": "/soft-play/hull/funforest-brigg-hull",
-    "destination": "/soft-play/doncaster/funforest-brigg",
+    "destination": "/soft-play/brigg/funforest-brigg",
     "permanent": true
   },
   {
     "source": "/soft-play/hull/time-4-play-grimsby-ltd-hull",
-    "destination": "/soft-play/doncaster/time-4-play-grimsby-ltd",
+    "destination": "/soft-play/grimsby/time-4-play-grimsby-ltd",
     "permanent": true
   },
   {
     "source": "/soft-play/hull/the-magical-castle-hull",
-    "destination": "/soft-play/doncaster/the-magical-castle",
+    "destination": "/soft-play/cleethorpes/the-magical-castle",
     "permanent": true
   },
   {
@@ -356,7 +356,7 @@
   },
   {
     "source": "/soft-play/hull/jurassica-hull",
-    "destination": "/soft-play/doncaster/jurassica",
+    "destination": "/soft-play/goole/jurassica",
     "permanent": true
   },
   {
@@ -981,7 +981,7 @@
   },
   {
     "source": "/soft-play/hull/jam-jamz-indoor-softplay-hull",
-    "destination": "/soft-play/bridlington/jam-jamz-indoor-softplay",
+    "destination": "/soft-play/driffield/jam-jamz-indoor-softplay",
     "permanent": true
   },
   {
@@ -2151,7 +2151,7 @@
   },
   {
     "source": "/soft-play/bridlington/jam-jamz-indoor-softplay-bridlington",
-    "destination": "/soft-play/bridlington/jam-jamz-indoor-softplay",
+    "destination": "/soft-play/driffield/jam-jamz-indoor-softplay",
     "permanent": true
   },
   {
@@ -2326,12 +2326,12 @@
   },
   {
     "source": "/soft-play/doncaster/funforest-brigg-doncaster",
-    "destination": "/soft-play/doncaster/funforest-brigg",
+    "destination": "/soft-play/brigg/funforest-brigg",
     "permanent": true
   },
   {
     "source": "/soft-play/doncaster/jurassica-doncaster",
-    "destination": "/soft-play/doncaster/jurassica",
+    "destination": "/soft-play/goole/jurassica",
     "permanent": true
   },
   {
@@ -2351,12 +2351,12 @@
   },
   {
     "source": "/soft-play/doncaster/the-magical-castle-doncaster",
-    "destination": "/soft-play/doncaster/the-magical-castle",
+    "destination": "/soft-play/cleethorpes/the-magical-castle",
     "permanent": true
   },
   {
     "source": "/soft-play/doncaster/time-4-play-grimsby-ltd-doncaster",
-    "destination": "/soft-play/doncaster/time-4-play-grimsby-ltd",
+    "destination": "/soft-play/grimsby/time-4-play-grimsby-ltd",
     "permanent": true
   },
   {
@@ -4021,7 +4021,7 @@
   },
   {
     "source": "/soft-play/doncaster/funforest-brigg-hull",
-    "destination": "/soft-play/doncaster/funforest-brigg",
+    "destination": "/soft-play/brigg/funforest-brigg",
     "permanent": true
   },
   {
@@ -4031,7 +4031,7 @@
   },
   {
     "source": "/soft-play/doncaster/the-magical-castle-hull",
-    "destination": "/soft-play/doncaster/the-magical-castle",
+    "destination": "/soft-play/cleethorpes/the-magical-castle",
     "permanent": true
   },
   {
@@ -4621,7 +4621,7 @@
   },
   {
     "source": "/soft-play/doncaster/jurassica-hull",
-    "destination": "/soft-play/doncaster/jurassica",
+    "destination": "/soft-play/goole/jurassica",
     "permanent": true
   },
   {
@@ -4866,7 +4866,7 @@
   },
   {
     "source": "/soft-play/bridlington/jam-jamz-indoor-softplay-hull",
-    "destination": "/soft-play/bridlington/jam-jamz-indoor-softplay",
+    "destination": "/soft-play/driffield/jam-jamz-indoor-softplay",
     "permanent": true
   },
   {
@@ -5006,7 +5006,7 @@
   },
   {
     "source": "/soft-play/doncaster/time-4-play-grimsby-ltd-hull",
-    "destination": "/soft-play/doncaster/time-4-play-grimsby-ltd",
+    "destination": "/soft-play/grimsby/time-4-play-grimsby-ltd",
     "permanent": true
   },
   {
@@ -5472,6 +5472,36 @@
   {
     "source": "/soft-play/bradford/petit-pois-play-cafe-bradford",
     "destination": "/soft-play/bradford",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/doncaster/time-4-play-grimsby-ltd",
+    "destination": "/soft-play/grimsby/time-4-play-grimsby-ltd",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/doncaster/the-magical-castle",
+    "destination": "/soft-play/cleethorpes/the-magical-castle",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/doncaster/funforest-brigg",
+    "destination": "/soft-play/brigg/funforest-brigg",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/bridlington/jam-jamz-indoor-softplay",
+    "destination": "/soft-play/driffield/jam-jamz-indoor-softplay",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/doncaster/jurassica",
+    "destination": "/soft-play/goole/jurassica",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/hull/sweet-soft-play-hull",
+    "destination": "/soft-play/beverley/sweet-soft-play-hull",
     "permanent": true
   }
 ]

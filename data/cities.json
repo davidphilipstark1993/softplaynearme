@@ -63,6 +63,10 @@
     "nearbyAreas": [
       "Beverley",
       "Bridlington",
+      "Driffield",
+      "Goole",
+      "Scunthorpe",
+      "Grimsby",
       "Hessle",
       "Cottingham",
       "Anlaby",
@@ -1407,7 +1411,10 @@
     "nearbyAreas": [
       "Doncaster",
       "Lincoln",
-      "Hull"
+      "Hull",
+      "Grimsby",
+      "Brigg",
+      "Goole"
     ],
     "faqs": []
   },
@@ -2839,6 +2846,87 @@
       "Forfar",
       "Falkirk",
       "Edinburgh"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "grimsby",
+    "name": "Grimsby",
+    "county": "Lincolnshire",
+    "region": "East Midlands",
+    "metaTitle": "Soft Play in Grimsby",
+    "metaDescription": "Find soft play centres in Grimsby, Lincolnshire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Grimsby",
+    "intro": "Soft play centres in Grimsby and the surrounding area of Lincolnshire.",
+    "nearbyAreas": [
+      "Cleethorpes",
+      "Scunthorpe",
+      "Brigg",
+      "Hull"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "cleethorpes",
+    "name": "Cleethorpes",
+    "county": "Lincolnshire",
+    "region": "East Midlands",
+    "metaTitle": "Soft Play in Cleethorpes",
+    "metaDescription": "Find soft play centres in Cleethorpes, Lincolnshire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Cleethorpes",
+    "intro": "Soft play centres in Cleethorpes and the surrounding area of Lincolnshire.",
+    "nearbyAreas": [
+      "Grimsby",
+      "Scunthorpe",
+      "Brigg"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "brigg",
+    "name": "Brigg",
+    "county": "Lincolnshire",
+    "region": "East Midlands",
+    "metaTitle": "Soft Play in Brigg",
+    "metaDescription": "Find soft play centres in Brigg, Lincolnshire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Brigg",
+    "intro": "Soft play centres in Brigg and the surrounding area of Lincolnshire.",
+    "nearbyAreas": [
+      "Scunthorpe",
+      "Grimsby",
+      "Doncaster"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "driffield",
+    "name": "Driffield",
+    "county": "East Yorkshire",
+    "region": "Yorkshire",
+    "metaTitle": "Soft Play in Driffield",
+    "metaDescription": "Find soft play centres in Driffield, East Yorkshire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Driffield",
+    "intro": "Soft play centres in Driffield and the surrounding area of East Yorkshire.",
+    "nearbyAreas": [
+      "Bridlington",
+      "Beverley",
+      "Hull"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "goole",
+    "name": "Goole",
+    "county": "East Yorkshire",
+    "region": "Yorkshire",
+    "metaTitle": "Soft Play in Goole",
+    "metaDescription": "Find soft play centres in Goole, East Yorkshire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Goole",
+    "intro": "Soft play centres in Goole and the surrounding area of East Yorkshire.",
+    "nearbyAreas": [
+      "Doncaster",
+      "Scunthorpe",
+      "Hull"
     ],
     "faqs": []
   }

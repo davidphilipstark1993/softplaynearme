@@ -3,6 +3,12 @@
 //   node scripts/migrations/phase7-02-create-town-hub.mjs --town=Scunthorpe --nearby=Doncaster,Lincoln,Hull
 //   node scripts/migrations/phase7-02-create-town-hub.mjs --town=Scunthorpe --nearby=… --execute [--db]
 //
+// Options: --min=N        genuine soft play venues needed (default 3; the Hull-area sweep of 12 Nov 2026
+//                         asked for hubs with at least 1 — pass --min=1 deliberately)
+//          --region=…     cities.json region (default East Midlands)
+//          --ids=78,31    only move these venue ids
+//          --allow-existing  move venues into a hub that already exists (no cities.json entry is added)
+//          --keep-slugs   don't strip the old hub's suffix from slugs (use when the DB change is city_slug only)//
 // A venue's "home town" comes from its postcode (data/postcode-localities.json). Venues
 // in that town that are filed under another hub (Scunthorpe venues under Doncaster) move
 // to the new hub. Needs 3+ genuine soft play venues (indoor/pub); fewer aborts. What it
@@ -28,6 +34,11 @@ const EXECUTE = process.argv.includes('--execute')
 const WITH_DB = process.argv.includes('--db')
 const TOWN = arg('town')
 if (!TOWN) throw new Error('--town=Name is required')
+const MIN = Number(arg('min') ?? 3)
+const REGION = arg('region') ?? 'East Midlands'
+const ONLY_IDS = arg('ids') ? new Set(arg('ids').split(',').map(Number)) : null
+const ALLOW_EXISTING = process.argv.includes('--allow-existing')
+const KEEP_SLUGS = process.argv.includes('--keep-slugs')
 const NEARBY = (arg('nearby') ?? '').split(',').map((s) => s.trim()).filter(Boolean)
 const slugOf = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
 const SLUG = slugOf(TOWN)
@@ -49,22 +60,25 @@ const VISIBLE = new Set(['indoor', 'pub'])
 const district = (pc) => String(pc ?? '').trim().toUpperCase().match(/^([A-Z]{1,2}\d[A-Z\d]?)\s*\d[A-Z]{2}$/)?.[1]
 const localityOf = (v) => localities.venueOverrides[String(v.id)] ?? localities.districts[district(v.postcode)] ?? null
 
-const movers = venues.filter((v) => localityOf(v) === TOWN && v.townSlug !== SLUG)
+const movers = venues.filter((v) => localityOf(v) === TOWN && v.townSlug !== SLUG && (!ONLY_IDS || ONLY_IDS.has(v.id)))
 const visibleCount = movers.filter((v) => VISIBLE.has(v.venueType) || !v.venueType).length
 console.log(`${EXECUTE ? 'EXECUTE' : 'DRY RUN'}: ${movers.length} venue(s) in ${TOWN} (${visibleCount} genuine soft play) filed under other hubs.`)
-if (visibleCount < 3) {
-  console.error(`Aborting: a hub needs 3+ soft play venues, ${TOWN} has ${visibleCount}.`)
+if (visibleCount < MIN) {
+  console.error(`Aborting: a hub needs ${MIN}+ soft play venues, ${TOWN} has ${visibleCount}.`)
   process.exit(1)
 }
-if (cities.some((c) => c.slug === SLUG)) throw new Error(`${SLUG} already has a hub`)
-const county = localities.counties[TOWN]
+const hubExists = cities.some((c) => c.slug === SLUG)
+if (hubExists && !ALLOW_EXISTING) throw new Error(`${SLUG} already has a hub (pass --allow-existing to move venues into it)`)
+if (!hubExists && ALLOW_EXISTING) throw new Error(`${SLUG} has no hub yet; drop --allow-existing`)
+const county = localities.counties[TOWN] ?? cities.find((c) => c.slug === SLUG)?.county
 if (!county) throw new Error(`No county for ${TOWN} in data/postcode-localities.json -> counties`)
 
 // new slugs
 const taken = new Set((byTown[SLUG]?.venues ?? []).map((v) => v.slug))
 const plan = movers.map((v) => {
-  let slug = stripTrailingCity(v.slug, v.townSlug)
-  for (let n = 2; taken.has(slug); n++) slug = `${stripTrailingCity(v.slug, v.townSlug)}-${n}`
+  const base = KEEP_SLUGS ? v.slug : stripTrailingCity(v.slug, v.townSlug)
+  let slug = base
+  for (let n = 2; taken.has(slug); n++) slug = `${base}-${n}`
   taken.add(slug)
   return { v, oldHub: v.townSlug, oldSlug: v.slug, newSlug: slug }
 })
@@ -105,10 +119,11 @@ write('data/generated/venuesByTown.json', json(ordered))
 write('data/generated/towns.json', json(newTowns))
 
 // cities.json: append in the same shape as the other entries, without reformatting the file
+if (!hubExists) {
 const existingNames = new Set(cities.map((c) => c.name))
 const nearbyAreas = NEARBY.filter((n) => existingNames.has(n))
 const entry = {
-  slug: SLUG, name: TOWN, county, region: 'East Midlands',
+  slug: SLUG, name: TOWN, county, region: REGION,
   metaTitle: `Soft Play in ${TOWN}`,
   metaDescription: `Find soft play centres in ${TOWN}, ${county}. Compare venues, facilities and ratings.`,
   h1: `Soft Play Centres in ${TOWN}`,
@@ -121,6 +136,7 @@ const closing = citiesRaw.lastIndexOf('\n]')
 write('data/cities.json', citiesRaw.slice(0, closing) + insert + citiesRaw.slice(closing))
 cities.push(entry)
 write('data/cities-basic.json', json(cities.map((c) => ({ slug: c.slug, name: c.name, county: c.county }))) + '\n')
+}
 
 // redirects (+ flatten) and internal links
 const rules = new Map(redirects.map((r) => [r.source, { ...r }]))
