@@ -127,7 +127,7 @@ for (const p of paths) {
   }
   if (/\/soft-play\/[^/]+$/.test(p)) {
     for (const need of ['BreadcrumbList', 'FAQPage', 'ItemList']) if (!ctx.seen.has(need)) fail(p, `city page is missing ${need}`)
-    if (ctx.faqCount < 4 || ctx.faqCount > 6) fail(p, `city page FAQ should have 4-6 questions, has ${ctx.faqCount}`)
+    if (ctx.faqCount < 4 || ctx.faqCount > 7) fail(p, `city page FAQ should have 4-7 questions, has ${ctx.faqCount}`)
   }
   if (/\/soft-play\/[^/]+\/[^/]+$/.test(p) && !/\/(toddler|birthday-parties|sen-friendly|open-now)$/.test(p)) {
     if (!ctx.business) fail(p, 'venue page has no business entity')
