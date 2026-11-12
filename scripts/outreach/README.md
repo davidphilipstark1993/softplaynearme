@@ -4,7 +4,7 @@
 
 B2B email about a public listing that already exists (legitimate interest, clear opt-out). Not the newsletter, and not the
 "you're newly listed, please verify" email. Approved copy: `templates/claim-{city}.txt` / `.html`; each city has its own letter and a
-config block at the top of the script. The script refuses to run if a letter's figures (impressions, position, clicks, date range, page URL)
+config block at the top of the script. The script refuses to run if a letter's figures (impressions, date range, page URL)
 differ from its config.
 
 ```bash

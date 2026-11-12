@@ -31,8 +31,10 @@ test('the letter makes no promise the free dashboard cannot keep', () => {
   }
   assert.match(textTemplate, /reply with the link and I'll add a Book Now button/)
   assert.match(textTemplate, /isn't in the dashboard yet/)
-  assert.match(textTemplate, /not for your own listing/, 'page-level figures are not presented as venue-level')
-  assert.doesNotMatch(textTemplate, /\bsearches for\b/, 'impressions are "appeared … in Google searches", never "searches for"')
+  assert.match(textTemplate, /Hull page \(https:\/\/www\.softplaynearme\.co\.uk\/soft-play\/hull\) appeared 4,576 times in Google searches between 1 August and 31 October 2026\./, 'the figure is about the city page and states its window')
+  assert.doesNotMatch(textTemplate, /\bsearches for\b|your (own )?(listing|venue) (appeared|had)/, 'never presented as a venue-level figure')
+  assert.doesNotMatch(textTemplate, /average position|clicked through/, 'position and click figures were removed from the letter')
+  assert.match(textTemplate, /^Hi \{\{venue_name\}\} team,\n\nHow are you\? I hope business is good!\n\nI'm David,/, 'warm opening')
 })
 
 test('rendering fills every token, escapes HTML in names, and encodes the claim URL', () => {

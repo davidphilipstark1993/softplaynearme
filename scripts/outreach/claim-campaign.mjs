@@ -143,15 +143,13 @@ export function renderEmail({ textTemplate, htmlTemplate, city, recipient, unsub
 
 export const unresolvedTokens = (s) => s.match(/\{\{\w+\}\}/g) ?? []
 
-/** The letter must say exactly what the config says: impressions, position, clicks, date range, page URL. */
+/** Every figure the letter does state must be the config's: impressions, date range, page URL. */
 export function checkLetterMatchesConfig(text, city) {
   const problems = []
   const want = [
     [city.impressions.toLocaleString('en-GB'), 'impressions'],
-    [city.avg_position, 'average position'],
     [city.page_url, 'city page URL'],
     [city.date_range, 'date range'],
-    [`${city.clicks_words} people clicked through`, 'click count'],
   ]
   for (const [needle, label] of want) if (!text.includes(needle)) problems.push(`letter does not contain the config's ${label} (${needle})`)
   return problems
