@@ -11,7 +11,7 @@
  *   node scripts/outreach/claim-campaign.mjs --city hull --send --limit 5
  *   node scripts/outreach/claim-campaign.mjs --city hull --csv path/to.csv
  *
- * Options: --day-cap N, --max-per-minute N (default 8), --allow-duplicate-email,
+ * Options: --day-cap N, --max-per-minute N (default 8), --allow-duplicate-email, --include-held (release a venue on the city's hold list),
  *          --include-placeholders, --exclude-file path (extra addresses to skip, one per line),
  *          --i-have-confirmed-sender (skip the SendGrid verified-sender lookup, see below).
  *
@@ -54,6 +54,52 @@ export const CITIES = {
     date_range: '1 August and 31 October 2026',
     template: 'scripts/outreach/templates/claim-hull.txt',
     html_template: 'scripts/outreach/templates/claim-hull.html',
+  },
+  // Birmingham city proper (Birmingham local authority, including Sutton Coldfield). Figures are the 12 Nov 2026
+  // city-page CTR audit's Search Console export for the same window as Hull (exported 2 Nov 2026); re-confirm
+  // them in Search Console before sending. The window predates the neighbouring-town retags, so the page then
+  // listed more venues than it does now — the sentence in the letter is about the page, which is still true.
+  birmingham: {
+    slug: 'birmingham',
+    name: 'Birmingham',
+    page_url: `${SITE}/soft-play/birmingham`,
+    impressions: 2812,
+    clicks: 6,
+    clicks_words: 'Six',
+    ctr: '0.21%',
+    avg_position: '21.00',
+    date_range: '1 August and 31 October 2026',
+    template: 'scripts/outreach/templates/claim-birmingham.txt',
+    html_template: 'scripts/outreach/templates/claim-birmingham.html',
+    // Postcode check: a venue is only emailed if its postcode district is one of Birmingham city's. Ambiguous
+    // districts are left out on purpose (B36 Castle Bromwich, B37 Chelmsley Wood, B43 Great Barr, B45 Rubery /
+    // Barnt Green): a venue there can be emailed by hand once a person has checked the address.
+    postcode_districts: [
+      ...Array.from({ length: 21 }, (_, i) => `B${i + 1}`),
+      ...Array.from({ length: 13 }, (_, i) => `B${i + 23}`), // B23-B35
+      'B38', 'B42', 'B44', 'B72', 'B73', 'B74', 'B75', 'B76',
+    ],
+    // Held back until a person has looked, even though they have an address and pass the checks.
+    hold: {
+      2013: 'Little Tinkers Birmingham — its own website says the store is temporarily closed (party hire continues). Confirm it is trading before emailing; --include-held to release',
+    },
+  },
+  // Beverley (hub since before the Hull-area sweep; Sweet Soft Play joined it on 12 Nov 2026). Figures from the same
+  // 12 Nov 2026 audit export (page 1,697 impressions, 5 clicks, 0.29% CTR, average position 11.84) — re-confirm in Search Console.
+  beverley: {
+    slug: 'beverley',
+    name: 'Beverley',
+    page_url: `${SITE}/soft-play/beverley`,
+    impressions: 1697,
+    clicks: 5,
+    clicks_words: 'Five',
+    ctr: '0.29%',
+    avg_position: '11.84',
+    date_range: '1 August and 31 October 2026',
+    template: 'scripts/outreach/templates/claim-beverley.txt',
+    html_template: 'scripts/outreach/templates/claim-beverley.html',
+    // HU17 is Beverley and Beverley Rural (Lockington included); HU16 Cottingham and the rest of the HU area are Hull's.
+    postcode_districts: ['HU17'],
   },
 }
 
@@ -102,6 +148,12 @@ export function emailDomain(email) {
 /** Addresses that are valid but likely dead (a withdrawn ISP's mailbox): still sent to, but flagged in the dry run. */
 export const STALE_DOMAINS = ['karoo.co.uk']
 export const isLikelyStale = (email) => STALE_DOMAINS.some((d) => emailDomain(email).endsWith(d))
+
+/** Outward code of a UK postcode ("B72 1PL" -> "B72"), or null if it doesn't look like one. */
+export function postcodeDistrict(postcode) {
+  const m = String(postcode ?? '').trim().toUpperCase().match(/^([A-Z]{1,2}\d[A-Z\d]?)\s*\d[A-Z]{2}$/) ?? String(postcode ?? '').trim().toUpperCase().match(/^([A-Z]{1,2}\d[A-Z\d]?)$/)
+  return m ? m[1] : null
+}
 
 export function isPlaceholderEmail(email) {
   return PLACEHOLDER_DOMAINS.has(emailDomain(email))
@@ -177,6 +229,14 @@ export function classify(recipients, ctx) {
     if (r.claimed) { skip(r, 'already claimed'); continue }
     // The letter quotes this city page's impressions, so it only goes to venues listed on that page.
     if (ctx.listingPrefix && !r.listing_url.startsWith(ctx.listingPrefix)) { skip(r, `listed on /soft-play/${r.city_slug}/, not ${ctx.listingPrefix.replace(SITE, '')} — the ${ctx.cityName} letter quotes the ${ctx.cityName} page, so this venue needs a letter of its own`); continue }
+    // Postcode check (cities that set postcode_districts): a venue filed under the hub whose postcode is in another town
+    // must not get a letter that quotes this city's page.
+    if (ctx.districts) {
+      const d = postcodeDistrict(r.postcode)
+      if (!d) { skip(r, `no usable postcode in the CSV, so it can't be checked against ${ctx.cityName} — add the postcode column, or email it by hand`); continue }
+      if (!ctx.districts.has(d)) { skip(r, `postcode ${r.postcode} (${d}) is outside the ${ctx.cityName} area this letter covers — probably a neighbouring town, so it needs a letter of its own`); continue }
+    }
+    if (ctx.hold?.[r.venue_id] && !ctx.includeHeld) { skip(r, `held: ${ctx.hold[r.venue_id]}`); continue }
     if (isPlaceholderEmail(r.email) && !ctx.includePlaceholders) { skip(r, `placeholder address (${emailDomain(r.email)}) — confirm it, then pass --include-placeholders`); continue }
     if (ctx.suppressed.has(r.email)) { skip(r, 'on the local suppression list (said no thanks / added by hand)'); continue }
     if (ctx.excluded.has(r.email)) { skip(r, 'on an exclude file (recent outreach / opted out)'); continue }
@@ -340,6 +400,9 @@ async function main() {
   const ctx = {
     cityName: city.name,
     listingPrefix: `${SITE}/soft-play/${city.slug}/`,
+    districts: city.postcode_districts ? new Set(city.postcode_districts) : null,
+    hold: city.hold ?? null,
+    includeHeld: args['include-held'] === true,
     includePlaceholders: args['include-placeholders'] === true,
     allowDuplicateEmail: args['allow-duplicate-email'] === true,
     suppressed: new Set(readLines(path.join(DATA_DIR, 'suppression.txt'))),

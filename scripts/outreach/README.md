@@ -13,7 +13,11 @@ node scripts/outreach/claim-campaign.mjs --city hull --test-to david@softplaynea
 node scripts/outreach/claim-campaign.mjs --city hull --send                        # the real batch — only after the test has been checked
 node scripts/outreach/claim-campaign.mjs --city hull --send --limit 5
 node scripts/outreach/claim-campaign.mjs --city hull --csv path/to.csv
+node scripts/outreach/claim-campaign.mjs --city birmingham                          # cities: hull, birmingham, beverley
+node scripts/outreach/claim-campaign.mjs --city birmingham --send --include-held    # release a venue on the city's hold list
 ```
+
+Which cities are ready, the exact SQL-then-send commands and the remaining data fixes: `claim-wave-readiness-2026-11-13.md`.
 
 Flow: dry run → `--test-to` → eyeball it in the inbox → `--send`. Never send the batch in the same sitting as the test.
 
@@ -30,7 +34,13 @@ Export with the SQL in the venue-claim email report (`city_slug = 'hull'`) to `c
 (columns `venue_id, venue_name, slug, city_slug, email, website, address, postcode, venue_type, claimed_by_owner`).
 The claim and listing URLs are built by the script from name/city/slug (percent-encoded exactly like the listing page's Claim button).
 
+A city can also set `postcode_districts` in its config (Birmingham, Beverley): a venue is then only emailed if its postcode is in one of
+those districts (a missing or out-of-area postcode is skipped, with the reason printed), and `hold` (venue id → reason) for venues to leave until a person has
+looked (`--include-held` releases them). Recipient SQL: `scripts/sql/outreach/city-claim-recipients.sql` (any city, `-v city=slug`),
+`scripts/sql/birmingham-area-2026-11-12/03-birmingham-claim-recipients.sql` (with the postcode rule), and `city-claim-readiness.sql` (usable emails per hub).
+
 ### Skipped, with the reason printed
+postcode outside the city's `postcode_districts`, or missing · on the city's hold list ·
 listed under a different hub than the letter's city (the Hull letter quotes the Hull page's impressions, so a Beverley or Scunthorpe venue needs a letter of its own) · invalid email · already claimed · placeholder domain (`mysite.com`, `example.com`, `email.com`, `test.com`, `domain.com`, `yourvenue.co.uk`;
 `--include-placeholders` after you've confirmed the address) · local suppression list · `--exclude-file` / the older backlink outreach logs ·
 SendGrid bounces, blocks, invalid, spam reports, global and outreach-group unsubscribes · already sent for this campaign and `venue_id` ·
