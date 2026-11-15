@@ -12,9 +12,12 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import pg from 'pg';
 import { venueSlug } from './lib/venue-slug.mjs';
+import { loadHubs, cityForNewVenue } from './lib/derive-city.mjs';
 
 const { Pool } = pg;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+let hubsCache = null;
+const geoCache = { pc: {}, rev: {} };
 
 // Configuration
 const CONFIG = {
@@ -234,7 +237,14 @@ async function upsertVenue(client, row) {
 
     return { updated: true, id: existing.rows[0].id };
   } else {
-    // Insert new venue
+    // A NEW venue is filed under the hub its own postcode / coordinates give, not the
+    // CSV's Town column (that column is often the town that was searched).
+    hubsCache ??= loadHubs(path.join(__dirname, '..'));
+    const home = await cityForNewVenue({ postcode, lat, lng, address }, hubsCache, citySlug, geoCache);
+    if (!home.citySlug) return { skipped: true, reason: `No hub within 40 km (${home.method})` };
+    if (home.citySlug !== citySlug) console.log(`  > ${name}: Town says ${citySlug}, filed under ${home.citySlug} [${home.confidence}: ${home.method}]`);
+    const insertCity = home.citySlug;
+    const insertSlug = insertCity === citySlug ? slug : generateSlug(name, insertCity);
     const result = await client.query(`
       INSERT INTO venues (
         name, slug, city_slug, address, postcode,
@@ -257,7 +267,7 @@ async function upsertVenue(client, row) {
         last_verified_at = CURRENT_TIMESTAMP,
         updated_at = CURRENT_TIMESTAMP
       RETURNING id
-    `, [name, slug, citySlug, address, postcode, lat, lng, phone, website, googleMapsUrl, notes, category]);
+    `, [name, insertSlug, insertCity, address, postcode, lat, lng, phone, website, googleMapsUrl, notes, category]);
 
     return { inserted: true, id: result.rows[0].id };
   }

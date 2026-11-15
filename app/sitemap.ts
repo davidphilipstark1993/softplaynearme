@@ -3,17 +3,17 @@ import { getAllCitySlugs, filters } from '@/lib/venues'
 import { getPool } from '@/lib/pool'
 import { getAllStaticTownSlugs, getStaticVenuesByTown } from '@/lib/staticVenues'
 import { blogPosts } from '@/lib/blogPosts'
-import redirectEntries from '@/data/redirects.json'
+import { redirectFor } from '@/lib/redirects'
 import { getVenueCounts } from '@/lib/venueCounts'
 import { isVenueIndexable } from '@/lib/venueContent'
 import { totalPagesFor, hubPagePath } from '@/lib/pagination'
 import { minFilterVenues } from '@/lib/hubGuides'
 
-// Paths that 301/308-redirect elsewhere (see next.config.ts) must never be
-// listed in the sitemap even if a stale/duplicate row for them still exists
-// in the venues table — submitting a URL that immediately redirects is the
-// same mixed signal as submitting a noindex one.
-const REDIRECTED_PATHS = new Set(redirectEntries.map((r) => r.source))
+// Paths that 301 elsewhere (data/redirects.json, served by proxy.ts) are never
+// listed — submitting a URL that immediately redirects is the same mixed signal as
+// submitting a noindex one. A DB row whose URL redirects to another venue page is a
+// venue moved by a migration that has not hit the DB yet: list where it now lives.
+const isVenuePath = (p: string) => p.split('/').length === 4
 
 // `npm run build` sets SOFTPLAY_STATIC_BUILD=1, which skips the DB. A sitemap
 // prerendered that way lists whatever slugs the static export holds — and the
@@ -94,10 +94,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         const score = venue.completeness_score ?? 100 // unknown → include
         if (!isVenueIndexable(score, venue.venue_type)) continue // same rule as the page's noindex
 
-        const path = `/soft-play/${venue.city_slug}/${venue.slug}`
-        if (REDIRECTED_PATHS.has(path)) continue      // skip stale rows that just 301 elsewhere
+        const listed = `/soft-play/${venue.city_slug}/${venue.slug}`
+        const moved = redirectFor(listed)
+        if (moved && !isVenuePath(moved)) continue // retired/merged into a hub page
+        const path = moved ?? listed
+        const key = path.slice('/soft-play/'.length)
+        if (addedVenueKeys.has(key)) continue
 
-        addedVenueKeys.add(`${venue.city_slug}/${venue.slug}`)
+        addedVenueKeys.add(key)
         venueEntries.push({
           url: `${baseUrl}${path}`,
           lastModified: updated,
@@ -122,7 +126,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
       const key = `${townSlug}/${venue.slug}`
       const path = `/soft-play/${townSlug}/${venue.slug}`
-      if (!addedVenueKeys.has(key) && !REDIRECTED_PATHS.has(path)) {
+      if (!addedVenueKeys.has(key) && !redirectFor(path)) {
         venueEntries.push({
           url: `${baseUrl}${path}`,
           // The venue's last-verified date, so Google knows when its data changed

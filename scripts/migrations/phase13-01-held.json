@@ -1,0 +1,134 @@
+[
+ {
+  "id": 333,
+  "name": "Jungle Monkeys",
+  "from_city": "barnsley",
+  "from_slug": "jungle-monkeys",
+  "to_city": "sheffield",
+  "to_slug": "jungle-monkeys",
+  "method": "locality: district \"Sheffield\" (12.5km)",
+  "confidence": "high",
+  "held_because": "reversal: was moved sheffield->barnsley"
+ },
+ {
+  "id": 423,
+  "name": "Little P's Play Town",
+  "from_city": "aldridge",
+  "from_slug": "little-p-s-play-town",
+  "to_city": "walsall",
+  "to_slug": "little-p-s-play-town",
+  "method": "locality: parish \"Walsall, unparished area\" (6.0km)",
+  "confidence": "high",
+  "held_because": "overrides 12 Nov Birmingham sweep (hand-picked aldridge)"
+ },
+ {
+  "id": 622,
+  "name": "Phantom Winger Wacky Warehouse",
+  "from_city": "bolton",
+  "from_slug": "phantom-winger-wacky-warehouse",
+  "to_city": "blackpool",
+  "to_slug": "phantom-winger-wacky-warehouse",
+  "method": "nearest-hub 22.2km (next lancaster 28.6km)",
+  "confidence": "low",
+  "held_because": "reversal: was moved blackpool->bolton"
+ },
+ {
+  "id": 720,
+  "name": "Tiny Tots Town",
+  "from_city": "swansea",
+  "from_slug": "tiny-tots-town",
+  "to_city": "llanelli",
+  "to_slug": "tiny-tots-town",
+  "method": "locality: bua \"Llanelli\" (3.4km)",
+  "confidence": "high",
+  "held_because": "reversal: was moved llanelli->swansea"
+ },
+ {
+  "id": 864,
+  "name": "The Wonder Wood",
+  "from_city": "ipswich",
+  "from_slug": "the-wonder-wood",
+  "to_city": "norwich",
+  "to_slug": "the-wonder-wood",
+  "method": "nearest-hub 30.1km (next kings-lynn 37.1km)",
+  "confidence": "low",
+  "held_because": "reversal: was moved norwich->ipswich"
+ },
+ {
+  "id": 1081,
+  "name": "Scallywags Indoor Play Centre",
+  "from_city": "stourbridge",
+  "from_slug": "scallywags-indoor-play-centre-birmingham",
+  "to_city": "dudley",
+  "to_slug": "scallywags-indoor-play-centre",
+  "method": "locality: parish \"Dudley, unparished area\" (3.9km)",
+  "confidence": "high",
+  "held_because": "overrides 12 Nov Birmingham sweep (hand-picked stourbridge)"
+ },
+ {
+  "id": 1086,
+  "name": "Zig Zags Play and Party",
+  "from_city": "stourbridge",
+  "from_slug": "zig-zags-play-and-party-birmingham",
+  "to_city": "dudley",
+  "to_slug": "zig-zags-play-and-party",
+  "method": "locality: parish \"Dudley, unparished area\" (4.2km)",
+  "confidence": "high",
+  "held_because": "overrides 12 Nov Birmingham sweep (hand-picked stourbridge)"
+ },
+ {
+  "id": 1116,
+  "name": "JR Playhouse",
+  "from_city": "solihull",
+  "from_slug": "jr-playhouse-birmingham",
+  "to_city": "birmingham",
+  "to_slug": "jr-playhouse-birmingham",
+  "method": "locality: bua \"Birmingham\" (11.1km)",
+  "confidence": "high",
+  "held_because": "reversal: was moved birmingham->solihull (12 Nov Birmingham sweep)"
+ },
+ {
+  "id": 1703,
+  "name": "Captain Sandy's Play Cove",
+  "from_city": "doncaster",
+  "from_slug": "captain-sandy-s-play-cove",
+  "to_city": "lincoln",
+  "to_slug": "captain-sandy-s-play-cove",
+  "method": "nearest-hub 20.1km (next doncaster 31.9km)",
+  "confidence": "medium",
+  "held_because": "reversal: was moved lincoln->doncaster"
+ },
+ {
+  "id": 1721,
+  "name": "East Leake Play Area",
+  "from_city": "leicester",
+  "from_slug": "east-leake-play-area",
+  "to_city": "nottingham",
+  "to_slug": "east-leake-play-area",
+  "method": "ttwa \"Nottingham\" (13.9km)",
+  "confidence": "medium",
+  "held_because": "reversal: was moved nottingham->leicester"
+ },
+ {
+  "id": 1731,
+  "name": "Childs Play Leisure",
+  "from_city": "leicester",
+  "from_slug": "childs-play-leisure",
+  "to_city": "nottingham",
+  "to_slug": "childs-play-leisure",
+  "method": "ttwa \"Nottingham\" (15.9km)",
+  "confidence": "medium",
+  "held_because": "reversal: was moved nottingham->leicester"
+ },
+ {
+  "id": 1861,
+  "name": "Children's Centre Washington",
+  "from_city": "newcastle",
+  "from_slug": "children-s-centre-washington",
+  "to_city": "sunderland",
+  "to_slug": "children-s-centre-washington",
+  "method": "locality: parish \"Sunderland, unparished area\" (10.3km)",
+  "confidence": "high",
+  "held_because": "reversal: was moved sunderland->newcastle"
+ }
+]

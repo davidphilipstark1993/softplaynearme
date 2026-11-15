@@ -1,0 +1,1652 @@
+[
+ {
+  "id": 113,
+  "name": "Funzy",
+  "from_city": "leeds",
+  "from_slug": "funzy-leeds",
+  "to_city": "bradford",
+  "to_slug": "funzy",
+  "method": "locality: bua \"Bradford\" (0.5km)",
+  "confidence": "high"
+ },
+ {
+  "id": 151,
+  "name": "Crazy Kingdom Northallerton",
+  "from_city": "leeds",
+  "from_slug": "crazy-kingdom-northallerton-leeds",
+  "to_city": "bishop-auckland",
+  "to_slug": "crazy-kingdom-northallerton",
+  "method": "nearest-hub 38.0km (next york 49.2km)",
+  "confidence": "low"
+ },
+ {
+  "id": 155,
+  "name": "Jigsaw Juniors Shipley",
+  "from_city": "leeds",
+  "from_slug": "jigsaw-juniors-shipley-leeds",
+  "to_city": "bradford",
+  "to_slug": "jigsaw-juniors-shipley",
+  "method": "locality: parish \"Bradford, unparished area\" (5.0km)",
+  "confidence": "high"
+ },
+ {
+  "id": 260,
+  "name": "PlayMablethorpe",
+  "from_city": "lincoln",
+  "from_slug": "playmablethorpe-lincoln",
+  "to_city": "skegness",
+  "to_slug": "playmablethorpe",
+  "method": "nearest-hub 22.5km (next cleethorpes 31.1km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 261,
+  "name": "Fun Farm Spalding",
+  "from_city": "lincoln",
+  "from_slug": "fun-farm-spalding-lincoln",
+  "to_city": "peterborough",
+  "to_slug": "fun-farm-spalding",
+  "method": "nearest-hub 27.4km (next kings-lynn 33.7km)",
+  "confidence": "low"
+ },
+ {
+  "id": 263,
+  "name": "Fuzzy Ed's",
+  "from_city": "lincoln",
+  "from_slug": "fuzzy-ed-s-lincoln",
+  "to_city": "skegness",
+  "to_slug": "fuzzy-ed-s",
+  "method": "nearest-hub 31.4km (next kings-lynn 36.9km)",
+  "confidence": "low"
+ },
+ {
+  "id": 284,
+  "name": "Kiddies Play Cafe",
+  "from_city": "sunderland",
+  "from_slug": "kiddies-play-cafe-sunderland",
+  "to_city": "newcastle",
+  "to_slug": "kiddies-play-cafe",
+  "method": "ttwa \"Newcastle\" (4.0km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 285,
+  "name": "Babyccinos Wallsend",
+  "from_city": "sunderland",
+  "from_slug": "babyccinos-wallsend-sunderland",
+  "to_city": "newcastle",
+  "to_slug": "babyccinos-wallsend",
+  "method": "ttwa \"Newcastle\" (5.5km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 321,
+  "name": "Xplore - Soft Play and 4D Golf",
+  "from_city": "leeds",
+  "from_slug": "xplore-soft-play-and-4d-golf",
+  "to_city": "castleford",
+  "to_slug": "xplore-soft-play-and-4d-golf",
+  "method": "locality: bua \"Castleford\" (1.9km)",
+  "confidence": "high"
+ },
+ {
+  "id": 323,
+  "name": "Shake Rattle and Roll",
+  "from_city": "doncaster",
+  "from_slug": "shake-rattle-and-roll-doncaster",
+  "to_city": "castleford",
+  "to_slug": "shake-rattle-and-roll",
+  "method": "nearest-hub 5.0km (next barnsley 19.8km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 353,
+  "name": "Safari Sam's",
+  "from_city": "barnsley",
+  "from_slug": "safari-sam-s-barnsley",
+  "to_city": "huddersfield",
+  "to_slug": "safari-sam-s",
+  "method": "ttwa \"Huddersfield\" (4.5km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 354,
+  "name": "Ultimate Kids Play Centre",
+  "from_city": "barnsley",
+  "from_slug": "ultimate-kids-play-centre-barnsley",
+  "to_city": "huddersfield",
+  "to_slug": "ultimate-kids-play-centre",
+  "method": "ttwa \"Huddersfield\" (6.8km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 356,
+  "name": "Krazy Kids",
+  "from_city": "barnsley",
+  "from_slug": "krazy-kids-barnsley",
+  "to_city": "huddersfield",
+  "to_slug": "krazy-kids",
+  "method": "ttwa \"Huddersfield\" (10.3km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 360,
+  "name": "Funalot",
+  "from_city": "barnsley",
+  "from_slug": "funalot-barnsley",
+  "to_city": "castleford",
+  "to_slug": "funalot",
+  "method": "locality: bua \"Castleford\" (0.8km)",
+  "confidence": "high"
+ },
+ {
+  "id": 361,
+  "name": "The Little Town of Play Batley",
+  "from_city": "barnsley",
+  "from_slug": "the-little-town-of-play-batley-barnsley",
+  "to_city": "huddersfield",
+  "to_slug": "the-little-town-of-play-batley",
+  "method": "ttwa \"Huddersfield\" (12.4km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 363,
+  "name": "Skye Pie's Soft Play Limited",
+  "from_city": "barnsley",
+  "from_slug": "skye-pie-s-soft-play-limited-barnsley",
+  "to_city": "leeds",
+  "to_slug": "skye-pie-s-soft-play-limited",
+  "method": "locality: district \"Leeds\" (13.8km)",
+  "confidence": "high"
+ },
+ {
+  "id": 365,
+  "name": "Sensory World Play Centre & Cafe",
+  "from_city": "barnsley",
+  "from_slug": "sensory-world-play-centre-cafe-barnsley",
+  "to_city": "huddersfield",
+  "to_slug": "sensory-world-play-centre-cafe",
+  "method": "ttwa \"Huddersfield\" (11.1km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 373,
+  "name": "Swithens Farm",
+  "from_city": "barnsley",
+  "from_slug": "swithens-farm-barnsley",
+  "to_city": "leeds",
+  "to_slug": "swithens-farm",
+  "method": "locality: parish \"Leeds, unparished area\" (8.4km)",
+  "confidence": "high"
+ },
+ {
+  "id": 393,
+  "name": "Rainforest Adventure Motherwell",
+  "from_city": "glasgow",
+  "from_slug": "rainforest-adventure-motherwell-glasgow",
+  "to_city": "hamilton",
+  "to_slug": "rainforest-adventure-motherwell",
+  "method": "nearest-hub 3.7km (next glasgow 18.7km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 481,
+  "name": "Playworld",
+  "from_city": "stoke",
+  "from_slug": "playworld-stoke",
+  "to_city": "crewe",
+  "to_slug": "playworld",
+  "method": "ttwa \"Crewe\" (4.2km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 513,
+  "name": "UA Play Crewe",
+  "from_city": "stoke",
+  "from_slug": "ua-play-crewe-stoke",
+  "to_city": "crewe",
+  "to_slug": "ua-play-crewe",
+  "method": "locality: bua \"Crewe\" (0.8km)",
+  "confidence": "high"
+ },
+ {
+  "id": 515,
+  "name": "Happy Adventures Play Village",
+  "from_city": "halifax",
+  "from_slug": "happy-adventures-play-village-halifax",
+  "to_city": "huddersfield",
+  "to_slug": "happy-adventures-play-village",
+  "method": "locality: bua \"Huddersfield\" (1.8km)",
+  "confidence": "high"
+ },
+ {
+  "id": 521,
+  "name": "The Magical Forest playgym",
+  "from_city": "halifax",
+  "from_slug": "the-magical-forest-playgym-halifax",
+  "to_city": "huddersfield",
+  "to_slug": "the-magical-forest-playgym",
+  "method": "locality: bua \"Huddersfield\" (1.7km)",
+  "confidence": "high"
+ },
+ {
+  "id": 535,
+  "name": "Little Moo’s Play Barn Ltd",
+  "from_city": "nottingham",
+  "from_slug": "little-moo-s-play-barn-ltd-nottingham",
+  "to_city": "matlock",
+  "to_slug": "little-moo-s-play-barn-ltd",
+  "method": "nearest-hub 14.0km (next derby 18.8km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 546,
+  "name": "Fun Valley Derby",
+  "from_city": "nottingham",
+  "from_slug": "fun-valley-derby-nottingham",
+  "to_city": "derby",
+  "to_slug": "fun-valley-derby",
+  "method": "locality: bua \"Derby\" (2.4km)",
+  "confidence": "high"
+ },
+ {
+  "id": 549,
+  "name": "JANGALA SoftPlay",
+  "from_city": "nottingham",
+  "from_slug": "jangala-softplay-nottingham",
+  "to_city": "derby",
+  "to_slug": "jangala-softplay",
+  "method": "ttwa \"Derby\" (11.7km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 550,
+  "name": "Berzerk Active Play Derby",
+  "from_city": "nottingham",
+  "from_slug": "berzerk-active-play-derby-nottingham",
+  "to_city": "derby",
+  "to_slug": "berzerk-active-play-derby",
+  "method": "locality: bua \"Derby\" (2.1km)",
+  "confidence": "high"
+ },
+ {
+  "id": 552,
+  "name": "The Play Village Ashbourne",
+  "from_city": "nottingham",
+  "from_slug": "the-play-village-ashbourne-nottingham",
+  "to_city": "derby",
+  "to_slug": "the-play-village-ashbourne",
+  "method": "ttwa \"Derby\" (19.8km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 554,
+  "name": "Tubby Bear's Play Zone",
+  "from_city": "nottingham",
+  "from_slug": "tubby-bear-s-play-zone-nottingham",
+  "to_city": "derby",
+  "to_slug": "tubby-bear-s-play-zone",
+  "method": "locality: bua \"Derby\" (0.9km)",
+  "confidence": "high"
+ },
+ {
+  "id": 555,
+  "name": "Freddy & Friends",
+  "from_city": "nottingham",
+  "from_slug": "freddy-friends-nottingham",
+  "to_city": "derby",
+  "to_slug": "freddy-friends",
+  "method": "locality: bua \"Derby\" (5.0km)",
+  "confidence": "high"
+ },
+ {
+  "id": 558,
+  "name": "Mill House Wacky Warehouse",
+  "from_city": "nottingham",
+  "from_slug": "mill-house-wacky-warehouse-nottingham",
+  "to_city": "derby",
+  "to_slug": "mill-house-wacky-warehouse",
+  "method": "nearest-hub 14.2km (next tamworth 22.3km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 560,
+  "name": "Blossoms play cafe",
+  "from_city": "nottingham",
+  "from_slug": "blossoms-play-cafe-nottingham",
+  "to_city": "derby",
+  "to_slug": "blossoms-play-cafe",
+  "method": "ttwa \"Derby\" (9.9km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 562,
+  "name": "Noah's Ark Soft Play Centre",
+  "from_city": "nottingham",
+  "from_slug": "noah-s-ark-soft-play-centre-nottingham",
+  "to_city": "leicester",
+  "to_slug": "noah-s-ark-soft-play-centre",
+  "method": "ttwa \"Leicester\" (18.5km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 566,
+  "name": "Meadowside Leisure Centre",
+  "from_city": "nottingham",
+  "from_slug": "meadowside-leisure-centre-nottingham",
+  "to_city": "derby",
+  "to_slug": "meadowside-leisure-centre",
+  "method": "nearest-hub 16.6km (next tamworth 19.6km)",
+  "confidence": "low"
+ },
+ {
+  "id": 567,
+  "name": "The Play Mill",
+  "from_city": "nottingham",
+  "from_slug": "the-play-mill-nottingham",
+  "to_city": "matlock",
+  "to_slug": "the-play-mill",
+  "method": "nearest-hub 3.2km (next derby 22.0km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 568,
+  "name": "Oxygen Derby",
+  "from_city": "nottingham",
+  "from_slug": "oxygen-derby-nottingham",
+  "to_city": "derby",
+  "to_slug": "oxygen-derby",
+  "method": "locality: bua \"Derby\" (2.4km)",
+  "confidence": "high"
+ },
+ {
+  "id": 569,
+  "name": "Awesome Softplays",
+  "from_city": "nottingham",
+  "from_slug": "awesome-softplays-nottingham",
+  "to_city": "derby",
+  "to_slug": "awesome-softplays",
+  "method": "ttwa \"Derby\" (12.7km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 571,
+  "name": "Tenpin Crewe",
+  "from_city": "stoke",
+  "from_slug": "tenpin-crewe-stoke",
+  "to_city": "crewe",
+  "to_slug": "tenpin-crewe",
+  "method": "locality: bua \"Crewe\" (0.2km)",
+  "confidence": "high"
+ },
+ {
+  "id": 610,
+  "name": "Jungle Madness",
+  "from_city": "leicester",
+  "from_slug": "jungle-madness-leicester",
+  "to_city": "tamworth",
+  "to_slug": "jungle-madness",
+  "method": "nearest-hub 14.9km (next middleton 21.1km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 618,
+  "name": "Lakemore Farm Park",
+  "from_city": "stoke",
+  "from_slug": "lakemore-farm-park-stoke",
+  "to_city": "crewe",
+  "to_slug": "lakemore-farm-park",
+  "method": "ttwa \"Crewe\" (4.2km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 637,
+  "name": "The Fun Factory",
+  "from_city": "lincoln",
+  "from_slug": "the-fun-factory-lincoln",
+  "to_city": "cleethorpes",
+  "to_slug": "the-fun-factory",
+  "method": "nearest-hub 19.9km (next grimsby 20.9km)",
+  "confidence": "low"
+ },
+ {
+  "id": 657,
+  "name": "George's Spaceship Play Zone",
+  "from_city": "southend",
+  "from_slug": "georges-spaceship-play-zone",
+  "to_city": "southampton",
+  "to_slug": "georges-spaceship-play-zone",
+  "method": "ttwa \"Southampton\" (11.1km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 686,
+  "name": "Fuze",
+  "from_city": "swansea",
+  "from_slug": "fuze",
+  "to_city": "cardiff",
+  "to_slug": "fuze",
+  "method": "nearest-hub 25.9km (next swansea 32.4km)",
+  "confidence": "low"
+ },
+ {
+  "id": 723,
+  "name": "Sgiliau Llanelli",
+  "from_city": "swansea",
+  "from_slug": "sgiliau-llanelli",
+  "to_city": "llanelli",
+  "to_slug": "sgiliau-llanelli",
+  "method": "locality: bua \"Llanelli\" (3.1km)",
+  "confidence": "high"
+ },
+ {
+  "id": 725,
+  "name": "The Glen",
+  "from_city": "swansea",
+  "from_slug": "the-glen",
+  "to_city": "llanelli",
+  "to_slug": "the-glen",
+  "method": "locality: bua \"Llanelli\" (0.1km)",
+  "confidence": "high"
+ },
+ {
+  "id": 738,
+  "name": "Crazy Maisie's",
+  "from_city": "swansea",
+  "from_slug": "crazy-maisies",
+  "to_city": "llanelli",
+  "to_slug": "crazy-maisies",
+  "method": "locality: bua \"Llanelli\" (1.0km)",
+  "confidence": "high"
+ },
+ {
+  "id": 742,
+  "name": "Cwtsh Newydd",
+  "from_city": "swansea",
+  "from_slug": "cwtsh-newydd",
+  "to_city": "llanelli",
+  "to_slug": "cwtsh-newydd",
+  "method": "ttwa \"Llanelli\" (13.8km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 749,
+  "name": "The Adventure Barn",
+  "from_city": "portsmouth",
+  "from_slug": "the-adventure-barn",
+  "to_city": "southampton",
+  "to_slug": "the-adventure-barn",
+  "method": "ttwa \"Southampton\" (12.7km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 750,
+  "name": "Play Shack",
+  "from_city": "portsmouth",
+  "from_slug": "play-shack",
+  "to_city": "southampton",
+  "to_slug": "play-shack",
+  "method": "ttwa \"Southampton\" (7.4km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 763,
+  "name": "Kids2Day Ltd",
+  "from_city": "portsmouth",
+  "from_slug": "kids2day-ltd",
+  "to_city": "southampton",
+  "to_slug": "kids2day-ltd",
+  "method": "ttwa \"Southampton\" (8.3km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 765,
+  "name": "Little Monsters House of Fun",
+  "from_city": "colchester",
+  "from_slug": "little-monsters-house-of-fun",
+  "to_city": "harlow",
+  "to_slug": "little-monsters-house-of-fun",
+  "method": "nearest-hub 22.6km (next ware 29.1km)",
+  "confidence": "low"
+ },
+ {
+  "id": 767,
+  "name": "The Play Park Romsey",
+  "from_city": "portsmouth",
+  "from_slug": "the-play-park-romsey",
+  "to_city": "southampton",
+  "to_slug": "the-play-park-romsey",
+  "method": "ttwa \"Southampton\" (12.2km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 770,
+  "name": "Romsey Rapids Soft Play",
+  "from_city": "portsmouth",
+  "from_slug": "romsey-rapids-soft-play",
+  "to_city": "southampton",
+  "to_slug": "romsey-rapids-soft-play",
+  "method": "ttwa \"Southampton\" (11.0km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 775,
+  "name": "Applemore Health & Leisure",
+  "from_city": "portsmouth",
+  "from_slug": "applemore-health-and-leisure",
+  "to_city": "southampton",
+  "to_slug": "applemore-health-and-leisure",
+  "method": "ttwa \"Southampton\" (5.1km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 776,
+  "name": "The Funky Playbus",
+  "from_city": "portsmouth",
+  "from_slug": "the-funky-playbus",
+  "to_city": "southampton",
+  "to_slug": "the-funky-playbus",
+  "method": "ttwa \"Southampton\" (7.3km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 784,
+  "name": "Tiny Treasure Town",
+  "from_city": "portsmouth",
+  "from_slug": "tiny-treasure-town",
+  "to_city": "southampton",
+  "to_slug": "tiny-treasure-town",
+  "method": "ttwa \"Southampton\" (20.0km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 787,
+  "name": "Northfields Childrens Play Area",
+  "from_city": "portsmouth",
+  "from_slug": "northfields-childrens-play-area",
+  "to_city": "southampton",
+  "to_slug": "northfields-childrens-play-area",
+  "method": "ttwa \"Southampton\" (15.0km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 815,
+  "name": "Giggleton",
+  "from_city": "hastings",
+  "from_slug": "giggleton",
+  "to_city": "horley",
+  "to_slug": "giggleton",
+  "method": "nearest-hub 16.5km (next brighton 26.0km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 817,
+  "name": "The Zone",
+  "from_city": "colchester",
+  "from_slug": "the-zone",
+  "to_city": "cambridge",
+  "to_slug": "the-zone",
+  "method": "nearest-hub 27.4km (next colchester 36.4km)",
+  "confidence": "low"
+ },
+ {
+  "id": 818,
+  "name": "Treasure Chest Indoor Play",
+  "from_city": "hastings",
+  "from_slug": "treasure-chest-indoor-play",
+  "to_city": "horley",
+  "to_slug": "treasure-chest-indoor-play",
+  "method": "nearest-hub 4.6km (next dorking 15.5km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 853,
+  "name": "JustPlay Saffron Walden",
+  "from_city": "colchester",
+  "from_slug": "justplay-saffron-walden",
+  "to_city": "cambridge",
+  "to_slug": "justplay-saffron-walden",
+  "method": "ttwa \"Cambridge\" (22.5km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 860,
+  "name": "Jumppin Jacks Funhouse",
+  "from_city": "ipswich",
+  "from_slug": "jumppin-jacks-funhouse",
+  "to_city": "cambridge",
+  "to_slug": "jumppin-jacks-funhouse",
+  "method": "nearest-hub 30.7km (next kings-lynn 44.8km)",
+  "confidence": "low"
+ },
+ {
+  "id": 866,
+  "name": "Flying Fortress",
+  "from_city": "worthing",
+  "from_slug": "flying-fortress",
+  "to_city": "bognor-regis",
+  "to_slug": "flying-fortress",
+  "method": "nearest-hub 6.5km (next chichester 13.0km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 913,
+  "name": "Playground",
+  "from_city": "portsmouth",
+  "from_slug": "playground",
+  "to_city": "chichester",
+  "to_slug": "playground",
+  "method": "locality: district \"Chichester\" (12.6km)",
+  "confidence": "high"
+ },
+ {
+  "id": 915,
+  "name": "West Sands Fun Fair",
+  "from_city": "portsmouth",
+  "from_slug": "west-sands-fun-fair",
+  "to_city": "chichester",
+  "to_slug": "west-sands-fun-fair",
+  "method": "locality: district \"Chichester\" (11.5km)",
+  "confidence": "high"
+ },
+ {
+  "id": 918,
+  "name": "Selsey Play Park",
+  "from_city": "portsmouth",
+  "from_slug": "selsey-play-park",
+  "to_city": "chichester",
+  "to_slug": "selsey-play-park",
+  "method": "locality: district \"Chichester\" (12.1km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1011,
+  "name": "The Nook Saddleworth Play Cafe",
+  "from_city": "mossley",
+  "from_slug": "the-nook-saddleworth-play-cafe",
+  "to_city": "oldham",
+  "to_slug": "the-nook-saddleworth-play-cafe",
+  "method": "locality: district \"Oldham\" (6.8km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1032,
+  "name": "Elsecar Park",
+  "from_city": "sheffield",
+  "from_slug": "elsecar-park",
+  "to_city": "barnsley",
+  "to_slug": "elsecar-park",
+  "method": "locality: parish \"Barnsley, unparished area\" (7.9km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1033,
+  "name": "Cannon Hall Farm",
+  "from_city": "sheffield",
+  "from_slug": "cannon-hall-farm",
+  "to_city": "barnsley",
+  "to_slug": "cannon-hall-farm",
+  "method": "locality: district \"Barnsley\" (7.4km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1044,
+  "name": "Elsecar Heritage Centre",
+  "from_city": "sheffield",
+  "from_slug": "elsecar-heritage-centre",
+  "to_city": "barnsley",
+  "to_slug": "elsecar-heritage-centre",
+  "method": "locality: parish \"Barnsley, unparished area\" (7.8km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1052,
+  "name": "Wildmoor Avenue Play Area",
+  "from_city": "mossley",
+  "from_slug": "wildmoor-avenue-play-area",
+  "to_city": "oldham",
+  "to_slug": "wildmoor-avenue-play-area",
+  "method": "locality: bua \"Oldham\" (3.2km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1058,
+  "name": "Fun 4 All",
+  "from_city": "sheffield",
+  "from_slug": "fun-4-all",
+  "to_city": "manchester",
+  "to_slug": "fun-4-all",
+  "method": "ttwa \"Manchester\" (24.7km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1067,
+  "name": "Qube Soft Play",
+  "from_city": "southend",
+  "from_slug": "qube-soft-play",
+  "to_city": "southampton",
+  "to_slug": "qube-soft-play",
+  "method": "ttwa \"Southampton\" (17.0km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1134,
+  "name": "Jd's bouncy castle and soft play hire",
+  "from_city": "birmingham",
+  "from_slug": "jd-s-bouncy-castle-and-soft-play-hire-birmingham",
+  "to_city": "dudley",
+  "to_slug": "jd-s-bouncy-castle-and-soft-play-hire",
+  "method": "ttwa \"Dudley\" (4.4km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1166,
+  "name": "Playground",
+  "from_city": "doncaster",
+  "from_slug": "playground",
+  "to_city": "scunthorpe",
+  "to_slug": "playground",
+  "method": "ttwa \"Scunthorpe\" (16.7km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1188,
+  "name": "Cocos Playbarn",
+  "from_city": "liverpool",
+  "from_slug": "cocos-playbarn-liverpool",
+  "to_city": "chester",
+  "to_slug": "cocos-playbarn",
+  "method": "nearest-hub 16.0km (next liverpool 23.8km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1257,
+  "name": "Dan's Den at Christchurch",
+  "from_city": "leeds",
+  "from_slug": "dan-s-den-at-christchurch-leeds",
+  "to_city": "bradford",
+  "to_slug": "dan-s-den-at-christchurch",
+  "method": "locality: district \"Bradford\" (15.5km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1272,
+  "name": "Wacky Kingdom Soft Play Centre",
+  "from_city": "london",
+  "from_slug": "wacky-kingdom-soft-play-centre-london",
+  "to_city": "horley",
+  "to_slug": "wacky-kingdom-soft-play-centre",
+  "method": "nearest-hub 7.6km (next dorking 11.2km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1289,
+  "name": "Little Peeps Soft Play",
+  "from_city": "london",
+  "from_slug": "little-peeps-soft-play-london",
+  "to_city": "sunbury-on-thames",
+  "to_slug": "little-peeps-soft-play",
+  "method": "nearest-hub 9.6km (next dorking 15.0km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1306,
+  "name": "Paper Mill Wacky Warehouse",
+  "from_city": "bolton",
+  "from_slug": "paper-mill-wacky-warehouse",
+  "to_city": "bury",
+  "to_slug": "paper-mill-wacky-warehouse",
+  "method": "locality: parish \"Bury, unparished area\" (2.2km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1307,
+  "name": "Jungle J's Play and Party Centre",
+  "from_city": "manchester",
+  "from_slug": "jungle-j-s-play-and-party-centre-manchester",
+  "to_city": "oldham",
+  "to_slug": "jungle-j-s-play-and-party-centre",
+  "method": "locality: parish \"Oldham, unparished area\" (1.6km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1317,
+  "name": "Imagination Bay Adventure Play",
+  "from_city": "bolton",
+  "from_slug": "imagination-bay-adventure-play",
+  "to_city": "bury",
+  "to_slug": "imagination-bay-adventure-play",
+  "method": "locality: parish \"Bury, unparished area\" (1.0km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1320,
+  "name": "Play! Oldham",
+  "from_city": "manchester",
+  "from_slug": "play-oldham-manchester",
+  "to_city": "oldham",
+  "to_slug": "play-oldham",
+  "method": "locality: parish \"Oldham, unparished area\" (1.9km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1321,
+  "name": "Sparkles Adventure Play Ltd",
+  "from_city": "manchester",
+  "from_slug": "sparkles-adventure-play-ltd-manchester",
+  "to_city": "oldham",
+  "to_slug": "sparkles-adventure-play-ltd",
+  "method": "locality: parish \"Oldham, unparished area\" (2.7km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1329,
+  "name": "Bounce Central Oldham",
+  "from_city": "manchester",
+  "from_slug": "bounce-central-oldham-manchester",
+  "to_city": "oldham",
+  "to_slug": "bounce-central-oldham",
+  "method": "locality: bua \"Oldham\" (0.7km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1331,
+  "name": "Playtime",
+  "from_city": "bolton",
+  "from_slug": "playtime",
+  "to_city": "bury",
+  "to_slug": "playtime",
+  "method": "locality: parish \"Bury, unparished area\" (0.9km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1332,
+  "name": "Jungle Mayhem",
+  "from_city": "manchester",
+  "from_slug": "jungle-mayhem-manchester",
+  "to_city": "bury",
+  "to_slug": "jungle-mayhem",
+  "method": "locality: parish \"Bury, unparished area\" (2.6km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1335,
+  "name": "Funtastic Childrens Play Centre",
+  "from_city": "manchester",
+  "from_slug": "funtastic-childrens-play-centre-manchester",
+  "to_city": "bury",
+  "to_slug": "funtastic-childrens-play-centre",
+  "method": "locality: parish \"Bury, unparished area\" (4.0km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1339,
+  "name": "Tower of Fun",
+  "from_city": "manchester",
+  "from_slug": "tower-of-fun-manchester",
+  "to_city": "oldham",
+  "to_slug": "tower-of-fun",
+  "method": "locality: bua \"Oldham\" (2.1km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1343,
+  "name": "Fuzzy ED's funhouse",
+  "from_city": "manchester",
+  "from_slug": "fuzzy-ed-s-funhouse-manchester",
+  "to_city": "bury",
+  "to_slug": "fuzzy-ed-s-funhouse",
+  "method": "locality: parish \"Bury, unparished area\" (4.2km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1347,
+  "name": "Oasis Soft Play",
+  "from_city": "manchester",
+  "from_slug": "oasis-soft-play-manchester",
+  "to_city": "bury",
+  "to_slug": "oasis-soft-play",
+  "method": "locality: parish \"Bury, unparished area\" (4.4km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1350,
+  "name": "Toddler Sense Manchester Central",
+  "from_city": "manchester",
+  "from_slug": "toddler-sense-manchester-central-manchester",
+  "to_city": "bury",
+  "to_slug": "toddler-sense-manchester-central",
+  "method": "locality: parish \"Bury, unparished area\" (7.8km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1362,
+  "name": "Victoria park Playground",
+  "from_city": "manchester",
+  "from_slug": "victoria-park-playground-manchester",
+  "to_city": "bury",
+  "to_slug": "victoria-park-playground",
+  "method": "locality: parish \"Bury, unparished area\" (5.3km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1367,
+  "name": "Pamper-tastics",
+  "from_city": "manchester",
+  "from_slug": "pamper-tastics-manchester",
+  "to_city": "bury",
+  "to_slug": "pamper-tastics",
+  "method": "locality: parish \"Bury, unparished area\" (4.0km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1418,
+  "name": "Hurst Road Play park",
+  "from_city": "southend",
+  "from_slug": "hurst-road-play-park",
+  "to_city": "southampton",
+  "to_slug": "hurst-road-play-park",
+  "method": "ttwa \"Southampton\" (24.2km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1423,
+  "name": "Longdown Activity Farm",
+  "from_city": "southend",
+  "from_slug": "longdown-activity-farm",
+  "to_city": "southampton",
+  "to_slug": "longdown-activity-farm",
+  "method": "ttwa \"Southampton\" (7.2km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1425,
+  "name": "Lymington Meadows Playground",
+  "from_city": "southend",
+  "from_slug": "lymington-meadows-playground",
+  "to_city": "southampton",
+  "to_slug": "lymington-meadows-playground",
+  "method": "ttwa \"Southampton\" (18.5km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1433,
+  "name": "The Play Zone Amusement Arcade",
+  "from_city": "bournemouth",
+  "from_slug": "the-play-zone-amusement-arcade-bournemouth",
+  "to_city": "salisbury",
+  "to_slug": "the-play-zone-amusement-arcade",
+  "method": "ttwa \"Salisbury\" (15.7km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1436,
+  "name": "Family Entertainment Complex",
+  "from_city": "bournemouth",
+  "from_slug": "family-entertainment-complex-bournemouth",
+  "to_city": "dorchester",
+  "to_slug": "family-entertainment-complex",
+  "method": "nearest-hub 7.8km (next bridport 30.2km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1440,
+  "name": "Testbourne Play Area",
+  "from_city": "southend",
+  "from_slug": "testbourne-play-area",
+  "to_city": "southampton",
+  "to_slug": "testbourne-play-area",
+  "method": "ttwa \"Southampton\" (7.5km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1441,
+  "name": "Bounce-A-Lean",
+  "from_city": "southend",
+  "from_slug": "bounce-a-lean",
+  "to_city": "southampton",
+  "to_slug": "bounce-a-lean",
+  "method": "ttwa \"Southampton\" (18.8km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1451,
+  "name": "Flip Out Chichester",
+  "from_city": "portsmouth",
+  "from_slug": "flip-out-chichester",
+  "to_city": "chichester",
+  "to_slug": "flip-out-chichester",
+  "method": "locality: bua \"Chichester\" (2.0km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1455,
+  "name": "Bounceabout bouncy castle and soft play hire.",
+  "from_city": "portsmouth",
+  "from_slug": "bounceabout-bouncy-castle-and-soft-play-hire",
+  "to_city": "chichester",
+  "to_slug": "bounceabout-bouncy-castle-and-soft-play-hire",
+  "method": "locality: district \"Chichester\" (12.0km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1457,
+  "name": "Arun Leisure Centre",
+  "from_city": "portsmouth",
+  "from_slug": "arun-leisure-centre",
+  "to_city": "bognor-regis",
+  "to_slug": "arun-leisure-centre",
+  "method": "locality: bua \"Bognor Regis\" (1.4km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1463,
+  "name": "East Beach Play Park",
+  "from_city": "portsmouth",
+  "from_slug": "east-beach-play-park",
+  "to_city": "chichester",
+  "to_slug": "east-beach-play-park",
+  "method": "locality: district \"Chichester\" (11.5km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1467,
+  "name": "Play Area",
+  "from_city": "portsmouth",
+  "from_slug": "play-area",
+  "to_city": "chichester",
+  "to_slug": "play-area",
+  "method": "locality: bua \"Chichester\" (0.5km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1474,
+  "name": "Wiggleys Fun Farm",
+  "from_city": "cardiff",
+  "from_slug": "wiggleys-fun-farm-cardiff",
+  "to_city": "swansea",
+  "to_slug": "wiggleys-fun-farm",
+  "method": "nearest-hub 22.6km (next cardiff 32.6km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1492,
+  "name": "Halo Garw Valley Life Centre",
+  "from_city": "cardiff",
+  "from_slug": "halo-garw-valley-life-centre-cardiff",
+  "to_city": "swansea",
+  "to_slug": "halo-garw-valley-life-centre",
+  "method": "nearest-hub 24.6km (next cardiff 31.7km)",
+  "confidence": "low"
+ },
+ {
+  "id": 1497,
+  "name": "Halo Maesteg Sports Centre",
+  "from_city": "cardiff",
+  "from_slug": "halo-maesteg-sports-centre-cardiff",
+  "to_city": "swansea",
+  "to_slug": "halo-maesteg-sports-centre",
+  "method": "nearest-hub 19.2km (next llanelli 35.4km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1550,
+  "name": "Bounce Buddies",
+  "from_city": "doncaster",
+  "from_slug": "bounce-buddies-doncaster",
+  "to_city": "barnsley",
+  "to_slug": "bounce-buddies",
+  "method": "nearest-hub 10.2km (next castleford 12.8km)",
+  "confidence": "low"
+ },
+ {
+  "id": 1553,
+  "name": "Hemsworth Methodist Church (+ Little Fishes soft play)",
+  "from_city": "doncaster",
+  "from_slug": "hemsworth-methodist-church-little-fishes-soft-play-doncaster",
+  "to_city": "barnsley",
+  "to_slug": "hemsworth-methodist-church-little-fishes-soft-play",
+  "method": "nearest-hub 10.6km (next castleford 12.4km)",
+  "confidence": "low"
+ },
+ {
+  "id": 1578,
+  "name": "Washington Village Play Park",
+  "from_city": "newcastle",
+  "from_slug": "washington-village-play-park",
+  "to_city": "sunderland",
+  "to_slug": "washington-village-play-park",
+  "method": "locality: parish \"Sunderland, unparished area\" (8.9km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1579,
+  "name": "Rainbow Family Hub",
+  "from_city": "newcastle",
+  "from_slug": "rainbow-family-hub",
+  "to_city": "sunderland",
+  "to_slug": "rainbow-family-hub",
+  "method": "locality: parish \"Sunderland, unparished area\" (8.6km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1587,
+  "name": "Washington Leisure Centre",
+  "from_city": "newcastle",
+  "from_slug": "washington-leisure-centre",
+  "to_city": "sunderland",
+  "to_slug": "washington-leisure-centre",
+  "method": "locality: parish \"Sunderland, unparished area\" (9.5km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1600,
+  "name": "Fun Abounds Trampoline & Gymnastics Centre",
+  "from_city": "hastings",
+  "from_slug": "fun-abounds-trampoline-gymnastics-centre-hastings",
+  "to_city": "brighton",
+  "to_slug": "fun-abounds-trampoline-gymnastics-centre",
+  "method": "nearest-hub 22.8km (next horley 28.6km)",
+  "confidence": "low"
+ },
+ {
+  "id": 1612,
+  "name": "3-2-1 Fun Softplay & Inflatable hire",
+  "from_city": "hastings",
+  "from_slug": "3-2-1-fun-softplay-inflatable-hire-hastings",
+  "to_city": "brighton",
+  "to_slug": "3-2-1-fun-softplay-inflatable-hire",
+  "method": "nearest-hub 23.5km (next horley 23.8km)",
+  "confidence": "low"
+ },
+ {
+  "id": 1659,
+  "name": "Harwich Green Play Area",
+  "from_city": "colchester",
+  "from_slug": "harwich-green-play-area",
+  "to_city": "harwich",
+  "to_slug": "harwich-green-play-area",
+  "method": "locality: bua \"Harwich\" (0.4km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1710,
+  "name": "The Louisa Centre",
+  "from_city": "newcastle",
+  "from_slug": "the-louisa-centre-newcastle",
+  "to_city": "stanley",
+  "to_slug": "the-louisa-centre",
+  "method": "locality: parish \"Stanley\" (0.7km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1720,
+  "name": "National Forest Adventure Farm",
+  "from_city": "nottingham",
+  "from_slug": "national-forest-adventure-farm-nottingham",
+  "to_city": "derby",
+  "to_slug": "national-forest-adventure-farm",
+  "method": "nearest-hub 19.4km (next tamworth 19.6km)",
+  "confidence": "low"
+ },
+ {
+  "id": 1727,
+  "name": "Children Play Area Normanton Park",
+  "from_city": "nottingham",
+  "from_slug": "children-play-area-normanton-park-nottingham",
+  "to_city": "derby",
+  "to_slug": "children-play-area-normanton-park",
+  "method": "locality: bua \"Derby\" (2.3km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1729,
+  "name": "Bluebell Dairy Ice Cream Farm",
+  "from_city": "nottingham",
+  "from_slug": "bluebell-dairy-ice-cream-farm-nottingham",
+  "to_city": "derby",
+  "to_slug": "bluebell-dairy-ice-cream-farm",
+  "method": "locality: bua \"Derby\" (5.5km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1732,
+  "name": "Play Park",
+  "from_city": "nottingham",
+  "from_slug": "play-park-nottingham",
+  "to_city": "derby",
+  "to_slug": "play-park",
+  "method": "nearest-hub 15.6km (next tamworth 20.4km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1734,
+  "name": "Falkirk Avenue Play Area",
+  "from_city": "nottingham",
+  "from_slug": "falkirk-avenue-play-area-nottingham",
+  "to_city": "derby",
+  "to_slug": "falkirk-avenue-play-area",
+  "method": "ttwa \"Derby\" (16.0km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1739,
+  "name": "Genesis Entertainment Centre",
+  "from_city": "nottingham",
+  "from_slug": "genesis-entertainment-centre-nottingham",
+  "to_city": "matlock",
+  "to_slug": "genesis-entertainment-centre",
+  "method": "nearest-hub 11.9km (next derby 20.0km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1740,
+  "name": "Natural Explorers Play Garden",
+  "from_city": "nottingham",
+  "from_slug": "natural-explorers-play-garden-nottingham",
+  "to_city": "derby",
+  "to_slug": "natural-explorers-play-garden",
+  "method": "locality: bua \"Derby\" (4.6km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1742,
+  "name": "Deans Drive play area",
+  "from_city": "nottingham",
+  "from_slug": "deans-drive-play-area-nottingham",
+  "to_city": "derby",
+  "to_slug": "deans-drive-play-area",
+  "method": "ttwa \"Derby\" (7.0km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1743,
+  "name": "Wetmore Community Play Park",
+  "from_city": "nottingham",
+  "from_slug": "wetmore-community-play-park-nottingham",
+  "to_city": "derby",
+  "to_slug": "wetmore-community-play-park",
+  "method": "nearest-hub 15.3km (next tamworth 21.1km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1744,
+  "name": "Merchantman Mews Play Park",
+  "from_city": "nottingham",
+  "from_slug": "merchantman-mews-play-park-nottingham",
+  "to_city": "derby",
+  "to_slug": "merchantman-mews-play-park",
+  "method": "ttwa \"Derby\" (12.1km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1746,
+  "name": "MCS Fun Factory - Mobile Soft Play Hire Service",
+  "from_city": "nottingham",
+  "from_slug": "mcs-fun-factory-mobile-soft-play-hire-service-nottingham",
+  "to_city": "derby",
+  "to_slug": "mcs-fun-factory-mobile-soft-play-hire-service",
+  "method": "nearest-hub 16.9km (next tamworth 19.9km)",
+  "confidence": "low"
+ },
+ {
+  "id": 1748,
+  "name": "Nordic Playground Institute UK",
+  "from_city": "nottingham",
+  "from_slug": "nordic-playground-institute-uk-nottingham",
+  "to_city": "derby",
+  "to_slug": "nordic-playground-institute-uk",
+  "method": "locality: bua \"Derby\" (2.6km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1750,
+  "name": "Carsington Water Play Area",
+  "from_city": "nottingham",
+  "from_slug": "carsington-water-play-area-nottingham",
+  "to_city": "derby",
+  "to_slug": "carsington-water-play-area",
+  "method": "ttwa \"Derby\" (18.7km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1752,
+  "name": "The Scotches Play Area",
+  "from_city": "nottingham",
+  "from_slug": "the-scotches-play-area-nottingham",
+  "to_city": "derby",
+  "to_slug": "the-scotches-play-area",
+  "method": "ttwa \"Derby\" (11.9km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1753,
+  "name": "Somersal Close Play Area",
+  "from_city": "nottingham",
+  "from_slug": "somersal-close-play-area-nottingham",
+  "to_city": "derby",
+  "to_slug": "somersal-close-play-area",
+  "method": "locality: bua \"Derby\" (5.7km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1754,
+  "name": "Springwood Leisure Centre",
+  "from_city": "nottingham",
+  "from_slug": "springwood-leisure-centre-nottingham",
+  "to_city": "derby",
+  "to_slug": "springwood-leisure-centre",
+  "method": "locality: bua \"Derby\" (3.7km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1785,
+  "name": "Puffin Close Play Area",
+  "from_city": "southend",
+  "from_slug": "puffin-close-play-area",
+  "to_city": "southampton",
+  "to_slug": "puffin-close-play-area",
+  "method": "locality: bua \"Southampton\" (5.0km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1787,
+  "name": "Gang Warily Recreation & Community Centre",
+  "from_city": "southend",
+  "from_slug": "gang-warily-recreation-community-centre",
+  "to_city": "southampton",
+  "to_slug": "gang-warily-recreation-community-centre",
+  "method": "ttwa \"Southampton\" (9.1km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1791,
+  "name": "Jack's Corner Playground",
+  "from_city": "southend",
+  "from_slug": "jack-s-corner-playground",
+  "to_city": "southampton",
+  "to_slug": "jack-s-corner-playground",
+  "method": "locality: bua \"Southampton\" (3.9km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1794,
+  "name": "Places Leisure Eastleigh",
+  "from_city": "southend",
+  "from_slug": "places-leisure-eastleigh",
+  "to_city": "southampton",
+  "to_slug": "places-leisure-eastleigh",
+  "method": "ttwa \"Southampton\" (7.5km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1799,
+  "name": "Romsey Rapids Sports Complex",
+  "from_city": "southend",
+  "from_slug": "romsey-rapids-sports-complex",
+  "to_city": "southampton",
+  "to_slug": "romsey-rapids-sports-complex",
+  "method": "ttwa \"Southampton\" (11.0km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1801,
+  "name": "Fishlake Meadows Playground",
+  "from_city": "southend",
+  "from_slug": "fishlake-meadows-playground",
+  "to_city": "southampton",
+  "to_slug": "fishlake-meadows-playground",
+  "method": "ttwa \"Southampton\" (11.7km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1807,
+  "name": "Sapphies Soft Play",
+  "from_city": "southend",
+  "from_slug": "sapphies-soft-play",
+  "to_city": "southampton",
+  "to_slug": "sapphies-soft-play",
+  "method": "ttwa \"Southampton\" (10.4km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1809,
+  "name": "Meadowsweet Way Play Area",
+  "from_city": "southend",
+  "from_slug": "meadowsweet-way-play-area",
+  "to_city": "southampton",
+  "to_slug": "meadowsweet-way-play-area",
+  "method": "ttwa \"Southampton\" (9.0km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1812,
+  "name": "The Bounce Department",
+  "from_city": "southend",
+  "from_slug": "the-bounce-department",
+  "to_city": "southampton",
+  "to_slug": "the-bounce-department",
+  "method": "ttwa \"Southampton\" (6.5km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1837,
+  "name": "Plough Inn Wacky Warehouse",
+  "from_city": "stoke",
+  "from_slug": "plough-inn-wacky-warehouse-stoke-on-trent",
+  "to_city": "crewe",
+  "to_slug": "plough-inn-wacky-warehouse-stoke-on-trent",
+  "method": "ttwa \"Crewe\" (7.8km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1840,
+  "name": "Wheelock Playing Fields play area",
+  "from_city": "stoke",
+  "from_slug": "wheelock-playing-fields-play-area-stoke-on-trent",
+  "to_city": "crewe",
+  "to_slug": "wheelock-playing-fields-play-area-stoke-on-trent",
+  "method": "ttwa \"Crewe\" (5.8km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1845,
+  "name": "Gutterscroft play area",
+  "from_city": "stoke",
+  "from_slug": "gutterscroft-play-area-stoke-on-trent",
+  "to_city": "crewe",
+  "to_slug": "gutterscroft-play-area-stoke-on-trent",
+  "method": "ttwa \"Crewe\" (3.1km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1846,
+  "name": "Greendale Gardens play area",
+  "from_city": "stoke",
+  "from_slug": "greendale-gardens-play-area-stoke-on-trent",
+  "to_city": "crewe",
+  "to_slug": "greendale-gardens-play-area-stoke-on-trent",
+  "method": "locality: bua \"Crewe\" (1.4km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1847,
+  "name": "Derby Docks play area",
+  "from_city": "stoke",
+  "from_slug": "derby-docks-play-area-stoke-on-trent",
+  "to_city": "crewe",
+  "to_slug": "derby-docks-play-area-stoke-on-trent",
+  "method": "locality: bua \"Crewe\" (1.3km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1849,
+  "name": "Ford Lane play area",
+  "from_city": "stoke",
+  "from_slug": "ford-lane-play-area-stoke-on-trent",
+  "to_city": "crewe",
+  "to_slug": "ford-lane-play-area-stoke-on-trent",
+  "method": "locality: bua \"Crewe\" (1.4km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1851,
+  "name": "Shavington Leisure Centre",
+  "from_city": "stoke",
+  "from_slug": "shavington-leisure-centre-stoke-on-trent",
+  "to_city": "crewe",
+  "to_slug": "shavington-leisure-centre-stoke-on-trent",
+  "method": "locality: bua \"Crewe\" (3.1km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1864,
+  "name": "JM Entertainment",
+  "from_city": "stoke",
+  "from_slug": "jm-entertainment",
+  "to_city": "stafford",
+  "to_slug": "jm-entertainment",
+  "method": "locality: district \"Stafford\" (14.6km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1879,
+  "name": "Z-A-K soft play and castle hire",
+  "from_city": "swansea",
+  "from_slug": "z-a-k-soft-play-and-castle-hire-swansea",
+  "to_city": "llanelli",
+  "to_slug": "z-a-k-soft-play-and-castle-hire",
+  "method": "locality: bua \"Llanelli\" (1.3km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1880,
+  "name": "Llanelli Town Hall Play Area",
+  "from_city": "swansea",
+  "from_slug": "llanelli-town-hall-play-area-swansea",
+  "to_city": "llanelli",
+  "to_slug": "llanelli-town-hall-play-area",
+  "method": "locality: bua \"Llanelli\" (0.1km)",
+  "confidence": "high"
+ },
+ {
+  "id": 1894,
+  "name": "Tumbles Play Place",
+  "from_city": "mossley",
+  "from_slug": "tumbles-play-place",
+  "to_city": "manchester",
+  "to_slug": "tumbles-play-place",
+  "method": "address-text \"Manchester\"",
+  "confidence": "low"
+ },
+ {
+  "id": 1909,
+  "name": "Cheeky Chops Play Cafe",
+  "from_city": "london",
+  "from_slug": "cheeky-chops-play-cafe",
+  "to_city": "sunbury-on-thames",
+  "to_slug": "cheeky-chops-play-cafe",
+  "method": "nearest-hub 7.2km (next london 15.2km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1912,
+  "name": "Halo Play Café",
+  "from_city": "london",
+  "from_slug": "halo-play-caf",
+  "to_city": "slough",
+  "to_slug": "halo-play-caf",
+  "method": "nearest-hub 9.0km (next egham 13.6km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1915,
+  "name": "Dino Soft Play",
+  "from_city": "london",
+  "from_slug": "dino-soft-play",
+  "to_city": "sunbury-on-thames",
+  "to_slug": "dino-soft-play",
+  "method": "nearest-hub 13.8km (next slough 14.0km)",
+  "confidence": "low"
+ },
+ {
+  "id": 1917,
+  "name": "MyPlace Soft Play & Parties",
+  "from_city": "london",
+  "from_slug": "myplace-soft-play-parties",
+  "to_city": "dartford",
+  "to_slug": "myplace-soft-play-parties",
+  "method": "nearest-hub 17.0km (next harlow 19.9km)",
+  "confidence": "low"
+ },
+ {
+  "id": 1957,
+  "name": "Goddenwick Farm Play Barn",
+  "from_city": "brighton",
+  "from_slug": "goddenwick-farm-play-barn",
+  "to_city": "horley",
+  "to_slug": "goddenwick-farm-play-barn",
+  "method": "nearest-hub 16.9km (next brighton 24.1km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1972,
+  "name": "Oakie Doke’s Playhouse",
+  "from_city": "dartford",
+  "from_slug": "oakie-dokes-playhouse",
+  "to_city": "swanley",
+  "to_slug": "oakie-dokes-playhouse",
+  "method": "nearest-hub 11.1km (next dartford 17.8km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1980,
+  "name": "The Pod Soft Play at YMCA Hawker",
+  "from_city": "london",
+  "from_slug": "the-pod-soft-play-ymca-hawker",
+  "to_city": "sunbury-on-thames",
+  "to_slug": "the-pod-soft-play-ymca-hawker",
+  "method": "nearest-hub 7.6km (next london 15.4km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 1990,
+  "name": "Jolly Giraffes",
+  "from_city": "mossley",
+  "from_slug": "jolly-giraffes",
+  "to_city": "manchester",
+  "to_slug": "jolly-giraffes",
+  "method": "ttwa \"Manchester\" (16.1km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 2008,
+  "name": "Crazy Castle Soft Play Area",
+  "from_city": "glasgow",
+  "from_slug": "crazy-castle-soft-play-area",
+  "to_city": "hamilton",
+  "to_slug": "crazy-castle-soft-play-area",
+  "method": "nearest-hub 10.7km (next glasgow 16.1km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 2017,
+  "name": "Little tots play village",
+  "from_city": "stoke",
+  "from_slug": "little-tots-play-village",
+  "to_city": "telford",
+  "to_slug": "little-tots-play-village",
+  "method": "ttwa \"Telford\" (11.5km)",
+  "confidence": "medium"
+ },
+ {
+  "id": 2024,
+  "name": "Perfect Playland",
+  "from_city": "luton",
+  "from_slug": "perfect-playland",
+  "to_city": "hitchin",
+  "to_slug": "perfect-playland",
+  "method": "nearest-hub 10.3km (next luton 18.3km)",
+  "confidence": "medium"
+ }
+]
