@@ -17,6 +17,7 @@ import path from 'path'
 import { fileURLToPath } from 'url'
 import pg from 'pg'
 import { toSlug, extractLikelyPostcode, normalizeUkPostcode } from './enrichment-utils.mjs'
+import { loadHubs, hubsMissingCentres, cityForNewVenue } from './lib/derive-city.mjs'
 
 const { Pool } = pg
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -190,10 +191,14 @@ async function main() {
   const pool = new Pool({ connectionString: DB_URL, ssl: { rejectUnauthorized: false } })
   const client = await pool.connect()
 
-  const existing = await client.query(
-    `SELECT place_id, google_place_id, name, address FROM venues WHERE city_slug = $1`,
-    [citySlug]
-  )
+  // A search for one city returns venues in its neighbours, and each is filed under
+  // the hub its OWN location gives (scripts/lib/derive-city.mjs), so dedup has to look
+  // at every city, not just the one searched.
+  const existing = await client.query(`SELECT place_id, google_place_id, name, address, city_slug FROM venues`)
+  const hubs = loadHubs(path.join(__dirname, '..'))
+  const noCentre = hubsMissingCentres(hubs)
+  if (noCentre.length) console.log(`Note: no centre for ${noCentre.join(', ')} (run scripts/plan-city-reassignment.mjs --write-centres)\n`)
+  const geoCache = { pc: {}, rev: {} }
   const knownPlaceIds = new Set(
     existing.rows.flatMap((r) => [r.place_id, r.google_place_id].filter(Boolean))
   )
@@ -205,14 +210,14 @@ async function main() {
   // stronger signal than it sounds — false positives here would only cause
   // a missed insert, not a bad one, whereas the reverse creates duplicates.
   const normalizeName = (s) => String(s || '').toLowerCase().replace(/[^a-z0-9]/g, '')
-  const knownNames = new Set(existing.rows.map((r) => normalizeName(r.name)))
+  const knownNames = new Set(existing.rows.map((r) => `${r.city_slug}|${normalizeName(r.name)}`))
   // Same building, different trading name (rename/rebrand, or a duplicate
   // Google listing) — a street-address match on its own is a strong enough
   // signal to exclude, since two unrelated soft play venues sharing one
   // street address is implausible.
   const normalizeAddress = (s) => String(s || '').split(',')[0].toLowerCase().replace(/[^a-z0-9]/g, '')
   const knownAddresses = new Set(existing.rows.map((r) => normalizeAddress(r.address)).filter(Boolean))
-  console.log(`${existing.rows.length} existing venues in ${citySlug} (${knownPlaceIds.size} with a place_id).\n`)
+  console.log(`${existing.rows.length} existing venues (${knownPlaceIds.size} with a place_id).\n`)
 
   const seen = new Map() // place_id -> place
   if (useCache && fs.existsSync(CACHE_PATH)) {
@@ -240,7 +245,6 @@ async function main() {
   const outsideCatchment = []
   const candidates = [...seen.values()].filter((p) => {
     if (knownPlaceIds.has(p.place_id)) return false
-    if (knownNames.has(normalizeName(p.name))) return false
     if (!looksLikeSoftPlay(p)) return false
     if (p.business_status === 'CLOSED_PERMANENTLY') return false
     if (!withinCatchment(p)) {
@@ -267,19 +271,31 @@ async function main() {
   console.log()
 
   let inserted = 0
+  const noHub = []
   for (const place of candidates) {
     const postcode = normalizeUkPostcode(extractLikelyPostcode(place.formatted_address || '')) || null
+    // File under the hub the venue's own postcode / coordinates put it in — NOT the
+    // searched city (that was the city-stamping bug). Falls back to the searched city
+    // only when Google gave no usable location, and then flags it.
+    const home = await cityForNewVenue(
+      { postcode, lat: place.geometry?.location?.lat ?? null, lng: place.geometry?.location?.lng ?? null, address: place.formatted_address },
+      hubs, citySlug, geoCache,
+    )
+    if (!home.citySlug) { noHub.push(`${place.name} — ${place.formatted_address} (${home.method})`); continue }
+    const venueCity = home.citySlug
+    if (knownNames.has(`${venueCity}|${normalizeName(place.name)}`)) continue
     const baseSlug = toSlug(place.name)
     let slug = baseSlug
     let suffix = 2
     // eslint-disable-next-line no-constant-condition
     while (true) {
-      const clash = await client.query(`SELECT 1 FROM venues WHERE city_slug = $1 AND slug = $2 LIMIT 1`, [citySlug, slug])
+      const clash = await client.query(`SELECT 1 FROM venues WHERE city_slug = $1 AND slug = $2 LIMIT 1`, [venueCity, slug])
       if (clash.rows.length === 0) break
       slug = `${baseSlug}-${suffix++}`
     }
 
-    console.log(`+ ${place.name} — ${place.formatted_address} (${place.rating ?? '?'}★, ${place.user_ratings_total ?? 0} reviews)`)
+    const filed = venueCity === citySlug ? '' : ` -> filed under ${venueCity}`
+    console.log(`+ ${place.name} — ${place.formatted_address} (${place.rating ?? '?'}★, ${place.user_ratings_total ?? 0} reviews)${filed} [${home.confidence}: ${home.method}]`)
 
     if (commit) {
       await client.query(
@@ -290,7 +306,7 @@ async function main() {
         [
           place.name,
           slug,
-          citySlug,
+          venueCity,
           place.formatted_address || null,
           postcode,
           place.geometry?.location?.lat ?? null,
@@ -308,8 +324,12 @@ async function main() {
   client.release()
   await pool.end()
 
+  if (noHub.length) {
+    console.log(`\n${noHub.length} not inserted — no city hub within 40 km of the venue (add a hub, then re-run):`)
+    for (const n of noHub) console.log(`  ~ ${n}`)
+  }
   if (commit) {
-    console.log(`\nInserted ${inserted} new venues into ${citySlug}, all flagged needs_review=true.`)
+    console.log(`\nInserted ${inserted} new venues (each under the hub its own location gives), all flagged needs_review=true.`)
     console.log('Next: run scripts/fetch-google-ratings.mjs and scripts/enrich-venues.mjs to fill in phone/website/hours, then scripts/rebuild-static-json.mjs.')
   } else {
     console.log('\nDry run — nothing written. Re-run with --commit to insert these.')

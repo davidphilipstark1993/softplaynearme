@@ -57,8 +57,8 @@ export const senPosts: BlogPost[] = [
 
 <h3>England</h3>
 <ul>
-  <li><strong>${link('/soft-play/london/sen-friendly', 'London SEN-friendly soft play')}</strong> — listings currently marked include ${link('/soft-play/london/the-pod-soft-play-ymca-hawker', 'The Pod Soft Play at YMCA Hawker')} and ${link('/soft-play/london/appletown-london-indoor-kids-soft-play-family-venue', 'Appletown London- Indoor Kids Soft Play &amp; Family Venue')}.</li>
-  <li><strong>${link('/soft-play/newcastle/sen-friendly', 'Newcastle SEN-friendly soft play')}</strong> — listings currently marked include ${link('/soft-play/newcastle/rainbow-family-hub', 'Rainbow Family Hub')} and ${link('/soft-play/newcastle/the-sensory-play-den-newcastle', 'The Sensory Play Den')}. The Rainbow Family Hub listing reports SEN and sensory sessions but does not yet confirm hours or prices, so contact the venue for both.</li>
+  <li><strong>${link('/soft-play/london/sen-friendly', 'London SEN-friendly soft play')}</strong> — listings currently marked include ${link('/soft-play/sunbury-on-thames/the-pod-soft-play-ymca-hawker', 'The Pod Soft Play at YMCA Hawker')} and ${link('/soft-play/london/appletown-london-indoor-kids-soft-play-family-venue', 'Appletown London- Indoor Kids Soft Play &amp; Family Venue')}.</li>
+  <li><strong>${link('/soft-play/newcastle/sen-friendly', 'Newcastle SEN-friendly soft play')}</strong> — listings currently marked include ${link('/soft-play/sunderland/rainbow-family-hub', 'Rainbow Family Hub')} and ${link('/soft-play/newcastle/the-sensory-play-den-newcastle', 'The Sensory Play Den')}. The Rainbow Family Hub listing reports SEN and sensory sessions but does not yet confirm hours or prices, so contact the venue for both.</li>
   <li><strong>${link('/soft-play/manchester', 'Manchester soft play')}</strong> — no Manchester venue is currently marked SEN-friendly in our directory. That reflects our listings only, not what venues offer in practice, so ask venues about quieter or SEN sessions.</li>
 </ul>
 

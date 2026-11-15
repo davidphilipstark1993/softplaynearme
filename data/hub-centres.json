@@ -1,0 +1,847 @@
+{
+  "aberaeron": {
+    "lat": 52.24226,
+    "lng": -4.25925,
+    "source": "os-names:Town"
+  },
+  "aberdeen": {
+    "lat": 57.14985,
+    "lng": -2.09376,
+    "source": "os-names:City"
+  },
+  "aldridge": {
+    "lat": 52.60541,
+    "lng": -1.91722,
+    "source": "os-names:Town"
+  },
+  "alvechurch": {
+    "lat": 52.35174,
+    "lng": -1.95955,
+    "source": "os-names:Village"
+  },
+  "aylesbury": {
+    "lat": 51.81711,
+    "lng": -0.81066,
+    "source": "os-names:Town"
+  },
+  "ayr": {
+    "lat": 55.45824,
+    "lng": -4.62903,
+    "source": "os-names:Town"
+  },
+  "ballynahinch": {
+    "lat": 54.40961,
+    "lng": -5.90567,
+    "source": "venue-median"
+  },
+  "banbury": {
+    "lat": 52.06213,
+    "lng": -1.3336,
+    "source": "os-names:Town"
+  },
+  "barnoldswick": {
+    "lat": 53.91654,
+    "lng": -2.18805,
+    "source": "os-names:Town"
+  },
+  "barnsley": {
+    "lat": 53.55352,
+    "lng": -1.48259,
+    "source": "os-names:Town"
+  },
+  "barnstaple": {
+    "lat": 51.08108,
+    "lng": -4.05838,
+    "source": "os-names:Town"
+  },
+  "barnt-green": {
+    "lat": 52.36154,
+    "lng": -1.9902,
+    "source": "os-names:Village"
+  },
+  "belfast": {
+    "lat": 54.67468,
+    "lng": -5.92178,
+    "source": "venue-median"
+  },
+  "beverley": {
+    "lat": 53.84345,
+    "lng": -0.43347,
+    "source": "os-names:Town"
+  },
+  "birmingham": {
+    "lat": 52.47928,
+    "lng": -1.90294,
+    "source": "os-names:City"
+  },
+  "bishop-auckland": {
+    "lat": 54.66413,
+    "lng": -1.6791,
+    "source": "os-names:Town"
+  },
+  "blackpool": {
+    "lat": 53.82086,
+    "lng": -3.05154,
+    "source": "os-names:Town"
+  },
+  "bognor-regis": {
+    "lat": 50.7844,
+    "lng": -0.67069,
+    "source": "os-names:Town"
+  },
+  "bolton": {
+    "lat": 53.57771,
+    "lng": -2.43104,
+    "source": "os-names:Town"
+  },
+  "bournemouth": {
+    "lat": 50.72097,
+    "lng": -1.87669,
+    "source": "os-names:Town"
+  },
+  "bradford": {
+    "lat": 53.79078,
+    "lng": -1.75456,
+    "source": "os-names:City"
+  },
+  "bridlington": {
+    "lat": 54.08444,
+    "lng": -0.19316,
+    "source": "os-names:Town"
+  },
+  "bridport": {
+    "lat": 50.73364,
+    "lng": -2.75836,
+    "source": "os-names:Town"
+  },
+  "brigg": {
+    "lat": 53.55193,
+    "lng": -0.48648,
+    "source": "os-names:Town"
+  },
+  "brighton": {
+    "lat": 50.82237,
+    "lng": -0.13768,
+    "source": "os-names:Other Settlement"
+  },
+  "bristol": {
+    "lat": 51.45313,
+    "lng": -2.60098,
+    "source": "os-names:City"
+  },
+  "broadstairs": {
+    "lat": 51.3595,
+    "lng": 1.43741,
+    "source": "os-names:Town"
+  },
+  "bude": {
+    "lat": 50.8311,
+    "lng": -4.54535,
+    "source": "os-names:Town"
+  },
+  "bury": {
+    "lat": 53.59269,
+    "lng": -2.29877,
+    "source": "os-names:Town"
+  },
+  "cambridge": {
+    "lat": 52.20486,
+    "lng": 0.11968,
+    "source": "os-names:City"
+  },
+  "cannock": {
+    "lat": 52.68995,
+    "lng": -2.03317,
+    "source": "os-names:Town"
+  },
+  "cardiff": {
+    "lat": 51.48,
+    "lng": -3.17686,
+    "source": "os-names:City"
+  },
+  "carlisle": {
+    "lat": 54.89262,
+    "lng": -2.93302,
+    "source": "os-names:City"
+  },
+  "castleford": {
+    "lat": 53.7258,
+    "lng": -1.35354,
+    "source": "os-names:Town"
+  },
+  "cheltenham": {
+    "lat": 51.90073,
+    "lng": -2.07669,
+    "source": "os-names:Town"
+  },
+  "chester": {
+    "lat": 53.1902,
+    "lng": -2.89164,
+    "source": "os-names:City"
+  },
+  "chichester": {
+    "lat": 50.8365,
+    "lng": -0.77902,
+    "source": "os-names:City"
+  },
+  "cirencester": {
+    "lat": 51.717,
+    "lng": -1.96838,
+    "source": "os-names:Town"
+  },
+  "cleethorpes": {
+    "lat": 53.56098,
+    "lng": -0.02994,
+    "source": "os-names:Town"
+  },
+  "cleobury-mortimer": {
+    "lat": 52.37852,
+    "lng": -2.48414,
+    "source": "os-names:Town"
+  },
+  "colchester": {
+    "lat": 51.88971,
+    "lng": 0.89935,
+    "source": "os-names:City"
+  },
+  "coldstream": {
+    "lat": 55.65186,
+    "lng": -2.25097,
+    "source": "os-names:Town"
+  },
+  "coventry": {
+    "lat": 52.40771,
+    "lng": -1.50686,
+    "source": "os-names:City"
+  },
+  "crewe": {
+    "lat": 53.09503,
+    "lng": -2.44176,
+    "source": "os-names:Town"
+  },
+  "cupar": {
+    "lat": 56.31945,
+    "lng": -3.01165,
+    "source": "os-names:Town"
+  },
+  "dartford": {
+    "lat": 51.4561,
+    "lng": 0.24675,
+    "source": "os-names:Town"
+  },
+  "derby": {
+    "lat": 52.92469,
+    "lng": -1.47805,
+    "source": "os-names:City"
+  },
+  "derry-londonderry": {
+    "lat": 54.99578,
+    "lng": -7.30355,
+    "source": "venue-median"
+  },
+  "doncaster": {
+    "lat": 53.52272,
+    "lng": -1.13235,
+    "source": "os-names:City"
+  },
+  "dorchester": {
+    "lat": 50.71532,
+    "lng": -2.43813,
+    "source": "os-names:Town"
+  },
+  "dorking": {
+    "lat": 51.23284,
+    "lng": -0.32986,
+    "source": "os-names:Town"
+  },
+  "driffield": {
+    "lat": 54.00568,
+    "lng": -0.44008,
+    "source": "os-names:Town"
+  },
+  "dudley": {
+    "lat": 52.51005,
+    "lng": -2.08316,
+    "source": "os-names:Town"
+  },
+  "dumfries": {
+    "lat": 55.06977,
+    "lng": -3.60927,
+    "source": "os-names:Town"
+  },
+  "dundee": {
+    "lat": 56.45841,
+    "lng": -2.97367,
+    "source": "os-names:City"
+  },
+  "edinburgh": {
+    "lat": 55.95334,
+    "lng": -3.18911,
+    "source": "os-names:City"
+  },
+  "egham": {
+    "lat": 51.43137,
+    "lng": -0.54949,
+    "source": "os-names:Town"
+  },
+  "exeter": {
+    "lat": 50.72258,
+    "lng": -3.5326,
+    "source": "os-names:City"
+  },
+  "exmouth": {
+    "lat": 50.61873,
+    "lng": -3.41242,
+    "source": "os-names:Town"
+  },
+  "falkirk": {
+    "lat": 55.99933,
+    "lng": -3.78481,
+    "source": "os-names:Town"
+  },
+  "falmouth": {
+    "lat": 50.15349,
+    "lng": -5.07403,
+    "source": "os-names:Town"
+  },
+  "fleet": {
+    "lat": 51.28025,
+    "lng": -0.84326,
+    "source": "os-names:Town"
+  },
+  "forfar": {
+    "lat": 56.64407,
+    "lng": -2.88898,
+    "source": "os-names:Town"
+  },
+  "galashiels": {
+    "lat": 55.61482,
+    "lng": -2.80754,
+    "source": "os-names:Town"
+  },
+  "glasgow": {
+    "lat": 55.86363,
+    "lng": -4.23688,
+    "source": "os-names:City"
+  },
+  "goole": {
+    "lat": 53.70382,
+    "lng": -0.8713,
+    "source": "os-names:Town"
+  },
+  "grimsby": {
+    "lat": 53.56511,
+    "lng": -0.08383,
+    "source": "os-names:Town"
+  },
+  "guildford": {
+    "lat": 51.23945,
+    "lng": -0.57591,
+    "source": "os-names:Town"
+  },
+  "haddington": {
+    "lat": 55.95539,
+    "lng": -2.78384,
+    "source": "os-names:Town"
+  },
+  "halesowen": {
+    "lat": 52.45341,
+    "lng": -2.06091,
+    "source": "os-names:Town"
+  },
+  "halifax": {
+    "lat": 53.72283,
+    "lng": -1.86018,
+    "source": "os-names:Town"
+  },
+  "hamilton": {
+    "lat": 55.77603,
+    "lng": -4.03339,
+    "source": "os-names:Town"
+  },
+  "harlow": {
+    "lat": 51.76879,
+    "lng": 0.09571,
+    "source": "os-names:Town"
+  },
+  "harwich": {
+    "lat": 51.94644,
+    "lng": 1.28729,
+    "source": "os-names:Town"
+  },
+  "hastings": {
+    "lat": 50.85633,
+    "lng": 0.58122,
+    "source": "os-names:Town"
+  },
+  "hatfield": {
+    "lat": 51.76511,
+    "lng": -0.22013,
+    "source": "os-names:Town"
+  },
+  "helston": {
+    "lat": 50.10093,
+    "lng": -5.27447,
+    "source": "os-names:Town"
+  },
+  "hemel-hempstead": {
+    "lat": 51.75261,
+    "lng": -0.47232,
+    "source": "os-names:Town"
+  },
+  "hereford": {
+    "lat": 52.05598,
+    "lng": -2.71755,
+    "source": "os-names:City"
+  },
+  "high-wycombe": {
+    "lat": 51.62876,
+    "lng": -0.74946,
+    "source": "os-names:Town"
+  },
+  "himley": {
+    "lat": 52.51838,
+    "lng": -2.18003,
+    "source": "os-names:Village"
+  },
+  "hitchin": {
+    "lat": 51.94951,
+    "lng": -0.28007,
+    "source": "os-names:Town"
+  },
+  "horley": {
+    "lat": 51.17174,
+    "lng": -0.16364,
+    "source": "os-names:Town"
+  },
+  "huddersfield": {
+    "lat": 53.64428,
+    "lng": -1.7822,
+    "source": "os-names:Town"
+  },
+  "hull": {
+    "lat": 53.74459,
+    "lng": -0.33258,
+    "source": "os-names:City"
+  },
+  "inverness": {
+    "lat": 57.48,
+    "lng": -4.22622,
+    "source": "os-names:City"
+  },
+  "ipswich": {
+    "lat": 52.05707,
+    "lng": 1.15283,
+    "source": "os-names:Town"
+  },
+  "kidderminster": {
+    "lat": 52.3882,
+    "lng": -2.24923,
+    "source": "os-names:Town"
+  },
+  "kings-lynn": {
+    "lat": 52.75194,
+    "lng": 0.39538,
+    "source": "os-names:Town"
+  },
+  "lancaster": {
+    "lat": 54.05007,
+    "lng": -2.80316,
+    "source": "os-names:City"
+  },
+  "leeds": {
+    "lat": 53.8007,
+    "lng": -1.55026,
+    "source": "os-names:City"
+  },
+  "leicester": {
+    "lat": 52.63361,
+    "lng": -1.13346,
+    "source": "os-names:City"
+  },
+  "lincoln": {
+    "lat": 53.23484,
+    "lng": -0.53844,
+    "source": "os-names:City"
+  },
+  "lisburn": {
+    "lat": 54.50779,
+    "lng": -6.0647,
+    "source": "venue-median"
+  },
+  "liverpool": {
+    "lat": 53.40935,
+    "lng": -2.97849,
+    "source": "os-names:City"
+  },
+  "llandudno": {
+    "lat": 53.324,
+    "lng": -3.83044,
+    "source": "os-names:Town"
+  },
+  "llanelli": {
+    "lat": 51.68211,
+    "lng": -4.16366,
+    "source": "os-names:Town"
+  },
+  "london": {
+    "lat": 51.50741,
+    "lng": -0.12772,
+    "source": "os-names:City"
+  },
+  "loughborough": {
+    "lat": 52.7721,
+    "lng": -1.20616,
+    "source": "os-names:Town"
+  },
+  "luton": {
+    "lat": 51.87954,
+    "lng": -0.41745,
+    "source": "os-names:Town"
+  },
+  "malvern": {
+    "lat": 52.11118,
+    "lng": -2.33006,
+    "source": "venue-median"
+  },
+  "manchester": {
+    "lat": 53.47894,
+    "lng": -2.24528,
+    "source": "os-names:City"
+  },
+  "matlock": {
+    "lat": 53.13897,
+    "lng": -1.55458,
+    "source": "os-names:Town"
+  },
+  "middleton": {
+    "lat": 52.58237,
+    "lng": -1.73752,
+    "source": "os-names:Village"
+  },
+  "midsomer-norton": {
+    "lat": 51.28561,
+    "lng": -2.48286,
+    "source": "os-names:Town"
+  },
+  "milton-keynes": {
+    "lat": 52.04302,
+    "lng": -0.75406,
+    "source": "os-names:City"
+  },
+  "morpeth": {
+    "lat": 55.16749,
+    "lng": -1.69074,
+    "source": "os-names:Town"
+  },
+  "mossley": {
+    "lat": 53.51818,
+    "lng": -2.04625,
+    "source": "os-names:Town"
+  },
+  "musselburgh": {
+    "lat": 55.94285,
+    "lng": -3.04931,
+    "source": "os-names:Town"
+  },
+  "newcastle": {
+    "lat": 54.97801,
+    "lng": -1.61019,
+    "source": "os-names:City"
+  },
+  "northampton": {
+    "lat": 52.23786,
+    "lng": -0.89505,
+    "source": "os-names:Town"
+  },
+  "norwich": {
+    "lat": 52.62887,
+    "lng": 1.29331,
+    "source": "os-names:City"
+  },
+  "nottingham": {
+    "lat": 52.9562,
+    "lng": -1.1512,
+    "source": "os-names:City"
+  },
+  "nuneaton": {
+    "lat": 52.52214,
+    "lng": -1.46773,
+    "source": "os-names:Town"
+  },
+  "oldham": {
+    "lat": 53.54216,
+    "lng": -2.11596,
+    "source": "os-names:Town"
+  },
+  "omagh": {
+    "lat": 54.55324,
+    "lng": -7.1462,
+    "source": "venue-median"
+  },
+  "oxford": {
+    "lat": 51.75198,
+    "lng": -1.25765,
+    "source": "os-names:City"
+  },
+  "perth": {
+    "lat": 56.39547,
+    "lng": -3.4389,
+    "source": "os-names:City"
+  },
+  "peterborough": {
+    "lat": 52.57251,
+    "lng": -0.2425,
+    "source": "os-names:City"
+  },
+  "peterhead": {
+    "lat": 57.50823,
+    "lng": -1.78348,
+    "source": "os-names:Town"
+  },
+  "plymouth": {
+    "lat": 50.37001,
+    "lng": -4.14207,
+    "source": "os-names:City"
+  },
+  "portrush": {
+    "lat": 55.20339,
+    "lng": -6.65137,
+    "source": "venue-median"
+  },
+  "portsmouth": {
+    "lat": 50.79685,
+    "lng": -1.09117,
+    "source": "os-names:City"
+  },
+  "randalstown": {
+    "lat": 54.74894,
+    "lng": -6.32034,
+    "source": "venue-median"
+  },
+  "rhyl": {
+    "lat": 53.3207,
+    "lng": -3.4924,
+    "source": "os-names:Town"
+  },
+  "rugby": {
+    "lat": 52.37218,
+    "lng": -1.26265,
+    "source": "os-names:Town"
+  },
+  "salisbury": {
+    "lat": 51.07037,
+    "lng": -1.79643,
+    "source": "os-names:City"
+  },
+  "scunthorpe": {
+    "lat": 53.59189,
+    "lng": -0.64676,
+    "source": "os-names:Town"
+  },
+  "seahouses": {
+    "lat": 55.58183,
+    "lng": -1.65349,
+    "source": "os-names:Village"
+  },
+  "sheffield": {
+    "lat": 53.38251,
+    "lng": -1.46854,
+    "source": "os-names:City"
+  },
+  "shifnal": {
+    "lat": 52.67038,
+    "lng": -2.37253,
+    "source": "os-names:Village"
+  },
+  "shrewsbury": {
+    "lat": 52.70817,
+    "lng": -2.75433,
+    "source": "os-names:Town"
+  },
+  "skegness": {
+    "lat": 53.14453,
+    "lng": 0.3362,
+    "source": "os-names:Town"
+  },
+  "slough": {
+    "lat": 51.50886,
+    "lng": -0.59296,
+    "source": "os-names:Town"
+  },
+  "smethwick": {
+    "lat": 52.49074,
+    "lng": -1.96776,
+    "source": "os-names:Town"
+  },
+  "solihull": {
+    "lat": 52.41275,
+    "lng": -1.77755,
+    "source": "os-names:Town"
+  },
+  "southampton": {
+    "lat": 50.90489,
+    "lng": -1.40431,
+    "source": "os-names:City"
+  },
+  "southend": {
+    "lat": 51.54012,
+    "lng": 0.71137,
+    "source": "os-names:City"
+  },
+  "st-austell": {
+    "lat": 50.33846,
+    "lng": -4.79115,
+    "source": "os-names:Town"
+  },
+  "st-neots": {
+    "lat": 52.22788,
+    "lng": -0.26938,
+    "source": "os-names:Town"
+  },
+  "stafford": {
+    "lat": 52.8058,
+    "lng": -2.11666,
+    "source": "os-names:Town"
+  },
+  "stanley": {
+    "lat": 54.87227,
+    "lng": -1.69381,
+    "source": "os-names:Town"
+  },
+  "stirling": {
+    "lat": 56.11546,
+    "lng": -3.93416,
+    "source": "os-names:City"
+  },
+  "stocksfield": {
+    "lat": 54.94639,
+    "lng": -1.91687,
+    "source": "os-names:Village"
+  },
+  "stoke": {
+    "lat": 53.02218,
+    "lng": -2.17337,
+    "source": "os-names:City"
+  },
+  "stourbridge": {
+    "lat": 52.45507,
+    "lng": -2.1433,
+    "source": "os-names:Town"
+  },
+  "sunbury-on-thames": {
+    "lat": 51.41872,
+    "lng": -0.41839,
+    "source": "os-names:Town"
+  },
+  "sunderland": {
+    "lat": 54.90216,
+    "lng": -1.3838,
+    "source": "os-names:City"
+  },
+  "swanley": {
+    "lat": 51.39757,
+    "lng": 0.1727,
+    "source": "os-names:Town"
+  },
+  "swansea": {
+    "lat": 51.62011,
+    "lng": -3.94142,
+    "source": "os-names:City"
+  },
+  "swindon": {
+    "lat": 51.56153,
+    "lng": -1.78546,
+    "source": "os-names:Town"
+  },
+  "tamworth": {
+    "lat": 52.63343,
+    "lng": -1.69245,
+    "source": "os-names:Town"
+  },
+  "taunton": {
+    "lat": 51.01341,
+    "lng": -3.10818,
+    "source": "os-names:Town"
+  },
+  "telford": {
+    "lat": 52.6754,
+    "lng": -2.44875,
+    "source": "os-names:Town"
+  },
+  "tipton": {
+    "lat": 52.54124,
+    "lng": -2.03975,
+    "source": "os-names:Town"
+  },
+  "walsall": {
+    "lat": 52.58622,
+    "lng": -1.98034,
+    "source": "os-names:Town"
+  },
+  "ware": {
+    "lat": 51.81384,
+    "lng": -0.03444,
+    "source": "os-names:Town"
+  },
+  "wellingborough": {
+    "lat": 52.30217,
+    "lng": -0.6921,
+    "source": "os-names:Town"
+  },
+  "west-bromwich": {
+    "lat": 52.52018,
+    "lng": -1.99686,
+    "source": "os-names:Town"
+  },
+  "west-calder": {
+    "lat": 55.85087,
+    "lng": -3.57318,
+    "source": "os-names:Village"
+  },
+  "willenhall": {
+    "lat": 52.58314,
+    "lng": -2.05433,
+    "source": "os-names:Town"
+  },
+  "wokingham": {
+    "lat": 51.41027,
+    "lng": -0.83293,
+    "source": "os-names:Town"
+  },
+  "wolverhampton": {
+    "lat": 52.5862,
+    "lng": -2.12992,
+    "source": "os-names:City"
+  },
+  "wombourne": {
+    "lat": 52.53124,
+    "lng": -2.20072,
+    "source": "os-names:Other Settlement"
+  },
+  "worcester": {
+    "lat": 52.19293,
+    "lng": -2.22109,
+    "source": "os-names:City"
+  },
+  "worthing": {
+    "lat": 50.81426,
+    "lng": -0.37122,
+    "source": "os-names:Town"
+  },
+  "wythall": {
+    "lat": 52.37389,
+    "lng": -1.88593,
+    "source": "os-names:Village"
+  },
+  "yeovil": {
+    "lat": 50.94077,
+    "lng": -2.63352,
+    "source": "os-names:Town"
+  },
+  "york": {
+    "lat": 53.96201,
+    "lng": -1.08367,
+    "source": "os-names:City"
+  }
+}

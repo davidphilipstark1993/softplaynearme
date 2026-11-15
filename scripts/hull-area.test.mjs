@@ -52,7 +52,9 @@ test('new hubs only link to hubs that exist', () => {
 
 test('each new hub holds exactly its venue in the static data, counts derived not hand-typed', () => {
   const towns = new Map(read('data/generated/towns.json').map((t) => [t.slug, t]))
-  for (const slug of ['grimsby', 'cleethorpes', 'brigg', 'driffield', 'goole']) assert.equal(towns.get(slug).venueCount, 1, slug)
+  for (const slug of ['grimsby', 'brigg', 'driffield', 'goole']) assert.equal(towns.get(slug).venueCount, 1, slug)
+  // + The Fun Factory, Louth (LN11), refiled off Lincoln by phase13-01 (nearest hub)
+  assert.equal(towns.get('cleethorpes').venueCount, 2)
   assert.equal(towns.get('beverley').venueCount, 3)
 })
 

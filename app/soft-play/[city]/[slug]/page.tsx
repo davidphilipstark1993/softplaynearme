@@ -21,6 +21,7 @@ import {
 import type { Metadata } from 'next'
 import { getPool, STATIC_BUILD } from '@/lib/pool'
 import { getHubGuide } from '@/lib/hubGuides'
+import { pendingSources } from '@/lib/redirects'
 import { calculateDistance, formatDistance, getBoundingBox } from '@/lib/geo'
 import { visibleVenueTypeSql } from '@/lib/venueTypes'
 import { getStaticVenue, getStaticTownBySlug, getStaticVenuesByTown, getAllStaticTownSlugs, type StaticVenue } from '@/lib/staticVenues'
@@ -187,7 +188,24 @@ const getVenue = cache(async function getVenue(citySlug: string, slug: string): 
         'SELECT * FROM venues WHERE city_slug = $1 AND slug = $2 AND is_active = true',
         [citySlug, slug]
       )
-      const row = result.rows[0]
+      let row = result.rows[0]
+      // Bridge for a move whose 301 is deployed before the DB row is updated
+      // (lib/redirects.ts): this new URL renders the venue from its old row, as
+      // the new URL, so neither the old nor the new address ever 404s.
+      if (!row) {
+        for (const source of pendingSources(`/soft-play/${citySlug}/${slug}`)) {
+          const [, , fromCity, fromSlug] = source.split('/')
+          if (!fromSlug) continue
+          const prior = await client.query(
+            'SELECT * FROM venues WHERE city_slug = $1 AND slug = $2 AND is_active = true',
+            [fromCity, fromSlug]
+          )
+          if (prior.rows[0]) {
+            row = { ...prior.rows[0], city_slug: citySlug, slug }
+            break
+          }
+        }
+      }
       if (row) {
         // First-party view count for the dashboard Insights card / monthly
         // insights email (see scripts/migrateInsights.mjs) — a rough proxy

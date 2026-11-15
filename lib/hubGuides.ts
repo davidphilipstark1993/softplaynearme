@@ -61,7 +61,7 @@ const GUIDES: Record<string, HubGuide> = {
       {
         heading: 'Older children',
         paragraphs: [
-          "Out of Bounds combines soft play with ten-pin bowling, laser tag, high ropes and adventure golf, so it suits a mixed-age group. [Flying Fortress](/soft-play/worthing/flying-fortress) in Ford prices children up to age 13. Harbour Park's soft play is for children up to 9.",
+          "Out of Bounds combines soft play with ten-pin bowling, laser tag, high ropes and adventure golf, so it suits a mixed-age group. [Flying Fortress](/soft-play/bognor-regis/flying-fortress) in Ford prices children up to age 13. Harbour Park's soft play is for children up to 9.",
         ],
       },
       {

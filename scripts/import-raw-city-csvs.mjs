@@ -33,6 +33,7 @@
  */
 
 import { venueSlug } from './lib/venue-slug.mjs'
+import { loadHubs, lookupLocations, decideCity } from './lib/derive-city.mjs'
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -893,6 +894,7 @@ async function main() {
       if (venue.mapsUrlKey) seenMapsKeys.add(venue.mapsUrlKey)
       seenDedupeKeys.add(venue.dedupeKey)
 
+      venue._row = row
       allVenues.push(venue)
       cityInserts++
     }
@@ -901,6 +903,31 @@ async function main() {
       `  ${cityMeta.city.padEnd(12)} — ${cityInserts} venues queued, ${citySkips} skipped`
     )
   }
+
+  // Each CSV is a Google Maps search for ONE city, but the results include its
+  // neighbours. File every venue under the hub its own postcode / coordinates give
+  // (scripts/lib/derive-city.mjs), not the city of the CSV it came in — that was the
+  // city-stamping bug (e.g. every row of "Bolton, Preston.csv" became /soft-play/bolton/).
+  // Only NEW rows are filed this way; an existing row keeps its city_slug (moving a live
+  // URL needs a migration with 301s).
+  const hubs = loadHubs(projectRoot)
+  const locs = await lookupLocations(allVenues)
+  const refiled = [], noHub = [], noLocation = []
+  for (let i = allVenues.length - 1; i >= 0; i--) {
+    const v = allVenues[i]
+    const r = decideCity(v, locs[i], hubs, null)
+    if (r.derived === 'none') { noHub.push(`${v.name} (${v.city} CSV): ${r.method}`); allVenues.splice(i, 1); continue }
+    if (r.method === 'no-location') { noLocation.push(`${v.name} (${v.city} CSV)`); continue }
+    if (r.derived === v.citySlug) continue
+    const h = hubs.get(r.derived)
+    const re = buildVenue(v._row, { city: h.name, citySlug: h.slug, county: h.county ?? v.county, region: h.region ?? v.region })
+    re._fileVenue = v
+    allVenues[i] = re
+    refiled.push(`${v.name}: ${v.citySlug} CSV -> ${h.slug} [${r.confidence}: ${r.method}]`)
+  }
+  if (refiled.length) { console.log(`\n${refiled.length} venues filed under their own hub, not the CSV's city:`); for (const x of refiled) console.log(`  > ${x}`) }
+  if (noHub.length) { console.log(`\n${noHub.length} skipped — no hub within 40 km (add a hub, then re-run):`); for (const x of noHub) console.log(`  ~ ${x}`) }
+  if (noLocation.length) { console.log(`\n${noLocation.length} have no postcode or coordinates, kept under the CSV's city — check by hand:`); for (const x of noLocation) console.log(`  ? ${x}`) }
 
   console.log()
   console.log(`Total venues queued for import: ${allVenues.length}`)
@@ -988,10 +1015,13 @@ async function main() {
 
     for (const venue of allVenues) {
       try {
-        const existingId = await findExisting(client, venue)
+        // Match on the CSV-city version first (that is how earlier imports stored it),
+        // then on the re-filed version. An existing row is updated in place, never moved.
+        const asFiled = venue._fileVenue ?? venue
+        const existingId = (await findExisting(client, asFiled)) ?? (venue._fileVenue ? await findExisting(client, venue) : null)
 
         if (existingId) {
-          await updateVenue(client, existingId, venue)
+          await updateVenue(client, existingId, asFiled)
           updated++
           process.stdout.write('u')
         } else {
