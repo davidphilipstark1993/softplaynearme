@@ -3525,5 +3525,20 @@
       "Hull"
     ],
     "faqs": []
+  },
+  {
+    "slug": "southampton",
+    "name": "Southampton",
+    "county": "Hampshire",
+    "region": "South East",
+    "metaTitle": "Soft Play in Southampton",
+    "metaDescription": "Find soft play centres in Southampton, Hampshire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Southampton",
+    "intro": "Soft play centres in Southampton and the surrounding area of Hampshire.",
+    "nearbyAreas": [
+      "Portsmouth",
+      "Bournemouth"
+    ],
+    "faqs": []
   }
 ]

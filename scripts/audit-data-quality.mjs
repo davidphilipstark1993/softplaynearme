@@ -23,7 +23,7 @@ const POSTCODE_TO_CITIES = {
   SE: ['london'], SW: ['london'], W: ['london'], WC: ['london'],
   NE: ['newcastle'], SR: ['sunderland'],
   NR: ['norwich'],
-  PO: ['portsmouth'], SO: ['southend'],
+  PO: ['portsmouth'], SO: ['southampton'],
   SS: ['southend'],
   ST: ['stoke'],
   TN: ['hastings'],

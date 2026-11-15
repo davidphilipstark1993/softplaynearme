@@ -61,7 +61,12 @@
     "BN11": "Worthing",
     "BN13": "Worthing",
     "BN14": "Worthing",
-    "BN15": "Lancing"
+    "BN15": "Lancing",
+    "SO14": "Southampton",
+    "SO15": "Southampton",
+    "SO17": "Southampton",
+    "SO18": "Southampton",
+    "SO19": "Southampton"
   },
   "venueOverrides": {
     "18": "Anlaby",
@@ -76,7 +81,9 @@
     "908": "Southwick",
     "919": "Furner's Green",
     "1622": "Cooksbridge",
-    "1449": "Hurstpierpoint", "1957": "Lindfield", "1958": "Whitesmith",
+    "1449": "Hurstpierpoint",
+    "1957": "Lindfield",
+    "1958": "Whitesmith",
     "881": "Worthing",
     "901": "Goring-by-Sea",
     "894": "Worthing",
@@ -153,7 +160,8 @@
     "1294": "Dudley",
     "1296": "Shifnal",
     "1297": "Dudley",
-    "1298": "Telford"
+    "1298": "Telford",
+    "658": "Southampton"
   },
   "counties": {
     "Anlaby": "East Yorkshire",
@@ -223,7 +231,8 @@
     "Telford": "Shropshire",
     "Shifnal": "Shropshire",
     "Cleobury Mortimer": "Shropshire",
-    "Cannock": "Staffordshire"
+    "Cannock": "Staffordshire",
+    "Southampton": "Hampshire"
   },
   "hubs": {
     "hull": {
@@ -274,6 +283,12 @@
         "Angmering",
         "Littlehampton"
       ]
+    },
+    "southampton": {
+      "core": [
+        "Southampton"
+      ],
+      "nearby": []
     }
   }
 }

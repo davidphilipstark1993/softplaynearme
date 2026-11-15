@@ -803,5 +803,10 @@
     "slug": "goole",
     "name": "Goole",
     "county": "East Yorkshire"
+  },
+  {
+    "slug": "southampton",
+    "name": "Southampton",
+    "county": "Hampshire"
   }
 ]

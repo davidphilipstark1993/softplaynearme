@@ -740,7 +740,7 @@
   {
     "name": "Portsmouth",
     "slug": "portsmouth",
-    "venueCount": 26,
+    "venueCount": 24,
     "avgRating": "4.4"
   },
   {
@@ -828,9 +828,15 @@
     "avgRating": "4.4"
   },
   {
+    "name": "Southampton",
+    "slug": "southampton",
+    "venueCount": 4,
+    "avgRating": "3.9"
+  },
+  {
     "name": "Southend",
     "slug": "southend",
-    "venueCount": 23,
+    "venueCount": 21,
     "avgRating": "4.3"
   },
   {

@@ -136,7 +136,7 @@
   },
   {
     "source": "/soft-play/bournemouth/inflatazone-indoor-soft-play-centre-and-inflatable-zone",
-    "destination": "/soft-play/southend/inflatazone-indoor-soft-play-centre-and-inflatable-zone",
+    "destination": "/soft-play/southampton/inflatazone-indoor-soft-play-centre-and-inflatable-zone",
     "permanent": true
   },
   {
@@ -816,7 +816,7 @@
   },
   {
     "source": "/soft-play/portsmouth/wonderworld-soft-play-and-kids-group-party-venue-southampton-portsmouth",
-    "destination": "/soft-play/southend/wonderworld-soft-play-and-kids-group-party-venue-southampton",
+    "destination": "/soft-play/southampton/wonderworld-soft-play-and-kids-group-party-venue-southampton",
     "permanent": true
   },
   {
@@ -831,7 +831,7 @@
   },
   {
     "source": "/soft-play/portsmouth/southampton-common-playground-portsmouth",
-    "destination": "/soft-play/southend/southampton-common-playground",
+    "destination": "/soft-play/southampton/southampton-common-playground",
     "permanent": true
   },
   {
@@ -841,7 +841,7 @@
   },
   {
     "source": "/soft-play/portsmouth/houndwell-park-playground-portsmouth",
-    "destination": "/soft-play/southend/houndwell-park-playground",
+    "destination": "/soft-play/southampton/houndwell-park-playground",
     "permanent": true
   },
   {
@@ -851,7 +851,7 @@
   },
   {
     "source": "/soft-play/portsmouth/newtown-adventure-playground-portsmouth",
-    "destination": "/soft-play/southend/newtown-adventure-playground",
+    "destination": "/soft-play/southampton/newtown-adventure-playground",
     "permanent": true
   },
   {
@@ -866,12 +866,12 @@
   },
   {
     "source": "/soft-play/portsmouth/playground-portsmouth",
-    "destination": "/soft-play/southend/playground",
+    "destination": "/soft-play/southampton/playground",
     "permanent": true
   },
   {
     "source": "/soft-play/portsmouth/west-quay-play-area-portsmouth",
-    "destination": "/soft-play/southend/west-quay-play-area",
+    "destination": "/soft-play/southampton/west-quay-play-area",
     "permanent": true
   },
   {
@@ -896,7 +896,7 @@
   },
   {
     "source": "/soft-play/portsmouth/southampton-soft-play-hire-j-w-bouncy-castles-portsmouth",
-    "destination": "/soft-play/southend/southampton-soft-play-hire-j-w-bouncy-castles",
+    "destination": "/soft-play/southampton/southampton-soft-play-hire-j-w-bouncy-castles",
     "permanent": true
   },
   {
@@ -4106,7 +4106,7 @@
   },
   {
     "source": "/soft-play/southend/playground-portsmouth",
-    "destination": "/soft-play/southend/playground",
+    "destination": "/soft-play/southampton/playground",
     "permanent": true
   },
   {
@@ -4256,7 +4256,7 @@
   },
   {
     "source": "/soft-play/southend/wonderworld-soft-play-and-kids-group-party-venue-southampton-portsmouth",
-    "destination": "/soft-play/southend/wonderworld-soft-play-and-kids-group-party-venue-southampton",
+    "destination": "/soft-play/southampton/wonderworld-soft-play-and-kids-group-party-venue-southampton",
     "permanent": true
   },
   {
@@ -4601,7 +4601,7 @@
   },
   {
     "source": "/soft-play/southend/newtown-adventure-playground-portsmouth",
-    "destination": "/soft-play/southend/newtown-adventure-playground",
+    "destination": "/soft-play/southampton/newtown-adventure-playground",
     "permanent": true
   },
   {
@@ -5386,22 +5386,22 @@
   },
   {
     "source": "/soft-play/southend/southampton-common-playground-portsmouth",
-    "destination": "/soft-play/southend/southampton-common-playground",
+    "destination": "/soft-play/southampton/southampton-common-playground",
     "permanent": true
   },
   {
     "source": "/soft-play/southend/houndwell-park-playground-portsmouth",
-    "destination": "/soft-play/southend/houndwell-park-playground",
+    "destination": "/soft-play/southampton/houndwell-park-playground",
     "permanent": true
   },
   {
     "source": "/soft-play/southend/west-quay-play-area-portsmouth",
-    "destination": "/soft-play/southend/west-quay-play-area",
+    "destination": "/soft-play/southampton/west-quay-play-area",
     "permanent": true
   },
   {
     "source": "/soft-play/southend/southampton-soft-play-hire-j-w-bouncy-castles-portsmouth",
-    "destination": "/soft-play/southend/southampton-soft-play-hire-j-w-bouncy-castles",
+    "destination": "/soft-play/southampton/southampton-soft-play-hire-j-w-bouncy-castles",
     "permanent": true
   },
   {
@@ -5917,6 +5917,66 @@
   {
     "source": "/soft-play/hull/sweet-soft-play-hull",
     "destination": "/soft-play/beverley/sweet-soft-play-hull",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/portsmouth/jumpin-jax-soft-play-and-party",
+    "destination": "/soft-play/southampton/jumpin-jax-soft-play-and-party",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/portsmouth/monkey-bizness-southampton",
+    "destination": "/soft-play/southampton/monkey-bizness-southampton",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/portsmouth/ninja-warrior-uk-adventure-southampton",
+    "destination": "/soft-play/southampton/ninja-warrior-uk-adventure-southampton",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/portsmouth/tenpin-southampton",
+    "destination": "/soft-play/southampton/tenpin-southampton",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/southend/houndwell-park-playground",
+    "destination": "/soft-play/southampton/houndwell-park-playground",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/southend/inflatazone-indoor-soft-play-centre-and-inflatable-zone",
+    "destination": "/soft-play/southampton/inflatazone-indoor-soft-play-centre-and-inflatable-zone",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/southend/newtown-adventure-playground",
+    "destination": "/soft-play/southampton/newtown-adventure-playground",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/southend/playground",
+    "destination": "/soft-play/southampton/playground",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/southend/southampton-common-playground",
+    "destination": "/soft-play/southampton/southampton-common-playground",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/southend/southampton-soft-play-hire-j-w-bouncy-castles",
+    "destination": "/soft-play/southampton/southampton-soft-play-hire-j-w-bouncy-castles",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/southend/west-quay-play-area",
+    "destination": "/soft-play/southampton/west-quay-play-area",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/southend/wonderworld-soft-play-and-kids-group-party-venue-southampton",
+    "destination": "/soft-play/southampton/wonderworld-soft-play-and-kids-group-party-venue-southampton",
     "permanent": true
   }
 ]
