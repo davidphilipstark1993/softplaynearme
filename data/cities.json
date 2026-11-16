@@ -3540,5 +3540,21 @@
       "Bournemouth"
     ],
     "faqs": []
+  },
+  {
+    "slug": "stockton-on-tees",
+    "name": "Stockton-on-Tees",
+    "county": "County Durham",
+    "region": "North East",
+    "metaTitle": "Soft Play in Stockton-on-Tees",
+    "metaDescription": "Find soft play centres in Stockton-on-Tees, County Durham. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Stockton-on-Tees",
+    "intro": "Soft play centres in Stockton-on-Tees and the surrounding area of County Durham.",
+    "nearbyAreas": [
+      "Bishop Auckland",
+      "Sunderland",
+      "Newcastle"
+    ],
+    "faqs": []
   }
 ]
