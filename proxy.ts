@@ -2,7 +2,8 @@ import { NextResponse, type NextRequest } from 'next/server'
 import { redirectFor } from '@/lib/redirects'
 
 /**
- * One-hop 301s for every old venue URL in data/redirects.json (see lib/redirects.ts).
+ * One-hop 301s for every old venue URL, and merged blog posts, in data/redirects.json
+ * (see lib/redirects.ts).
  * Query strings are carried over.
  */
 export function proxy(request: NextRequest) {
@@ -14,5 +15,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: '/soft-play/:path*',
+  matcher: ['/soft-play/:path*', '/blog/:path*'],
 }
