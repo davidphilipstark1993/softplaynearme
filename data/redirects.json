@@ -6808,5 +6808,25 @@
     "source": "/soft-play/hull/jump-inc-by-airhop-adventure-and-trampoline-park-beverley",
     "destination": "/soft-play/hull",
     "permanent": true
+  },
+  {
+    "source": "/soft-play/hull/big-fun",
+    "destination": "/soft-play/hull/big-fun-hull",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/hull/monkey-bizness-hull",
+    "destination": "/soft-play/hull/monkey-bizness",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/hull/little-astronauts",
+    "destination": "/soft-play/hull/little-astronauts-hull",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/hull/smyths-toys-superstores-hull",
+    "destination": "/soft-play/hull",
+    "permanent": true
   }
 ]
