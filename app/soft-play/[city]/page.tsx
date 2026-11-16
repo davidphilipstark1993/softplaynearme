@@ -45,7 +45,7 @@ import { VenueCardFacts } from '@/components/venue/VenueCardFacts'
 import { VenueComparisonTable } from '@/components/location/VenueComparisonTable'
 import { HubGuide, NearbyHubs } from '@/components/location/HubGuide'
 import { NearTown } from '@/components/location/NearTown'
-import { getHubGuide, buildDataGuide, buildGuideTitle, buildAnswerFirst, MAX_FAQS } from '@/lib/hubGuides'
+import { getHubGuide, buildDataGuide, buildGuideTitle, buildAnswerFirst, composeGuideFaqs } from '@/lib/hubGuides'
 
 interface PageProps {
   params: Promise<{ city: string }>
@@ -99,7 +99,8 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
     return { title: 'City Not Found', robots: { index: false, follow: false } }
   }
 
-  const name = cityConfig?.name || staticTown?.name || city
+  // A guide hub can name its whole area ("Brighton & Hove") in its title and description.
+  const name = getHubGuide(city)?.areaName || cityConfig?.name || staticTown?.name || city
   const county = cityConfig?.county || ''
   const baseUrl = 'https://www.softplaynearme.co.uk'
 
@@ -570,16 +571,21 @@ export default async function CityPage({ params, searchParams }: PageProps) {
 
   // Use content generator for rich intros and FAQs
   const locationContent = getLocationContent(city, cityConfig, staticTown, cityVenueCount)
-  const { h1, intro } = locationContent
+  // Hand-written guide hubs (Brighton, Worthing) name their whole area and replace the
+  // template intro with the guide's own "what is here" section.
+  const verifiedGuide = getHubGuide(city)
+  const hubName = verifiedGuide?.areaName ?? displayName
+  const h1 = verifiedGuide ? `Soft Play in ${hubName}` : locationContent.h1
+  const { intro } = locationContent
   // Under-heading summary and FAQ are built from this hub's own venues
   // (lib/cityContent.ts). The unfiltered main list is what they describe, so use
   // the unfiltered city list, not whatever filter is currently applied.
   const contentVenues = splitByLocality(city, allCityVenues).core
   const nearbyTownNames = [...new Set(nearbyVenues.map((v) => getLocality(v)).filter((l): l is string => !!l))]
-  const contentInput = { name: displayName, county, slug: city, venues: contentVenues.map(toStatsVenue), nearbyCount: nearbyVenues.length, nearbyTowns: nearbyTownNames }
+  const contentInput = { name: hubName, county, slug: city, venues: contentVenues.map(toStatsVenue), nearbyCount: nearbyVenues.length, nearbyTowns: nearbyTownNames }
   const heroIntro = buildCityIntro(contentInput)
   const cityStatsForSchema = computeCityStats(contentInput.venues)
-  const cityMeta = buildOverrideMeta(city, displayName, cityStatsForSchema) ?? buildCityMeta(displayName, county, cityStatsForSchema)
+  const cityMeta = buildOverrideMeta(city, displayName, cityStatsForSchema) ?? buildCityMeta(hubName, county, cityStatsForSchema)
   // Hand-verified guide (Worthing, Brighton) or, for large hubs, one built from the listings (lib/hubGuides.ts).
   const guide =
     getHubGuide(city) ??
@@ -590,15 +596,9 @@ export default async function CityPage({ params, searchParams }: PageProps) {
       getPostForCity(displayName)
     )
   const genericFaqs = buildCityFaqs(contentInput)
-  // A guide's own party question replaces the generic one; the rest of the generic FAQ fills what room is left.
-  const guideHasParty = !!guide?.faqs.some((f) => /part(y|ies)/i.test(f.question))
-  const faqs = guide
-    ? [
-        ...genericFaqs.filter((f) => !(guideHasParty && /birthday party/i.test(f.question))).slice(0, MAX_FAQS - guide.faqs.length),
-        ...guide.faqs,
-      ]
-    : genericFaqs
-  const answerFirst = guide || city === 'london' ? buildAnswerFirst({ name: displayName, venues: contentVenues.map((v) => ({ ...toStatsVenue(v), area: getLocality(v) })), nearbyCount: nearbyVenues.length, nearbyTowns: nearbyTownNames }) : null
+  // A guide's own questions replace the generic ones it covers (lib/hubGuides.ts composeGuideFaqs).
+  const faqs = guide ? composeGuideFaqs(guide, genericFaqs) : genericFaqs
+  const answerFirst = guide || city === 'london' ? buildAnswerFirst({ name: hubName, venues: contentVenues.map((v) => ({ ...toStatsVenue(v), area: getLocality(v) })), nearbyCount: nearbyVenues.length, nearbyTowns: nearbyTownNames }) : null
   // Newest real change to any main-list venue (DB updated_at; static export: last verified).
   const lastUpdatedMs = contentVenues.reduce((max, v) => {
     const t = new Date((v.updated_at ?? v.last_verified_at ?? '') as string).getTime()
@@ -635,7 +635,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
       reviewCount: v.review_count ? Number(v.review_count) : undefined,
       venueType: v.venue_type,
     })),
-    `Soft Play Centres in ${displayName}`,
+    `Soft Play Centres in ${hubName}`,
     (pageNum - 1) * VENUES_PER_PAGE
   )
 
@@ -1185,7 +1185,8 @@ export default async function CityPage({ params, searchParams }: PageProps) {
               >
                 <div className="flex-1">
                   <p className="text-xs font-semibold uppercase tracking-wide text-purple-600 mb-1">Parent Guide</p>
-                  <h2 className="text-base font-bold text-slate-900 group-hover:text-purple-700 leading-snug">{cityBlogPost.title}</h2>
+                  {/* Not a heading: a link card repeating the post's title as an H2 competed with the post itself */}
+                  <p className="text-base font-bold text-slate-900 group-hover:text-purple-700 leading-snug">{cityBlogPost.title}</p>
                   <p className="mt-1 text-sm text-slate-600 line-clamp-2">{cityBlogPost.excerpt}</p>
                 </div>
                 <span className="text-purple-500 mt-1 shrink-0">→</span>
@@ -1288,8 +1289,8 @@ export default async function CityPage({ params, searchParams }: PageProps) {
 
           {guide && !hasActiveFilters && pageNum === 1 && <NearbyHubs hubs={guide.nearbyHubs} cityName={displayName} />}
 
-          {/* Location Intro (SEO content) */}
-          <LocationIntro content={intro} locationName={displayName} />
+          {/* Location Intro (template SEO copy) — not on hand-written guide hubs, whose guide covers it */}
+          {!verifiedGuide && <LocationIntro content={intro} locationName={displayName} />}
 
           {/* Hand-curated, fact-checked venue lists — Hull only, see data/hullCuratedVenues.ts */}
           {city === 'hull' && (

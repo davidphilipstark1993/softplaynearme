@@ -6556,7 +6556,7 @@
   },
   {
     "source": "/soft-play/hastings/3-2-1-fun-softplay-inflatable-hire-hastings",
-    "destination": "/soft-play/brighton/3-2-1-fun-softplay-inflatable-hire",
+    "destination": "/soft-play/brighton",
     "permanent": true
   },
   {
@@ -6827,6 +6827,16 @@
   {
     "source": "/soft-play/hull/smyths-toys-superstores-hull",
     "destination": "/soft-play/hull",
+    "permanent": true
+  },
+  {
+    "source": "/blog/best-soft-play-in-brighton",
+    "destination": "/soft-play/brighton",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/brighton/3-2-1-fun-softplay-inflatable-hire",
+    "destination": "/soft-play/brighton",
     "permanent": true
   }
 ]

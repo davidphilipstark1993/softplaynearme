@@ -17,7 +17,7 @@ const v = (hub: string, slug: string, label: string) => link(`${hub}/${slug}`, l
 const space = v(HUB_W, 'space-station-soft-play-ltd', 'Space Station')
 const lighthouse = v(HUB_W, 'the-lighthouse-soft-play-and-cafe', 'The Lighthouse')
 const outOfBounds = v(HUB_W, 'out-of-bounds', 'Out of Bounds')
-const fortress = v(HUB_W, 'flying-fortress', 'Flying Fortress')
+const fortress = link('/soft-play/bognor-regis/flying-fortress', 'Flying Fortress')
 const harbour = v(HUB_W, 'harbour-park-indoor-soft-play', 'Harbour Park')
 const lpv = v(HUB_W, 'the-little-play-village', 'The Little Play Village')
 
@@ -35,7 +35,7 @@ export const sussexPosts: BlogPost[] = [
     verifiedOn: CHECKED,
     contentHtml: `<p>Worthing's soft play is mostly independent and community-run. Several of the larger venues are a short drive outside the town, so it helps to know where each one actually is before you set off. This guide only states what the venues say on their own websites (checked ${CHECKED}); we leave out prices and opening hours because they change.</p>
 
-<blockquote><p>👉 ${link(HUB_W, '<strong>See every soft play centre near Worthing, with ratings and map details</strong>')}</p></blockquote>
+<blockquote><p>👉 See all ${link(HUB_W, '<strong>soft play in Worthing</strong>')}, with ratings, opening hours and map details.</p></blockquote>
 
 <h2>${space}, Lancing</h2>
 <p>${space} describes its play centre as for ages 0–12 and runs timed sessions. It takes walk-ins but can't guarantee a space when it is full, so ring ahead. It has two party rooms and a private hire option.</p>
@@ -64,7 +64,7 @@ export const sussexPosts: BlogPost[] = [
 </ul>
 
 <h2>Before you go</h2>
-<p>Opening days differ between venues, and weekends and school holidays fill up, so ring or check the venue's site first. For ratings, review counts and the full list, see the ${link(HUB_W, 'Worthing soft play directory')}. Heading east? Try ${link(HUB_B, 'soft play in Brighton and Hove')}.</p>`,
+<p>Opening days differ between venues, and weekends and school holidays fill up, so ring or check the venue's site first. For ratings, review counts and the full list, see ${link(HUB_W, 'soft play in Worthing')}. Heading east? Try ${link(HUB_B, 'soft play in Brighton')} and Hove.</p>`,
     faq: [
       {
         q: 'Is there soft play in Worthing itself?',
@@ -77,67 +77,6 @@ export const sussexPosts: BlogPost[] = [
       {
         q: 'Which Worthing soft play is best for older children?',
         a: 'Out of Bounds combines soft play with ten-pin bowling, laser tag, high ropes and adventure golf. Flying Fortress prices children up to age 13.',
-      },
-    ],
-  },
-  {
-    slug: 'best-soft-play-in-brighton',
-    title: 'Best Soft Play in Brighton (2026 Parent Guide)',
-    city: 'Brighton',
-    excerpt:
-      "An honest guide to soft play in Brighton and Hove: the few indoor centres inside the city, and the larger venues in Lewes, Henfield, Burgess Hill and Uckfield that families usually drive to.",
-    publishedAt: '2026-02-18T00:00:00.000Z',
-    updatedAt: PUBLISHED,
-    datePublished: '2026-02-18T00:00:00.000Z',
-    dateModified: PUBLISHED,
-    verifiedOn: CHECKED,
-    contentHtml: `<p>Brighton and Hove has few traditional indoor soft play centres. This guide separates the ones inside the city from the larger venues families drive to, and only states what we could confirm from venue websites (checked ${CHECKED}). Prices and opening hours are left out because they change.</p>
-
-<blockquote><p>👉 ${link(HUB_B, '<strong>See all the soft play centres in and around Brighton, with ratings</strong>')}</p></blockquote>
-
-<h2>Inside Brighton and Hove</h2>
-<ul>
-  <li>${v(HUB_B, 'level-up-soft-play', 'Level Up')} — at Withdean Sports Complex. It has a main play frame, a sensory toddler zone for ages 0–3, party rooms and SEN sessions; sessions last 1 hour 30 minutes and socks must be worn.</li>
-  <li>${v(HUB_B, 'funplex', 'Funplex')} — Brighton, BN2. Multi-level play frames, three slides, a four-cannon ball area and a two-level toddler area; £9.95 at peak times (weekends, inset days, school holidays), £7.45 in term time, adults £2.25.</li>
-  <li>${v(HUB_B, 'palace-play', 'Palace Play')} — on Brighton Palace Pier. £6.50 under 0.9m, £9 over 0.9m, all day; nobody over 1.5m.</li>
-</ul>
-<p>Playcafé (a term-time toddler café at St Matthias Church) and FunPlay Leisure at Brighton Marina are listed under other family activities rather than as soft play. Prices are as published on 27 October 2026; check before you travel.</p>
-
-<h2>Weekly community soft play sessions</h2>
-<ul>
-  <li>${v(HUB_B, 'hangleton-community-centre-soft-play', 'Hangleton Community Centre')} (Hove) lists children's soft play 9:30am–2pm, Monday to Friday, at £2 per family.</li>
-  <li>${v(HUB_B, 'old-boat-corner-soft-play', 'Old Boat Corner')} (Hollingbury) lists soft play on Tuesday and Wednesday mornings, 9:30am–12pm, at £3.50.</li>
-  <li>${v(HUB_B, 'king-alfred-soft-play-sessions', 'King Alfred Leisure Centre')} (Hove) lists soft play on Tuesdays (9am–12:30pm) and Fridays, from £5.25 for one child.</li>
-</ul>
-
-<h2>Worth the drive</h2>
-<p>${v(HUB_B, 'meridian-mayhem', 'Meridian Mayhem')} in Peacehaven is a new multi-level indoor play and soft play centre for babies up to 12-year-olds, with a baby and toddler zone, a first-floor café, party rooms and SEND sessions. Booking online is recommended at weekends and in school holidays.</p>
-<p>${v(HUB_B, 'monkey-bizness-lewes', 'Monkey Bizness in Lewes')} publishes three party packages (Funky Monkey, Mega Monkey and Pizza Party), each for a minimum of 12 children and 2 hours, with 90 minutes of play.</p>
-<p>${v(HUB_B, 'sharkys', "Sharky's")}, at Henfield Leisure Centre, lists SEN sessions on the first and third Thursday of each month and is a nut-free site with a café. Its website says sessions are often fully booked.</p>
-<p>${v(HUB_B, 'the-doves-play-barn', 'The Doves Play Barn')} at Furner's Green, near Uckfield, describes a toddler-safe area alongside hidden spaces, rope bridges and slides, with a café. It says it is open seven days a week, 9am to 5pm.</p>
-<p>${v(HUB_B, 'jumpin-fun-inflatable-park-burgess-hill', 'Jumpin Fun in Burgess Hill')} is a 25,000 sq ft inflatable park with a mega slide, ball pit and ninja course. It is an inflatable park rather than soft play.</p>
-
-<h2>Looking west?</h2>
-<p>Several well-regarded centres are nearer Worthing than Brighton: see our ${link('/blog/best-soft-play-in-worthing', 'Worthing guide')} and the ${link(HUB_W, 'Worthing directory')}.</p>
-
-<h2>More Brighton guides</h2>
-<ul>
-  <li>${link('/blog/rainy-day-things-to-do-with-kids-in-brighton', 'Rainy day things to do with kids in Brighton')}</li>
-  <li>${link('/blog/baby-and-toddler-soft-play-in-brighton-and-worthing', 'Baby and toddler soft play in Brighton and Worthing')}</li>
-  <li>${link('/blog/trampoline-parks-in-brighton-and-sussex', 'Trampoline parks in Brighton and Sussex')}</li>
-</ul>`,
-    faq: [
-      {
-        q: 'Is there much soft play in Brighton itself?',
-        a: 'Not a lot. Inside Brighton and Hove we list Level Up at Withdean, Funplex and Palace Play on Brighton Palace Pier, plus weekly community soft play sessions. Larger venues are in Peacehaven, Lewes, Henfield, Burgess Hill, Uckfield and Lindfield.',
-      },
-      {
-        q: 'Is there SEN-friendly soft play near Brighton?',
-        a: "Sharky's at Henfield Leisure Centre lists SEN sessions on the first and third Thursday of each month. Sessions are often fully booked, so book ahead.",
-      },
-      {
-        q: 'Where can I have a kids party near Brighton?',
-        a: "Monkey Bizness in Lewes publishes three party packages for a minimum of 12 children. Meridian Mayhem in Peacehaven publishes four party packages, and Level Up has party rooms. Sharky's, The Doves Play Barn and Jumpin Fun also have party pages. Check each venue for prices.",
       },
     ],
   },
@@ -164,7 +103,7 @@ export const sussexPosts: BlogPost[] = [
 </ul>
 
 <h2>Before you book</h2>
-<p>Ask what is included in the price, the minimum number of children, how long you get the room and whether food is provided. Book well ahead for weekends and school holidays. See the ${link(HUB_W + '/birthday-parties', 'Worthing birthday party page')} for venues flagged for parties, or ${link('/blog/best-soft-play-in-worthing', 'our Worthing soft play guide')}. Across the border, see ${link(HUB_B, 'Brighton soft play')}.</p>`,
+<p>Ask what is included in the price, the minimum number of children, how long you get the room and whether food is provided. Book well ahead for weekends and school holidays. See the ${link(HUB_W + '/birthday-parties', 'Worthing birthday party page')} for venues flagged for parties, or ${link('/blog/best-soft-play-in-worthing', 'our Worthing soft play guide')}. For every venue, see ${link(HUB_W, 'soft play in Worthing')}; further east, ${link(HUB_B, 'soft play in Brighton')}.</p>`,
     faq: [
       {
         q: 'Where can I have a kids party in Worthing?',
@@ -201,9 +140,9 @@ export const sussexPosts: BlogPost[] = [
 <ul>
   <li>${v(HUB_B, 'the-doves-play-barn', 'The Doves Play Barn')} (Furner's Green, near Uckfield) describes a toddler-safe area alongside hidden spaces, rope bridges and slides, with a café.</li>
 </ul>
-<p>We couldn't read toddler details for the soft play centres inside Brighton and Hove, so we don't make claims about them; see the ${link(HUB_B, 'Brighton directory')} and check with the venue.</p>
+<p>We couldn't read toddler details for the soft play centres inside Brighton and Hove, so we don't make claims about them; see ${link(HUB_B, 'soft play in Brighton')} and check with the venue.</p>
 
-<p>More: ${link('/blog/best-soft-play-in-worthing', 'Worthing soft play guide')} · ${link('/blog/best-soft-play-in-brighton', 'Brighton soft play guide')}.</p>
+<p>More: ${link(HUB_W, 'soft play in Worthing')} · ${link('/blog/best-soft-play-in-worthing', 'Worthing soft play guide')} · ${link(HUB_B, 'soft play in Brighton')}.</p>
 
 <p>Planning further afield? See our <a href="/blog/baby-and-toddler-soft-play-uk" class="text-purple-700 hover:underline">UK baby and toddler soft play guide</a>.</p>
 `,
@@ -245,7 +184,7 @@ export const sussexPosts: BlogPost[] = [
 <h2>Towards Worthing</h2>
 <p>Every venue in our ${link('/blog/best-soft-play-in-worthing', 'Worthing guide')} is indoors, from ${space} in Lancing to ${outOfBounds}, which adds bowling, laser tag and high ropes.</p>
 
-<p>See all options in the ${link(HUB_B, 'Brighton soft play directory')}.</p>`,
+<p>See all the options in ${link(HUB_B, 'soft play in Brighton')}, or ${link(HUB_W, 'soft play in Worthing')} if you're heading west.</p>`,
     faq: [
       {
         q: 'What can you do with kids in Brighton when it rains?',
@@ -270,7 +209,7 @@ export const sussexPosts: BlogPost[] = [
 
 <p>The nearest bounce-style venue we list is ${v(HUB_B, 'jumpin-fun-inflatable-park-burgess-hill', 'Jumpin Fun in Burgess Hill')}, a 25,000 sq ft inflatable park with a mega slide, ball pit and ninja course. It is an inflatable park, not a trampoline park.</p>
 
-<p>If you know of an open trampoline park in Sussex, ${link('/add-venue', 'tell us')} and we'll verify it. In the meantime see ${link(HUB_B, 'soft play in Brighton')} and ${link('/blog/best-soft-play-in-brighton', 'our Brighton guide')}.</p>`,
+<p>If you know of an open trampoline park in Sussex, ${link('/add-venue', 'tell us')} and we'll verify it. In the meantime see ${link(HUB_B, 'soft play in Brighton')} and ${link(HUB_W, 'soft play in Worthing')}.</p>`,
     faq: [
       {
         q: 'Are there trampoline parks in Brighton?',

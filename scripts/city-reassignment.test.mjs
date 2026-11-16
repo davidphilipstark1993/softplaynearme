@@ -99,12 +99,19 @@ const redirects = new Map(read('data/redirects.json').map((r) => [r.source, r.de
 const venues = read('data/generated/venues.json')
 const live = new Set([...venues.map((v) => `/soft-play/${v.townSlug}/${v.slug}`), ...venues.map((v) => `/soft-play/${v.townSlug}`)])
 const byId = new Map(venues.map((v) => [v.id, v]))
+const RETIRED_AFTER_MOVE = new Set([1612])
 
 test('every approved move: old URL 301s once to the new URL, which is live in the static export', () => {
   assert.equal(moves.length, 165)
   for (const m of moves) {
     const oldUrl = `/soft-play/${m.from_city}/${m.from_slug}`
     const newUrl = `/soft-play/${m.to_city}/${m.to_slug}`
+    // A venue retired after its move (phase 14-01: 3-2-1 Fun hire) 301s, old URL included, to its hub.
+    if (RETIRED_AFTER_MOVE.has(m.id)) {
+      assert.equal(redirects.get(newUrl), `/soft-play/${m.to_city}`, newUrl)
+      assert.equal(redirects.get(oldUrl), `/soft-play/${m.to_city}`, oldUrl)
+      continue
+    }
     assert.equal(redirects.get(oldUrl), newUrl, oldUrl)
     assert.ok(!redirects.has(newUrl), `${newUrl} is itself redirected`)
     assert.ok(live.has(newUrl), `${newUrl} not in static export`)

@@ -25,6 +25,13 @@ export interface HubGuide {
    * having read venue websites, and it is always as current as the listings.
    */
   kind?: 'verified' | 'listings'
+  /** The name the hub's title, H1 and FAQ use when it differs from the city name ("Brighton & Hove"). */
+  areaName?: string
+  /**
+   * Which of the generic data FAQs (lib/cityContent.ts buildCityFaqs) to keep, matched on the question.
+   * Unset: the generic FAQ fills whatever room the guide's own FAQs leave (up to MAX_FAQS).
+   */
+  keepGenericFaqs?: RegExp[]
   sections: GuideSection[]
   /** Appended to the data-driven FAQ (capped at MAX_FAQS in total by the page). */
   faqs: Faq[]
@@ -40,59 +47,90 @@ export interface HubGuide {
 
 export const MAX_FAQS = 7
 
+/** Prices quoted below were read from each venue's own website on this date. */
+export const PRICES_ON = '27 October 2026'
+/** Opening hours quoted in the FAQs below are as listed on the venue pages on this date. */
+export const HOURS_ON = '16 November 2026'
+
 const GUIDES: Record<string, HubGuide> = {
   worthing: {
+    keepGenericFaqs: [/^How many soft play/, /^How much does soft play cost/],
     nearbyHubs: [
       { slug: 'brighton', label: 'Brighton & Hove' },
+      { slug: 'bognor-regis', label: 'Bognor Regis' },
     ],
     sections: [
       {
-        heading: 'Soft play in Worthing: a local guide',
+        heading: 'Soft play in Worthing: what is here',
         paragraphs: [
-          "Worthing's soft play is mostly independent and community-run rather than big chains. Space Station is in Lancing, and three larger activity venues sit just outside the town, in Angmering, Ford and Littlehampton. We list those separately under nearby towns.",
+          "Worthing's soft play is independent and community-run rather than big chains, and it is spread along the coast rather than in the town centre. In Worthing itself we list [Hope Hive](/soft-play/worthing/hope-hive) on St Dunstan's Road and [The Lighthouse](/soft-play/worthing/the-lighthouse-soft-play-and-cafe) on South Farm Road; [Space Station](/soft-play/worthing/space-station-soft-play-ltd) is a few minutes east in Lancing, and [The Little Play Village](/soft-play/worthing/the-little-play-village), a ticketed role-play village, is in Goring-by-Sea.",
+          "The two biggest venues are just outside the town and are listed under nearby towns below: [Out of Bounds](/soft-play/worthing/out-of-bounds) in Angmering and [Harbour Park](/soft-play/worthing/harbour-park-indoor-soft-play) in Littlehampton. [Flying Fortress](/soft-play/bognor-regis/flying-fortress) at Ford, further west, is listed under [soft play in Bognor Regis](/soft-play/bognor-regis).",
         ],
       },
       {
         heading: 'Babies and toddlers',
         paragraphs: [
-          "[Space Station](/soft-play/worthing/space-station-soft-play-ltd) in Lancing describes its play centre as for ages 0–12 and runs timed sessions; it takes walk-ins but can't guarantee a space when full, so ring ahead. [Harbour Park](/soft-play/worthing/harbour-park-indoor-soft-play) in Littlehampton has a separate baby soft play for 0–18 months and says you can pay on arrival without booking. [Out of Bounds](/soft-play/worthing/out-of-bounds) in Angmering runs a pre-school Climb 'n' Soft Play session. [The Lighthouse](/soft-play/worthing/the-lighthouse-soft-play-and-cafe) lists entry prices for babies from birth.",
+          "Space Station in Lancing describes its play centre as for ages 0–12 and runs timed sessions; it takes walk-ins but can't guarantee a space when full, so ring ahead. Harbour Park in Littlehampton has a separate baby soft play for 0–18 months and says you can pay on arrival without booking. Out of Bounds in Angmering runs a pre-school Climb 'n' Soft Play session. The Lighthouse lists entry prices for babies from birth.",
         ],
       },
       {
         heading: 'Older children',
         paragraphs: [
-          "Out of Bounds combines soft play with ten-pin bowling, laser tag, high ropes and adventure golf, so it suits a mixed-age group. [Flying Fortress](/soft-play/bognor-regis/flying-fortress) in Ford prices children up to age 13. Harbour Park's soft play is for children up to 9.",
+          "Out of Bounds combines soft play with ten-pin bowling, laser tag, high ropes and adventure golf, so it suits a mixed-age group. Harbour Park's soft play is for children up to 9. Flying Fortress at Ford prices children up to age 13.",
         ],
       },
       {
         heading: 'Birthday parties',
         paragraphs: [
-          "Space Station has two party rooms and a private hire option. The Lighthouse lists party bookings on its site, and Out of Bounds, Flying Fortress and Harbour Park each publish party information. [The Little Play Village](/soft-play/worthing/the-little-play-village), a role-play village based in Goring, also runs parties. Packages and prices change, so check the venue's own page before you book.",
+          "Space Station has two party rooms and a private hire option. The Lighthouse lists party bookings on its site, and Out of Bounds and Harbour Park each publish party information. The Little Play Village in Goring also runs parties. Packages and prices change, so check the venue's own page before you book.",
+        ],
+      },
+      {
+        heading: 'Trampoline parks near Worthing',
+        paragraphs: [
+          "We don't list a trampoline park in Worthing. The nearest we list is [Flip Out Chichester](/soft-play/chichester/flip-out-chichester), about 17 miles west in a straight line. For bouncing closer to home, Out of Bounds in Angmering has high ropes and laser tag alongside its soft play.",
         ],
       },
       {
         heading: 'Rainy days and opening days',
         paragraphs: [
-          "All of these are indoors. Opening days differ: The Lighthouse's website lists Wednesday to Friday only, and Flying Fortress is closed on Mondays. Check before you set off.",
-          "The Little Play Village is a role-play experience rather than a conventional soft play centre, and it runs on ticketed event dates, so book ahead.",
+          "All of these are indoors. Opening days differ: The Lighthouse's website lists Wednesday to Friday only, and Hope Hive is open mornings to early afternoon. Check before you set off.",
+          "Heading east? See [soft play in Brighton](/soft-play/brighton) and Hove.",
         ],
       },
     ],
     faqs: [
       {
-        question: 'Where can I have a kids party in Worthing?',
+        question: 'Which soft play in Worthing is best for toddlers?',
         answer:
-          "Space Station in Lancing has two party rooms and a private hire option, and The Lighthouse in Worthing lists party bookings on its website. Out of Bounds (Angmering), Flying Fortress (Ford), Harbour Park (Littlehampton) and The Little Play Village (Goring) also publish party information. Packages and prices are set by each venue, so check their pages for current details.",
+          "For babies, Harbour Park in Littlehampton has a separate baby soft play for 0–18 months, and The Lighthouse in Worthing lists entry prices from birth. Space Station in Lancing is for ages 0–12 and runs timed sessions, and Out of Bounds in Angmering runs a pre-school Climb 'n' Soft Play session.",
       },
       {
-        question: 'Do I need to book soft play in Worthing?',
+        question: 'Is any soft play near Worthing open late?',
         answer:
-          "It depends on the venue. Space Station says it accepts walk-ins but cannot guarantee a space if it is at capacity. Harbour Park says there is no need to book and you can pay on arrival, though peak times may limit play to a one-hour session. For weekends and school holidays, ring first.",
+          `Out of Bounds in Angmering is the latest we list: until 8pm on Fridays and Saturdays (6pm other days, closed Mondays). Harbour Park in Littlehampton is open until 7pm on Mondays and 6pm the rest of the week. In Worthing and Lancing, Space Station closes at 5:15pm (3:15pm Monday to Wednesday), The Lighthouse at 5pm at the latest, and Hope Hive closes by 1:30pm. Hours as listed on ${HOURS_ON}; they change in school holidays, so check before you go.`,
+      },
+      {
+        question: 'Is there SEN-friendly soft play in Worthing?',
+        answer:
+          "Hope Hive on St Dunstan's Road in Worthing is listed with SEN sessions. Ask the venue which sessions are quieter or SEN-only, and when.",
+      },
+      {
+        question: 'Where can I have a kids party in Worthing?',
+        answer:
+          "Space Station in Lancing has two party rooms and a private hire option, and The Lighthouse in Worthing lists party bookings on its website. Out of Bounds (Angmering), Harbour Park (Littlehampton) and The Little Play Village (Goring) also publish party information, and Flying Fortress at Ford (listed under Bognor Regis) does too. Packages and prices are set by each venue, so check their pages for current details.",
+      },
+      {
+        question: 'Are there trampoline parks in Worthing?',
+        answer:
+          "Not one we list. The nearest trampoline park we list is Flip Out Chichester, about 17 miles west. Out of Bounds in Angmering has high ropes, laser tag and bowling alongside soft play.",
       },
     ],
   },
 
   brighton: {
+    areaName: 'Brighton & Hove',
+    keepGenericFaqs: [/^How many soft play/],
     nearTowns: [{ name: 'Peacehaven', lat: 50.7934, lng: -0.0045 }],
     nearbyHubs: [
       { slug: 'worthing', label: 'Worthing' },
@@ -100,51 +138,80 @@ const GUIDES: Record<string, HubGuide> = {
     ],
     sections: [
       {
-        heading: 'Soft play in Brighton and Hove: a local guide',
+        heading: 'Soft play in Brighton & Hove: what is here',
         paragraphs: [
-          "Brighton and Hove has few traditional indoor soft play centres. Inside the city we list [Level Up](/soft-play/brighton/level-up-soft-play) at Withdean Sports Complex, Funplex (BN2) and Palace Play on Brighton Palace Pier, plus weekly soft play sessions at community venues: Hangleton Community Centre, Old Boat Corner in Hollingbury and King Alfred Leisure Centre in Hove. Most larger venues are a drive away in Peacehaven, Lewes, Henfield, Burgess Hill, Uckfield and Lindfield, and are listed under nearby towns. Playcafé, a term-time toddler café at St Matthias Church, and FunPlay Leisure at Brighton Marina are listed under other family activities.",
+          "Brighton & Hove has few big soft play centres, so it helps to know what is where. Inside the city we list three soft play centres: [Level Up](/soft-play/brighton/level-up-soft-play) at Withdean Sports Complex, [Funplex](/soft-play/brighton/funplex) on the Hyde Business Park off Auckland Drive (BN2), and [Palace Play](/soft-play/brighton/palace-play) on Brighton Palace Pier. Three community venues run weekly soft play sessions: [Hangleton Community Centre](/soft-play/brighton/hangleton-community-centre-soft-play) in Hove, [Old Boat Corner](/soft-play/brighton/old-boat-corner-soft-play) in Hollingbury and [King Alfred Leisure Centre](/soft-play/brighton/king-alfred-soft-play-sessions) on the Hove seafront.",
+          "We don't list a soft play venue in Portslade or Shoreham-by-Sea; the nearest are [Two by Two](/soft-play/brighton/two-by-two-softplay) in Southwick and the Hove sessions. The larger venues families drive to are in Peacehaven, Lewes, Henfield, Burgess Hill and near Uckfield, listed under nearby towns below. Playcafé, a term-time toddler café at St Matthias Church, and FunPlay Leisure at Brighton Marina are listed under other family activities.",
+        ],
+      },
+      {
+        heading: 'Prices: the cheapest soft play in Brighton',
+        paragraphs: [
+          `The community sessions are the cheapest: Hangleton Community Centre lists soft play from 9:30am to 2pm, Monday to Friday, at £2 per family; Old Boat Corner lists Tuesday and Wednesday mornings (9:30am–12pm) at £3.50; and King Alfred Leisure Centre lists Tuesday (9am–12:30pm) and Friday sessions from £5.25 for one child. Of the centres, Palace Play charges £6.50 under 0.9m and £9 over 0.9m for all day (nobody over 1.5m), and Funplex charges £7.45 in term time and £9.95 at peak times (weekends, inset days and school holidays), plus £2.25 per adult. Prices as published by each venue on ${PRICES_ON}; check before you travel.`,
         ],
       },
       {
         heading: 'Toddlers and babies',
         paragraphs: [
-          "[Level Up](/soft-play/brighton/level-up-soft-play) at Withdean describes a sensory toddler zone for ages 0–3, and [Meridian Mayhem](/soft-play/brighton/meridian-mayhem) in Peacehaven has a baby and toddler zone for children aged 5 and under. [The Doves Play Barn](/soft-play/brighton/the-doves-play-barn) at Furner's Green, near Uckfield, describes a toddler-safe area alongside hidden spaces, rope bridges and slides, with a café, and says it is open seven days a week, 9am to 5pm.",
+          "Level Up at Withdean has a main play frame and a sensory toddler zone for ages 0–3; sessions last 1 hour 30 minutes and socks must be worn. Funplex has multi-level play frames, three slides, a four-cannon ball area and a two-level toddler area. [Meridian Mayhem](/soft-play/brighton/meridian-mayhem) in Peacehaven has a baby and toddler zone for children aged 5 and under. [The Doves Play Barn](/soft-play/brighton/the-doves-play-barn) at Furner's Green, near Uckfield, describes a toddler-safe area alongside hidden spaces, rope bridges and slides, with a café, and says it is open seven days a week, 9am to 5pm.",
         ],
       },
       {
         heading: 'SEN-friendly sessions',
         paragraphs: [
-          "[Sharky's](/soft-play/brighton/sharkys), at Henfield Leisure Centre, lists SEN sessions on the first and third Thursday of each month, and is a nut-free site with a café. Its website says sessions are often fully booked, so book ahead.",
+          "Level Up runs SEN sessions, and Meridian Mayhem in Peacehaven runs SEND sessions. [Sharky's](/soft-play/brighton/sharkys), at Henfield Leisure Centre, lists SEN sessions on the first and third Thursday of each month and is a nut-free site with a café; its website says sessions are often fully booked, so book ahead.",
         ],
       },
       {
         heading: 'Birthday parties',
         paragraphs: [
-          "[Monkey Bizness in Lewes](/soft-play/brighton/monkey-bizness-lewes) publishes three party packages (Funky Monkey, Mega Monkey and Pizza Party), each for a minimum of 12 children and 2 hours, with 90 minutes of play. Sharky's, The Doves Play Barn and [Jumpin Fun in Burgess Hill](/soft-play/brighton/jumpin-fun-inflatable-park-burgess-hill) also have party pages. Check the venue's site for current prices.",
+          "Level Up has party rooms. Meridian Mayhem in Peacehaven publishes four party packages and has a first-floor café; it recommends booking online at weekends and in school holidays. [Monkey Bizness in Lewes](/soft-play/brighton/monkey-bizness-lewes) publishes three party packages (Funky Monkey, Mega Monkey and Pizza Party), each for a minimum of 12 children and 2 hours, with 90 minutes of play. Sharky's, The Doves Play Barn and [Jumpin Fun in Burgess Hill](/soft-play/brighton/jumpin-fun-inflatable-park-burgess-hill) also have party pages. Check the venue's site for current prices.",
         ],
       },
       {
-        heading: 'Trampoline and inflatable parks',
+        heading: 'Trampoline parks in Brighton',
         paragraphs: [
-          "We don't list an open trampoline park in Brighton and Hove: Google shows Sky High Trampoline Park in Peacehaven as permanently closed, and the indoor play centre [Meridian Mayhem](/soft-play/brighton/meridian-mayhem) now operates in Peacehaven. The nearest bounce-style venue we list is Jumpin Fun in Burgess Hill, an inflatable park with a mega slide, ball pit and ninja course, which is not a trampoline park.",
+          "There is no open trampoline park in Brighton & Hove that we can confirm. Sky High Trampoline Park in Peacehaven is shown by Google as permanently closed; the indoor play centre Meridian Mayhem now operates in Peacehaven. The nearest venue with trampolines that we list is [Fun Abounds Trampoline & Gymnastics Centre](/soft-play/brighton/fun-abounds-trampoline-gymnastics-centre) in Uckfield, about 14 miles north-east in a straight line; check its website for which sessions are open to the public.",
+          "For bouncing nearer the city, Jumpin Fun in Burgess Hill is a 25,000 sq ft inflatable park with a mega slide, ball pit and ninja course. It is an inflatable park, not a trampoline park.",
+        ],
+      },
+      {
+        heading: 'Looking west?',
+        paragraphs: [
+          "Several well-regarded centres are nearer Worthing than Brighton, in Lancing, Angmering and Littlehampton: see [soft play in Worthing](/soft-play/worthing).",
         ],
       },
     ],
     faqs: [
       {
+        question: "What's the cheapest soft play in Brighton?",
+        answer:
+          `The weekly community sessions: Hangleton Community Centre in Hove at £2 per family (Monday to Friday, 9:30am–2pm), Old Boat Corner in Hollingbury at £3.50 (Tuesday and Wednesday mornings) and King Alfred Leisure Centre from £5.25 for one child. Of the soft play centres, Palace Play starts at £6.50 for under-0.9m children and Funplex at £7.45 in term time. Prices as published on ${PRICES_ON}.`,
+      },
+      {
+        question: 'Which soft play in Brighton is best for toddlers?',
+        answer:
+          "Level Up at Withdean has a sensory toddler zone for ages 0–3, and Funplex has a two-level toddler area. Just outside the city, Meridian Mayhem in Peacehaven has a baby and toddler zone for under-5s, and The Doves Play Barn near Uckfield describes a toddler-safe area with a café. Hangleton Community Centre's weekday sessions are an inexpensive option for little ones.",
+      },
+      {
+        question: 'Is any soft play in Brighton open late?',
+        answer:
+          `Level Up at Withdean is open latest inside the city: 9am–7:30pm Monday to Friday and 9am–6pm on Saturday. Funplex is open 10am–6pm every day, and Palace Play 11am–5pm on weekdays and 10am–6pm at weekends. Nearby, Monkey Bizness in Lewes and Magic Castle at Peacehaven Leisure Centre are open until 6pm every day. Hours as listed on ${HOURS_ON}; they change in school holidays, so check before you go.`,
+      },
+      {
+        question: 'Is there SEN-friendly soft play in Brighton?',
+        answer:
+          "Level Up at Withdean runs SEN sessions, and Meridian Mayhem in Peacehaven runs SEND sessions. Sharky's at Henfield Leisure Centre lists SEN sessions on the first and third Thursday of each month; they are often fully booked, so book ahead.",
+      },
+      {
+        question: 'Where can I have a kids party in Brighton?',
+        answer:
+          "Level Up at Withdean has party rooms, and Funplex and Palace Play are both listed for parties. Meridian Mayhem in Peacehaven publishes four party packages, and Monkey Bizness in Lewes three (each for a minimum of 12 children). Sharky's in Henfield, The Doves Play Barn near Uckfield and Jumpin Fun in Burgess Hill also have party pages. Prices and availability are set by each venue.",
+      },
+      {
         question: 'Are there trampoline parks in Brighton?',
         answer:
-          "Not one we can confirm as open. Sky High Trampoline Park in Peacehaven is shown by Google as permanently closed. Jumpin Fun in Burgess Hill is an inflatable park, not a trampoline park, and is the nearest bounce-style venue we list.",
-      },
-      {
-        question: "What's the biggest soft play in Brighton?",
-        answer:
-          "We don't hold floor areas for the venues in Brighton and Hove, so we can't rank them by size. Jumpin Fun in Burgess Hill describes itself as a 25,000 sq ft inflatable theme park; it is an inflatable park rather than soft play. Check each venue's website for its own figures.",
-      },
-      {
-        question: 'Where can I have a kids party near Brighton?',
-        answer:
-          "Monkey Bizness in Lewes publishes three party packages for a minimum of 12 children. Sharky's in Henfield, The Doves Play Barn near Uckfield and Jumpin Fun in Burgess Hill also have party pages. Prices and availability are set by each venue.",
+          "Not one we can confirm as open. Sky High Trampoline Park in Peacehaven is shown by Google as permanently closed. The nearest venue with trampolines we list is Fun Abounds Trampoline & Gymnastics Centre in Uckfield, about 14 miles away; Jumpin Fun in Burgess Hill is an inflatable park, not a trampoline park.",
       },
     ],
   },
@@ -162,10 +229,22 @@ export function getHubGuide(citySlug: string): HubGuide | undefined {
   return GUIDES[citySlug]
 }
 
-/** `Soft Play in Worthing – 4 Indoor Play Centres (2026 Guide)` — N is the live main-list count. */
+/** `Soft Play in Brighton & Hove: 6 Indoor Play Centres (2026)` — N is the live main-list count. */
 export function buildGuideTitle(name: string, total: number, year: number): string {
   if (total <= 0) return `Soft Play in ${name}`
-  return `Soft Play in ${name} – ${total} Indoor Play ${total === 1 ? 'Centre' : 'Centres'} (${year} Guide)`
+  return `Soft Play in ${name}: ${total} Indoor Play ${total === 1 ? 'Centre' : 'Centres'} (${year})`
+}
+
+/**
+ * A guide hub's FAQ: the generic data questions it keeps (keepGenericFaqs), then its own.
+ * Without keepGenericFaqs, the generic list fills the room the guide's FAQs leave. Capped at MAX_FAQS.
+ */
+export function composeGuideFaqs(guide: HubGuide, generic: Faq[]): Faq[] {
+  const hasParty = guide.faqs.some((f) => /part(y|ies)/i.test(f.question))
+  const kept = guide.keepGenericFaqs
+    ? generic.filter((f) => guide.keepGenericFaqs!.some((re) => re.test(f.question)))
+    : generic.filter((f) => !(hasParty && /birthday party/i.test(f.question))).slice(0, Math.max(0, MAX_FAQS - guide.faqs.length))
+  return [...kept, ...guide.faqs].slice(0, MAX_FAQS)
 }
 
 function joinList(items: string[]): string {

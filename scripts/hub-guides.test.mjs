@@ -69,3 +69,49 @@ test('data guide: only the listed hubs, and not for tiny hubs', { skip }, async 
   assert.equal(minFilterVenues('hull'), 1, 'filter-page indexing rules are unchanged for these hubs')
   assert.equal(minFilterVenues('worthing'), 2)
 })
+
+// ── Brighton & Worthing (hand-written guide hubs) ──────────────────────────────────────
+
+test('guide hubs: title "Soft Play in {Area}: N Indoor Play Centres (year)" within 60 chars', { skip }, async () => {
+  const { buildGuideTitle, getHubGuide } = await import('../lib/hubGuides.ts')
+  const b = buildGuideTitle(getHubGuide('brighton').areaName, 6, 2026)
+  assert.equal(b, 'Soft Play in Brighton & Hove: 6 Indoor Play Centres (2026)')
+  assert.ok(b.length <= 60)
+  assert.equal(buildGuideTitle('Worthing', 3, 2026), 'Soft Play in Worthing: 3 Indoor Play Centres (2026)')
+  assert.equal(buildGuideTitle('Worthing', 1, 2026), 'Soft Play in Worthing: 1 Indoor Play Centre (2026)')
+})
+
+test('guide hubs: FAQ covers cheapest, toddlers, open late, SEN, parties and trampolines; max 7', { skip }, async () => {
+  const { getHubGuide, composeGuideFaqs, MAX_FAQS } = await import('../lib/hubGuides.ts')
+  const generic = [
+    { question: 'How many soft play centres are there in X?', answer: 'n' },
+    { question: 'Which soft play centres in X are the best rated?', answer: 'n' },
+    { question: 'Is there soft play for toddlers in X?', answer: 'n' },
+    { question: 'Can I book a birthday party at soft play in X?', answer: 'n' },
+    { question: 'Is there SEN-friendly soft play in X?', answer: 'n' },
+    { question: 'How much does soft play cost in X?', answer: 'n' },
+  ]
+  for (const city of ['brighton', 'worthing']) {
+    const faqs = composeGuideFaqs(getHubGuide(city), generic)
+    const qs = faqs.map((f) => f.question).join(' | ')
+    assert.ok(faqs.length <= MAX_FAQS, `${city}: ${faqs.length}`)
+    assert.equal(new Set(faqs.map((f) => f.question.toLowerCase())).size, faqs.length, `${city}: duplicate question`)
+    for (const topic of [/^How many/m, /cheapest|cost/i, /toddler/i, /open late/i, /SEN/, /part(y|ies)/i, /trampoline/i]) {
+      assert.match(qs, topic, `${city} FAQ has no ${topic} question`)
+    }
+    for (const f of getHubGuide(city).faqs) assert.ok(f.answer.length > 40, `${city}: thin answer to ${f.question}`)
+  }
+})
+
+test('guide hubs: no links to the merged Brighton blog post; Worthing guide no longer lists Flying Fortress as local', { skip }, async () => {
+  const { getHubGuide } = await import('../lib/hubGuides.ts')
+  const fs = await import('node:fs')
+  for (const city of ['brighton', 'worthing']) {
+    const g = getHubGuide(city)
+    const text = JSON.stringify(g)
+    assert.ok(!text.includes('best-soft-play-in-brighton'), city)
+  }
+  assert.ok(!fs.readFileSync(new URL('../lib/blogPostsSussex.ts', import.meta.url), 'utf8').includes('best-soft-play-in-brighton'))
+  assert.ok(!JSON.stringify(getHubGuide('worthing')).includes('/soft-play/worthing/flying-fortress'))
+  assert.ok(JSON.stringify(getHubGuide('brighton')).includes('Trampoline parks in Brighton'))
+})
