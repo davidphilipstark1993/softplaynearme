@@ -60,15 +60,3 @@ test('"hours" claims only count venues that have hours; todayHoursLabel is faith
   assert.equal(todayHoursLabel({ opening_hours: { monday: { open: '09:30', close: '17:00' } } }, monday), 'Today 9:30am–5pm')
   assert.equal(todayHoursLabel({ opening_hours_text: 'Sunday 9:00; Saturday 9:00' }, monday), 'Opening hours listed')
 })
-
-test('venue title: ~60 chars, claims only from data, boilerplate seo_title detected', { skip }, async () => {
-  const { buildVenueTitle, isBoilerplateSeoTitle } = await import('../lib/venueTitle.ts')
-  const full = buildVenueTitle({ name: 'Party and Play', town: 'Birmingham', venueType: 'indoor', hasHours: true, hasReviews: true })
-  assert.equal(full, 'Party and Play, Birmingham: Soft Play Hours & Reviews')
-  assert.equal(buildVenueTitle({ name: 'Party and Play', town: 'Birmingham', venueType: 'indoor' }), 'Party and Play, Birmingham: Soft Play Info')
-  assert.doesNotMatch(buildVenueTitle({ name: 'Acme', town: 'Hull', venueType: 'indoor', hasHours: true }), /Prices|Reviews/)
-  assert.ok(buildVenueTitle({ name: 'Wyre Forest Leisure Centre', town: 'Kidderminster', venueType: 'indoor', hasHours: true, hasReviews: true }).length <= 60)
-  assert.ok(isBoilerplateSeoTitle("Little Lincoln | Soft Play & Kids' Activities in Lincoln"))
-  assert.ok(isBoilerplateSeoTitle("X | Children's Soft Play Centre, Swansea"))
-  assert.ok(!isBoilerplateSeoTitle('Best Soft Play in Hull | Hand written'))
-})

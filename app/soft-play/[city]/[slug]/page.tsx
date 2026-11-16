@@ -1,6 +1,5 @@
 import Link from 'next/link'
-import { buildVenueTitle, isBoilerplateSeoTitle } from '@/lib/venueTitle'
-import { trimMeta } from '@/lib/metaLength'
+import { venueFacts, buildVenueSeoTitle, buildVenueMetaDescription, quickFactRows, nearbyText, parseWeekHours, weekHoursForSchema, NEARBY_MILES, NEARBY_LIST_MAX, type VenueFacts } from '@/lib/venueSnippet'
 import { cache } from 'react'
 import { notFound } from 'next/navigation'
 import { Button } from '@/components/ui/button'
@@ -25,6 +24,7 @@ import { pendingSources } from '@/lib/redirects'
 import { calculateDistance, formatDistance, getBoundingBox } from '@/lib/geo'
 import { visibleVenueTypeSql } from '@/lib/venueTypes'
 import { getStaticVenue, getStaticTownBySlug, getStaticVenuesByTown, getAllStaticTownSlugs, type StaticVenue } from '@/lib/staticVenues'
+import { isVisibleVenueType } from '@/lib/venueTypes'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
@@ -37,7 +37,6 @@ import { cleanAddressForDisplay, formatAddressLine } from '@/lib/sanitize'
 import { isUsablePhotoUrl } from '@/lib/imageUtils'
 import {
   generateVenueDescription,
-  generateVenueMetaDescription,
   generateVenueFAQs,
   computeCompletenessScore,
   isVenueIndexable,
@@ -56,8 +55,8 @@ import { ReportIssueLink } from '@/components/venue/ReportIssueLink'
 import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup'
 import { AdSlot } from '@/components/ads/AdSlot'
 import { VenueViewTracking } from '@/components/venue/VenueViewTracking'
-import { cleanHoursText, hasOpeningHours, hasPrice } from '@/lib/venueFacts'
-import { getLocality } from '@/lib/localities'
+import { cleanHoursText, hasOpeningHours, hasStructuredHours } from '@/lib/venueFacts'
+import { getVenueTown } from '@/lib/localities'
 
 interface PageProps {
   params: Promise<{ city: string; slug: string }>
@@ -512,7 +511,7 @@ async function getNearestVenues(from: { id?: number; lat?: number | null; lng?: 
         name: r.name,
         slug: r.slug,
         citySlug: r.city_slug,
-        area: getLocality({ id: r.id, postcode: r.postcode }),
+        area: getVenueTown({ id: r.id, postcode: r.postcode }),
         miles: calculateDistance({ lat, lng }, { lat: Number(r.lat), lng: Number(r.lng) }),
       }))
       .filter((r: NearestVenue) => r.miles <= 25)
@@ -521,6 +520,69 @@ async function getNearestVenues(from: { id?: number; lat?: number | null; lng?: 
   } catch {
     return []
   }
+}
+
+/**
+ * Every other soft play venue (directory types only, active) within NEARBY_MILES of
+ * this one, closest first, across hub boundaries. generateMetadata and the page share
+ * it (cache), so the meta's "Compare N other soft plays" always matches the list the
+ * page shows. Falls back to the static export when the DB is unavailable.
+ */
+const getVenuesWithin = cache(async function getVenuesWithin(
+  id: number,
+  citySlug: string,
+  slug: string,
+  latIn: number | string | null | undefined,
+  lngIn: number | string | null | undefined,
+): Promise<NearestVenue[]> {
+  const lat = Number(latIn)
+  const lng = Number(lngIn)
+  if (latIn == null || lngIn == null || !Number.isFinite(lat) || !Number.isFinite(lng) || (lat === 0 && lng === 0)) return []
+  const box = getBoundingBox({ lat, lng }, NEARBY_MILES)
+  type Row = { id: number; name: string; slug: string; city_slug: string; postcode: string | null; lat: number | string; lng: number | string }
+  let rows: Row[] | null = null
+  if (!STATIC_BUILD) {
+    try {
+      const res = await getPool().query(
+        `SELECT id, name, slug, city_slug, postcode, lat, lng FROM venues v
+          WHERE v.is_active = true AND ${visibleVenueTypeSql()}
+            AND v.lat BETWEEN $1 AND $2 AND v.lng BETWEEN $3 AND $4`,
+        [box.minLat, box.maxLat, box.minLng, box.maxLng]
+      )
+      rows = res.rows
+    } catch {
+      rows = null
+    }
+  }
+  if (!rows) {
+    rows = getAllStaticTownSlugs()
+      .flatMap((t) => getStaticVenuesByTown(t))
+      .filter((v) => isVisibleVenueType(v.venueType) && v.lat != null && v.lng != null)
+      .map((v) => ({ id: v.id ?? 0, name: v.name, slug: v.slug, city_slug: v.townSlug, postcode: v.postcode, lat: v.lat!, lng: v.lng! }))
+  }
+  return rows
+    .filter((r) => !(r.city_slug === citySlug && r.slug === slug) && !(id > 0 && r.id === id))
+    .map((r) => ({
+      name: r.name,
+      slug: r.slug,
+      citySlug: r.city_slug,
+      area: getVenueTown({ id: r.id, postcode: r.postcode }),
+      miles: calculateDistance({ lat, lng }, { lat: Number(r.lat), lng: Number(r.lng) }),
+    }))
+    .filter((r) => r.miles <= NEARBY_MILES)
+    .sort((a, b) => a.miles - b.miles || a.name.localeCompare(b.name))
+})
+
+/** Facts for the title, meta and Quick facts block — one source for all three. */
+async function getVenueFacts(venue: Venue, city: string, slug: string, town: string): Promise<{ facts: VenueFacts; within: NearestVenue[] }> {
+  const id = venue.id || (venue as { _staticId?: number })._staticId || 0
+  const within = await getVenuesWithin(id, city, slug, venue.lat, venue.lng)
+  const facts = venueFacts(venue, {
+    town,
+    nearbyCount: Math.min(within.length, NEARBY_LIST_MAX),
+    nearbyMore: within.length > NEARBY_LIST_MAX,
+  })
+  return { facts, within: within.slice(0, NEARBY_LIST_MAX) }
 }
 
 /** Get nearby venues in the same city (excluding this one) */
@@ -563,25 +625,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const cityName = cityConfig?.name || staticTown?.name || city
   const county = cityConfig?.county || ''
   // The town the venue is really in (Hessle for a HU13 venue filed under Hull).
-  const homeTown = getLocality({ id: venue.id || (venue as { _staticId?: number })._staticId, postcode: venue.postcode }) ?? cityName
+  const homeTown = getVenueTown({ id: venue.id || (venue as { _staticId?: number })._staticId, postcode: venue.postcode }) ?? cityName
 
-  // A hand-written seo_title wins; the bulk-generated boilerplate is replaced by a short, data-backed title.
-  const title =
-    venue.seo_title && !isBoilerplateSeoTitle(venue.seo_title)
-      ? venue.seo_title
-      : buildVenueTitle({
-          name: venue.name,
-          town: homeTown,
-          venueType: venue.venue_type,
-          hasHours: hasOpeningHours(venue),
-          hasPrice: hasPrice(venue),
-          hasReviews: (venue.review_count ?? 0) > 0,
-        })
-  const description = trimMeta(
-    venue.meta_description ||
-    venue.description ||
-    generateVenueMetaDescription({ ...venue, city: homeTown, county: homeTown === cityName ? county : '' })
-  )
+  // Built from the venue's own facts (lib/venueSnippet.ts). The stored seo_title /
+  // meta_description columns hold bulk-generated text (some cut off, some naming the
+  // hub instead of the town) and are no longer used.
+  const { facts } = await getVenueFacts(venue, city, slug, homeTown)
+  const title = buildVenueSeoTitle(facts, venue.venue_type)
+  const description = buildVenueMetaDescription(facts)
 
   // Noindex very thin pages (name + address only, no useful content)
   const score = venue.completeness_score ??
@@ -627,7 +678,16 @@ export default async function VenuePage({ params }: PageProps) {
 
   const cityName = cityConfig?.name || staticTown?.name || city
   const county = cityConfig?.county || ''
-  const homeTown = getLocality({ id: venue.id || (venue as { _staticId?: number })._staticId, postcode: venue.postcode }) ?? cityName
+  const homeTown = getVenueTown({ id: venue.id || (venue as { _staticId?: number })._staticId, postcode: venue.postcode }) ?? cityName
+  const { facts, within: withinVenues } = await getVenueFacts(venue, city, slug, homeTown)
+  const factRows = quickFactRows(facts)
+  // Per-day table: structured hours as stored, else the Google weekday text parsed to a
+  // full week. (Google's { source, weekday_text } object used to reach the table as-is
+  // and render every day as "Closed".) Anything else falls to the text card below.
+  const hoursTable =
+    weekHoursForSchema(parseWeekHours(venue)) ??
+    (hasStructuredHours(venue.opening_hours) ? (venue.opening_hours as Record<string, string>) : null)
+  const compareLine = nearbyText(facts)
   const isStaticVenue = (venue as any)._isStatic === true
 
   // Fetch all related data in parallel
@@ -696,7 +756,8 @@ export default async function VenuePage({ params }: PageProps) {
     website: venue.website,
     lat: venue.lat,
     lng: venue.lng,
-    openingHours: venue.opening_hours,
+    // Structured hours if held, else the Google hours text parsed to a full week.
+    openingHours: weekHoursForSchema(parseWeekHours(venue)) ?? undefined,
     priceFrom: venue.price_from,
     priceTo: venue.price_to,
     // AggregateRating only from reviews left on this site (shown in the Reviews
@@ -814,6 +875,31 @@ export default async function VenuePage({ params }: PageProps) {
             </div>
           </div>
         </div>
+
+        {/* Quick facts: the same facts the meta description states (lib/venueSnippet.ts),
+            so the snippet always matches what the page shows. */}
+        {(factRows.length > 0 || compareLine) && (
+          <section aria-labelledby="quick-facts-heading" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+            <div className="bg-white rounded-lg border border-slate-200 p-4 sm:p-5">
+              <h2 id="quick-facts-heading" className="font-semibold text-base mb-3">Quick facts: {venue.name}</h2>
+              {factRows.length > 0 && (
+                <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-2 text-sm">
+                  {factRows.map((r) => (
+                    <div key={r.key} className="flex gap-2 min-w-0">
+                      <dt className="text-slate-500 flex-shrink-0">{r.label}:</dt>
+                      <dd className="font-medium text-slate-800 min-w-0">{r.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+              )}
+              {compareLine && (
+                <a href="#nearby-soft-play" className="inline-block mt-3 text-sm font-medium text-purple-700 hover:text-purple-800">
+                  {compareLine} &darr;
+                </a>
+              )}
+            </div>
+          </section>
+        )}
 
         {/* Photo Gallery / Placeholder */}
         {galleryPhotos.length > 0 ? (
@@ -1041,8 +1127,42 @@ export default async function VenuePage({ params }: PageProps) {
                 googleReviewCount={(venue as any).reviews_count}
               />
 
+              {/* Every other soft play within 5 miles: the list the meta's "Compare N" counts */}
+              {withinVenues.length > 0 && (
+                <section id="nearby-soft-play" aria-labelledby="nearby-soft-play-heading" className="bg-white rounded-lg border border-slate-200 p-6 scroll-mt-20">
+                  <h2 id="nearby-soft-play-heading" className="font-semibold text-lg mb-1">
+                    {facts.nearbyMore ? `${facts.nearbyCount}+` : facts.nearbyCount} other soft play{facts.nearbyCount === 1 && !facts.nearbyMore ? '' : 's'} near {homeTown}
+                  </h2>
+                  <p className="text-sm text-slate-500 mb-4">
+                    {facts.nearbyMore ? `The ${facts.nearbyCount} closest` : 'All'} within {NEARBY_MILES} miles of {venue.name}, nearest first.
+                  </p>
+                  <ul className="grid sm:grid-cols-2 gap-3">
+                    {withinVenues.map((nv) => (
+                      <li key={`${nv.citySlug}/${nv.slug}`}>
+                        <Link
+                          href={`/soft-play/${nv.citySlug}/${nv.slug}`}
+                          className="flex items-center gap-3 p-3 rounded-lg border border-slate-100 hover:border-purple-300 hover:bg-purple-50 transition-colors"
+                        >
+                          <MapPin className="w-4 h-4 text-purple-500 flex-shrink-0" aria-hidden="true" />
+                          <div className="min-w-0">
+                            <p className="font-medium text-sm truncate">{nv.name}</p>
+                            <p className="text-xs text-slate-500">{[nv.area, `${formatDistance(nv.miles)} away`].filter(Boolean).join(' · ')}</p>
+                          </div>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                  <Link
+                    href={`/soft-play/${city}`}
+                    className="block text-center text-sm text-purple-600 hover:text-purple-700 font-medium mt-4"
+                  >
+                    All soft play in {cityName}
+                  </Link>
+                </section>
+              )}
+
               {/* Closest soft play by distance, across hub boundaries (hubs with a guide) */}
-              {guideHub && nearestVenues.length > 0 && (
+              {withinVenues.length === 0 && guideHub && nearestVenues.length > 0 && (
                 <section aria-labelledby="nearest-heading" className="bg-white rounded-lg border border-slate-200 p-6">
                   <h2 id="nearest-heading" className="font-semibold text-lg mb-4">More soft play near {venue.name}</h2>
                   <ul className="grid sm:grid-cols-2 gap-3">
@@ -1071,7 +1191,7 @@ export default async function VenuePage({ params }: PageProps) {
               )}
 
               {/* Nearby Venues */}
-              {!guideHub && nearbyVenues.length > 0 && (
+              {withinVenues.length === 0 && !guideHub && nearbyVenues.length > 0 && (
                 <section aria-labelledby="nearby-heading" className="bg-white rounded-lg border border-slate-200 p-6">
                   <h2 id="nearby-heading" className="font-semibold text-lg mb-4">Nearby Soft Play in {cityName}</h2>
                   <div className="grid sm:grid-cols-2 gap-3">
@@ -1257,8 +1377,8 @@ export default async function VenuePage({ params }: PageProps) {
                 />
 
                 {/* Opening Hours */}
-                {venue.opening_hours ? (
-                  <OpeningHours hours={venue.opening_hours} />
+                {hoursTable ? (
+                  <OpeningHours hours={hoursTable} />
                 ) : cleanHoursText(venue.opening_hours_text) ? (
                   // No structured hours, but we do hold the venue's listed hours as
                   // text — show them as listed rather than claiming nothing is known.

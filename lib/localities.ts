@@ -11,6 +11,7 @@
  * null and the venue is treated as belonging to its hub.
  */
 import data from '@/data/postcode-localities.json'
+import venueTowns from '@/data/venue-towns.json'
 
 interface LocalityData {
   districts: Record<string, string>
@@ -93,4 +94,17 @@ export function groupNearbyByLocality<T extends LocalityInput>(citySlug: string,
       anchor: `nearby-${locality.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
       venues: groups.get(locality)!,
     }))
+}
+
+
+const VENUE_TOWNS = venueTowns as Record<string, string>
+
+/**
+ * The town to name on a venue's own page (title, H1, meta, schema). The curated
+ * locality above wins; otherwise the built-up area its postcode is in
+ * (data/venue-towns.json, from scripts/build-venue-towns.mjs). Hub lists and splits
+ * keep using getLocality(), so this never moves a venue between sections of a city page.
+ */
+export function getVenueTown(venue: LocalityInput): string | null {
+  return getLocality(venue) ?? (venue.id ? VENUE_TOWNS[String(venue.id)] ?? null : null)
 }
