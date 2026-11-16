@@ -101,8 +101,9 @@ const VENUE_TOWNS = venueTowns as Record<string, string>
 
 /**
  * The town to name on a venue's own page (title, H1, meta, schema). The curated
- * locality above wins; otherwise the built-up area its postcode is in
- * (data/venue-towns.json, from scripts/build-venue-towns.mjs). Hub lists and splits
+ * locality above wins; otherwise the hub or major town its postcode's built-up area
+ * is (data/venue-towns.json, from scripts/build-venue-towns.mjs); otherwise null and
+ * the page names the hub. Hub lists and splits
  * keep using getLocality(), so this never moves a venue between sections of a city page.
  */
 export function getVenueTown(venue: LocalityInput): string | null {

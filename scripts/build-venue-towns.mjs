@@ -1,6 +1,6 @@
-// Writes data/venue-towns.json: { venueId: "Town" } — the town each venue is really in,
-// from its own postcode (or lat/lng) via postcodes.io's built-up area (bua), falling
-// back to a named parish. Used by lib/localities.ts after the hand-curated
+// Writes data/venue-towns.json: { venueId: "Town" } — for venues whose own postcode (or
+// lat/lng) puts them in a hub or major town other than the one the page would otherwise
+// name, via postcodes.io's built-up area (bua). Venues not listed are named by their hub. Used by lib/localities.ts after the hand-curated
 // postcode-localities.json, so the venue page's title, H1 and meta name a real town
 // (Shipley, Tipton, Eastbourne) instead of the hub the URL is filed under.
 //
@@ -22,6 +22,7 @@ const RENAME = {
   'newcastle upon tyne': 'Newcastle',
   'brighton and hove': 'Brighton',
   'royal sutton coldfield': 'Sutton Coldfield',
+  southend: 'Southend-on-Sea',
   'city of westminster': 'Westminster',
   'city of london': 'City of London',
 }
@@ -52,15 +53,24 @@ const locs = await lookupLocations(rows, cache, () => fs.writeFileSync(CACHE, JS
 fs.mkdirSync(path.dirname(CACHE), { recursive: true })
 fs.writeFileSync(CACHE, JSON.stringify(cache))
 
+// A built-up area is named only if it is a place people search by: one of our hubs or a
+// travel-to-work-area town (Eastbourne, Glossop's hub Mossley). A suburb or smaller town
+// (Longbenton, Cramlington, Adwick le Street) is left out, and the page names the hub it
+// is filed under (Newcastle, Doncaster), which is what people search: GSC shows "round
+// the twist newcastle", not "... longbenton". Travel-to-work-area names themselves are
+// not used for that fallback: they can be a neighbouring town (Cramlington -> Blyth).
+const geos = locs.map((l) => l.pc ?? l.rev)
+const majorTowns = new Set([...hubNames.keys()])
+for (const g of geos) if (g?.ttwa) majorTowns.add(normName(cleanTown(g.ttwa, hubNames)))
+
 const out = {}
-const how = { bua: 0, parish: 0, none: 0 }
+const how = { named: 0, hub: 0 }
 rows.forEach((v, i) => {
-  const g = locs[i].pc ?? locs[i].rev
-  const bua = cleanTown(g?.bua, hubNames)
-  const parish = bua ? null : cleanTown(g?.parish, hubNames)
-  const town = bua ?? parish
-  how[bua ? 'bua' : parish ? 'parish' : 'none']++
-  if (town) out[v.id] = town
+  const bua = cleanTown(geos[i]?.bua, hubNames)
+  if (bua && majorTowns.has(normName(bua))) {
+    out[v.id] = bua
+    how.named++
+  } else how.hub++
 })
 fs.writeFileSync(OUT, JSON.stringify(out, null, 0).replace(/,"/g, ',\n"').replace(/^\{/, '{\n').replace(/\}$/, '\n}') + '\n')
-console.log(`${rows.length} active venues: ${how.bua} by built-up area, ${how.parish} by parish, ${how.none} unknown -> ${path.relative(ROOT, OUT)}`)
+console.log(`${rows.length} active venues: ${how.named} named by their built-up area, ${how.hub} left to their hub's name -> ${path.relative(ROOT, OUT)}`)

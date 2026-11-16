@@ -28,6 +28,7 @@ test('hours: weekly pattern from Google text or structured JSON, never "today"',
   assert.equal(s(p({ opening_hours_text: GOOGLE_DAILY })), 'Open daily 9:30am–6pm')
   assert.equal(s(p({ opening_hours_text: GOOGLE_DAILY.replace('Tuesday: 9:30 AM – 6:00 PM', 'Tuesday: Closed') })), 'Open 9:30am–6pm, closed Tuesdays')
   assert.equal(s(p({ opening_hours_text: GOOGLE_DAILY.replace('Monday: 9:30 AM – 6:00 PM', 'Monday: Closed').replace('Sunday: 9:30 AM – 6:00 PM', 'Sunday: Closed') })), 'Open Tue–Sat 9:30am–6pm')
+  assert.equal(s(p({ opening_hours_text: GOOGLE_DAILY.replace('Sunday: 9:30 AM – 6:00 PM', 'Sunday: 9:30 AM – 4:00 PM') })), 'Open 7 days from 9:30am')
   assert.equal(s(p({ opening_hours_text: GOOGLE_DAILY.replace('Sunday: 9:30 AM – 6:00 PM', 'Sunday: 10:00 AM – 4:00 PM') })), 'Open 7 days')
   assert.equal(s(p({ opening_hours_text: 'Monday to Sunday 9am–6pm (holiday times differ)' })), null, 'free text we cannot map to days says nothing')
   assert.equal(s(p({ opening_hours_text: 'Monday: 9:30 AM – 3:00 PM; Tuesday: Closed' })), null, 'a partial week says nothing')
@@ -52,7 +53,7 @@ test('facts: only what the record holds; false booleans are unknown, not "no"', 
   const { venueFacts } = await load()
   const f = venueFacts(base, { town: 'Shipley', nearbyCount: 7 })
   assert.deepEqual(f.rating, { value: 4.1, count: 161 })
-  assert.deepEqual(f.features, ['Café', 'Parties', 'SEN sessions'])
+  assert.deepEqual(f.features, ['Café', 'Party bookings', 'SEN sessions'])
   assert.equal(f.price, null)
   assert.equal(f.ages, null)
   const bare = venueFacts({ name: 'X', venue_type: 'indoor' }, { town: 'Hull', nearbyCount: 0 })
@@ -79,7 +80,7 @@ test('title: name first, town once, <= 60 chars with fallbacks', { skip }, async
 test('meta: facts first, then the comparison; <= 155; dropped whole, never cut', { skip }, async () => {
   const { venueFacts, buildVenueMetaDescription: m } = await load()
   const f = (over = {}, opts = {}) => venueFacts({ ...base, ...over }, { town: 'Shipley', nearbyCount: 7, ...opts })
-  assert.equal(m(f()), 'Rated 4.1★ on Google (161 reviews). Open daily 9:30am–6pm. Café, parties and SEN sessions. Compare 7 other soft plays near Shipley.')
+  assert.equal(m(f()), 'Rated 4.1★ on Google (161 reviews). Open daily 9:30am–6pm. Facilities: café, party bookings and SEN sessions. Compare 7 other soft plays near Shipley.')
   assert.equal(m(f({ cafe: false, parties: false, has_sen_sessions: false, opening_hours_text: null })), 'Rated 4.1★ on Google (161 reviews). Compare 7 other soft plays near Shipley.')
   assert.equal(m(f({}, { nearbyCount: 20, nearbyMore: true })).endsWith('Compare 20+ other soft plays near Shipley.'), true)
   assert.equal(m(f({}, { nearbyCount: 1 })).endsWith('Compare 1 other soft play near Shipley.'), true)
@@ -100,10 +101,11 @@ test('Quick facts rows carry every fact the meta can state', { skip }, async () 
   assert.match(shown, /Open daily 9:30am–6pm/)
   assert.match(shown, /Ages 0–8/)
   assert.match(shown, /From £6\.50 per child/)
-  assert.match(shown, /Café, Parties, SEN sessions/)
+  assert.match(shown, /Café, Party bookings, SEN sessions/)
   // every fact sentence in the meta (apart from the comparison) is backed by a row
-  for (const sentence of buildVenueMetaDescription(f).split('. ').map((x) => x.replace(/\.$/, ''))) {
+  for (let sentence of buildVenueMetaDescription(f).split('. ').map((x) => x.replace(/\.$/, ''))) {
     if (sentence.startsWith('Compare') || sentence.startsWith('Rated')) continue
+    sentence = sentence.replace(/^Facilities: /, '')
     const lower = shown.toLowerCase()
     for (const word of sentence.toLowerCase().split(/,? and |, /)) assert.ok(lower.includes(word.replace(/ per child$/, '')), `${word} not shown`)
   }

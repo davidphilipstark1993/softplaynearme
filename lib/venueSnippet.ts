@@ -53,8 +53,9 @@ export function cleanVenueName(raw: string): string {
     .map((w, i) => {
       const bare = w.replace(/[^A-Za-z]/g, '')
       if (shouted && bare.length >= 4 && bare === bare.toUpperCase()) w = w.charAt(0) + w.slice(1).toLowerCase()
-      // all-lowercase words ("Jungle boogie walsall") get a capital, short joining words don't
-      if (/^[a-z]/.test(w) && (i === 0 || !SMALL_WORDS.has(w.toLowerCase()))) w = w.charAt(0).toUpperCase() + w.slice(1)
+      // all-lowercase words ("Jungle boogie walsall") get a capital; joining words and
+      // single letters ("i FUN") don't
+      if (/^[a-z]{2}/.test(w) && (i === 0 || !SMALL_WORDS.has(w.toLowerCase()))) w = w.charAt(0).toUpperCase() + w.slice(1)
       return w
     })
     .join(' ')
@@ -159,11 +160,20 @@ export function summariseHours(week: WeekHours | null): string | null {
   const timed = open.map((d) => week[d]).filter((h): h is { open: number; close: number } => typeof h === 'object' && typeof h.open === 'number')
   const same = timed.length === open.length && timed.every((h) => h.open === timed[0].open && h.close === timed[0].close)
   const times = same ? ` ${clock(timed[0].open)}–${clock(timed[0].close)}` : ''
-  if (open.length === 7) return same ? `Open daily${times}` : 'Open 7 days'
+  // Times differ by day, but they may share an opening or a closing time.
+  const allTimed = timed.length === open.length
+  const partly = !same && allTimed
+    ? timed.every((h) => h.open === timed[0].open)
+      ? ` from ${clock(timed[0].open)}`
+      : timed.every((h) => h.close === timed[0].close)
+        ? ` until ${clock(timed[0].close)}`
+        : ''
+    : ''
+  if (open.length === 7) return same ? `Open daily${times}` : `Open 7 days${partly}`
   if (open.length === 6) {
     const shut = WEEK.find((d) => week[d] === 'closed')!
     const day = `${shut.charAt(0).toUpperCase()}${shut.slice(1)}s`
-    return same ? `Open${times}, closed ${day}` : `Open 6 days, closed ${day}`
+    return same ? `Open${times}, closed ${day}` : `Open 6 days${partly}, closed ${day}`
   }
   // A run of consecutive days, allowing it to wrap round the week (Tue–Sun, Fri–Mon).
   const idx = open.map((d) => WEEK.indexOf(d))
@@ -230,9 +240,9 @@ export function venueFacts(v: SnippetVenue, opts: { town: string | null; nearbyC
   const count = positive(v.reviews_count) ?? positive(v.review_count)
   const features: string[] = []
   if (v.cafe || v.food_served) features.push('Café')
-  if (v.parties || v.has_party_rooms) features.push('Parties')
-  if (v.has_sen_sessions) features.push('SEN sessions')
-  else if (v.sen_friendly) features.push('SEN-friendly')
+  if (v.parties || v.has_party_rooms) features.push('Party bookings')
+  // the page lists sen_friendly as "SEN / Sensory Sessions" too
+  if (v.has_sen_sessions || v.sen_friendly) features.push('SEN sessions')
   if (v.toddler_area) features.push('Toddler area')
   if (v.free_parking) features.push('Free parking')
   else if (v.parking) features.push('Parking')
@@ -324,9 +334,9 @@ export function buildVenueMetaDescription(f: VenueFacts): string {
   if (f.rating) facts.push(ratingText(f.rating))
   if (f.hours) facts.push(f.hours)
   const features = f.features.slice(0, 3)
-  // "Café, parties and SEN sessions": lower-case after the first, but not acronyms
+  // "Facilities: café, party bookings and SEN sessions" (acronyms keep their capitals)
   const lower = (x: string) => (/^[A-Z]{2}/.test(x) ? x : x.charAt(0).toLowerCase() + x.slice(1))
-  if (features.length) facts.push(joinList(features.map((x, i) => (i === 0 ? x : lower(x)))))
+  if (features.length) facts.push(`Facilities: ${joinList(features.map(lower))}`)
   if (f.ages) facts.push(f.ages)
   if (f.price) facts.push(`${f.price} per child`)
 
