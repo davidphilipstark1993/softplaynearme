@@ -166,7 +166,7 @@ export function QuickFactsPanel({
       <CardHeader className="pb-3">
         <CardTitle className="text-base font-semibold text-slate-700 flex items-center gap-2">
           <Users className="w-4 h-4 text-purple-500" />
-          Quick Facts
+          Visit checklist
         </CardTitle>
       </CardHeader>
       <CardContent className="pt-0">
