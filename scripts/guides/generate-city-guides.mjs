@@ -11,7 +11,7 @@ import { getPool } from '../migrations/_lib.mjs'
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const CITIES = [
   { slug: 'manchester', name: 'Manchester', area: 'Greater Manchester' },
-  { slug: 'liverpool', name: 'Liverpool', area: 'Merseyside' },
+  // liverpool: merged into /soft-play/liverpool (301) in Nov 2026, so not generated
   // birmingham: merged into /soft-play/birmingham (301) in Nov 2026, so not generated
   { slug: 'bristol', name: 'Bristol', area: 'the surrounding area' },
   { slug: 'newcastle', name: 'Newcastle', area: 'Tyneside' },

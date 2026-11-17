@@ -98,7 +98,7 @@
   {
     "name": "Blackpool",
     "slug": "blackpool",
-    "venueCount": 12,
+    "venueCount": 10,
     "avgRating": "4.5"
   },
   {
@@ -566,7 +566,7 @@
   {
     "name": "Liverpool",
     "slug": "liverpool",
-    "venueCount": 46,
+    "venueCount": 43,
     "avgRating": "4.3"
   },
   {

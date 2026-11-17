@@ -181,7 +181,32 @@
     "2124": "Redditch",
     "2122": "Astwood Bank",
     "2126": "Smethwick",
-    "2125": "Willenhall"
+    "2125": "Willenhall",
+    "1241": "Moreton",
+    "1216": "Birkenhead",
+    "1214": "Birkenhead",
+    "1204": "Birkenhead",
+    "1215": "New Brighton",
+    "1181": "New Brighton",
+    "1191": "Wallasey",
+    "1230": "West Kirby",
+    "1197": "Bebington",
+    "1185": "Neston",
+    "1184": "Maghull",
+    "1193": "Maghull",
+    "1217": "Formby",
+    "1210": "Widnes",
+    "1208": "Widnes",
+    "1224": "Widnes",
+    "1225": "Warrington",
+    "1221": "St Helens",
+    "1201": "Ormskirk",
+    "1228": "Ormskirk",
+    "1238": "Burscough",
+    "1183": "Skelmersdale",
+    "257": "Preston",
+    "378": "Preston",
+    "1969": "Southport"
   },
   "counties": {
     "Anlaby": "East Yorkshire",
@@ -337,6 +362,37 @@
         "Astwood Bank",
         "Smethwick",
         "Willenhall"
+      ]
+    },
+    "liverpool": {
+      "core": [
+        "Liverpool"
+      ],
+      "nearby": [
+        "Moreton",
+        "Birkenhead",
+        "New Brighton",
+        "Wallasey",
+        "West Kirby",
+        "Bebington",
+        "Neston",
+        "Maghull",
+        "Formby",
+        "Widnes",
+        "Warrington",
+        "St Helens",
+        "Ormskirk",
+        "Burscough",
+        "Skelmersdale"
+      ]
+    },
+    "blackpool": {
+      "core": [
+        "Blackpool"
+      ],
+      "nearby": [
+        "Preston",
+        "Southport"
       ]
     }
   }

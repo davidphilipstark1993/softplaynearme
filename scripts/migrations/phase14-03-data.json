@@ -185,5 +185,65 @@
       }
     ],
     "postcodes": []
+  },
+  "liverpool": {
+    "retire": [
+      {
+        "id": 1206,
+        "slug": "bounce-house-inflatable-theme-park-liverpool",
+        "why": "Google: permanently closed"
+      },
+      {
+        "id": 1243,
+        "slug": "wonderland-parties-moreton-liverpool",
+        "why": "Google: permanently closed"
+      },
+      {
+        "id": 1207,
+        "slug": "yellow-sub-liverpool",
+        "why": "Google: permanently closed"
+      },
+      {
+        "id": 1246,
+        "slug": "jump-inc-by-airhop-adventure-trampoline-park",
+        "why": "Google: permanently closed"
+      }
+    ],
+    "reclassify": [],
+    "postcodes": []
+  },
+  "blackpool": {
+    "retire": [
+      {
+        "id": 616,
+        "slug": "roarsome-roleplay-blackpool",
+        "why": "Google: permanently closed"
+      }
+    ],
+    "reclassify": [
+      {
+        "id": 262,
+        "slug": "funland-blackpool",
+        "to": "family-attraction",
+        "why": "amusement arcade on the Promenade"
+      }
+    ],
+    "postcodes": [
+      {
+        "id": 257,
+        "slug": "little-beans-play-cafe-blackpool",
+        "postcode": "PR1 2TY"
+      },
+      {
+        "id": 378,
+        "slug": "the-kinder-hub-blackpool",
+        "postcode": "PR4 0NZ"
+      },
+      {
+        "id": 564,
+        "slug": "thingamajigz-blackpool",
+        "postcode": "FY6 8JS"
+      }
+    ]
   }
 }
