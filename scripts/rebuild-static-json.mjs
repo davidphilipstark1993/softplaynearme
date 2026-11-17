@@ -82,6 +82,14 @@ async function main() {
   } catch {}
   const existingByKey = new Map(existingStatic.map(v => [`${v.townSlug}/${v.slug}`, v]))
 
+  // Hub display names: data/cities.json, then the previous export's towns.json, so a
+  // rebuild never turns "Sunbury-on-Thames" into titleCase's "Sunbury On Thames".
+  const readJson = (f) => { try { return JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8')) } catch { return [] } }
+  const hubName = new Map([
+    ...readJson('data/generated/towns.json').map(t => [t.slug, t.name]),
+    ...readJson('data/cities.json').map(c => [c.slug, c.name]),
+  ])
+
   // Transform DB venues to static format
   const allVenues = dbVenues.map(v => {
     const townSlug = v.city_slug || slugify(v.town || '')
@@ -90,7 +98,7 @@ async function main() {
 
     return {
       id: v.id,
-      town: v.town || titleCase(townSlug),
+      town: hubName.get(townSlug) || v.town || titleCase(townSlug),
       townSlug,
       name: v.name,
       slug: v.slug,
