@@ -65,8 +65,8 @@ test('data guide: only the listed hubs, and not for tiny hubs', { skip }, async 
   for (const slug of ['london', 'birmingham', 'manchester', 'edinburgh', 'liverpool', 'bristol', 'leeds', 'swansea', 'glasgow', 'sheffield']) assert.ok(hasDataGuide(slug), slug)
   for (const slug of ['stoke', 'norwich', 'beverley', 'crewe', 'halifax', 'nottingham', 'blackpool', 'worthing', 'brighton', 'hull']) assert.equal(hasDataGuide(slug), false, slug)
   assert.equal(buildDataGuide('hull', 'Hull', BHAM.slice(0, 3)), undefined)
-  assert.equal(getHubGuide('nottingham'), undefined, 'a hub without a written guide has none')
-  assert.equal(minFilterVenues('nottingham'), 1, 'filter-page indexing rules are unchanged for hubs without a written guide')
+  assert.equal(getHubGuide('stoke'), undefined, 'a hub without a written guide has none')
+  assert.equal(minFilterVenues('stoke'), 1, 'filter-page indexing rules are unchanged for hubs without a written guide')
   assert.equal(minFilterVenues('hull'), 2, 'a written-guide hub needs 2 venues for a category page')
   assert.equal(minFilterVenues('worthing'), 2)
 })
@@ -126,7 +126,7 @@ test('guide hubs: every link in a guide goes to a live venue, hub or blog post (
   const redirects = new Set(read('data/redirects.json').map((r) => r.source))
   const { blogPosts } = await import('../lib/blogPosts.ts')
   const posts = new Set(blogPosts.map((p) => `/blog/${p.slug}`))
-  for (const city of ['brighton', 'worthing', 'hull']) {
+  for (const city of ['brighton', 'worthing', 'hull', 'nottingham']) {
     const g = getHubGuide(city)
     const text = [...g.sections.flatMap((s) => s.paragraphs), ...g.faqs.map((f) => f.answer)].join(' ')
     for (const [, href] of text.matchAll(/\]\((\/[^)]+)\)/g)) {

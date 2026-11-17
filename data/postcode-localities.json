@@ -162,7 +162,21 @@
     "1297": "Dudley",
     "1298": "Telford",
     "658": "Southampton",
-    "47": "Cottingham"
+    "47": "Cottingham",
+    "541": "Long Eaton",
+    "545": "Long Eaton",
+    "539": "Long Eaton",
+    "572": "Sutton-in-Ashfield",
+    "573": "Huthwaite",
+    "1987": "Mansfield",
+    "259": "Mansfield",
+    "563": "Kirkby-in-Ashfield",
+    "551": "Heanor",
+    "533": "Riddings",
+    "1931": "Somercotes",
+    "544": "Southwell",
+    "525": "East Bridgford",
+    "574": "Keyworth"
   },
   "counties": {
     "Anlaby": "East Yorkshire",
@@ -290,6 +304,24 @@
         "Southampton"
       ],
       "nearby": []
+    },
+    "nottingham": {
+      "core": [
+        "Nottingham"
+      ],
+      "nearby": [
+        "Long Eaton",
+        "Sutton-in-Ashfield",
+        "Huthwaite",
+        "Mansfield",
+        "Kirkby-in-Ashfield",
+        "Heanor",
+        "Riddings",
+        "Somercotes",
+        "Southwell",
+        "East Bridgford",
+        "Keyworth"
+      ]
     }
   }
 }
