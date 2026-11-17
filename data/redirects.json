@@ -6968,5 +6968,10 @@
     "source": "/soft-play/blackpool/roarsome-roleplay-blackpool",
     "destination": "/soft-play/blackpool",
     "permanent": true
+  },
+  {
+    "source": "/blog/best-soft-play-in-bristol",
+    "destination": "/soft-play/bristol",
+    "permanent": true
   }
 ]

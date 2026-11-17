@@ -245,5 +245,17 @@
         "postcode": "FY6 8JS"
       }
     ]
+  },
+  "bristol": {
+    "retire": [],
+    "reclassify": [
+      {
+        "id": 1158,
+        "slug": "avon-valley-adventure-park-bristol",
+        "to": "family-attraction",
+        "why": "adventure park and farm attraction (Google: event venue), not soft play"
+      }
+    ],
+    "postcodes": []
   }
 }
