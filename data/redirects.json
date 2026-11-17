@@ -5176,7 +5176,7 @@
   },
   {
     "source": "/soft-play/liverpool/jump-inc-by-airhop-adventure-trampoline-park-liverpool-liverpool",
-    "destination": "/soft-play/liverpool/jump-inc-by-airhop-adventure-trampoline-park",
+    "destination": "/soft-play/liverpool",
     "permanent": true
   },
   {
@@ -6932,6 +6932,41 @@
   {
     "source": "/blog/best-soft-play-in-birmingham",
     "destination": "/soft-play/birmingham",
+    "permanent": true
+  },
+  {
+    "source": "/blog/best-soft-play-in-liverpool",
+    "destination": "/soft-play/liverpool",
+    "permanent": true
+  },
+  {
+    "source": "/blog/best-soft-play-in-blackpool",
+    "destination": "/soft-play/blackpool",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/liverpool/bounce-house-inflatable-theme-park-liverpool",
+    "destination": "/soft-play/liverpool",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/liverpool/wonderland-parties-moreton-liverpool",
+    "destination": "/soft-play/liverpool",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/liverpool/yellow-sub-liverpool",
+    "destination": "/soft-play/liverpool",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/liverpool/jump-inc-by-airhop-adventure-trampoline-park",
+    "destination": "/soft-play/liverpool",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/blackpool/roarsome-roleplay-blackpool",
+    "destination": "/soft-play/blackpool",
     "permanent": true
   }
 ]

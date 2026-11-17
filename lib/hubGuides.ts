@@ -437,6 +437,120 @@ const GUIDES: Record<string, HubGuide> = {
       },
     ],
   },
+
+  liverpool: {
+    // From our listings (Google Places addresses, types and status, checked 17 November 2026).
+    kind: 'listings',
+    contentUpdated: '2026-11-17',
+    keepGenericFaqs: [/^How many soft play/, /best rated/],
+    nearbyHubs: [
+      { slug: 'manchester', label: 'Manchester' },
+      { slug: 'chester', label: 'Chester' },
+    ],
+    sections: [
+      {
+        heading: 'Soft play in Liverpool: where it is',
+        paragraphs: [
+          "In the city centre, [Slimeville](/soft-play/liverpool/slimeville-kids-playground-liverpool) is on Duke Street. North Liverpool has [Cirq d-Play](/soft-play/liverpool/cirq-d-play-kids-indoor-play-centre-liverpool) on Great Homer Street, [Sector 8](/soft-play/liverpool/sector-8-inflatable-theme-park), an inflatable park in Norris Green, and [Amaisleys](/soft-play/liverpool/amaisleys-liverpool) and [Happy Dayz](/soft-play/liverpool/happy-dayz-liverpool) in Clubmoor, with [Imagine That!](/soft-play/liverpool/imagine-that-liverpool) nearby on Faraday Road. Around Aintree and Bootle are [Crazy Town Aintree](/soft-play/liverpool/crazy-town-aintree-liverpool), [Play Away](/soft-play/liverpool/play-away-liverpool), [Time Out](/soft-play/liverpool/time-out-liverpool) and [Manu's Wonderland](/soft-play/liverpool/manu-s-wonderland-play-centre-liverpool), and [Speckled Frogs](/soft-play/liverpool/speckled-frogs-playcentre-liverpool) is in Crosby.",
+          "South Liverpool has [Jungle Fun](/soft-play/liverpool/jungle-fun-children-s-activity-centre-liverpool) in Belle Vale, [Frankie + Lola's](/soft-play/liverpool/frankie-lola-s) in Hunts Cross, [Volair Adventure Cove](/soft-play/liverpool/volair-adventure-cove-soft-play-liverpool) in Halewood and [Family Day Out](/soft-play/liverpool/family-day-out) at Otterspool. To the east are [Fun Time](/soft-play/liverpool/fun-time-soft-play-centre-liverpool) in Kirkby, [Kids Adventure Cabin](/soft-play/liverpool/kids-adventure-cabin-liverpool) in Huyton, and [Spaceworld](/soft-play/liverpool/spaceworld-soft-play-liverpool) and [Little Legend's Playhouse](/soft-play/liverpool/little-legend-s-playhouse-liverpool) in Prescot.",
+        ],
+      },
+      {
+        heading: 'Trampolines, inflatables and ninja courses',
+        paragraphs: [
+          "For older children, Liverpool has [Flip Out Liverpool](/soft-play/liverpool/flip-out) in the city centre and [Flip Out Aintree](/soft-play/liverpool/flip-out-aintree-liverpool), the [Ninja Warrior UK Adventure Park](/soft-play/liverpool/ninja-warrior-uk-adventure-park) at Speke, and Sector 8, an inflatable park in Norris Green; these are listed under other family activities. Jump Inc in Hunts Cross, Bounce House and Yellow Sub are shown by Google as permanently closed, so we no longer list them.",
+        ],
+      },
+      {
+        heading: 'The Wirral and nearby towns',
+        paragraphs: [
+          "Venues across the Mersey and in nearby towns are listed separately below the Liverpool list. On the Wirral: [Adventureland](/soft-play/liverpool/adventureland-liverpool) and [Bubbles' World of Play](/soft-play/liverpool/bubbles-world-of-play-liverpool) at New Brighton, [Monkey House](/soft-play/liverpool/monkey-house-liverpool) in Wallasey, [Little Edenville](/soft-play/liverpool/little-edenville-liverpool) and [Rascalz](/soft-play/liverpool/rascalz-play-centre-liverpool) in Birkenhead, [The Madhouse](/soft-play/liverpool/the-madhouse-liverpool) in Bebington and [Cub and Calf](/soft-play/liverpool/cub-and-calf-parent-hub-limited-liverpool) in West Kirby. North of the city: [The Fun Factor](/soft-play/liverpool/the-fun-factor-liverpool) and [KidzCove](/soft-play/liverpool/kidzcove-play-party-centre-liverpool) in Maghull, [Jungle Play](/soft-play/liverpool/jungle-play-formby-liverpool) in Formby, [JJ's Jungle](/soft-play/liverpool/jj-s-jungle-liverpool) in Ormskirk and [The Jungle](/soft-play/liverpool/the-jungle-skelmersdale-liverpool) in Skelmersdale. East: [Air Nation](/soft-play/liverpool/air-nation-liverpool) in St Helens and [Jellybeans](/soft-play/liverpool/jellybeans-play-centre-liverpool) and [The Hive](/soft-play/liverpool/the-hive-leisure-park-liverpool) in Widnes.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Where is soft play in north Liverpool?',
+        answer:
+          "Cirq d-Play on Great Homer Street, Sector 8 inflatable park in Norris Green, Amaisleys and Happy Dayz in Clubmoor and Imagine That! on Faraday Road. Around Aintree and Bootle are Crazy Town Aintree, Play Away, Time Out and Manu's Wonderland.",
+      },
+      {
+        question: 'Where is soft play in south Liverpool?',
+        answer:
+          "Jungle Fun in Belle Vale, Frankie + Lola's in Hunts Cross, Volair Adventure Cove in Halewood and Family Day Out at Otterspool. The Ninja Warrior UK Adventure Park is at Speke.",
+      },
+      {
+        question: 'Are there trampoline parks in Liverpool?',
+        answer:
+          "Yes: Flip Out Liverpool in the city centre and Flip Out Aintree. The Ninja Warrior UK Adventure Park at Speke and Sector 8 inflatable park in Norris Green also suit older children. Jump Inc in Hunts Cross is shown by Google as permanently closed.",
+      },
+      {
+        question: 'Is there soft play on the Wirral?',
+        answer:
+          "Yes, listed under nearby towns on this page: Adventureland and Bubbles' World of Play at New Brighton, Monkey House in Wallasey, Little Edenville and Rascalz in Birkenhead, The Madhouse in Bebington and Cub and Calf in West Kirby.",
+      },
+      {
+        question: 'Where can I have a kids party in Liverpool?',
+        answer:
+          "KidzCove Play & Party Centre in Maghull and Rascalz in Birkenhead are listed for parties, and most soft play centres take party bookings. Packages and prices are set by each venue, so ask them directly.",
+      },
+    ],
+  },
+
+  blackpool: {
+    // From our listings (Google Places addresses, types and status, checked 17 November 2026).
+    kind: 'listings',
+    contentUpdated: '2026-11-17',
+    keepGenericFaqs: [/^How many soft play/, /best rated/],
+    nearbyHubs: [{ slug: 'lancaster', label: 'Lancaster' }],
+    sections: [
+      {
+        heading: 'Soft play in Blackpool and the Fylde coast',
+        paragraphs: [
+          "In Blackpool itself, [Bounce Play Centre](/soft-play/blackpool/bounce-play-centre-blackpool) is on Moor Park Avenue in Bispham and the [Air Balloon Wacky Warehouse](/soft-play/blackpool/air-balloon-wacky-warehouse-blackpool) is on Squires Gate Lane by the airport. Along the Fylde coast, [Funtastic Play](/soft-play/blackpool/funtastic-play-blackpool) and [Harry's Play Centre](/soft-play/blackpool/harry-s-play-centre-blackpool) are in Lytham St Annes, [Tea and Tumbles](/soft-play/blackpool/tea-and-tumbles-blackpool) is in Thornton-Cleveleys, [Thingamajigz](/soft-play/blackpool/thingamajigz-blackpool) is on Poulton Business Park, and [Play and Bee](/soft-play/blackpool/play-and-bee-role-play-centre-blackpool), a role-play centre, is at Hambleton.",
+        ],
+      },
+      {
+        heading: 'Trampolines and family attractions',
+        paragraphs: [
+          "[AirHop Blackpool](/soft-play/blackpool/airhop-adventure-trampoline-park) on Cornford Road is a trampoline and adventure park. The [Blackpool Zoo Playbarn](/soft-play/blackpool/blackpool-zoo-playbarn-blackpool) and [Coral Island](/soft-play/blackpool/coral-island-blackpool) on the Promenade are listed under other family activities, as is Funland, an arcade on the Promenade. Roarsome Roleplay in Lytham St Annes is shown by Google as permanently closed, so we no longer list it.",
+        ],
+      },
+      {
+        heading: 'Preston and Southport',
+        paragraphs: [
+          "Venues further afield are listed separately below the Blackpool list: [Little Beans Play Cafe](/soft-play/blackpool/little-beans-play-cafe-blackpool) and [The Kinder Hub](/soft-play/blackpool/the-kinder-hub-blackpool) in Cottam, both in Preston, and [Kinderworld Play Barn](/soft-play/blackpool/kinderworld-play-barn) in Southport. For Lancaster, see [soft play in Lancaster](/soft-play/lancaster).",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Where is soft play in Blackpool?',
+        answer:
+          "In Blackpool, Bounce Play Centre is in Bispham and the Air Balloon Wacky Warehouse is on Squires Gate Lane. Along the Fylde coast there are Funtastic Play and Harry's Play Centre in Lytham St Annes, Tea and Tumbles in Thornton-Cleveleys, Thingamajigz in Poulton and Play and Bee at Hambleton.",
+      },
+      {
+        question: 'Is there soft play in Lytham St Annes?',
+        answer:
+          "Yes: Funtastic Play on Snowdon Road and Harry's Play Centre at the YMCA on St Alban's Road. Roarsome Roleplay, which shared Snowdon Road, is shown by Google as permanently closed.",
+      },
+      {
+        question: 'Is there a trampoline park in Blackpool?',
+        answer:
+          "Yes: AirHop Adventure & Trampoline Park on Cornford Road. Coral Island and the Blackpool Zoo Playbarn are other indoor options for a wet day, listed under family activities.",
+      },
+      {
+        question: 'Is there role-play soft play near Blackpool?',
+        answer:
+          "Play and Bee Role Play Centre at Hambleton, near Poulton-le-Fylde, is built around role play. Most other Fylde coast venues are traditional soft play frames.",
+      },
+      {
+        question: 'Is there soft play near Preston?',
+        answer:
+          "Little Beans Play Cafe on Fylde Road and The Kinder Hub at Cottam are both in Preston, and are listed separately on this page under nearby towns.",
+      },
+    ],
+  },
 }
 
 /**
