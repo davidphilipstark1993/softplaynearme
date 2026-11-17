@@ -82,6 +82,14 @@ async function main() {
   } catch {}
   const existingByKey = new Map(existingStatic.map(v => [`${v.townSlug}/${v.slug}`, v]))
 
+  // Hub display names: data/cities.json, then the previous export's towns.json, so a
+  // rebuild never turns "Sunbury-on-Thames" into titleCase's "Sunbury On Thames".
+  const readJson = (f) => { try { return JSON.parse(fs.readFileSync(path.join(ROOT, f), 'utf8')) } catch { return [] } }
+  const hubName = new Map([
+    ...readJson('data/generated/towns.json').map(t => [t.slug, t.name]),
+    ...readJson('data/cities.json').map(c => [c.slug, c.name]),
+  ])
+
   // Transform DB venues to static format
   const allVenues = dbVenues.map(v => {
     const townSlug = v.city_slug || slugify(v.town || '')
@@ -90,7 +98,7 @@ async function main() {
 
     return {
       id: v.id,
-      town: v.town || titleCase(townSlug),
+      town: hubName.get(townSlug) || v.town || titleCase(townSlug),
       townSlug,
       name: v.name,
       slug: v.slug,
@@ -137,7 +145,7 @@ async function main() {
       // See lib/venueTypes.ts — null/'indoor' means genuine soft play.
       venueType: v.venue_type || 'indoor',
       lastVerified: v.last_verified_at
-        ? new Date(v.last_verified_at).toISOString().split('T')[0]
+        ? localDate(v.last_verified_at)
         : (existing.lastVerified || ''),
       notes: v.notes || existing.notes || '',
     }
@@ -211,6 +219,13 @@ async function main() {
   console.log(`With cafe: ${withCafe}`)
   console.log(`With parties: ${withParties}`)
   console.log('\nDone! Static JSON files updated.')
+}
+
+// last_verified_at is a timestamp without time zone, which pg reads as local time;
+// toISOString() would shift a BST midnight back to the previous day.
+function localDate(d) {
+  const t = new Date(d)
+  return `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2, '0')}-${String(t.getDate()).padStart(2, '0')}`
 }
 
 function titleCase(str) {

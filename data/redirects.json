@@ -6838,5 +6838,50 @@
     "source": "/soft-play/brighton/3-2-1-fun-softplay-inflatable-hire",
     "destination": "/soft-play/brighton",
     "permanent": true
+  },
+  {
+    "source": "/blog/best-soft-play-in-hull",
+    "destination": "/soft-play/hull",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/hull/airplay-bouncy-castles-hull",
+    "destination": "/soft-play/hull",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/hull/bb-inflatables-hull",
+    "destination": "/soft-play/hull",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/hull/bump-n-bounce-hull",
+    "destination": "/soft-play/hull",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/hull/c-r-bouncy-castles-and-soft-play-hull",
+    "destination": "/soft-play/hull",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/hull/fun4all-bouncy-castles-hull",
+    "destination": "/soft-play/hull",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/hull/softplay-tots-hull",
+    "destination": "/soft-play/hull",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/hull/the-curious-owl-hull",
+    "destination": "/soft-play/hull",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/hull/coffee-luxe-hull",
+    "destination": "/soft-play/hull",
+    "permanent": true
   }
 ]

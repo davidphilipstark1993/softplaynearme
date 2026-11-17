@@ -271,144 +271,6 @@ export const posts: BlogPost[] = [
     ],
   },
   {
-    slug: 'best-soft-play-in-hull',
-    title: "Soft Play in Hull: A Local Parent's Guide (2026)",
-    city: 'Hull',
-    excerpt:
-      'An honest local guide to soft play in Hull — Blue Kangaroo, Crazy Kids, Little Astronauts and more, compared by age group, price and party options.',
-    publishedAt: '2026-02-14T00:00:00.000Z',
-    updatedAt: '2026-05-17T00:00:00.000Z',
-    datePublished: '2026-02-14T00:00:00.000Z',
-    dateModified: '2026-05-17T00:00:00.000Z',
-    contentHtml: `<p>It rains in Hull. Not always, not as much as the jokes suggest, but enough that any local parent has a mental list of places to take the kids when the sky goes grey at half nine on a Saturday morning. Soft play sits near the top of that list — and Hull is genuinely well-served, with a spread of centres covering everything from sensory rooms for babies to three-storey climbing frames for the eight-year-olds who think they’re too cool for any of this.</p>
-
-<p>This is a guide to the soft plays in and around Hull, written for the parents who want to know which one actually suits their child rather than which one has the slickest website. I’ve grouped them by the things that tend to matter when you’re standing in the porch with shoes on the wrong feet trying to decide.</p>
-
-<blockquote>
-  <p>👉 <strong><a href="/soft-play/hull">Browse every soft play in Hull — opening hours, prices and facilities</a></strong></p>
-</blockquote>
-
-<h2>Hull’s soft play scene at a glance</h2>
-<p>Across the city and the surrounding villages — Cottingham, Hessle, Anlaby, Hedon — there are around a dozen indoor play centres that meet the broad definition of soft play in Hull. Some are pure soft play with the big padded climbing frames and ball pits. Others lean into role-play, with themed rooms that work better for imaginative kids than for ones who just want to bomb down a slide. A few are hybrid venues attached to sports facilities or climbing centres.</p>
-
-<p>Prices in Hull sit roughly between £4 and £8 per child for a standard session, with adults usually free or charged a small amount for a drink. The variation has more to do with venue size and what’s included than postcode.</p>
-
-<h2>Best soft play in Hull for toddlers and under-5s</h2>
-<p>The under-five crowd is where Hull’s soft play scene is strongest, because most centres ringfence space for the smaller kids rather than throwing them in with the older lot.</p>
-
-<p><strong><a href="/soft-play/hull/blue-kangaroo-hull" class="text-purple-700 hover:underline">Blue Kangaroo in Cottingham</a></strong> has the strongest pitch for this age group, and it’s deliberate — they cap their age limit at eight, which sounds restrictive until you realise that means no nine-year-old elbows in the ball pit at the weekend. Parents tend to stay in the actual play area rather than retreating to the cafe, which works because the layout is open enough to see most of it from anywhere.</p>
-
-<p><strong><a href="/soft-play/hull/let-s-play" class="text-purple-700 hover:underline">Let’s Play Hull</a></strong> is the better pick if your toddler is more interested in pretending to run a vet’s surgery than climbing anything. Ten themed role-play rooms — pirate ship, dinosaur park, supermarket, pop star stage — plus a small sensory zone for under-twos. It’s aimed at zero-to-seven so the older end of that range can still get something out of it.</p>
-
-<p><strong><a href="/soft-play/hull/little-astronauts-hull" class="text-purple-700 hover:underline">Little Astronauts</a></strong> has the under-fives well sorted with a separate area, and the glass-roof cafe genuinely is one of the nicest places in the city to sit with a coffee while someone else’s kid is napping in a buggy near you. The food is a clear step above standard soft play fare, which matters more than you’d think when you’re spending three hours there.</p>
-
-<h2>Best soft play in Hull for older kids and energy burners</h2>
-<p>Once children hit five or six the standard soft play frame stops being the workout it used to be, and you start needing places with more vertical or more variety.</p>
-
-<p><strong><a href="/soft-play/hull/crazy-kids-hull" class="text-purple-700 hover:underline">Crazy Kids</a></strong> on Holderness Road is the obvious answer in east Hull — three-storey frame, proper height, and a separate area for the under-fours so the small ones aren’t getting flattened. It’s been there for years and locals will tell you it’s the best straight-up soft play in this part of the city. Open seven days, including bank holiday Mondays from 10am.</p>
-
-<p><strong><a href="/soft-play/hull/rock-up" class="text-purple-700 hover:underline">Rock Up Hull</a></strong> is technically a climbing centre rather than a soft play, but it bundles the two — the soft play area is included with under-12s entry, and older children can climb the auto-belay walls from age four. If you have a five-year-old who’s outgrown traditional soft play but isn’t ready to be left at a trampoline park, this is the bridge.</p>
-
-<p><strong>Active+ on Harpings Road</strong> runs Little Monkeys soft play up to age 11, with under-5s zones built in. Adults go free, which adds up over a year. The site shares space with sports pitches, so older siblings can be doing different things at the same time.</p>
-
-<h2>When to go: weekday mornings and quieter slots</h2>
-<p>Weekend soft play in Hull can be — there’s no kind way to put this — a lot. Loud, busy, hot, and your shoulder bag will end up smelling like chicken nuggets. Weekday mornings during term time are the move.</p>
-
-<p>Most centres open at 9.30 or 10am on weekdays. Active+, Crazy Kids, Blue Kangaroo and Let’s Play are all noticeably calmer between opening and roughly 11.30, before pre-schools and nursery groups start filtering in for their morning sessions. Tuesday and Wednesday tend to be the quietest, with Mondays sometimes closed at smaller venues.</p>
-
-<p>If you have a child who’s overwhelmed by busy environments, the smaller role-play venues like <strong><a href="/soft-play/hull/our-imagination-station-hull" class="text-purple-700 hover:underline">Imagination Station</a></strong> in Hessle and <strong><a href="/soft-play/hull/the-secret-village-hull" class="text-purple-700 hover:underline">The Secret Village</a></strong> in Anlaby cap their session sizes, which keeps the noise down in a way the bigger frames can’t.</p>
-
-<h2>Soft play parties in Hull</h2>
-<p>Almost every soft play in Hull does party packages, but they’re not interchangeable. The questions worth asking before you book:</p>
-<ul>
-  <li>Do you get the whole venue, or a roped-off section while the public are still in?</li>
-  <li>Is the food included, and what is it exactly?</li>
-  <li>How long is the play time before they herd you into the party room?</li>
-  <li>Can you bring your own cake?</li>
-</ul>
-<p>Blue Kangaroo, Crazy Kids and Active+ all run conventional soft play parties with set packages. Let’s Play and Imagination Station lean into themed parties around their role-play rooms, which work brilliantly for the four-to-six bracket. Rock Up Hull’s parties combine climbing and soft play, which is the right call once kids are old enough to do both.</p>
-
-<h2>SEN-friendly and sensory sessions</h2>
-<p>Several Hull soft plays run quieter, lower-stimulation sessions specifically for children with additional sensory needs, though scheduling shifts term by term so it’s worth checking directly. Active+ lists sensory sessions on its facilities. Let’s Play’s under-twos area doubles as a soft sensory space and tends to be quiet during weekday mornings. Smaller capped-session venues are often a better default for SEN children than the bigger frame-style centres, because the noise floor is genuinely lower rather than just being in a roped-off corner of the same room.</p>
-
-<h2>For the parents (let’s be honest)</h2>
-<p>You’ll spend two hours at a soft play. The coffee matters.</p>
-
-<p>Little Astronauts has the best cafe of any soft play in Hull and it isn’t close — proper stone-baked pizzas, decent coffee, fresh pastries. Blue Kangaroo does a solid cafe lunch and has enough seating that you can actually find a table on a Saturday. Active+ benefits from the wider venue having a proper food offering rather than the usual nugget-and-chips reheat.</p>
-
-<p>The Crazy Kids cafe is the no-frills end of the spectrum, but it’s cheaper, and there’s free Wi-Fi, which is more than some of the newer venues offer.</p>
-
-<h2>Practical things worth knowing before you go</h2>
-<p>Socks are required almost everywhere — grippy socks ideally, but check the venue. A few centres sell them at the door for around £2 if you’ve forgotten, which you will. Bring a refillable water bottle; soft play centres are warm. Most accept card-only payments now.</p>
-
-<p>Parking is generally easy at the out-of-centre venues — Active+, Crazy Kids, Blue Kangaroo, Adventure Land. The village-centre and town-centre options can be tighter at peak times, particularly Saturday late morning.</p>
-
-<p>Term-time pricing is usually cheaper than school holiday pricing at the larger venues. Several offer multi-visit passes that pay for themselves after the third trip, so if you’ve found one your child loves, ask.</p>
-
-<h2>So which Hull soft play should you actually pick?</h2>
-<p>If your child is under three and you want somewhere calm and clean: <strong><a href="/soft-play/hull/blue-kangaroo-hull" class="text-purple-700 hover:underline">Blue Kangaroo</a></strong> in Cottingham, or <strong><a href="/soft-play/hull/let-s-play" class="text-purple-700 hover:underline">Let’s Play Hull</a></strong> for the role-play angle.</p>
-
-<p>If your child is five to eight and wants to actually exhaust themselves: <strong><a href="/soft-play/hull/crazy-kids-hull" class="text-purple-700 hover:underline">Crazy Kids</a></strong> in east Hull, or <strong>Active+</strong> on Harpings Road.</p>
-
-<p>If the parents need to be kept onside as much as the kids: <strong><a href="/soft-play/hull/little-astronauts-hull" class="text-purple-700 hover:underline">Little Astronauts</a></strong>.</p>
-
-<p>If you want climbing as well as soft play: <strong><a href="/soft-play/hull/rock-up" class="text-purple-700 hover:underline">Rock Up Hull</a></strong>.</p>
-
-<p>If you want a sensory-friendly smaller venue: <strong><a href="/soft-play/hull/our-imagination-station-hull" class="text-purple-700 hover:underline">Imagination Station</a></strong> in Hessle or <strong><a href="/soft-play/hull/the-secret-village-hull" class="text-purple-700 hover:underline">The Secret Village</a></strong> in Anlaby.</p>
-
-<p>Beyond these there’s a longer tail of smaller venues across Hull and the East Riding worth knowing about — including options in Hedon, on Clough Road, and at the K3 business park.</p>
-
-<blockquote>
-  <p>👉 <strong><a href="/soft-play/hull">See the full list of soft play centres in Hull with opening hours, prices and facilities</a></strong></p>
-</blockquote>
-
-<h2>Frequently asked questions</h2>
-
-<h3>How much does soft play in Hull cost?</h3>
-<p>Most centres charge £4–£8 per child for a standard session. Adults are usually free, though some charge a small amount that includes a drink. Toddler-only sessions and weekday off-peak slots tend to be cheaper.</p>
-
-<h3>What age is soft play for?</h3>
-<p>Soft play in Hull caters from babies right up to around age 11, depending on the venue. Blue Kangaroo caps entry at eight; Let’s Play at seven; Crazy Kids, Active+ and Adventure Land go up to about 11. Always check the upper age limit before turning up with a tall nine-year-old.</p>
-
-<h3>Do soft play centres in Hull do birthday parties?</h3>
-<p>Yes — almost all of them. Party packages typically include private use of a party room, food for the children, and a set time slot in the soft play area. Whole-venue hire is occasionally available at smaller centres for an additional fee.</p>
-
-<h3>Which soft play in Hull is best for toddlers?</h3>
-<p>Blue Kangaroo (Cottingham), Let’s Play Hull, and Little Astronauts are the strongest picks for under-fives, each with dedicated areas, capped age limits, or both.</p>
-
-<h3>Are any soft plays in Hull SEN-friendly?</h3>
-<p>Several offer quieter sensory sessions; Active+ explicitly lists this in its facilities. The smaller role-play centres with capped session sizes are often a calmer default. Check directly with each venue for current scheduling.</p>
-
-<h3>What’s the best weekday time to visit soft play in Hull?</h3>
-<p>Between opening time (usually 9.30 or 10am) and around 11.30am on a Tuesday or Wednesday during term time. Pre-school groups tend to arrive later in the morning, and after-school sessions get busy from about 3.30pm.</p>`,
-    faq: [
-      {
-        q: 'How much does soft play in Hull cost?',
-        a: 'Most centres charge £4–£8 per child for a standard session. Adults are usually free, though some charge a small amount that includes a drink. Toddler-only sessions and weekday off-peak slots tend to be cheaper.',
-      },
-      {
-        q: 'What age is soft play for?',
-        a: "Soft play in Hull caters from babies right up to around age 11, depending on the venue. Blue Kangaroo caps entry at eight; Let’s Play at seven; Crazy Kids, Active+ and Adventure Land go up to about 11. Always check the upper age limit before turning up with a tall nine-year-old.",
-      },
-      {
-        q: 'Do soft play centres in Hull do birthday parties?',
-        a: 'Yes — almost all of them. Party packages typically include private use of a party room, food for the children, and a set time slot in the soft play area. Whole-venue hire is occasionally available at smaller centres for an additional fee.',
-      },
-      {
-        q: 'Which soft play in Hull is best for toddlers?',
-        a: "Blue Kangaroo (Cottingham), Let’s Play Hull, and Little Astronauts are the strongest picks for under-fives, each with dedicated areas, capped age limits, or both.",
-      },
-      {
-        q: 'Are any soft plays in Hull SEN-friendly?',
-        a: 'Several offer quieter sensory sessions; Active+ explicitly lists this in its facilities. The smaller role-play centres with capped session sizes are often a calmer default. Check directly with each venue for current scheduling.',
-      },
-      {
-        q: "What’s the best weekday time to visit soft play in Hull?",
-        a: 'Between opening time (usually 9.30 or 10am) and around 11.30am on a Tuesday or Wednesday during term time. Pre-school groups tend to arrive later in the morning, and after-school sessions get busy from about 3.30pm.',
-      },
-    ],
-  },
-  {
     slug: 'cheap-soft-play-in-hull',
     title: 'Cheap Soft Play in Hull: Budget-Friendly Places Parents Love (2026)',
     city: 'Hull',
@@ -533,7 +395,7 @@ export const posts: BlogPost[] = [
 
 <p>And for parents? Sometimes it's simply somewhere warm where children can safely entertain themselves for an hour. That alone can feel worth the entry fee.</p>
 
-<p>The trick is finding places that offer good value for your child's age and personality. Our <a href="/blog/best-soft-play-in-hull">full guide to soft play in Hull</a> compares venues by age group, facilities and party options to help you decide.</p>
+<p>The trick is finding places that offer good value for your child's age and personality. Our guide to <a href="/soft-play/hull">soft play in Hull</a> compares venues by area, price and age group to help you decide.</p>
 
 <h2>Cheap Alternatives to Soft Play in Hull</h2>
 <p>If you want indoor ideas without spending much, some parents rotate soft play with:</p>
@@ -551,7 +413,7 @@ export const posts: BlogPost[] = [
 <h2>Frequently Asked Questions</h2>
 
 <h3>What is the cheapest soft play in Hull?</h3>
-<p>Prices change depending on age, location and time of visit. Many parents compare toddler pricing, weekday sessions and parking costs rather than entry price alone. <a href="/soft-play/hull">Browse Hull venues</a> to compare options.</p>
+<p>Prices change depending on age, location and time of visit. Many parents compare toddler pricing, weekday sessions and parking costs rather than entry price alone. Compare options on our <a href="/soft-play/hull">soft play in Hull</a> page.</p>
 
 <h3>Is soft play cheaper during weekdays?</h3>
 <p>Often, yes. Some venues offer quieter weekday toddler sessions or discounted off-peak entry.</p>
@@ -4384,7 +4246,7 @@ export const posts: BlogPost[] = [
 
 <p>If you're comparing venues, focus on toddler suitability rather than size, visit at quieter times when possible, and don't underestimate how much difference a decent caf\u00e9 and easy parking can make.</p>
 
-<p>For more family-friendly indoor play ideas, <a href="/soft-play/hull">browse all Hull soft play venues</a> and nearby areas including <a href="/soft-play/beverley">Beverley</a>. Or read our <a href="/blog/best-soft-play-in-hull">full Hull soft play guide</a> for a broader overview of the city's top venues.</p>
+<p>For more family-friendly indoor play ideas, <a href="/soft-play/hull">browse all soft play in Hull</a> and nearby areas including <a href="/soft-play/beverley">Beverley</a>. for a broader overview of the city's top venues.</p>
 
 <p>Planning further afield? See our <a href="/blog/baby-and-toddler-soft-play-uk" class="text-purple-700 hover:underline">UK baby and toddler soft play guide</a>.</p>
 `,
@@ -4598,7 +4460,7 @@ export const posts: BlogPost[] = [
 
 <h3>Keep a Backup List</h3>
 
-<p>Know three or four indoor places you can head to quickly. Our <a href="/soft-play/hull">Hull soft play directory</a> is a good place to start.</p>
+<p>Know three or four indoor places you can head to quickly. Our <a href="/soft-play/hull">soft play in Hull</a> page is a good place to start.</p>
 
 <h3>Pack Snacks</h3>
 
@@ -4640,7 +4502,7 @@ export const posts: BlogPost[] = [
 
 <p>A decent coffee and somewhere safe for kids to run around usually solves more problems than most parents care to admit.</p>
 
-<p>For more family-friendly indoor ideas, <a href="/soft-play/hull">compare soft play venues across Hull</a> and nearby areas including <a href="/soft-play/beverley">Beverley</a>. Or read our <a href="/blog/best-soft-play-in-hull">full Hull soft play guide</a> for a broader overview.</p>`,
+<p>For more family-friendly indoor ideas, <a href="/soft-play/hull">compare soft play in Hull</a> and nearby areas including <a href="/soft-play/beverley">Beverley</a>. for a broader overview.</p>`,
     faq: [
       {
         q: 'What are the best rainy day activities in Hull for toddlers?',

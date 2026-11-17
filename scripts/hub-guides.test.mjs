@@ -62,11 +62,12 @@ test('data guide: London gets a by-area section using lib/londonAreas.ts prefixe
 
 test('data guide: only the listed hubs, and not for tiny hubs', { skip }, async () => {
   const { buildDataGuide, hasDataGuide, getHubGuide, minFilterVenues } = await import('../lib/hubGuides.ts')
-  for (const slug of ['london', 'birmingham', 'manchester', 'edinburgh', 'hull', 'liverpool', 'bristol', 'leeds', 'swansea', 'glasgow', 'sheffield']) assert.ok(hasDataGuide(slug), slug)
-  for (const slug of ['stoke', 'norwich', 'beverley', 'crewe', 'halifax', 'nottingham', 'blackpool', 'worthing', 'brighton']) assert.equal(hasDataGuide(slug), false, slug)
+  for (const slug of ['london', 'birmingham', 'manchester', 'edinburgh', 'liverpool', 'bristol', 'leeds', 'swansea', 'glasgow', 'sheffield']) assert.ok(hasDataGuide(slug), slug)
+  for (const slug of ['stoke', 'norwich', 'beverley', 'crewe', 'halifax', 'nottingham', 'blackpool', 'worthing', 'brighton', 'hull']) assert.equal(hasDataGuide(slug), false, slug)
   assert.equal(buildDataGuide('hull', 'Hull', BHAM.slice(0, 3)), undefined)
-  assert.equal(getHubGuide('hull'), undefined, 'hand-verified registry is untouched')
-  assert.equal(minFilterVenues('hull'), 1, 'filter-page indexing rules are unchanged for these hubs')
+  assert.equal(getHubGuide('nottingham'), undefined, 'a hub without a written guide has none')
+  assert.equal(minFilterVenues('nottingham'), 1, 'filter-page indexing rules are unchanged for hubs without a written guide')
+  assert.equal(minFilterVenues('hull'), 2, 'a written-guide hub needs 2 venues for a category page')
   assert.equal(minFilterVenues('worthing'), 2)
 })
 
@@ -114,4 +115,23 @@ test('guide hubs: no links to the merged Brighton blog post; Worthing guide no l
   assert.ok(!fs.readFileSync(new URL('../lib/blogPostsSussex.ts', import.meta.url), 'utf8').includes('best-soft-play-in-brighton'))
   assert.ok(!JSON.stringify(getHubGuide('worthing')).includes('/soft-play/worthing/flying-fortress'))
   assert.ok(JSON.stringify(getHubGuide('brighton')).includes('Trampoline parks in Brighton'))
+})
+
+test('guide hubs: every link in a guide goes to a live venue, hub or blog post (no redirects)', { skip }, async () => {
+  const { getHubGuide } = await import('../lib/hubGuides.ts')
+  const fs = await import('node:fs')
+  const read = (f) => JSON.parse(fs.readFileSync(new URL(`../${f}`, import.meta.url), 'utf8'))
+  const venues = new Set(read('data/generated/venues.json').map((v) => `/soft-play/${v.townSlug}/${v.slug}`))
+  const hubs = new Set(read('data/generated/towns.json').map((t) => `/soft-play/${t.slug}`))
+  const redirects = new Set(read('data/redirects.json').map((r) => r.source))
+  const { blogPosts } = await import('../lib/blogPosts.ts')
+  const posts = new Set(blogPosts.map((p) => `/blog/${p.slug}`))
+  for (const city of ['brighton', 'worthing', 'hull']) {
+    const g = getHubGuide(city)
+    const text = [...g.sections.flatMap((s) => s.paragraphs), ...g.faqs.map((f) => f.answer)].join(' ')
+    for (const [, href] of text.matchAll(/\]\((\/[^)]+)\)/g)) {
+      assert.ok(!redirects.has(href), `${city}: ${href} is redirected`)
+      assert.ok(venues.has(href) || hubs.has(href) || posts.has(href), `${city}: ${href} is not a live page`)
+    }
+  }
 })

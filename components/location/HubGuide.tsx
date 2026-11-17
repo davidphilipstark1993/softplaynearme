@@ -37,7 +37,7 @@ export function HubGuide({ guide, cityName }: { guide: HubGuideData; cityName: s
       <p className="mt-4 text-xs text-slate-500">
         {guide.kind === 'listings'
           ? <>This guide is built from the venue details in our directory. Hours, prices and sessions change, so confirm with the venue before travelling to {cityName}.</>
-          : <>Details in this guide were checked against each venue&apos;s own website or Google listing on {VERIFIED_ON}. Hours, prices and sessions change, so confirm with the venue before travelling to {cityName}.</>}
+          : <>Details in this guide were checked against each venue&apos;s own website or Google listing on {guide.verifiedOn ?? VERIFIED_ON}. Hours, prices and sessions change, so confirm with the venue before travelling to {cityName}.</>}
       </p>
     </section>
   )
