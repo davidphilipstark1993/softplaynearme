@@ -209,7 +209,9 @@
     "1969": "Southport",
     "2012": "Cheddar",
     "1150": "Yate",
-    "1158": "Keynsham"
+    "1158": "Keynsham",
+    "1279": "Bushey",
+    "1291": "Epsom"
   },
   "counties": {
     "Anlaby": "East Yorkshire",
@@ -406,6 +408,15 @@
         "Cheddar",
         "Yate",
         "Keynsham"
+      ]
+    },
+    "london": {
+      "core": [
+        "London"
+      ],
+      "nearby": [
+        "Bushey",
+        "Epsom"
       ]
     }
   }

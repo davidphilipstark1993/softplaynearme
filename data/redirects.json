@@ -6973,5 +6973,10 @@
     "source": "/blog/best-soft-play-in-bristol",
     "destination": "/soft-play/bristol",
     "permanent": true
+  },
+  {
+    "source": "/blog/best-soft-play-in-london",
+    "destination": "/soft-play/london",
+    "permanent": true
   }
 ]
