@@ -176,7 +176,12 @@
     "1931": "Somercotes",
     "544": "Southwell",
     "525": "East Bridgford",
-    "574": "Keyworth"
+    "574": "Keyworth",
+    "2121": "Redditch",
+    "2124": "Redditch",
+    "2122": "Astwood Bank",
+    "2126": "Smethwick",
+    "2125": "Willenhall"
   },
   "counties": {
     "Anlaby": "East Yorkshire",
@@ -321,6 +326,17 @@
         "Southwell",
         "East Bridgford",
         "Keyworth"
+      ]
+    },
+    "birmingham": {
+      "core": [
+        "Birmingham"
+      ],
+      "nearby": [
+        "Redditch",
+        "Astwood Bank",
+        "Smethwick",
+        "Willenhall"
       ]
     }
   }

@@ -71,7 +71,8 @@ test('new hubs have a county, honest default copy, and nearby towns that are rea
 
 test('genuine Birmingham and already-correct Coventry rows were not touched', () => {
   const byId = new Map(venues.map((v) => [v.id, v]))
-  for (const id of [415, 406, 400, 2013, 416, 1073]) assert.equal(byId.get(id)?.townSlug, 'birmingham', String(id))
+  // 400 (Mini Me) was retired in phase14-03 (Google: permanently closed), so it has left the export.
+  for (const id of [415, 406, 2013, 416, 1073]) assert.equal(byId.get(id)?.townSlug, 'birmingham', String(id))
   for (const id of [1935, 1936]) assert.equal(byId.get(id)?.townSlug, 'coventry', String(id))
   for (const r of retags) for (const id of r.ids) assert.ok(![415, 406, 400, 2013, 416, 1935, 1936].includes(id), `${id} must not be retagged`)
 })
