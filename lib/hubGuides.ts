@@ -303,6 +303,73 @@ const GUIDES: Record<string, HubGuide> = {
       },
     ],
   },
+
+  nottingham: {
+    // From our listings (Google Places addresses and types, checked 17 November 2026) — no
+    // venue prices are held for Nottingham, so none are quoted.
+    kind: 'listings',
+    contentUpdated: '2026-11-17',
+    keepGenericFaqs: [/^How many soft play/, /best rated/],
+    nearbyHubs: [
+      { slug: 'derby', label: 'Derby' },
+      { slug: 'leicester', label: 'Leicester' },
+      { slug: 'loughborough', label: 'Loughborough' },
+    ],
+    sections: [
+      {
+        heading: 'Soft play in Nottingham: where it is',
+        paragraphs: [
+          "In the city centre, [Planet Bounce](/soft-play/nottingham/planet-bounce-inflatable-park) on Huntingdon Street is an inflatable park, and [Devastation Station](/soft-play/nottingham/devastation-station-play-cafe) is a play café. To the north, [Pirates Play, Party & Laser Centre](/soft-play/nottingham/pirates-play-party-laser-centre-nottingham) (NG5) and [Tumble Town](/soft-play/nottingham/tumble-town-play-centre-ltd-nottingham) in Arnold. West of the centre, [Tiny Town Adventures](/soft-play/nottingham/tiny-town-adventures-role-play-centre-nottingham) on Radford Road and [Robyn's World](/soft-play/nottingham/robyn-s-world-nottingham) are role-play centres, and [Kidz Kaboom](/soft-play/nottingham/kidz-kaboom-nursery-and-soft-play-centre-nottingham) is a nursery with a soft play centre. [Meadows Play Centre](/soft-play/nottingham/meadows-play-centre-soft-play-nottingham) is just south of the centre, and [Fun Valley](/soft-play/nottingham/fun-valley) is east, in Carlton.",
+          "Beeston and Stapleford have [Hocus Pocus](/soft-play/nottingham/hocus-pocus-soft-play-and-party-venue-nottingham), [Little Foxes Play Town](/soft-play/nottingham/little-foxes-play-town-nottingham) on Chilwell Road, [The Square Play Cafe](/soft-play/nottingham/the-square-play-cafe-nottingham) and [Mighty Monsters](/soft-play/nottingham/mighty-monsters-nottingham). Hucknall has [Squiggles Playden](/soft-play/nottingham/squiggles-playden-nottingham), [Oceans of Fun](/soft-play/nottingham/oceans-of-fun-nottingham) and [My Little World](/soft-play/nottingham/my-little-world-play-centre).",
+        ],
+      },
+      {
+        heading: 'Role play, inflatables and play cafés',
+        paragraphs: [
+          "Not every Nottingham venue is a climbing frame. Tiny Town Adventures, Robyn's World and Little Foxes Play Town are built around role play, which suits imaginative younger children. Planet Bounce is an inflatable park and Pirates adds laser games to its soft play, which suit older children. The Square Play Cafe in Beeston and Devastation Station in the city centre are play cafés, smaller and calmer than the big frames.",
+        ],
+      },
+      {
+        heading: 'Trampoline parks near Nottingham',
+        paragraphs: [
+          "We don't list a trampoline park inside Nottingham. The nearest we list are [Freestyle Trampoline Park](/soft-play/nottingham/freestyle-trampoline-park-soft-play-and-inflatable-nottingham) in Kirkby-in-Ashfield, which also has soft play and inflatables, and [i FUN Trampoline & Soft Play](/soft-play/nottingham/i-fun-trampoline-soft-play-mansfield) in Mansfield Woodhouse.",
+        ],
+      },
+      {
+        heading: 'Just outside Nottingham',
+        paragraphs: [
+          "Venues in nearby towns are listed separately below the Nottingham list. Long Eaton has [Cyril's Fun House](/soft-play/nottingham/cyrils-fun-house-nottingham), Cyril's Nut Hut and [Plank & Leggit Wacky Warehouse](/soft-play/nottingham/plank-leggit-wacky-warehouse-nottingham). Further out are [Treetops Activity Centre](/soft-play/nottingham/treetops-activity-centre-nottingham) in Riddings, near Alfreton, [Dinky Dino's](/soft-play/nottingham/dinky-dino-s-soft-play-nottingham) in Heanor, [Ed & Molly's Playbarn](/soft-play/nottingham/ed-molly-s-playbarn-nottingham) on the Fosse Way at East Bridgford, [Supernova Stay and Play](/soft-play/nottingham/supernova-stay-and-play-nottingham) in Southwell, and Jimmy Beans and Bizzy Beans around Sutton-in-Ashfield. For Derby, see [soft play in Derby](/soft-play/derby).",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Where is soft play in Nottingham city centre?',
+        answer:
+          "Planet Bounce, an inflatable park on Huntingdon Street, and Devastation Station, a play café, are in the city centre. Tiny Town Adventures and Robyn's World (role play) and Kidz Kaboom are just west of the centre, and Meadows Play Centre is just south.",
+      },
+      {
+        question: 'Is there role-play soft play in Nottingham?',
+        answer:
+          "Yes. Tiny Town Adventures on Radford Road, Robyn's World and Little Foxes Play Town in Beeston are all built around themed role-play rather than a climbing frame, which suits imaginative younger children.",
+      },
+      {
+        question: 'Are there trampoline parks near Nottingham?',
+        answer:
+          "Not inside the city in our listings. The nearest we list are Freestyle Trampoline Park in Kirkby-in-Ashfield, which also has soft play and inflatables, and i FUN Trampoline & Soft Play in Mansfield Woodhouse. Planet Bounce in the city centre is an inflatable park.",
+      },
+      {
+        question: 'Is there SEN-friendly soft play in Nottingham?',
+        answer:
+          "The Square Play Cafe in Beeston is listed with SEN-friendly sessions as well as toddler and baby areas. Smaller play cafés and role-play centres are often calmer than the big frames; ask any venue whether it runs a quieter session.",
+      },
+      {
+        question: 'Where can I have a kids party in Nottingham?',
+        answer:
+          "Hocus Pocus in Beeston is a soft play and party venue, and Pirates Play, Party & Laser Centre adds laser games. Pop and Play by Holly in Keyworth and Playmania in Mansfield are also listed for parties. Packages and prices are set by each venue, so ask them directly.",
+      },
+    ],
+  },
 }
 
 /**

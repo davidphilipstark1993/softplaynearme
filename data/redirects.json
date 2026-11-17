@@ -6883,5 +6883,35 @@
     "source": "/soft-play/hull/coffee-luxe-hull",
     "destination": "/soft-play/hull",
     "permanent": true
+  },
+  {
+    "source": "/soft-play/nottingham/mousetrap-soft-play-nott-m-ltd-nottingham",
+    "destination": "/soft-play/nottingham",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/nottingham/party2party-entertainment-hire-ltd-nottingham",
+    "destination": "/soft-play/nottingham",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/nottingham/play-everyday-kids-tv-nottingham",
+    "destination": "/soft-play/nottingham",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/nottingham/soft-play-and-sprinkles-nottingham",
+    "destination": "/soft-play/nottingham",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/nottingham/cj-entertainment-hire-nottingham",
+    "destination": "/soft-play/nottingham",
+    "permanent": true
+  },
+  {
+    "source": "/blog/best-soft-play-in-nottingham",
+    "destination": "/soft-play/nottingham",
+    "permanent": true
   }
 ]

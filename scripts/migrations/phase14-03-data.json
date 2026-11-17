@@ -1,0 +1,161 @@
+{
+  "nottingham": {
+    "retire": [
+      {
+        "id": 537,
+        "slug": "mousetrap-soft-play-nott-m-ltd-nottingham",
+        "why": "Google: permanently closed"
+      },
+      {
+        "id": 559,
+        "slug": "party2party-entertainment-hire-ltd-nottingham",
+        "why": "entertainment hire firm at a home address"
+      },
+      {
+        "id": 575,
+        "slug": "play-everyday-kids-tv-nottingham",
+        "why": "a kids TV / video organisation, not a venue"
+      },
+      {
+        "id": 1741,
+        "slug": "soft-play-and-sprinkles-nottingham",
+        "why": "home-based party service (Google: service)"
+      },
+      {
+        "id": 1730,
+        "slug": "cj-entertainment-hire-nottingham",
+        "why": "entertainment hire firm"
+      }
+    ],
+    "reclassify": [
+      {
+        "id": 1737,
+        "slug": "redhill-leisure-centre-nottingham",
+        "to": "leisure-centre",
+        "why": "leisure centre (Redhill Leisure Centre)"
+      }
+    ],
+    "postcodes": [
+      {
+        "id": 573,
+        "slug": "bizzy-beans-nottingham",
+        "postcode": "NG17 2LQ"
+      },
+      {
+        "id": 541,
+        "slug": "cyrils-fun-house-nottingham",
+        "postcode": "NG10 1FR"
+      },
+      {
+        "id": 545,
+        "slug": "cyril-s-nut-hut-nottingham",
+        "postcode": "NG10 1FR"
+      },
+      {
+        "id": 551,
+        "slug": "dinky-dino-s-soft-play-nottingham",
+        "postcode": "DE75 7QL"
+      },
+      {
+        "id": 525,
+        "slug": "ed-molly-s-playbarn-nottingham",
+        "postcode": "NG13 8LA"
+      },
+      {
+        "id": 563,
+        "slug": "freestyle-trampoline-park-soft-play-and-inflatable-nottingham",
+        "postcode": "NG17 7LJ"
+      },
+      {
+        "id": 524,
+        "slug": "hocus-pocus-soft-play-and-party-venue-nottingham",
+        "postcode": "NG9 2FE"
+      },
+      {
+        "id": 532,
+        "slug": "kidz-kaboom-nursery-and-soft-play-centre-nottingham",
+        "postcode": "NG8 6AR"
+      },
+      {
+        "id": 1931,
+        "slug": "little-moos-play-barn",
+        "postcode": "DE55 4LY"
+      },
+      {
+        "id": 528,
+        "slug": "mighty-monsters-nottingham",
+        "postcode": "NG9 7FN"
+      },
+      {
+        "id": 536,
+        "slug": "oceans-of-fun-nottingham",
+        "postcode": "NG15 7BZ"
+      },
+      {
+        "id": 529,
+        "slug": "pirates-play-party-laser-centre-nottingham",
+        "postcode": "NG5 1GD"
+      },
+      {
+        "id": 542,
+        "slug": "planet-bounce-inflatable-park",
+        "postcode": "NG1 3NL"
+      },
+      {
+        "id": 539,
+        "slug": "plank-leggit-wacky-warehouse-nottingham",
+        "postcode": "NG10 3AD"
+      },
+      {
+        "id": 574,
+        "slug": "pop-and-play-by-holly-nottingham",
+        "postcode": "NG12 5AL"
+      },
+      {
+        "id": 547,
+        "slug": "robyn-s-world-nottingham",
+        "postcode": "NG7 2JW"
+      },
+      {
+        "id": 530,
+        "slug": "squiggles-playden-nottingham",
+        "postcode": "NG15 6DW"
+      },
+      {
+        "id": 544,
+        "slug": "supernova-stay-and-play-nottingham",
+        "postcode": "NG25 0TX"
+      },
+      {
+        "id": 553,
+        "slug": "the-square-play-cafe-nottingham",
+        "postcode": "NG9 2JJ"
+      },
+      {
+        "id": 526,
+        "slug": "tiny-town-adventures-role-play-centre-nottingham",
+        "postcode": "NG7 5GU"
+      },
+      {
+        "id": 533,
+        "slug": "treetops-activity-centre-nottingham",
+        "postcode": "DE55 4BR"
+      },
+      {
+        "id": 534,
+        "slug": "tumble-town-play-centre-ltd-nottingham",
+        "postcode": "NG5 7DS"
+      },
+      {
+        "id": 570,
+        "slug": "white-post-farm-nottingham",
+        "postcode": "NG22 8HL"
+      },
+      {
+        "id": 259,
+        "slug": "i-fun-trampoline-soft-play-mansfield",
+        "postcode": "NG19 9AL"
+      }
+    ]
+  }
+}
