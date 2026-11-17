@@ -145,7 +145,7 @@ async function main() {
       // See lib/venueTypes.ts — null/'indoor' means genuine soft play.
       venueType: v.venue_type || 'indoor',
       lastVerified: v.last_verified_at
-        ? new Date(v.last_verified_at).toISOString().split('T')[0]
+        ? localDate(v.last_verified_at)
         : (existing.lastVerified || ''),
       notes: v.notes || existing.notes || '',
     }
@@ -219,6 +219,13 @@ async function main() {
   console.log(`With cafe: ${withCafe}`)
   console.log(`With parties: ${withParties}`)
   console.log('\nDone! Static JSON files updated.')
+}
+
+// last_verified_at is a timestamp without time zone, which pg reads as local time;
+// toISOString() would shift a BST midnight back to the previous day.
+function localDate(d) {
+  const t = new Date(d)
+  return `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2, '0')}-${String(t.getDate()).padStart(2, '0')}`
 }
 
 function titleCase(str) {
