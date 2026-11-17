@@ -219,6 +219,9 @@ interface VenueFilters {
 
 function staticToDisplayVenue(sv: StaticVenue): Venue {
   return {
+    // The id keys lib/localities venueOverrides; without it a DB-less render put Burgess
+    // Hill and Henfield venues in Brighton & Hove's own list.
+    id: sv.id,
     name: sv.name,
     slug: sv.slug,
     address: sv.address,
@@ -738,17 +741,6 @@ export default async function CityPage({ params, searchParams }: PageProps) {
           </div>
         )}
 
-        {city === 'hull' && (
-          <div className="bg-purple-50 border-b border-purple-100 py-3 px-4">
-            <div className="max-w-7xl mx-auto text-sm text-purple-900">
-              New to Hull&apos;s soft play scene?{' '}
-              <Link href="/blog/best-soft-play-in-hull" className="font-semibold underline hover:text-purple-700">
-                Read our local guide to soft play in Hull
-              </Link>{' '}
-              — venues compared by age, parties and sensory needs.
-            </div>
-          </div>
-        )}
 
         {/* Sticky Filters */}
         <div className="bg-white border-b border-slate-200 py-3 sticky top-16 z-40">

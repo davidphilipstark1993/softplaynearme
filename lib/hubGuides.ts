@@ -25,6 +25,13 @@ export interface HubGuide {
    * having read venue websites, and it is always as current as the listings.
    */
   kind?: 'verified' | 'listings'
+  /** When the guide's facts were checked (shown under the guide). Defaults to VERIFIED_ON. */
+  verifiedOn?: string
+  /**
+   * ISO date the guide's text last changed. The sitemap uses it as the hub's lastmod when it is
+   * later than the newest venue change, so Google sees rewritten hub copy as an update.
+   */
+  contentUpdated?: string
   /** The name the hub's title, H1 and FAQ use when it differs from the city name ("Brighton & Hove"). */
   areaName?: string
   /**
@@ -54,6 +61,7 @@ export const HOURS_ON = '16 November 2026'
 
 const GUIDES: Record<string, HubGuide> = {
   worthing: {
+    contentUpdated: '2026-11-16',
     keepGenericFaqs: [/^How many soft play/, /^How much does soft play cost/],
     nearbyHubs: [
       { slug: 'brighton', label: 'Brighton & Hove' },
@@ -129,6 +137,7 @@ const GUIDES: Record<string, HubGuide> = {
   },
 
   brighton: {
+    contentUpdated: '2026-11-16',
     areaName: 'Brighton & Hove',
     keepGenericFaqs: [/^How many soft play/],
     nearTowns: [{ name: 'Peacehaven', lat: 50.7934, lng: -0.0045 }],
@@ -215,6 +224,85 @@ const GUIDES: Record<string, HubGuide> = {
       },
     ],
   },
+
+  hull: {
+    // Prices and venue notes: the hand-checked Hull list (data/hullCuratedVenues.ts, approved
+    // 14 September 2026, from each venue's own website). Areas: our listings' postcodes.
+    verifiedOn: '14 September 2026',
+    contentUpdated: '2026-11-17',
+    keepGenericFaqs: [/^How many soft play/, /best rated/],
+    nearbyHubs: [
+      { slug: 'beverley', label: 'Beverley' },
+      { slug: 'bridlington', label: 'Bridlington' },
+    ],
+    sections: [
+      {
+        heading: 'Soft play in Hull: where it is',
+        paragraphs: [
+          "Hull's soft play is spread across the city rather than in one retail park. In west Hull (HU5) there are [Big Fun](/soft-play/hull/big-fun-hull) and [Adventure Play Town](/soft-play/hull/adventure-play-town-hull), an imagination town for younger children. North Hull (HU6) has [Ping Pong Tots](/soft-play/hull/ping-pong-tots) on Clough Road and [Little Monkeys at Active+](/soft-play/hull/little-monkeys-active-plus). Bransholme and Kingswood (HU7) have [Monkey Bizness](/soft-play/hull/monkey-bizness) and [Simsory Sensory](/soft-play/hull/simsory-sensory-hull). East Hull (HU9) has [East Coast Crazy Kids](/soft-play/hull/crazy-kids-hull), [Let's Play Hull](/soft-play/hull/let-s-play), a fantasy role-play village, and [the Freedom Centre](/soft-play/hull/the-freedom-centre-hull) on Preston Road.",
+          "In and around the city centre are [Little Astronauts](/soft-play/hull/little-astronauts-hull), [Rock Up](/soft-play/hull/rock-up) at St Stephen's, which offers soft play alongside climbing, and the Crazy Club soft play at [Superbowl UK](/soft-play/hull/superbowl-uk) in Princes Quay. Bowling, trampoline and arcade venues such as Gravity Active, Funstation and Hollywood Bowl are listed under other family activities rather than as soft play.",
+        ],
+      },
+      {
+        heading: 'What soft play costs in Hull',
+        paragraphs: [
+          "Prices published by the venues themselves: Adventure Play Town charges £6.50 per child and £2.50 per adult, with pre-walkers free, for a 90-minute session. Let's Play Hull charges £7 for children aged 1–7, £5 for babies under 12 months and £2 for adults, also for 90 minutes. Crazy Club at Superbowl is £6.50 for ages 1+ off-peak (adults free) and £7.50 at peak times (adults £1), with under-1s £2. Ping Pong Tots has published midweek soft play at £10, and our listing for Little Astronauts shows prices from £8.95. Just outside the city, Blue Kangaroo in Cottingham charges £6.95 for ages 1–8, and Kingstown Wacky Warehouse in Hedon around £5 for general play and £3.50 for tots. Little Monkeys at Active+ doesn't publish soft play prices clearly, so ask the venue.",
+        ],
+      },
+      {
+        heading: 'Babies and toddlers',
+        paragraphs: [
+          "Let's Play Hull has a baby soft play area within its fantasy village, and babies under 12 months pay less than older children. Adventure Play Town lets pre-walkers in free. Ping Pong Tots combines soft play with role play. In Cottingham, [Blue Kangaroo](/soft-play/hull/blue-kangaroo-hull) is for children up to about 8, so younger ones aren't sharing the frame with much older children, and it lets babies up to 8 months in free. [Kingstown Wacky Warehouse](/soft-play/hull/kingstown-wacky-warehouse-hull) in Hedon has a separate tots price.",
+        ],
+      },
+      {
+        heading: 'SEN and sensory play',
+        paragraphs: [
+          "Let's Play Hull is listed with SEN sessions, and Simsory Sensory in Bransholme is a sensory play venue. Session times change through the year, so check with the venue before you go, and ask whether a quieter session is available.",
+        ],
+      },
+      {
+        heading: 'Older children',
+        paragraphs: [
+          "Once a frame stops being a challenge, Rock Up Hull adds climbing walls to its soft play, and [Inflata Nation](/soft-play/hull/inflata-nation-inflatable-theme-park) is an inflatable park; both price by booking, so book online for current prices. Gravity Active Hull is a trampoline park. [William's Den](/soft-play/hull/william-s-den-hull) near North Cave is an adventure play barn and says on its own site that it is not soft play.",
+        ],
+      },
+      {
+        heading: 'Just outside Hull',
+        paragraphs: [
+          "Venues in the surrounding towns are listed separately below the Hull list: [Our Imagination Station](/soft-play/hull/our-imagination-station-hull) in Hessle, Blue Kangaroo in Cottingham, [The Secret Village](/soft-play/hull/the-secret-village-hull) role-play centre in Anlaby, Kingstown Wacky Warehouse in Hedon, and [Beach Cove](/soft-play/hull/beach-cove-adventure-play-area-hull) at Hornsea Village, which has indoor and outdoor play. For Beverley and Bridlington, see [soft play in Beverley](/soft-play/beverley) and [soft play in Bridlington](/soft-play/bridlington).",
+          "More Hull guides: [cheap soft play in Hull](/blog/cheap-soft-play-in-hull), [toddler soft play in Hull](/blog/best-toddler-soft-play-in-hull) and [rainy day ideas in Hull](/blog/rainy-day-activities-hull).",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'How much does soft play cost in Hull?',
+        answer:
+          "Most published prices in Hull are £6.50–£7 per child: Adventure Play Town £6.50 (adults £2.50, pre-walkers free), Let's Play Hull £7 for ages 1–7 (babies £5, adults £2) and Crazy Club at Superbowl £6.50 off-peak or £7.50 at peak times. Ping Pong Tots has published £10 midweek, and Little Astronauts is listed from £8.95. Prices as published by the venues; check before you go.",
+      },
+      {
+        question: 'Which soft play in Hull is best for babies and toddlers?',
+        answer:
+          "Let's Play Hull has a baby soft play area and a lower price for under-12-months, Adventure Play Town lets pre-walkers in free, and Ping Pong Tots mixes soft play with role play. Just outside the city, Blue Kangaroo in Cottingham is for children up to about 8, with babies up to 8 months free.",
+      },
+      {
+        question: 'Where is soft play in east and west Hull?',
+        answer:
+          "In east Hull (HU9): East Coast Crazy Kids, Let's Play Hull and the Freedom Centre on Preston Road. In west Hull (HU5): Big Fun and Adventure Play Town. North Hull and Bransholme have Ping Pong Tots, Little Monkeys at Active+ and Monkey Bizness, and the city centre has Little Astronauts, Rock Up and Crazy Club at Princes Quay.",
+      },
+      {
+        question: 'Is there SEN-friendly or sensory soft play in Hull?',
+        answer:
+          "Let's Play Hull is listed with SEN sessions, and Simsory Sensory in Bransholme is a sensory play venue. Session times change, so ask the venue which sessions are quieter or SEN-only.",
+      },
+      {
+        question: 'What is there for older children in Hull?',
+        answer:
+          "Rock Up Hull combines soft play with climbing walls, Inflata Nation is an inflatable park and Gravity Active Hull is a trampoline park; all three price by online booking. William's Den near North Cave is an adventure play barn rather than soft play.",
+      },
+    ],
+  },
 }
 
 /**
@@ -265,7 +353,11 @@ export function buildAnswerFirst(input: {
   const { name, venues, nearbyCount, nearbyTowns } = input
   const top = rankTopRated(venues, 3)
   if (top.length === 0) return null
-  const areaOf = (slug: string) => venues.find((v) => v.slug === slug)?.area
+  // A venue's town is only worth naming when it differs from the hub ("Adventure Play Town in Hull" on the Hull page says nothing).
+  const areaOf = (slug: string) => {
+    const area = venues.find((v) => v.slug === slug)?.area
+    return area && area.toLowerCase() !== name.toLowerCase() ? area : null
+  }
   const first = top[0]
   const where = areaOf(first.slug)
   const rest = top.slice(1).map((t) => (areaOf(t.slug) ? `${t.name} (${areaOf(t.slug)})` : t.name))
@@ -306,7 +398,6 @@ const DATA_GUIDES: Record<string, DataGuideConfig> = {
   birmingham: { allow: /^(B|CV|DY|WS|WV|TF|WR)\d/, nearbyHubs: [{ slug: 'stoke', label: 'Stoke-on-Trent' }] },
   manchester: { allow: /^(M|SK)\d/, nearbyHubs: [{ slug: 'bolton', label: 'Bolton' }, { slug: 'mossley', label: 'Mossley' }, { slug: 'liverpool', label: 'Liverpool' }] },
   edinburgh: { allow: /^EH\d/, nearbyHubs: [{ slug: 'glasgow', label: 'Glasgow' }] },
-  hull: { allow: /^HU\d/, nearbyHubs: [{ slug: 'beverley', label: 'Beverley' }, { slug: 'bridlington', label: 'Bridlington' }] },
   liverpool: { allow: /^L\d/, nearbyHubs: [{ slug: 'manchester', label: 'Manchester' }] },
   bristol: { allow: /^BS\d/, nearbyHubs: [{ slug: 'cardiff', label: 'Cardiff' }] },
   leeds: { allow: /^LS\d/, nearbyHubs: [{ slug: 'bradford', label: 'Bradford' }, { slug: 'halifax', label: 'Halifax' }, { slug: 'huddersfield', label: 'Huddersfield' }, { slug: 'york', label: 'York' }] },

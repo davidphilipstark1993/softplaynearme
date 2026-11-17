@@ -7,7 +7,7 @@ import { redirectFor } from '@/lib/redirects'
 import { getVenueCounts } from '@/lib/venueCounts'
 import { isVenueIndexable } from '@/lib/venueContent'
 import { totalPagesFor, hubPagePath } from '@/lib/pagination'
-import { minFilterVenues } from '@/lib/hubGuides'
+import { getHubGuide, minFilterVenues } from '@/lib/hubGuides'
 
 // Paths that 301 elsewhere (data/redirects.json, served by proxy.ts) are never
 // listed — submitting a URL that immediately redirects is the same mixed signal as
@@ -163,7 +163,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // A hub with no venues renders an empty shell — don't ask Google to index it.
     if ((counts.byCity[city] ?? 0) === 0) continue
 
-    const lastModified = cityLastMod.get(city)
+    // A rewritten hub guide (lib/hubGuides.ts contentUpdated) is a change too.
+    const guideUpdated = getHubGuide(city)?.contentUpdated
+    const lastModified = later(cityLastMod.get(city), guideUpdated ? new Date(`${guideUpdated}T00:00:00Z`) : undefined)
     siteLastMod = later(siteLastMod, lastModified)
 
     hubEntries.push({
