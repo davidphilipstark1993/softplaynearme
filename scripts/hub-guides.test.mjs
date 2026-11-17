@@ -126,7 +126,17 @@ test('guide hubs: every link in a guide goes to a live venue, hub or blog post (
   const redirects = new Set(read('data/redirects.json').map((r) => r.source))
   const { blogPosts } = await import('../lib/blogPosts.ts')
   const posts = new Set(blogPosts.map((p) => `/blog/${p.slug}`))
-  for (const city of ['brighton', 'worthing', 'hull', 'nottingham', 'birmingham', 'liverpool', 'blackpool', 'bristol']) {
+  // London area pages (lib/londonAreaHubs.ts) that exist: 5+ main-list venues in the area
+  const { getLondonAreaSlug, LONDON_AREAS } = await import('../lib/londonAreas.ts')
+  const { MIN_AREA_VENUES, londonAreaPath } = await import('../lib/londonAreaContent.ts')
+  const loc = read('data/postcode-localities.json')
+  const counts = {}
+  for (const v of read('data/generated/venues.json')) {
+    if (v.townSlug !== 'london' || (v.venueType && !['indoor', 'pub'].includes(v.venueType)) || loc.hubs.london.nearby.includes(loc.venueOverrides[String(v.id)])) continue
+    const a = getLondonAreaSlug(v.postcode); if (a) counts[a] = (counts[a] ?? 0) + 1
+  }
+  for (const a of LONDON_AREAS) if ((counts[a.slug] ?? 0) >= MIN_AREA_VENUES) hubs.add(londonAreaPath(a.slug))
+  for (const city of ['brighton', 'worthing', 'hull', 'nottingham', 'birmingham', 'liverpool', 'blackpool', 'bristol', 'london']) {
     const g = getHubGuide(city)
     const text = [...g.sections.flatMap((s) => s.paragraphs), ...g.faqs.map((f) => f.answer)].join(' ')
     for (const [, href] of text.matchAll(/\]\((\/[^)]+)\)/g)) {

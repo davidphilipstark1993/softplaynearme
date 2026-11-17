@@ -8,6 +8,7 @@ import { getVenueCounts } from '@/lib/venueCounts'
 import { isVenueIndexable } from '@/lib/venueContent'
 import { totalPagesFor, hubPagePath } from '@/lib/pagination'
 import { getHubGuide, minFilterVenues } from '@/lib/hubGuides'
+import { getLondonAreaHubs, londonAreaPath } from '@/lib/londonAreaHubs'
 
 // Paths that 301 elsewhere (data/redirects.json, served by proxy.ts) are never
 // listed — submitting a URL that immediately redirects is the same mixed signal as
@@ -155,6 +156,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })
   }
 
+  // ── London area sub-hubs (lib/londonAreaHubs.ts) ───────────────────────
+  const londonAreaEntries: MetadataRoute.Sitemap = (await getLondonAreaHubs()).map((a) => ({
+    url: `${baseUrl}${londonAreaPath(a.slug)}`,
+    lastModified: cityLastMod.get('london'),
+    changeFrequency: 'weekly',
+    priority: 0.8,
+  }))
+
   // ── Hubs, their pages, and filter pages ─────────────────────────────────
   const counts = await getVenueCounts()
   const hubEntries: MetadataRoute.Sitemap = []
@@ -219,5 +228,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/pricing`, changeFrequency: 'monthly', priority: 0.5 },
   ]
 
-  return [...topLevel, ...blogEntries, ...hubEntries, ...venueEntries]
+  return [...topLevel, ...blogEntries, ...hubEntries, ...londonAreaEntries, ...venueEntries]
 }

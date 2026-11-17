@@ -272,7 +272,7 @@
   {
     "name": "Dartford",
     "slug": "dartford",
-    "venueCount": 6,
+    "venueCount": 8,
     "avgRating": "4.2"
   },
   {
@@ -434,8 +434,8 @@
   {
     "name": "Harlow",
     "slug": "harlow",
-    "venueCount": 2,
-    "avgRating": "4.3"
+    "venueCount": 3,
+    "avgRating": "4.5"
   },
   {
     "name": "Harwich",
@@ -584,8 +584,8 @@
   {
     "name": "London",
     "slug": "london",
-    "venueCount": 54,
-    "avgRating": "4.3"
+    "venueCount": 58,
+    "avgRating": "4.4"
   },
   {
     "name": "Loughborough",
@@ -800,7 +800,7 @@
   {
     "name": "Slough & Windsor",
     "slug": "slough",
-    "venueCount": 4,
+    "venueCount": 5,
     "avgRating": "4.6"
   },
   {

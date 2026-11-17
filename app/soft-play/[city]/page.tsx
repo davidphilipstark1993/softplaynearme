@@ -32,6 +32,7 @@ import { getCardQuote, formatLastVerified } from '@/lib/venueCardText'
 import { isVerified } from '@/lib/plans'
 import { FeaturedImpression } from '@/components/venue/FeaturedImpression'
 import { LONDON_AREAS, getLondonAreaSlug } from '@/lib/londonAreas'
+import { getLondonAreaHubs, londonAreaPath } from '@/lib/londonAreaHubs'
 import { getCityVenueCount } from '@/lib/venueCounts'
 import { computeCityStats, rankTopRated, smoothedRating, MIN_REVIEWS_FOR_TOP_RATED, RATING_PRIOR_MEAN } from '@/lib/cityStats'
 import { buildCityIntro, buildCityFaqs } from '@/lib/cityContent'
@@ -564,6 +565,8 @@ export default async function CityPage({ params, searchParams }: PageProps) {
   // Popular-areas counts for London — a second, unfiltered fetch so the area
   // pills always show true totals regardless of whatever filters are active.
   const londonAreaCounts: Record<string, number> = {}
+  // Areas big enough for their own page (/soft-play/london/area/{area}); the rest stay as filters.
+  const londonAreaPages = city === 'london' ? new Set((await getLondonAreaHubs()).map((a) => a.slug)) : new Set<string>()
   if (city === 'london') {
     const allLondonVenues = await getVenues('london', {})
     for (const v of allLondonVenues) {
@@ -1224,7 +1227,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                   const count = londonAreaCounts[a.slug] || 0
                   const isActive = area === a.slug
                   return (
-                    <Link key={a.slug} href={isActive ? `/soft-play/london` : `/soft-play/london?area=${a.slug}`}>
+                    <Link key={a.slug} href={londonAreaPages.has(a.slug) ? londonAreaPath(a.slug) : isActive ? `/soft-play/london` : `/soft-play/london?area=${a.slug}`}>
                       <Badge
                         variant="outline"
                         className={

@@ -610,6 +610,71 @@ const GUIDES: Record<string, HubGuide> = {
       },
     ],
   },
+
+  london: {
+    // From our listings (Google Places addresses, types and status, checked 17 November 2026).
+    // London is split into area pages (lib/londonAreaHubs.ts) where an area has 5+ venues.
+    kind: 'listings',
+    contentUpdated: '2026-11-17',
+    keepGenericFaqs: [/^How many soft play/, /best rated/],
+    nearbyHubs: [
+      { slug: 'dartford', label: 'Dartford' },
+      { slug: 'southend', label: 'Southend-on-Sea' },
+    ],
+    sections: [
+      {
+        heading: 'Soft play in London, by area',
+        paragraphs: [
+          "London is too big to browse as one list, so the areas with enough venues have their own pages: [soft play in North London](/soft-play/london/area/north-london), [East London](/soft-play/london/area/east-london), [South East London](/soft-play/london/area/south-east-london), [South West London](/soft-play/london/area/south-west-london) and [North West London](/soft-play/london/area/north-west-london). West London venues ([Snakes & Ladders](/soft-play/london/snakes-ladders-london) in Brentford, [Two Plus Cafe](/soft-play/london/two-plus-cafe), [Bella Boos](/soft-play/london/bella-boos) in Hammersmith and [Sammy's Soft Play](/soft-play/london/sammy-s-soft-play)) are in the main list below.",
+        ],
+      },
+      {
+        heading: 'The big centres',
+        paragraphs: [
+          "The largest venues by number of reviews are [Clowntown](/soft-play/london/clowntown) in North Finchley and [Topsy Turvy World](/soft-play/london/topsy-turvy-world-london) in Hendon, [Gambado Chelsea](/soft-play/london/gambado-chelsea-indoor-softplay-london) in Fulham, [Kidspace Romford](/soft-play/london/kidspace-romford) and [Snakes & Ladders](/soft-play/london/snakes-ladders-london) in Brentford. [Sobell Leisure Centre](/soft-play/london/sobell-leisure-centre-london) in Islington has a large soft play as part of the leisure centre.",
+        ],
+      },
+      {
+        heading: 'Play cafés and role play',
+        paragraphs: [
+          "Much of London's soft play is in smaller play cafés, which suit babies and toddlers: [Ladybird](/soft-play/london/ladybird-softplay-and-cafe) and [Ballooon](/soft-play/london/ballooon-soft-play-cafe) in Barnet, [Kids n'Joy](/soft-play/london/kids-n-joy-play-cafe) in Crouch End, [Dreami Play Café](/soft-play/london/dreami-play-caf) in Bethnal Green, [It Takes a Village](/soft-play/london/it-takes-a-village-play-cafe) in Walthamstow, [Millie & Maisie](/soft-play/london/millie-maisie-play-caf) in Clapham, [Under the Canopy](/soft-play/london/under-the-canopy-play-cafe) in Kentish Town and [Ollie Polly](/soft-play/london/ollie-polly-play-cafe) in West Wickham. [Littleville](/soft-play/london/littleville-role-play-cafe) in Orpington is a role-play café.",
+        ],
+      },
+      {
+        heading: 'Just outside London',
+        paragraphs: [
+          "[Parents Paradise](/soft-play/london/parents-paradise-children-s-play-centre-london) in Bushey and [Rascals](/soft-play/london/rascals-softplay-epsom-london) in Epsom are just outside London and are listed under nearby towns. For Kent and Essex, see [soft play in Dartford](/soft-play/dartford) and [soft play in Southend-on-Sea](/soft-play/southend).",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Where is soft play in north London?',
+        answer:
+          "Clowntown in North Finchley, Ladybird and Ballooon in Barnet, Red Stairs in High Barnet, Funlord at Edmonton Green and Kids n'Joy in Crouch End are among the venues on our North London page, and Sobell Leisure Centre is in Islington. Topsy Turvy World in Hendon is on our North West London page.",
+      },
+      {
+        question: 'Where is soft play in east London?',
+        answer:
+          "Kidspace in Romford, Owls Play Centre in Ilford, Kinder Island in Bow, Rainforest Soft Play in Hackney, Safari Soft Play in Chingford, Dreami Play Café in Bethnal Green and It Takes a Village in Walthamstow are among the venues on our East London page.",
+      },
+      {
+        question: 'Where is soft play in south London?',
+        answer:
+          "South East London has Kubz Klub in Eltham, Globetrotters in Bexleyheath, Crazy Club in Sidcup, Macaroni Penguin in Kidbrooke, Littleville in Orpington and Discovery Planet in Surrey Quays. South West London has Bertie and Boo in Balham, Gambado Chelsea in Fulham, Millie & Maisie in Clapham and Kiddistop in Sutton.",
+      },
+      {
+        question: 'Are there play cafés for toddlers in London?',
+        answer:
+          "Yes, many: Ladybird and Ballooon in Barnet, Kids n'Joy in Crouch End, Dreami Play Café in Bethnal Green, It Takes a Village in Walthamstow, Millie & Maisie in Clapham, Under the Canopy in Kentish Town and Ollie Polly in West Wickham. They are smaller and calmer than the big centres.",
+      },
+      {
+        question: 'What is the biggest soft play in London?',
+        answer:
+          "We don't hold floor areas, but by number of reviews the largest are Clowntown in North Finchley, Topsy Turvy World in Hendon, Gambado Chelsea in Fulham, Kidspace Romford and Snakes & Ladders in Brentford.",
+      },
+    ],
+  },
 }
 
 /**
