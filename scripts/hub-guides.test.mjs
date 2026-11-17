@@ -126,7 +126,7 @@ test('guide hubs: every link in a guide goes to a live venue, hub or blog post (
   const redirects = new Set(read('data/redirects.json').map((r) => r.source))
   const { blogPosts } = await import('../lib/blogPosts.ts')
   const posts = new Set(blogPosts.map((p) => `/blog/${p.slug}`))
-  for (const city of ['brighton', 'worthing', 'hull', 'nottingham', 'birmingham', 'liverpool', 'blackpool']) {
+  for (const city of ['brighton', 'worthing', 'hull', 'nottingham', 'birmingham', 'liverpool', 'blackpool', 'bristol']) {
     const g = getHubGuide(city)
     const text = [...g.sections.flatMap((s) => s.paragraphs), ...g.faqs.map((f) => f.answer)].join(' ')
     for (const [, href] of text.matchAll(/\]\((\/[^)]+)\)/g)) {

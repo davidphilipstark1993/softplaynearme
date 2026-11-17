@@ -206,7 +206,10 @@
     "1183": "Skelmersdale",
     "257": "Preston",
     "378": "Preston",
-    "1969": "Southport"
+    "1969": "Southport",
+    "2012": "Cheddar",
+    "1150": "Yate",
+    "1158": "Keynsham"
   },
   "counties": {
     "Anlaby": "East Yorkshire",
@@ -393,6 +396,16 @@
       "nearby": [
         "Preston",
         "Southport"
+      ]
+    },
+    "bristol": {
+      "core": [
+        "Bristol"
+      ],
+      "nearby": [
+        "Cheddar",
+        "Yate",
+        "Keynsham"
       ]
     }
   }

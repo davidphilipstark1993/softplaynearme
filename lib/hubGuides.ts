@@ -551,6 +551,65 @@ const GUIDES: Record<string, HubGuide> = {
       },
     ],
   },
+
+  bristol: {
+    // From our listings (Google Places addresses, types and status, checked 17 November 2026).
+    kind: 'listings',
+    contentUpdated: '2026-11-17',
+    keepGenericFaqs: [/^How many soft play/, /best rated/],
+    nearbyHubs: [
+      { slug: 'midsomer-norton', label: 'Midsomer Norton' },
+      { slug: 'cardiff', label: 'Cardiff' },
+    ],
+    sections: [
+      {
+        heading: 'Soft play in Bristol: where it is',
+        paragraphs: [
+          "South Bristol has the most choice: [Noah's Ark](/soft-play/bristol/noah-s-ark-play-centre-bristol) and [Chaos Inflatable Park](/soft-play/bristol/chaos-inflatable-park-bristol) in Brislington, [Out There Indoors](/soft-play/bristol/out-there-indoors-bristol) at the Paintworks, [Pickle Street](/soft-play/bristol/pickle-street-bristol) on East Street in Bedminster, [Boing! Inns Court](/soft-play/bristol/boing-inns-court-bristol) in Knowle and [SPARC](/soft-play/bristol/sparc-st-peter-s-activity-resource-centre-bristol) in Bishopsworth. In the north are [Play Patch](/soft-play/bristol/play-patch-community-soft-play), a community soft play in Lockleaze, [Pop Up Play Village](/soft-play/bristol/pop-up-play-village-kid-s-role-play-in-north-of) in Stoke Gifford, [Boing! Lawrence Weston](/soft-play/bristol/boing-lawrence-weston-bristol), and, near Cribbs Causeway, [Wild Things](/soft-play/bristol/wild-things-play-project-bristol) at The Mall and [Jump Bristol](/soft-play/bristol/jump) in Patchway.",
+          "East Bristol has [Wishing Well Wacky Warehouse](/soft-play/bristol/wishing-well-wacky-warehouse-bristol) at Aspects Leisure Park, [Tiny Town Play Cafe](/soft-play/bristol/tiny-town-play-cafe-bristol) in the Kings Chase centre in Kingswood, [Mill House Wacky Warehouse](/soft-play/bristol/mill-house-wacky-warehouse-bristol) at Emersons Green and [Be Weird Be Wild Be Wonderful](/soft-play/bristol/be-weird-be-wild-be-wonderful-play-hub-bristol) at Longwell Green.",
+        ],
+      },
+      {
+        heading: 'Role play, community sessions and trampolines',
+        paragraphs: [
+          "Pop Up Play Village and Pickle Street are role-play towns for younger children, and Tiny Town and Be Weird Be Wild Be Wonderful are play cafés. Play Patch in Lockleaze is a community soft play, listed with a toddler area and prices from £2.50. For older children, [Freedog](/soft-play/bristol/freedog-bristol-soft-play-and-trampolines-bristol) near Bedminster has trampolines as well as soft play, and Jump Bristol in Patchway and Chaos in Brislington are inflatable and bounce venues; Google shows Chaos as temporarily closed, so check before you go.",
+        ],
+      },
+      {
+        heading: 'Just outside Bristol',
+        paragraphs: [
+          "Venues further out are listed separately below the Bristol list: [The Play Shed](/soft-play/bristol/the-play-shed-soft-play-and-caf-bristol) in Yate and [Ocean Adventurers](/soft-play/bristol/ocean-adventurers-soft-play) in Cheddar, which is listed with a toddler area and parties. [Avon Valley Adventure Park](/soft-play/bristol/avon-valley-adventure-park-bristol) near Keynsham is an adventure park and farm, listed under other family activities.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Where is soft play in south Bristol?',
+        answer:
+          "Noah's Ark and Chaos Inflatable Park in Brislington, Out There Indoors at the Paintworks, Pickle Street in Bedminster, Boing! Inns Court in Knowle and SPARC in Bishopsworth. Freedog, with soft play and trampolines, is near Bedminster.",
+      },
+      {
+        question: 'Where is soft play in north Bristol and Cribbs Causeway?',
+        answer:
+          "Wild Things at The Mall, Cribbs Causeway, and Jump Bristol in Patchway are the biggest. Play Patch in Lockleaze, Pop Up Play Village in Stoke Gifford and Boing! Lawrence Weston are smaller venues.",
+      },
+      {
+        question: 'Is there cheap or community soft play in Bristol?',
+        answer:
+          "Play Patch in Lockleaze is a community soft play listed with prices from £2.50. Prices change, so check with the venue before you go.",
+      },
+      {
+        question: 'Are there trampoline parks in Bristol?',
+        answer:
+          "Freedog near Bedminster has trampolines alongside soft play. Jump Bristol in Patchway and Chaos Inflatable Park in Brislington are inflatable and bounce venues; Google shows Chaos as temporarily closed.",
+      },
+      {
+        question: 'Is there role-play soft play in Bristol?',
+        answer:
+          "Yes: Pop Up Play Village in Stoke Gifford and Pickle Street on East Street in Bedminster are role-play towns for younger children.",
+      },
+    ],
+  },
 }
 
 /**

@@ -36,36 +36,6 @@ export const cityGuidePosts: BlogPost[] = [
     ]
   },
   {
-    "slug": "best-soft-play-in-bristol",
-    "title": "Best Soft Play in Bristol (2026 Parent Guide)",
-    "city": "Bristol",
-    "excerpt": "Soft play in Bristol from real data: 19 venues with ratings and the toddler, party and SEN facilities each one confirms. Honest parent guide.",
-    "publishedAt": "2026-02-18T00:00:00.000Z",
-    "updatedAt": "2026-11-12T00:00:00.000Z",
-    "datePublished": "2026-02-18T00:00:00.000Z",
-    "dateModified": "2026-11-12T00:00:00.000Z",
-    "verifiedOn": "3 November 2026",
-    "contentHtml": "<p>We list 19 soft play centres in and around Bristol, and 18 of them have 20 or more Google reviews, enough to say something fair about how families rate them.</p>\n\n<p>This guide only states what we hold real data for: ratings, review counts and facilities the venue confirms. We leave out prices, age limits and opening times, because they change often and are best checked with the venue directly before you set off.</p>\n\n<blockquote>\n  <p>👉 <strong><a href=\"/soft-play/bristol\" class=\"text-purple-700 hover:underline\">Browse every soft play centre in Bristol with ratings and facilities</a></strong></p>\n</blockquote>\n\n<h2>The best-reviewed soft play in Bristol</h2>\n<p><a href=\"/soft-play/bristol/tiny-town-play-cafe-bristol\" class=\"text-purple-700 hover:underline\">Tiny Town Play Cafe</a> has the highest rating of any venue we list with 20+ reviews, at 5.0 stars. Ranked by rating, then by how many people have reviewed them:</p>\n<ul>\n  <li><strong><a href=\"/soft-play/bristol/tiny-town-play-cafe-bristol\" class=\"text-purple-700 hover:underline\">Tiny Town Play Cafe</a></strong>: 5.0 stars from 20 reviews.</li>\n  <li><strong><a href=\"/soft-play/bristol/play-patch-community-soft-play\" class=\"text-purple-700 hover:underline\">Play Patch Community Soft Play</a></strong>: 4.9 stars from 239 reviews.</li>\n  <li><strong><a href=\"/soft-play/bristol/boing-inns-court-bristol\" class=\"text-purple-700 hover:underline\">Boing! Inns Court</a></strong>: 4.9 stars from 90 reviews.</li>\n  <li><strong><a href=\"/soft-play/bristol/sparc-st-peter-s-activity-resource-centre-bristol\" class=\"text-purple-700 hover:underline\">SPARC (St Peter's Activity &amp; Resource Centre)</a></strong>: 4.8 stars from 70 reviews.</li>\n  <li><strong><a href=\"/soft-play/bristol/boing-lawrence-weston-bristol\" class=\"text-purple-700 hover:underline\">Boing! Lawrence Weston</a></strong>: 4.8 stars from 47 reviews.</li>\n</ul>\n\n<h2>The busiest venues</h2>\n<p>Review volume is a good proxy for how many families actually go. <a href=\"/soft-play/bristol/avon-valley-adventure-park-bristol\" class=\"text-purple-700 hover:underline\">Avon Valley Adventure Park</a> (3,435 reviews, 4.4 stars), <a href=\"/soft-play/bristol/ocean-adventurers-soft-play\" class=\"text-purple-700 hover:underline\">Ocean Adventurers Soft Play</a> (688 reviews, 4.6 stars) and <a href=\"/soft-play/bristol/noah-s-ark-play-centre-bristol\" class=\"text-purple-700 hover:underline\">Noah's Ark Play Centre</a> (422 reviews, 4.2 stars) lead the list.</p>\n\n<h2>What each venue confirms</h2>\n<ul>\n  <li><strong>Dedicated toddler area</strong> (2): <strong><a href=\"/soft-play/bristol/ocean-adventurers-soft-play\" class=\"text-purple-700 hover:underline\">Ocean Adventurers Soft Play</a></strong> and <strong><a href=\"/soft-play/bristol/play-patch-community-soft-play\" class=\"text-purple-700 hover:underline\">Play Patch Community Soft Play</a></strong>.</li>\n  <li><strong>Birthday parties</strong> (4): <strong><a href=\"/soft-play/bristol/ocean-adventurers-soft-play\" class=\"text-purple-700 hover:underline\">Ocean Adventurers Soft Play</a></strong>, <strong><a href=\"/soft-play/bristol/play-patch-community-soft-play\" class=\"text-purple-700 hover:underline\">Play Patch Community Soft Play</a></strong> and <strong><a href=\"/soft-play/midsomer-norton/the-den-at-fox-and-kit\" class=\"text-purple-700 hover:underline\">The Den at Fox &amp; Kit</a></strong> (Midsomer Norton) and more.</li>\n  <li><strong>Café</strong> (7): <strong><a href=\"/soft-play/bristol/play-patch-community-soft-play\" class=\"text-purple-700 hover:underline\">Play Patch Community Soft Play</a></strong>, <strong><a href=\"/soft-play/bristol/sparc-st-peter-s-activity-resource-centre-bristol\" class=\"text-purple-700 hover:underline\">SPARC (St Peter's Activity &amp; Resource Centre)</a></strong>, <strong><a href=\"/soft-play/bristol/out-there-indoors-bristol\" class=\"text-purple-700 hover:underline\">Out There Indoors</a></strong> and <strong><a href=\"/soft-play/bristol/be-weird-be-wild-be-wonderful-play-hub-bristol\" class=\"text-purple-700 hover:underline\">Be Weird Be Wild Be Wonderful Play Hub</a></strong> and more.</li>\n</ul>\n<p>Filter Bristol by <a href=\"/soft-play/bristol/toddler\" class=\"text-purple-700 hover:underline\">toddler areas</a>, <a href=\"/soft-play/bristol/birthday-parties\" class=\"text-purple-700 hover:underline\">birthday parties</a> or <a href=\"/soft-play/bristol/sen-friendly\" class=\"text-purple-700 hover:underline\">SEN-friendly sessions</a>. Venues are only tagged when they confirm the facility, so a missing tag means we don't know, not that the venue lacks it.</p>\n\n<h2>Planning a visit with under-fives?</h2>\n<p>Read our <a href=\"/blog/baby-and-toddler-soft-play-uk\" class=\"text-purple-700 hover:underline\">UK baby and toddler soft play guide</a> for what a good toddler area has and how to pick quieter times.</p>\n\n<p>👉 <strong><a href=\"/soft-play/bristol\" class=\"text-purple-700 hover:underline\">See the full Bristol directory</a></strong></p>",
-    "faq": [
-      {
-        "q": "How many soft play centres are there in Bristol?",
-        "a": "We list 19 soft play centres in and around Bristol. The full list, with ratings and facilities, is on our Bristol page."
-      },
-      {
-        "q": "What is the best-reviewed soft play in Bristol?",
-        "a": "Tiny Town Play Cafe has the highest rating among venues we list with 20 or more reviews, at 5.0 stars from 20 reviews."
-      },
-      {
-        "q": "Which Bristol soft play centres have a toddler area?",
-        "a": "2 venues in our Bristol listings confirm a dedicated toddler area. Use the toddler filter on the Bristol page to see them."
-      },
-      {
-        "q": "Can I book a birthday party at soft play in Bristol?",
-        "a": "4 venues in our Bristol listings confirm they offer parties. Check each venue for packages and prices."
-      }
-    ]
-  },
-  {
     "slug": "best-soft-play-in-newcastle",
     "title": "Best Soft Play in Newcastle (2026 Parent Guide)",
     "city": "Newcastle",
