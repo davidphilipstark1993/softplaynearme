@@ -66,40 +66,6 @@ export const cityGuidePosts: BlogPost[] = [
     ]
   },
   {
-    "slug": "best-soft-play-in-birmingham",
-    "title": "Best Soft Play in Birmingham (2026 Parent Guide)",
-    "city": "Birmingham",
-    "excerpt": "Soft play in Birmingham from real data: 76 venues with ratings and the toddler, party and SEN facilities each one confirms. Honest parent guide.",
-    "publishedAt": "2026-02-18T00:00:00.000Z",
-    "updatedAt": "2026-11-12T00:00:00.000Z",
-    "datePublished": "2026-02-18T00:00:00.000Z",
-    "dateModified": "2026-11-12T00:00:00.000Z",
-    "verifiedOn": "3 November 2026",
-    "contentHtml": "<p>We list 76 soft play centres in and around Birmingham, and 66 of them have 20 or more Google reviews, enough to say something fair about how families rate them.</p>\n\n<p>This guide only states what we hold real data for: ratings, review counts and facilities the venue confirms. We leave out prices, age limits and opening times, because they change often and are best checked with the venue directly before you set off.</p>\n\n<blockquote>\n  <p>👉 <strong><a href=\"/soft-play/birmingham\" class=\"text-purple-700 hover:underline\">Browse every soft play centre in Birmingham with ratings and facilities</a></strong></p>\n</blockquote>\n\n<h2>The best-reviewed soft play in Birmingham</h2>\n<p><a href=\"/soft-play/cannock/little-brown-mouse-play-cafe\" class=\"text-purple-700 hover:underline\">Little Brown mouse play cafe</a> (Cannock) has the highest rating of any venue we list with 20+ reviews, at 4.9 stars. Ranked by rating, then by how many people have reviewed them:</p>\n<ul>\n  <li><strong><a href=\"/soft-play/cannock/little-brown-mouse-play-cafe\" class=\"text-purple-700 hover:underline\">Little Brown mouse play cafe</a></strong> (Cannock): 4.9 stars from 173 reviews.</li>\n  <li><strong><a href=\"/soft-play/birmingham/flamingoo-soft-play-birmingham\" class=\"text-purple-700 hover:underline\">Flamingoo Soft Play</a></strong>: 4.9 stars from 160 reviews.</li>\n  <li><strong><a href=\"/soft-play/birmingham/little-tinkers-birmingham\" class=\"text-purple-700 hover:underline\">Little Tinkers Birmingham</a></strong>: 4.9 stars from 138 reviews.</li>\n  <li><strong><a href=\"/soft-play/dudley/mini-monkeys-play-learn-centre-birmingham\" class=\"text-purple-700 hover:underline\">Mini Monkeys Play &amp; Learn Centre</a></strong>: 4.9 stars from 42 reviews.</li>\n  <li><strong><a href=\"/soft-play/stourbridge/little-lobsters-play-centre-birmingham\" class=\"text-purple-700 hover:underline\">Little Lobsters Play Centre</a></strong>: 4.8 stars from 110 reviews.</li>\n</ul>\n\n<h2>The busiest venues</h2>\n<p>Review volume is a good proxy for how many families actually go. <a href=\"/soft-play/stourbridge/zig-zags-play-and-party-birmingham\" class=\"text-purple-700 hover:underline\">Zig Zags Play and Party</a> (1,983 reviews, 4.6 stars), <a href=\"/soft-play/birmingham/the-play-station-birmingham\" class=\"text-purple-700 hover:underline\">The Play Station</a> (1,400 reviews, 4.1 stars) and <a href=\"/soft-play/birmingham/monster-mayhem-birmingham\" class=\"text-purple-700 hover:underline\">Monster Mayhem</a> (1,376 reviews, 4.1 stars) lead the list.</p>\n\n<h2>What each venue confirms</h2>\n<ul>\n  <li><strong>Dedicated toddler area</strong> (5): <strong><a href=\"/soft-play/west-bromwich/funky-monkeys-west-bromwich-birmingham\" class=\"text-purple-700 hover:underline\">Funky Monkeys West Bromwich</a></strong> and <strong><a href=\"/soft-play/dudley/mini-monkeys-play-learn-centre-birmingham\" class=\"text-purple-700 hover:underline\">Mini Monkeys Play &amp; Learn Centre</a></strong> and more.</li>\n  <li><strong>Birthday parties</strong> (9): <strong><a href=\"/soft-play/stourbridge/zig-zags-play-and-party-birmingham\" class=\"text-purple-700 hover:underline\">Zig Zags Play and Party</a></strong>, <strong><a href=\"/soft-play/stourbridge/scallywags-indoor-play-centre-birmingham\" class=\"text-purple-700 hover:underline\">Scallywags Indoor Play Centre</a></strong>, <strong><a href=\"/soft-play/smethwick/junglebugs-indoor-play-centre-and-party-zone-birmingham\" class=\"text-purple-700 hover:underline\">Junglebugs Indoor Play Centre and Party Zone</a></strong> and <strong><a href=\"/soft-play/cannock/little-brown-mouse-play-cafe\" class=\"text-purple-700 hover:underline\">Little Brown mouse play cafe</a></strong> (Cannock) and more.</li>\n  <li><strong>SEN-friendly</strong> (1): <strong><a href=\"/soft-play/birmingham/monster-mayhem-birmingham\" class=\"text-purple-700 hover:underline\">Monster Mayhem</a></strong>.</li>\n  <li><strong>Café</strong> (19): <strong><a href=\"/soft-play/birmingham/neverland-fun-house-under-new-management-birmingham\" class=\"text-purple-700 hover:underline\">Neverland Fun House (Under New Management)</a></strong>, <strong><a href=\"/soft-play/cannock/little-brown-mouse-play-cafe\" class=\"text-purple-700 hover:underline\">Little Brown mouse play cafe</a></strong> (Cannock), <strong><a href=\"/soft-play/tamworth/coffee-crepes-cafe-and-soft-play-birmingham\" class=\"text-purple-700 hover:underline\">Coffee &amp; Crepes (cafe and soft play)</a></strong> and <strong><a href=\"/soft-play/coventry/the-cube-coventry\" class=\"text-purple-700 hover:underline\">The Cube Coventry</a></strong> (Coventry) and more.</li>\n</ul>\n<p>Filter Birmingham by <a href=\"/soft-play/birmingham/toddler\" class=\"text-purple-700 hover:underline\">toddler areas</a>, <a href=\"/soft-play/birmingham/birthday-parties\" class=\"text-purple-700 hover:underline\">birthday parties</a> or <a href=\"/soft-play/birmingham/sen-friendly\" class=\"text-purple-700 hover:underline\">SEN-friendly sessions</a>. Venues are only tagged when they confirm the facility, so a missing tag means we don't know, not that the venue lacks it.</p>\n\n<h2>Planning a visit with under-fives?</h2>\n<p>Read our <a href=\"/blog/baby-and-toddler-soft-play-uk\" class=\"text-purple-700 hover:underline\">UK baby and toddler soft play guide</a> for what a good toddler area has and how to pick quieter times.</p>\n\n<p>👉 <strong><a href=\"/soft-play/birmingham\" class=\"text-purple-700 hover:underline\">See the full Birmingham directory</a></strong></p>",
-    "faq": [
-      {
-        "q": "How many soft play centres are there in Birmingham?",
-        "a": "We list 76 soft play centres in and around Birmingham. The full list, with ratings and facilities, is on our Birmingham page."
-      },
-      {
-        "q": "What is the best-reviewed soft play in Birmingham?",
-        "a": "Little Brown mouse play cafe has the highest rating among venues we list with 20 or more reviews, at 4.9 stars from 173 reviews."
-      },
-      {
-        "q": "Which Birmingham soft play centres have a toddler area?",
-        "a": "5 venues in our Birmingham listings confirm a dedicated toddler area. Use the toddler filter on the Birmingham page to see them."
-      },
-      {
-        "q": "Can I book a birthday party at soft play in Birmingham?",
-        "a": "9 venues in our Birmingham listings confirm they offer parties. Check each venue for packages and prices."
-      },
-      {
-        "q": "Is there SEN-friendly soft play in Birmingham?",
-        "a": "1 venue in our Birmingham listings are tagged SEN-friendly. Contact the venue to check session times and what support they offer."
-      }
-    ]
-  },
-  {
     "slug": "best-soft-play-in-bristol",
     "title": "Best Soft Play in Bristol (2026 Parent Guide)",
     "city": "Bristol",

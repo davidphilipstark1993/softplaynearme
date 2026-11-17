@@ -1916,7 +1916,7 @@
   },
   {
     "source": "/soft-play/birmingham/mini-me-children-s-role-play-centre-and-cafe-birmingham",
-    "destination": "/soft-play/birmingham/mini-me-children-s-role-play-centre-and-cafe",
+    "destination": "/soft-play/birmingham",
     "permanent": true
   },
   {
@@ -4946,7 +4946,7 @@
   },
   {
     "source": "/soft-play/birmingham/mini-me-children-s-role-play-centre-and-cafe-glasgow",
-    "destination": "/soft-play/birmingham/mini-me-children-s-role-play-centre-and-cafe",
+    "destination": "/soft-play/birmingham",
     "permanent": true
   },
   {
@@ -6912,6 +6912,26 @@
   {
     "source": "/blog/best-soft-play-in-nottingham",
     "destination": "/soft-play/nottingham",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/birmingham/mini-me-children-s-role-play-centre-and-cafe",
+    "destination": "/soft-play/birmingham",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/birmingham/mama-bears-co-soft-play-hire-birmingham",
+    "destination": "/soft-play/birmingham",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/birmingham/wiggle-s-soft-play-birmingham",
+    "destination": "/soft-play/birmingham",
+    "permanent": true
+  },
+  {
+    "source": "/blog/best-soft-play-in-birmingham",
+    "destination": "/soft-play/birmingham",
     "permanent": true
   }
 ]

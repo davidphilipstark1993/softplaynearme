@@ -370,6 +370,73 @@ const GUIDES: Record<string, HubGuide> = {
       },
     ],
   },
+
+  birmingham: {
+    // From our listings (Google Places addresses and types, checked 17 November 2026).
+    kind: 'listings',
+    contentUpdated: '2026-11-17',
+    keepGenericFaqs: [/^How many soft play/, /best rated/],
+    nearbyHubs: [
+      { slug: 'solihull', label: 'Solihull' },
+      { slug: 'walsall', label: 'Walsall' },
+      { slug: 'dudley', label: 'Dudley' },
+      { slug: 'coventry', label: 'Coventry' },
+    ],
+    sections: [
+      {
+        heading: 'Soft play in Birmingham: where it is',
+        paragraphs: [
+          "Near the city centre, [360 Play](/soft-play/birmingham/360-play-birmingham) and [Rock Up](/soft-play/birmingham/rock-up-birmingham), which combines climbing with soft play, share Broadway Plaza on Ladywood Middleway, and [Teenie Weenies](/soft-play/birmingham/teenie-weenies-softplay-and-nursery-birmingham) is on Park Street. East of the centre are [Monster Mayhem](/soft-play/birmingham/monster-mayhem-birmingham) at Star City, [Bounce Mania](/soft-play/birmingham/bounce-mania-birmingham), [The Play Station](/soft-play/birmingham/the-play-station-birmingham) in Saltley, [Inflata Nation](/soft-play/birmingham/inflata-nation-inflatable-theme-park) at Stechford Retail Park, [Tumble & Giggle](/soft-play/birmingham/tumble-giggle-birmingham) in Yardley and the Fuzzy Ed's at [St Bernards Grange](/soft-play/birmingham/fuzzy-eds-st-bernards-grange-sheldon) in Sheldon.",
+          "South Birmingham has the most choice: [Air Nation](/soft-play/birmingham/air-nation-birmingham) and [Berzerk Active Play](/soft-play/birmingham/berzerk-active-play) in Kings Heath, [The Soft Play Café](/soft-play/birmingham/the-soft-play-caf-birmingham) in Stirchley, [Humpty Dumpty's](/soft-play/birmingham/humpty-dumpty-s-birmingham) in Selly Oak, [Little Tinkers](/soft-play/birmingham/little-tinkers-birmingham) in Weoley Castle, [Treasure Island](/soft-play/birmingham/treasure-island-play-ltd-birmingham) on the Bristol Road and [Little Dots Play Village](/soft-play/birmingham/little-dots-play-village-birmingham) near Maypole. Harborne has [The Little High Street](/soft-play/birmingham/the-little-high-street) and the [Old House At Home Wacky Warehouse](/soft-play/birmingham/old-house-at-home-wacky-warehouse-birmingham). In the north, Erdington has [Flamingoo](/soft-play/birmingham/flamingoo-soft-play-birmingham), [Neverland Fun House](/soft-play/birmingham/neverland-fun-house-under-new-management-birmingham) and [Party and Play](/soft-play/birmingham/party-and-play), and Great Barr has [Wibbly Wobbly World of Play](/soft-play/birmingham/wibbly-wobbly-world-of-play-birmingham) and [Grapevine](/soft-play/birmingham/grapevine-soft-play-great-barr).",
+        ],
+      },
+      {
+        heading: 'Inflatable parks, trampolines and climbing',
+        paragraphs: [
+          "For older children, Inflata Nation in Stechford and Air Nation in Kings Heath are inflatable parks, and Rock Up adds climbing walls to its soft play. Birmingham's trampoline parks, [AirHop](/soft-play/birmingham/airhop-adventure-trampoline-park-birmingham-formerly-rush-birmingham) in Kings Norton and [Gravity Active](/soft-play/birmingham/gravity-active) at Star City, are listed under other family activities.",
+        ],
+      },
+      {
+        heading: 'Toddlers, SEN and play cafés',
+        paragraphs: [
+          "The Soft Play Café in Stirchley, Little latte Land in Quinton and The Little High Street in Harborne are smaller, café-style venues that suit toddlers. Fuzzy Ed's at St Bernards Grange is listed with a toddler area. Monster Mayhem and Rock Up are listed with SEN sessions; ask either venue for current times.",
+        ],
+      },
+      {
+        heading: 'Just outside Birmingham',
+        paragraphs: [
+          "Venues in nearby towns are listed separately below the Birmingham list: [Pippatopia](/soft-play/birmingham/pippatopia-smethwick) in Smethwick (ages 0–7), [360 Play](/soft-play/birmingham/360-play-redditch) and [Monster Mayhem](/soft-play/birmingham/monster-mayhem-redditch) in Redditch, [Imagination Street](/soft-play/birmingham/imagination-street-redditch) at Astwood Bank and the [Wacky Warehouse at The Broadway](/soft-play/birmingham/wacky-warehouse-broadway-willenhall) in Willenhall. See also [soft play in Solihull](/soft-play/solihull) and [soft play in Walsall](/soft-play/walsall).",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Where is soft play in south Birmingham?',
+        answer:
+          "South Birmingham has the most choice: Air Nation and Berzerk Active Play in Kings Heath, The Soft Play Café in Stirchley, Humpty Dumpty's in Selly Oak, Little Tinkers in Weoley Castle, Treasure Island on the Bristol Road and Little Dots Play Village near Maypole. AirHop trampoline park is in Kings Norton.",
+      },
+      {
+        question: 'Where is soft play in north Birmingham and Erdington?',
+        answer:
+          "Erdington has Flamingoo, Neverland Fun House and Party and Play, and Great Barr has Wibbly Wobbly World of Play and Grapevine. Fuzzy Ed's at the Hare & Hounds is at Minworth, near Sutton Coldfield.",
+      },
+      {
+        question: 'Are there trampoline and inflatable parks in Birmingham?',
+        answer:
+          "Yes. AirHop in Kings Norton and Gravity Active at Star City are trampoline parks, and Inflata Nation in Stechford and Air Nation in Kings Heath are inflatable parks. Rock Up on Ladywood Middleway combines climbing walls with soft play.",
+      },
+      {
+        question: 'Is there SEN-friendly soft play in Birmingham?',
+        answer:
+          "Monster Mayhem at Star City and Rock Up Birmingham are listed with SEN sessions. Session times change, so ask the venue which sessions are quieter or SEN-only.",
+      },
+      {
+        question: 'Where can I have a kids party in Birmingham?',
+        answer:
+          "360 Play and Rock Up on Ladywood Middleway, Party and Play in Erdington, Little Tinkers in Weoley Castle and Grapevine in Great Barr are all listed for parties. Packages and prices are set by each venue, so ask them directly.",
+      },
+    ],
+  },
 }
 
 /**

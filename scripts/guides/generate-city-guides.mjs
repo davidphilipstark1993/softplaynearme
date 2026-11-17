@@ -12,7 +12,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..')
 const CITIES = [
   { slug: 'manchester', name: 'Manchester', area: 'Greater Manchester' },
   { slug: 'liverpool', name: 'Liverpool', area: 'Merseyside' },
-  { slug: 'birmingham', name: 'Birmingham', area: 'the West Midlands' },
+  // birmingham: merged into /soft-play/birmingham (301) in Nov 2026, so not generated
   { slug: 'bristol', name: 'Bristol', area: 'the surrounding area' },
   { slug: 'newcastle', name: 'Newcastle', area: 'Tyneside' },
 ]
