@@ -1,5 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
+import fs from 'node:fs'
 import { registerTsResolver } from './ts-resolve-hook.mjs'
 
 const canStripTypes = Number(process.versions.node.split('.')[0]) >= 22
@@ -144,4 +145,10 @@ test('guide hubs: every link in a guide goes to a live venue, hub or blog post (
       assert.ok(venues.has(href) || hubs.has(href) || posts.has(href), `${city}: ${href} is not a live page`)
     }
   }
+})
+
+test('sitemap only lists filter pages for hubs that have them (data/cities.json)', () => {
+  const src = fs.readFileSync(new URL('../app/sitemap.ts', import.meta.url), 'utf8')
+  assert.match(src, /hasFilterPages = !!getCityBySlug\(city\)/)
+  assert.match(src, /for \(const filter of hasFilterPages \? filters : \[\]\)/)
 })

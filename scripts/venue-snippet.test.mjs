@@ -15,6 +15,7 @@ test('names: notes, straplines and shouting removed; real names left alone', { s
   assert.equal(c('5 ALIVE BRADFORD Adventure Soft Play Centre/ INDOOR FOOTBALL (SEE WEBSITE FOR OPERATING HOURS)'), '5 Alive Bradford Adventure Soft Play Centre')
   assert.equal(c('The Hidden Village Keighley: Role-play Village, Sensory Room & Café'), 'The Hidden Village Keighley')
   assert.equal(c('Immersive Gamebox - Arndale, Manchester'), 'Immersive Gamebox')
+  assert.equal(c('The Eden Centre - Blackwood'), 'The Eden Centre - Blackwood', 'a branch name is kept, so branches differ')
   assert.equal(c('SHWEET SOFT PLAY'), 'Shweet Soft Play')
   assert.equal(c('Jungle boogie walsall'), 'Jungle Boogie Walsall')
   assert.equal(c("CJ's Funhouse"), "CJ's Funhouse")

@@ -30,6 +30,8 @@ const SHORT: Record<DayKey, string> = { monday: 'Mon', tuesday: 'Tue', wednesday
 
 // ── Names ────────────────────────────────────────────────────────────────────────────
 
+// Words that make a dash-tail a description ("- Indoor Softplay", "- Farmhouse Inns"), not a branch name.
+const GENERIC_TAIL = /\b(play|soft|softplay|centre|center|cafe|café|fun|park|inns?|pub|wetherspoon|leisure|hire|inflatables?|indoor|outdoor|parties|party|venue|classes|room|club|city)\b/i
 const SMALL_WORDS = new Set(['a', 'an', 'and', 'at', 'by', 'for', 'in', 'of', 'on', 'or', 'the', 'to', 'with', 'de'])
 const NOTE_IN_BRACKETS = /\s*\((?=[^)]*\b(see|website|hours|open|opening|call|book|booking|closed|temporarily|now)\b)[^)]*\)?/gi
 
@@ -46,7 +48,11 @@ export function cleanVenueName(raw: string): string {
   const shouted = letters.length >= 8 && upper.length / letters.length > 0.6
   n = n.replace(NOTE_IN_BRACKETS, '').trim()
   // A strapline after "/", "|", ":" or a spaced dash. Keep the first part if it is a name.
-  const head = n.split(/\s*[/|]\s*|:\s+|\s[-–—]\s/)[0].trim()
+  // A short tail after a spaced dash is a branch ("The Eden Centre - Blackwood"): keep it,
+  // or two branches get the same title. A longer or comma'd tail is a strapline.
+  const dash = n.match(/^(.*?)\s[-–—]\s(.+)$/)
+  const branchTail = !!dash && !dash[2].includes(',') && dash[2].split(/\s+/).length <= 2 && !GENERIC_TAIL.test(dash[2])
+  const head = (branchTail ? n.split(/\s*[/|]\s*|:\s+/) : n.split(/\s*[/|]\s*|:\s+|\s[-–—]\s/))[0].trim()
   if (head.length >= 3 && head !== n) n = head
   n = n
     .split(' ')
