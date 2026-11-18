@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { getAllCitySlugs, filters } from '@/lib/venues'
+import { getAllCitySlugs, getCityBySlug, filters } from '@/lib/venues'
 import { getPool } from '@/lib/pool'
 import { getAllStaticTownSlugs, getStaticVenuesByTown } from '@/lib/staticVenues'
 import { blogPosts } from '@/lib/blogPosts'
@@ -195,7 +195,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       })
     }
 
-    for (const filter of filters) {
+    // Filter pages only exist for hubs in data/cities.json (FilterPageContent 404s for
+    // static-export-only towns such as Derby or Chester), so only list those.
+    const hasFilterPages = !!getCityBySlug(city)
+    for (const filter of hasFilterPages ? filters : []) {
       // /open-now pages are noindex,follow (their result set is time-of-day
       // dependent, so they're never a stable, indexable URL) — listing a
       // noindex URL in the sitemap is a mixed signal to Google, same reason
