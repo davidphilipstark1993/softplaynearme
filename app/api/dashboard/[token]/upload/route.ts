@@ -39,15 +39,23 @@ export async function POST(
     client = await getPool().connect()
 
     const claimResult = await client.query(
-      `SELECT city_slug, venue_slug FROM venue_claims WHERE access_token = $1 LIMIT 1`,
+      `SELECT city_slug, venue_slug, status FROM venue_claims WHERE access_token = $1 LIMIT 1`,
       [token]
     )
     if (claimResult.rows.length === 0) {
       return NextResponse.json({ error: 'Invalid token' }, { status: 403 })
     }
-    const { city_slug, venue_slug } = claimResult.rows[0]
+    const { city_slug, venue_slug, status } = claimResult.rows[0]
     if (!city_slug || !venue_slug) {
       return NextResponse.json({ error: 'No venue linked to this claim yet' }, { status: 400 })
+    }
+    // Only an approved claim may change a live listing. The access token is handed out the
+    // moment anyone submits a claim, so without this check anyone could edit any venue.
+    if (status !== 'approved') {
+      return NextResponse.json(
+        { error: 'Your claim is awaiting review. You can edit the listing once we have approved it (usually within 1 working day).' },
+        { status: 403 }
+      )
     }
 
     const formData = await request.formData()
