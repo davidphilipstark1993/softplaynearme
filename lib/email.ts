@@ -660,3 +660,82 @@ export async function sendRenewalReminderEmail(opts: RenewalReminderEmailOptions
 
   await sendEmail(opts.to, `Your ${opts.venueName} Premium renews on ${renewsDate}`, html)
 }
+
+// ─── Owner claim flow (phase 15-01) ───────────────────────────────────────────
+// Plain, short emails: one button, no images. Sign-in links are single use and expire in
+// 24 hours (lib/claims/tokens.ts).
+
+const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+
+function ownerEmailHtml(opts: { heading: string; paragraphs: string[]; buttonText?: string; buttonUrl?: string; footnote?: string }): string {
+  const button = opts.buttonUrl
+    ? `<p style="margin:24px 0"><a href="${opts.buttonUrl}" style="background:#7c3aed;color:#fff;text-decoration:none;padding:12px 20px;border-radius:8px;font-weight:600;display:inline-block">${esc(opts.buttonText ?? 'Continue')}</a></p>
+       <p style="font-size:12px;color:#64748b;margin:0 0 16px">Or paste this link into your browser: ${opts.buttonUrl}</p>`
+    : ''
+  return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#f8fafc;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#1e293b">
+<div style="max-width:520px;margin:0 auto;padding:32px 16px"><div style="background:#fff;border-radius:12px;padding:28px;border:1px solid #e2e8f0">
+<h1 style="font-size:18px;margin:0 0 16px">${esc(opts.heading)}</h1>
+${opts.paragraphs.map((p) => `<p style="font-size:15px;line-height:1.5;margin:0 0 12px">${p}</p>`).join('\n')}
+${button}
+${opts.footnote ? `<p style="font-size:12px;color:#64748b;margin:16px 0 0">${opts.footnote}</p>` : ''}
+</div><p style="font-size:12px;color:#94a3b8;text-align:center;margin:16px 0 0">Soft Play Near Me · softplaynearme.co.uk</p></div></body></html>`
+}
+
+export async function sendOwnerSignInEmail(opts: { to: string; ownerName: string; venueName: string; signInUrl: string; pendingReview?: boolean }): Promise<void> {
+  const paragraphs = [
+    `Hi ${esc(opts.ownerName)},`,
+    opts.pendingReview
+      ? `Thanks for claiming <strong>${esc(opts.venueName)}</strong> on Soft Play Near Me. Please confirm your email address with the button below. We check claims from addresses that don't match the venue's website by hand, and will confirm within 1 working day.`
+      : `Use the button below to sign in and manage <strong>${esc(opts.venueName)}</strong> on Soft Play Near Me. It's free, and there's no password.`,
+  ]
+  await sendEmail(opts.to, `${opts.pendingReview ? 'Confirm your email' : 'Your sign-in link'}: ${opts.venueName}`, ownerEmailHtml({
+    heading: opts.pendingReview ? 'Confirm your email address' : 'Sign in to your listing',
+    paragraphs,
+    buttonText: opts.pendingReview ? 'Confirm my email' : 'Sign in',
+    buttonUrl: opts.signInUrl,
+    footnote: "This link works once and expires in 24 hours. If you didn't ask for it, you can ignore this email.",
+  }))
+}
+
+export async function sendClaimApprovedEmail(opts: { to: string; ownerName: string; venueName: string; signInUrl: string }): Promise<void> {
+  await sendEmail(opts.to, `You're verified: ${opts.venueName}`, ownerEmailHtml({
+    heading: "You're verified",
+    paragraphs: [
+      `Hi ${esc(opts.ownerName)},`,
+      `We've verified you as the owner of <strong>${esc(opts.venueName)}</strong>. Your listing now shows a "Verified by owner" badge, and you can add prices, sessions, party packages, photos and events yourself.`,
+    ],
+    buttonText: 'Sign in and update your listing',
+    buttonUrl: opts.signInUrl,
+    footnote: 'This link works once and expires in 24 hours. You can always request a new one at softplaynearme.co.uk/owner/login.',
+  }))
+}
+
+export async function sendAdminClaimReviewEmail(opts: {
+  claimantName: string
+  claimantEmail: string
+  role: string
+  venueName: string
+  venueUrl: string
+  website: string | null
+  reason: string
+}): Promise<void> {
+  await sendEmail('david@softplaynearme.co.uk', `Claim to review: ${opts.venueName}`, ownerEmailHtml({
+    heading: 'A claim needs a manual check',
+    paragraphs: [
+      `<strong>${esc(opts.claimantName)}</strong> (${esc(opts.role)}) &lt;${esc(opts.claimantEmail)}&gt; claimed <a href="${opts.venueUrl}">${esc(opts.venueName)}</a>.`,
+      `Venue website: ${opts.website ? esc(opts.website) : '(none on file)'}. Why it needs a check: ${esc(opts.reason)}.`,
+    ],
+    buttonText: 'Open the review queue',
+    buttonUrl: 'https://www.softplaynearme.co.uk/admin/owners',
+  }))
+}
+
+/**
+ * Monthly "your listing stats" email for owners. The figures come from first-party
+ * venue_page_events (see sendMonthlyInsightsEmail and /api/admin/insights/monthly, which
+ * already sends this to claimed venues); GA4 per-page data can be added here later.
+ */
+export async function sendOwnerMonthlyStatsEmail(opts: MonthlyInsightsEmailOptions): Promise<void> {
+  await sendMonthlyInsightsEmail(opts)
+}

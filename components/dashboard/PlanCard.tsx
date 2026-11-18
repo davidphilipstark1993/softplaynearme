@@ -105,8 +105,8 @@ export function PlanCard({ token, venueId, plan, planStatus, stripeCustomerId }:
       {plan === 'free' ? (
         <>
           <p className="text-sm text-slate-500 mt-1 mb-4">
-            You&apos;re on the Free plan — free forever. Upgrade for a Verified badge,
-            featured placement, and lead notifications straight to your inbox.
+            You&apos;re on the Free plan — free forever. Upgrade for featured placement,
+            extra photos, and lead notifications straight to your inbox.
           </p>
 
           <div className="inline-flex items-center rounded-lg border border-slate-200 p-0.5 mb-3 text-sm">

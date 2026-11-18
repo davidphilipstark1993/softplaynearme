@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="56" viewBox="0 0 200 56" role="img" aria-label="Find us on Soft Play Near Me">
+  <rect width="200" height="56" rx="10" fill="#7c3aed"/>
+  <circle cx="28" cy="28" r="14" fill="#fff"/>
+  <path d="M21 31c2 4 12 4 14 0" stroke="#7c3aed" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <circle cx="23.5" cy="24" r="2" fill="#7c3aed"/><circle cx="32.5" cy="24" r="2" fill="#7c3aed"/>
+  <text x="52" y="24" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#ede9fe">Find us on</text>
+  <text x="52" y="41" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700" fill="#fff">Soft Play Near Me</text>
+</svg>

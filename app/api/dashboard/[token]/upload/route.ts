@@ -49,9 +49,17 @@ export async function POST(
     if (!city_slug || !venue_slug) {
       return NextResponse.json({ error: 'No venue linked to this claim yet' }, { status: 400 })
     }
+    // Listing edits moved to the owner dashboard (/owner, sign-in links; owner data kept in
+    // venue_owner_data so Google refreshes can't overwrite it). This endpoint no longer writes.
+    if (process.env.LEGACY_DASHBOARD_EDITS !== 'on') {
+      return NextResponse.json(
+        { error: 'Editing has moved. Request a sign-in link at https://www.softplaynearme.co.uk/owner/login to update your listing.', moved: '/owner/login' },
+        { status: 410 }
+      )
+    }
     // Only an approved claim may change a live listing. The access token is handed out the
     // moment anyone submits a claim, so without this check anyone could edit any venue.
-    if (status !== 'approved') {
+    if (status !== 'approved' && status !== 'verified') {
       return NextResponse.json(
         { error: 'Your claim is awaiting review. You can edit the listing once we have approved it (usually within 1 working day).' },
         { status: 403 }

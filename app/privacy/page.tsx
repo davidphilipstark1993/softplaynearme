@@ -41,7 +41,7 @@ export default function PrivacyPage() {
         <h1 className="text-3xl font-bold mb-8">Privacy Policy</h1>
 
         <div className="prose prose-slate max-w-none space-y-6 text-slate-600">
-          <p className="text-sm text-slate-500">Last updated: February 2025</p>
+          <p className="text-sm text-slate-500">Last updated: November 2026</p>
 
           <h2 className="text-xl font-semibold text-slate-900 mt-8">Who we are</h2>
           <p>
@@ -57,6 +57,19 @@ export default function PrivacyPage() {
             <li><strong>Contact emails:</strong> If you email us (e.g. to add a venue or report an error), we store your email address and message to respond to your enquiry.</li>
           </ul>
 
+          <h2 className="text-xl font-semibold text-slate-900 mt-8">Venue owners</h2>
+          <p>If you claim or manage a venue listing, we collect and use:</p>
+          <ul className="list-disc pl-6 space-y-2">
+            <li><strong>Your contact details:</strong> your name, role at the venue and email address, to verify that you represent the venue, send you sign-in links, and contact you about your listing. We compare your email domain with the venue&apos;s website and may check claims by hand.</li>
+            <li><strong>What you add to the listing:</strong> prices, opening hours, sessions, party information, events, descriptions and photos. These are published on your venue&apos;s page. Photos are re-encoded and stripped of location and camera data when you upload them.</li>
+            <li><strong>A record of edits:</strong> each change is logged with the date and who made it, so we can check and undo edits if needed.</li>
+            <li><strong>Security data:</strong> a one-way hash of your IP address when you submit a claim, to limit abuse. We do not store the address itself.</li>
+            <li><strong>Sign-in cookie:</strong> after you use a sign-in link, an essential cookie (owner_session) keeps you signed in for up to 30 days. It isn&apos;t used for tracking.</li>
+          </ul>
+          <p>
+            Our lawful basis is legitimate interests: keeping venue listings accurate and letting venues manage their own information. We keep owner contact details while you manage the listing and for up to 2 years after your last sign-in, unless you ask us to delete them sooner. We use Resend and SendGrid to send emails, and Vercel Blob to store photos.
+          </p>
+
           <h2 className="text-xl font-semibold text-slate-900 mt-8">Cookies</h2>
           <p>
             Our site uses cookies from Google Analytics to measure website traffic and understand how visitors interact with the site. These are third-party cookies that do not contain personal information. You can control cookie settings through your browser preferences.
@@ -68,12 +81,13 @@ export default function PrivacyPage() {
             <li><strong>Google Analytics:</strong> For anonymised website traffic analysis.</li>
             <li><strong>Google Maps:</strong> For venue maps and directions.</li>
             <li><strong>Postcodes.io:</strong> For postcode geocoding (converting postcodes to coordinates for search).</li>
-            <li><strong>Vercel:</strong> For website hosting.</li>
+            <li><strong>Vercel:</strong> For website hosting and photo storage.</li>
+            <li><strong>Resend and SendGrid:</strong> For sending emails, such as sign-in links to venue owners.</li>
           </ul>
 
           <h2 className="text-xl font-semibold text-slate-900 mt-8">Your rights</h2>
           <p>
-            Under UK data protection law (UK GDPR), you have the right to access, correct, or delete any personal data we hold about you. Since we collect minimal personal data, this primarily applies to any emails you have sent us. To exercise these rights, please contact us at{' '}
+            Under UK data protection law (UK GDPR), you have the right to access, correct, or delete any personal data we hold about you. This applies to any emails you have sent us and, for venue owners, the contact details described above. To exercise these rights, please contact us at{' '}
             <a href="mailto:info@softplaynearme.co.uk" className="text-purple-600 hover:underline">info@softplaynearme.co.uk</a>.
           </p>
 

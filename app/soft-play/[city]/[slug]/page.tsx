@@ -57,6 +57,9 @@ import { AdSlot } from '@/components/ads/AdSlot'
 import { VenueViewTracking } from '@/components/venue/VenueViewTracking'
 import { cleanHoursText, hasOpeningHours, hasStructuredHours } from '@/lib/venueFacts'
 import { getVenueTown } from '@/lib/localities'
+import { getOwnerData } from '@/lib/claims/db'
+import { mergeOwnerData, upcomingEvents, priceLines, type OwnerData } from '@/lib/ownerData'
+import { ClaimCta } from '@/components/owner/ClaimCta'
 
 interface PageProps {
   params: Promise<{ city: string; slug: string }>
@@ -125,6 +128,8 @@ interface Venue {
   review_count?: number
   // Ownership
   claimed_by_owner?: boolean
+  /** The owner's own data (venue_owner_data), already merged into the fields above. */
+  _owner?: OwnerData | null
   owner_submitted?: boolean
   // SEO overrides
   seo_title?: string
@@ -219,7 +224,7 @@ const getVenue = cache(async function getVenue(citySlug: string, slug: string): 
           // Table may not exist yet in an environment that hasn't run the
           // migration — never let this break the page render.
         }
-        return {
+        const base = {
           ...row,
           // Imports left a few rows holding the literal "nan" / "https://nan"
           // placeholder; treat those as no website so no dead link renders.
@@ -228,6 +233,10 @@ const getVenue = cache(async function getVenue(citySlug: string, slug: string): 
             : row.website,
           featured: !!row.featured && (!row.featured_until || new Date(row.featured_until) > new Date()),
         }
+        // Owner data (venue_owner_data) wins over the Google / generated base row. It lives
+        // in its own table, so no ingest or enrichment script can overwrite it.
+        const owner = await getOwnerData(row.id)
+        return { ...mergeOwnerData(base, owner), _owner: owner }
       }
       // A real query that simply found nothing (wrong slug, or a venue that
       // exists but is_active = false) must 404 — it must NOT fall through to
@@ -722,7 +731,10 @@ export default async function VenuePage({ params }: PageProps) {
 
   const baseUrl = 'https://www.softplaynearme.co.uk'
   const usablePhotos = photos.filter((p) => isUsablePhotoUrl(p.url))
-  const galleryPhotos = usablePhotos.length > 0
+  const ownerPhotos = (venue._owner?.photos ?? []).map((url, i) => ({ id: -1 - i, url, alt_text: `${venue.name}, photo from the venue`, is_primary: i === 0 }))
+  const galleryPhotos = ownerPhotos.length > 0
+    ? [...ownerPhotos, ...usablePhotos.filter((p) => !ownerPhotos.some((o) => o.url === p.url))]
+    : usablePhotos.length > 0
     ? usablePhotos
     : isUsablePhotoUrl(venue.main_image_url)
       ? [{ id: 0, url: venue.main_image_url, alt_text: `${venue.name} soft play area`, is_primary: true }]
@@ -819,13 +831,21 @@ export default async function VenuePage({ params }: PageProps) {
                   )}
                   {isVerified(venue) && (
                     <Badge className="bg-blue-500 text-white inline-flex items-center gap-1">
-                      <CheckCircle2 className="w-3 h-3" /> Verified
+                      <CheckCircle2 className="w-3 h-3" /> Verified by owner
                     </Badge>
                   )}
                 </div>
                 <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
                   {venue.name} <span className="text-purple-200 font-normal text-xl sm:text-2xl md:text-3xl">| Soft Play in {homeTown}</span>
                 </h1>
+                {!venue.claimed_by_owner && typeof venue.id === 'number' && venue.id > 0 && (
+                  <p className="text-sm text-purple-100 mb-2">
+                    Is this your venue?{' '}
+                    <ClaimCta citySlug={city} slug={slug} placement="top" className="font-semibold text-white underline underline-offset-2">
+                      Claim it free
+                    </ClaimCta>
+                  </p>
+                )}
                 {formatAddressLine(venue.address, venue.postcode) && (
                   <div className="flex items-center gap-2 text-purple-100">
                     <MapPin className="w-5 h-5" />
@@ -948,6 +968,50 @@ export default async function VenuePage({ params }: PageProps) {
                 wheelchairAccess={venue.wheelchair_access}
                 disabledAccess={venue.disabled_access}
               />
+
+              {/* From the owner: only what a verified owner has added (venue_owner_data) */}
+              {(() => {
+                const o = venue._owner
+                if (!o) return null
+                const prices = priceLines(o.prices)
+                const events = upcomingEvents(o.events)
+                const rows: Array<[string, string]> = [
+                  ...(prices.length ? [['Prices', prices.join(' · ') + (o.prices?.notes ? `. ${o.prices.notes}` : '')] as [string, string]] : []),
+                  ...(o.toddler_sessions ? [['Toddler sessions', o.toddler_sessions] as [string, string]] : []),
+                  ...(o.sen_sessions ? [['SEN and quiet sessions', o.sen_sessions] as [string, string]] : []),
+                  ...(o.party_packages ? [['Parties', o.party_packages] as [string, string]] : []),
+                ]
+                if (!rows.length && !events.length) return null
+                return (
+                  <section aria-labelledby="owner-heading" className="bg-white rounded-lg border border-slate-200 p-6">
+                    <h2 id="owner-heading" className="font-semibold text-lg mb-1">From {venue.name}</h2>
+                    <p className="text-xs text-slate-500 mb-4">Added by the venue&apos;s verified owner.</p>
+                    {rows.length > 0 && (
+                      <dl className="space-y-3 text-sm">
+                        {rows.map(([k, v]) => (
+                          <div key={k}>
+                            <dt className="font-medium text-slate-800">{k}</dt>
+                            <dd className="text-slate-600 whitespace-pre-line">{v}</dd>
+                          </div>
+                        ))}
+                      </dl>
+                    )}
+                    {events.length > 0 && (
+                      <div className="mt-4">
+                        <h3 className="font-medium text-slate-800 mb-2">Coming up</h3>
+                        <ul className="space-y-2 text-sm">
+                          {events.map((e) => (
+                            <li key={`${e.date}-${e.title}`}>
+                              <time dateTime={e.date} className="font-medium">{new Date(`${e.date}T12:00:00`).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' })}</time>
+                              {' '}{e.title}{e.description ? `: ${e.description}` : ''}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </section>
+                )
+              })()}
 
               {/* About – always shown; renders stored multi-paragraph description */}
               <section aria-labelledby="about-heading" className="bg-white rounded-lg border border-slate-200 p-6">
@@ -1295,7 +1359,8 @@ export default async function VenuePage({ params }: PageProps) {
                 </section>
               )}
 
-              {/* Venue Owner Section */}
+              {/* Venue Owner Section (unclaimed listings only) */}
+              {!venue.claimed_by_owner && (
               <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg border border-green-200 p-6">
                 <h2 className="font-semibold text-lg text-green-800 mb-3">
                   Venue Owners: Manage Your Listing
@@ -1323,11 +1388,12 @@ export default async function VenuePage({ params }: PageProps) {
                   </li>
                 </ul>
                 <Button asChild className="bg-green-600 hover:bg-green-700">
-                  <Link href={`/add-venue?venue=${encodeURIComponent(venue.name)}&city=${city}&slug=${slug}`}>
+                  <ClaimCta citySlug={city} slug={slug} placement="owner-section">
                     Claim Your Free Listing
-                  </Link>
+                  </ClaimCta>
                 </Button>
               </div>
+              )}
             </article>
 
             {/* Sidebar */}
@@ -1442,9 +1508,9 @@ export default async function VenuePage({ params }: PageProps) {
                         )}
                         {typeof venue.id === 'number' && (
                           <Button variant="outline" size="sm" asChild>
-                            <Link href={`/add-venue?venue=${encodeURIComponent(venue.name)}&city=${city}&slug=${slug}`}>
+                            <ClaimCta citySlug={city} slug={slug} placement="hours-card">
                               Know the hours? Update this listing
-                            </Link>
+                            </ClaimCta>
                           </Button>
                         )}
                       </div>
@@ -1452,7 +1518,8 @@ export default async function VenuePage({ params }: PageProps) {
                   </Card>
                 )}
 
-                {/* Claim Venue CTA */}
+                {/* Claim Venue CTA (unclaimed listings only) */}
+                {!venue.claimed_by_owner && (
                 <Card className="border-green-200 bg-green-50">
                   <CardHeader className="pb-3">
                     <CardTitle className="text-lg text-green-800">Own this venue?</CardTitle>
@@ -1463,15 +1530,16 @@ export default async function VenuePage({ params }: PageProps) {
                       and manage your venue profile.
                     </p>
                     <Button asChild className="w-full bg-green-600 hover:bg-green-700">
-                      <Link href={`/add-venue?venue=${encodeURIComponent(venue.name)}&city=${city}&slug=${slug}`}>
+                      <ClaimCta citySlug={city} slug={slug} placement="sidebar">
                         Claim This Venue (Free)
-                      </Link>
+                      </ClaimCta>
                     </Button>
                     <p className="text-xs text-green-600 text-center">
                       No cost, no obligation
                     </p>
                   </CardContent>
                 </Card>
+                )}
               </div>
             </div>
           </div>
