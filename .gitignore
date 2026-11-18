@@ -36,3 +36,7 @@ scripts/.discover-cache-*.json
 
 # Local SEO working data (GSC exports, plans) — private, never commit
 /seo-data/
+
+# DB migration backups: full venue rows (contact emails, phones). Kept locally for
+# --rollback, never committed (public repo). Older ones already tracked stay tracked.
+scripts/output/backups/
