@@ -262,5 +262,57 @@
     "retire": [],
     "reclassify": [],
     "postcodes": []
+  },
+  "brighton": {
+    "retire": [],
+    "reclassify": [],
+    "postcodes": [
+      {
+        "id": 914,
+        "slug": "funplay-leisure",
+        "postcode": "BN2 5UT"
+      },
+      {
+        "id": 791,
+        "slug": "monkey-bizness-lewes",
+        "postcode": "BN8 6JL"
+      },
+      {
+        "id": 897,
+        "slug": "sharkys",
+        "postcode": "BN5 9QB"
+      }
+    ]
+  },
+  "worthing": {
+    "retire": [],
+    "reclassify": [],
+    "postcodes": [
+      {
+        "id": 907,
+        "slug": "harbour-park-indoor-soft-play",
+        "postcode": "BN17 5LH"
+      },
+      {
+        "id": 899,
+        "slug": "out-of-bounds",
+        "postcode": "BN16 4NB"
+      },
+      {
+        "id": 874,
+        "slug": "space-station-soft-play-ltd",
+        "postcode": "BN15 8FB"
+      },
+      {
+        "id": 894,
+        "slug": "the-lighthouse-soft-play-and-cafe",
+        "postcode": "BN14 7TN"
+      },
+      {
+        "id": 901,
+        "slug": "the-little-play-village",
+        "postcode": "BN12 6HZ"
+      }
+    ]
   }
 }
