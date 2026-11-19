@@ -388,41 +388,18 @@ async function getPhotos(venueId: number): Promise<Photo[]> {
 
 export const revalidate = 3600
 
-/** Pre-render venue pages from static data */
+/**
+ * Venue pages are not pre-rendered at build time. Each one renders from the
+ * database on its first visit after a deploy, then is cached for `revalidate`.
+ *
+ * Production builds run with SOFTPLAY_STATIC_BUILD=1, so pre-rendering here
+ * produced pages from data/generated/ with no venue id and no owner data
+ * (venue_owner_data). Every deploy then served those for up to an hour,
+ * hiding owners' photos, prices and events and showing the claim prompt on
+ * venues that are already claimed.
+ */
 export async function generateStaticParams() {
-  const params: { city: string; slug: string }[] = []
-
-  // From DB
-  try {
-    const pool = getPool()
-    const client = await pool.connect()
-    try {
-      const result = await client.query('SELECT city_slug, slug FROM venues WHERE is_active = true')
-      for (const row of result.rows) {
-        params.push({ city: row.city_slug, slug: row.slug })
-      }
-    } finally {
-      client.release()
-    }
-  } catch {
-    // DB unavailable – use static data below
-  }
-
-  // From static JSON (deduplicated)
-  const seen = new Set(params.map((p) => `${p.city}/${p.slug}`))
-  const allTowns = getAllStaticTownSlugs()
-  for (const townSlug of allTowns) {
-    const venues = getStaticVenuesByTown(townSlug)
-    for (const v of venues) {
-      const key = `${townSlug}/${v.slug}`
-      if (!seen.has(key)) {
-        params.push({ city: townSlug, slug: v.slug })
-        seen.add(key)
-      }
-    }
-  }
-
-  return params
+  return []
 }
 
 interface SimilarVenue {
