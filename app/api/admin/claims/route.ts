@@ -19,12 +19,14 @@ export async function GET(req: NextRequest) {
   try {
     client = await getPool().connect()
     const result = await client.query(
+      // 'approved' is the pre-phase15-01 name for 'verified'; report both as 'verified'.
       `SELECT id, name, email, venue_name, venue_address, venue_phone, venue_website,
-              city_slug, venue_slug, status, email_verified, created_at,
-              plan_interest, message
+              city_slug, venue_slug,
+              CASE WHEN status = 'approved' THEN 'verified' ELSE status END AS status,
+              email_verified, created_at, plan_interest, message
        FROM venue_claims
        ORDER BY
-         CASE status WHEN 'pending' THEN 0 WHEN 'approved' THEN 1 ELSE 2 END,
+         CASE status WHEN 'pending' THEN 0 WHEN 'verified' THEN 1 WHEN 'approved' THEN 1 ELSE 2 END,
          created_at DESC`
     )
     return NextResponse.json({ claims: result.rows })
@@ -41,8 +43,11 @@ export async function PATCH(req: NextRequest) {
     return NextResponse.json({ error: 'Unauthorised' }, { status: 401 })
   }
 
-  const { id, status, citySlug } = await req.json()
-  if (!id || !['approved', 'rejected', 'pending'].includes(status)) {
+  const body = await req.json()
+  const { id, citySlug } = body
+  // Accept the legacy 'approved' from older clients; store the current name, 'verified'.
+  const status = body.status === 'approved' ? 'verified' : body.status
+  if (!id || !['verified', 'rejected', 'pending'].includes(status)) {
     return NextResponse.json({ error: 'Invalid request' }, { status: 400 })
   }
 
@@ -50,10 +55,10 @@ export async function PATCH(req: NextRequest) {
   try {
     client = await getPool().connect()
 
-    if (status === 'approved') {
+    if (status === 'verified') {
       const claimResult = await client.query(
         `SELECT venue_name, venue_address, venue_phone, venue_website, city_slug, venue_slug,
-                plan_interest, stripe_customer_id, stripe_subscription_id
+                plan_interest, stripe_customer_id, stripe_subscription_id, status
          FROM venue_claims WHERE id = $1 LIMIT 1`,
         [id]
       )
@@ -61,6 +66,11 @@ export async function PATCH(req: NextRequest) {
         return NextResponse.json({ error: 'Claim not found' }, { status: 404 })
       }
       const claim = claimResult.rows[0]
+      // Already accepted: approving again must not re-run venue creation,
+      // which would insert a duplicate listing for an orphaned claim.
+      if (claim.status === 'verified' || claim.status === 'approved') {
+        return NextResponse.json({ success: true, alreadyVerified: true })
+      }
       // Only a claim whose Direct Debit subscription is actually confirmed
       // (the webhook sets stripe_subscription_id once Stripe Checkout
       // completes) counts as a paid Premium sign-up here — someone who
@@ -149,7 +159,10 @@ export async function PATCH(req: NextRequest) {
     }
 
     await client.query(
-      `UPDATE venue_claims SET status = $1 WHERE id = $2`,
+      status === 'verified'
+        ? `UPDATE venue_claims SET status = $1, verified_at = COALESCE(verified_at, NOW()),
+             reviewed_by = COALESCE(reviewed_by, 'admin') WHERE id = $2`
+        : `UPDATE venue_claims SET status = $1 WHERE id = $2`,
       [status, id]
     )
     return NextResponse.json({ success: true })

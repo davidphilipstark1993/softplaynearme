@@ -16,7 +16,7 @@ interface Claim {
   venue_website: string | null
   city_slug: string | null
   venue_slug: string | null
-  status: 'pending' | 'approved' | 'rejected'
+  status: 'pending' | 'verified' | 'rejected'
   email_verified: boolean
   created_at: string
   plan_interest: 'free' | 'bespoke' | null
@@ -25,13 +25,13 @@ interface Claim {
 
 const STATUS_STYLES = {
   pending:  'bg-amber-50 text-amber-700 border-amber-200',
-  approved: 'bg-green-50 text-green-700 border-green-200',
+  verified: 'bg-green-50 text-green-700 border-green-200',
   rejected: 'bg-red-50 text-red-600 border-red-200',
 }
 
 const STATUS_ICONS = {
   pending:  <Clock className="w-3.5 h-3.5" />,
-  approved: <CheckCircle2 className="w-3.5 h-3.5" />,
+  verified: <CheckCircle2 className="w-3.5 h-3.5" />,
   rejected: <XCircle className="w-3.5 h-3.5" />,
 }
 
@@ -259,7 +259,7 @@ export default function AdminClaimsPage() {
                     {/* Right: action buttons */}
                     <div className="flex flex-col items-end gap-2 flex-shrink-0">
                       <div className="flex items-center gap-2">
-                        {needsCity && claim.status !== 'approved' && (
+                        {needsCity && claim.status !== 'verified' && (
                           <select
                             value={cityChoice[claim.id] || ''}
                             onChange={(e) =>
@@ -273,9 +273,9 @@ export default function AdminClaimsPage() {
                             ))}
                           </select>
                         )}
-                        {claim.status !== 'approved' && (
+                        {claim.status !== 'verified' && (
                           <button
-                            onClick={() => updateStatus(claim.id, 'approved', cityChoice[claim.id])}
+                            onClick={() => updateStatus(claim.id, 'verified', cityChoice[claim.id])}
                             disabled={updating === claim.id || (needsCity && !cityChoice[claim.id])}
                             className="inline-flex items-center gap-1.5 bg-green-600 hover:bg-green-700 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors disabled:opacity-50"
                           >
