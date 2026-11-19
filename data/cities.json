@@ -3556,5 +3556,53 @@
       "Newcastle"
     ],
     "faqs": []
+  },
+  {
+    "slug": "ballymena",
+    "name": "Ballymena",
+    "county": "Mid and East Antrim",
+    "region": "Northern Ireland",
+    "metaTitle": "Soft Play in Ballymena",
+    "metaDescription": "Find soft play centres in Ballymena, Mid and East Antrim. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Ballymena",
+    "intro": "Soft play centres in Ballymena and the surrounding area of Mid and East Antrim.",
+    "nearbyAreas": [
+      "Antrim",
+      "Randalstown",
+      "Belfast"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "selby",
+    "name": "Selby",
+    "county": "North Yorkshire",
+    "region": "Yorkshire and the Humber",
+    "metaTitle": "Soft Play in Selby",
+    "metaDescription": "Find soft play centres in Selby, North Yorkshire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Selby",
+    "intro": "Soft play centres in Selby and the surrounding area of North Yorkshire.",
+    "nearbyAreas": [
+      "York",
+      "Leeds",
+      "Goole",
+      "Doncaster"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "kettering",
+    "name": "Kettering",
+    "county": "North Northamptonshire",
+    "region": "East Midlands",
+    "metaTitle": "Soft Play in Kettering",
+    "metaDescription": "Find soft play centres in Kettering, North Northamptonshire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Kettering",
+    "intro": "Soft play centres in Kettering and the surrounding area of North Northamptonshire.",
+    "nearbyAreas": [
+      "Wellingborough",
+      "Northampton"
+    ],
+    "faqs": []
   }
 ]

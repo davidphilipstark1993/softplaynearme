@@ -813,5 +813,20 @@
     "slug": "stockton-on-tees",
     "name": "Stockton-on-Tees",
     "county": "County Durham"
+  },
+  {
+    "slug": "ballymena",
+    "name": "Ballymena",
+    "county": "Mid and East Antrim"
+  },
+  {
+    "slug": "selby",
+    "name": "Selby",
+    "county": "North Yorkshire"
+  },
+  {
+    "slug": "kettering",
+    "name": "Kettering",
+    "county": "North Northamptonshire"
   }
 ]

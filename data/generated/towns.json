@@ -36,6 +36,12 @@
     "avgRating": "4.4"
   },
   {
+    "name": "Ballymena",
+    "slug": "ballymena",
+    "venueCount": 1,
+    "avgRating": null
+  },
+  {
     "name": "Ballynahinch",
     "slug": "ballynahinch",
     "venueCount": 1,
@@ -522,6 +528,12 @@
     "avgRating": "4.5"
   },
   {
+    "name": "Kettering",
+    "slug": "kettering",
+    "venueCount": 1,
+    "avgRating": null
+  },
+  {
     "name": "Kidderminster",
     "slug": "kidderminster",
     "venueCount": 2,
@@ -772,6 +784,12 @@
     "slug": "seahouses",
     "venueCount": 1,
     "avgRating": "4.1"
+  },
+  {
+    "name": "Selby",
+    "slug": "selby",
+    "venueCount": 1,
+    "avgRating": null
   },
   {
     "name": "Sheffield",
