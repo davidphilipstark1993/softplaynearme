@@ -135,7 +135,7 @@ export default async function DashboardPage({ params, searchParams }: DashboardP
           </div>
         )}
 
-        {claim.status === 'approved' && (
+        {(claim.status === 'approved' || claim.status === 'verified') && (
           <div className="flex items-center gap-3 bg-green-50 border border-green-200 rounded-xl p-4 mb-6">
             <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />
             <p className="font-medium text-green-900 text-sm">

@@ -9,6 +9,8 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'lh3.googleusercontent.com' },
       { protocol: 'https', hostname: 'maps.googleapis.com' },
       { protocol: 'https', hostname: '**.googleusercontent.com' },
+      // Vercel Blob: owner-uploaded venue photos and ad creatives
+      { protocol: 'https', hostname: '*.public.blob.vercel-storage.com' },
     ],
   },
   // Venue 301s (data/redirects.json) are served by proxy.ts, not redirects() here:
