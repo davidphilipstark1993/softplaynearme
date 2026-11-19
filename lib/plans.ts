@@ -20,9 +20,13 @@ export function isPaidActive(venue: PlanFields): boolean {
     : false
 }
 
-/** Verified badge: paid plan, currently active, and an owner has actually claimed it. */
+/**
+ * "Verified by owner" badge: an owner has claimed the listing and been verified (by their
+ * venue-domain email or by manual review). Free for every venue since Nov 2026; Premium is
+ * about featured placement and lead alerts, not the badge.
+ */
 export function isVerified(venue: PlanFields): boolean {
-  return isPaidActive(venue) && !!venue.claimed_by_owner
+  return !!venue.claimed_by_owner
 }
 
 /** Paid plans can only be granted to venues an owner has actually claimed. */

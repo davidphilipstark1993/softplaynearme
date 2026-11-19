@@ -9,7 +9,8 @@ const SECTIONS = [
   { href: '/admin/newsletter', label: 'Newsletter', desc: "This week's issue, approvals, send history", icon: Mail },
   { href: '/admin/newsletter/subscribers', label: 'Newsletter Subscribers', desc: 'Subscriber list, stats, SendGrid sync', icon: Users },
   { href: '/admin/venues', label: 'Venues & Plans', desc: 'Manage listings, plans, featured placement', icon: Building2 },
-  { href: '/admin/claims', label: 'Claims', desc: 'Venue ownership claims awaiting review', icon: FileCheck2 },
+  { href: '/admin/owners', label: 'Owners', desc: 'Claims to review, owner edits (with revert) and claimed venues', icon: FileCheck2 },
+  { href: '/admin/claims', label: 'Claims (legacy)', desc: 'Older claims and Premium sign-ups', icon: FileCheck2 },
   { href: '/admin/ads', label: 'Advertisements', desc: 'Cross-promote your other sites: adverts, placements, analytics', icon: Megaphone },
   { href: '/admin/insights', label: 'Insights', desc: 'Monthly stats, renewals, slipping listings', icon: BarChart3 },
 ]

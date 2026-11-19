@@ -47,6 +47,7 @@ import { VenueComparisonTable } from '@/components/location/VenueComparisonTable
 import { HubGuide, NearbyHubs } from '@/components/location/HubGuide'
 import { NearTown } from '@/components/location/NearTown'
 import { getHubGuide, buildDataGuide, buildGuideTitle, buildAnswerFirst, composeGuideFaqs } from '@/lib/hubGuides'
+import { listingBoost } from '@/lib/ownerData'
 
 interface PageProps {
   params: Promise<{ city: string }>
@@ -258,10 +259,17 @@ function staticToDisplayVenue(sv: StaticVenue): Venue {
  * Unrated venues come last. See smoothedRating in lib/cityStats.ts.
  */
 function sortByRating(list: Venue[]): Venue[] {
+  // Claimed and more complete listings get a small tie-breaker (at most 0.2 of a smoothed
+  // star, lib/ownerData.ts listingBoost): it reorders similarly rated venues but never lifts a
+  // venue over a clearly better-rated one. Unrated venues stay last.
+  const score = (v: Venue) => {
+    const r = smoothedRating(v.avg_rating, v.review_count)
+    return r === null ? -1 : r + listingBoost(v as { claimed_by_owner?: boolean | null; owner_completeness?: number | null })
+  }
   return [...list].sort(
     (a, b) =>
       Number(!!b.featured) - Number(!!a.featured) ||
-      (smoothedRating(b.avg_rating, b.review_count) ?? -1) - (smoothedRating(a.avg_rating, a.review_count) ?? -1) ||
+      score(b) - score(a) ||
       a.name.localeCompare(b.name)
   )
 }

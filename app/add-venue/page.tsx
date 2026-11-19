@@ -5,6 +5,7 @@ import { Footer } from '@/components/layout/Footer'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 import { ClaimVenueForm } from '@/components/forms/ClaimVenueForm'
 import { CheckCircle2, Sparkles } from 'lucide-react'
+import { redirect } from 'next/navigation'
 
 // The root layout applies `template: "%s | Soft Play Near Me"`, so `title` must
 // NOT repeat the suffix. Social cards bypass the template, so they keep it.
@@ -48,6 +49,9 @@ const BENEFITS = [
 
 export default async function AddVenuePage({ searchParams }: AddVenuePageProps) {
   const { venue, city, slug } = await searchParams
+  // Claiming an existing listing has its own flow (sign-in link, domain check); /add-venue is
+  // for venues we don't list yet. Old links with ?city=&slug= go straight to the claim page.
+  if (city && slug) redirect(`/claim/${encodeURIComponent(city)}/${encodeURIComponent(slug)}`)
   const venueUrl =
     city && slug
       ? `https://www.softplaynearme.co.uk/soft-play/${city}/${slug}`
