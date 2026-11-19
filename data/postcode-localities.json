@@ -211,7 +211,14 @@
     "1150": "Yate",
     "1158": "Keynsham",
     "1279": "Bushey",
-    "1291": "Epsom"
+    "1291": "Epsom",
+    "770": "Romsey",
+    "767": "Romsey",
+    "1799": "Romsey",
+    "1801": "Romsey",
+    "657": "Romsey",
+    "1067": "Winchester",
+    "784": "Winchester"
   },
   "counties": {
     "Anlaby": "East Yorkshire",
@@ -282,7 +289,9 @@
     "Shifnal": "Shropshire",
     "Cleobury Mortimer": "Shropshire",
     "Cannock": "Staffordshire",
-    "Southampton": "Hampshire"
+    "Southampton": "Hampshire",
+    "Romsey": "Hampshire",
+    "Winchester": "Hampshire"
   },
   "hubs": {
     "hull": {

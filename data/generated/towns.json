@@ -762,6 +762,12 @@
     "avgRating": "4.6"
   },
   {
+    "name": "Romsey",
+    "slug": "romsey",
+    "venueCount": 3,
+    "avgRating": "4.3"
+  },
+  {
     "name": "Rugby",
     "slug": "rugby",
     "venueCount": 3,
@@ -836,8 +842,8 @@
   {
     "name": "Southampton",
     "slug": "southampton",
-    "venueCount": 15,
-    "avgRating": "4.3"
+    "venueCount": 10,
+    "avgRating": "4.2"
   },
   {
     "name": "Southend-on-Sea",
@@ -988,6 +994,12 @@
     "slug": "willenhall",
     "venueCount": 1,
     "avgRating": "4.1"
+  },
+  {
+    "name": "Winchester",
+    "slug": "winchester",
+    "venueCount": 2,
+    "avgRating": "4.4"
   },
   {
     "name": "Wokingham",

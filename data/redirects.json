@@ -131,7 +131,7 @@
   },
   {
     "source": "/soft-play/bournemouth/georges-spaceship-play-zone",
-    "destination": "/soft-play/southampton/georges-spaceship-play-zone",
+    "destination": "/soft-play/romsey/georges-spaceship-play-zone",
     "permanent": true
   },
   {
@@ -331,7 +331,7 @@
   },
   {
     "source": "/soft-play/portsmouth/qube-soft-play-portsmouth",
-    "destination": "/soft-play/southampton/qube-soft-play",
+    "destination": "/soft-play/winchester/qube-soft-play",
     "permanent": true
   },
   {
@@ -856,12 +856,12 @@
   },
   {
     "source": "/soft-play/portsmouth/romsey-rapids-sports-complex-portsmouth",
-    "destination": "/soft-play/southampton/romsey-rapids-sports-complex",
+    "destination": "/soft-play/romsey/romsey-rapids-sports-complex",
     "permanent": true
   },
   {
     "source": "/soft-play/portsmouth/fishlake-meadows-playground-portsmouth",
-    "destination": "/soft-play/southampton/fishlake-meadows-playground",
+    "destination": "/soft-play/romsey/fishlake-meadows-playground",
     "permanent": true
   },
   {
@@ -4081,7 +4081,7 @@
   },
   {
     "source": "/soft-play/southend/romsey-rapids-sports-complex-portsmouth",
-    "destination": "/soft-play/southampton/romsey-rapids-sports-complex",
+    "destination": "/soft-play/romsey/romsey-rapids-sports-complex",
     "permanent": true
   },
   {
@@ -4421,7 +4421,7 @@
   },
   {
     "source": "/soft-play/southend/qube-soft-play-portsmouth",
-    "destination": "/soft-play/southampton/qube-soft-play",
+    "destination": "/soft-play/winchester/qube-soft-play",
     "permanent": true
   },
   {
@@ -4471,7 +4471,7 @@
   },
   {
     "source": "/soft-play/southend/fishlake-meadows-playground-portsmouth",
-    "destination": "/soft-play/southampton/fishlake-meadows-playground",
+    "destination": "/soft-play/romsey/fishlake-meadows-playground",
     "permanent": true
   },
   {
@@ -6186,7 +6186,7 @@
   },
   {
     "source": "/soft-play/southend/georges-spaceship-play-zone",
-    "destination": "/soft-play/southampton/georges-spaceship-play-zone",
+    "destination": "/soft-play/romsey/georges-spaceship-play-zone",
     "permanent": true
   },
   {
@@ -6236,12 +6236,12 @@
   },
   {
     "source": "/soft-play/portsmouth/the-play-park-romsey",
-    "destination": "/soft-play/southampton/the-play-park-romsey",
+    "destination": "/soft-play/romsey/the-play-park-romsey",
     "permanent": true
   },
   {
     "source": "/soft-play/portsmouth/romsey-rapids-soft-play",
-    "destination": "/soft-play/southampton/romsey-rapids-soft-play",
+    "destination": "/soft-play/romsey/romsey-rapids-soft-play",
     "permanent": true
   },
   {
@@ -6256,7 +6256,7 @@
   },
   {
     "source": "/soft-play/portsmouth/tiny-treasure-town",
-    "destination": "/soft-play/southampton/tiny-treasure-town",
+    "destination": "/soft-play/winchester/tiny-treasure-town",
     "permanent": true
   },
   {
@@ -6341,7 +6341,7 @@
   },
   {
     "source": "/soft-play/southend/qube-soft-play",
-    "destination": "/soft-play/southampton/qube-soft-play",
+    "destination": "/soft-play/winchester/qube-soft-play",
     "permanent": true
   },
   {
@@ -6671,12 +6671,12 @@
   },
   {
     "source": "/soft-play/southend/romsey-rapids-sports-complex",
-    "destination": "/soft-play/southampton/romsey-rapids-sports-complex",
+    "destination": "/soft-play/romsey/romsey-rapids-sports-complex",
     "permanent": true
   },
   {
     "source": "/soft-play/southend/fishlake-meadows-playground",
-    "destination": "/soft-play/southampton/fishlake-meadows-playground",
+    "destination": "/soft-play/romsey/fishlake-meadows-playground",
     "permanent": true
   },
   {
@@ -6977,6 +6977,41 @@
   {
     "source": "/blog/best-soft-play-in-london",
     "destination": "/soft-play/london",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/southampton/fishlake-meadows-playground",
+    "destination": "/soft-play/romsey/fishlake-meadows-playground",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/southampton/georges-spaceship-play-zone",
+    "destination": "/soft-play/romsey/georges-spaceship-play-zone",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/southampton/romsey-rapids-soft-play",
+    "destination": "/soft-play/romsey/romsey-rapids-soft-play",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/southampton/romsey-rapids-sports-complex",
+    "destination": "/soft-play/romsey/romsey-rapids-sports-complex",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/southampton/the-play-park-romsey",
+    "destination": "/soft-play/romsey/the-play-park-romsey",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/southampton/qube-soft-play",
+    "destination": "/soft-play/winchester/qube-soft-play",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/southampton/tiny-treasure-town",
+    "destination": "/soft-play/winchester/tiny-treasure-town",
     "permanent": true
   }
 ]

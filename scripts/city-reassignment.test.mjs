@@ -100,6 +100,13 @@ const venues = read('data/generated/venues.json')
 const live = new Set([...venues.map((v) => `/soft-play/${v.townSlug}/${v.slug}`), ...venues.map((v) => `/soft-play/${v.townSlug}`)])
 const byId = new Map(venues.map((v) => [v.id, v]))
 const RETIRED_AFTER_MOVE = new Set([1612])
+// Refiled again after phase 13 onto a smaller town hub (19 Nov 2026 Hampshire batch: Romsey/Winchester
+// split off Southampton). Their phase-13 URLs now 301 on to the town hub.
+const REFILED_AFTER_MOVE = new Map([
+  [657, 'romsey'], [767, 'romsey'], [770, 'romsey'], [1799, 'romsey'], [1801, 'romsey'],
+  [784, 'winchester'], [1067, 'winchester'],
+])
+const finalUrl = (m) => (REFILED_AFTER_MOVE.has(m.id) ? `/soft-play/${REFILED_AFTER_MOVE.get(m.id)}/${m.to_slug}` : `/soft-play/${m.to_city}/${m.to_slug}`)
 
 test('every approved move: old URL 301s once to the new URL, which is live in the static export', () => {
   assert.equal(moves.length, 165)
@@ -110,6 +117,14 @@ test('every approved move: old URL 301s once to the new URL, which is live in th
     if (RETIRED_AFTER_MOVE.has(m.id)) {
       assert.equal(redirects.get(newUrl), `/soft-play/${m.to_city}`, newUrl)
       assert.equal(redirects.get(oldUrl), `/soft-play/${m.to_city}`, oldUrl)
+      continue
+    }
+    if (REFILED_AFTER_MOVE.has(m.id)) {
+      const finalU = finalUrl(m)
+      assert.equal(redirects.get(oldUrl), finalU, oldUrl)
+      assert.equal(redirects.get(newUrl), finalU, newUrl)
+      assert.ok(!redirects.has(finalU), `${finalU} is itself redirected`)
+      assert.ok(live.has(finalU), `${finalU} not in static export`)
       continue
     }
     assert.equal(redirects.get(oldUrl), newUrl, oldUrl)

@@ -828,5 +828,15 @@
     "slug": "kettering",
     "name": "Kettering",
     "county": "North Northamptonshire"
+  },
+  {
+    "slug": "romsey",
+    "name": "Romsey",
+    "county": "Hampshire"
+  },
+  {
+    "slug": "winchester",
+    "name": "Winchester",
+    "county": "Hampshire"
   }
 ]

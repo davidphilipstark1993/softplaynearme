@@ -3536,6 +3536,8 @@
     "h1": "Soft Play Centres in Southampton",
     "intro": "Soft play centres in Southampton and the surrounding area of Hampshire.",
     "nearbyAreas": [
+      "Romsey",
+      "Winchester",
       "Portsmouth",
       "Bournemouth"
     ],
@@ -3602,6 +3604,36 @@
     "nearbyAreas": [
       "Wellingborough",
       "Northampton"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "romsey",
+    "name": "Romsey",
+    "county": "Hampshire",
+    "region": "South East",
+    "metaTitle": "Soft Play in Romsey",
+    "metaDescription": "Find soft play centres in Romsey, Hampshire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Romsey",
+    "intro": "Soft play centres in Romsey and the surrounding area of Hampshire.",
+    "nearbyAreas": [
+      "Southampton",
+      "Winchester"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "winchester",
+    "name": "Winchester",
+    "county": "Hampshire",
+    "region": "South East",
+    "metaTitle": "Soft Play in Winchester",
+    "metaDescription": "Find soft play centres in Winchester, Hampshire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Winchester",
+    "intro": "Soft play centres in Winchester and the surrounding area of Hampshire.",
+    "nearbyAreas": [
+      "Southampton",
+      "Romsey"
     ],
     "faqs": []
   }
