@@ -6,20 +6,22 @@
 //
 // Needs DATABASE_URL and RESEND_API_KEY or SENDGRID_API_KEY. Run after phase15-01 --execute and
 // after the owner-claims code is deployed (the link must land on a live /owner/signin).
-// One email per address (an owner with several venues gets one per claim). Never re-sends a
-// claim that already has an unexpired, unused token, so re-running is safe.
+// One email per address per venue name (repeat claims and duplicate listings of the same venue
+// share one). Skips addresses that already hold an unexpired, unused token, so re-running is safe.
 import { createHash, randomBytes } from 'node:crypto'
 import { getPool } from '../migrations/_lib.mjs'
 
 const COMMIT = process.argv.includes('--commit')
+if (COMMIT && !process.env.RESEND_API_KEY && !process.env.SENDGRID_API_KEY) throw new Error('No RESEND_API_KEY or SENDGRID_API_KEY: nothing would send. Load them first (vercel env pull).')
 const BASE = 'https://www.softplaynearme.co.uk'
 const pool = await getPool()
 const { rows } = await pool.query(`
-  SELECT c.id, c.name, c.email, v.name AS venue_name, v.city_slug, v.slug
+  SELECT DISTINCT ON (lower(c.email), lower(v.name)) c.id, c.name, c.email, v.name AS venue_name, v.city_slug, v.slug
     FROM venue_claims c JOIN venues v ON v.id = c.venue_id
    WHERE c.status = 'verified' AND v.is_active = true
-     AND NOT EXISTS (SELECT 1 FROM owner_login_tokens t WHERE t.claim_id = c.id AND t.used_at IS NULL AND t.expires_at > NOW())
-   ORDER BY c.email, c.id`)
+     AND NOT EXISTS (SELECT 1 FROM owner_login_tokens t JOIN venue_claims c2 ON c2.id = t.claim_id
+                      WHERE lower(c2.email) = lower(c.email) AND t.used_at IS NULL AND t.expires_at > NOW())
+   ORDER BY lower(c.email), lower(v.name), c.id`)
 console.log(`${rows.length} verified owner claim(s) to email${COMMIT ? '' : ' (dry run)'}:`)
 for (const r of rows) console.log(`  #${r.id} ${r.email}  ${r.venue_name}  ${BASE}/soft-play/${r.city_slug}/${r.slug}`)
 
