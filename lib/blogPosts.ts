@@ -6,6 +6,7 @@ import { playCafePosts } from './blogPostsPlayCafes'
 import { hirePosts } from './blogPostsHire'
 import { northernIrelandPosts } from './blogPostsNorthernIreland'
 import { santaPosts } from './blogPostsSanta'
+import { partyCostPosts } from './blogPostsPartyCost'
 
 export interface BlogFaq {
   q: string
@@ -4283,7 +4284,7 @@ export const posts: BlogPost[] = [
   },
 ]
 
-posts.push(...sussexPosts, ...ukPosts, ...senPosts, ...cityGuidePosts, ...playCafePosts, ...hirePosts, ...northernIrelandPosts, ...santaPosts)
+posts.push(...sussexPosts, ...ukPosts, ...senPosts, ...cityGuidePosts, ...playCafePosts, ...hirePosts, ...northernIrelandPosts, ...santaPosts, ...partyCostPosts)
 
 export const blogPosts: BlogPost[] = posts
 
