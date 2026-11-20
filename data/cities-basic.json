@@ -838,5 +838,20 @@
     "slug": "winchester",
     "name": "Winchester",
     "county": "Hampshire"
+  },
+  {
+    "slug": "bedford",
+    "name": "Bedford",
+    "county": "Bedford"
+  },
+  {
+    "slug": "gloucester",
+    "name": "Gloucester",
+    "county": "Gloucestershire"
+  },
+  {
+    "slug": "rochester",
+    "name": "Rochester",
+    "county": "Medway"
   }
 ]

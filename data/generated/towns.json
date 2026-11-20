@@ -78,6 +78,12 @@
     "avgRating": "5.0"
   },
   {
+    "name": "Bedford",
+    "slug": "bedford",
+    "venueCount": 1,
+    "avgRating": null
+  },
+  {
     "name": "Belfast",
     "slug": "belfast",
     "venueCount": 3,
@@ -394,6 +400,12 @@
     "slug": "glasgow",
     "venueCount": 18,
     "avgRating": "4.3"
+  },
+  {
+    "name": "Gloucester",
+    "slug": "gloucester",
+    "venueCount": 1,
+    "avgRating": null
   },
   {
     "name": "Goole",
@@ -760,6 +772,12 @@
     "slug": "rhyl",
     "venueCount": 2,
     "avgRating": "4.6"
+  },
+  {
+    "name": "Rochester",
+    "slug": "rochester",
+    "venueCount": 1,
+    "avgRating": null
   },
   {
     "name": "Romsey",

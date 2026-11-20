@@ -3636,5 +3636,51 @@
       "Romsey"
     ],
     "faqs": []
+  },
+  {
+    "slug": "bedford",
+    "name": "Bedford",
+    "county": "Bedford",
+    "region": "East of England",
+    "metaTitle": "Soft Play in Bedford",
+    "metaDescription": "Find soft play centres in Bedford, Bedford. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Bedford",
+    "intro": "Soft play centres in Bedford and the surrounding area of Bedford.",
+    "nearbyAreas": [
+      "Milton Keynes",
+      "St Neots",
+      "Luton",
+      "Hitchin"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "gloucester",
+    "name": "Gloucester",
+    "county": "Gloucestershire",
+    "region": "South West",
+    "metaTitle": "Soft Play in Gloucester",
+    "metaDescription": "Find soft play centres in Gloucester, Gloucestershire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Gloucester",
+    "intro": "Soft play centres in Gloucester and the surrounding area of Gloucestershire.",
+    "nearbyAreas": [
+      "Cheltenham",
+      "Cirencester"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "rochester",
+    "name": "Rochester",
+    "county": "Medway",
+    "region": "South East",
+    "metaTitle": "Soft Play in Rochester",
+    "metaDescription": "Find soft play centres in Rochester and Strood, Medway. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Rochester",
+    "intro": "Soft play centres in Rochester and Strood and the surrounding area of Medway.",
+    "nearbyAreas": [
+      "Swanley"
+    ],
+    "faqs": []
   }
 ]
