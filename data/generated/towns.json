@@ -608,7 +608,7 @@
   {
     "name": "London",
     "slug": "london",
-    "venueCount": 58,
+    "venueCount": 59,
     "avgRating": "4.4"
   },
   {
@@ -924,6 +924,12 @@
     "avgRating": "4.4"
   },
   {
+    "name": "Stratford-upon-Avon",
+    "slug": "stratford-upon-avon",
+    "venueCount": 1,
+    "avgRating": null
+  },
+  {
     "name": "Sunbury-on-Thames",
     "slug": "sunbury-on-thames",
     "venueCount": 5,
@@ -1048,6 +1054,12 @@
     "slug": "worthing",
     "venueCount": 5,
     "avgRating": "4.5"
+  },
+  {
+    "name": "Wrexham",
+    "slug": "wrexham",
+    "venueCount": 1,
+    "avgRating": null
   },
   {
     "name": "Wythall",

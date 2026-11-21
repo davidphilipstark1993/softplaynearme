@@ -67,7 +67,7 @@ export const getLondonVenues = cache(async (): Promise<AreaVenue[]> => {
       id: v.id, name: v.name, slug: v.slug, city_slug: 'london', address: v.address, postcode: v.postcode,
       cafe: v.cafe, parking: v.parking, parties: v.parties, toddler_area: v.toddlerArea, baby_area: v.babyArea,
       sen_friendly: v.senFriendly, wheelchair_access: v.wheelchairAccess, avg_rating: v.rating ?? null,
-      review_count: v.reviewCount ?? 0, price_from: v.priceFrom ?? undefined, price_to: v.priceTo ?? undefined,
+      review_count: v.reviewCount ?? 0, price_from: num(v.priceFrom), price_to: num(v.priceTo),
       updated_at: v.lastVerified || null,
     }))
     .filter((v) => !isNearbyTownVenue('london', v))

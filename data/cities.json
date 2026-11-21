@@ -3682,5 +3682,39 @@
       "Swanley"
     ],
     "faqs": []
+  },
+  {
+    "slug": "wrexham",
+    "name": "Wrexham",
+    "county": "Wrexham",
+    "region": "Wales",
+    "metaTitle": "Soft Play in Wrexham",
+    "metaDescription": "Find soft play centres in Wrexham. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Wrexham",
+    "intro": "Soft play centres in Wrexham and the surrounding area.",
+    "nearbyAreas": [
+      "Rhyl",
+      "Crewe",
+      "Shrewsbury"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "stratford-upon-avon",
+    "name": "Stratford-upon-Avon",
+    "county": "Warwickshire",
+    "region": "West Midlands",
+    "metaTitle": "Soft Play in Stratford-upon-Avon",
+    "metaDescription": "Find soft play centres in Stratford-upon-Avon, Warwickshire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Stratford-upon-Avon",
+    "intro": "Soft play centres in Stratford-upon-Avon and the surrounding area of Warwickshire.",
+    "nearbyAreas": [
+      "Coventry",
+      "Rugby",
+      "Solihull",
+      "Worcester",
+      "Banbury"
+    ],
+    "faqs": []
   }
 ]

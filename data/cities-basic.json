@@ -853,5 +853,15 @@
     "slug": "rochester",
     "name": "Rochester",
     "county": "Medway"
+  },
+  {
+    "slug": "wrexham",
+    "name": "Wrexham",
+    "county": "Wrexham"
+  },
+  {
+    "slug": "stratford-upon-avon",
+    "name": "Stratford-upon-Avon",
+    "county": "Warwickshire"
   }
 ]
