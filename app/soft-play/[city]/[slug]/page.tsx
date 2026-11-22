@@ -912,9 +912,13 @@ export default async function VenuePage({ params }: PageProps) {
                 Are you the owner of {venue.name}? Add photos to help families choose your venue.
               </p>
               <Button variant="outline" asChild>
-                <a href={`mailto:info@softplaynearme.co.uk?subject=Photos%20for%20${encodeURIComponent(venue.name)}`}>
-                  Submit Photos
-                </a>
+                {venue.claimed_by_owner ? (
+                  <Link href="/owner/login">Owner sign in to add photos</Link>
+                ) : (
+                  <ClaimCta citySlug={city} slug={slug} placement="photos">
+                    Claim this listing to add photos
+                  </ClaimCta>
+                )}
               </Button>
             </div>
           </div>

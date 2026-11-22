@@ -2,9 +2,10 @@
 
 import { useEffect, useState, useCallback } from 'react'
 import Link from 'next/link'
-import { RefreshCw, ExternalLink, ShieldCheck, Plus } from 'lucide-react'
+import { RefreshCw, ExternalLink, ShieldCheck, Plus, Camera } from 'lucide-react'
 import { PLAN_LABELS, type Plan, type PlanStatus } from '@/lib/plans'
 import { AdminUnavailable } from '@/components/admin/AdminUnavailable'
+import { VenuePhotos } from './VenuePhotos'
 
 interface AdminVenue {
   id: number
@@ -43,6 +44,7 @@ export default function AdminVenuesPage() {
   const [addForm, setAddForm] = useState({ name: '', citySlug: '', address: '', postcode: '', phone: '', website: '' })
   const [addError, setAddError] = useState('')
   const [adding, setAdding] = useState(false)
+  const [photosFor, setPhotosFor] = useState<AdminVenue | null>(null)
 
   async function login(e: React.FormEvent) {
     e.preventDefault()
@@ -176,6 +178,7 @@ export default function AdminVenuesPage() {
 
   return (
     <div className="min-h-screen bg-slate-50">
+      {photosFor && <VenuePhotos venue={photosFor} onClose={() => setPhotosFor(null)} />}
       <div className="max-w-6xl mx-auto px-4 py-8">
 
         <div className="flex items-center justify-between mb-6">
@@ -332,6 +335,13 @@ export default function AdminVenuesPage() {
                         >
                           view <ExternalLink className="w-3 h-3" />
                         </a>
+                        <button
+                          type="button"
+                          onClick={() => setPhotosFor(v)}
+                          className="inline-flex items-center gap-0.5 text-purple-500 hover:underline"
+                        >
+                          photos <Camera className="w-3 h-3" />
+                        </button>
                       </div>
                       {rowError[v.id] && <p className="text-xs text-red-600 mt-1">{rowError[v.id]}</p>}
                     </td>
