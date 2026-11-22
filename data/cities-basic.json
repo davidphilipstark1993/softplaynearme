@@ -863,5 +863,20 @@
     "slug": "stratford-upon-avon",
     "name": "Stratford-upon-Avon",
     "county": "Warwickshire"
+  },
+  {
+    "slug": "barrow-in-furness",
+    "name": "Barrow-in-Furness",
+    "county": "Westmorland and Furness"
+  },
+  {
+    "slug": "durham",
+    "name": "Durham",
+    "county": "County Durham"
+  },
+  {
+    "slug": "bathgate",
+    "name": "Bathgate",
+    "county": "West Lothian"
   }
 ]

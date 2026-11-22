@@ -78,6 +78,18 @@
     "avgRating": "5.0"
   },
   {
+    "name": "Barrow-in-Furness",
+    "slug": "barrow-in-furness",
+    "venueCount": 1,
+    "avgRating": null
+  },
+  {
+    "name": "Bathgate",
+    "slug": "bathgate",
+    "venueCount": 1,
+    "avgRating": null
+  },
+  {
     "name": "Bedford",
     "slug": "bedford",
     "venueCount": 1,
@@ -338,6 +350,12 @@
   {
     "name": "Dundee",
     "slug": "dundee",
+    "venueCount": 1,
+    "avgRating": null
+  },
+  {
+    "name": "Durham",
+    "slug": "durham",
     "venueCount": 1,
     "avgRating": null
   },

@@ -3716,5 +3716,56 @@
       "Banbury"
     ],
     "faqs": []
+  },
+  {
+    "slug": "barrow-in-furness",
+    "name": "Barrow-in-Furness",
+    "county": "Westmorland and Furness",
+    "region": "North West",
+    "metaTitle": "Soft Play in Barrow-in-Furness",
+    "metaDescription": "Find soft play centres in Barrow-in-Furness, Cumbria. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Barrow-in-Furness",
+    "intro": "Soft play centres in Barrow-in-Furness and the surrounding area of Furness, Cumbria.",
+    "nearbyAreas": [
+      "Lancaster",
+      "Carlisle",
+      "Blackpool"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "durham",
+    "name": "Durham",
+    "county": "County Durham",
+    "region": "North East",
+    "metaTitle": "Soft Play in Durham",
+    "metaDescription": "Find soft play centres in Durham, County Durham. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Durham",
+    "intro": "Soft play centres in Durham and the surrounding area of County Durham.",
+    "nearbyAreas": [
+      "Newcastle",
+      "Sunderland",
+      "Bishop Auckland",
+      "Stanley",
+      "Stockton-on-Tees"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "bathgate",
+    "name": "Bathgate",
+    "county": "West Lothian",
+    "region": "Scotland",
+    "metaTitle": "Soft Play in Bathgate",
+    "metaDescription": "Find soft play centres in Bathgate, West Lothian. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Bathgate",
+    "intro": "Soft play centres in Bathgate and the surrounding area of West Lothian.",
+    "nearbyAreas": [
+      "West Calder",
+      "Edinburgh",
+      "Falkirk",
+      "Musselburgh"
+    ],
+    "faqs": []
   }
 ]
