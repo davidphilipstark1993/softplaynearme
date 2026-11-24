@@ -725,7 +725,12 @@ export default async function CityPage({ params, searchParams }: PageProps) {
         {/* Hero */}
         <div className="bg-gradient-to-br from-purple-600 to-pink-500 text-white py-10 sm:py-12 px-4">
           <div className="max-w-7xl mx-auto">
-            <h1 className="text-3xl md:text-4xl font-bold mb-3">{h1}</h1>
+            {/* Pages 2+ are indexable in their own right (self-canonical), so their
+                H1 says which page it is, matching the title's "– Page N". */}
+            <h1 className="text-3xl md:text-4xl font-bold mb-3">
+              {h1}
+              {pageNum > 1 && <span className="font-semibold"> – Page {pageNum}</span>}
+            </h1>
             <p className="text-purple-100 text-lg max-w-3xl">{answerFirst ?? heroIntro}</p>
           </div>
         </div>
