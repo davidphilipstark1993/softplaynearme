@@ -17,6 +17,7 @@
 import { isSoftPlayVenueType, NON_SOFT_PLAY_VENUE_TYPE_LABELS, type NonSoftPlayVenueType } from './venueTypes'
 import { cleanHoursText, formatAgeRange, formatPrice, hasStructuredHours, priceNumber, type HoursPrice } from './venueFacts'
 import type { DayKey } from './ukTime'
+import { formatAddressLine } from './sanitize'
 
 export const MAX_TITLE = 60
 export const MAX_META = 155
@@ -215,6 +216,12 @@ export interface SnippetVenue extends HoursPrice {
   toddler_area?: boolean | null
   baby_area?: boolean | null
   price_range?: string | null
+  address?: string | null
+  postcode?: string | null
+  phone?: string | null
+  google_place_id?: string | null
+  lat?: number | string | null
+  lng?: number | string | null
 }
 
 export interface VenueFacts {
@@ -234,6 +241,12 @@ export interface VenueFacts {
   nearbyCount: number
   /** True when more exist than the list shows (the meta then says "20+"). */
   nearbyMore: boolean
+  /**
+   * What the page lets a parent do to reach the venue, in the words the meta uses:
+   * "address" (a usable address line is shown), "phone number" (a tel: link),
+   * "directions" (the Get Directions button, same rule as components/venue/CTAButtons).
+   */
+  contact: string[]
 }
 
 const positive = (x: unknown) => {
@@ -256,6 +269,11 @@ export function venueFacts(v: SnippetVenue, opts: { town: string | null; nearbyC
   const from = priceNumber(v.price_from)
   const to = priceNumber(v.price_to)
   const price = from ? (to && to > from ? `${formatPrice(from)}–${formatPrice(to)}` : `From ${formatPrice(from)}`) : null
+  const addressLine = formatAddressLine(v.address, v.postcode)
+  const contact: string[] = []
+  if (addressLine) contact.push('address')
+  if (v.phone && String(v.phone).replace(/\D/g, '').length >= 10) contact.push('phone number')
+  if (v.google_place_id || (Number(v.lat) && Number(v.lng)) || addressLine) contact.push('directions')
   return {
     name: v.name,
     shortName: cleanVenueName(v.name),
@@ -268,6 +286,7 @@ export function venueFacts(v: SnippetVenue, opts: { town: string | null; nearbyC
     features,
     nearbyCount: opts.nearbyCount,
     nearbyMore: !!opts.nearbyMore,
+    contact,
   }
 }
 
@@ -311,6 +330,8 @@ export function buildVenueSeoTitle(f: VenueFacts, venueType?: string | null): st
 
 // ── Meta description ─────────────────────────────────────────────────────────────────
 
+const capitalise = (x: string) => x.charAt(0).toUpperCase() + x.slice(1)
+
 function joinList(items: string[]): string {
   if (items.length <= 1) return items.join('')
   return `${items.slice(0, -1).join(', ')} and ${items[items.length - 1]}`
@@ -345,17 +366,22 @@ export function buildVenueMetaDescription(f: VenueFacts): string {
   if (features.length) facts.push(`Facilities: ${joinList(features.map(lower))}`)
   if (f.ages) facts.push(f.ages)
   if (f.price) facts.push(`${f.price} per child`)
+  // Most venue searches are the bare name: people want to find and reach the venue. When
+  // there is room, say the page has the ways to do that, naming only what it shows.
+  // Needs an address or phone (directions alone is not worth a sentence); dropped first.
+  const reach = tail && f.contact.some((c) => c !== 'directions') ? capitalise(joinList(f.contact)) : null
 
   const ending = tail ?? 'Address, directions and contact details'
   // With nothing concrete to lead on, say what and where it is.
   const lead = facts.length === 0
     ? [`${f.shortName}${f.town && !includesWord(f.shortName, f.town) ? ` in ${f.town}` : ''}: ${f.isSoftPlay ? 'soft play' : 'family activity'} info`]
     : []
-  const sentences = [...lead, ...facts, ending]
+  const sentences = [...lead, ...facts, ...(reach ? [reach] : []), ending]
   const build = (s: string[]) => s.map((x) => `${x}.`).join(' ')
   let text = build(sentences)
-  // Drop the lowest-priority fact (never the lead or the comparison) until it fits.
-  const optional = [...facts]
+  // Drop the lowest-priority sentence (never the lead or the comparison) until it fits:
+  // the contact line first, then facts from the end.
+  const optional = [...facts, ...(reach ? [reach] : [])]
   while (text.length > MAX_META && optional.length > 0) {
     const drop = optional.pop()!
     sentences.splice(sentences.indexOf(drop), 1)
