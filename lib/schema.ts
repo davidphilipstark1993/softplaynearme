@@ -162,7 +162,10 @@ export function buildLocalBusinessSchema(input: LocalBusinessSchemaInput) {
     '@type': getSchemaType(input.venueType),
     '@id': `${venueUrl}#business`,
     name: input.name,
-    url: venueUrl,
+    // `url` is the business's own site; our listing is the page about it, not its
+    // website (Phase 4, 25 Nov 2026: the directory must not present itself as the venue).
+    ...(input.website && /^https?:\/\//i.test(input.website) ? { url: input.website } : {}),
+    mainEntityOfPage: venueUrl,
     address: {
       '@type': 'PostalAddress',
       // Omit streetAddress rather than assert leaked scrape junk ("nan",
