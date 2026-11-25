@@ -9,6 +9,8 @@ export interface NearTownVenue {
   lng?: number | string | null
   /** The venue's real town (lib/localities.ts), if known. */
   area: string | null
+  /** Hub the venue is filed under, when it isn't `hubSlug` (thin-hub "more near" list). */
+  citySlug?: string
 }
 
 const SHOW = 4
@@ -23,27 +25,38 @@ const IN_TOWN_MILES = 2
  * is within IN_TOWN_MILES it says so plainly rather than implying there is. Renders nothing
  * when no venue is within MAX_MILES, or when no venue has coordinates.
  */
-export function NearTown({ town, centre, venues, hubSlug }: { town: string; centre: { lat: number; lng: number }; venues: NearTownVenue[]; hubSlug: string }) {
+export function NearTown({ town, centre, venues, hubSlug, heading, lead, show = SHOW }: {
+  town: string
+  centre: { lat: number; lng: number }
+  venues: NearTownVenue[]
+  hubSlug: string
+  /** Overrides "Soft play near {town}". */
+  heading?: string
+  /** Overrides the default intro line. */
+  lead?: string
+  show?: number
+}) {
   const ranked = venues
     .map((v) => ({ v, miles: calculateDistance(centre, { lat: Number(v.lat), lng: Number(v.lng) }) }))
     .filter((r) => Number.isFinite(r.miles) && Number(r.v.lat) !== 0 && r.miles <= MAX_MILES)
     .sort((a, b) => a.miles - b.miles)
-    .slice(0, SHOW)
+    .slice(0, show)
   if (ranked.length === 0) return null
   const inTown = ranked.filter((r) => r.miles <= IN_TOWN_MILES).length
+  const anchor = `near-${town.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`
 
   return (
-    <section aria-labelledby={`near-${town.toLowerCase()}-heading`} id={`near-${town.toLowerCase()}`} className="mt-12 scroll-mt-28">
-      <h2 id={`near-${town.toLowerCase()}-heading`} className="text-xl font-semibold mb-2">Soft play near {town}</h2>
+    <section aria-labelledby={`${anchor}-heading`} id={anchor} className="mt-12 scroll-mt-28">
+      <h2 id={`${anchor}-heading`} className="text-xl font-semibold mb-2">{heading ?? `Soft play near ${town}`}</h2>
       <p className="text-slate-600 mb-4">
-        {inTown === 0
+        {lead ?? (inTown === 0
           ? `We don't list a soft play centre in ${town} itself. These are the closest, by straight-line distance from the town centre.`
-          : `The closest soft play to ${town}, by straight-line distance from the town centre.`}
+          : `The closest soft play to ${town}, by straight-line distance from the town centre.`)}
       </p>
       <ul className="grid sm:grid-cols-2 gap-3">
         {ranked.map(({ v, miles }) => (
           <li key={v.slug}>
-            <Link href={`/soft-play/${hubSlug}/${v.slug}`} className="flex items-center gap-3 p-3 rounded-lg border border-slate-200 bg-white hover:border-purple-300 hover:bg-purple-50 transition-colors">
+            <Link href={`/soft-play/${v.citySlug ?? hubSlug}/${v.slug}`} className="flex items-center gap-3 p-3 rounded-lg border border-slate-200 bg-white hover:border-purple-300 hover:bg-purple-50 transition-colors">
               <MapPin className="w-4 h-4 text-purple-500 flex-shrink-0" aria-hidden="true" />
               <span className="min-w-0">
                 <span className="block font-medium text-sm truncate">{v.name}</span>

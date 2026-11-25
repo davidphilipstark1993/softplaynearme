@@ -46,6 +46,7 @@ import { VenueCardFacts } from '@/components/venue/VenueCardFacts'
 import { VenueComparisonTable } from '@/components/location/VenueComparisonTable'
 import { HubGuide, NearbyHubs } from '@/components/location/HubGuide'
 import { NearTown } from '@/components/location/NearTown'
+import { hubCentre, rankNearest, THIN_HUB_MAX_VENUES, NEAREST_MAX_MILES, NEAREST_SHOW, type NearestCandidate } from '@/lib/nearestVenues'
 import { getHubGuide, buildDataGuide, buildGuideTitle, buildAnswerFirst, composeGuideFaqs } from '@/lib/hubGuides'
 import { listingBoost } from '@/lib/ownerData'
 
@@ -502,6 +503,32 @@ async function getSponsoredCityVenues(citySlug: string): Promise<SponsoredVenue[
   }
 }
 
+/**
+ * Soft play venues filed under OTHER hubs within NEAREST_MAX_MILES of a point, for the
+ * "More soft play near X" list on thin hubs (lib/nearestVenues.ts ranks and filters).
+ * Live DB with a bounding box; static export when the DB is skipped or down.
+ */
+type NearestRow = NearestCandidate & { id?: number; postcode?: string | null }
+async function getVenuesNearPoint(citySlug: string, centre: { lat: number; lng: number }): Promise<NearestRow[]> {
+  const dLat = (NEAREST_MAX_MILES * 1.1) / 69
+  const dLng = dLat / Math.cos((centre.lat * Math.PI) / 180)
+  try {
+    const pool = getPool()
+    const { rows } = await pool.query<NearestRow>(
+      `SELECT v.id, v.name, v.slug, v.city_slug, v.lat, v.lng, v.postcode, v.venue_type, v.completeness_score
+       FROM venues v
+       WHERE v.is_active = true AND v.city_slug <> $1 AND ${visibleVenueTypeSql('v')}
+         AND v.lat BETWEEN $2 AND $3 AND v.lng BETWEEN $4 AND $5`,
+      [citySlug, centre.lat - dLat, centre.lat + dLat, centre.lng - dLng, centre.lng + dLng]
+    )
+    return rows
+  } catch {
+    return getAllStaticTownSlugs().flatMap((t) =>
+      getStaticVenuesByTown(t).map((v) => ({ id: v.id, name: v.name, slug: v.slug, city_slug: v.townSlug, lat: v.lat, lng: v.lng, postcode: v.postcode, venue_type: v.venueType ?? null }))
+    )
+  }
+}
+
 export default async function CityPage({ params, searchParams }: PageProps) {
   const { city } = await params
   const { filter, search, age: ageParam, facilities: facilitiesParam, price, special: specialParam, sort, area, page: pageParam } = await searchParams
@@ -667,6 +694,22 @@ export default async function CityPage({ params, searchParams }: PageProps) {
   const showCurated = !hasActiveFilters && pageNum === 1 && venues.length >= 4
   const showNearby = !hasActiveFilters && !filter && pageNum === 1
   const nearbyGroups = showNearby ? groupNearbyByLocality(city, nearbyVenues) : []
+  // Thin hub (1–2 soft play venues): list the closest venues filed under other hubs, so the
+  // page answers "soft play near {town}" instead of repeating its one venue page.
+  const ownSoftPlayCount = contentVenues.filter((v) => isSoftPlayVenueType(v.venue_type)).length
+  const thinCentre = !hasActiveFilters && pageNum === 1 && ownSoftPlayCount <= THIN_HUB_MAX_VENUES ? hubCentre(city) : null
+  const moreNear = thinCentre
+    ? rankNearest(thinCentre, await getVenuesNearPoint(city, thinCentre), city).map(({ venue: v }) => ({
+        slug: v.slug,
+        name: v.name,
+        lat: v.lat,
+        lng: v.lng,
+        citySlug: v.city_slug,
+        // The venue's real town, or nothing: the hub it's filed under (Chester-le-Street under Newcastle) would mislead.
+        area: getLocality({ id: v.id, postcode: v.postcode ?? null }),
+      }))
+    : []
+  const ownCountWords = ['no soft play centres', 'one soft play centre', 'two soft play centres'][ownSoftPlayCount]
   // Every nearby area is a real link or isn't shown: a town with its own hub
   // links there; a town whose venues are in the Nearby section above links to
   // that block; anything else (no hub, no venues) is left out rather than
@@ -1294,6 +1337,18 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                 venues={[...contentVenues, ...nearbyVenues].filter((v) => isSoftPlayVenueType(v.venue_type)).map((v) => ({ slug: v.slug, name: v.name, lat: v.lat, lng: v.lng, area: getLocality(v) }))}
               />
             ))}
+
+          {thinCentre && moreNear.length > 0 && (
+            <NearTown
+              town={displayName}
+              centre={thinCentre}
+              hubSlug={city}
+              venues={moreNear}
+              show={NEAREST_SHOW}
+              heading={`More soft play near ${displayName}`}
+              lead={`We list ${ownCountWords} in ${displayName} itself. These are the closest others, listed under nearby towns, by straight-line distance from the centre of ${displayName}.`}
+            />
+          )}
 
           {guide && !hasActiveFilters && pageNum === 1 && <NearbyHubs hubs={guide.nearbyHubs} cityName={displayName} />}
 

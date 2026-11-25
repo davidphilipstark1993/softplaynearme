@@ -59,6 +59,21 @@
     "lng": -1.9902,
     "source": "os-names:Village"
   },
+  "barrow-in-furness": {
+    "lat": 54.11136,
+    "lng": -3.22716,
+    "source": "os-names:Town"
+  },
+  "bathgate": {
+    "lat": 55.90247,
+    "lng": -3.64182,
+    "source": "os-names:Town"
+  },
+  "bedford": {
+    "lat": 52.13684,
+    "lng": -0.46849,
+    "source": "os-names:Town"
+  },
   "belfast": {
     "lat": 54.67468,
     "lng": -5.92178,
@@ -274,6 +289,11 @@
     "lng": -2.97367,
     "source": "os-names:City"
   },
+  "durham": {
+    "lat": 54.77786,
+    "lng": -1.58261,
+    "source": "os-names:City"
+  },
   "edinburgh": {
     "lat": 55.95334,
     "lng": -3.18911,
@@ -322,6 +342,11 @@
   "glasgow": {
     "lat": 55.86363,
     "lng": -4.23688,
+    "source": "os-names:City"
+  },
+  "gloucester": {
+    "lat": 51.86455,
+    "lng": -2.24693,
     "source": "os-names:City"
   },
   "goole": {
@@ -432,6 +457,11 @@
   "ipswich": {
     "lat": 52.05707,
     "lng": 1.15283,
+    "source": "os-names:Town"
+  },
+  "kettering": {
+    "lat": 52.39995,
+    "lng": -0.72831,
     "source": "os-names:Town"
   },
   "kidderminster": {
@@ -624,6 +654,16 @@
     "lng": -3.4924,
     "source": "os-names:Town"
   },
+  "rochester": {
+    "lat": 51.38979,
+    "lng": 0.50363,
+    "source": "os-names:Town"
+  },
+  "romsey": {
+    "lat": 50.98911,
+    "lng": -1.49976,
+    "source": "os-names:Town"
+  },
   "rugby": {
     "lat": 52.37218,
     "lng": -1.26265,
@@ -643,6 +683,11 @@
     "lat": 55.58183,
     "lng": -1.65349,
     "source": "os-names:Village"
+  },
+  "selby": {
+    "lat": 53.78393,
+    "lng": -1.06983,
+    "source": "os-names:Town"
   },
   "sheffield": {
     "lat": 53.38251,
@@ -719,6 +764,11 @@
     "lng": -1.91687,
     "source": "os-names:Village"
   },
+  "stockton-on-tees": {
+    "lat": 54.56397,
+    "lng": -1.31267,
+    "source": "os-names:Town"
+  },
   "stoke": {
     "lat": 53.02218,
     "lng": -2.17337,
@@ -727,6 +777,11 @@
   "stourbridge": {
     "lat": 52.45507,
     "lng": -2.1433,
+    "source": "os-names:Town"
+  },
+  "stratford-upon-avon": {
+    "lat": 52.19269,
+    "lng": -1.70635,
     "source": "os-names:Town"
   },
   "sunbury-on-thames": {
@@ -804,6 +859,11 @@
     "lng": -2.05433,
     "source": "os-names:Town"
   },
+  "winchester": {
+    "lat": 51.06176,
+    "lng": -1.311,
+    "source": "os-names:City"
+  },
   "wokingham": {
     "lat": 51.41027,
     "lng": -0.83293,
@@ -828,6 +888,11 @@
     "lat": 50.81426,
     "lng": -0.37122,
     "source": "os-names:Town"
+  },
+  "wrexham": {
+    "lat": 53.04792,
+    "lng": -2.99478,
+    "source": "os-names:City"
   },
   "wythall": {
     "lat": 52.37389,
