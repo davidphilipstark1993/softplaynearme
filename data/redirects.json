@@ -8338,5 +8338,25 @@
     "source": "/blog/sensory-soft-play-yorkshire",
     "destination": "/blog/sen-friendly-soft-play-uk",
     "permanent": true
+  },
+  {
+    "source": "/soft-play/leeds/tiny-tykes-play-leeds",
+    "destination": "/soft-play/leeds/tiny-tykes-play",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/leeds/jigsaw-gyms-leeds",
+    "destination": "/soft-play/leeds/jigsaw-gyms",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/dartford/sense-of-play-ltd-2",
+    "destination": "/soft-play/dartford/sense-of-play-ltd",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/manchester/tumbles-play-place",
+    "destination": "/soft-play/mossley/tumbles-play-place-2",
+    "permanent": true
   }
 ]

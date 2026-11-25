@@ -32,7 +32,7 @@ import pg from 'pg'
 
 const args = Object.fromEntries(process.argv.slice(2).map((a) => { const [k, v = true] = a.replace(/^--/, '').split('='); return [k, v] }))
 const out = args.out ?? 'seo-data/phase1/venue-quality.csv'
-const NOINDEX_TYPES = ['park-playground', 'leisure-centre', 'mobile-hire', 'retail'] // lib/venueContent.ts
+const NOINDEX_TYPES = ['park-playground', 'mobile-hire', 'retail'] // lib/venueContent.ts
 const NOINDEX_THRESHOLD = 20
 const FACILITY_KEYS = ['cafe', 'parking', 'parties', 'toddler_area', 'baby_area', 'sen_friendly', 'wheelchair_access', 'has_outdoor_play', 'free_wifi', 'air_conditioning', 'party_rooms', 'food_served', 'changing_facilities', 'role_play_area']
 
