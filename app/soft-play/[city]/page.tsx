@@ -130,7 +130,7 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
   const outOfRange = requested > totalPages
 
   // Hubs with an editorial guide (lib/hubGuides.ts) use the long-form title with the live N.
-  const guideTitle = !override && getHubGuide(city) && core.length > 0 ? buildGuideTitle(name, core.length, new Date().getFullYear()) : null
+  const guideTitle = !override && getHubGuide(city) && !getHubGuide(city)?.keepGeneratedTitle && core.length > 0 ? buildGuideTitle(name, core.length, new Date().getFullYear()) : null
   const titleText = guideTitle ?? meta.title
   const title = pageNum > 1 ? `${titleText} – Page ${pageNum}` : titleText
   const description = pageNum > 1 ? trimMeta(`${meta.description} Page ${pageNum} of ${totalPages}.`) : meta.description

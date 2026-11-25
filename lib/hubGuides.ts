@@ -32,6 +32,12 @@ export interface HubGuide {
    * later than the newest venue change, so Google sees rewritten hub copy as an update.
    */
   contentUpdated?: string
+  /**
+   * Keep the hub's generated/override title instead of switching to buildGuideTitle. Set on hubs
+   * that got a guide while their title was part of the 12 Nov 2026 title comparison (benchmark
+   * vs "near me" override hubs), so adding content does not also change the title being measured.
+   */
+  keepGeneratedTitle?: boolean
   /** The name the hub's title, H1 and FAQ use when it differs from the city name ("Brighton & Hove"). */
   areaName?: string
   /**
@@ -675,6 +681,253 @@ const GUIDES: Record<string, HubGuide> = {
       },
     ],
   },
+  newcastle: {
+    // From our listings (Google Places names, types and postcodes; council areas and wards
+    // from postcodes.io), checked 25 November 2026. No prices or session times are held for
+    // these venues, so none are quoted. Title kept: Newcastle is outside the 12 Nov override group.
+    kind: 'listings',
+    contentUpdated: '2026-11-25',
+    keepGeneratedTitle: true,
+    keepGenericFaqs: [/^How many soft play/, /best rated/],
+    nearbyHubs: [
+      { slug: 'sunderland', label: 'Sunderland' },
+      { slug: 'durham', label: 'Durham' },
+    ],
+    sections: [
+      {
+        heading: 'Soft play in Newcastle and Tyneside: where it is',
+        paragraphs: [
+          "This page covers Tyneside, not only the city: Gateshead, North and South Tyneside, and Cramlington are all a short drive from each other. In Newcastle itself most soft play is in the east end. [Fun Shack](/soft-play/newcastle/fun-shack-newcastle) and the inflatable park [InflateSpace](/soft-play/newcastle/inflatespace) are next door to each other on Benfield Business Park (NE6), [New Adventurelands](/soft-play/newcastle/new-adventurelands-soft-play-newcastle) is on Benton Road (NE7) and [Walker Activity Dome](/soft-play/newcastle/walker-activity-dome) is in Walker. North-west of the centre, [Captain Ted's](/soft-play/newcastle/captain-ted-s-newcastle) is in Gosforth, [Kenton Park Sports Centre](/soft-play/newcastle/kenton-park-sports-centre) and [sport@kenton](/soft-play/newcastle/sport-kenton) are in Kenton, and [Lemon Tree Softplay Cafe](/soft-play/newcastle/lemon-tree-softplay-cafe) is on Wagonway Drive (NE13).",
+          "North Tyneside has the most-reviewed indoor soft play we list on Tyneside, [Round The Twist](/soft-play/newcastle/round-the-twist-newcastle), on the North Tyne Industrial Estate at Forest Hall (NE12), with [Ace Playce](/soft-play/newcastle/ace-playce-newcastle) nearby in Killingworth. On the coast, Whitley Bay has [Acorn and Oak](/soft-play/newcastle/acorn-and-oak-soft-play-newcastle) and [Whitley Bay Treehouse](/soft-play/newcastle/whitley-bay-treehouse-soft-play-newcastle), North Shields has [Kiki's Kabin](/soft-play/newcastle/kiki-s-kabin-newcastle), and Royal Quays (NE29) has [Inflata Nation](/soft-play/newcastle/inflata-nation-inflatable-theme-park) and [brood Play Cafe](/soft-play/newcastle/brood-play-cafe-newcastle). [Babyccinos](/soft-play/newcastle/babyccinos-wallsend) is in Wallsend.",
+          "South of the river, Gateshead has [Lilyput Lane](/soft-play/newcastle/lilyput-lane-newcastle) and [Kiddies Play Cafe](/soft-play/newcastle/kiddies-play-cafe) in Felling, [Dunston Activity Centre](/soft-play/newcastle/dunston-activity-centre), and [Le Petit Playhouse](/soft-play/newcastle/le-petit-playhouse-newcastle) and [Pineapple and Bears Play Hub](/soft-play/newcastle/pineapple-and-bears-play-hub-newcastle) around Blaydon (NE21). In South Tyneside, [Story Book Wacky Warehouse](/soft-play/newcastle/story-book-wacky-warehouse-newcastle) is at Boldon Leisure Park and [The Sensory Play Den](/soft-play/newcastle/the-sensory-play-den-newcastle) is in Hebburn. Further out, [CJ's Funhouse](/soft-play/newcastle/cj-s-funhouse-newcastle) is in Cramlington and [Moobears](/soft-play/newcastle/moobears-chester-le-street-newcastle) in Chester-le-Street; for Wearside, see [soft play in Sunderland](/soft-play/sunderland).",
+        ],
+      },
+      {
+        heading: 'Babies, toddlers and sensory play',
+        paragraphs: [
+          "Babyccinos in Wallsend is listed with both a toddler area and a baby area. The Sensory Play Den in Hebburn is a sensory venue and is listed with a baby area and SEN sessions. For a smaller, quieter visit than the big frames, Lemon Tree Softplay Cafe, brood Play Cafe and Kiddies Play Cafe are play cafés. Age limits differ from venue to venue, so check before you go if you have a baby and an older child with you.",
+        ],
+      },
+      {
+        heading: 'Trampolines and inflatables for older children',
+        paragraphs: [
+          "Once a soft play frame stops being a challenge, the trampoline parks we list are [Jump 360](/soft-play/newcastle/jump-360-newcastle-trampoline-park) at Forest Hall, [Newcastle Trampoline Park, Soft Play and Gym](/soft-play/newcastle/newcastle-trampoline-park-soft-play-and-gym-newcastle) on West Road (NE4), [Jump Giants](/soft-play/newcastle/jump-giants-newcastle-trampoline-park-softplay) in Gateshead (NE8), which also has soft play, and [Airbox Bounce](/soft-play/newcastle/airbox-bounce-trampoline-park-newcastle) in Cramlington. InflateSpace at Benfield and Inflata Nation at Royal Quays are inflatable parks.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Is there soft play in Newcastle city centre?',
+        answer:
+          "Not in the city centre itself in our listings. The nearest are Captain Ted's in Gosforth, Walker Activity Dome in Walker, and Fun Shack, InflateSpace and New Adventurelands in the east end. Newcastle Trampoline Park on West Road also has soft play.",
+      },
+      {
+        question: 'Where is soft play near Whitley Bay, Tynemouth and North Shields?',
+        answer:
+          "Whitley Bay has Acorn and Oak and Whitley Bay Treehouse, North Shields has Kiki's Kabin, and Royal Quays has Inflata Nation, an inflatable park, and brood Play Cafe. Round The Twist and Ace Playce are a short drive inland at Forest Hall and Killingworth.",
+      },
+      {
+        question: 'Is there soft play in Gateshead?',
+        answer:
+          "Yes. Lilyput Lane and Kiddies Play Cafe are in Felling, Dunston Activity Centre is in Dunston, and Le Petit Playhouse and Pineapple and Bears Play Hub are around Blaydon. Jump Giants in Gateshead is a trampoline park with soft play.",
+      },
+      {
+        question: 'Is there sensory or SEN-friendly soft play near Newcastle?',
+        answer:
+          "The Sensory Play Den in Hebburn is a sensory play venue and is listed with SEN sessions and a baby area. Play cafés are usually smaller and calmer than the big frames; ask any venue whether it runs a quieter session and when.",
+      },
+      {
+        question: 'Where are the trampoline parks near Newcastle?',
+        answer:
+          "Jump 360 at Forest Hall, Newcastle Trampoline Park on West Road, Jump Giants in Gateshead and Airbox Bounce in Cramlington. InflateSpace at Benfield and Inflata Nation at Royal Quays are inflatable parks.",
+      },
+    ],
+  },
+  portsmouth: {
+    // From our listings (Google Places names, types and postcodes; council areas and wards from
+    // postcodes.io), checked 25 November 2026. No prices are held, so none are quoted.
+    // Title kept: Portsmouth is a benchmark hub in the 12 Nov title comparison.
+    kind: 'listings',
+    contentUpdated: '2026-11-25',
+    keepGeneratedTitle: true,
+    keepGenericFaqs: [/^How many soft play/, /best rated/],
+    nearbyHubs: [
+      { slug: 'southampton', label: 'Southampton' },
+      { slug: 'chichester', label: 'Chichester' },
+    ],
+    sections: [
+      {
+        heading: 'Soft play in Portsmouth: where it is',
+        paragraphs: [
+          "On Portsea Island, Southsea has [Exploria](/soft-play/portsmouth/exploria) in the Pyramids Centre on the seafront and [Southsea Play Cafe](/soft-play/portsmouth/southsea-play-cafe-ltd) on Osborne Road. North of the city centre are [Sovereigns Wacky Warehouse](/soft-play/portsmouth/sovereigns-wacky-warehouse) on Kingston Crescent and [Buckland Park Play Centre](/soft-play/portsmouth/buckland-park-play-centre) (PO2), and [Farmhouse Wacky Warehouse](/soft-play/portsmouth/farmhouse-wacky-warehouse) is in Baffins (PO3). [PlayZone](/soft-play/portsmouth/playzone) at Cosham (PO6) is the most-reviewed soft play in our Portsmouth listings.",
+          "This page also covers the towns around the harbour. Gosport has [Monkey Bizness Gosport](/soft-play/portsmouth/monkey-bizness-gosport) and [Wild Wonderland](/soft-play/portsmouth/wild-wonderland-gosport) in Bridgemary and [PlayDaze](/soft-play/portsmouth/playdaze-indoor-play-centre) in Elson. Fareham has [Wonder](/soft-play/portsmouth/wonder) and [Sweet Peas Role Play Cafe](/soft-play/portsmouth/sweet-peas-role-play-cafe-craft-and-party-venue), with [Little Big Village](/soft-play/portsmouth/little-big-village-childrens-role-play-and-cafe) at Locks Heath and [Little Giggle Street](/soft-play/portsmouth/little-giggle-street) in Whiteley Shopping Centre. To the north, [Cubano Beach Club](/soft-play/portsmouth/cubano-beach-club-waterlooville) is in Waterlooville and [Play Planet](/soft-play/portsmouth/play-planet-horndean) in Horndean.",
+        ],
+      },
+      {
+        heading: 'Role play and play cafés',
+        paragraphs: [
+          "Not every venue here is a climbing frame. Sweet Peas in Fareham and Little Big Village at Locks Heath are role-play cafés, which suit imaginative younger children, and Southsea Play Cafe is a play café. All three are listed with a café; Sweet Peas also takes party bookings.",
+        ],
+      },
+      {
+        heading: 'Days out nearby',
+        paragraphs: [
+          "For a longer day, [Staunton Farm](/soft-play/portsmouth/staunton-farm) at Leigh Park, Havant, is a play farm, and [Rock Up Whiteley](/soft-play/portsmouth/rock-up-whiteley) is a climbing and activity centre also in Whiteley Shopping Centre.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Is there soft play in Southsea?',
+        answer:
+          "Yes. Exploria is in the Pyramids Centre on the seafront and Southsea Play Cafe is on Osborne Road. Sovereigns Wacky Warehouse and Buckland Park Play Centre are a short drive north, in PO2.",
+      },
+      {
+        question: 'Is there soft play in Gosport and Fareham?',
+        answer:
+          "Gosport has Monkey Bizness Gosport and Wild Wonderland in Bridgemary and PlayDaze in Elson. Fareham has Wonder and Sweet Peas Role Play Cafe, and Little Big Village is at Locks Heath.",
+      },
+      {
+        question: 'Is there role-play soft play near Portsmouth?',
+        answer:
+          "Sweet Peas Role Play Cafe in Fareham and Little Big Village at Locks Heath are role-play cafés with a café on site. They suit younger children who prefer pretend play to a big frame.",
+      },
+      {
+        question: 'Is there SEN-friendly soft play in Portsmouth?',
+        answer:
+          "Southsea Play Cafe and Wild Wonderland in Gosport are listed as SEN-friendly. What that means varies (quiet sessions, smaller groups, sensory equipment), so ask the venue what it offers and when.",
+      },
+      {
+        question: 'Where can I have a soft play party in Portsmouth?',
+        answer:
+          "Farmhouse Wacky Warehouse in Baffins and Sweet Peas in Fareham are listed for party bookings. Other venues may take parties too, so ask the one you like for its current packages and prices.",
+      },
+    ],
+  },
+  leicester: {
+    // From our listings (Google Places names, types and postcodes; council areas and wards from
+    // postcodes.io), checked 25 November 2026. No prices are held, so none are quoted.
+    // Title kept: Leicester is a benchmark hub in the 12 Nov title comparison.
+    kind: 'listings',
+    contentUpdated: '2026-11-25',
+    keepGeneratedTitle: true,
+    keepGenericFaqs: [/^How many soft play/, /best rated/],
+    nearbyHubs: [
+      { slug: 'loughborough', label: 'Loughborough' },
+      { slug: 'nottingham', label: 'Nottingham' },
+      { slug: 'coventry', label: 'Coventry' },
+    ],
+    sections: [
+      {
+        heading: 'Soft play in Leicester: where it is',
+        paragraphs: [
+          "In the city, [Rascal Ranch](/soft-play/leicester/rascal-ranch-leicester) on Trevanth Road and [Northfields Playbarn](/soft-play/leicester/northfields-playbarn-leicester) on Gipsy Lane are both in the north-east (Troon ward, LE4 and LE5), and [Fun Valley](/soft-play/leicester/fun-valley) is on Evington Valley Road (LE5). [Party House](/soft-play/leicester/party-house-leicester) (LE4) and [Soft Play Parties](/soft-play/leicester/soft-play-parties-leicester) (LE3) are party venues. In the city centre, [Boost Trampoline Park](/soft-play/leicester/boost-trampoline-park) is on St George Street and [Ninja Warrior UK Adventure](/soft-play/leicester/ninja-warrior-uk-adventure) is at St Georges Retail Park.",
+          "Just outside the city boundary: Oadby has [Petite Street Play Village](/soft-play/leicester/petite-street-play-village-leicester) and [Parklands Play World](/soft-play/leicester/parklands-play-world-leicester), Wigston has [Two Steeples Wacky Warehouse](/soft-play/leicester/two-steeples-wacky-warehouse-leicester) and [Varney's Fun Factory](/soft-play/leicester/varney-s-fun-factory-kids-parties-leicestershire-leicester), and around Meridian (LE19) are [360 Play](/soft-play/leicester/360-play-leicester-family-entertainment-centre-and-party-venue-leicester) and [Bees Knees Wacky Warehouse](/soft-play/leicester/bees-knees-wacky-warehouse-leicester). [Enderby Leisure & Golf Centre](/soft-play/leicester/enderby-leisure-golf-centre-leicester) is in Enderby and [Tots Play](/soft-play/leicester/tots-play-baby-development-and-toddler-classes-blaby-whetstone-desford-leicester) in Whetstone.",
+          "Further out in Leicestershire: [Mini Mischiefs](/soft-play/leicester/mini-mischiefs) in Market Harborough; [Smallville Roleplay](/soft-play/leicester/smallville-roleplay-leicester) and [Little Cobblers Play Barn](/soft-play/leicester/little-cobblers-play-barn-leicester) east of the city in the Billesdon and Tilton area (LE7); [The Hub](/soft-play/leicester/the-hub-cafe-soft-play-leicester) in Syston, [Beanies](/soft-play/leicester/beanies-soft-play-leicester) in Anstey and [Noah's Ark](/soft-play/leicester/noah-s-ark-soft-play-centre) in Shepshed; [Jungle Bugs](/soft-play/leicester/jungle-bugs-soft-play-leicester) in Melton Mowbray; and [Sunnyside Adventure](/soft-play/leicester/sunnyside-adventure-leicester) and [Little Dragon's Den](/soft-play/leicester/little-dragon-s-den-soft-play-parties-leicester) around Coalville (LE67). For Loughborough, see [soft play in Loughborough](/soft-play/loughborough).",
+        ],
+      },
+      {
+        heading: 'Babies and toddlers',
+        paragraphs: [
+          "Tots Play in Whetstone runs baby development and toddler classes and is listed with both a baby and a toddler area. Mini Mischiefs in Market Harborough is listed with a toddler area, a café and party bookings. Smallville Roleplay is a role-play centre, which suits younger children who prefer pretend play to a big frame. The Hub in Syston, Beanies in Anstey, Noah's Ark in Shepshed and Sunnyside Adventure are all listed with a café.",
+        ],
+      },
+      {
+        heading: 'Birthday parties',
+        paragraphs: [
+          "Venues listed for party bookings are Mini Mischiefs, 360 Play at Meridian Leisure Park, Varney's Fun Factory in Wigston, Little Dragon's Den near Coalville, and the party venues Party House and Soft Play Parties in the city. Packages and prices are set by each venue, so ask them for a current quote.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Is there soft play in Leicester city centre?',
+        answer:
+          "The city centre has Boost Trampoline Park on St George Street and Ninja Warrior UK Adventure at St Georges Retail Park. The nearest soft play frames are Rascal Ranch and Northfields Playbarn to the north-east and Fun Valley on Evington Valley Road.",
+      },
+      {
+        question: 'Is there soft play in Oadby and Wigston?',
+        answer:
+          "Yes. Oadby has Petite Street Play Village and Parklands Play World, and Wigston has Two Steeples Wacky Warehouse and Varney's Fun Factory, which is listed for parties.",
+      },
+      {
+        question: 'Where can I take a baby or toddler to soft play near Leicester?',
+        answer:
+          "Tots Play in Whetstone runs baby and toddler classes and is listed with baby and toddler areas, and Mini Mischiefs in Market Harborough is listed with a toddler area. Smallville Roleplay, a role-play centre, suits younger children too.",
+      },
+      {
+        question: 'Where can I have a soft play party in Leicester?',
+        answer:
+          "Mini Mischiefs, 360 Play at Meridian Leisure Park, Varney's Fun Factory in Wigston and Little Dragon's Den near Coalville are listed for parties, as are the city party venues Party House and Soft Play Parties. Ask each venue for current packages and prices.",
+      },
+      {
+        question: 'Is there soft play in Leicestershire outside the city?',
+        answer:
+          "Yes: Mini Mischiefs in Market Harborough, Jungle Bugs in Melton Mowbray, Noah's Ark in Shepshed, The Hub in Syston, Beanies in Anstey, Smallville Roleplay and Little Cobblers Play Barn east of the city, and Sunnyside Adventure and Little Dragon's Den around Coalville. Loughborough has its own page.",
+      },
+    ],
+  },
+  norwich: {
+    // From our listings (Google Places names, types and postcodes; council areas and wards from
+    // postcodes.io), checked 25 November 2026. No prices are held, so none are quoted.
+    // Title kept: Norwich has a "near me" override from the 12 Nov title comparison.
+    kind: 'listings',
+    contentUpdated: '2026-11-25',
+    keepGeneratedTitle: true,
+    keepGenericFaqs: [/^How many soft play/, /best rated/],
+    nearbyHubs: [
+      { slug: 'ipswich', label: 'Ipswich' },
+      { slug: 'cambridge', label: 'Cambridge' },
+    ],
+    sections: [
+      {
+        heading: 'Soft play in Norwich: where it is',
+        paragraphs: [
+          "In Norwich itself, [Explorers Soft Play](/soft-play/norwich/explorers-soft-play) is at the YMCA on Aylsham Road (NR3) and [Ragged Rascals](/soft-play/norwich/ragged-rascals) at Harford Community Centre (NR4). [Gravity Active](/soft-play/norwich/gravity-active-norwich) is at Riverside (NR1) and [High Altitude Trampoline Park](/soft-play/norwich/high-altitude-trampoline-park) is on Whiffler Road (NR3). Just outside the city are [Hyper Centre Soft Play](/soft-play/norwich/hyper-centre-soft-play) at Horsford (NR10), [The Playbarn](/soft-play/norwich/the-playbarn) near Poringland (NR14), [Tots Town](/soft-play/norwich/tots-town-childrens-roleplay-centre), a role-play centre in Hethersett (NR9), and [Jump For Joy](/soft-play/norwich/jump-for-joy-norwich) to the north-east (NR13).",
+          "This page also covers the rest of Norfolk and the Suffolk border. Wymondham has [Jolly Junction](/soft-play/norwich/jolly-junction-soft-play-centre) and [Little Stars Norfolk](/soft-play/norwich/little-stars-norfolk), Dereham has [Planet Zoom](/soft-play/norwich/planet-zoom), North Walsham has [Stompers](/soft-play/norwich/stompers), and near Fakenham, [Hootz House](/soft-play/norwich/hootz-house) is at [Pensthorpe](/soft-play/norwich/pensthorpe). On the coast, [Neon Adventure Park](/soft-play/norwich/neon-adventure-park-softplay) and [Jump Warehouse](/soft-play/norwich/jump-warehouse-great-yamouth-norwich) are in Great Yarmouth. Over the border in Suffolk, Lowestoft has [Dinky Town](/soft-play/norwich/dinky-town) at Oulton Broad and [Adventure Island Play Park](/soft-play/norwich/adventure-island-play-park) at Carlton Colville, and Bungay has [Bugs Play Cafe](/soft-play/norwich/bugs-play-cafe).",
+        ],
+      },
+      {
+        heading: 'Toddlers and role play',
+        paragraphs: [
+          "Tots Town in Hethersett is a children's role-play centre and is listed with a toddler area, which suits younger children who prefer pretend play to a big frame. Gravity Active at Riverside is also listed with a toddler area. Bugs Play Cafe in Bungay is a play café.",
+        ],
+      },
+      {
+        heading: 'Trampolines and older children',
+        paragraphs: [
+          "High Altitude Trampoline Park on Whiffler Road is listed for parties, and Gravity Active at Riverside is an activity centre. On the coast, Jump Warehouse is in Great Yarmouth. For a full day out, [Pettitts Animal Adventure Park](/soft-play/norwich/pettitts-animal-adventure-park-norwich) is east of the city (NR13) and [Namco Funscape](/soft-play/norwich/namco-funscape-norwich) is in Bowthorpe (NR5).",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        question: 'Is there soft play in Norwich city?',
+        answer:
+          "Yes. Explorers Soft Play is at the YMCA on Aylsham Road and Ragged Rascals at Harford Community Centre. Gravity Active at Riverside and High Altitude Trampoline Park on Whiffler Road are activity and trampoline venues in the city.",
+      },
+      {
+        question: 'Is there soft play just outside Norwich?',
+        answer:
+          "Hyper Centre Soft Play is at Horsford, The Playbarn near Poringland, Tots Town in Hethersett and Jump For Joy north-east of the city. Wymondham has Jolly Junction and Little Stars Norfolk.",
+      },
+      {
+        question: 'Is there role-play soft play near Norwich?',
+        answer:
+          "Tots Town in Hethersett is a children's role-play centre and is listed with a toddler area. It suits younger children who prefer pretend play to a big climbing frame.",
+      },
+      {
+        question: 'Where is soft play near Great Yarmouth and Lowestoft?',
+        answer:
+          "Great Yarmouth has Neon Adventure Park and Jump Warehouse. In Lowestoft, Dinky Town is at Oulton Broad and Adventure Island Play Park at Carlton Colville. Bugs Play Cafe is in Bungay.",
+      },
+      {
+        question: 'Where are the trampoline parks near Norwich?',
+        answer:
+          "High Altitude Trampoline Park is on Whiffler Road in Norwich and is listed for parties. On the coast, Jump Warehouse is in Great Yarmouth.",
+      },
+    ],
+  },
 }
 
 /**
@@ -776,6 +1029,20 @@ const DATA_GUIDES: Record<string, DataGuideConfig> = {
   swansea: { allow: /^SA([1-9]|1[0-3])$/, nearbyHubs: [{ slug: 'llanelli', label: 'Llanelli' }, { slug: 'cardiff', label: 'Cardiff' }] },
   glasgow: { allow: /^G\d/, nearbyHubs: [{ slug: 'edinburgh', label: 'Edinburgh' }] },
   sheffield: { allow: /^S([1-9]|1\d|2\d|3[0-6])$/, nearbyHubs: [{ slug: 'barnsley', label: 'Barnsley' }, { slug: 'doncaster', label: 'Doncaster' }] },
+  // Phase 3 (25 Nov 2026): the hubs with the most Search Console impressions that had no guide.
+  // `allow` is the hub's own postcode area(s): venues filed here from further away are counted but not named.
+  stoke: { allow: /^ST\d/, nearbyHubs: [{ slug: 'crewe', label: 'Crewe' }, { slug: 'stafford', label: 'Stafford' }] },
+  sunderland: { allow: /^(SR\d|NE3[5-8]|DH[45])$/, nearbyHubs: [{ slug: 'newcastle', label: 'Newcastle' }, { slug: 'durham', label: 'Durham' }] },
+  southend: { allow: /^SS\d/, nearbyHubs: [{ slug: 'colchester', label: 'Colchester' }, { slug: 'dartford', label: 'Dartford' }] },
+  barnsley: { allow: /^S7[0-5]$/, nearbyHubs: [{ slug: 'sheffield', label: 'Sheffield' }, { slug: 'doncaster', label: 'Doncaster' }, { slug: 'huddersfield', label: 'Huddersfield' }] },
+  huddersfield: { allow: /^HD\d/, nearbyHubs: [{ slug: 'halifax', label: 'Halifax' }, { slug: 'barnsley', label: 'Barnsley' }, { slug: 'leeds', label: 'Leeds' }] },
+  lincoln: { allow: /^LN\d/, nearbyHubs: [{ slug: 'scunthorpe', label: 'Scunthorpe' }, { slug: 'skegness', label: 'Skegness' }] },
+  bradford: { allow: /^BD\d/, nearbyHubs: [{ slug: 'leeds', label: 'Leeds' }, { slug: 'halifax', label: 'Halifax' }] },
+  halifax: { allow: /^HX\d/, nearbyHubs: [{ slug: 'huddersfield', label: 'Huddersfield' }, { slug: 'bradford', label: 'Bradford' }] },
+  cardiff: { allow: /^CF\d/, nearbyHubs: [{ slug: 'swansea', label: 'Swansea' }, { slug: 'bristol', label: 'Bristol' }] },
+  york: { allow: /^YO\d/, nearbyHubs: [{ slug: 'leeds', label: 'Leeds' }, { slug: 'beverley', label: 'Beverley' }] },
+  bolton: { allow: /^BL\d/, nearbyHubs: [{ slug: 'manchester', label: 'Manchester' }] },
+  doncaster: { allow: /^DN([1-9]|1[0-2])$/, nearbyHubs: [{ slug: 'barnsley', label: 'Barnsley' }, { slug: 'sheffield', label: 'Sheffield' }] },
 }
 
 export function hasDataGuide(citySlug: string): boolean {

@@ -35,38 +35,4 @@ export const cityGuidePosts: BlogPost[] = [
       }
     ]
   },
-  {
-    "slug": "best-soft-play-in-newcastle",
-    "title": "Best Soft Play in Newcastle (2026 Parent Guide)",
-    "city": "Newcastle",
-    "excerpt": "Soft play in Newcastle from real data: 33 venues with ratings and the toddler, party and SEN facilities each one confirms. Honest parent guide.",
-    "publishedAt": "2026-02-18T00:00:00.000Z",
-    "updatedAt": "2026-11-12T00:00:00.000Z",
-    "datePublished": "2026-02-18T00:00:00.000Z",
-    "dateModified": "2026-11-12T00:00:00.000Z",
-    "verifiedOn": "3 November 2026",
-    "contentHtml": "<p>We list 33 soft play centres in and around Newcastle, and 28 of them have 20 or more Google reviews, enough to say something fair about how families rate them.</p>\n\n<p>This guide only states what we hold real data for: ratings, review counts and facilities the venue confirms. We leave out prices, age limits and opening times, because they change often and are best checked with the venue directly before you set off.</p>\n\n<blockquote>\n  <p>👉 <strong><a href=\"/soft-play/newcastle\" class=\"text-purple-700 hover:underline\">Browse every soft play centre in Newcastle with ratings and facilities</a></strong></p>\n</blockquote>\n\n<h2>The best-reviewed soft play in Newcastle</h2>\n<p><a href=\"/soft-play/newcastle/tim-lamb-children-s-centre-newcastle\" class=\"text-purple-700 hover:underline\">Tim Lamb Children's Centre</a> has the highest rating of any venue we list with 20+ reviews, at 4.9 stars. Ranked by rating, then by how many people have reviewed them:</p>\n<ul>\n  <li><strong><a href=\"/soft-play/newcastle/tim-lamb-children-s-centre-newcastle\" class=\"text-purple-700 hover:underline\">Tim Lamb Children's Centre</a></strong>: 4.9 stars from 92 reviews.</li>\n  <li><strong><a href=\"/soft-play/newcastle/acorn-and-oak-soft-play-newcastle\" class=\"text-purple-700 hover:underline\">Acorn and Oak Soft Play</a></strong>: 4.9 stars from 85 reviews.</li>\n  <li><strong><a href=\"/soft-play/newcastle/le-petit-playhouse-newcastle\" class=\"text-purple-700 hover:underline\">Le Petit Playhouse</a></strong>: 4.9 stars from 55 reviews.</li>\n  <li><strong><a href=\"/soft-play/newcastle/lilyput-lane-newcastle\" class=\"text-purple-700 hover:underline\">Lilyput Lane</a></strong>: 4.8 stars from 99 reviews.</li>\n  <li><strong><a href=\"/soft-play/newcastle/story-book-wacky-warehouse-newcastle\" class=\"text-purple-700 hover:underline\">Story Book Wacky Warehouse</a></strong>: 4.7 stars from 335 reviews.</li>\n</ul>\n\n<h2>The busiest venues</h2>\n<p>Review volume is a good proxy for how many families actually go. <a href=\"/soft-play/newcastle/round-the-twist-newcastle\" class=\"text-purple-700 hover:underline\">Round The Twist</a> (991 reviews, 4.2 stars), <a href=\"/soft-play/newcastle/fun-shack-newcastle\" class=\"text-purple-700 hover:underline\">Fun Shack</a> (932 reviews, 4.3 stars) and <a href=\"/soft-play/newcastle/new-adventurelands-soft-play-newcastle\" class=\"text-purple-700 hover:underline\">New Adventurelands Soft play</a> (613 reviews, 4.3 stars) lead the list.</p>\n\n<h2>What each venue confirms</h2>\n<ul>\n  <li><strong>Dedicated toddler area</strong> (1): <strong><a href=\"/soft-play/stocksfield/brocksbushes-play-barn\" class=\"text-purple-700 hover:underline\">Brocksbushes Play Barn</a></strong> (Stocksfield).</li>\n  <li><strong>Birthday parties</strong> (4): <strong><a href=\"/soft-play/stanley/krazy-kingdom\" class=\"text-purple-700 hover:underline\">Krazy Kingdom</a></strong> (Stanley) and <strong><a href=\"/soft-play/stocksfield/brocksbushes-play-barn\" class=\"text-purple-700 hover:underline\">Brocksbushes Play Barn</a></strong> (Stocksfield) and more.</li>\n  <li><strong>SEN-friendly</strong> (2): <strong><a href=\"/soft-play/newcastle/the-sensory-play-den-newcastle\" class=\"text-purple-700 hover:underline\">The Sensory Play Den</a></strong> and more.</li>\n  <li><strong>Café</strong> (9): <strong><a href=\"/soft-play/newcastle/round-the-twist-newcastle\" class=\"text-purple-700 hover:underline\">Round The Twist</a></strong>, <strong><a href=\"/soft-play/stocksfield/brocksbushes-play-barn\" class=\"text-purple-700 hover:underline\">Brocksbushes Play Barn</a></strong> (Stocksfield), <strong><a href=\"/soft-play/newcastle/ace-playce-newcastle\" class=\"text-purple-700 hover:underline\">Ace Playce</a></strong> and <strong><a href=\"/soft-play/newcastle/captain-ted-s-newcastle\" class=\"text-purple-700 hover:underline\">Captain Ted's</a></strong> and more.</li>\n</ul>\n<p>Filter Newcastle by <a href=\"/soft-play/newcastle/toddler\" class=\"text-purple-700 hover:underline\">toddler areas</a>, <a href=\"/soft-play/newcastle/birthday-parties\" class=\"text-purple-700 hover:underline\">birthday parties</a> or <a href=\"/soft-play/newcastle/sen-friendly\" class=\"text-purple-700 hover:underline\">SEN-friendly sessions</a>. Venues are only tagged when they confirm the facility, so a missing tag means we don't know, not that the venue lacks it.</p>\n\n<h2>Planning a visit with under-fives?</h2>\n<p>Read our <a href=\"/blog/baby-and-toddler-soft-play-uk\" class=\"text-purple-700 hover:underline\">UK baby and toddler soft play guide</a> for what a good toddler area has and how to pick quieter times.</p>\n\n<p>👉 <strong><a href=\"/soft-play/newcastle\" class=\"text-purple-700 hover:underline\">See the full Newcastle directory</a></strong></p>",
-    "faq": [
-      {
-        "q": "How many soft play centres are there in Newcastle?",
-        "a": "We list 33 soft play centres in and around Newcastle. The full list, with ratings and facilities, is on our Newcastle page."
-      },
-      {
-        "q": "What is the best-reviewed soft play in Newcastle?",
-        "a": "Tim Lamb Children's Centre has the highest rating among venues we list with 20 or more reviews, at 4.9 stars from 92 reviews."
-      },
-      {
-        "q": "Which Newcastle soft play centres have a toddler area?",
-        "a": "1 venue in our Newcastle listings confirm a dedicated toddler area. Use the toddler filter on the Newcastle page to see them."
-      },
-      {
-        "q": "Can I book a birthday party at soft play in Newcastle?",
-        "a": "4 venues in our Newcastle listings confirm they offer parties. Check each venue for packages and prices."
-      },
-      {
-        "q": "Is there SEN-friendly soft play in Newcastle?",
-        "a": "2 venues in our Newcastle listings are tagged SEN-friendly. Contact the venue to check session times and what support they offer."
-      }
-    ]
-  }
 ]

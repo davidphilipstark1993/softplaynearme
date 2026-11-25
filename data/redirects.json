@@ -8358,5 +8358,25 @@
     "source": "/soft-play/manchester/tumbles-play-place",
     "destination": "/soft-play/mossley/tumbles-play-place-2",
     "permanent": true
+  },
+  {
+    "source": "/blog/best-soft-play-in-newcastle",
+    "destination": "/soft-play/newcastle",
+    "permanent": true
+  },
+  {
+    "source": "/blog/best-soft-play-in-portsmouth",
+    "destination": "/soft-play/portsmouth",
+    "permanent": true
+  },
+  {
+    "source": "/blog/best-soft-play-in-leicester",
+    "destination": "/soft-play/leicester",
+    "permanent": true
+  },
+  {
+    "source": "/blog/best-soft-play-in-norwich",
+    "destination": "/soft-play/norwich",
+    "permanent": true
   }
 ]
