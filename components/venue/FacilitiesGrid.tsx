@@ -119,7 +119,7 @@ export function FacilitiesGrid({
 
   // Check if we have any facilities to display
   const hasFacilities = FACILITY_CONFIG.some(
-    (f) => mergedFacilities[f.key] !== undefined
+    (f) => mergedFacilities[f.key] === true
   )
 
   if (!hasFacilities) {

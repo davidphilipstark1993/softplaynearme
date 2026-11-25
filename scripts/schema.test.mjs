@@ -64,3 +64,11 @@ test('breadcrumb and FAQ builders', { skip }, async () => {
   assert.equal(buildFAQSchema([]), null)
   assert.equal(buildFAQSchema([{ question: 'q?', answer: 'a' }]).mainEntity[0].acceptedAnswer.text, 'a')
 })
+
+test('venue schema: url is the venue website, our page is mainEntityOfPage', { skip }, async () => {
+  const { buildLocalBusinessSchema } = await import('../lib/schema.ts')
+  const s = buildLocalBusinessSchema({ ...base, website: 'https://example-venue.co.uk/' })
+  assert.equal(s.url, 'https://example-venue.co.uk/')
+  assert.match(s.mainEntityOfPage, /^https:\/\/www\.softplaynearme\.co\.uk\/soft-play\//)
+  assert.equal(buildLocalBusinessSchema({ ...base }).url, undefined)
+})

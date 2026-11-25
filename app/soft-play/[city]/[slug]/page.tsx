@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { cleanVenueDescription, cleanVenueTips, cleanWhatToExpect } from '@/lib/venueCopy'
 import { venueFacts, buildVenueSeoTitle, buildVenueMetaDescription, quickFactRows, nearbyText, parseWeekHours, weekHoursForSchema, NEARBY_MILES, NEARBY_LIST_MAX, type VenueFacts } from '@/lib/venueSnippet'
 import { cache } from 'react'
 import { notFound } from 'next/navigation'
@@ -22,7 +23,7 @@ import { getPool, STATIC_BUILD } from '@/lib/pool'
 import { getHubGuide } from '@/lib/hubGuides'
 import { pendingSources } from '@/lib/redirects'
 import { calculateDistance, formatDistance, getBoundingBox } from '@/lib/geo'
-import { visibleVenueTypeSql } from '@/lib/venueTypes'
+import { visibleVenueTypeSql, NON_SOFT_PLAY_VENUE_TYPE_LABELS, type NonSoftPlayVenueType } from '@/lib/venueTypes'
 import { getStaticVenue, getStaticTownBySlug, getStaticVenuesByTown, getAllStaticTownSlugs, type StaticVenue } from '@/lib/staticVenues'
 import { isVisibleVenueType } from '@/lib/venueTypes'
 import { Header } from '@/components/layout/Header'
@@ -66,6 +67,7 @@ interface PageProps {
 }
 
 interface Venue {
+  review_snippet?: string | null
   id: number
   name: string
   slug: string
@@ -714,14 +716,37 @@ export default async function VenuePage({ params }: PageProps) {
     : usablePhotos.length > 0
     ? usablePhotos
     : isUsablePhotoUrl(venue.main_image_url)
-      ? [{ id: 0, url: venue.main_image_url, alt_text: `${venue.name} soft play area`, is_primary: true }]
+      ? [{ id: 0, url: venue.main_image_url, alt_text: `${venue.name}, photo from its Google listing`, is_primary: true }]
       : []
 
   // ── Content generation ─────────────────────────────────────────────────
-  const venueContentInput = { ...venue, city: homeTown, county: homeTown === cityName ? county : '' }
+  // The facility columns default to false, so false only means "no" when the venue's owner
+  // said so (owner form: café, parking); otherwise it is "not confirmed". accepts_walk_ins
+  // defaults to true and nothing ever confirms it, so it is never stated.
+  const ownerSaid = venue._owner?.facilities ?? {}
+  const venueContentInput = {
+    ...venue,
+    city: homeTown,
+    county: homeTown === cityName ? county : '',
+    cafe: venue.cafe || (ownerSaid.cafe === false ? false : undefined),
+    parking: venue.parking || (ownerSaid.parking === false ? false : undefined),
+    accepts_walk_ins: undefined,
+  }
 
-  // Use stored description if available, otherwise generate one
-  const displayDescription = venue.description || generateVenueDescription(venueContentInput)
+  // Stored description without generator filler (lib/venueCopy.ts). An owner's own text
+  // passes through untouched. Too little left: lead with the address line, or generate.
+  const cleanedDescription = venue._owner?.owner_description ? venue.description ?? '' : cleanVenueDescription(venue.description, venue.review_snippet)
+  const descAddress = formatAddressLine(venue.address, venue.postcode)
+  const KIND: Record<string, string> = { indoor: 'soft play centre', pub: 'pub with soft play', 'leisure-centre': 'leisure centre', 'mobile-hire': 'mobile soft play hire business', retail: 'shop' }
+  const kind = KIND[venue.venue_type ?? 'indoor'] ?? NON_SOFT_PLAY_VENUE_TYPE_LABELS[venue.venue_type as NonSoftPlayVenueType]?.toLowerCase() ?? 'play venue'
+  const descLead = descAddress && !cleanedDescription.startsWith(venue.name)
+    ? `${venue.name} is ${/^[aeiou]/i.test(kind) ? 'an' : 'a'} ${kind} at ${descAddress}.`
+    : ''
+  const displayDescription = cleanedDescription
+    ? [descLead, cleanedDescription].filter(Boolean).join(cleanedDescription.includes('\n\n') ? '\n\n' : ' ')
+    : generateVenueDescription(venueContentInput)
+  const expect = cleanWhatToExpect(venue.what_to_expect)
+  const tips = cleanVenueTips(venue.tips_before_visiting)
 
   // FAQs: prefer stored faq_json, otherwise generate from structured data
   const faqs: Array<{ question: string; answer: string }> =
@@ -737,7 +762,8 @@ export default async function VenuePage({ params }: PageProps) {
   // engines and AI answer engines see one unambiguous entity per venue.
   const localBusinessSchema = buildLocalBusinessSchema({
     name: venue.name,
-    description: venue.description,
+    // Our own summary only: the Google reviewer's quote is not the business's description.
+    description: displayDescription.replace(/\s*One Google reviewer wrote: “[^”]*”/g, '').replace(/\n+/g, ' ').trim() || undefined,
     address: venue.address,
     city: homeTown,
     postcode: venue.postcode,
@@ -934,7 +960,7 @@ export default async function VenuePage({ params }: PageProps) {
                 ageRangeMin={venue.age_range_min}
                 ageRangeMax={venue.age_range_max}
                 ageRanges={venue.age_ranges}
-                acceptsWalkIns={venue.accepts_walk_ins}
+                acceptsWalkIns={undefined}
                 prebookingRequired={venue.prebooking_required}
                 priceFrom={venue.price_from}
                 priceTo={venue.price_to}
@@ -1002,7 +1028,7 @@ export default async function VenuePage({ params }: PageProps) {
                     <p key={i} className="text-slate-600 leading-relaxed">{para}</p>
                   ))}
                 </div>
-                {!venue.description && (
+                {!cleanedDescription && (
                   <p className="mt-3 text-xs text-slate-400 italic">
                     This description was generated from available listing data. Contact the venue to confirm details.
                   </p>
@@ -1046,97 +1072,42 @@ export default async function VenuePage({ params }: PageProps) {
                 />
               </section>
 
-              {/* Facilities key-value summary — structured for AI extractors,
-                  built only from confirmed booleans (never invents facts) */}
+              {/* "at a Glance" (removed 25 Nov 2026): it repeated the facilities grid and showed
+                  every unconfirmed facility as "Not available", because the columns default to false. */}
+
+              {/* Who is this best for: audience tags and any venue-specific line from
+                  what_to_expect; the generic "children of all ages" text is dropped (lib/venueCopy.ts). */}
               {(() => {
-                const facilityPairs: Array<[string, boolean | undefined]> = [
-                  ['Café', venue.cafe],
-                  ['Parking', venue.parking],
-                  ['Birthday Parties', venue.parties],
-                  ['Toddler Area', venue.toddler_area],
-                  ['Baby Area', venue.baby_area],
-                  ['SEN / Sensory Sessions', venue.sen_friendly],
-                  ['Wheelchair Access', venue.wheelchair_access],
-                  ['Free WiFi', venue.free_wifi],
+                const audiences = expect.audiences.length ? expect.audiences : [
+                  ...(venue.baby_area || venue.has_under_1s ? ['Babies'] : []),
+                  ...(venue.toddler_area ? ['Toddlers'] : []),
+                  ...(venue.parties ? ['Birthday parties'] : []),
+                  ...(venue.sen_friendly || venue.has_sen_sessions ? ['SEN and additional needs'] : []),
                 ]
-                const confirmedPairs = facilityPairs.filter(([, v]) => v !== undefined)
-                if (confirmedPairs.length === 0) return null
-                return (
-                  <section aria-labelledby="facts-heading" className="bg-white rounded-lg border border-slate-200 p-6">
-                    <h2 id="facts-heading" className="font-semibold text-lg mb-3">
-                      {venue.name} at a Glance
-                    </h2>
-                    <dl className="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-2 text-sm">
-                      {confirmedPairs.map(([label, value]) => (
-                        <div key={label} className="flex flex-col">
-                          <dt className="text-slate-500">{label}</dt>
-                          <dd className="font-medium text-slate-800">{value ? 'Yes' : 'Not available'}</dd>
-                        </div>
-                      ))}
-                    </dl>
-                  </section>
-                )
-              })()}
-
-              {/* Who Is This Best For? — derived from stored what_to_expect */}
-              {(() => {
-                const wtoe = venue.what_to_expect || ''
-                // Extract "Best for: X." audience line vs body text
-                const bestForMatch = wtoe.match(/^Best for:\s*([^.]+\.?)\s*/i)
-                const bestForLine = bestForMatch ? bestForMatch[1].replace(/\.$/, '') : null
-                const bodyText = bestForMatch ? wtoe.slice(bestForMatch[0].length).trim() : wtoe
-
-                if (wtoe) {
-                  return (
-                    <div className="bg-purple-50 rounded-lg border border-purple-200 p-6">
-                      <h2 className="font-semibold text-lg text-purple-900 mb-3">Who Is This Best For?</h2>
-                      {bestForLine && (
-                        <div className="flex flex-wrap gap-2 mb-3">
-                          {bestForLine.split(/,\s*| and /).map((audience) => audience.trim()).filter(Boolean).map((audience) => (
-                            <span key={audience} className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
-                              {audience}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                      {bodyText && (
-                        <p className="text-slate-600 leading-relaxed text-sm">{bodyText}</p>
-                      )}
-                    </div>
-                  )
-                }
-
-                // Fallback: derive from facility booleans
-                const audiences: string[] = []
-                if (venue.baby_area || venue.has_under_1s) audiences.push('Babies & newborns')
-                if (venue.toddler_area) audiences.push('Toddlers (1–3 yrs)')
-                if (venue.parties) audiences.push('Birthday parties')
-                if (venue.sen_friendly || venue.has_sen_sessions) audiences.push('SEN & additional needs')
-                if (!audiences.length) audiences.push('Children of all ages', 'Families')
-
+                if (!audiences.length && !expect.body) return null
                 return (
                   <div className="bg-purple-50 rounded-lg border border-purple-200 p-6">
                     <h2 className="font-semibold text-lg text-purple-900 mb-3">Who Is This Best For?</h2>
-                    <div className="flex flex-wrap gap-2 mb-3">
-                      {audiences.map((a) => (
-                        <span key={a} className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
-                          {a}
-                        </span>
-                      ))}
-                    </div>
-                    <p className="text-slate-600 leading-relaxed text-sm">
-                      Contact {venue.name} directly to confirm current opening times, prices, and session availability before visiting.
-                    </p>
+                    {audiences.length > 0 && (
+                      <div className="flex flex-wrap gap-2 mb-3">
+                        {audiences.map((a) => (
+                          <span key={a} className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
+                            {a}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                    {expect.body && <p className="text-slate-600 leading-relaxed text-sm">{expect.body}</p>}
                   </div>
                 )
               })()}
 
-              {/* Tips Before Visiting (only when data present) */}
-              {venue.tips_before_visiting && (
+              {/* Tips: venue-specific ones only (the five generic tips were on ~1,500 pages) */}
+              {tips && (
                 <div className="bg-white rounded-lg border border-slate-200 p-6">
                   <h2 className="font-semibold text-lg mb-3">Tips Before You Visit</h2>
                   <p className="text-slate-600 leading-relaxed whitespace-pre-wrap">
-                    {venue.tips_before_visiting}
+                    {tips}
                   </p>
                 </div>
               )}

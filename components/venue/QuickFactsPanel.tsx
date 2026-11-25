@@ -161,6 +161,20 @@ export function QuickFactsPanel({
     : 'Detailed facilities not yet confirmed'
   const facilitiesConfirmed = facilityItems.length > 0
 
+  // Only confirmed rows are shown; the rest are named once in a single line rather than
+  // as a column of "Not yet confirmed" rows (Phase 4, 25 Nov 2026).
+  const rows = [
+    { icon: Baby, label: 'Age suitability', missing: 'ages', value: ageValue, confirmed: ageConfirmed },
+    { icon: Coffee, label: 'Key facilities', missing: 'facilities', value: facilitiesValue, confirmed: facilitiesConfirmed },
+    { icon: Accessibility, label: 'Accessibility', missing: 'accessibility', value: accessValue, confirmed: accessConfirmed },
+    { icon: CalendarCheck, label: 'Booking', missing: 'booking', value: bookingValue, confirmed: bookingConfirmed },
+    { icon: PoundSterling, label: 'Pricing', missing: 'prices', value: pricingValue, confirmed: pricingConfirmed },
+    { icon: Clock, label: 'Opening hours', missing: 'opening hours', value: hoursValue, confirmed: hoursConfirmed },
+  ]
+  const shown = rows.filter((r) => r.confirmed)
+  const missing = rows.filter((r) => !r.confirmed).map((r) => r.missing)
+  const missingText = missing.length > 1 ? `${missing.slice(0, -1).join(', ')} and ${missing[missing.length - 1]}` : missing[0]
+
   return (
     <Card>
       <CardHeader className="pb-3">
@@ -170,15 +184,12 @@ export function QuickFactsPanel({
         </CardTitle>
       </CardHeader>
       <CardContent className="pt-0">
-        <FactRow icon={Baby}         label="Age suitability" value={ageValue}         confirmed={ageConfirmed} />
-        <FactRow icon={Coffee}       label="Key facilities"  value={facilitiesValue}  confirmed={facilitiesConfirmed} />
-        <FactRow icon={Accessibility} label="Accessibility"  value={accessValue}      confirmed={accessConfirmed} />
-        <FactRow icon={CalendarCheck} label="Booking"        value={bookingValue}     confirmed={bookingConfirmed} />
-        <FactRow icon={PoundSterling} label="Pricing"        value={pricingValue}     confirmed={pricingConfirmed} />
-        <FactRow icon={Clock}        label="Opening hours"   value={hoursValue}       confirmed={hoursConfirmed} />
-        {!pricingConfirmed && !hoursConfirmed && (
-          <p className="text-xs text-slate-400 mt-3 leading-relaxed">
-            Some details are still being confirmed. Check directly with the venue before visiting.
+        {shown.map((r) => (
+          <FactRow key={r.label} icon={r.icon} label={r.label} value={r.value} confirmed />
+        ))}
+        {missing.length > 0 && (
+          <p className="text-xs text-slate-500 mt-3 leading-relaxed">
+            Not yet confirmed: {missingText}. Check with the venue before visiting.
           </p>
         )}
       </CardContent>

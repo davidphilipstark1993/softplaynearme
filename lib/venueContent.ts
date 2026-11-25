@@ -130,7 +130,8 @@ function confirmedFacilities(v: VenueContentInput): string[] {
 
 /** Build a human-readable age suitability string. */
 function ageText(v: VenueContentInput): string | null {
-  if (v.age_range_min !== undefined && v.age_range_max !== undefined) {
+  // != null: the DB gives null, not undefined (was rendering "aged null–null")
+  if (v.age_range_min != null && v.age_range_max != null) {
     if (v.age_range_min === 0) return `suitable for babies up to age ${v.age_range_max}`
     return `suitable for children aged ${v.age_range_min}–${v.age_range_max}`
   }
@@ -175,10 +176,6 @@ export function generateVenueDescription(v: VenueContentInput): string {
   if (facilities.length > 0) {
     parts.push(
       `Families visiting can expect ${listItems(facilities)}.`
-    )
-  } else {
-    parts.push(
-      `The venue provides children's indoor play facilities in a convenient ${v.city} location.`
     )
   }
 
@@ -269,7 +266,7 @@ export function generateVenueFAQs(v: VenueContentInput): FAQItem[] {
   const seeds = [baseSeed, lcgNext(baseSeed), lcgNext(lcgNext(baseSeed)), lcgNext(lcgNext(lcgNext(baseSeed)))]
 
   // 1. Toddler suitability
-  if (v.toddler_area || v.baby_area || v.age_range_min !== undefined) {
+  if (v.toddler_area || v.baby_area || v.age_range_min === 0) {
     if (v.toddler_area) {
       faqs.push({
         question: `Is ${v.name} suitable for toddlers?`,
@@ -317,9 +314,10 @@ export function generateVenueFAQs(v: VenueContentInput): FAQItem[] {
       ], seeds[1]),
     })
   } else if (hasCafe === false) {
+    // Only reached when the owner said no: the page passes unconfirmed false as undefined.
     faqs.push({
       question: `Does ${v.name} have a café or refreshments?`,
-      answer: `${v.name} does not appear to have an on-site café. We recommend checking directly with the venue about any refreshment options available.`,
+      answer: `No. ${v.name} has told us it has no on-site café, so bring snacks and drinks or ask the venue what's allowed.`,
     })
   } else {
     faqs.push({
@@ -344,7 +342,7 @@ export function generateVenueFAQs(v: VenueContentInput): FAQItem[] {
   } else if (hasParking === false) {
     faqs.push({
       question: `Is parking available at ${v.name}?`,
-      answer: `${v.name} does not appear to have dedicated parking. We suggest using local public parking and checking with the venue for the nearest options.`,
+      answer: `${v.name} has told us it has no parking of its own, so plan to use nearby public parking.`,
     })
   } else {
     faqs.push({
