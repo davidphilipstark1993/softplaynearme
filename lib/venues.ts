@@ -95,6 +95,7 @@ export const filters: FilterConfig[] = [
 
 // City configurations — loaded from data/cities.json for easy bulk editing
 import citiesData from '@/data/cities.json'
+import hubCentres from '@/data/hub-centres.json'
 export const cities: CityConfig[] = citiesData as CityConfig[]
 
 /**
@@ -121,11 +122,41 @@ export function getFilterBySlug(slug: string): FilterConfig | undefined {
 /**
  * Get nearby cities
  */
+const NEARBY_MAX = 6
+/** A configured neighbour further than this is dropped (e.g. Lancaster -> Carlisle, 94 km). */
+const NEARBY_CONFIGURED_MAX_KM = 60
+/** Hubs within this distance fill the list up to NEARBY_MAX, nearest first. */
+const NEARBY_FILL_MAX_KM = 50
+
+function hubKm(a: string, b: string): number | null {
+  const A = (hubCentres as Record<string, { lat: number; lng: number }>)[a]
+  const B = (hubCentres as Record<string, { lat: number; lng: number }>)[b]
+  if (!A || !B) return null
+  const r = (x: number) => (x * Math.PI) / 180
+  const h = Math.sin(r(B.lat - A.lat) / 2) ** 2 + Math.cos(r(A.lat)) * Math.cos(r(B.lat)) * Math.sin(r(B.lng - A.lng) / 2) ** 2
+  return 12742 * Math.asin(Math.sqrt(h))
+}
+
+/**
+ * Hubs to link as "nearby": the hand-picked nearbyAreas first (when within 60 km of this
+ * hub's centre, or when either centre is unknown), then the nearest other hubs within 50 km,
+ * up to 6. Centres are data/hub-centres.json (OS Names), so links are geographically sensible
+ * and no hub is left without any.
+ */
 export function getNearbyCities(citySlug: string): CityConfig[] {
   const city = getCityBySlug(citySlug)
   if (!city) return []
 
-  return city.nearbyAreas
+  const picked = city.nearbyAreas
     .map((area) => cities.find((c) => c.name.toLowerCase() === area.toLowerCase()))
-    .filter((c): c is CityConfig => c !== undefined)
+    .filter((c): c is CityConfig => c !== undefined && c.slug !== citySlug)
+    .filter((c) => (hubKm(citySlug, c.slug) ?? 0) <= NEARBY_CONFIGURED_MAX_KM)
+  const seen = new Set(picked.map((c) => c.slug))
+  const fill = cities
+    .filter((c) => c.slug !== citySlug && !seen.has(c.slug))
+    .map((c) => ({ c, d: hubKm(citySlug, c.slug) }))
+    .filter((x): x is { c: CityConfig; d: number } => x.d !== null && x.d <= NEARBY_FILL_MAX_KM)
+    .sort((a, b) => a.d - b.d)
+    .map((x) => x.c)
+  return [...new Map([...picked, ...fill].map((c) => [c.slug, c])).values()].slice(0, NEARBY_MAX)
 }

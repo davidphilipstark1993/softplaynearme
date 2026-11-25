@@ -14,7 +14,7 @@ const CITIES = [
   // liverpool: merged into /soft-play/liverpool (301) in Nov 2026, so not generated
   // birmingham: merged into /soft-play/birmingham (301) in Nov 2026, so not generated
   // bristol: merged into /soft-play/bristol (301) in Nov 2026, so not generated
-  { slug: 'newcastle', name: 'Newcastle', area: 'Tyneside' },
+  // newcastle: merged into /soft-play/newcastle (301) in Nov 2026, so not generated
 ]
 const fixes = fs.existsSync(path.join(ROOT, 'reports/slug-fixes.csv')) ? fs.readFileSync(path.join(ROOT, 'reports/slug-fixes.csv'), 'utf8') : ''
 const CHECKED = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
