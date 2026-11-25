@@ -478,14 +478,18 @@ export const NOINDEX_THRESHOLD = 20
 
 /**
  * venue_types that are real, visitable places but not soft play: public park
- * playgrounds, leisure centres, mobile/equipment hire, retail. They stay
+ * playgrounds, mobile/equipment hire, retail. They stay
  * reachable (the "Other family activities" tab, direct links) but are never
  * indexed or listed in the sitemap: they are not what anyone searching "soft
  * play near me" wants, and as a group they are thin (park playgrounds average
  * a completeness score of 45). Hundreds of low-value indexable URLs is what
  * Search Console files under "Crawled / Discovered – currently not indexed".
  */
-const NOINDEX_VENUE_TYPES = ['park-playground', 'leisure-centre', 'mobile-hire', 'retail']
+//
+// Leisure centres were in this list from 24 Oct 2026 and were taken out on 25 Nov 2026
+// at the owner's request: many run soft play, parents search for them by name, and
+// while noindexed they still drew ~2,600 impressions and 54 clicks in 3 months.
+const NOINDEX_VENUE_TYPES = ['park-playground', 'mobile-hire', 'retail']
 
 /**
  * The single indexability rule for a venue page. The page's robots meta and the
