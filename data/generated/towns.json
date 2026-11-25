@@ -296,7 +296,7 @@
   {
     "name": "Dartford",
     "slug": "dartford",
-    "venueCount": 8,
+    "venueCount": 7,
     "avgRating": "4.2"
   },
   {
@@ -584,7 +584,7 @@
   {
     "name": "Leeds",
     "slug": "leeds",
-    "venueCount": 47,
+    "venueCount": 45,
     "avgRating": "4.5"
   },
   {
@@ -650,7 +650,7 @@
   {
     "name": "Manchester",
     "slug": "manchester",
-    "venueCount": 35,
+    "venueCount": 34,
     "avgRating": "4.3"
   },
   {

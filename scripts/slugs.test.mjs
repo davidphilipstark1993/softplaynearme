@@ -31,7 +31,17 @@ test('uniqueSlug disambiguates within a hub', () => {
 
 const venues = readJson('data/generated/venues.json')
 const redirects = readJson('data/redirects.json')
-const live = new Set([...venues.map((v) => `/soft-play/${v.townSlug}/${v.slug}`), ...new Set(venues.map((v) => `/soft-play/${v.townSlug}`))])
+// Live pages a redirect may point at: venues, hubs, the filter pages of hubs in
+// data/cities.json, and published blog posts (lib/blogPosts*.ts).
+const FILTERS = ['toddler', 'birthday-parties', 'sen-friendly']
+const blogSlugs = fs.readdirSync(path.join(ROOT, 'lib')).filter((f) => /^blogPosts\w*\.ts$/.test(f))
+  .flatMap((f) => [...fs.readFileSync(path.join(ROOT, 'lib', f), 'utf8').matchAll(/^\s*slug:\s*['"]([a-z0-9-]+)['"]/gm)].map((m) => `/blog/${m[1]}`))
+const live = new Set([
+  ...venues.map((v) => `/soft-play/${v.townSlug}/${v.slug}`),
+  ...new Set(venues.map((v) => `/soft-play/${v.townSlug}`)),
+  ...readJson('data/cities.json').flatMap((c) => FILTERS.map((f) => `/soft-play/${c.slug}/${f}`)),
+  ...blogSlugs,
+])
 const bySource = new Map(redirects.map((r) => [r.source, r.destination]))
 
 test('no live venue slug still repeats its city', () => {

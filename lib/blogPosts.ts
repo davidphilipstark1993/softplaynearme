@@ -492,7 +492,7 @@ export const posts: BlogPost[] = [
 
 <p><strong><a href="/soft-play/leeds/jackaboos-ltd-leeds">Jackaboos</a></strong> on Town Street (4.3 from 175) runs 9am to 3.30pm Monday to Friday and is <strong>closed both weekend days</strong> — a weekday-only venue, which is either perfect or useless depending on your working pattern.</p>
 
-<p><strong><a href="/soft-play/leeds/jigsaw-gyms-leeds">Jigsaw Gyms</a></strong> on Broad Lane (4.4 from 232) has the same weekday-only shape, 9am to 3pm, <strong>closed Saturday and Sunday</strong>. <strong><a href="/soft-play/leeds/tiny-tykes-play-leeds">Tiny Tykes Play</a></strong> (4.7 from 54) shares that postcode and those hours, but opens Saturdays too.</p>
+<p><strong><a href="/soft-play/leeds/jigsaw-gyms">Jigsaw Gyms</a></strong> on Broad Lane (4.4 from 232) has the same weekday-only shape, 9am to 3pm, <strong>closed Saturday and Sunday</strong>. <strong><a href="/soft-play/leeds/tiny-tykes-play">Tiny Tykes Play</a></strong> (4.7 from 54) shares that postcode and those hours, but opens Saturdays too.</p>
 
 <p><strong><a href="/soft-play/leeds/little-burrowers-leeds">Little Burrowers</a></strong> (4.6 from 36) is the one in this group that's open all seven days — 9.30am to 2.45pm on weekdays, and later at weekends until 4.30pm.</p>
 
