@@ -1,4 +1,4 @@
-import { Search, MapPin, Clock, Baby, PartyPopper, Heart, Coffee, Car, CheckCircle2, Sparkles } from 'lucide-react'
+import { Search, Clock, Baby, PartyPopper, Heart, Coffee, Car, CheckCircle2, Sparkles } from 'lucide-react'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
@@ -16,6 +16,11 @@ import { getPool } from '@/lib/pool'
 import { getVenueCounts, formatVenueTotal } from '@/lib/venueCounts'
 import { TYPICAL_SESSION_SENTENCE } from '@/lib/typicalCosts'
 import type { Metadata } from 'next'
+
+const REGION_ORDER = [
+  'London', 'South East', 'South West', 'East of England', 'East Midlands', 'West Midlands',
+  'North West', 'North East', 'Yorkshire', 'Wales', 'Scotland', 'Northern Ireland',
+]
 
 // Highest-traffic cities in priority order (London first) — used for the
 // homepage's "Popular" quick links, rather than data/cities.json's raw
@@ -168,6 +173,15 @@ export default async function Home() {
     .sort((a, b) => (cityCounts[b.slug] ?? 0) - (cityCounts[a.slug] ?? 0))
     .slice(0, 16)
 
+  // Browse by Location: hubs grouped by region, regions in a fixed order,
+  // hubs A–Z within each. "Yorkshire and the Humber" is filed as Yorkshire.
+  const citiesByRegion = REGION_ORDER.map((region) => ({
+    region,
+    cities: cities
+      .filter((c) => (c.region === 'Yorkshire and the Humber' ? 'Yorkshire' : c.region) === region)
+      .sort((a, b) => a.name.localeCompare(b.name)),
+  })).filter((g) => g.cities.length > 0)
+
   // ItemList schema for Browse by City section
   const cityListSchema = buildCityListSchema(cities, 'Soft Play by City')
 
@@ -308,34 +322,32 @@ export default async function Home() {
         <div className="max-w-7xl mx-auto">
           <h2 className="text-2xl font-bold text-slate-900 mb-2 text-center">Browse by Location</h2>
           <p className="text-slate-600 text-center mb-8">Find soft play centres in your area</p>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {cities.map((city, index) => {
-              const venueCount = cityCounts[city.slug] ?? 0
-              return (
-                <Link key={city.slug} href={`/soft-play/${city.slug}`} className="group">
-                  <Card className="overflow-hidden text-center hover:shadow-lg hover:border-purple-300 transition-all">
-                    <div
-                      className="relative h-24 w-full flex items-center justify-center overflow-hidden transition-transform duration-500 group-hover:scale-105"
-                      style={{
-                        background: `linear-gradient(135deg, hsl(${(index * 47 + 262) % 360}, 70%, 55%), hsl(${(index * 47 + 320) % 360}, 60%, 50%))`,
-                      }}
-                    >
-                      <span className="text-white/25 text-4xl font-bold select-none" aria-hidden="true">
-                        {city.name.charAt(0)}
-                      </span>
-                    </div>
-                    <div className="p-4">
-                      <MapPin className="w-5 h-5 mx-auto mb-1.5 text-purple-500" />
-                      <h3 className="font-semibold text-slate-900 group-hover:text-purple-600">{city.name}</h3>
-                      <p className="text-xs text-slate-500">{city.county}</p>
-                    </div>
-                    {venueCount > 0 && (
-                      <p className="text-xs text-purple-600 font-medium pb-4">{venueCount} {venueCount === 1 ? 'venue' : 'venues'}</p>
-                    )}
-                  </Card>
-                </Link>
-              )
-            })}
+          {/* A compact list grouped by region. It replaced a grid of 176 gradient
+              cards, which on a phone ran to ~90 card rows and ~1,500 DOM nodes and
+              was the main cost in the homepage's mobile render. Every hub link and
+              venue count is kept. */}
+          <div className="columns-1 sm:columns-2 lg:columns-3 gap-8">
+            {citiesByRegion.map((group) => (
+              <section key={group.region} className="mb-6 break-inside-avoid">
+                <h3 className="text-sm font-semibold uppercase tracking-wide text-slate-500 mb-2">{group.region}</h3>
+                <ul className="flex flex-wrap gap-2">
+                  {group.cities.map((city) => {
+                    const venueCount = cityCounts[city.slug] ?? 0
+                    return (
+                      <li key={city.slug}>
+                        <Link
+                          href={`/soft-play/${city.slug}`}
+                          className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm text-slate-800 hover:border-purple-300 hover:text-purple-700"
+                        >
+                          {city.name}
+                          {venueCount > 0 && <span className="text-xs text-slate-500">({venueCount})</span>}
+                        </Link>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </section>
+            ))}
           </div>
         </div>
       </div>
