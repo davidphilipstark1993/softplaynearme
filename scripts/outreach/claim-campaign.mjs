@@ -218,7 +218,7 @@ const FROM_NAME = () => process.env.SENDGRID_FROM_NAME || 'David'
 const REPLY_TO = 'david@softplaynearme.co.uk'
 const PLACEHOLDER_POSTAL = /^\s*$|\{\{|TODO|YOUR|PLACEHOLDER|CHANGE.?ME/i
 
-async function sg(method, endpoint, body) {
+export async function sg(method, endpoint, body) {
   const res = await fetch(`https://api.sendgrid.com/v3${endpoint}`, {
     method,
     headers: { Authorization: `Bearer ${apiKey()}`, 'Content-Type': 'application/json' },
@@ -230,7 +230,7 @@ async function sg(method, endpoint, body) {
 }
 
 /** Addresses SendGrid will refuse or that must never be mailed: bounces, blocks, invalid, spam reports, global + ASM-group unsubscribes. */
-async function fetchSendgridSuppressions(groupId) {
+export async function fetchSendgridSuppressions(groupId) {
   const found = new Map()
   const lists = [
     ['/suppression/bounces', 'bounce'], ['/suppression/blocks', 'block'], ['/suppression/invalid_emails', 'invalid'],
@@ -251,7 +251,7 @@ async function fetchSendgridSuppressions(groupId) {
 }
 
 /** david@ must be a verified sender (or on an authenticated domain) or SendGrid can accept (202) and silently drop. */
-async function senderIsConfirmed(email) {
+export async function senderIsConfirmed(email) {
   const { json } = await sg('GET', '/verified_senders?limit=200')
   return (json?.results ?? []).some((s) => String(s.from_email).toLowerCase() === email.toLowerCase() && s.verified === true)
 }

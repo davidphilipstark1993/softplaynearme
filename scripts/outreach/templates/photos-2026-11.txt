@@ -4,13 +4,9 @@ Hi {{venue_name}} team,
 
 I'm David, and I run Soft Play Near Me, a free UK directory for indoor soft play. Your venue is listed here: {{listing_url}}
 
-That page came up {{impressions}} times in Google searches over the last three months, but it doesn't have a photo of your venue yet. Photos are usually the first thing parents look at, so I'd love to add some.
+{{reach}} Photos are usually the first thing parents look at, so I'd love to add some.
 
-Two easy ways:
-- Reply to this email with a few photos you're happy for us to use, and I'll put them up for you.
-- Or claim the listing for free and upload up to 10 yourself, along with your hours, prices and facilities: {{claim_url}}
-
-There's no cost and no subscription. If anything on the listing is wrong, just tell me and I'll fix it.
+{{options}} If anything on the listing is wrong, just tell me and I'll fix it.
 
 Thanks,
 David
