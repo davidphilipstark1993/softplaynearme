@@ -100,6 +100,9 @@ const venues = read('data/generated/venues.json')
 const live = new Set([...venues.map((v) => `/soft-play/${v.townSlug}/${v.slug}`), ...venues.map((v) => `/soft-play/${v.townSlug}`)])
 const byId = new Map(venues.map((v) => [v.id, v]))
 const RETIRED_AFTER_MOVE = new Set([1612])
+// Merged into another listing after its move (25 Nov 2026, phase16-01 duplicate merge): both
+// its phase-13 URLs 301 straight to the surviving listing.
+const MERGED_AFTER_MOVE = new Map([[1894, '/soft-play/mossley/tumbles-play-place-2']])
 // Refiled again after phase 13 onto a smaller town hub (19 Nov 2026 Hampshire batch: Romsey/Winchester
 // split off Southampton). Their phase-13 URLs now 301 on to the town hub.
 const REFILED_AFTER_MOVE = new Map([
@@ -117,6 +120,13 @@ test('every approved move: old URL 301s once to the new URL, which is live in th
     if (RETIRED_AFTER_MOVE.has(m.id)) {
       assert.equal(redirects.get(newUrl), `/soft-play/${m.to_city}`, newUrl)
       assert.equal(redirects.get(oldUrl), `/soft-play/${m.to_city}`, oldUrl)
+      continue
+    }
+    if (MERGED_AFTER_MOVE.has(m.id)) {
+      const survivor = MERGED_AFTER_MOVE.get(m.id)
+      assert.equal(redirects.get(oldUrl), survivor, oldUrl)
+      assert.equal(redirects.get(newUrl), survivor, newUrl)
+      assert.ok(live.has(survivor), `${survivor} not in static export`)
       continue
     }
     if (REFILED_AFTER_MOVE.has(m.id)) {

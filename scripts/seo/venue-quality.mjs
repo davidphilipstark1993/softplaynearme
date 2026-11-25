@@ -45,9 +45,8 @@ if (args.gsc) {
 }
 
 const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL })
-const { rows } = await pool.query(`
-  SELECT v.*, (o.venue_id IS NOT NULL) AS has_owner_data
-  FROM venues v LEFT JOIN venue_owner_data o ON o.venue_id = v.id`)
+// owner_completeness > 0 means a verified owner has added data to the listing
+const { rows } = await pool.query('SELECT *, (COALESCE(owner_completeness, 0) > 0) AS has_owner_data FROM venues')
 await pool.end()
 
 const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')

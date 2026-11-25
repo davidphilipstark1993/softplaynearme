@@ -6746,7 +6746,7 @@
   },
   {
     "source": "/soft-play/mossley/tumbles-play-place",
-    "destination": "/soft-play/manchester/tumbles-play-place",
+    "destination": "/soft-play/mossley/tumbles-play-place-2",
     "permanent": true
   },
   {
@@ -7121,7 +7121,7 @@
   },
   {
     "source": "/soft-play/bridlington/john-bull-world-of-rock",
-    "destination": "/soft-play/bridlington/john-bull-world-of-rock-bridlington",
+    "destination": "/soft-play/bridlington",
     "permanent": true
   },
   {
@@ -7136,7 +7136,7 @@
   },
   {
     "source": "/soft-play/bridlington/treasure-island-amusements",
-    "destination": "/soft-play/bridlington/treasure-island-amusements-bridlington",
+    "destination": "/soft-play/bridlington",
     "permanent": true
   },
   {
@@ -7176,7 +7176,7 @@
   },
   {
     "source": "/soft-play/doncaster/tots-explore-play-cafe-and-play-area-doncaster",
-    "destination": "/soft-play/barnsley/tots-explore-play-cafe-and-play-area-doncaster",
+    "destination": "/soft-play/barnsley/tots-explore-play-cafe-and-play-area-barnsley",
     "permanent": true
   },
   {
@@ -7221,7 +7221,7 @@
   },
   {
     "source": "/soft-play/glasgow/handsworth-park-play-centre-glasgow",
-    "destination": "/soft-play/birmingham/handsworth-park-play-centre-glasgow",
+    "destination": "/soft-play/birmingham",
     "permanent": true
   },
   {
@@ -7256,7 +7256,7 @@
   },
   {
     "source": "/soft-play/glasgow/mini-me-children-s-role-play-centre-and-cafe-glasgow",
-    "destination": "/soft-play/birmingham/mini-me-children-s-role-play-centre-and-cafe",
+    "destination": "/soft-play/birmingham",
     "permanent": true
   },
   {
@@ -7356,7 +7356,7 @@
   },
   {
     "source": "/soft-play/hull/active-hull",
-    "destination": "/soft-play/hull/active-hull-hull",
+    "destination": "/soft-play/hull/little-monkeys-active-plus",
     "permanent": true
   },
   {
@@ -7371,7 +7371,7 @@
   },
   {
     "source": "/soft-play/hull/airplay-bouncy-castles",
-    "destination": "/soft-play/hull/airplay-bouncy-castles-hull",
+    "destination": "/soft-play/hull",
     "permanent": true
   },
   {
@@ -7386,7 +7386,7 @@
   },
   {
     "source": "/soft-play/hull/bb-inflatables",
-    "destination": "/soft-play/hull/bb-inflatables-hull",
+    "destination": "/soft-play/hull",
     "permanent": true
   },
   {
@@ -7406,22 +7406,22 @@
   },
   {
     "source": "/soft-play/hull/brewers-fayre-home-farm",
-    "destination": "/soft-play/hull/brewers-fayre-home-farm-hull",
+    "destination": "/soft-play/hull",
     "permanent": true
   },
   {
     "source": "/soft-play/hull/bump-n-bounce",
-    "destination": "/soft-play/hull/bump-n-bounce-hull",
+    "destination": "/soft-play/hull",
     "permanent": true
   },
   {
     "source": "/soft-play/hull/candr-bouncy-castles-and-soft-play",
-    "destination": "/soft-play/hull/c-r-bouncy-castles-and-soft-play-hull",
+    "destination": "/soft-play/hull",
     "permanent": true
   },
   {
     "source": "/soft-play/hull/coffee-luxe",
-    "destination": "/soft-play/hull/coffee-luxe-hull",
+    "destination": "/soft-play/hull",
     "permanent": true
   },
   {
@@ -7436,7 +7436,7 @@
   },
   {
     "source": "/soft-play/hull/dolly-daydreams-party-caravan",
-    "destination": "/soft-play/hull/dolly-daydreams-party-caravan-hull",
+    "destination": "/soft-play/hull",
     "permanent": true
   },
   {
@@ -7446,17 +7446,17 @@
   },
   {
     "source": "/soft-play/hull/enigma-live-escape-rooms-hull",
-    "destination": "/soft-play/hull/enigma-live-escape-rooms-hull-hull",
+    "destination": "/soft-play/hull",
     "permanent": true
   },
   {
     "source": "/soft-play/hull/fantastic-faces-face-painting-hull",
-    "destination": "/soft-play/hull/fantastic-faces-face-painting-hull-hull",
+    "destination": "/soft-play/hull",
     "permanent": true
   },
   {
     "source": "/soft-play/hull/fun4all-bouncy-castles",
-    "destination": "/soft-play/hull/fun4all-bouncy-castles-hull",
+    "destination": "/soft-play/hull",
     "permanent": true
   },
   {
@@ -7501,12 +7501,12 @@
   },
   {
     "source": "/soft-play/hull/laser-station-st-stephens-hull",
-    "destination": "/soft-play/hull/laser-station-st-stephen-s-hull-hull",
+    "destination": "/soft-play/hull/funstation",
     "permanent": true
   },
   {
     "source": "/soft-play/hull/lemon-tree-childrens-centre",
-    "destination": "/soft-play/hull/lemon-tree-children-s-centre-hull",
+    "destination": "/soft-play/hull",
     "permanent": true
   },
   {
@@ -7521,7 +7521,7 @@
   },
   {
     "source": "/soft-play/hull/little-stars-family-hub",
-    "destination": "/soft-play/hull/little-stars-family-hub-hull",
+    "destination": "/soft-play/hull",
     "permanent": true
   },
   {
@@ -7536,7 +7536,7 @@
   },
   {
     "source": "/soft-play/hull/pickering-park",
-    "destination": "/soft-play/hull/pickering-park-hull",
+    "destination": "/soft-play/hull",
     "permanent": true
   },
   {
@@ -7556,7 +7556,7 @@
   },
   {
     "source": "/soft-play/hull/rockcity-climbing",
-    "destination": "/soft-play/hull/rockcity-climbing-hull",
+    "destination": "/soft-play/hull",
     "permanent": true
   },
   {
@@ -7571,7 +7571,7 @@
   },
   {
     "source": "/soft-play/hull/softplay-tots",
-    "destination": "/soft-play/hull/softplay-tots-hull",
+    "destination": "/soft-play/hull",
     "permanent": true
   },
   {
@@ -7581,7 +7581,7 @@
   },
   {
     "source": "/soft-play/hull/the-curious-owl",
-    "destination": "/soft-play/hull/the-curious-owl-hull",
+    "destination": "/soft-play/hull",
     "permanent": true
   },
   {
@@ -7596,12 +7596,12 @@
   },
   {
     "source": "/soft-play/hull/the-kingstown",
-    "destination": "/soft-play/hull/the-kingstown-hull",
+    "destination": "/soft-play/hull/kingstown-wacky-warehouse-hull",
     "permanent": true
   },
   {
     "source": "/soft-play/hull/the-lost-city-adventure-golf",
-    "destination": "/soft-play/hull/the-lost-city-adventure-golf-hull",
+    "destination": "/soft-play/hull",
     "permanent": true
   },
   {
@@ -7616,7 +7616,7 @@
   },
   {
     "source": "/soft-play/hull/west-park-kids-kingdom",
-    "destination": "/soft-play/hull/west-park-kids-kingdom-hull",
+    "destination": "/soft-play/hull",
     "permanent": true
   },
   {
@@ -7636,7 +7636,7 @@
   },
   {
     "source": "/soft-play/leeds/bee-happy-kids",
-    "destination": "/soft-play/leeds/bee-happy-kids-leeds",
+    "destination": "/soft-play/leeds",
     "permanent": true
   },
   {
@@ -7671,7 +7671,7 @@
   },
   {
     "source": "/soft-play/leeds/david-lloyd-leeds",
-    "destination": "/soft-play/leeds/david-lloyd-leeds-leeds",
+    "destination": "/soft-play/leeds",
     "permanent": true
   },
   {
@@ -7686,7 +7686,7 @@
   },
   {
     "source": "/soft-play/leeds/escape-hunt-leeds",
-    "destination": "/soft-play/leeds/escape-hunt-leeds-leeds",
+    "destination": "/soft-play/leeds",
     "permanent": true
   },
   {
@@ -7731,7 +7731,7 @@
   },
   {
     "source": "/soft-play/leeds/interfun-expo",
-    "destination": "/soft-play/leeds/interfun-expo-leeds",
+    "destination": "/soft-play/leeds",
     "permanent": true
   },
   {
@@ -7956,7 +7956,7 @@
   },
   {
     "source": "/soft-play/portsmouth/i-wanna-be-role-play-village",
-    "destination": "/soft-play/southend/i-wanna-be-role-play-village",
+    "destination": "/soft-play/southend",
     "permanent": true
   },
   {
@@ -7971,7 +7971,7 @@
   },
   {
     "source": "/soft-play/york/adventure-camps-the-mount-school-york-school-holiday-clubs",
-    "destination": "/soft-play/york/adventure-camps-the-mount-school-york-school-holiday-clubs-york",
+    "destination": "/soft-play/york",
     "permanent": true
   },
   {
@@ -7991,7 +7991,7 @@
   },
   {
     "source": "/soft-play/york/askham-bryan-wildlife-and-conservation-park",
-    "destination": "/soft-play/york/askham-bryan-wildlife-conservation-park-york",
+    "destination": "/soft-play/york",
     "permanent": true
   },
   {
@@ -8026,7 +8026,7 @@
   },
   {
     "source": "/soft-play/york/dig",
-    "destination": "/soft-play/york/dig-york",
+    "destination": "/soft-play/york",
     "permanent": true
   },
   {
@@ -8086,7 +8086,7 @@
   },
   {
     "source": "/soft-play/york/homestead-park",
-    "destination": "/soft-play/york/homestead-park-york",
+    "destination": "/soft-play/york",
     "permanent": true
   },
   {
@@ -8101,12 +8101,12 @@
   },
   {
     "source": "/soft-play/york/little-vikings",
-    "destination": "/soft-play/york/little-vikings-york",
+    "destination": "/soft-play/york",
     "permanent": true
   },
   {
     "source": "/soft-play/york/little-vikings-york-for-kids",
-    "destination": "/soft-play/york/little-vikings-york-for-kids-york",
+    "destination": "/soft-play/york",
     "permanent": true
   },
   {
@@ -8121,7 +8121,7 @@
   },
   {
     "source": "/soft-play/york/museum-gardens",
-    "destination": "/soft-play/york/museum-gardens-york",
+    "destination": "/soft-play/york",
     "permanent": true
   },
   {
@@ -8141,7 +8141,7 @@
   },
   {
     "source": "/soft-play/york/nurseries-caravan-park-york",
-    "destination": "/soft-play/york/nurseries-caravan-park-york-york",
+    "destination": "/soft-play/york",
     "permanent": true
   },
   {
@@ -8156,7 +8156,7 @@
   },
   {
     "source": "/soft-play/york/pandas-playtime",
-    "destination": "/soft-play/york/panda-s-playtime-york",
+    "destination": "/soft-play/york",
     "permanent": true
   },
   {
@@ -8201,7 +8201,7 @@
   },
   {
     "source": "/soft-play/york/playfootball-york",
-    "destination": "/soft-play/york/playfootball-york-york",
+    "destination": "/soft-play/york",
     "permanent": true
   },
   {
@@ -8226,7 +8226,7 @@
   },
   {
     "source": "/soft-play/york/spark-york",
-    "destination": "/soft-play/york/spark-york-york",
+    "destination": "/soft-play/york",
     "permanent": true
   },
   {
@@ -8246,7 +8246,7 @@
   },
   {
     "source": "/soft-play/york/the-entertainer",
-    "destination": "/soft-play/york/the-entertainer-york",
+    "destination": "/soft-play/york",
     "permanent": true
   },
   {
@@ -8271,12 +8271,12 @@
   },
   {
     "source": "/soft-play/york/the-yorkshire-play-company",
-    "destination": "/soft-play/york/the-yorkshire-play-company-york",
+    "destination": "/soft-play/york",
     "permanent": true
   },
   {
     "source": "/soft-play/york/toddler-sense-york",
-    "destination": "/soft-play/york/toddler-sense-york-york",
+    "destination": "/soft-play/york",
     "permanent": true
   },
   {
@@ -8291,7 +8291,7 @@
   },
   {
     "source": "/soft-play/york/york-footgolf",
-    "destination": "/soft-play/york/york-footgolf-york",
+    "destination": "/soft-play/york",
     "permanent": true
   },
   {
@@ -8316,7 +8316,7 @@
   },
   {
     "source": "/soft-play/york/yorkshire-spa-retreat",
-    "destination": "/soft-play/york/yorkshire-spa-retreat-york",
+    "destination": "/soft-play/york",
     "permanent": true
   },
   {
