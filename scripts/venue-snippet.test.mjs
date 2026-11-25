@@ -111,3 +111,27 @@ test('Quick facts rows carry every fact the meta can state', { skip }, async () 
     for (const word of sentence.toLowerCase().split(/,? and |, /)) assert.ok(lower.includes(word.replace(/ per child$/, '')), `${word} not shown`)
   }
 })
+
+test('meta: says how to reach the venue when there is room, naming only what the page shows', { skip }, async () => {
+  const { venueFacts, buildVenueMetaDescription: m } = await load()
+  const reach = { address: '9 Trevanth Rd', postcode: 'LE4 9JJ', phone: '0116 397 0940', google_place_id: 'abc' }
+  const f = (over = {}, opts = {}) => venueFacts({ ...base, cafe: false, parties: false, has_sen_sessions: false, ...over }, { town: 'Leicester', nearbyCount: 10, ...opts })
+  assert.equal(
+    m(f(reach)),
+    'Rated 4.1★ on Google (161 reviews). Open daily 9:30am–6pm. Address, phone number and directions. Compare 10 other soft plays near Leicester.',
+  )
+  assert.deepEqual(f(reach).contact, ['address', 'phone number', 'directions'])
+  // no phone: not promised
+  assert.ok(m(f({ ...reach, phone: null })).includes('Address and directions.'))
+  // directions alone is not worth a sentence
+  assert.ok(!/directions\./i.test(m(f({ google_place_id: 'abc' }))))
+  // junk address ("Closed", "nan") is not an address
+  assert.deepEqual(f({ address: 'Closed', postcode: 'nan' }).contact, [])
+  // it is the first thing dropped when space runs out: facts survive, comparison survives
+  const busy = m(f({ ...reach, cafe: true, parties: true, has_sen_sessions: true }))
+  assert.ok(busy.length <= 155, busy)
+  assert.ok(busy.includes('Facilities:') && !busy.includes('phone number'), busy)
+  // no comparison (no nearby venues): the existing contact ending is used, not repeated
+  const alone = m(f(reach, { nearbyCount: 0 }))
+  assert.equal(alone.match(/directions/gi).length, 1, alone)
+})
