@@ -276,6 +276,12 @@
     "avgRating": "4.8"
   },
   {
+    "name": "Corby",
+    "slug": "corby",
+    "venueCount": 1,
+    "avgRating": null
+  },
+  {
     "name": "Coventry",
     "slug": "coventry",
     "venueCount": 4,
@@ -634,6 +640,12 @@
     "slug": "loughborough",
     "venueCount": 1,
     "avgRating": "4.4"
+  },
+  {
+    "name": "Lurgan",
+    "slug": "lurgan",
+    "venueCount": 1,
+    "avgRating": null
   },
   {
     "name": "Luton",
@@ -1000,6 +1012,12 @@
     "slug": "tipton",
     "venueCount": 1,
     "avgRating": "4.2"
+  },
+  {
+    "name": "Wakefield",
+    "slug": "wakefield",
+    "venueCount": 1,
+    "avgRating": null
   },
   {
     "name": "Walsall",

@@ -224,6 +224,11 @@
     "lng": -2.25097,
     "source": "os-names:Town"
   },
+  "corby": {
+    "lat": 52.48768,
+    "lng": -0.7013,
+    "source": "os-names:Town"
+  },
   "coventry": {
     "lat": 52.40771,
     "lng": -1.50686,
@@ -523,6 +528,11 @@
     "lat": 52.7721,
     "lng": -1.20616,
     "source": "os-names:Town"
+  },
+  "lurgan": {
+    "lat": 54.45854,
+    "lng": -6.35743,
+    "source": "venue-median"
   },
   "luton": {
     "lat": 51.87954,
@@ -828,6 +838,11 @@
     "lat": 52.54124,
     "lng": -2.03975,
     "source": "os-names:Town"
+  },
+  "wakefield": {
+    "lat": 53.6837,
+    "lng": -1.49817,
+    "source": "os-names:City"
   },
   "walsall": {
     "lat": 52.58622,

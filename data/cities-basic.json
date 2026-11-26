@@ -878,5 +878,20 @@
     "slug": "bathgate",
     "name": "Bathgate",
     "county": "West Lothian"
+  },
+  {
+    "slug": "lurgan",
+    "name": "Lurgan",
+    "county": "Armagh City, Banbridge and Craigavon"
+  },
+  {
+    "slug": "wakefield",
+    "name": "Wakefield",
+    "county": "West Yorkshire"
+  },
+  {
+    "slug": "corby",
+    "name": "Corby",
+    "county": "North Northamptonshire"
   }
 ]

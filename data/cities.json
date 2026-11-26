@@ -3767,5 +3767,55 @@
       "Musselburgh"
     ],
     "faqs": []
+  },
+  {
+    "slug": "lurgan",
+    "name": "Lurgan",
+    "county": "Armagh City, Banbridge and Craigavon",
+    "region": "Northern Ireland",
+    "metaTitle": "Soft Play in Lurgan",
+    "metaDescription": "Find soft play centres in Lurgan, County Armagh. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Lurgan",
+    "intro": "Soft play centres in Lurgan and the surrounding area of Armagh City, Banbridge and Craigavon.",
+    "nearbyAreas": [
+      "Lisburn",
+      "Belfast",
+      "Ballynahinch"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "wakefield",
+    "name": "Wakefield",
+    "county": "West Yorkshire",
+    "region": "Yorkshire and the Humber",
+    "metaTitle": "Soft Play in Wakefield",
+    "metaDescription": "Find soft play centres in Wakefield, West Yorkshire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Wakefield",
+    "intro": "Soft play centres in Wakefield and the surrounding area of West Yorkshire.",
+    "nearbyAreas": [
+      "Leeds",
+      "Castleford",
+      "Barnsley",
+      "Huddersfield"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "corby",
+    "name": "Corby",
+    "county": "North Northamptonshire",
+    "region": "East Midlands",
+    "metaTitle": "Soft Play in Corby",
+    "metaDescription": "Find soft play centres in Corby, North Northamptonshire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Corby",
+    "intro": "Soft play centres in Corby and the surrounding area of North Northamptonshire.",
+    "nearbyAreas": [
+      "Kettering",
+      "Wellingborough",
+      "Northampton",
+      "Peterborough"
+    ],
+    "faqs": []
   }
 ]
