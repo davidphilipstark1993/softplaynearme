@@ -43,6 +43,7 @@ import { splitByLocality, groupNearbyByLocality, getLocality } from '@/lib/local
 import { VENUES_PER_PAGE, totalPagesFor, parsePageParam, hubPagePath, pageWindow } from '@/lib/pagination'
 import { NearbyTowns } from '@/components/location/NearbyTowns'
 import { VenueCardFacts } from '@/components/venue/VenueCardFacts'
+import { GoogleRating } from '@/components/venue/GoogleRating'
 import { VenueComparisonTable } from '@/components/location/VenueComparisonTable'
 import { HubGuide, NearbyHubs } from '@/components/location/HubGuide'
 import { NearTown } from '@/components/location/NearTown'
@@ -291,8 +292,8 @@ async function getVenues(citySlug: string, opts: VenueFilters = {}): Promise<Ven
     try {
       let query = `
         SELECT v.*,
-               COALESCE(NULLIF(COALESCE(AVG(r.rating), 0), 0), v.rating::numeric) as avg_rating,
-               CASE WHEN COUNT(r.id) > 0 THEN COUNT(r.id) ELSE COALESCE(v.reviews_count, 0) END as review_count
+               COALESCE(NULLIF(v.rating::numeric, 0), NULLIF(AVG(r.rating), 0)) as avg_rating,
+               CASE WHEN COALESCE(v.rating, 0) > 0 THEN COALESCE(v.reviews_count, 0) ELSE COUNT(r.id) END as review_count
         FROM venues v
         LEFT JOIN reviews r ON r.venue_id = v.id AND r.approved = true
         WHERE v.city_slug = $1 AND v.is_active = true
@@ -478,6 +479,8 @@ interface SponsoredVenue {
   id: number
   name: string
   slug: string
+  rating: number | string | null
+  reviews_count: number | null
 }
 
 /**
@@ -491,7 +494,7 @@ async function getSponsoredCityVenues(citySlug: string): Promise<SponsoredVenue[
   try {
     const pool = getPool()
     const result = await pool.query<SponsoredVenue>(
-      `SELECT id, name, slug FROM venues
+      `SELECT id, name, slug, rating, reviews_count FROM venues
        WHERE city_slug = $1 AND is_active = true AND ad_placements -> 'city_pages' ? $1
        ORDER BY RANDOM()
        LIMIT 3`,
@@ -869,12 +872,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                             <Sparkles className="w-3 h-3" /> Featured
                           </span>
                           <p className="font-semibold text-sm text-slate-800 group-hover:text-purple-600 line-clamp-2 flex-1">{venue.name}</p>
-                          {venue.avg_rating && Number(venue.avg_rating) > 0 && (
-                            <div className="flex items-center gap-1 mt-2 text-xs text-slate-500">
-                              <Star className="w-3 h-3 text-yellow-400 fill-current" />
-                              <span className="font-medium text-slate-700">{Number(venue.avg_rating).toFixed(1)}</span>
-                            </div>
-                          )}
+                          <GoogleRating rating={venue.avg_rating} count={venue.review_count} className="mt-2" />
                         </div>
                       </Link>
                     ))}
@@ -900,7 +898,8 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                       >
                         <div className="bg-white border-2 border-amber-200 rounded-lg p-4 hover:border-amber-400 hover:shadow-md transition-all h-full flex flex-col">
                           <span className="text-[10px] font-bold uppercase tracking-wide text-amber-700 mb-2">Sponsored</span>
-                          <p className="font-semibold text-sm text-slate-800 group-hover:text-amber-700 line-clamp-2">{venue.name}</p>
+                          <p className="font-semibold text-sm text-slate-800 group-hover:text-amber-700 line-clamp-2 flex-1">{venue.name}</p>
+                          <GoogleRating rating={venue.rating} count={venue.reviews_count} className="mt-2" />
                         </div>
                       </Link>
                     ))}
@@ -923,15 +922,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                             <Baby className="w-3 h-3" /> Toddler Friendly
                           </span>
                           <p className="font-semibold text-sm text-slate-800 group-hover:text-blue-600 line-clamp-2 flex-1">{venue.name}</p>
-                          {venue.avg_rating && Number(venue.avg_rating) > 0 && (
-                            <div className="flex items-center gap-1 mt-2 text-xs text-slate-500">
-                              <Star className="w-3 h-3 text-yellow-400 fill-current" />
-                              <span className="font-medium text-slate-700">{Number(venue.avg_rating).toFixed(1)}</span>
-                              {venue.review_count && Number(venue.review_count) > 0 && (
-                                <span>({Number(venue.review_count).toLocaleString()})</span>
-                              )}
-                            </div>
-                          )}
+                          <GoogleRating rating={venue.avg_rating} count={venue.review_count} className="mt-2" />
                         </div>
                       </Link>
                     ))}
@@ -950,7 +941,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                       <Link key={venue.slug} href={`/soft-play/${city}/${venue.slug}`} className="group block">
                         <div className="bg-white border border-slate-200 rounded-lg p-4 hover:border-yellow-300 hover:shadow-md transition-all h-full flex flex-col">
                           <span className="inline-flex items-center gap-1 text-xs font-semibold text-yellow-700 bg-yellow-50 border border-yellow-200 rounded-full px-2 py-0.5 mb-2 w-fit">
-                            <Star className="w-3 h-3 fill-current" /> {venue.rating.toFixed(1)} rated
+                            <Star className="w-3 h-3 fill-current" /> {venue.rating.toFixed(1)} on Google
                           </span>
                           <p className="font-semibold text-sm text-slate-800 group-hover:text-yellow-600 line-clamp-2 flex-1">{venue.name}</p>
                           <p className="mt-2 text-xs text-slate-500">{venue.reviews.toLocaleString()} reviews</p>
@@ -975,12 +966,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                             <TrendingUp className="w-3 h-3" /> {Number(venue.review_count).toLocaleString()} reviews
                           </span>
                           <p className="font-semibold text-sm text-slate-800 group-hover:text-purple-600 line-clamp-2 flex-1">{venue.name}</p>
-                          {venue.avg_rating && Number(venue.avg_rating) > 0 && (
-                            <div className="flex items-center gap-1 mt-2 text-xs text-slate-500">
-                              <Star className="w-3 h-3 text-yellow-400 fill-current" />
-                              <span className="font-medium text-slate-700">{Number(venue.avg_rating).toFixed(1)}</span>
-                            </div>
-                          )}
+                          <GoogleRating rating={venue.avg_rating} count={venue.review_count} className="mt-2" />
                         </div>
                       </Link>
                     ))}
@@ -1069,15 +1055,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                         </div>
                       )}
                       {/* Rating overlay */}
-                      {venue.avg_rating && venue.avg_rating > 0 ? (
-                        <div className="absolute top-2 right-2 flex items-center gap-1 bg-white/95 backdrop-blur-sm px-2 py-1 rounded-full shadow text-xs font-bold">
-                          <Star className="w-3 h-3 text-yellow-400 fill-current" />
-                          <span className="text-slate-800">{Number(venue.avg_rating).toFixed(1)}</span>
-                          {venue.review_count && venue.review_count > 0 && (
-                            <span className="text-slate-400 font-normal">({venue.review_count.toLocaleString()})</span>
-                          )}
-                        </div>
-                      ) : null}
+                      <GoogleRating variant="overlay" rating={venue.avg_rating} count={venue.review_count} className="absolute top-2 right-2" />
                     </div>
                   </Link>
 

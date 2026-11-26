@@ -11,6 +11,7 @@ import { SearchHero } from '@/components/home/SearchHero'
 import { HeroCarousel } from '@/components/home/HeroCarousel'
 import { buildFAQSchema, buildCityListSchema } from '@/lib/schema'
 import { JsonLd } from '@/components/seo/JsonLd'
+import { GoogleRating } from '@/components/venue/GoogleRating'
 import { blogPosts } from '@/lib/blogPosts'
 import { getPool } from '@/lib/pool'
 import { getVenueCounts, formatVenueTotal } from '@/lib/venueCounts'
@@ -97,6 +98,8 @@ interface RecentVenue {
   slug: string
   city_name: string
   completeness_score: number
+  rating: number | string | null
+  reviews_count: number | null
 }
 
 interface FeaturedVenue {
@@ -104,13 +107,15 @@ interface FeaturedVenue {
   city_slug: string
   slug: string
   city_name: string
+  rating: number | string | null
+  reviews_count: number | null
 }
 
 async function getFeaturedHomepageVenues(): Promise<FeaturedVenue[]> {
   try {
     const pool = getPool()
-    const result = await pool.query<{ name: string; city_slug: string; slug: string }>(`
-      SELECT name, city_slug, slug FROM venues
+    const result = await pool.query<{ name: string; city_slug: string; slug: string; rating: number | string | null; reviews_count: number | null }>(`
+      SELECT name, city_slug, slug, rating, reviews_count FROM venues
       WHERE is_active = true AND ad_placements->>'homepage' = 'true'
       ORDER BY RANDOM()
       LIMIT 6
@@ -133,7 +138,7 @@ async function getHomepageStats() {
     const [claimedResult, recentResult] = await Promise.all([
       pool.query<{ total: number }>(`SELECT COUNT(*)::int AS total FROM venues WHERE is_active = true AND claimed_by_owner = true`),
       pool.query<RecentVenue>(`
-        SELECT v.name, v.town_slug, v.slug,
+        SELECT v.name, v.town_slug, v.slug, v.rating, v.reviews_count,
                COALESCE(v.completeness_score, 0) AS completeness_score
         FROM venues v
         WHERE v.is_active = true
@@ -382,6 +387,7 @@ export default async function Home() {
                     <div className="min-w-0">
                       <p className="font-semibold text-slate-900 group-hover:text-amber-700 truncate">{venue.name}</p>
                       <p className="text-xs text-slate-500 mt-0.5">{venue.city_name}</p>
+                      <GoogleRating rating={venue.rating} count={venue.reviews_count} className="mt-1" />
                     </div>
                   </Card>
                 </Link>
@@ -418,6 +424,7 @@ export default async function Home() {
                     <div className="min-w-0">
                       <p className="font-semibold text-slate-900 group-hover:text-purple-600 truncate">{venue.name}</p>
                       <p className="text-xs text-slate-500 mt-0.5">{venue.city_name}</p>
+                      <GoogleRating rating={venue.rating} count={venue.reviews_count} className="mt-1" />
                     </div>
                   </Card>
                 </Link>

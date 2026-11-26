@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button'
 import { isUsablePhotoUrl } from '@/lib/imageUtils'
 import {
   MapPin,
-  Star,
   Coffee,
   Car,
   Cake,
@@ -22,6 +21,7 @@ import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup'
 import { formatAddressLine } from '@/lib/sanitize'
 import { isVerified } from '@/lib/plans'
 import { FeaturedImpression } from '@/components/venue/FeaturedImpression'
+import { GoogleRating } from '@/components/venue/GoogleRating'
 
 interface VenueResult {
   id: number
@@ -127,15 +127,7 @@ function VenueCard({
               >
                 <h3 className="font-semibold text-lg leading-tight">{venue.name}</h3>
               </Link>
-              {venue.avg_rating && (
-                <div className="flex items-center gap-1 text-sm flex-shrink-0">
-                  <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                  <span className="font-medium">{Number(venue.avg_rating).toFixed(1)}</span>
-                  <span className="text-muted-foreground">
-                    ({venue.review_count})
-                  </span>
-                </div>
-              )}
+              <GoogleRating rating={venue.avg_rating} count={venue.review_count} className="flex-shrink-0" />
             </div>
 
             {/* Location */}

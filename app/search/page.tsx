@@ -121,8 +121,8 @@ async function searchVenues(
 
     const sql = `
       SELECT v.*,
-             COALESCE(AVG(r.rating), 0) as avg_rating,
-             COUNT(r.id) as review_count,
+             COALESCE(NULLIF(v.rating::numeric, 0), AVG(r.rating), 0) as avg_rating,
+             CASE WHEN COALESCE(v.rating, 0) > 0 THEN COALESCE(v.reviews_count, 0) ELSE COUNT(r.id) END as review_count,
              (3959 * acos(
                LEAST(1, GREATEST(-1,
                  cos(radians($1)) * cos(radians(v.lat)) *

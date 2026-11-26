@@ -121,8 +121,8 @@ export async function GET(request: NextRequest) {
 
     const sql = `
       SELECT v.*,
-             COALESCE(AVG(r.rating), 0) as avg_rating,
-             COUNT(r.id) as review_count
+             COALESCE(NULLIF(v.rating::numeric, 0), AVG(r.rating), 0) as avg_rating,
+             CASE WHEN COALESCE(v.rating, 0) > 0 THEN COALESCE(v.reviews_count, 0) ELSE COUNT(r.id) END as review_count
              ${distanceSelect}
       FROM venues v
       LEFT JOIN reviews r ON r.venue_id = v.id AND r.approved = true

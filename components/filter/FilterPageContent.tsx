@@ -7,7 +7,7 @@ import { isUsablePhotoUrl } from '@/lib/imageUtils'
 import { Badge } from '@/components/ui/badge'
 import { getCityBySlug, getFilterBySlug, getNearbyCities } from '@/lib/venues'
 import { getStaticVenuesByTown } from '@/lib/staticVenues'
-import { MapPin, Star, Coffee, Car, Baby, PartyPopper, Heart, Globe, Navigation, CheckCircle2, Info } from 'lucide-react'
+import { MapPin, Coffee, Car, Baby, PartyPopper, Heart, Globe, Navigation, CheckCircle2, Info } from 'lucide-react'
 import { getPool, STATIC_BUILD } from '@/lib/pool'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
@@ -24,6 +24,7 @@ import { getCityVenueCount } from '@/lib/venueCounts'
 import { getFilterContent, type FilterSlug } from '@/lib/filterContent'
 import { getCardQuote, formatLastVerified } from '@/lib/venueCardText'
 import { VenueCardFacts } from '@/components/venue/VenueCardFacts'
+import { GoogleRating } from '@/components/venue/GoogleRating'
 
 interface FilterVenue {
   id: number
@@ -74,8 +75,8 @@ async function getFilteredVenues(citySlug: string, filterSlug: FilterSlug): Prom
       const whereExtra = dbColumn ? `AND v.${dbColumn} = true` : ''
       const result = await client.query<FilterVenue>(
         `SELECT v.*,
-                COALESCE(NULLIF(COALESCE(AVG(r.rating), 0), 0), v.rating::numeric) AS avg_rating,
-                CASE WHEN COUNT(r.id) > 0 THEN COUNT(r.id) ELSE COALESCE(v.reviews_count, 0) END AS review_count
+                COALESCE(NULLIF(v.rating::numeric, 0), NULLIF(AVG(r.rating), 0)) AS avg_rating,
+                CASE WHEN COALESCE(v.rating, 0) > 0 THEN COALESCE(v.reviews_count, 0) ELSE COUNT(r.id) END AS review_count
          FROM venues v
          LEFT JOIN reviews r ON r.venue_id = v.id AND r.approved = true
          WHERE v.city_slug = $1 AND v.is_active = true AND ${visibleVenueTypeSql()} ${whereExtra}
@@ -246,15 +247,7 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
                   </div>
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-                {venue.avg_rating && Number(venue.avg_rating) > 0 ? (
-                  <div className="absolute top-2 right-2 flex items-center gap-1 bg-white/95 backdrop-blur-sm px-2 py-1 rounded-full shadow text-xs font-bold">
-                    <Star className="w-3 h-3 text-yellow-400 fill-current" />
-                    <span className="text-slate-800">{Number(venue.avg_rating).toFixed(1)}</span>
-                    {venue.review_count && Number(venue.review_count) > 0 && (
-                      <span className="text-slate-400 font-normal">({Number(venue.review_count).toLocaleString()})</span>
-                    )}
-                  </div>
-                ) : null}
+                <GoogleRating variant="overlay" rating={venue.avg_rating} count={venue.review_count} className="absolute top-2 right-2" />
               </div>
             </Link>
 

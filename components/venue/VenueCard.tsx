@@ -6,7 +6,6 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
   MapPin,
-  Star,
   Coffee,
   Car,
   Baby,
@@ -18,6 +17,7 @@ import {
   ExternalLink,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { GoogleRating } from '@/components/venue/GoogleRating'
 import { cleanAddressForDisplay, formatAddressLine } from '@/lib/sanitize'
 
 interface VenueCardProps {
@@ -92,7 +92,6 @@ export function VenueCard({
   ).slice(0, 4)
 
   const priceDisplay = formatPrice(venue.price_from, venue.price_to)
-  const hasRating = venue.avg_rating && venue.avg_rating > 0
   const primaryImage = venue.images?.[0]
 
   // Google Maps directions URL — null (button hidden) when there's no valid
@@ -139,14 +138,7 @@ export function VenueCard({
                   {venue.name}
                 </h3>
               </Link>
-              {hasRating && (
-                <div className="flex items-center gap-1 bg-purple-50 px-2 py-1 rounded-lg flex-shrink-0">
-                  <Star className="w-4 h-4 text-yellow-500 fill-current" />
-                  <span className="font-bold text-purple-700 text-sm">
-                    {Number(venue.avg_rating).toFixed(1)}
-                  </span>
-                </div>
-              )}
+              <GoogleRating rating={venue.avg_rating} count={venue.review_count} className="flex-shrink-0" />
             </div>
 
             <div className="flex items-center gap-2 text-sm text-slate-500 mb-3">
@@ -248,17 +240,7 @@ export function VenueCard({
           )}
         </div>
 
-        {hasRating && (
-          <div className="absolute top-3 right-3 flex items-center gap-1 bg-white/95 backdrop-blur-sm px-2 py-1 rounded-lg shadow-sm">
-            <Star className="w-4 h-4 text-yellow-500 fill-current" />
-            <span className="font-bold text-slate-900 text-sm">
-              {Number(venue.avg_rating).toFixed(1)}
-            </span>
-            {venue.review_count && venue.review_count > 0 && (
-              <span className="text-slate-500 text-xs">({venue.review_count})</span>
-            )}
-          </div>
-        )}
+        <GoogleRating variant="overlay" rating={venue.avg_rating} count={venue.review_count} className="absolute top-3 right-3" />
 
         {showDistance && venue.distance !== undefined && (
           <div className="absolute bottom-3 right-3">
