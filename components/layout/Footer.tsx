@@ -147,9 +147,11 @@ export function Footer({ minimal = false }: FooterProps) {
             <h2 className="font-semibold text-white mb-4">Quick Links</h2>
             <ul className="space-y-2 text-sm">
               <li><Link href="/search" className="hover:text-white transition-colors">Search Venues</Link></li>
-              <li><Link href="/search?filters=toddler" className="hover:text-white transition-colors">Toddler Soft Play</Link></li>
-              <li><Link href="/search?filters=parties" className="hover:text-white transition-colors">Birthday Parties</Link></li>
-              <li><Link href="/search?filters=sen" className="hover:text-white transition-colors">SEN Friendly</Link></li>
+              <li><Link href="/toddler-soft-play" className="hover:text-white transition-colors">Toddler Soft Play</Link></li>
+              <li><Link href="/baby-soft-play" className="hover:text-white transition-colors">Baby Soft Play</Link></li>
+              <li><Link href="/play-cafes" className="hover:text-white transition-colors">Play Cafés</Link></li>
+              <li><Link href="/soft-play-parties" className="hover:text-white transition-colors">Birthday Parties</Link></li>
+              <li><Link href="/sen-soft-play" className="hover:text-white transition-colors">SEN Soft Play</Link></li>
               <li><Link href="/blog" className="hover:text-white transition-colors">Soft Play Blog</Link></li>
               <li><Link href="/newsletter" className="hover:text-white transition-colors">Newsletter Archive</Link></li>
               <li><Link href="/add-venue" className="hover:text-white transition-colors">Add Your Venue</Link></li>

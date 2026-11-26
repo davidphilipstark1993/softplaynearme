@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { HUBS, HUB_SLUGS, hubPath, type HubVenue } from '@/lib/categoryHubs'
 import { cleanVenueDescription, cleanVenueTips, cleanWhatToExpect } from '@/lib/venueCopy'
 import { venueFacts, buildVenueSeoTitle, buildVenueMetaDescription, quickFactRows, nearbyText, parseWeekHours, weekHoursForSchema, NEARBY_MILES, NEARBY_LIST_MAX, type VenueFacts } from '@/lib/venueSnippet'
 import { cache } from 'react'
@@ -747,6 +748,8 @@ export default async function VenuePage({ params }: PageProps) {
     : generateVenueDescription(venueContentInput)
   const expect = cleanWhatToExpect(venue.what_to_expect)
   const tips = cleanVenueTips(venue.tips_before_visiting)
+  // National category hubs this venue is listed on (lib/categoryHubs.ts).
+  const venueHubs = HUB_SLUGS.filter((h) => HUBS[h].matches(venue as unknown as HubVenue))
 
   // FAQs: prefer stored faq_json, otherwise generate from structured data
   const faqs: Array<{ question: string; answer: string }> =
@@ -1274,6 +1277,19 @@ export default async function VenuePage({ params }: PageProps) {
                   >
                     View all {similarFeatureLabel.toLowerCase()} venues in {cityName} →
                   </Link>
+                </div>
+              )}
+
+              {venueHubs.length > 0 && (
+                <div className="bg-white rounded-lg border border-slate-200 p-6">
+                  <h2 className="font-semibold text-lg mb-3">More like {venue.name} across the UK</h2>
+                  <div className="flex flex-wrap gap-2">
+                    {venueHubs.map((s) => (
+                      <Link key={s} href={hubPath(s)} className="rounded-full border border-purple-200 bg-purple-50 px-3 py-1 text-sm text-purple-700 hover:bg-purple-100">
+                        {HUBS[s].label.charAt(0).toUpperCase() + HUBS[s].label.slice(1)}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               )}
 

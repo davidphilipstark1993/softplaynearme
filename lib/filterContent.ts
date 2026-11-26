@@ -31,29 +31,29 @@ const filterContentMap: Record<FilterSlug, FilterContentConfig> = {
     faqs: (cityName) => [
       {
         question: `What age is the toddler area at soft play in ${cityName}?`,
-        answer: `Toddler areas at soft play centres in ${cityName} are typically designed for children under 3 or 4 years old. These sections have age-appropriate equipment including soft mats, low-level slides, ball pits, and sensory toys, all separated from the larger frame used by older children.`,
+        answer: `Each venue sets its own limit, but toddler areas are usually for children under about 4: soft mats, low slides and ball pits, kept apart from the main frame. Where a venue in ${cityName} publishes an age range, its page shows it.`,
       },
       {
         question: `Are babies welcome at soft play in ${cityName}?`,
-        answer: `Yes, most soft play centres in ${cityName} welcome babies. Many have dedicated baby areas with soft textures, mirrors, and sensory toys. Babies under 12 months usually enter free. Look for venues that specifically mention baby or under-1s sections.`,
+        answer: `Babies are welcome at soft play, but only some venues have a separate baby area. The venues on this page show a baby area where one is confirmed, and their pages show any under-1s prices we hold, as these vary from venue to venue.`,
       },
       {
         question: `Do toddler soft play centres in ${cityName} have cafes?`,
-        answer: `Most toddler-friendly venues in ${cityName} have on-site cafes serving hot drinks, snacks, and children's meals. Many offer baby-friendly options and high chairs. Some venues also allow you to bring your own food — check the venue page before you visit.`,
+        answer: `Each venue on this page shows a café where one is confirmed. Rules on bringing your own food differ between venues, so check the venue page or ask before you go.`,
       },
       {
         question: `When is the best time to visit toddler soft play in ${cityName}?`,
-        answer: `Weekday mornings are the best time for toddler soft play in ${cityName}. Many venues run dedicated toddler-only sessions on Tuesday to Thursday mornings, which are noticeably quieter. Avoid weekends and school holiday peak hours if your child prefers a calmer environment.`,
+        answer: `Term-time weekdays, when older children are at school, are usually calmer than weekends and school holidays. Some venues in ${cityName} run toddler-only sessions; ask the venue, or check its page, for current times.`,
       },
     ],
     advice: (cityName) => ({
       heading: `Tips for Visiting Toddler Soft Play in ${cityName}`,
       tips: [
-        'Visit on a weekday morning for the quietest experience — many venues offer dedicated toddler-only sessions Tue–Thu.',
+        'Term-time weekdays are usually calmer than weekends and school holidays; ask whether the venue runs toddler-only sessions.',
         'Look for venues with a physically separated toddler area so bigger children on the main frame don\'t overwhelm little ones.',
-        'Pack socks for everyone — almost all soft play centres require them, and accidents happen.',
+        'Pack socks for everyone: most soft play centres ask for them, for adults on the frame too.',
         'Check whether the venue has a cafe before you go. Some allow you to bring your own snacks and a flask of tea.',
-        'Many venues charge per session rather than per hour, so you can stay as long as the session lasts.',
+        'Check the session length when you book or arrive, as venues set different time limits.',
       ],
     }),
   },
@@ -77,11 +77,11 @@ const filterContentMap: Record<FilterSlug, FilterContentConfig> = {
       },
       {
         question: `Can parents stay during a soft play birthday party?`,
-        answer: `Yes, parents and carers are welcome to stay throughout. Most venues provide adult seating near the party room and some include tea and coffee for supervising adults. Check whether the venue charges for adult refreshments or includes them in the package.`,
+        answer: `Parents and carers usually stay to supervise, and venues expect them to. Ask whether adult drinks are included in the package or charged separately.`,
       },
       {
         question: `Can I bring my own cake to a soft play party?`,
-        answer: `Many soft play centres in ${cityName} allow you to bring your own cake — but always confirm this when booking. Some venues have a policy of charging a small cutting fee. A few venues sell their own cakes or cupcakes as an add-on.`,
+        answer: `Each venue sets its own cake policy, so ask when you book. Some sell their own cakes as an add-on, and some charge for cutting and serving a cake you bring.`,
       },
     ],
     advice: (cityName) => ({
@@ -90,7 +90,7 @@ const filterContentMap: Record<FilterSlug, FilterContentConfig> = {
         'Book early for weekends and school holidays, and ask each venue how far ahead it takes bookings.',
         'Ask explicitly whether the party room is exclusively yours or shared — this varies between venues.',
         'Clarify exactly what\'s in the package: food choices, party bags, invitations, and host time differ significantly.',
-        'Confirm the venue\'s cake policy before ordering — most allow homemade cakes but some charge a cutting fee.',
+        'Confirm the venue\'s cake policy before ordering a cake.',
         'Ask about adult supervision ratios and whether venue staff are included for the children during play time.',
       ],
     }),
@@ -103,29 +103,28 @@ const filterContentMap: Record<FilterSlug, FilterContentConfig> = {
     faqs: (cityName) => [
       {
         question: `What are SEN-friendly soft play sessions in ${cityName}?`,
-        answer: `SEN-friendly sessions at soft play centres in ${cityName} are designed for children with Special Educational Needs and disabilities. They typically feature reduced numbers, lower music and lighting levels, and additional staff support — creating a calmer, more accessible environment.`,
+        answer: `SEN sessions are set aside for children with special educational needs and disabilities. What changes differs by venue, but it usually means fewer children and a calmer room, often with music and lights turned down. Ask the ${cityName} venue what its sessions involve.`,
       },
       {
         question: `When are SEN sessions held at soft play in ${cityName}?`,
-        answer: `SEN sessions in ${cityName} are usually held on quieter weekday mornings, often before general admission opens. Schedules vary significantly between venues — some run weekly sessions, others monthly. Contact venues directly or check their individual listing pages for current schedules.`,
+        answer: `Each venue sets its own times. Some run SEN sessions weekly and others monthly, and they may be early in the day, in the evening or at weekends. Check the venue page or contact the venue for current dates.`,
       },
       {
         question: `Do I need to book SEN soft play sessions in advance?`,
-        answer: `It depends on the venue. Some SEN sessions in ${cityName} require pre-booking to manage numbers, while others operate as quiet drop-ins. We recommend calling ahead to confirm the schedule, any booking requirements, and whether the session suits your child's specific needs.`,
+        answer: `It depends on the venue: some SEN sessions need booking to keep numbers down, others are drop-in. Call ahead to confirm the date, whether to book and whether the session suits your child.`,
       },
       {
         question: `Are soft play centres in ${cityName} wheelchair accessible?`,
-        answer: `Many soft play centres in ${cityName} have wheelchair-accessible facilities including step-free entrances, accessible toilets, and ground-floor play areas. Accessibility varies between venues. Check individual venue pages for specific details, or call ahead if you have particular access requirements.`,
+        answer: `Accessibility varies between venues, and we only show wheelchair access on a venue page where it has been confirmed. If you have particular access needs, call the venue before you travel.`,
       },
     ],
     advice: (cityName) => ({
       heading: `Visiting SEN-Friendly Soft Play in ${cityName}`,
       tips: [
-        'Call ahead to confirm dedicated SEN session times — many venues run them monthly and they can fill up quickly.',
+        'Call ahead to confirm SEN session dates and whether you need to book.',
         'Ask about the sensory environment: some venues dim lights and turn off background music for SEN sessions.',
-        'Early weekday mornings (before 11am) are generally the quietest times even outside dedicated sessions.',
-        'Inform staff about your child\'s specific needs on arrival — most SEN-friendly venues will adapt where they can.',
-        'Some venues offer a familiarisation visit so children can explore the space before attending a session.',
+                'Tell staff about your child\'s needs when you arrive, or when you book.',
+        'Ask whether you can visit beforehand, so your child can see the space when it is quiet.',
       ],
     }),
   },
@@ -141,18 +140,18 @@ const filterContentMap: Record<FilterSlug, FilterContentConfig> = {
       },
       {
         question: `Are soft play centres in ${cityName} open at weekends?`,
-        answer: `Yes, the majority of soft play centres in ${cityName} are open on Saturdays and Sundays. Weekend sessions tend to be busier and some venues require advance booking. A few venues close early on Sunday afternoons, so check individual listings.`,
+        answer: `Most soft play centres open at weekends, but hours often differ from weekdays and some close early for private parties. Each venue page shows the hours we hold.`,
       },
       {
         question: `Are soft play centres open during school holidays in ${cityName}?`,
-        answer: `Yes — soft play centres in ${cityName} are typically open throughout all school holidays and often extend their hours. Expect higher footfall during half-terms and the summer holidays. Some venues run special holiday programmes and activities.`,
+        answer: `Soft play is busiest in school holidays, and many venues change their hours or session times then. Check the venue page or the venue's own website before you travel.`,
       },
     ],
     advice: (cityName) => ({
       heading: `What to Know Before You Visit in ${cityName}`,
       tips: [
         'Opening times shown are general guidelines — always verify directly with the venue before travelling.',
-        'Many venues extend hours during school holidays and half-terms; some close early on Sundays.',
+        'Hours can change in school holidays and half-terms, so check before you travel.',
         'Some venues require pre-booking even for casual visits — book online to guarantee a slot.',
         'If travelling at a specific time, call ahead: venues may close early for private parties.',
       ],

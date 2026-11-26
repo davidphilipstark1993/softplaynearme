@@ -249,9 +249,9 @@ export default async function Home() {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {[
               { href: '/search?filters=open_now', icon: Clock, label: 'Open Now' },
-              { href: '/search?filters=toddler', icon: Baby, label: 'Toddler Friendly' },
-              { href: '/search?filters=parties', icon: PartyPopper, label: 'Birthday Parties' },
-              { href: '/search?filters=sen', icon: Heart, label: 'SEN Friendly' },
+              { href: '/toddler-soft-play', icon: Baby, label: 'Toddler Friendly' },
+              { href: '/soft-play-parties', icon: PartyPopper, label: 'Birthday Parties' },
+              { href: '/sen-soft-play', icon: Heart, label: 'SEN Friendly' },
               { href: '/search?filters=cafe', icon: Coffee, label: 'Has Cafe' },
               { href: '/search?filters=parking', icon: Car, label: 'Has Parking' },
             ].map(({ href, icon: Icon, label }) => (
@@ -554,10 +554,10 @@ export default async function Home() {
               Whether you are looking for <Link href="/soft-play/hull" className="text-purple-600 underline underline-offset-2 hover:text-purple-700">soft play in Hull</Link>, <Link href="/soft-play/leeds" className="text-purple-600 underline underline-offset-2 hover:text-purple-700">indoor play centres in Leeds</Link>, <Link href="/soft-play/york" className="text-purple-600 underline underline-offset-2 hover:text-purple-700">family venues in York</Link>, <Link href="/soft-play/sheffield" className="text-purple-600 underline underline-offset-2 hover:text-purple-700">play areas in Sheffield</Link>, <Link href="/soft-play/brighton" className="text-purple-600 underline underline-offset-2 hover:text-purple-700">soft play in Brighton</Link>, <Link href="/soft-play/bournemouth" className="text-purple-600 underline underline-offset-2 hover:text-purple-700">indoor play in Bournemouth</Link>, or <Link href="/soft-play/norwich" className="text-purple-600 underline underline-offset-2 hover:text-purple-700">children&apos;s venues in Norwich</Link>, our directory helps you compare your options in one place. Every listing includes the venue&apos;s address, contact details, facilities, and directions.
             </p>
             <p>
-              Most modern soft play centres cater to a wide range of ages. Dedicated baby areas with sensory toys and soft mats are perfect for under-1s, while toddler zones with gentle slides and ball pits suit children up to around three or four years old. Older children can enjoy multi-level climbing frames, zip lines, and adventure courses. Many venues also offer <Link href="/search?filters=parties" className="text-purple-600 underline underline-offset-2 hover:text-purple-700">birthday party packages</Link> with private rooms and catering.
+              Most modern soft play centres cater to a wide range of ages. Dedicated baby areas with sensory toys and soft mats are perfect for under-1s, while toddler zones with gentle slides and ball pits suit children up to around three or four years old. Older children can enjoy multi-level climbing frames, zip lines, and adventure courses. Many venues also offer <Link href="/soft-play-parties" className="text-purple-600 underline underline-offset-2 hover:text-purple-700">birthday party packages</Link> with private rooms and catering.
             </p>
             <p>
-              Accessibility is increasingly important to families, and a growing number of venues now run <Link href="/search?filters=sen" className="text-purple-600 underline underline-offset-2 hover:text-purple-700">SEN-friendly sessions</Link> with reduced noise, lower lighting, and smaller group sizes. These quieter sessions give children with additional needs the chance to play in a more comfortable environment.
+              Accessibility is increasingly important to families, and a growing number of venues now run <Link href="/sen-soft-play" className="text-purple-600 underline underline-offset-2 hover:text-purple-700">SEN-friendly sessions</Link> with reduced noise, lower lighting, and smaller group sizes. These quieter sessions give children with additional needs the chance to play in a more comfortable environment.
             </p>
             <p>
               Looking for soft play centres near you? These are the areas with the most listings, each with its own guide to toddler-friendly, party and SEN-friendly venues:
@@ -594,7 +594,7 @@ export default async function Home() {
               Soft Play Near Me was created to help families find the right venue quickly and easily. We focus on accurate, up-to-date information so you can check opening times, compare facilities, and plan your visit with confidence. Venue owners can <Link href="/add-venue" className="text-purple-600 underline underline-offset-2 hover:text-purple-700">claim their listing for free</Link> to manage their profile, add photos, and keep their information current.
             </p>
             <p>
-              Browse our <Link href="/search" className="text-purple-600 underline underline-offset-2 hover:text-purple-700">full search</Link> to find soft play centres near your postcode, or explore by location using the links above. From <Link href="/search?filters=toddler" className="text-purple-600 underline underline-offset-2 hover:text-purple-700">toddler-friendly venues</Link> to centres with cafes and parking, we make it simple to find the perfect indoor play destination for your family.
+              Browse our <Link href="/search" className="text-purple-600 underline underline-offset-2 hover:text-purple-700">full search</Link> to find soft play centres near your postcode, or explore by location using the links above. From <Link href="/toddler-soft-play" className="text-purple-600 underline underline-offset-2 hover:text-purple-700">toddler-friendly venues</Link> to centres with cafes and parking, we make it simple to find the perfect indoor play destination for your family.
             </p>
           </div>
         </div>

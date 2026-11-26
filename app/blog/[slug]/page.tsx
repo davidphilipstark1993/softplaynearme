@@ -4,6 +4,7 @@ import { trimMeta } from '@/lib/metaLength'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getPostBySlug, getRelatedPosts, posts } from '@/lib/blogPosts'
+import { GUIDE_HUBS, HUBS, hubPath } from '@/lib/categoryHubs'
 import { ShareButtons } from '@/components/social/ShareButtons'
 import { buildArticleSchema, buildFAQSchema, buildBreadcrumbSchema } from '@/lib/schema'
 import { getBlogOgImage } from '@/lib/cityImages'
@@ -167,6 +168,21 @@ export default async function BlogPostPage({ params }: PageProps) {
             ))}
           </div>
         </section>
+
+        {(GUIDE_HUBS[post.slug] ?? []).length > 0 && (
+          <section className="mt-10 rounded-lg border border-purple-200 bg-purple-50 p-5">
+            <h2 className="text-lg font-semibold text-slate-900">Find venues near you</h2>
+            <ul className="mt-2 space-y-1">
+              {GUIDE_HUBS[post.slug].map((h) => (
+                <li key={h}>
+                  <Link href={hubPath(h)} className="font-medium text-purple-700 hover:underline">
+                    {HUBS[h].h1.replace(/ Near You$/, '')}: every venue we list, by town →
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         <p className="mt-10 text-slate-700">
           {hubForPost ? (
