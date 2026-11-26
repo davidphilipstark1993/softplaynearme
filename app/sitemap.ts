@@ -9,6 +9,7 @@ import { isVenueIndexable } from '@/lib/venueContent'
 import { totalPagesFor, hubPagePath } from '@/lib/pagination'
 import { getHubGuide, minFilterVenues } from '@/lib/hubGuides'
 import { getLondonAreaHubs, londonAreaPath } from '@/lib/londonAreaHubs'
+import { HUB_SLUGS, hubPath } from '@/lib/categoryHubs'
 
 // Paths that 301 elsewhere (data/redirects.json, served by proxy.ts) are never
 // listed — submitting a URL that immediately redirects is the same mixed signal as
@@ -229,6 +230,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/privacy`, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${baseUrl}/blog`, lastModified: blogLastMod, changeFrequency: 'weekly', priority: 0.7 },
     { url: `${baseUrl}/pricing`, changeFrequency: 'monthly', priority: 0.5 },
+    // National category hubs (Phase 5)
+    ...HUB_SLUGS.map((s) => ({ url: `${baseUrl}${hubPath(s)}`, lastModified: siteLastMod, changeFrequency: 'weekly' as const, priority: 0.8 })),
   ]
 
   return [...topLevel, ...blogEntries, ...hubEntries, ...londonAreaEntries, ...venueEntries]
