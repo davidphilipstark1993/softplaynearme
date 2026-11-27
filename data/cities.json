@@ -3817,5 +3817,39 @@
       "Peterborough"
     ],
     "faqs": []
+  },
+  {
+    "slug": "stevenage",
+    "name": "Stevenage",
+    "county": "Hertfordshire",
+    "region": "East of England",
+    "metaTitle": "Soft Play in Stevenage",
+    "metaDescription": "Find soft play centres in Stevenage, Hertfordshire. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Stevenage",
+    "intro": "Soft play centres in Stevenage and the surrounding area of Hertfordshire.",
+    "nearbyAreas": [
+      "Hitchin",
+      "Luton",
+      "Hatfield",
+      "Ware"
+    ],
+    "faqs": []
+  },
+  {
+    "slug": "crawley",
+    "name": "Crawley",
+    "county": "West Sussex",
+    "region": "South East",
+    "metaTitle": "Soft Play in Crawley",
+    "metaDescription": "Find soft play centres in Crawley, West Sussex. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Crawley",
+    "intro": "Soft play centres in Crawley and the surrounding area of West Sussex.",
+    "nearbyAreas": [
+      "Horley",
+      "Dorking",
+      "Brighton",
+      "Worthing"
+    ],
+    "faqs": []
   }
 ]

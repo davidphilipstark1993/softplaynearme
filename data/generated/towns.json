@@ -288,6 +288,12 @@
     "avgRating": "4.7"
   },
   {
+    "name": "Crawley",
+    "slug": "crawley",
+    "venueCount": 1,
+    "avgRating": null
+  },
+  {
     "name": "Crewe",
     "slug": "crewe",
     "venueCount": 7,
@@ -924,6 +930,12 @@
     "avgRating": "4.3"
   },
   {
+    "name": "Stevenage",
+    "slug": "stevenage",
+    "venueCount": 1,
+    "avgRating": null
+  },
+  {
     "name": "Stirling",
     "slug": "stirling",
     "venueCount": 1,
@@ -986,7 +998,7 @@
   {
     "name": "Swindon",
     "slug": "swindon",
-    "venueCount": 1,
+    "venueCount": 2,
     "avgRating": "3.9"
   },
   {

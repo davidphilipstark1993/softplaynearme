@@ -234,6 +234,11 @@
     "lng": -1.50686,
     "source": "os-names:City"
   },
+  "crawley": {
+    "lat": 51.11448,
+    "lng": -0.18823,
+    "source": "os-names:Town"
+  },
   "crewe": {
     "lat": 53.09503,
     "lng": -2.44176,
@@ -762,6 +767,11 @@
   "stanley": {
     "lat": 54.87227,
     "lng": -1.69381,
+    "source": "os-names:Town"
+  },
+  "stevenage": {
+    "lat": 51.90234,
+    "lng": -0.2008,
     "source": "os-names:Town"
   },
   "stirling": {

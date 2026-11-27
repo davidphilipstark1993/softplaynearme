@@ -893,5 +893,15 @@
     "slug": "corby",
     "name": "Corby",
     "county": "North Northamptonshire"
+  },
+  {
+    "slug": "stevenage",
+    "name": "Stevenage",
+    "county": "Hertfordshire"
+  },
+  {
+    "slug": "crawley",
+    "name": "Crawley",
+    "county": "West Sussex"
   }
 ]
