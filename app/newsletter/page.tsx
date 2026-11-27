@@ -66,7 +66,8 @@ export default async function NewsletterArchivePage() {
         )}
       </main>
 
-      <Footer />
+      {/* The page's own sign-up is the one on this page (the footer's is off) */}
+      <Footer newsletter={false} />
     </div>
   )
 }

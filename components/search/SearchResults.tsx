@@ -251,14 +251,6 @@ function NoResults({ searchTerm }: { searchTerm?: string }) {
         <p className="text-sm text-muted-foreground mb-6">
           Try adjusting your filters, increasing the search radius, or searching a different location.
         </p>
-        <div className="max-w-sm mx-auto text-left">
-          <NewsletterSignup
-            source="search_empty_state"
-            heading="Find something fun to do with the kids"
-            subtext="We'll email you new venues and family activity ideas as we find them."
-            variant="inline"
-          />
-        </div>
       </CardContent>
     </Card>
   )

@@ -5,7 +5,8 @@ import Link from 'next/link'
 import { cities } from '@/lib/venues'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
-import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup'
+import { getHubStates, filterIndexableFromCounts } from '@/lib/indexing'
+import { FOOTER_CITY_SLUGS } from '@/components/layout/Footer'
 import { AdSlot } from '@/components/ads/AdSlot'
 import { SearchHero } from '@/components/home/SearchHero'
 import { HeroCarousel } from '@/components/home/HeroCarousel'
@@ -25,7 +26,6 @@ const REGION_ORDER = [
 // Highest-traffic cities in priority order (London first) — used for the
 // homepage's "Popular" quick links, rather than data/cities.json's raw
 // array order which doesn't reflect actual traffic.
-const POPULAR_CITY_SLUGS = ['london', 'nottingham', 'leeds', 'manchester', 'hull', 'brighton', 'worthing']
 
 // The homepage is prerendered at build time (from the static JSON export, see
 // lib/pool.ts STATIC_BUILD). City hubs are rendered on demand from the live
@@ -175,10 +175,14 @@ export default async function Home() {
 
   // Browse by Location: hubs grouped by region, regions in a fixed order,
   // hubs A–Z within each. "Yorkshire and the Humber" is filed as Yorkshire.
+  // The footer already links its ~40 cities, and thin hubs are merged or noindexed
+  // (lib/indexing.ts), so this lists the other indexable hubs once; /soft-play has every town.
+  const hubStates = await getHubStates()
   const citiesByRegion = REGION_ORDER.map((region) => ({
     region,
     cities: cities
       .filter((c) => (c.region === 'Yorkshire and the Humber' ? 'Yorkshire' : c.region) === region)
+      .filter((c) => hubStates[c.slug]?.indexable && !FOOTER_CITY_SLUGS.has(c.slug))
       .sort((a, b) => a.name.localeCompare(b.name)),
   })).filter((g) => g.cities.length > 0)
 
@@ -209,35 +213,8 @@ export default async function Home() {
             <p className="text-purple-100 text-sm mt-6">
               Free to use &middot; No sign-up required &middot; Updated by venue owners
             </p>
-            <p className="text-purple-200 text-sm mt-2">
-              Popular:{' '}
-              {POPULAR_CITY_SLUGS
-                .map((slug) => cities.find((c) => c.slug === slug))
-                .filter((c): c is (typeof cities)[number] => !!c)
-                .map((city, i) => (
-                <span key={city.slug}>
-                  {i > 0 && ' \u00B7 '}
-                  <Link href={`/soft-play/${city.slug}`} className="underline hover:text-white">
-                    {city.name}
-                  </Link>
-                </span>
-              ))}
-            </p>
           </div>
           <HeroCarousel />
-        </div>
-      </div>
-
-      {/* Newsletter banner */}
-      <div className="bg-white py-6 px-4 border-b border-slate-200">
-        <div className="max-w-2xl mx-auto">
-          <NewsletterSignup
-            source="homepage_banner"
-            offer="events"
-            variant="inline"
-            heading="Get local family events, free"
-            subtext="Events happening in your area this month and next — straight to your inbox."
-          />
         </div>
       </div>
 
@@ -270,7 +247,7 @@ export default async function Home() {
       <div className="py-16 px-4 bg-white border-b border-slate-200">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-2xl font-bold text-slate-900 mb-8 text-center">How It Works</h2>
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="max-w-xl mx-auto">
             {/* For Parents */}
             <div>
               <h3 className="text-xl font-semibold text-purple-600 mb-6">For Parents</h3>
@@ -292,27 +269,6 @@ export default async function Home() {
                 ))}
               </ol>
             </div>
-            {/* For Venue Owners */}
-            <div>
-              <h3 className="text-xl font-semibold text-green-600 mb-6">For Venue Owners</h3>
-              <ol className="space-y-5">
-                {[
-                  { step: '1', title: 'Find your venue', desc: 'Search for your soft play centre in our directory' },
-                  { step: '2', title: 'Claim your listing', desc: 'Submit your claim through our form — completely free, no account needed' },
-                  { step: '3', title: 'Manage your profile', desc: 'Update hours, add photos, and highlight your facilities' },
-                ].map(({ step, title, desc }) => (
-                  <li key={step} className="flex gap-3">
-                    <span className="flex-shrink-0 w-8 h-8 rounded-full bg-green-100 text-green-600 font-bold flex items-center justify-center text-sm">
-                      {step}
-                    </span>
-                    <div>
-                      <p className="font-semibold">{title}</p>
-                      <p className="text-sm text-slate-600">{desc}</p>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            </div>
           </div>
         </div>
       </div>
@@ -321,7 +277,10 @@ export default async function Home() {
       <div className="py-16 px-4">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-2xl font-bold text-slate-900 mb-2 text-center">Browse by Location</h2>
-          <p className="text-slate-600 text-center mb-8">Find soft play centres in your area</p>
+          <p className="text-slate-600 text-center mb-8">
+            More towns with several soft play centres. The biggest cities are in the footer, and{' '}
+            <Link href="/soft-play" className="text-purple-700 underline underline-offset-2">every town we cover</Link> is on one page.
+          </p>
           {/* A compact list grouped by region. It replaced a grid of 176 gradient
               cards, which on a phone ran to ~90 card rows and ~1,500 DOM nodes and
               was the main cost in the homepage's mobile render. Every hub link and
@@ -458,7 +417,7 @@ export default async function Home() {
 
       {/* Trust signals */}
       <div className="py-10 px-4 bg-white border-b border-slate-200">
-        <div className={`max-w-7xl mx-auto grid gap-4 text-center ${claimedVenues > 0 ? 'sm:grid-cols-2 lg:grid-cols-4' : 'sm:grid-cols-3'}`}>
+        <div className={`max-w-7xl mx-auto grid gap-4 text-center ${claimedVenues > 0 ? 'sm:grid-cols-3' : 'sm:grid-cols-2'}`}>
           <Card className="p-5 border-slate-200">
             <p className="text-2xl font-bold text-purple-700">{cities.length}+</p>
             <p className="text-sm text-slate-600">UK towns and cities covered</p>
@@ -473,10 +432,6 @@ export default async function Home() {
               <p className="text-sm text-slate-600">venues claimed by their owners</p>
             </Card>
           )}
-          <Card className="p-5 border-slate-200">
-            <p className="text-2xl font-bold text-purple-700">Free</p>
-            <p className="text-sm text-slate-600">no sign-up or account needed</p>
-          </Card>
         </div>
       </div>
 
@@ -528,18 +483,6 @@ export default async function Home() {
         </div>
       </div>
 
-      {/* Newsletter CTA */}
-      <div className="py-14 px-4">
-        <div className="max-w-lg mx-auto">
-          <NewsletterSignup
-            source="homepage"
-            offer="both"
-            heading="Get Sunday&rsquo;s family guide"
-            subtext="Weekly soft play picks, plus local family events happening this month and next — free."
-          />
-        </div>
-      </div>
-
       {/* SEO Content Block */}
       <div className="py-16 px-4">
         <div className="max-w-3xl mx-auto">
@@ -569,19 +512,19 @@ export default async function Home() {
                     Soft play in {city.name}
                   </Link>{' '}
                   <span className="text-slate-500">({cityCounts[city.slug]})</span>
-                  {(counts.filterCountsByCity[city.slug]?.toddler ?? 0) > 0 && (
+                  {filterIndexableFromCounts(counts, hubStates, city.slug, 'toddler') && (
                     <>
                       {' \u00B7 '}
                       <Link href={`/soft-play/${city.slug}/toddler`} className="text-slate-600 underline underline-offset-2 hover:text-purple-700">toddler</Link>
                     </>
                   )}
-                  {(counts.filterCountsByCity[city.slug]?.['birthday-parties'] ?? 0) > 0 && (
+                  {filterIndexableFromCounts(counts, hubStates, city.slug, 'birthday-parties') && (
                     <>
                       {' \u00B7 '}
                       <Link href={`/soft-play/${city.slug}/birthday-parties`} className="text-slate-600 underline underline-offset-2 hover:text-purple-700">parties</Link>
                     </>
                   )}
-                  {(counts.filterCountsByCity[city.slug]?.['sen-friendly'] ?? 0) > 0 && (
+                  {filterIndexableFromCounts(counts, hubStates, city.slug, 'sen-friendly') && (
                     <>
                       {' \u00B7 '}
                       <Link href={`/soft-play/${city.slug}/sen-friendly`} className="text-slate-600 underline underline-offset-2 hover:text-purple-700">SEN-friendly</Link>

@@ -202,14 +202,6 @@ export default async function BlogPostPage({ params }: PageProps) {
 
         <AdSlot placement="blog_post" className="mt-10" />
 
-        <div className="mt-8">
-          <NewsletterSignup
-            source="blog_article"
-            heading="Find something fun to do with the kids"
-            subtext="Get our weekly family activity picks and days-out ideas by email."
-          />
-        </div>
-
         {relatedPosts.length > 0 && (
           <section className="mt-12 border-t border-slate-200 pt-8">
             <h2 className="text-xl font-semibold text-slate-900 mb-5">More Parent Guides</h2>

@@ -1,8 +1,7 @@
 import Link from 'next/link'
-import { cities } from '@/lib/venues'
 import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup'
 
-const cityDirectory: { region: string; cities: { name: string; slug: string }[] }[] = [
+export const cityDirectory: { region: string; cities: { name: string; slug: string }[] }[] = [
   { region: 'Yorkshire', cities: [
     { name: 'Hull', slug: 'hull' }, { name: 'Leeds', slug: 'leeds' }, { name: 'Sheffield', slug: 'sheffield' },
     { name: 'York', slug: 'york' }, { name: 'Bradford', slug: 'bradford' }, { name: 'Doncaster', slug: 'doncaster' },
@@ -39,6 +38,9 @@ const cityDirectory: { region: string; cities: { name: string; slug: string }[] 
   ]},
 ]
 
+/** Every hub the footer links to, so page bodies can leave them out rather than list them twice. */
+export const FOOTER_CITY_SLUGS: ReadonlySet<string> = new Set(cityDirectory.flatMap((r) => r.cities.map((c) => c.slug)))
+
 function FacebookIcon() {
   return (
     <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor" aria-hidden="true">
@@ -66,13 +68,11 @@ function TikTokIcon() {
 interface FooterProps {
   /** Minimal footer with just copyright (for detail pages) */
   minimal?: boolean
+  /** The site-wide newsletter sign-up. Off on pages whose body is the sign-up itself, so it shows once. */
+  newsletter?: boolean
 }
 
-export function Footer({ minimal = false }: FooterProps) {
-  const majorCitySlugs = ['london', 'manchester', 'leeds', 'sheffield', 'york', 'hull']
-  const majorCities = majorCitySlugs
-    .map((slug) => cities.find((city) => city.slug === slug))
-    .filter((city): city is (typeof cities)[number] => !!city)
+export function Footer({ minimal = false, newsletter = true }: FooterProps) {
 
   if (minimal) {
     return (
@@ -87,15 +87,17 @@ export function Footer({ minimal = false }: FooterProps) {
   return (
     <footer className="bg-slate-900 text-slate-400 py-12 px-4">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-10 max-w-xl mx-auto">
-          <NewsletterSignup
-            source="footer"
-            offer="both"
-            heading="Get family days out in your inbox"
-            subtext="Weekly soft play picks and family events, straight to your inbox."
-          />
-        </div>
-        <div className="grid md:grid-cols-4 gap-8">
+        {newsletter && (
+          <div className="mb-10 max-w-xl mx-auto">
+            <NewsletterSignup
+              source="footer"
+              offer="both"
+              heading="Get family days out in your inbox"
+              subtext="Weekly soft play picks and family events, straight to your inbox."
+            />
+          </div>
+        )}
+        <div className="grid md:grid-cols-3 gap-8">
           <div>
             <div className="flex items-center gap-2 mb-4">
               <span className="font-bold text-lg text-white">Soft Play Near Me</span>
@@ -130,18 +132,6 @@ export function Footer({ minimal = false }: FooterProps) {
                 <TikTokIcon />
               </a>
             </div>
-          </div>
-          <div>
-            <h2 className="font-semibold text-white mb-4">Popular Cities</h2>
-            <ul className="space-y-2 text-sm">
-              {majorCities.map((city) => (
-                <li key={city.slug}>
-                  <Link href={`/soft-play/${city.slug}`} className="hover:text-white transition-colors">
-                    {city.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
           </div>
           <div>
             <h2 className="font-semibold text-white mb-4">Quick Links</h2>

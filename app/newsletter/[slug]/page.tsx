@@ -110,7 +110,8 @@ export default async function NewsletterIssuePage({ params }: { params: Promise<
         </div>
       </main>
 
-      <Footer />
+      {/* The page's own sign-up is the one on this page (the footer's is off) */}
+      <Footer newsletter={false} />
     </div>
   )
 }
