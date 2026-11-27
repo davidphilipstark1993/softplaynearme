@@ -119,18 +119,22 @@ const INTRO_P3: string[] = [
   `Getting to soft play in {name} depends on the venue — parking and public transport links vary, so check each venue\u2019s page for directions. If you're driving from the surrounding {county} area, journey times are usually short. Check individual venue pages for directions and parking information.`,
 ]
 
+// General advice, not claims about {name}: these run on every town page, including
+// towns with one or two venues, so they can't say "many centres here do X". Links go
+// to the national category pages, which exist for every town (city filter pages
+// don't exist for static-only towns such as Chester).
 const INTRO_P4: string[] = [
-  `Many soft play centres in {name} run dedicated [SEN-friendly sessions](/soft-play/{slug}/sen-friendly) with reduced noise, lower lighting, and fewer children. These sessions are invaluable for families with children who have additional needs. If SEN provision is important to you, use our filters to find venues that offer it.`,
+  `Some soft play centres run dedicated SEN-friendly sessions with reduced noise, lower lighting and fewer children. If that matters to your family, check each venue's page, or see [SEN-friendly soft play across the UK](/sen-soft-play) for venues that list it.`,
 
-  `[Birthday parties](/soft-play/{slug}/birthday-parties) are one of the most popular reasons to visit soft play in {name}. Most venues offer packages that include exclusive use of a party room, food, and dedicated play time. Some also provide party bags, invitations, and a host to help things run smoothly. Book well in advance for weekend slots.`,
+  `Birthday parties are one of the most popular reasons to book soft play. Packages usually cover play time, food and sometimes a party room or host, and weekend slots go first, so book well ahead. See [soft play party venues](/soft-play-parties) for centres that list parties.`,
 
-  `If you have a toddler, you'll be pleased to know that many soft play centres in {name} have dedicated under-3s or under-4s areas. Browse our [toddler-friendly venues in {name}](/soft-play/{slug}/toddler) for sections with age-appropriate equipment, softer surfaces, and a calmer atmosphere. Some venues also run specific toddler sessions during quieter weekday mornings.`,
+  `If you have a toddler, look for a separate under-3s or under-4s area with age-appropriate equipment and softer surfaces. Some venues also run toddler-only sessions at quieter times. See [toddler soft play](/toddler-soft-play) for venues that list a toddler area.`,
 
   `For families with children across different age groups, finding a soft play in {name} that keeps everyone happy can be a challenge. Look for venues with clearly separated age zones — this way, toddlers can explore safely while older children enjoy the bigger frames and slides.`,
 
-  `Accessibility matters, and several soft play venues in {name} have made real efforts to be inclusive. From wheelchair-accessible facilities and accessible toilets to sensory rooms and quiet sessions, the options are improving. Browse [SEN-friendly venues in {name}](/soft-play/{slug}/sen-friendly) to plan with confidence.`,
+  `If accessibility matters to you, check each venue's page for wheelchair access, accessible toilets, sensory rooms or quiet sessions, and call ahead if anything isn't listed. [SEN-friendly soft play](/sen-soft-play) lists venues that say they cater for additional needs.`,
 
-  `If you're visiting {name} during school holidays, soft play centres can be a lifesaver. Many venues run special holiday activities, themed sessions, and extended opening hours. Check which venues are [open now in {name}](/soft-play/{slug}/open-now) or book ahead during half-terms and summer holidays, as popular venues get busy quickly.`,
+  `School holidays are the busiest time for soft play. Some venues run holiday activities, themed sessions or longer hours, and popular centres can reach capacity, so check opening times and whether to book before you set off.`,
 ]
 
 const INTRO_P5: string[] = [
