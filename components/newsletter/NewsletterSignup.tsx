@@ -95,7 +95,7 @@ export function NewsletterSignup({
         <div className={cn('mb-4', variant === 'inline' ? 'text-left' : 'text-center')}>
           <div className={cn('flex items-center gap-2', variant === 'inline' ? '' : 'justify-center')}>
             <Mail className="h-4 w-4 text-purple-600" />
-            <h3 className="font-semibold text-slate-900" dangerouslySetInnerHTML={{ __html: heading }} />
+            <p className="font-semibold text-slate-900" dangerouslySetInnerHTML={{ __html: heading }} />
           </div>
           <p className="mt-1.5 text-sm text-slate-500">{subtext}</p>
         </div>
@@ -142,13 +142,13 @@ export function NewsletterSignup({
       </form>
 
       {offer === 'both' && (
-        <div className="mt-3 flex flex-col gap-1.5 text-xs text-slate-600 sm:flex-row sm:gap-4">
-          <label className="flex items-center gap-1.5">
-            <input type="checkbox" checked={weekly} onChange={(e) => setWeekly(e.target.checked)} className="rounded" />
+        <div className="mt-3 flex flex-col gap-2 text-xs text-slate-600 sm:flex-row sm:gap-4">
+          <label className="flex items-center gap-2 min-h-6 cursor-pointer">
+            <input type="checkbox" checked={weekly} onChange={(e) => setWeekly(e.target.checked)} className="h-4 w-4 rounded accent-purple-600" />
             Weekly Soft Play Near Me newsletter
           </label>
-          <label className="flex items-center gap-1.5">
-            <input type="checkbox" checked={events} onChange={(e) => setEvents(e.target.checked)} className="rounded" />
+          <label className="flex items-center gap-2 min-h-6 cursor-pointer">
+            <input type="checkbox" checked={events} onChange={(e) => setEvents(e.target.checked)} className="h-4 w-4 rounded accent-purple-600" />
             Family events & activities
           </label>
         </div>
@@ -156,9 +156,9 @@ export function NewsletterSignup({
 
       {status === 'error' && <p className="mt-2 text-xs text-red-600">{error}</p>}
 
-      <p className="mt-2.5 text-[11px] text-slate-400">
+      <p className="mt-2.5 text-xs text-slate-500">
         No spam, unsubscribe any time. See our{' '}
-        <a href="/privacy" className="underline hover:text-slate-500">
+        <a href="/privacy" className="underline hover:text-slate-700">
           privacy policy
         </a>
         .

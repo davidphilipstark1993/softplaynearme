@@ -299,7 +299,7 @@ export default async function Home() {
             </div>
             {/* For Venue Owners */}
             <div>
-              <h3 className="text-xl font-semibold text-green-600 mb-6">For Venue Owners</h3>
+              <h3 className="text-xl font-semibold text-green-700 mb-6">For Venue Owners</h3>
               <ol className="space-y-5">
                 {[
                   { step: '1', title: 'Find your venue', desc: 'Search for your soft play centre in our directory' },
@@ -455,7 +455,7 @@ export default async function Home() {
               </span>
             ))}
           </div>
-          <Button asChild className="bg-green-600 hover:bg-green-700">
+          <Button asChild className="bg-green-700 hover:bg-green-800">
             <Link href="/add-venue">
               Claim Your Venue (Free)
             </Link>

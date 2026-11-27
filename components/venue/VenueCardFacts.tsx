@@ -23,7 +23,7 @@ export function VenueCardFacts({ venue }: VenueCardFactsProps) {
     <ul className="mb-3 space-y-1 text-xs text-slate-600">
       <li className="flex items-center gap-1.5">
         <Clock className="w-3.5 h-3.5 flex-shrink-0 text-slate-400" aria-hidden="true" />
-        {hoursLabel ? <span>{hoursLabel}</span> : <span className="text-slate-400">Hours not available</span>}
+        {hoursLabel ? <span>{hoursLabel}</span> : <span className="text-slate-500">Hours not available</span>}
       </li>
       {ageLabel && (
         <li className="flex items-center gap-1.5">

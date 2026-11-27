@@ -144,7 +144,7 @@ export function CTAButtons({
               variant={button.highlight ? 'default' : button.variant}
               size="sm"
               asChild
-              className={button.highlight ? 'bg-green-600 hover:bg-green-700' : ''}
+              className={button.highlight ? 'bg-green-700 hover:bg-green-800' : ''}
             >
               <a
                 href={button.href}
@@ -172,7 +172,7 @@ export function CTAButtons({
       <CardContent className="space-y-3">
         {/* Primary action - Booking or Directions */}
         {bookingUrl ? (
-          <Button asChild className="w-full bg-green-600 hover:bg-green-700">
+          <Button asChild className="w-full bg-green-700 hover:bg-green-800">
             <a href={bookingUrl} target="_blank" rel="noopener noreferrer">
               <Calendar className="h-4 w-4" />
               Book Now

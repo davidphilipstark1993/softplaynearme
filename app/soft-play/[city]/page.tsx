@@ -6,7 +6,7 @@ import { notFound } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { isUsablePhotoUrl } from '@/lib/imageUtils'
+import { isUsablePhotoUrl, displayPhotoUrl } from '@/lib/imageUtils'
 import { getCityBySlug, getAllCitySlugs, getNearbyCities, filters, cities } from '@/lib/venues'
 import { MapPin, Star, Coffee, Car, Baby, PartyPopper, Heart, Phone, Globe, Navigation, TrendingUp, CheckCircle2, Sparkles, Compass } from 'lucide-react'
 import type { Metadata } from 'next'
@@ -886,7 +886,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                     <span className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-amber-700 bg-amber-100 border border-amber-200 rounded-full px-2.5 py-1">
                       Sponsored
                     </span>
-                    <span className="text-xs text-slate-400">Placed by our Bespoke partners</span>
+                    <span className="text-xs text-slate-500">Placed by our Bespoke partners</span>
                   </div>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                     {sponsoredVenues.map((venue) => (
@@ -1003,9 +1003,9 @@ export default async function CityPage({ params, searchParams }: PageProps) {
               {pagedVenues.map((venue, index) => {
                 const hasFeatures = venue.toddler_area || venue.baby_area || venue.parties || venue.cafe || venue.parking || venue.sen_friendly
                 const verifiedOn = formatLastVerified(venue.last_verified_at)
-                const displayImage = isUsablePhotoUrl(venue.main_image_url) ? venue.main_image_url : null
+                const displayImage = isUsablePhotoUrl(venue.main_image_url) ? displayPhotoUrl(venue.main_image_url) : null
                 return (
-                <Card key={venue.slug} className="group hover:shadow-lg transition-all duration-200 border-slate-200 overflow-hidden h-full flex flex-col">
+                <Card key={venue.slug} className="group hover:shadow-lg transition-all duration-200 border-slate-200 overflow-hidden h-full flex flex-col py-0 gap-0">
                   {/* Venue thumbnail banner */}
                   <Link
                     href={`/soft-play/${city}/${venue.slug}`}
@@ -1048,7 +1048,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                             <Badge className="bg-yellow-400 text-yellow-900 text-xs">Featured</Badge>
                           )}
                           {isVerified(venue) && (
-                            <Badge className="bg-blue-500 text-white text-xs inline-flex items-center gap-1">
+                            <Badge className="bg-blue-600 text-white text-xs inline-flex items-center gap-1">
                               <CheckCircle2 className="w-3 h-3" /> Verified
                             </Badge>
                           )}
@@ -1124,7 +1124,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                     )}
 
                     {verifiedOn && (
-                      <p className="text-xs text-slate-400 mt-2">
+                      <p className="text-xs text-slate-500 mt-2">
                         Verified {verifiedOn}
                       </p>
                     )}

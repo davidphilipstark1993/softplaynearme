@@ -75,7 +75,7 @@ export function AdCard({
       </a>
 
       <div className={cn('flex flex-col p-5', isBanner && 'md:flex-1 md:justify-center md:p-7')}>
-        <p className="mb-2 text-[11px] font-semibold uppercase tracking-wider text-slate-400">{ad.label}</p>
+        <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-slate-500">{ad.label}</p>
         <h3 className={cn('font-bold text-slate-900', isBanner ? 'text-xl md:text-2xl' : 'text-lg')}>{ad.title}</h3>
         {ad.description && (
           <p className={cn('mt-2 text-sm text-slate-600', isBanner ? 'md:text-base' : 'line-clamp-3')}>{ad.description}</p>

@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
-import { isUsablePhotoUrl } from '@/lib/imageUtils'
+import { isUsablePhotoUrl, displayPhotoUrl } from '@/lib/imageUtils'
 import { Badge } from '@/components/ui/badge'
 import { getCityBySlug, getFilterBySlug, getNearbyCities } from '@/lib/venues'
 import { getStaticVenuesByTown } from '@/lib/staticVenues'
@@ -216,11 +216,11 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
 
   // One venue card, shared by the main grid and the nearby-towns grids.
   const renderCard = (venue: FilterVenue, index: number) => {
-        const displayImage = isUsablePhotoUrl(venue.main_image_url) ? venue.main_image_url : null
+        const displayImage = isUsablePhotoUrl(venue.main_image_url) ? displayPhotoUrl(venue.main_image_url) : null
         return (
           <Card
             key={venue.slug}
-            className="group hover:shadow-lg transition-all duration-200 border-slate-200 overflow-hidden flex flex-col h-full"
+            className="group hover:shadow-lg transition-all duration-200 border-slate-200 overflow-hidden flex flex-col h-full py-0 gap-0"
           >
             {/* Thumbnail */}
             <Link href={`/soft-play/${citySlug}/${venue.slug}`} tabIndex={-1} aria-hidden="true">
@@ -315,7 +315,7 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
               </div>
 
               {formatLastVerified(venue.last_verified_at) && (
-                <p className="text-xs text-slate-400 mt-2">
+                <p className="text-xs text-slate-500 mt-2">
                   Verified {formatLastVerified(venue.last_verified_at)}
                 </p>
               )}

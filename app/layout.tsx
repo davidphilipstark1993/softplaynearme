@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import { Toaster } from "sonner";
+import { DeferredThirdParty } from "@/components/layout/DeferredThirdParty";
 import "./globals.css";
 
 const inter = Inter({
@@ -59,6 +60,11 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
+  },
+  // AdSense site verification. The AdSense script itself loads after first interaction
+  // (components/layout/DeferredThirdParty.tsx), so verification can't rely on it being in <head>.
+  other: {
+    "google-adsense-account": "ca-pub-1521157758368352",
   },
 };
 
@@ -132,14 +138,7 @@ export default function RootLayout({
     <html lang="en" className={inter.variable}>
       <head>
         {/* Preconnect to external services for faster loading */}
-        <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://api.postcodes.io" />
-        {/* Google AdSense: site verification and Auto ads */}
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1521157758368352"
-          crossOrigin="anonymous"
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
@@ -156,11 +155,9 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        {/* Google Analytics with enhanced event tracking */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-LELV01QR3Z"
-          strategy="afterInteractive"
-        />
+        {/* Google Analytics with enhanced event tracking. This stub only queues commands in
+            dataLayer; gtag.js and AdSense load on first interaction (DeferredThirdParty). */}
+        <DeferredThirdParty />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];

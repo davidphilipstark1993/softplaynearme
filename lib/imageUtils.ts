@@ -55,6 +55,24 @@ export function isUsablePhotoUrl(url: unknown): url is string {
   return !UNRENDERABLE_PHOTO_PATTERNS.some((p) => p.test(trimmed))
 }
 
+// Size options on a Google photo URL, e.g. `=w92-h92-k-no` or `=s400`.
+const GOOGLE_PHOTO_SIZE = /=(?:[wh]\d+(?:-[wh]\d+)*|s\d+)(?:-[a-z0-9-]+)?$/i
+
+/**
+ * The URL to display a venue photo from. Scraped Google place photos are stored at Google's
+ * 92px thumbnail size (`=w92-h92-k-no`), which looks blurry on any card or banner; Google serves
+ * the same photo at any size if the suffix changes, so ask for a large one and let next/image
+ * scale it down for each screen. Other URLs are returned unchanged.
+ */
+export function displayPhotoUrl(url: string): string {
+  try {
+    if (!new URL(url).hostname.endsWith('googleusercontent.com')) return url
+  } catch {
+    return url
+  }
+  return GOOGLE_PHOTO_SIZE.test(url) ? url.replace(GOOGLE_PHOTO_SIZE, '=s1200-k-no') : url
+}
+
 /**
  * Generates a shimmer SVG as a base64-encoded blur placeholder for next/image.
  * Use as: blurDataURL={shimmerDataURL(700, 475)} placeholder="blur"

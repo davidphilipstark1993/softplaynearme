@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { ChevronLeft, ChevronRight, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import { displayPhotoUrl } from '@/lib/imageUtils'
 
 interface Photo {
   id: number
@@ -60,18 +61,22 @@ export function PhotoGallery({ photos, venueName }: PhotoGalleryProps) {
             key={photo.id}
             onClick={() => openLightbox(index)}
             className={cn(
-              'relative aspect-square overflow-hidden rounded-lg cursor-pointer group',
+              'relative overflow-hidden rounded-lg cursor-pointer group',
               'focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2',
+              // A lone photo spans the full width as a banner rather than a half-width square
+              photos.length === 1 ? 'col-span-2 md:col-span-4 aspect-[4/3] md:aspect-[21/9]' : 'aspect-square',
               index === 0 && photos.length > 1 && 'col-span-2 row-span-2'
             )}
           >
             <Image
-              src={photo.url}
+              src={displayPhotoUrl(photo.url)}
               alt={photo.alt_text || `${venueName} photo ${index + 1}`}
               fill
               className="object-cover transition-transform duration-300 group-hover:scale-105"
-              sizes={index === 0 ? '(max-width: 768px) 100vw, 50vw' : '(max-width: 768px) 50vw, 25vw'}
+              // The banner sits inside the page's side padding, so it is never the full viewport wide
+              sizes={photos.length === 1 ? '(max-width: 1280px) calc(100vw - 32px), 1216px' : index === 0 ? '(max-width: 768px) 100vw, 50vw' : '(max-width: 768px) 50vw, 25vw'}
               priority={index === 0}
+              quality={photos.length === 1 ? 65 : undefined}
             />
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
             {index === 7 && photos.length > 8 && (
@@ -129,7 +134,7 @@ export function PhotoGallery({ photos, venueName }: PhotoGalleryProps) {
             onClick={(e) => e.stopPropagation()}
           >
             <Image
-              src={photos[currentIndex].url}
+              src={displayPhotoUrl(photos[currentIndex].url)}
               alt={photos[currentIndex].alt_text || `${venueName} photo ${currentIndex + 1}`}
               fill
               className="object-contain"
@@ -180,7 +185,7 @@ export function PhotoGallery({ photos, venueName }: PhotoGalleryProps) {
                   )}
                 >
                   <Image
-                    src={photo.url}
+                    src={displayPhotoUrl(photo.url)}
                     alt=""
                     fill
                     className="object-cover"

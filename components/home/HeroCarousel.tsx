@@ -63,18 +63,23 @@ export function HeroCarousel() {
           {SLIDES[index].label}
         </p>
       </div>
-      <div className="absolute bottom-4 right-4 flex gap-1.5">
+      <div className="absolute bottom-2.5 right-2.5 flex">
         {SLIDES.map((_, dotIndex) => (
           <button
             key={dotIndex}
             type="button"
             onClick={() => setIndex(dotIndex)}
             aria-label={`Show slide ${dotIndex + 1}`}
-            className={cn(
-              'h-2.5 w-2.5 rounded-full border border-white/70 transition-all',
-              index === dotIndex ? 'bg-white' : 'bg-white/30'
-            )}
-          />
+            // 24px tap area around a 10px dot
+            className="h-6 w-6 flex items-center justify-center"
+          >
+            <span
+              className={cn(
+                'h-2.5 w-2.5 rounded-full border border-white/70 transition-all',
+                index === dotIndex ? 'bg-white' : 'bg-white/30'
+              )}
+            />
+          </button>
         ))}
       </div>
     </div>

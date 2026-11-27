@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { isUsablePhotoUrl } from '@/lib/imageUtils'
+import { isUsablePhotoUrl, displayPhotoUrl } from '@/lib/imageUtils'
 import {
   MapPin,
   Coffee,
@@ -87,13 +87,13 @@ function VenueCard({
         : venue.price_range || null
 
   return (
-    <Card className="hover:shadow-md transition-shadow">
+    <Card className="hover:shadow-md transition-shadow py-0">
       <CardContent className="p-4 sm:p-6">
         <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
           <div className="relative h-28 w-full overflow-hidden rounded-lg bg-slate-100 sm:h-24 sm:w-36 sm:flex-shrink-0">
             {isUsablePhotoUrl(venue.main_image_url) ? (
               <Image
-                src={venue.main_image_url}
+                src={displayPhotoUrl(venue.main_image_url)}
                 alt={`${venue.name} soft play venue`}
                 fill
                 loading="lazy"
@@ -110,7 +110,7 @@ function VenueCard({
                   <Badge className="bg-yellow-400 text-yellow-900 text-[10px] px-1.5 py-0">Featured</Badge>
                 )}
                 {isVerified(venue) && (
-                  <Badge className="bg-blue-500 text-white text-[10px] px-1.5 py-0">Verified</Badge>
+                  <Badge className="bg-blue-600 text-white text-[10px] px-1.5 py-0">Verified</Badge>
                 )}
               </div>
             )}

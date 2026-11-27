@@ -3,6 +3,8 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
+    // 65: the single-photo banner on venue pages (components/venue/PhotoGallery.tsx)
+    qualities: [65, 75],
     remotePatterns: [
       { protocol: 'https', hostname: 'images.unsplash.com' },
       { protocol: 'https', hostname: 'ssl.gstatic.com' },

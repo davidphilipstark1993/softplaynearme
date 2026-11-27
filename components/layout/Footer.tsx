@@ -168,7 +168,7 @@ export function Footer({ minimal = false }: FooterProps) {
               <p className="text-sm text-slate-300 font-medium mb-2">Own a soft play?</p>
               <Link
                 href="/add-venue"
-                className="inline-block text-sm bg-green-600 hover:bg-green-500 text-white font-semibold px-4 py-2 rounded-md transition-colors"
+                className="inline-block text-sm bg-green-700 hover:bg-green-800 text-white font-semibold px-4 py-2 rounded-md transition-colors"
               >
                 Get a free listing →
               </Link>

@@ -44,7 +44,7 @@ export function ReportIssueLink({ venueId }: { venueId: number }) {
     return (
       <button
         onClick={() => setOpen(true)}
-        className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-slate-600 transition-colors"
+        className="inline-flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-700 transition-colors"
       >
         <Flag className="w-3 h-3" />
         Report an issue with this listing

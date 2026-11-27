@@ -836,7 +836,7 @@ export default async function VenuePage({ params }: PageProps) {
                     <Badge className="bg-yellow-400 text-yellow-900">Featured</Badge>
                   )}
                   {isVerified(venue) && (
-                    <Badge className="bg-blue-500 text-white inline-flex items-center gap-1">
+                    <Badge className="bg-blue-600 text-white inline-flex items-center gap-1">
                       <CheckCircle2 className="w-3 h-3" /> Verified by owner
                     </Badge>
                   )}
@@ -929,7 +929,9 @@ export default async function VenuePage({ params }: PageProps) {
 
         {/* Photo Gallery / Placeholder */}
         {galleryPhotos.length > 0 ? (
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-4 relative z-10">
+          // Overlaps the hero only when it sits directly under it; with Quick facts in
+          // between, the negative margin pushed the photos up over that box.
+          <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${factRows.length > 0 || compareLine ? 'pt-4' : '-mt-4 relative z-10'}`}>
             <PhotoGallery photos={galleryPhotos} venueName={venue.name} />
           </div>
         ) : (
@@ -1047,7 +1049,7 @@ export default async function VenuePage({ params }: PageProps) {
                     </a>
                   </p>
                   {venue.last_verified_at && (
-                    <p className="text-xs text-slate-400">
+                    <p className="text-xs text-slate-500">
                       Last updated:{' '}
                       {new Date(venue.last_verified_at).toLocaleDateString('en-GB', {
                         day: 'numeric',
@@ -1355,7 +1357,7 @@ export default async function VenuePage({ params }: PageProps) {
                     Respond to reviews
                   </li>
                 </ul>
-                <Button asChild className="bg-green-600 hover:bg-green-700">
+                <Button asChild className="bg-green-700 hover:bg-green-800">
                   <ClaimCta citySlug={city} slug={slug} placement="owner-section">
                     Claim Your Free Listing
                   </ClaimCta>
@@ -1497,12 +1499,12 @@ export default async function VenuePage({ params }: PageProps) {
                       Claim your free listing to update information, add photos,
                       and manage your venue profile.
                     </p>
-                    <Button asChild className="w-full bg-green-600 hover:bg-green-700">
+                    <Button asChild className="w-full bg-green-700 hover:bg-green-800">
                       <ClaimCta citySlug={city} slug={slug} placement="sidebar">
                         Claim This Venue (Free)
                       </ClaimCta>
                     </Button>
-                    <p className="text-xs text-green-600 text-center">
+                    <p className="text-xs text-green-700 text-center">
                       No cost, no obligation
                     </p>
                   </CardContent>

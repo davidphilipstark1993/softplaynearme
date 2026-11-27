@@ -294,30 +294,32 @@ export function SearchForm({
           {suggestionsList}
         </div>
 
-        {/* Use my location button */}
-        <Button
-          type="button"
-          variant="outline"
-          onClick={handleGeolocation}
-          disabled={isLocating}
-          aria-label={isLocating ? 'Locating...' : 'Use my location'}
-          className="h-12 whitespace-nowrap text-slate-900 border-slate-300"
-        >
-          {isLocating ? (
-            <Loader2 className="h-4 w-4 animate-spin" />
-          ) : (
-            <MapPin className="h-4 w-4" />
-          )}
-          <span className="hidden sm:inline ml-2">
-            {isLocating ? 'Locating...' : 'Use my location'}
-          </span>
-        </Button>
+        {/* Phones: location and search side by side under the input, both labelled */}
+        <div className="grid grid-cols-2 gap-3 sm:flex">
+          {/* Use my location button */}
+          <Button
+            type="button"
+            variant="outline"
+            onClick={handleGeolocation}
+            disabled={isLocating}
+            className="h-12 whitespace-nowrap text-slate-900 border-slate-300"
+          >
+            {isLocating ? (
+              <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+            ) : (
+              <MapPin className="h-4 w-4" aria-hidden="true" />
+            )}
+            <span className="ml-2">
+              {isLocating ? 'Locating...' : 'Use my location'}
+            </span>
+          </Button>
 
-        {/* Search button */}
-        <Button type="submit" size="lg" aria-label="Search" className="h-12 bg-slate-100 text-slate-900 hover:bg-slate-200">
-          <Search className="h-4 w-4 sm:mr-2" />
-          <span className="hidden sm:inline">Search</span>
-        </Button>
+          {/* Search button */}
+          <Button type="submit" size="lg" className="h-12 bg-purple-600 text-white hover:bg-purple-700 font-semibold">
+            <Search className="h-4 w-4 mr-2" aria-hidden="true" />
+            Search
+          </Button>
+        </div>
       </div>
 
       {/* Radius selection */}
