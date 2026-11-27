@@ -903,5 +903,10 @@
     "slug": "crawley",
     "name": "Crawley",
     "county": "West Sussex"
+  },
+  {
+    "slug": "gillingham",
+    "name": "Gillingham",
+    "county": "Medway"
   }
 ]

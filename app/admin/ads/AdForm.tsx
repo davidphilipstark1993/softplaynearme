@@ -256,7 +256,7 @@ export function AdForm({
                 value={draft.citySlugs}
                 onChange={(e) => set('citySlugs', Array.from(e.target.selectedOptions).map((o) => o.value))}
               >
-                {cities.map((c) => <option key={c.slug} value={c.slug}>{c.name}</option>)}
+                {[...cities].sort((a, b) => a.name.localeCompare(b.name, 'en-GB')).map((c) => <option key={c.slug} value={c.slug}>{c.name}</option>)}
               </select>
               <p className="mt-1 text-xs text-slate-500">{draft.citySlugs.length ? `${draft.citySlugs.length} selected (Cmd/Ctrl-click to change)` : 'All cities'}</p>
             </div>

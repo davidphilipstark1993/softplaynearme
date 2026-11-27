@@ -23,6 +23,9 @@ interface Claim {
   message: string | null
 }
 
+// City pickers list cities alphabetically (data/cities.json is in the order hubs were added).
+const citiesByName = [...cities].sort((a, b) => a.name.localeCompare(b.name, 'en-GB'))
+
 const STATUS_STYLES = {
   pending:  'bg-amber-50 text-amber-700 border-amber-200',
   verified: 'bg-green-50 text-green-700 border-green-200',
@@ -268,7 +271,7 @@ export default function AdminClaimsPage() {
                             className="text-sm border border-slate-300 rounded-lg px-2 py-2 bg-white text-slate-700"
                           >
                             <option value="">New listing — select city…</option>
-                            {cities.map((c) => (
+                            {citiesByName.map((c) => (
                               <option key={c.slug} value={c.slug}>{c.name}</option>
                             ))}
                           </select>
