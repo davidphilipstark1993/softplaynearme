@@ -9,8 +9,7 @@ import { getPool, STATIC_BUILD } from '@/lib/pool'
 import { getCityBySlug } from '@/lib/venues'
 import { getStaticTowns, getStaticVenuesByTown } from '@/lib/staticVenues'
 import { isVisibleVenueType, visibleVenueTypeSql } from '@/lib/venueTypes'
-import { isVenueIndexable } from '@/lib/venueContent'
-import { minFilterVenues } from '@/lib/hubGuides'
+import { isVenueIndexable, isFilterIndexable, getHubStates } from '@/lib/indexing'
 import { trimMeta } from '@/lib/metaLength'
 import { HUBS, HUB_SLUGS, groupHubVenues, hubFaqs, hubPath, type HubSlug, type HubVenue } from '@/lib/categoryHubs'
 
@@ -28,7 +27,7 @@ async function getHubVenues(slug: HubSlug): Promise<HubVenue[]> {
            FROM venues v
           WHERE v.is_active = true AND ${visibleVenueTypeSql('v')}`,
       )
-      return rows.filter((v) => isVenueIndexable(Number(v.completeness_score ?? 0), v.venue_type) && hub.matches(v))
+      return rows.filter((v) => isVenueIndexable(v) && hub.matches(v))
     } catch (error) {
       console.error(`[CategoryHub] DB error for ${slug}:`, error)
     }
@@ -71,8 +70,14 @@ export async function CategoryHubPage({ slug }: { slug: HubSlug }) {
   const faqs = hubFaqs(hub, venues, places)
   const others = HUB_SLUGS.filter((s) => s !== slug)
 
-  const cityLink = (citySlug: string, count: number) =>
-    hub.cityFilter && count >= minFilterVenues(citySlug) ? `/soft-play/${citySlug}/${hub.cityFilter}` : `/soft-play/${citySlug}`
+  // The city's category page when it is indexable, else the city hub (or the hub a thin
+  // hub is merged into), so no link lands on a redirect (lib/indexing.ts).
+  const hubStates = await getHubStates()
+  const cityLink = (citySlug: string, count: number) => {
+    const state = hubStates[citySlug]
+    if (state?.mergeInto) return `/soft-play/${state.mergeInto}`
+    return hub.cityFilter && isFilterIndexable(count, state) ? `/soft-play/${citySlug}/${hub.cityFilter}` : `/soft-play/${citySlug}`
+  }
 
   return (
     <div className="min-h-screen bg-white">

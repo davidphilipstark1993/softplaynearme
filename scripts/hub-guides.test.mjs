@@ -62,14 +62,11 @@ test('data guide: London gets a by-area section using lib/londonAreas.ts prefixe
 })
 
 test('data guide: only the listed hubs, and not for tiny hubs', { skip }, async () => {
-  const { buildDataGuide, hasDataGuide, getHubGuide, minFilterVenues } = await import('../lib/hubGuides.ts')
+  const { buildDataGuide, hasDataGuide, getHubGuide } = await import('../lib/hubGuides.ts')
   for (const slug of ['london', 'birmingham', 'manchester', 'edinburgh', 'liverpool', 'bristol', 'leeds', 'swansea', 'glasgow', 'sheffield', 'stoke', 'sunderland', 'southend', 'barnsley', 'huddersfield', 'lincoln', 'bradford', 'halifax', 'cardiff', 'york', 'bolton', 'doncaster']) assert.ok(hasDataGuide(slug), slug)
   for (const slug of ['norwich', 'newcastle', 'portsmouth', 'leicester', 'beverley', 'crewe', 'nottingham', 'blackpool', 'worthing', 'brighton', 'hull']) assert.equal(hasDataGuide(slug), false, slug)
   assert.equal(buildDataGuide('hull', 'Hull', BHAM.slice(0, 3)), undefined)
   assert.equal(getHubGuide('stoke'), undefined, 'a hub without a written guide has none')
-  assert.equal(minFilterVenues('stoke'), 1, 'filter-page indexing rules are unchanged for hubs without a written guide')
-  assert.equal(minFilterVenues('hull'), 2, 'a written-guide hub needs 2 venues for a category page')
-  assert.equal(minFilterVenues('worthing'), 2)
 })
 
 // ── Brighton & Worthing (hand-written guide hubs) ──────────────────────────────────────

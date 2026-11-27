@@ -18,7 +18,8 @@ import { isOpenNow } from '@/lib/utils'
 import { hasStructuredHours } from '@/lib/venueFacts'
 import { isVisibleVenueType, visibleVenueTypeSql } from '@/lib/venueTypes'
 import { splitByLocality, groupNearbyByLocality } from '@/lib/localities'
-import { minFilterVenues } from '@/lib/hubGuides'
+import { getHubState, getHubStates, isFilterIndexable, filterIndexableFromCounts, hubHref } from '@/lib/indexing'
+import { getVenueCounts } from '@/lib/venueCounts'
 import { buildFilterMeta, isDataFilter } from '@/lib/filterMeta'
 import { getCityVenueCount } from '@/lib/venueCounts'
 import { getFilterContent, type FilterSlug } from '@/lib/filterContent'
@@ -165,7 +166,13 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
   const { core: venues, nearby: nearbyVenues } = splitByLocality(citySlug, fetched)
   const nearbyGroups = groupNearbyByLocality(citySlug, nearbyVenues)
   const content = getFilterContent(filterSlug)
-  const nearbyCities = getNearbyCities(citySlug).slice(0, 6)
+  // Only link to nearby category pages that are indexable themselves, and to the hub's
+  // live URL (a thin hub merged into a bigger one redirects: lib/indexing.ts).
+  const [hubStates, venueCounts] = await Promise.all([getHubStates(), getVenueCounts()])
+  const nearbyCities = getNearbyCities(citySlug)
+    .filter((c) => filterSlug === 'open-now' || filterIndexableFromCounts(venueCounts, hubStates, c.slug, filterSlug as 'toddler' | 'birthday-parties' | 'sen-friendly'))
+    .slice(0, 6)
+  const hubLink = hubHref(citySlug, hubStates)
 
   const cityName = cityConfig.name
   const h1 = filterConfig.h1Template.replace('{city}', cityName)
@@ -354,7 +361,7 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
       <div className="min-h-screen bg-slate-50">
         <Header />
         <Breadcrumbs items={[
-          { label: cityName, href: `/soft-play/${citySlug}` },
+          { label: cityName, href: hubLink },
           { label: filterConfig.name },
         ]} />
 
@@ -372,7 +379,7 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
             <h2 className="text-xl font-semibold text-slate-800">
               {venues.length} {venues.length === 1 ? 'venue' : 'venues'} found
             </h2>
-            <Link href={`/soft-play/${citySlug}`}>
+            <Link href={hubLink}>
               <Button variant="outline" size="sm">View All in {cityName}</Button>
             </Link>
           </div>
@@ -401,7 +408,7 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
                   </p>
                 </>
               )}
-              <Link href={`/soft-play/${citySlug}`}>
+              <Link href={hubLink}>
                 <Button className="bg-purple-600 hover:bg-purple-700">View All Venues in {cityName}</Button>
               </Link>
             </div>
@@ -481,7 +488,7 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
 
           {/* Back link */}
           <div className="mt-8 pt-6 border-t border-slate-200">
-            <Link href={`/soft-play/${citySlug}`} className="text-sm text-purple-600 hover:text-purple-700 font-medium">
+            <Link href={hubLink} className="text-sm text-purple-600 hover:text-purple-700 font-medium">
               ← All soft play venues in {cityName}
             </Link>
           </div>
@@ -517,10 +524,10 @@ export async function buildFilterMetadata(citySlug: string, filterSlug: FilterSl
   return {
     title: { absolute: title },
     description,
-    // Noindex thin pages (no matching venues in this city for this filter) and
-    // "open now" always: its result set changes by the minute, so it is never a
-    // stable page worth indexing (it is also left out of the sitemap).
-    ...((venues.length < minFilterVenues(citySlug) || filterSlug === 'open-now') && { robots: { index: false, follow: true } }),
+    // Noindex thin pages (fewer than INDEXING.minFilterVenues matches, or a hub that is
+    // itself thin: lib/indexing.ts) and "open now" always: its result set changes by the
+    // minute, so it is never a stable page worth indexing (it is also left out of the sitemap).
+    ...((!isFilterIndexable(venues.length, await getHubState(citySlug)) || filterSlug === 'open-now') && { robots: { index: false, follow: true } }),
     openGraph: {
       title,
       description,

@@ -930,13 +930,6 @@ const GUIDES: Record<string, HubGuide> = {
   },
 }
 
-/**
- * A category page (/toddler, /birthday-parties, /sen-friendly) is only indexable with this many
- * matching venues. Guide hubs are small, so a one-venue category is a thin duplicate of the hub.
- */
-export function minFilterVenues(citySlug: string): number {
-  return GUIDES[citySlug] ? 2 : 1 // data guides (below) are for large hubs and don't change this
-}
 
 export function getHubGuide(citySlug: string): HubGuide | undefined {
   return GUIDES[citySlug]

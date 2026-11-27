@@ -48,6 +48,9 @@ export interface StaticVenue {
   priceFrom?: number | null
   priceTo?: number | null
   pricingHint?: string
+  // Ages (DB age_range_min / age_range_max)
+  ageRangeMin?: number | null
+  ageRangeMax?: number | null
   mainImageUrl?: string | null
   featured?: boolean
   venueType?: string

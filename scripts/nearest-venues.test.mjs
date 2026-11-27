@@ -8,9 +8,9 @@ registerTsResolver()
 const skip = canStripTypes ? false : 'needs Node >= 22.18 (built-in TypeScript type stripping)'
 
 const centre = { lat: 51.08, lng: -4.06 } // Barnstaple-ish
-const v = (o) => ({ slug: o.name.toLowerCase().replace(/\W+/g, '-'), city_slug: 'elsewhere', venue_type: 'indoor', completeness_score: 50, ...o })
+const v = (o) => ({ slug: o.name.toLowerCase().replace(/\W+/g, '-'), city_slug: 'elsewhere', venue_type: 'indoor', ...o })
 
-test('nearest venues: other hubs only, soft play only, indexable only, within 15 miles, nearest first', { skip }, async () => {
+test('nearest venues: other hubs only, soft play only, never playgrounds/hire, within 15 miles, nearest first', { skip }, async () => {
   const { rankNearest } = await import('../lib/nearestVenues.ts')
   const venues = [
     v({ name: 'Own hub', city_slug: 'barnstaple', lat: 51.08, lng: -4.06 }),
@@ -18,9 +18,9 @@ test('nearest venues: other hubs only, soft play only, indexable only, within 15
     v({ name: 'Second', lat: 51.08 + 0.1, lng: -4.06 }), // ~7 miles
     v({ name: 'First', lat: 51.08 + 0.02, lng: -4.06 }),
     v({ name: 'Trampoline', venue_type: 'trampoline-park', lat: 51.081, lng: -4.06 }),
-    v({ name: 'Thin', completeness_score: 5, lat: 51.081, lng: -4.06 }),
+    v({ name: 'Playground', venue_type: 'park-playground', lat: 51.081, lng: -4.06 }),
     v({ name: 'No coords', lat: null, lng: null }),
-    v({ name: 'Static export row', completeness_score: undefined, lat: 51.08 + 0.05, lng: -4.06 }),
+    v({ name: 'Static export row', lat: 51.08 + 0.05, lng: -4.06 }),
   ]
   const got = rankNearest(centre, venues, 'barnstaple').map((r) => r.venue.name)
   assert.deepEqual(got, ['First', 'Static export row', 'Second'])

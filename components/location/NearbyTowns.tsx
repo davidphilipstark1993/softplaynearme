@@ -14,6 +14,8 @@ export interface NearbyVenue extends HoursPrice {
   avg_rating?: number | string | null
   review_count?: number | string | null
   last_verified_at?: string | Date | null
+  /** Hub the venue is filed under, when it isn't this hub (a merged thin hub). */
+  city_slug?: string | null
 }
 
 interface NearbyTownsProps {
@@ -59,7 +61,7 @@ export function NearbyTowns({ cityName, citySlug, groups, hubSlugFor }: NearbyTo
                   const address = formatAddressLine(venue.address, venue.postcode)
                   return (
                     <Card key={venue.slug} className="p-4 border-slate-200 hover:shadow-md transition-shadow">
-                      <Link href={`/soft-play/${citySlug}/${venue.slug}`} className="font-semibold text-slate-900 hover:text-purple-600">
+                      <Link href={`/soft-play/${venue.city_slug || citySlug}/${venue.slug}`} className="font-semibold text-slate-900 hover:text-purple-600">
                         {venue.name}
                       </Link>
                       <div className="flex items-center gap-1.5 text-xs text-slate-500 mt-1 mb-2">

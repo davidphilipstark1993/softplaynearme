@@ -5,6 +5,7 @@ import { Footer } from '@/components/layout/Footer'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 import { cities } from '@/lib/venues'
 import { getVenueCounts, formatVenueTotal } from '@/lib/venueCounts'
+import { getHubStates } from '@/lib/indexing'
 
 export const revalidate = 3600
 
@@ -20,6 +21,9 @@ export async function generateMetadata(): Promise<Metadata> {
 /** Index of every hub with venues, grouped by county. The "Soft Play" level of venue breadcrumbs. */
 export default async function SoftPlayIndex() {
   const counts = await getVenueCounts()
+  // A thin hub merged into a bigger one links to its section on that hub (lib/indexing.ts).
+  const states = await getHubStates()
+  const hrefFor = (slug: string) => (states[slug]?.mergeInto ? `/soft-play/${states[slug].mergeInto}#nearby-${slug}` : `/soft-play/${slug}`)
   const hubs = cities.map((c) => ({ ...c, venues: counts.byCity[c.slug] ?? 0 })).filter((c) => c.venues > 0)
   const byCounty = new Map<string, typeof hubs>()
   for (const h of hubs) byCounty.set(h.county || 'Other', [...(byCounty.get(h.county || 'Other') ?? []), h])
@@ -38,7 +42,7 @@ export default async function SoftPlayIndex() {
             <ul className="grid sm:grid-cols-2 md:grid-cols-3 gap-2">
               {list.sort((a, b) => a.name.localeCompare(b.name)).map((h) => (
                 <li key={h.slug}>
-                  <Link href={`/soft-play/${h.slug}`} className="text-purple-700 hover:underline">
+                  <Link href={hrefFor(h.slug)} className="text-purple-700 hover:underline">
                     Soft play in {h.name}
                   </Link>{' '}
                   <span className="text-slate-500 text-sm">({h.venues})</span>

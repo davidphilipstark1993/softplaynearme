@@ -40,9 +40,8 @@ import { isUsablePhotoUrl } from '@/lib/imageUtils'
 import {
   generateVenueDescription,
   generateVenueFAQs,
-  computeCompletenessScore,
-  isVenueIndexable,
 } from '@/lib/venueContent'
+import { isVenueIndexable, getHubStates, type VenueFacts as IndexFacts } from '@/lib/indexing'
 
 import { PhotoGallery } from '@/components/venue/PhotoGallery'
 import { PricingTable } from '@/components/venue/PricingTable'
@@ -87,6 +86,7 @@ interface Venue {
   price_range?: string
   price_from?: number
   price_to?: number
+  pricing_hint?: string
   facilities?: Record<string, boolean>
   google_place_id?: string
   featured?: boolean
@@ -294,6 +294,9 @@ function staticToVenue(sv: StaticVenue): Venue {
     opening_hours_text: sv.openingHoursText || undefined,
     price_from: sv.priceFrom ?? undefined,
     price_to: sv.priceTo ?? undefined,
+    pricing_hint: sv.pricingHint || undefined,
+    age_range_min: sv.ageRangeMin ?? undefined,
+    age_range_max: sv.ageRangeMax ?? undefined,
     main_image_url: sv.mainImageUrl ?? undefined,
     featured: sv.featured ?? false,
     venue_type: sv.venueType,
@@ -327,6 +330,14 @@ async function getReviews(venueId: number, citySlug: string, venueSlug: string):
   } catch {
     return storedFallback()
   }
+}
+
+/** The venue row plus its owner/verified price and session rows, for lib/indexing.ts. */
+async function venueFactsFor(venue: Venue): Promise<IndexFacts> {
+  const isStatic = (venue as { _isStatic?: boolean })._isStatic
+  if (isStatic || !venue.id) return venue as IndexFacts
+  const [pricing, sessions] = await Promise.all([getPricing(venue.id), getSessions(venue.id)])
+  return { ...(venue as IndexFacts), price_rows: pricing.length, session_rows: sessions.length }
 }
 
 async function getPricing(venueId: number): Promise<PricingItem[]> {
@@ -623,10 +634,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const title = buildVenueSeoTitle(facts, venue.venue_type)
   const description = buildVenueMetaDescription(facts)
 
-  // Noindex very thin pages (name + address only, no useful content)
-  const score = venue.completeness_score ??
-    computeCompletenessScore({ ...venue, city: cityName, county })
-  const shouldNoindex = !isVenueIndexable(score, venue.venue_type)
+  // Noindex until the page holds a verified fact beyond Google Places data (lib/indexing.ts).
+  const shouldNoindex = !isVenueIndexable(await venueFactsFor(venue))
 
   return {
     title: { absolute: title },
@@ -667,6 +676,11 @@ export default async function VenuePage({ params }: PageProps) {
 
   const cityName = cityConfig?.name || staticTown?.name || city
   const county = cityConfig?.county || ''
+  // A thin hub merged into a bigger one redirects there (lib/indexing.ts): link to where
+  // the hub's venues are listed, not to the redirect.
+  const hubSlug = (await getHubStates())[city]?.mergeInto ?? city
+  const hubLink = `/soft-play/${hubSlug}`
+  const hubLinkName = hubSlug === city ? cityName : getCityBySlug(hubSlug)?.name || getStaticTownBySlug(hubSlug)?.name || hubSlug
   const homeTown = getVenueTown({ id: venue.id || (venue as { _staticId?: number })._staticId, postcode: venue.postcode }) ?? cityName
   const { facts, within: withinVenues } = await getVenueFacts(venue, city, slug, homeTown)
   const factRows = quickFactRows(facts)
@@ -801,7 +815,7 @@ export default async function VenuePage({ params }: PageProps) {
   const breadcrumbSchema = buildBreadcrumbSchema([
     { name: 'Home', url: baseUrl },
     ...(guideHub ? [{ name: 'Soft Play', url: `${baseUrl}/soft-play` }] : []),
-    { name: guideHub ? cityName : `Soft Play in ${cityName}`, url: `${baseUrl}/soft-play/${city}` },
+    { name: guideHub ? hubLinkName : `Soft Play in ${hubLinkName}`, url: `${baseUrl}${hubLink}` },
     { name: venue.name, url: `${baseUrl}/soft-play/${city}/${slug}` },
   ])
 
@@ -818,11 +832,11 @@ export default async function VenuePage({ params }: PageProps) {
       />
 
       <div className="min-h-screen bg-slate-50">
-        <Header backLink={{ href: `/soft-play/${city}`, label: cityName }} />
+        <Header backLink={{ href: hubLink, label: hubLinkName }} />
 
         <Breadcrumbs items={[
           ...(guideHub ? [{ label: 'Soft Play', href: '/soft-play' }] : county ? [{ label: county }] : []),
-          { label: cityName, href: `/soft-play/${city}` },
+          { label: hubLinkName, href: hubLink },
           { label: venue.name },
         ]} />
 
@@ -1172,10 +1186,10 @@ export default async function VenuePage({ params }: PageProps) {
                     ))}
                   </ul>
                   <Link
-                    href={`/soft-play/${city}`}
+                    href={hubLink}
                     className="block text-center text-sm text-purple-600 hover:text-purple-700 font-medium mt-4"
                   >
-                    All soft play in {cityName}
+                    All soft play in {hubLinkName}
                   </Link>
                 </section>
               )}
@@ -1201,10 +1215,10 @@ export default async function VenuePage({ params }: PageProps) {
                     ))}
                   </ul>
                   <Link
-                    href={`/soft-play/${city}`}
+                    href={hubLink}
                     className="block text-center text-sm text-purple-600 hover:text-purple-700 font-medium mt-4"
                   >
-                    All soft play in {cityName}
+                    All soft play in {hubLinkName}
                   </Link>
                 </section>
               )}
@@ -1230,10 +1244,10 @@ export default async function VenuePage({ params }: PageProps) {
                     ))}
                   </div>
                   <Link
-                    href={`/soft-play/${city}`}
+                    href={hubLink}
                     className="block text-center text-sm text-purple-600 hover:text-purple-700 font-medium mt-4"
                   >
-                    View all venues in {cityName}
+                    View all venues in {hubLinkName}
                   </Link>
                 </section>
               )}

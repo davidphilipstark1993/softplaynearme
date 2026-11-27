@@ -2,7 +2,8 @@ import { cache } from 'react'
 import { trimMeta } from '@/lib/metaLength'
 import Link from 'next/link'
 import Image from 'next/image'
-import { notFound } from 'next/navigation'
+import { notFound, permanentRedirect } from 'next/navigation'
+import { getHubState, getMergedInto, INDEXING } from '@/lib/indexing'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -137,7 +138,10 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
   const description = pageNum > 1 ? trimMeta(`${meta.description} Page ${pageNum} of ${totalPages}.`) : meta.description
   const canonical = `${baseUrl}${isVariation ? hubPagePath(city, 1) : hubPagePath(city, pageNum)}`
   // A hub with no soft play centre of its own (only family attractions) is not worth indexing yet.
-  const noindex = isVariation || outOfRange || !core.some((v) => isSoftPlayVenueType((v as { venue_type?: string | null }).venue_type))
+  // Thin hubs (fewer than INDEXING.minHubVenues soft play venues) stay out of the index
+  // until they grow; one close to a bigger hub redirects there instead (lib/indexing.ts).
+  const hubState = await getHubState(city)
+  const noindex = isVariation || outOfRange || !hubState.indexable || !core.some((v) => isSoftPlayVenueType((v as { venue_type?: string | null }).venue_type))
 
   const ogImage = getCityOgImage(city)
   return {
@@ -515,7 +519,7 @@ async function getVenuesNearPoint(citySlug: string, centre: { lat: number; lng: 
   try {
     const pool = getPool()
     const { rows } = await pool.query<NearestRow>(
-      `SELECT v.id, v.name, v.slug, v.city_slug, v.lat, v.lng, v.postcode, v.venue_type, v.completeness_score
+      `SELECT v.id, v.name, v.slug, v.city_slug, v.lat, v.lng, v.postcode, v.venue_type
        FROM venues v
        WHERE v.is_active = true AND v.city_slug <> $1 AND ${visibleVenueTypeSql('v')}
          AND v.lat BETWEEN $2 AND $3 AND v.lng BETWEEN $4 AND $5`,
@@ -539,6 +543,12 @@ export default async function CityPage({ params, searchParams }: PageProps) {
     notFound()
   }
 
+  // A thin hub within INDEXING.hubMergeRadiusKm of an indexable hub is listed there
+  // (see mergedGroups below). Recomputed from live counts: it stops redirecting as soon
+  // as it has enough venues of its own.
+  const hubState = await getHubState(city)
+  if (hubState.mergeInto) permanentRedirect(`/soft-play/${hubState.mergeInto}`)
+
   const displayName = cityConfig?.name || staticTown?.name || city
   const county = cityConfig?.county || ''
   const nearbyAreas = cityConfig?.nearbyAreas || []
@@ -561,8 +571,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
   // worse, imply an answer) — hide it instead.
   const allCityVenues = await getCityVenuesAll(city)
   const openNowAvailable = allCityVenues.some((v) => hasStructuredHours(v.opening_hours))
-  // On hubs with a guide, a category link only shows when at least 2 venues are in it.
-  const guideHub = !!getHubGuide(city)
+  // A category link only shows when its page has enough venues to be indexed (lib/indexing.ts).
   const coreForFilters = splitByLocality(city, allCityVenues).core
   const filterSupport: Record<string, number> = {
     toddler: coreForFilters.filter((v) => v.toddler_area).length,
@@ -570,7 +579,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
     'sen-friendly': coreForFilters.filter((v) => v.sen_friendly).length,
   }
   const visibleFilters = filters.filter(
-    (f) => (f.slug !== 'open-now' || openNowAvailable) && (!guideHub || !(f.slug in filterSupport) || filterSupport[f.slug] >= 2)
+    (f) => (f.slug !== 'open-now' || openNowAvailable) && (!(f.slug in filterSupport) || (hubState.indexable && filterSupport[f.slug] >= INDEXING.minFilterVenues))
   )
   const nearbyCities = cityConfig ? getNearbyCities(city) : []
 
@@ -694,6 +703,17 @@ export default async function CityPage({ params, searchParams }: PageProps) {
   const showCurated = !hasActiveFilters && pageNum === 1 && venues.length >= 4
   const showNearby = !hasActiveFilters && !filter && pageNum === 1
   const nearbyGroups = showNearby ? groupNearbyByLocality(city, nearbyVenues) : []
+  // Thin hubs redirected into this one (lib/indexing.ts): their venues are listed here,
+  // grouped by town, keeping their own URLs.
+  const mergedGroups = showNearby
+    ? await Promise.all(
+        (await getMergedInto(city)).map(async (slug) => {
+          const name = getCityBySlug(slug)?.name || getStaticTownBySlug(slug)?.name || slug
+          const venues = (await getVenues(slug, {})).filter((v) => isSoftPlayVenueType(v.venue_type)).map((v) => ({ ...v, city_slug: slug }))
+          return { locality: name, anchor: `nearby-${slug}`, venues }
+        }),
+      ).then((gs) => gs.filter((g) => g.venues.length > 0))
+    : []
   // Thin hub (1–2 soft play venues): list the closest venues filed under other hubs, so the
   // page answers "soft play near {town}" instead of repeating its one venue page.
   const ownSoftPlayCount = contentVenues.filter((v) => isSoftPlayVenueType(v.venue_type)).length
@@ -1306,8 +1326,12 @@ export default async function CityPage({ params, searchParams }: PageProps) {
             <NearbyTowns
               cityName={displayName}
               citySlug={city}
-              groups={nearbyGroups}
-              hubSlugFor={(locality) => cities.find((c) => c.name.toLowerCase() === locality.toLowerCase())?.slug ?? null}
+              groups={[...nearbyGroups, ...mergedGroups]}
+              hubSlugFor={(locality) => {
+                const slug = cities.find((c) => c.name.toLowerCase() === locality.toLowerCase())?.slug ?? null
+                // A merged hub redirects back here: no link.
+                return slug && !mergedGroups.some((g) => g.anchor === `nearby-${slug}`) ? slug : null
+              }}
             />
           )}
 

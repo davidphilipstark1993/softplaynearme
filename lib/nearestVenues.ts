@@ -1,6 +1,6 @@
 import { calculateDistance } from './geo'
 import { isSoftPlayVenueType } from './venueTypes'
-import { isVenueIndexable } from './venueContent'
+import { INDEXING } from './indexing'
 import hubCentres from '@/data/hub-centres.json'
 
 /**
@@ -24,8 +24,6 @@ export interface NearestCandidate {
   lat?: number | string | null
   lng?: number | string | null
   venue_type?: string | null
-  /** Undefined on the static export, which only holds listable venues. */
-  completeness_score?: number | null
 }
 
 export function hubCentre(citySlug: string): { lat: number; lng: number } | null {
@@ -35,8 +33,9 @@ export function hubCentre(citySlug: string): { lat: number; lng: number } | null
 
 /**
  * Closest soft play venues to `centre` that are filed under a different hub, nearest
- * first. Venues without coordinates, non-soft-play types and noindexed venues are left
- * out, so every link goes to a page worth landing on.
+ * first. Venues without coordinates and non-soft-play types are left out. A soft play
+ * venue still waiting for a verified fact (noindex, lib/indexing.ts) is listed: it is a
+ * real place a parent can go.
  */
 export function rankNearest<T extends NearestCandidate>(
   centre: { lat: number; lng: number },
@@ -46,7 +45,7 @@ export function rankNearest<T extends NearestCandidate>(
 ): { venue: T; miles: number }[] {
   return venues
     .filter((v) => v.city_slug !== excludeCity && isSoftPlayVenueType(v.venue_type))
-    .filter((v) => v.completeness_score == null || isVenueIndexable(Number(v.completeness_score), v.venue_type))
+    .filter((v) => !INDEXING.neverIndexTypes.includes(v.venue_type || 'indoor'))
     .filter((v) => Number(v.lat) && Number(v.lng))
     .map((venue) => ({ venue, miles: calculateDistance(centre, { lat: Number(venue.lat), lng: Number(venue.lng) }) }))
     .filter((r) => Number.isFinite(r.miles) && r.miles <= maxMiles)

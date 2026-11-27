@@ -5,9 +5,9 @@ import { getAllStaticTownSlugs, getStaticVenuesByTown } from '@/lib/staticVenues
 import { blogPosts } from '@/lib/blogPosts'
 import { redirectFor } from '@/lib/redirects'
 import { getVenueCounts } from '@/lib/venueCounts'
-import { isVenueIndexable } from '@/lib/venueContent'
+import { isVenueIndexable, staticVenueFacts, VENUE_FACT_COLUMNS, VENUE_FACT_COUNTS_SQL, getHubStates, filterIndexableFromCounts } from '@/lib/indexing'
 import { totalPagesFor, hubPagePath } from '@/lib/pagination'
-import { getHubGuide, minFilterVenues } from '@/lib/hubGuides'
+import { getHubGuide } from '@/lib/hubGuides'
 import { getLondonAreaHubs, londonAreaPath } from '@/lib/londonAreaHubs'
 import { HUB_SLUGS, hubPath } from '@/lib/categoryHubs'
 
@@ -70,22 +70,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const pool = getPool()
     const client = await pool.connect()
     try {
-      // completeness_score column may not exist on older DB instances; fall back
-      // gracefully by computing a minimal inline score when it is missing.
+      // The columns lib/indexing.ts reads, so this list and the page's robots tag agree.
+      // venue_pricing / venue_sessions may be missing on an old DB: then count none.
       let result
       try {
-        result = await client.query(`
-          SELECT city_slug, slug, updated_at, completeness_score, venue_type
-          FROM venues
-          WHERE is_active = true
-        `)
+        result = await client.query(`SELECT v.city_slug, v.slug, v.updated_at, ${VENUE_FACT_COLUMNS}, ${VENUE_FACT_COUNTS_SQL} FROM venues v WHERE v.is_active = true`)
       } catch {
-        // Column doesn't exist yet — include all venues without filtering
-        result = await client.query(`
-          SELECT city_slug, slug, updated_at, NULL::int AS completeness_score, venue_type
-          FROM venues
-          WHERE is_active = true
-        `)
+        result = await client.query(`SELECT v.city_slug, v.slug, v.updated_at, ${VENUE_FACT_COLUMNS}, 0 AS price_rows, 0 AS session_rows FROM venues v WHERE v.is_active = true`)
       }
 
       dbAvailable = true
@@ -93,8 +84,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         const updated = toDate(venue.updated_at)
         bumpCity(venue.city_slug, updated)
 
-        const score = venue.completeness_score ?? 100 // unknown → include
-        if (!isVenueIndexable(score, venue.venue_type)) continue // same rule as the page's noindex
+        if (!isVenueIndexable(venue)) continue // same rule as the page's noindex (lib/indexing.ts)
 
         const listed = `/soft-play/${venue.city_slug}/${venue.slug}`
         const moved = redirectFor(listed)
@@ -108,7 +98,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           url: `${baseUrl}${path}`,
           lastModified: updated,
           changeFrequency: 'weekly',
-          priority: score >= 60 ? 0.8 : 0.6,
+          priority: 0.7,
         })
       }
     } finally {
@@ -128,6 +118,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
       const key = `${townSlug}/${venue.slug}`
       const path = `/soft-play/${townSlug}/${venue.slug}`
+      if (!isVenueIndexable(staticVenueFacts(venue))) continue // same rule as the page
       if (!addedVenueKeys.has(key) && !redirectFor(path)) {
         venueEntries.push({
           url: `${baseUrl}${path}`,
@@ -167,11 +158,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // ── Hubs, their pages, and filter pages ─────────────────────────────────
   const counts = await getVenueCounts()
+  const hubStates = await getHubStates()
   const hubEntries: MetadataRoute.Sitemap = []
   let siteLastMod: Date | undefined
   for (const city of allCities) {
-    // A hub with no venues renders an empty shell — don't ask Google to index it.
-    if ((counts.byCity[city] ?? 0) === 0) continue
+    // Thin hubs (lib/indexing.ts) are noindex or redirect into a nearby hub: not listed.
+    if (!hubStates[city]?.indexable) continue
 
     // A rewritten hub guide (lib/hubGuides.ts contentUpdated) is a change too.
     const guideUpdated = getHubGuide(city)?.contentUpdated
@@ -205,10 +197,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       // noindex URL in the sitemap is a mixed signal to Google, same reason
       // thin venue pages are excluded above.
       if (filter.slug === 'open-now') continue
-      // A filter page with no matching venues is noindex too (see
-      // components/filter/FilterPageContent.tsx) — same rule.
-      const matching = counts.filterCountsByCity[city]?.[filter.slug as 'toddler' | 'birthday-parties' | 'sen-friendly'] ?? 0
-      if (matching < minFilterVenues(city)) continue
+      // Same rule as the filter page's robots tag (lib/indexing.ts).
+      if (!filterIndexableFromCounts(counts, hubStates, city, filter.slug as 'toddler' | 'birthday-parties' | 'sen-friendly')) continue
 
       hubEntries.push({
         url: `${baseUrl}/soft-play/${city}/${filter.slug}`,
