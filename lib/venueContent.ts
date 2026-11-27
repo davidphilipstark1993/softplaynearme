@@ -487,7 +487,7 @@ export const NOINDEX_THRESHOLD = 20
 // Leisure centres were in this list from 24 Oct 2026 and were taken out on 25 Nov 2026
 // at the owner's request: many run soft play, parents search for them by name, and
 // while noindexed they still drew ~2,600 impressions and 54 clicks in 3 months.
-const NOINDEX_VENUE_TYPES = ['park-playground', 'mobile-hire', 'retail']
+export const NOINDEX_VENUE_TYPES = ['park-playground', 'mobile-hire', 'retail']
 
 /**
  * The single indexability rule for a venue page. The page's robots meta and the

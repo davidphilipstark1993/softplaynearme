@@ -8,7 +8,7 @@ import { CheckCircle2, X, Sparkles, Building2 } from 'lucide-react'
 const TITLE = 'Free Venue Listings & Premium Plans'
 const SOCIAL_TITLE = 'Free Venue Listings & Premium Plans | Soft Play Near Me'
 const DESCRIPTION =
-  "List your soft play centre free forever, claim it for a Verified by owner badge, or upgrade to Premium or Bespoke for featured placement and lead alerts. See plans and prices."
+  "List your soft play centre free forever, claim it for a Verified by owner badge, or upgrade for featured placement and lead alerts. See plans and prices."
 const URL = 'https://www.softplaynearme.co.uk/pricing'
 
 export const metadata: Metadata = {

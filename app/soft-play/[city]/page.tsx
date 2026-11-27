@@ -570,7 +570,9 @@ export default async function CityPage({ params, searchParams }: PageProps) {
     'birthday-parties': coreForFilters.filter((v) => v.parties).length,
     'sen-friendly': coreForFilters.filter((v) => v.sen_friendly).length,
   }
-  const visibleFilters = filters.filter(
+  // Filter pages exist only for configured cities (FilterPageContent 404s otherwise),
+  // so static-only towns (Chester, Exeter …) must not link to them.
+  const visibleFilters = !cityConfig ? [] : filters.filter(
     (f) => (f.slug !== 'open-now' || openNowAvailable) && (!guideHub || !(f.slug in filterSupport) || filterSupport[f.slug] >= 2)
   )
   const nearbyCities = cityConfig ? getNearbyCities(city) : []
@@ -1260,6 +1262,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
           <AdSlot placement="city_page" city={city} className="mt-12" />
 
           {/* Category Links */}
+          {visibleFilters.length > 0 && (
           <section aria-labelledby="category-heading" className="mt-12">
             <h2 id="category-heading" className="text-xl font-semibold mb-4">Browse by Category in {displayName}</h2>
             <div className="flex flex-wrap gap-2">
@@ -1272,6 +1275,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
               ))}
             </div>
           </section>
+          )}
 
           {/* Popular Areas — London only, postcode-derived */}
           {city === 'london' && (
