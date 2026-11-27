@@ -3,7 +3,12 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { getPool } from '@/lib/pool'
 import { geocodePostcode, geocodeOutcode, isUKOutcode, parseRadius, formatPostcode, isValidUKPostcode } from '@/lib/geo'
-import { visibleVenueTypeSql } from '@/lib/venueTypes'
+import { NOINDEX_VENUE_TYPES } from '@/lib/venueContent'
+
+// Search covers every real venue (trampoline parks, play farms, leisure centres too),
+// but not the types that aren't venue pages people can visit: public playgrounds,
+// mobile hire and shops. Those are noindex and never in a city's lists either.
+const SEARCHABLE_SQL = `(v.venue_type IS NULL OR v.venue_type NOT IN ('${NOINDEX_VENUE_TYPES.join("','")}'))`
 import { citiesBasic } from '@/lib/cityBasics'
 import { getStaticTowns } from '@/lib/staticTowns'
 import { SearchForm } from '@/components/search/SearchForm'
@@ -77,7 +82,7 @@ async function searchVenuesByName(query: string) {
     const { rows } = await getPool().query(
       `SELECT v.*, v.rating AS avg_rating, COALESCE(v.reviews_count, 0) AS review_count
          FROM venues v
-        WHERE v.is_active = true AND ${visibleVenueTypeSql('v')}
+        WHERE v.is_active = true AND ${SEARCHABLE_SQL}
           AND v.name ILIKE '%' || $1 || '%'
         ORDER BY v.featured DESC, v.reviews_count DESC NULLS LAST, v.name
         LIMIT 30`,
@@ -115,8 +120,7 @@ async function searchVenues(
     client = await getPool().connect()
 
     const queryParams: (number | string)[] = [lat, lng]
-    // Same venue types the city pages list — not the hidden 'other activities'.
-    const where: string[] = ['v.is_active = true', visibleVenueTypeSql('v')]
+    const where: string[] = ['v.is_active = true', SEARCHABLE_SQL]
 
     const latDegPerMile = 1 / 69.0
     const lngDegPerMile = 1 / (69.0 * Math.cos((lat * Math.PI) / 180))
