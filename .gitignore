@@ -40,3 +40,7 @@ scripts/.discover-cache-*.json
 # DB migration backups: full venue rows (contact emails, phones). Kept locally for
 # --rollback, never committed (public repo). Older ones already tracked stay tracked.
 scripts/output/backups/
+
+# Python bytecode (scripts/seo/adsense)
+__pycache__/
+*.pyc

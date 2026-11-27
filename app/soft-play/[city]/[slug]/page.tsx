@@ -739,12 +739,8 @@ export default async function VenuePage({ params }: PageProps) {
   // Stored description without generator filler (lib/venueCopy.ts). An owner's own text
   // passes through untouched. Too little left: lead with the address line, or generate.
   const cleanedDescription = venue._owner?.owner_description ? venue.description ?? '' : cleanVenueDescription(venue.description, venue.review_snippet)
-  const descAddress = formatAddressLine(venue.address, venue.postcode)
   const KIND: Record<string, string> = { indoor: 'soft play centre', pub: 'pub with soft play', 'leisure-centre': 'leisure centre', 'mobile-hire': 'mobile soft play hire business', retail: 'shop' }
   const kind = KIND[venue.venue_type ?? 'indoor'] ?? NON_SOFT_PLAY_VENUE_TYPE_LABELS[venue.venue_type as NonSoftPlayVenueType]?.toLowerCase() ?? 'play venue'
-  const descLead = descAddress && !cleanedDescription.startsWith(venue.name)
-    ? `${venue.name} is ${/^[aeiou]/i.test(kind) ? 'an' : 'a'} ${kind} at ${descAddress}.`
-    : ''
   // Facts the About text and FAQs may state: only what this page shows (lib/venueSummary.ts).
   const summaryInput: SummaryInput = {
     name: venue.name, kind, address: venue.address, town: homeTown,
@@ -761,8 +757,10 @@ export default async function VenuePage({ params }: PageProps) {
   // sources (description_source = 'researched'). Everything else was bulk-generated
   // boilerplate, so the page states the facts instead.
   const storedIsReal = !!venue._owner?.owner_description || venue.description_source === 'researched'
+  // Researched and owner text is shown as written: no generated lead glued on the front
+  // (it repeated the name and address the text itself opens with).
   const displayDescription = storedIsReal && cleanedDescription
-    ? [descLead, cleanedDescription].filter(Boolean).join(cleanedDescription.includes('\n\n') ? '\n\n' : ' ')
+    ? cleanedDescription
     : buildVenueSummary(summaryInput).join('\n\n')
   const expect = cleanWhatToExpect(venue.what_to_expect)
   const tips = cleanVenueTips(venue.tips_before_visiting)
