@@ -4,6 +4,7 @@ import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 import { JsonLd } from '@/components/seo/JsonLd'
+import { TrackPageEvent } from '@/components/analytics/TrackPageEvent'
 import { buildBreadcrumbSchema, buildFAQSchema } from '@/lib/schema'
 import { getPool, STATIC_BUILD } from '@/lib/pool'
 import { getCityBySlug } from '@/lib/venues'
@@ -80,6 +81,7 @@ export async function CategoryHubPage({ slug }: { slug: HubSlug }) {
       <Breadcrumbs items={[{ label: hub.h1.replace(/ Near You$/, '') }]} />
       <JsonLd data={buildBreadcrumbSchema([{ name: 'Home', url: SITE }, { name: hub.h1.replace(/ Near You$/, '') }])} />
       {buildFAQSchema(faqs) && <JsonLd data={buildFAQSchema(faqs)!} />}
+      <TrackPageEvent name="category_view" params={{ category: slug }} />
 
       <main id="main-content" className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-bold text-slate-900 sm:text-4xl">{hub.h1}</h1>

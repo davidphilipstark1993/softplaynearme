@@ -25,7 +25,7 @@ export function CuratedVenueSection({ group }: { group: CuratedVenueGroup }) {
               >
                 {v.name}
               </a>
-              <span className="text-xs uppercase tracking-wide text-slate-400">{v.category}</span>
+              <span className="text-xs uppercase tracking-wide text-slate-500">{v.category}</span>
             </div>
             {v.note && <p className="text-sm text-slate-600 mt-1.5 leading-relaxed">{v.note}</p>}
           </li>

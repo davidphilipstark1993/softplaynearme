@@ -98,6 +98,7 @@ export function VenueMap({
           <Button variant="outline" asChild className="flex-1">
             <a
               href={getViewMapUrl()}
+              data-ga-map="view"
               target="_blank"
               rel="noopener noreferrer"
             >

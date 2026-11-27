@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { gtagEvent } from '@/lib/gtag'
 import { CheckCircle2, Loader2, Mail } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
@@ -56,6 +57,8 @@ export function NewsletterSignup({
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || 'Something went wrong')
       setStatus(data.outcome === 'already_subscribed' ? 'already' : 'success')
+      // No email or other personal data in the event — just where the form was.
+      if (data.outcome !== 'already_subscribed') gtagEvent('newsletter_signup', { source })
     } catch (err) {
       setStatus('error')
       setError(err instanceof Error ? err.message : 'Something went wrong — please try again')
@@ -156,7 +159,7 @@ export function NewsletterSignup({
 
       {status === 'error' && <p className="mt-2 text-xs text-red-600">{error}</p>}
 
-      <p className="mt-2.5 text-[11px] text-slate-400">
+      <p className="mt-2.5 text-[11px] text-slate-500">
         No spam, unsubscribe any time. See our{' '}
         <a href="/privacy" className="underline hover:text-slate-500">
           privacy policy

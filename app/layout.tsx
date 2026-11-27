@@ -184,7 +184,9 @@ export default function RootLayout({
               } else if (href.startsWith('mailto:')) {
                 gtag('event', 'email_click', { email: href.replace('mailto:', '').split('?')[0] });
               } else if (link.target === '_blank') {
-                if (href.includes('google.com/maps')) {
+                if (link.dataset.gaMap) {
+                  gtag('event', 'map_click', { url: href });
+                } else if (href.includes('google.com/maps')) {
                   gtag('event', 'directions_click', { url: href });
                   gtag('event', 'click_directions', { url: href });
                 } else if (!href.includes('softplaynearme.co.uk')) {

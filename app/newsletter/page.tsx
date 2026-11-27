@@ -46,7 +46,7 @@ export default async function NewsletterArchivePage() {
         </div>
 
         {issues.length === 0 ? (
-          <p className="text-center text-slate-400 py-12">No issues sent yet — check back soon.</p>
+          <p className="text-center text-slate-500 py-12">No issues sent yet — check back soon.</p>
         ) : (
           <div className="space-y-3">
             {issues.map((issue) => (
@@ -55,7 +55,7 @@ export default async function NewsletterArchivePage() {
                 href={`/newsletter/${issue.slug}`}
                 className="block bg-white border border-slate-200 rounded-xl p-4 hover:border-purple-300 hover:bg-purple-50 transition-colors"
               >
-                <p className="text-xs text-slate-400 mb-1">
+                <p className="text-xs text-slate-500 mb-1">
                   {issue.issue_number ? `Issue #${issue.issue_number} · ` : ''}
                   {issue.sent_at ? new Date(issue.sent_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : ''}
                 </p>

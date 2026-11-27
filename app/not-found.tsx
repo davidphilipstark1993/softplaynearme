@@ -26,12 +26,12 @@ export default function NotFound() {
             Sorry, we couldn&apos;t find the page you&apos;re looking for. It might have been moved or doesn&apos;t exist.
           </p>
           <div className="flex gap-4 justify-center">
-            <Link href="/">
-              <Button className="bg-purple-600 hover:bg-purple-700">Go Home</Button>
-            </Link>
-            <Link href="/search">
-              <Button variant="outline">Search Venues</Button>
-            </Link>
+            <Button asChild className="bg-purple-600 hover:bg-purple-700">
+              <Link href="/">Go Home</Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link href="/search">Search Venues</Link>
+            </Button>
           </div>
         </div>
       </main>

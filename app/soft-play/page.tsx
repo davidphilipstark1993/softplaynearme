@@ -5,6 +5,9 @@ import { Footer } from '@/components/layout/Footer'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 import { cities } from '@/lib/venues'
 import { getVenueCounts, formatVenueTotal } from '@/lib/venueCounts'
+import { JsonLd } from '@/components/seo/JsonLd'
+import { buildBreadcrumbSchema } from '@/lib/schema'
+import { HUBS, HUB_SLUGS, hubPath } from '@/lib/categoryHubs'
 
 export const revalidate = 3600
 
@@ -29,9 +32,19 @@ export default async function SoftPlayIndex() {
     <div className="min-h-screen bg-slate-50">
       <Header />
       <Breadcrumbs items={[{ label: 'Soft Play' }]} />
+      <JsonLd data={buildBreadcrumbSchema([{ name: 'Home', url: 'https://www.softplaynearme.co.uk' }, { name: 'Soft Play' }])} />
       <main id="main-content" className="max-w-5xl mx-auto px-4 py-10">
         <h1 className="text-3xl font-bold mb-2">Soft Play Near Me</h1>
-        <p className="text-slate-600 mb-8">Find soft play centres by town or city.</p>
+        <p className="text-slate-600 mb-4">Find soft play centres by town or city.</p>
+        <p className="text-sm text-slate-600 mb-8">
+          Looking for something specific?{' '}
+          {HUB_SLUGS.map((s, i) => (
+            <span key={s}>
+              {i > 0 && ' · '}
+              <Link href={hubPath(s)} className="text-purple-700 hover:underline">{HUBS[s].label}</Link>
+            </span>
+          ))}
+        </p>
         {groups.map(([county, list]) => (
           <section key={county} className="mb-8">
             <h2 className="text-lg font-semibold mb-3">{county}</h2>

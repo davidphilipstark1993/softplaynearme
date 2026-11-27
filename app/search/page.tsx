@@ -2,7 +2,8 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { getPool } from '@/lib/pool'
-import { geocodePostcode, parseRadius, formatPostcode, isValidUKPostcode } from '@/lib/geo'
+import { geocodePostcode, geocodeOutcode, isUKOutcode, parseRadius, formatPostcode, isValidUKPostcode } from '@/lib/geo'
+import { visibleVenueTypeSql } from '@/lib/venueTypes'
 import { citiesBasic } from '@/lib/cityBasics'
 import { getStaticTowns } from '@/lib/staticTowns'
 import { SearchForm } from '@/components/search/SearchForm'
@@ -68,6 +69,37 @@ export async function generateMetadata({ searchParams }: SearchPageProps): Promi
   }
 }
 
+/** Venues whose name contains the query: for "jungle jims" typed into the search box. */
+async function searchVenuesByName(query: string) {
+  const q = query.trim()
+  if (q.length < 3) return []
+  try {
+    const { rows } = await getPool().query(
+      `SELECT v.*, v.rating AS avg_rating, COALESCE(v.reviews_count, 0) AS review_count
+         FROM venues v
+        WHERE v.is_active = true AND ${visibleVenueTypeSql('v')}
+          AND v.name ILIKE '%' || $1 || '%'
+        ORDER BY v.featured DESC, v.reviews_count DESC NULLS LAST, v.name
+        LIMIT 30`,
+      [q.replace(/[%_\\]/g, (c) => `\\${c}`)],
+    )
+    return rows
+  } catch (error) {
+    console.error('Name search error:', error)
+    return []
+  }
+}
+
+/** Towns and cities whose name starts with the query ("brad" → Bradford), for the no-match state. */
+function suggestPlaces(query: string) {
+  const q = query.trim().toLowerCase()
+  if (q.length < 2) return []
+  const seen = new Set<string>()
+  return [...citiesBasic.map((c) => ({ name: c.name, slug: c.slug })), ...getStaticTowns().map((t) => ({ name: t.name, slug: t.slug }))]
+    .filter((p) => p.name.toLowerCase().startsWith(q) && !seen.has(p.slug) && seen.add(p.slug))
+    .slice(0, 8)
+}
+
 async function searchVenues(
   lat: number,
   lng: number,
@@ -83,7 +115,8 @@ async function searchVenues(
     client = await getPool().connect()
 
     const queryParams: (number | string)[] = [lat, lng]
-    const where: string[] = ['v.is_active = true']
+    // Same venue types the city pages list — not the hidden 'other activities'.
+    const where: string[] = ['v.is_active = true', visibleVenueTypeSql('v')]
 
     const latDegPerMile = 1 / 69.0
     const lngDegPerMile = 1 / (69.0 * Math.cos((lat * Math.PI) / 180))
@@ -112,7 +145,9 @@ async function searchVenues(
     const whereSql = where.length ? `WHERE ${where.join(' AND ')}` : ''
 
     let orderBy = 'distance ASC NULLS LAST'
-    if (sort === 'rating') orderBy = 'avg_rating DESC, review_count DESC, distance ASC'
+    // Expressions, not the avg_rating / review_count aliases: venues has its own
+    // review_count column, so the alias is ambiguous in ORDER BY.
+    if (sort === 'rating') orderBy = '(CASE WHEN COUNT(r.id) > 0 THEN AVG(r.rating) ELSE v.rating END) DESC NULLS LAST, (CASE WHEN COUNT(r.id) > 0 THEN COUNT(r.id) ELSE COALESCE(v.reviews_count, 0) END) DESC, distance ASC'
     else if (sort === 'price_low') orderBy = 'v.price_from ASC NULLS LAST, distance ASC'
     else if (sort === 'price_high') orderBy = 'v.price_to DESC NULLS LAST, distance ASC'
     else if (sort === 'name') orderBy = 'v.name ASC'
@@ -121,8 +156,10 @@ async function searchVenues(
 
     const sql = `
       SELECT v.*,
-             COALESCE(AVG(r.rating), 0) as avg_rating,
-             COUNT(r.id) as review_count,
+             -- On-site reviews when a venue has any; otherwise the Google rating and
+             -- review count every other page shows (search used to show no rating at all).
+             CASE WHEN COUNT(r.id) > 0 THEN AVG(r.rating) ELSE v.rating END as avg_rating,
+             CASE WHEN COUNT(r.id) > 0 THEN COUNT(r.id) ELSE COALESCE(v.reviews_count, 0) END as review_count,
              (3959 * acos(
                LEAST(1, GREATEST(-1,
                  cos(radians($1)) * cos(radians(v.lat)) *
@@ -183,6 +220,8 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   let lng: number | null = null
   let locationName: string | null = null
   let geocodeError: string | null = null
+  let nameMatches: any[] = []
+  let placeSuggestions: { name: string; slug: string }[] = []
 
   if (latParam && lngParam) {
     lat = parseFloat(latParam)
@@ -212,7 +251,19 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
       if (slug) {
         redirect(`/soft-play/${slug}`)
       }
-      locationName = query
+      if (isUKOutcode(query)) {
+        const result = await geocodeOutcode(query)
+        if (result.error) geocodeError = result.error
+        else {
+          lat = result.lat
+          lng = result.lng
+          locationName = result.postcode
+        }
+      } else {
+        locationName = query
+        nameMatches = await searchVenuesByName(query)
+        placeSuggestions = suggestPlaces(query)
+      }
     }
   }
 
@@ -254,10 +305,43 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
               {geocodeError}. Please check the postcode and try again.
             </p>
           </div>
+        ) : !lat && !lng && query && nameMatches.length > 0 ? (
+          <div className="mb-6">
+            {placeSuggestions.length > 0 && (
+              <p className="mb-4 text-slate-700">
+                Looking for a place?{' '}
+                {placeSuggestions.map((p, i) => (
+                  <span key={p.slug}>
+                    {i > 0 && ', '}
+                    <Link href={`/soft-play/${p.slug}`} className="font-medium text-purple-700 underline">Soft play in {p.name}</Link>
+                  </span>
+                ))}
+              </p>
+            )}
+            <h2 className="text-xl font-semibold mb-4">
+              {nameMatches.length === 30 ? '30+' : nameMatches.length} {nameMatches.length === 1 ? 'venue' : 'venues'} matching &ldquo;{query.trim()}&rdquo;
+            </h2>
+            <SearchResults venues={nameMatches} showDistance={false} />
+          </div>
         ) : !lat && !lng && query ? (
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
-            <p className="text-yellow-700">
-              Please enter a valid UK postcode to search for venues near you.
+          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6 text-yellow-800">
+            <p>
+              We couldn&apos;t find a town, postcode or venue matching &ldquo;{query.trim()}&rdquo;.
+              Try a full postcode (HU5 3AB), a postcode district (HU5) or a town name.
+            </p>
+            {placeSuggestions.length > 0 && (
+              <p className="mt-2">
+                Did you mean:{' '}
+                {placeSuggestions.map((p, i) => (
+                  <span key={p.slug}>
+                    {i > 0 && ', '}
+                    <Link href={`/soft-play/${p.slug}`} className="font-medium underline">{p.name}</Link>
+                  </span>
+                ))}
+              </p>
+            )}
+            <p className="mt-2">
+              Or <Link href="/soft-play" className="font-medium underline">browse every town and city</Link>.
             </p>
           </div>
         ) : null}

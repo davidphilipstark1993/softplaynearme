@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input'
 import { Search, MapPin, Loader2 } from 'lucide-react'
 import { isValidUKPostcode, RADIUS_OPTIONS } from '@/lib/geo'
 import { cn } from '@/lib/utils'
+import { gtagEvent, searchTermForAnalytics } from '@/lib/gtag'
 import { citiesBasic as cities } from '@/lib/cityBasics'
 import { getStaticTowns } from '@/lib/staticTowns'
 
@@ -124,10 +125,11 @@ export function SearchForm({
     }
 
     // Track search event
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      ;(window as any).gtag('event', 'search', { search_term: postcode.trim() })
-      ;(window as any).gtag('event', 'search_performed', { search_term: postcode.trim() })
-    }
+    // A full postcode can narrow down to a handful of homes, so only the outward
+    // code (HU5, SW1A) is sent; place names are sent as typed.
+    const term = searchTermForAnalytics(postcode)
+    gtagEvent('search', { search_term: term })
+    gtagEvent('search_performed', { search_term: term })
 
     const trimmedInput = postcode.trim()
     const cleaned = trimmedInput.replace(/\s/g, '')
@@ -230,7 +232,7 @@ export function SearchForm({
           )}
           onMouseDown={() => selectSuggestion(item)}
         >
-          <MapPin className="w-4 h-4 text-slate-400 flex-shrink-0" />
+          <MapPin className="w-4 h-4 text-slate-500 flex-shrink-0" />
           {item.label}
         </li>
       ))}

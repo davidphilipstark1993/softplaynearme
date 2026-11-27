@@ -37,7 +37,7 @@ export function VenueComparisonTable({ citySlug, cityName, venues }: { citySlug:
     parties: rows.some((r) => r.parties),
     rating: rows.some((r) => r.rating),
   }
-  const dash = <span className="text-slate-400" aria-label="not listed">&ndash;</span>
+  const dash = <span className="text-slate-500" aria-label="not listed">&ndash;</span>
 
   return (
     <section aria-labelledby="compare-heading" className="mt-12">

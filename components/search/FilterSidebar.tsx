@@ -314,7 +314,7 @@ function parseCSV(val: string | null): string[] {
 function FilterSection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2.5">
+      <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-2.5">
         {title}
       </p>
       <div className="space-y-2">{children}</div>

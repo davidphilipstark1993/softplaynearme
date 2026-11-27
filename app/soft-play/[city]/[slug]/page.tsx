@@ -432,10 +432,11 @@ async function getSimilarVenues(
     try {
       const result = await client.query<SimilarVenue>(
         `SELECT name, slug, postcode, toddler_area, sen_friendly, parties
-         FROM venues
+         FROM venues v
          WHERE city_slug = $1
            AND slug != $2
            AND is_active = true
+           AND ${visibleVenueTypeSql()}
            AND (
              ($3 AND toddler_area = true) OR
              ($4 AND sen_friendly = true) OR
@@ -459,7 +460,7 @@ async function getSimilarVenues(
 
   const staticVenues = getStaticVenuesByTown(citySlug)
   return staticVenues
-    .filter(v => v.slug !== excludeSlug)
+    .filter(v => v.slug !== excludeSlug && isVisibleVenueType(v.venueType))
     .filter(v =>
       (tags.toddler_area && v.toddlerArea) ||
       (tags.sen_friendly && v.senFriendly) ||
@@ -581,7 +582,7 @@ async function getNearbyVenues(citySlug: string, excludeSlug: string): Promise<{
     const client = await pool.connect()
     try {
       const result = await client.query(
-        'SELECT name, slug, postcode FROM venues WHERE city_slug = $1 AND slug != $2 AND is_active = true ORDER BY name LIMIT 6',
+        `SELECT name, slug, postcode FROM venues v WHERE v.city_slug = $1 AND v.slug != $2 AND v.is_active = true AND ${visibleVenueTypeSql()} ORDER BY v.name LIMIT 6`,
         [citySlug, excludeSlug]
       )
       if (result.rows.length > 0) return result.rows
@@ -594,7 +595,7 @@ async function getNearbyVenues(citySlug: string, excludeSlug: string): Promise<{
 
   const staticVenues = getStaticVenuesByTown(citySlug)
   return staticVenues
-    .filter(v => v.slug !== excludeSlug)
+    .filter(v => v.slug !== excludeSlug && isVisibleVenueType(v.venueType))
     .slice(0, 6)
     .map(v => ({ name: v.name, slug: v.slug, postcode: v.postcode }))
 }
@@ -800,8 +801,8 @@ export default async function VenuePage({ params }: PageProps) {
   // Breadcrumb schema – uses reusable builder
   const breadcrumbSchema = buildBreadcrumbSchema([
     { name: 'Home', url: baseUrl },
-    ...(guideHub ? [{ name: 'Soft Play', url: `${baseUrl}/soft-play` }] : []),
-    { name: guideHub ? cityName : `Soft Play in ${cityName}`, url: `${baseUrl}/soft-play/${city}` },
+    { name: 'Soft Play', url: `${baseUrl}/soft-play` },
+    { name: cityName, url: `${baseUrl}/soft-play/${city}` },
     { name: venue.name, url: `${baseUrl}/soft-play/${city}/${slug}` },
   ])
 
@@ -821,7 +822,7 @@ export default async function VenuePage({ params }: PageProps) {
         <Header backLink={{ href: `/soft-play/${city}`, label: cityName }} />
 
         <Breadcrumbs items={[
-          ...(guideHub ? [{ label: 'Soft Play', href: '/soft-play' }] : county ? [{ label: county }] : []),
+          { label: 'Soft Play', href: '/soft-play' },
           { label: cityName, href: `/soft-play/${city}` },
           { label: venue.name },
         ]} />
@@ -935,7 +936,7 @@ export default async function VenuePage({ params }: PageProps) {
         ) : (
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
             <div className="bg-slate-100 border-2 border-dashed border-slate-300 rounded-xl p-8 text-center">
-              <Camera className="w-12 h-12 mx-auto text-slate-400 mb-3" />
+              <Camera className="w-12 h-12 mx-auto text-slate-500 mb-3" />
               <p className="font-semibold text-slate-700 mb-2">No photos yet</p>
               <p className="text-sm text-slate-500 mb-4">
                 Are you the owner of {venue.name}? Add photos to help families choose your venue.
@@ -1032,7 +1033,7 @@ export default async function VenuePage({ params }: PageProps) {
                   ))}
                 </div>
                 {!cleanedDescription && (
-                  <p className="mt-3 text-xs text-slate-400 italic">
+                  <p className="mt-3 text-xs text-slate-500 italic">
                     This description was generated from available listing data. Contact the venue to confirm details.
                   </p>
                 )}
@@ -1047,7 +1048,7 @@ export default async function VenuePage({ params }: PageProps) {
                     </a>
                   </p>
                   {venue.last_verified_at && (
-                    <p className="text-xs text-slate-400">
+                    <p className="text-xs text-slate-500">
                       Last updated:{' '}
                       {new Date(venue.last_verified_at).toLocaleDateString('en-GB', {
                         day: 'numeric',
@@ -1225,7 +1226,7 @@ export default async function VenuePage({ params }: PageProps) {
                           <p className="font-medium text-sm truncate">{nv.name}</p>
                           <p className="text-xs text-slate-500">{nv.postcode}</p>
                         </div>
-                        <Navigation className="w-3.5 h-3.5 text-slate-400 ml-auto flex-shrink-0" />
+                        <Navigation className="w-3.5 h-3.5 text-slate-500 ml-auto flex-shrink-0" />
                       </Link>
                     ))}
                   </div>

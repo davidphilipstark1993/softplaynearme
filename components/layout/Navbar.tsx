@@ -51,11 +51,11 @@ export function Navbar({ variant = 'default' }: NavbarProps) {
             >
               Leeds
             </Link>
-            <Link href="/add-venue">
-              <Button className="bg-purple-600 text-white hover:bg-purple-700">
+            <Button asChild className="bg-purple-600 text-white hover:bg-purple-700">
+              <Link href="/add-venue">
                 Add Venue
-              </Button>
-            </Link>
+              </Link>
+            </Button>
           </div>
 
           {/* Mobile menu button */}

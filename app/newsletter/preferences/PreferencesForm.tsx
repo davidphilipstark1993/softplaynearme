@@ -44,7 +44,7 @@ export function PreferencesForm({ token }: { token: string }) {
   if (loadState === 'loading') {
     return (
       <div className="flex justify-center py-10">
-        <Loader2 className="h-6 w-6 animate-spin text-slate-400" />
+        <Loader2 className="h-6 w-6 animate-spin text-slate-500" />
       </div>
     )
   }
@@ -98,7 +98,7 @@ export function PreferencesForm({ token }: { token: string }) {
 
       {saved && <p className="mt-3 text-center text-xs text-green-600">Preferences saved.</p>}
       {!weekly && !events && (
-        <p className="mt-3 text-center text-xs text-slate-400">
+        <p className="mt-3 text-center text-xs text-slate-500">
           Unchecking both lists will unsubscribe you from all Soft Play Near Me emails.
         </p>
       )}

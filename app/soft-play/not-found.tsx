@@ -27,12 +27,12 @@ export default function SoftPlayNotFound() {
             We couldn&apos;t find that soft play listing. It may have been removed or the URL might be incorrect. Try searching or browse one of our popular locations below.
           </p>
           <div className="flex gap-4 justify-center mb-10">
-            <Link href="/">
-              <Button className="bg-purple-600 hover:bg-purple-700">Go Home</Button>
-            </Link>
-            <Link href="/search">
-              <Button variant="outline">Search Venues</Button>
-            </Link>
+            <Button asChild className="bg-purple-600 hover:bg-purple-700">
+              <Link href="/">Go Home</Link>
+            </Button>
+            <Button asChild variant="outline">
+              <Link href="/search">Search Venues</Link>
+            </Button>
           </div>
 
           <h3 className="text-lg font-semibold text-slate-900 mb-4">Browse by Location</h3>

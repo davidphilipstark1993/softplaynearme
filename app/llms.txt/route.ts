@@ -1,4 +1,5 @@
 import { cities, filters } from '@/lib/venues'
+import { HUBS, HUB_SLUGS, hubPath } from '@/lib/categoryHubs'
 import { blogPosts } from '@/lib/blogPosts'
 import { getVenueCounts } from '@/lib/venueCounts'
 import { MIN_REVIEWS_FOR_TOP_RATED } from '@/lib/cityStats'
@@ -38,7 +39,8 @@ export async function GET() {
     '## Where the data comes from',
     '',
     "- Listings are compiled from public sources (Google Places data and venues' own websites). Venue owners can claim their listing for free to correct and extend it; claimed listings are marked Verified.",
-    '- Every venue page shows the date it was last verified.',
+    '- Venue pages show the date their details were last updated.',
+    `- How listings are sourced and corrected: ${SITE}/about#how-listings-work`,
     '- Missing information is shown as missing: if a page says hours or prices are not available, they are unknown — not zero, not closed. We do not estimate prices, opening hours or age ranges.',
     `- Ratings are visitor ratings with the number of reviews behind them. "Top rated" lists only include venues with ${MIN_REVIEWS_FOR_TOP_RATED} or more reviews.`,
     '- Counts on city pages are venues in that town; venues in surrounding towns are listed separately under "Soft play near …".',
@@ -55,6 +57,12 @@ export async function GET() {
     `Each city page lists its venues (${VENUES_PER_PAGE} per page), a summary built from the data, and an FAQ. URL pattern: ${SITE}/soft-play/{city}; individual venues are at ${SITE}/soft-play/{city}/{venue}.`,
     '',
     ...hubs.map((c) => `- [Soft play in ${c.name}](${SITE}/soft-play/${c.slug}): ${c.venues} ${c.venues === 1 ? 'venue' : 'venues'}, ${c.county}`),
+    '',
+    '## Category pages (UK-wide)',
+    '',
+    'Venues listed only where we hold evidence for the category: a facility the venue lists, an age range it states, or the venue\'s own name.',
+    '',
+    ...HUB_SLUGS.map((s) => `- [${HUBS[s].h1.replace(/ Near You$/, '')}](${SITE}${hubPath(s)})`),
     '',
     '## Filtered lists',
     '',

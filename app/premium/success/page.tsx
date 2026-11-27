@@ -37,7 +37,7 @@ export default async function PremiumSuccessPage({ searchParams }: PremiumSucces
           Thanks — Stripe has your Direct Debit mandate. We&apos;re finalising your Premium subscription now;
           this usually takes a minute or two.
         </p>
-        <p className="text-sm text-slate-400 flex items-center justify-center gap-1.5 mb-10">
+        <p className="text-sm text-slate-500 flex items-center justify-center gap-1.5 mb-10">
           <Mail className="w-3.5 h-3.5" />
           We&apos;ll email you the moment Premium is active on your listing.
         </p>
