@@ -349,6 +349,11 @@
     "lng": -2.80754,
     "source": "os-names:Town"
   },
+  "gillingham": {
+    "lat": 51.36921,
+    "lng": 0.57856,
+    "source": "os-names:Town"
+  },
   "glasgow": {
     "lat": 55.86363,
     "lng": -4.23688,

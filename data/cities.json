@@ -3851,5 +3851,22 @@
       "Worthing"
     ],
     "faqs": []
+  },
+  {
+    "slug": "gillingham",
+    "name": "Gillingham",
+    "county": "Medway",
+    "region": "South East",
+    "metaTitle": "Soft Play in Gillingham",
+    "metaDescription": "Find soft play centres in Gillingham, Medway. Compare venues, facilities and ratings.",
+    "h1": "Soft Play Centres in Gillingham",
+    "intro": "Soft play centres in Gillingham and the surrounding area of Medway.",
+    "nearbyAreas": [
+      "Rochester",
+      "Chatham",
+      "Rainham",
+      "Sittingbourne"
+    ],
+    "faqs": []
   }
 ]
