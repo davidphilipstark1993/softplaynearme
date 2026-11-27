@@ -47,7 +47,7 @@ export const posts: BlogPost[] = [
     slug: 'best-soft-play-in-york',
     title: 'Best Soft Play in York (2026 Parent Guide)',
     city: 'York',
-    excerpt: 'A guide to soft play in York built from real data: 14 venues, the best-reviewed (Lollipop Lane, 4.9 stars), and which ones confirm a café, toddler area, parties or SEN-friendly sessions.',
+    excerpt: 'A guide to soft play in York built from real data: the best-reviewed venue (Lollipop Lane, 4.9 stars), and which ones confirm a café, toddler area, parties or SEN-friendly sessions.',
     publishedAt: '2026-02-15T00:00:00.000Z',
     updatedAt: '2026-10-24T00:00:00.000Z',
     datePublished: '2026-02-15T00:00:00.000Z',
@@ -71,15 +71,15 @@ export const posts: BlogPost[] = [
 </ul>
 
 <h2>The busiest venues</h2>
-<p>Review volume is a good proxy for how many families actually go. <a href="/soft-play/york/flying-legends-york" class="text-purple-700 hover:underline">Flying Legends</a> is the most-reviewed on our list with 1,408 reviews at 4.0 stars, followed by <a href="/soft-play/york/flying-legends-wacky-warehouse" class="text-purple-700 hover:underline">Flying Legends Wacky Warehouse</a> (864 reviews, 4.1 stars), <a href="/soft-play/york/galtres-centre-york" class="text-purple-700 hover:underline">Galtres Centre</a> (190 reviews, 4.5 stars) and <a href="/soft-play/york/oxygen" class="text-purple-700 hover:underline">Oxygen York</a> (174 reviews, 4.5 stars).</p>
+<p>Review volume is a good proxy for how many families actually go. <a href="/soft-play/york/flying-legends-york" class="text-purple-700 hover:underline">Flying Legends</a> is the most-reviewed on our list with 1,408 reviews at 4.0 stars, followed by <a href="/soft-play/york/flying-legends-york" class="text-purple-700 hover:underline">Flying Legends Wacky Warehouse</a> (864 reviews, 4.1 stars), Galtres Centre (190 reviews, 4.5 stars) and <a href="/soft-play/york/oxygen" class="text-purple-700 hover:underline">Oxygen York</a> (174 reviews, 4.5 stars).</p>
 
 <h2>Where the confirmed facilities are</h2>
 <p>Facility information is patchy across smaller venues, so these lists show only what is confirmed on each listing — a venue missing from a list may well have the facility, it just isn’t confirmed in our data.</p>
 <ul>
-  <li><strong>On-site café</strong> (7 of 14): <strong><a href="/soft-play/york/flying-legends-york" class="text-purple-700 hover:underline">Flying Legends</a></strong>, <strong><a href="/soft-play/york/flying-legends-wacky-warehouse" class="text-purple-700 hover:underline">Flying Legends Wacky Warehouse</a></strong>, <strong><a href="/soft-play/york/agility-york" class="text-purple-700 hover:underline">Agility</a></strong>, <strong><a href="/soft-play/york/twiggy-s-play-york" class="text-purple-700 hover:underline">Twiggy's Play</a></strong>, <strong><a href="/soft-play/york/galtres-centre-york" class="text-purple-700 hover:underline">Galtres Centre</a></strong>, <strong><a href="/soft-play/york/oxygen" class="text-purple-700 hover:underline">Oxygen York</a></strong> and 1 more.</li>
+  <li><strong>On-site café</strong> (7 of 14): <strong><a href="/soft-play/york/flying-legends-york" class="text-purple-700 hover:underline">Flying Legends</a></strong>, <strong><a href="/soft-play/york/flying-legends-york" class="text-purple-700 hover:underline">Flying Legends Wacky Warehouse</a></strong>, <strong><a href="/soft-play/york/agility-york" class="text-purple-700 hover:underline">Agility</a></strong>, <strong><a href="/soft-play/york/twiggy-s-play-york" class="text-purple-700 hover:underline">Twiggy's Play</a></strong>, <strong>Galtres Centre</strong>, <strong><a href="/soft-play/york/oxygen" class="text-purple-700 hover:underline">Oxygen York</a></strong> and 1 more.</li>
   <li><strong>Dedicated toddler area</strong> (4): <strong><a href="/soft-play/york/flying-legends-york" class="text-purple-700 hover:underline">Flying Legends</a></strong>, <strong><a href="/soft-play/york/agility-york" class="text-purple-700 hover:underline">Agility</a></strong>, <strong><a href="/soft-play/york/twiggy-s-play-york" class="text-purple-700 hover:underline">Twiggy's Play</a></strong> and <strong><a href="/soft-play/york/oxygen" class="text-purple-700 hover:underline">Oxygen York</a></strong>.</li>
   <li><strong>Baby area</strong> (3): <strong><a href="/soft-play/york/agility-york" class="text-purple-700 hover:underline">Agility</a></strong>, <strong><a href="/soft-play/york/twiggy-s-play-york" class="text-purple-700 hover:underline">Twiggy's Play</a></strong> and <strong><a href="/soft-play/york/oxygen" class="text-purple-700 hover:underline">Oxygen York</a></strong>.</li>
-  <li><strong>Birthday parties</strong> (6): <strong><a href="/soft-play/york/flying-legends-york" class="text-purple-700 hover:underline">Flying Legends</a></strong>, <strong><a href="/soft-play/york/agility-york" class="text-purple-700 hover:underline">Agility</a></strong>, <strong><a href="/soft-play/york/twiggy-s-play-york" class="text-purple-700 hover:underline">Twiggy's Play</a></strong>, <strong><a href="/soft-play/york/galtres-centre-york" class="text-purple-700 hover:underline">Galtres Centre</a></strong>, <strong><a href="/soft-play/york/oxygen" class="text-purple-700 hover:underline">Oxygen York</a></strong> and <strong><a href="/soft-play/york/clip-n-climb-york" class="text-purple-700 hover:underline">Clip N' Climb</a></strong>.</li>
+  <li><strong>Birthday parties</strong> (6): <strong><a href="/soft-play/york/flying-legends-york" class="text-purple-700 hover:underline">Flying Legends</a></strong>, <strong><a href="/soft-play/york/agility-york" class="text-purple-700 hover:underline">Agility</a></strong>, <strong><a href="/soft-play/york/twiggy-s-play-york" class="text-purple-700 hover:underline">Twiggy's Play</a></strong>, <strong>Galtres Centre</strong>, <strong><a href="/soft-play/york/oxygen" class="text-purple-700 hover:underline">Oxygen York</a></strong> and <strong><a href="/soft-play/york/clip-n-climb-york" class="text-purple-700 hover:underline">Clip N' Climb</a></strong>.</li>
   <li><strong>SEN-friendly</strong> (5): <strong><a href="/soft-play/york/flying-legends-york" class="text-purple-700 hover:underline">Flying Legends</a></strong>, <strong><a href="/soft-play/york/agility-york" class="text-purple-700 hover:underline">Agility</a></strong>, <strong><a href="/soft-play/york/oxygen" class="text-purple-700 hover:underline">Oxygen York</a></strong>, <strong><a href="/soft-play/york/the-spurriergate-centre-york" class="text-purple-700 hover:underline">The Spurriergate Centre</a></strong> and <strong><a href="/soft-play/york/clip-n-climb-york" class="text-purple-700 hover:underline">Clip N' Climb</a></strong>.</li>
   <li><strong>Wheelchair access</strong> (4): <strong><a href="/soft-play/york/flying-legends-york" class="text-purple-700 hover:underline">Flying Legends</a></strong>, <strong><a href="/soft-play/york/oxygen" class="text-purple-700 hover:underline">Oxygen York</a></strong>, <strong><a href="/soft-play/york/the-spurriergate-centre-york" class="text-purple-700 hover:underline">The Spurriergate Centre</a></strong> and <strong><a href="/soft-play/york/clip-n-climb-york" class="text-purple-700 hover:underline">Clip N' Climb</a></strong>.</li>
   <li><strong>On-site parking</strong> (4): <strong><a href="/soft-play/york/flying-legends-york" class="text-purple-700 hover:underline">Flying Legends</a></strong>, <strong><a href="/soft-play/york/agility-york" class="text-purple-700 hover:underline">Agility</a></strong>, <strong><a href="/soft-play/york/oxygen" class="text-purple-700 hover:underline">Oxygen York</a></strong> and <strong><a href="/soft-play/york/clip-n-climb-york" class="text-purple-700 hover:underline">Clip N' Climb</a></strong>.</li>
@@ -619,7 +619,7 @@ export const posts: BlogPost[] = [
     slug: 'best-soft-play-in-bournemouth',
     title: 'Best Soft Play in Bournemouth (2026 Parent Guide)',
     city: 'Bournemouth',
-    excerpt: 'A guide to soft play in Bournemouth built from real data: 28 venues, the best-reviewed (Mini Monsters (children\'s play cafe 0-5 years), 5.0 stars), and which ones confirm a café, toddler area, parties or SEN-friendly sessions.',
+    excerpt: 'A guide to soft play in Bournemouth built from real data: the best-reviewed venue (Mini Monsters (children\'s play cafe 0-5 years), 5.0 stars), and which ones confirm a café, toddler area, parties or SEN-friendly sessions.',
     publishedAt: '2026-02-18T00:00:00.000Z',
     updatedAt: '2026-10-24T00:00:00.000Z',
     datePublished: '2026-02-18T00:00:00.000Z',
@@ -691,7 +691,7 @@ export const posts: BlogPost[] = [
     slug: 'best-soft-play-in-cardiff',
     title: 'Best Soft Play in Cardiff (2026 Parent Guide)',
     city: 'Cardiff',
-    excerpt: 'A guide to soft play in Cardiff built from real data: 42 venues, the best-reviewed (Role Play Hood, 5.0 stars), and which ones confirm a café, toddler area, parties or SEN-friendly sessions.',
+    excerpt: 'A guide to soft play in Cardiff built from real data: the best-reviewed venue (Role Play Hood, 5.0 stars), and which ones confirm a café, toddler area, parties or SEN-friendly sessions.',
     publishedAt: '2026-02-18T00:00:00.000Z',
     updatedAt: '2026-10-24T00:00:00.000Z',
     datePublished: '2026-02-18T00:00:00.000Z',
@@ -767,7 +767,7 @@ export const posts: BlogPost[] = [
     slug: 'best-soft-play-in-colchester',
     title: 'Best Soft Play in Colchester (2026 Parent Guide)',
     city: 'Colchester',
-    excerpt: 'A guide to soft play in Colchester built from real data: 14 venues, the best-reviewed (Little Monsters House of Fun, 4.6 stars), and which ones confirm a café, toddler area, parties or SEN-friendly sessions.',
+    excerpt: 'A guide to soft play in Colchester built from real data: the best-reviewed venue (Little Monsters House of Fun, 4.6 stars), and which ones confirm a café, toddler area, parties or SEN-friendly sessions.',
     publishedAt: '2026-02-18T00:00:00.000Z',
     updatedAt: '2026-10-24T00:00:00.000Z',
     datePublished: '2026-02-18T00:00:00.000Z',
@@ -787,7 +787,7 @@ export const posts: BlogPost[] = [
   <li><strong><a href="/soft-play/colchester/rainbow-fun" class="text-purple-700 hover:underline">Rainbow Fun</a></strong> — 4.6 stars from 250 reviews.</li>
   <li><strong><a href="/soft-play/colchester/mace-playce" class="text-purple-700 hover:underline">Mace Playce</a></strong> — 4.5 stars from 602 reviews.</li>
   <li><strong><a href="/soft-play/colchester/mace-playce-city-centre" class="text-purple-700 hover:underline">Mace Playce City Centre</a></strong> — 4.5 stars from 68 reviews.</li>
-  <li><strong><a href="/soft-play/colchester/berechurch-family-hub-the-ormiston-centre-colchester" class="text-purple-700 hover:underline">Berechurch Family Hub (The Ormiston Centre)</a></strong> — 4.4 stars from 65 reviews.</li>
+  <li><strong>Berechurch Family Hub (The Ormiston Centre)</strong> — 4.4 stars from 65 reviews.</li>
 </ul>
 
 <h2>The busiest venues</h2>
@@ -838,7 +838,7 @@ export const posts: BlogPost[] = [
     slug: 'best-soft-play-in-hastings',
     title: 'Best Soft Play in Hastings (2026 Parent Guide)',
     city: 'Hastings',
-    excerpt: 'A guide to soft play in Hastings built from real data: 16 venues, the best-reviewed (Glow Baby Play Centre, 5.0 stars), and which ones confirm a café, toddler area, parties or SEN-friendly sessions.',
+    excerpt: 'A guide to soft play in Hastings built from real data: the best-reviewed venue (Glow Baby Play Centre, 5.0 stars), and which ones confirm a café, toddler area, parties or SEN-friendly sessions.',
     publishedAt: '2026-02-18T00:00:00.000Z',
     updatedAt: '2026-10-24T00:00:00.000Z',
     datePublished: '2026-02-18T00:00:00.000Z',
@@ -920,7 +920,7 @@ export const posts: BlogPost[] = [
     slug: 'best-soft-play-in-ipswich',
     title: 'Best Soft Play in Ipswich (2026 Parent Guide)',
     city: 'Ipswich',
-    excerpt: 'A guide to soft play in Ipswich built from real data: 14 venues, the best-reviewed (The Play Den, 5.0 stars), and which ones confirm a café, toddler area, parties or SEN-friendly sessions.',
+    excerpt: 'A guide to soft play in Ipswich built from real data: the best-reviewed venue (The Play Den, 5.0 stars), and which ones confirm a café, toddler area, parties or SEN-friendly sessions.',
     publishedAt: '2026-02-18T00:00:00.000Z',
     updatedAt: '2026-11-11T00:00:00.000Z',
     datePublished: '2026-02-18T00:00:00.000Z',
@@ -1001,7 +1001,7 @@ export const posts: BlogPost[] = [
     slug: 'best-soft-play-in-southend',
     title: 'Best Soft Play in Southend (2026 Parent Guide)',
     city: 'Southend',
-    excerpt: 'A guide to soft play in Southend-on-Sea built from real data: 14 venues, the best-reviewed (Little Play Village, 4.9 stars), and which ones confirm a café, toddler area, parties or SEN-friendly sessions.',
+    excerpt: 'A guide to soft play in Southend-on-Sea built from real data: the best-reviewed venue (Little Play Village, 4.9 stars), and which ones confirm a café, toddler area, parties or SEN-friendly sessions.',
     publishedAt: '2026-02-18T00:00:00.000Z',
     updatedAt: '2026-10-24T00:00:00.000Z',
     datePublished: '2026-02-18T00:00:00.000Z',
@@ -1018,7 +1018,7 @@ export const posts: BlogPost[] = [
 <p><a href="/soft-play/southend/little-play-village" class="text-purple-700 hover:underline">Little Play Village</a> has the highest rating of any venue with 20+ reviews, at 4.9 stars — ranked below by rating, then by how many people have reviewed them:</p>
 <ul>
   <li><strong><a href="/soft-play/southend/little-play-village" class="text-purple-700 hover:underline">Little Play Village</a></strong> — 4.9 stars from 191 reviews.</li>
-  <li><strong><a href="/soft-play/southend/john-burrows-play-ground-southend-on-sea" class="text-purple-700 hover:underline">John Burrows Play Ground</a></strong> — 4.5 stars from 168 reviews.</li>
+  <li><strong>John Burrows Play Ground</strong> — 4.5 stars from 168 reviews.</li>
   <li><strong><a href="/soft-play/southend/lets-go-bonkers" class="text-purple-700 hover:underline">Lets Go Bonkers</a></strong> — 4.5 stars from 124 reviews.</li>
   <li><strong><a href="/soft-play/southend/the-daisy-patch" class="text-purple-700 hover:underline">The Daisy Patch</a></strong> — 4.5 stars from 31 reviews.</li>
   <li><strong><a href="/soft-play/southend/funtopia-indoor-amusement-park" class="text-purple-700 hover:underline">Funtopia Indoor Amusement Park</a></strong> — 4.4 stars from 69 reviews.</li>
@@ -1033,7 +1033,7 @@ export const posts: BlogPost[] = [
   <li><strong>On-site café</strong> (2 of 14): <strong><a href="/soft-play/southend/fantasy-island" class="text-purple-700 hover:underline">Fantasy Island</a></strong> and <strong><a href="/soft-play/southend/little-play-village" class="text-purple-700 hover:underline">Little Play Village</a></strong>.</li>
   <li><strong>Birthday parties</strong> (2): <strong><a href="/soft-play/southend/360-play-basildon-family-entertainment-centre-and-party-venue" class="text-purple-700 hover:underline">360 Play Basildon - Family Entertainment Centre and Party Venue</a></strong> and <strong><a href="/soft-play/southend/dreamy-play-days" class="text-purple-700 hover:underline">Dreamy Play Days</a></strong>.</li>
   <li><strong>SEN-friendly</strong> (1): <strong><a href="/soft-play/southend/the-daisy-patch" class="text-purple-700 hover:underline">The Daisy Patch</a></strong>.</li>
-  <li><strong>On-site parking</strong> (1): <strong><a href="/soft-play/southend/john-burrows-play-ground-southend-on-sea" class="text-purple-700 hover:underline">John Burrows Play Ground</a></strong>.</li>
+  <li><strong>On-site parking</strong> (1): <strong>John Burrows Play Ground</strong>.</li>
 </ul>
 
 <h2>Which one to try first</h2>
@@ -1080,7 +1080,7 @@ export const posts: BlogPost[] = [
     slug: 'best-soft-play-in-swansea',
     title: 'Best Soft Play in Swansea (2026 Parent Guide)',
     city: 'Swansea',
-    excerpt: 'A guide to soft play in Swansea built from real data: 17 venues, the best-reviewed (Tiny Tots Town, 5.0 stars), and which ones confirm a café, toddler area, parties or SEN-friendly sessions.',
+    excerpt: 'A guide to soft play in Swansea built from real data: the best-reviewed venue (Tiny Tots Town, 5.0 stars), and which ones confirm a café, toddler area, parties or SEN-friendly sessions.',
     publishedAt: '2026-02-18T00:00:00.000Z',
     updatedAt: '2026-10-24T00:00:00.000Z',
     datePublished: '2026-02-18T00:00:00.000Z',
@@ -1155,7 +1155,7 @@ export const posts: BlogPost[] = [
     slug: 'best-soft-play-in-huddersfield',
     title: 'Best Soft Play in Huddersfield (2026 Parent Guide)',
     city: 'Huddersfield',
-    excerpt: 'A guide to soft play in Huddersfield built from real data: 9 venues, the best-reviewed (Town Playcafé Huddersfield, 4.8 stars), and which ones confirm a café, toddler area, parties or SEN-friendly sessions.',
+    excerpt: 'A guide to soft play in Huddersfield built from real data: the best-reviewed venue (Town Playcafé Huddersfield, 4.8 stars), and which ones confirm a café, toddler area, parties or SEN-friendly sessions.',
     publishedAt: '2026-02-20T00:00:00.000Z',
     updatedAt: '2026-10-24T00:00:00.000Z',
     datePublished: '2026-02-20T00:00:00.000Z',
@@ -1227,7 +1227,7 @@ export const posts: BlogPost[] = [
     slug: 'best-soft-play-in-edinburgh',
     title: 'Best Soft Play in Edinburgh (2026 Parent Guide)',
     city: 'Edinburgh',
-    excerpt: 'A guide to soft play in Edinburgh built from real data: 15 venues, the best-reviewed (MakeBelieve - The Baby Play Place, 4.9 stars), and which ones confirm a café, toddler area, parties or SEN-friendly sessions.',
+    excerpt: 'A guide to soft play in Edinburgh built from real data: the best-reviewed venue (MakeBelieve - The Baby Play Place, 4.9 stars), and which ones confirm a café, toddler area, parties or SEN-friendly sessions.',
     publishedAt: '2026-02-25T00:00:00.000Z',
     updatedAt: '2026-11-11T00:00:00.000Z',
     datePublished: '2026-02-25T00:00:00.000Z',
@@ -1302,7 +1302,7 @@ export const posts: BlogPost[] = [
     slug: 'best-soft-play-in-glasgow',
     title: 'Best Soft Play in Glasgow (2026 Parent Guide)',
     city: 'Glasgow',
-    excerpt: 'A guide to soft play in Glasgow built from real data: 19 venues, the best-reviewed (Adventure Planet Paisley, 4.9 stars), and which ones confirm a café, toddler area, parties or SEN-friendly sessions.',
+    excerpt: 'A guide to soft play in Glasgow built from real data: the best-reviewed venue (Adventure Planet Paisley, 4.9 stars), and which ones confirm a café, toddler area, parties or SEN-friendly sessions.',
     publishedAt: '2026-02-25T00:00:00.000Z',
     updatedAt: '2026-10-24T00:00:00.000Z',
     datePublished: '2026-02-25T00:00:00.000Z',
@@ -1375,7 +1375,7 @@ export const posts: BlogPost[] = [
     slug: 'best-soft-play-in-aberdeen',
     title: 'Best Soft Play in Aberdeen (2026 Parent Guide)',
     city: 'Aberdeen',
-    excerpt: 'A guide to soft play in Aberdeen built from real data: 11 venues, the best-reviewed (BECS - Inclusive Soft Play Centre, 4.9 stars), and which ones confirm a café, toddler area, parties or SEN-friendly sessions.',
+    excerpt: 'A guide to soft play in Aberdeen built from real data: the best-reviewed venue (BECS - Inclusive Soft Play Centre, 4.9 stars), and which ones confirm a café, toddler area, parties or SEN-friendly sessions.',
     publishedAt: '2026-02-25T00:00:00.000Z',
     updatedAt: '2026-10-24T00:00:00.000Z',
     datePublished: '2026-02-25T00:00:00.000Z',
@@ -1395,11 +1395,11 @@ export const posts: BlogPost[] = [
   <li><strong><a href="/soft-play/aberdeen/osmans" class="text-purple-700 hover:underline">Osmans</a></strong> — 4.6 stars from 99 reviews.</li>
   <li><strong><a href="/soft-play/aberdeen/playtown-inverurie-aberdeen" class="text-purple-700 hover:underline">Playtown Inverurie</a></strong> — 4.6 stars from 97 reviews.</li>
   <li><strong><a href="/soft-play/aberdeen/the-den-the-glen-aberdeen" class="text-purple-700 hover:underline">The Den &amp; The Glen</a></strong> — 4.4 stars from 1,106 reviews.</li>
-  <li><strong><a href="/soft-play/aberdeen/kids-park-aberdeen" class="text-purple-700 hover:underline">Kids Park</a></strong> — 4.4 stars from 25 reviews.</li>
+  <li><strong>Kids Park</strong> — 4.4 stars from 25 reviews.</li>
 </ul>
 
 <h2>The busiest venues</h2>
-<p>Review volume is a good proxy for how many families actually go. <a href="/soft-play/aberdeen/the-den-the-glen-aberdeen" class="text-purple-700 hover:underline">The Den &amp; The Glen</a> is the most-reviewed on our list with 1,106 reviews at 4.4 stars, followed by <a href="/soft-play/aberdeen/innoflate" class="text-purple-700 hover:underline">Innoflate Aberdeen</a> (366 reviews, 4.1 stars), <a href="/soft-play/aberdeen/smuggler-s-cove-aberdeen" class="text-purple-700 hover:underline">Smuggler's Cove</a> (126 reviews, 4.1 stars) and <a href="/soft-play/aberdeen/adventure-aberdeen-snowsports-aberdeen" class="text-purple-700 hover:underline">Adventure Aberdeen Snowsports</a> (77 reviews, 4.2 stars).</p>
+<p>Review volume is a good proxy for how many families actually go. <a href="/soft-play/aberdeen/the-den-the-glen-aberdeen" class="text-purple-700 hover:underline">The Den &amp; The Glen</a> is the most-reviewed on our list with 1,106 reviews at 4.4 stars, followed by <a href="/soft-play/aberdeen/innoflate" class="text-purple-700 hover:underline">Innoflate Aberdeen</a> (366 reviews, 4.1 stars), <a href="/soft-play/aberdeen/smuggler-s-cove-aberdeen" class="text-purple-700 hover:underline">Smuggler's Cove</a> (126 reviews, 4.1 stars) and Adventure Aberdeen Snowsports (77 reviews, 4.2 stars).</p>
 
 <h2>Where the confirmed facilities are</h2>
 <p>Facility information is patchy across smaller venues, so these lists show only what is confirmed on each listing — a venue missing from a list may well have the facility, it just isn’t confirmed in our data.</p>

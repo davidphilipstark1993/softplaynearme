@@ -1,0 +1,496 @@
+{
+  "generated": "2026-11-27",
+  "source": "seo-data/adsense/off-category-candidates.csv (high tier), reviewed by name/category/website",
+  "note": "Edit before running. Venues tiered \"review\" in the CSV are not touched. Every entry is checked by id AND name before writing.",
+  "deactivate_types": [
+    "park-playground",
+    "mobile-hire",
+    "retail"
+  ],
+  "deactivate": [
+    {
+      "id": 1390,
+      "name": "Adventure Aberdeen Snowsports",
+      "reason": "ski school"
+    },
+    {
+      "id": 1376,
+      "name": "Cornhill play ground",
+      "reason": "outdoor playground"
+    },
+    {
+      "id": 1378,
+      "name": "Kids Park",
+      "reason": "outdoor playground"
+    },
+    {
+      "id": 1421,
+      "name": "Spider",
+      "reason": "outdoor playground"
+    },
+    {
+      "id": 1535,
+      "name": "Berechurch Family Hub (The Ormiston Centre)",
+      "reason": "family support hub"
+    },
+    {
+      "id": 1524,
+      "name": "Play & Activity Area",
+      "reason": "outdoor play area"
+    },
+    {
+      "id": 1746,
+      "name": "MCS Fun Factory",
+      "reason": "mobile soft play hire"
+    },
+    {
+      "id": 1547,
+      "name": "Pit Top Play Grounds",
+      "reason": "outdoor playground"
+    },
+    {
+      "id": 1111,
+      "name": "Sycamore Adventure",
+      "reason": "outdoor adventure playground"
+    },
+    {
+      "id": 1629,
+      "name": "Play equipment",
+      "reason": "outdoor play equipment"
+    },
+    {
+      "id": 75,
+      "name": "All Saints Church Hall",
+      "reason": "church hall"
+    },
+    {
+      "id": 1442,
+      "name": "Moo Music Bournemouth, Christchurch, Ringwood and Ferndown",
+      "reason": "music class"
+    },
+    {
+      "id": 1859,
+      "name": "The Playgroup Hub Sunderland",
+      "reason": "playgroup"
+    },
+    {
+      "id": 265,
+      "name": "The Playgroup Patch",
+      "reason": "playgroup sessions"
+    },
+    {
+      "id": 1861,
+      "name": "Children's Centre Washington",
+      "reason": "children's centre"
+    },
+    {
+      "id": 871,
+      "name": "Children's Playing Area Longwater Lane Park",
+      "reason": "park playing area"
+    },
+    {
+      "id": 1833,
+      "name": "John Burrows Play Ground",
+      "reason": "outdoor playground"
+    },
+    {
+      "id": 1855,
+      "name": "Miles Green Park",
+      "reason": "park"
+    },
+    {
+      "id": 1787,
+      "name": "Gang Warily Recreation & Community Centre",
+      "reason": "community centre"
+    },
+    {
+      "id": 248,
+      "name": "Galtres Centre",
+      "reason": "community centre"
+    },
+    {
+      "id": 1198,
+      "name": "Family day out Liverpool",
+      "reason": "no identifiable venue"
+    },
+    {
+      "id": 781,
+      "name": "Cubano Beach Club Waterlooville",
+      "reason": "beach club/bar"
+    }
+  ],
+  "reclassify": [
+    {
+      "id": 1080,
+      "name": "Bounce Mania",
+      "from": "indoor",
+      "to": "trampoline-park"
+    },
+    {
+      "id": 1104,
+      "name": "Inflata Nation Inflatable Theme Park Birmingham",
+      "from": "indoor",
+      "to": "trampoline-park"
+    },
+    {
+      "id": 402,
+      "name": "Run and Jump Wigan",
+      "from": "indoor",
+      "to": "trampoline-park"
+    },
+    {
+      "id": 255,
+      "name": "Wacky World Inflatable Park",
+      "from": "indoor",
+      "to": "trampoline-park"
+    },
+    {
+      "id": 674,
+      "name": "Jump Cardiff",
+      "from": "indoor",
+      "to": "trampoline-park"
+    },
+    {
+      "id": 1171,
+      "name": "Jump Around Inflata-park",
+      "from": "indoor",
+      "to": "trampoline-park"
+    },
+    {
+      "id": 859,
+      "name": "Jump Warehouse Diss",
+      "from": "indoor",
+      "to": "trampoline-park"
+    },
+    {
+      "id": 624,
+      "name": "Bounce Central Lincoln",
+      "from": "indoor",
+      "to": "trampoline-park"
+    },
+    {
+      "id": 1248,
+      "name": "Sector 8 inflatable theme park Liverpool",
+      "from": "indoor",
+      "to": "trampoline-park"
+    },
+    {
+      "id": 1054,
+      "name": "Bizzy Bouncers",
+      "from": "indoor",
+      "to": "trampoline-park"
+    },
+    {
+      "id": 1328,
+      "name": "Bounce Central Salford",
+      "from": "indoor",
+      "to": "trampoline-park"
+    },
+    {
+      "id": 1355,
+      "name": "Jump Heaven LTD",
+      "from": "indoor",
+      "to": "trampoline-park"
+    },
+    {
+      "id": 450,
+      "name": "Inflata Nation Inflatable Theme Park Newcastle",
+      "from": "indoor",
+      "to": "trampoline-park"
+    },
+    {
+      "id": 542,
+      "name": "Planet Bounce Inflatable Park Nottingham",
+      "from": "indoor",
+      "to": "trampoline-park"
+    },
+    {
+      "id": 251,
+      "name": "GO Bounce",
+      "from": "indoor",
+      "to": "trampoline-park"
+    },
+    {
+      "id": 276,
+      "name": "Mister Twister's Jump Centre",
+      "from": "indoor",
+      "to": "trampoline-park"
+    },
+    {
+      "id": 1412,
+      "name": "BCP Leisure, Kings Park Leisure and Learning Centre",
+      "from": "indoor",
+      "to": "leisure-centre"
+    },
+    {
+      "id": 1603,
+      "name": "Bexhill Leisure Centre",
+      "from": "indoor",
+      "to": "leisure-centre"
+    },
+    {
+      "id": 810,
+      "name": "Hailsham Leisure Centre",
+      "from": "indoor",
+      "to": "leisure-centre"
+    },
+    {
+      "id": 47,
+      "name": "Cottingham Sports Centre",
+      "from": "indoor",
+      "to": "leisure-centre"
+    },
+    {
+      "id": 1653,
+      "name": "Felixstowe Leisure Centre",
+      "from": "indoor",
+      "to": "leisure-centre"
+    },
+    {
+      "id": 1566,
+      "name": "Dunston Activity Centre",
+      "from": "indoor",
+      "to": "leisure-centre"
+    },
+    {
+      "id": 283,
+      "name": "Kenton Park Sports Centre",
+      "from": "indoor",
+      "to": "leisure-centre"
+    },
+    {
+      "id": 1782,
+      "name": "Marina Leisure Centre",
+      "from": "indoor",
+      "to": "leisure-centre"
+    },
+    {
+      "id": 775,
+      "name": "Applemore Health & Leisure",
+      "from": "indoor",
+      "to": "leisure-centre"
+    },
+    {
+      "id": 1492,
+      "name": "Halo Garw Valley Life Centre",
+      "from": "indoor",
+      "to": "leisure-centre"
+    },
+    {
+      "id": 172,
+      "name": "Agility",
+      "from": "indoor",
+      "to": "leisure-centre"
+    },
+    {
+      "id": 1406,
+      "name": "Oasis Family Leisure Centres",
+      "from": "indoor",
+      "to": "family-attraction"
+    },
+    {
+      "id": 696,
+      "name": "Discobowl Newport",
+      "from": "indoor",
+      "to": "family-attraction"
+    },
+    {
+      "id": 1436,
+      "name": "Family Entertainment Complex",
+      "from": "indoor",
+      "to": "family-attraction"
+    },
+    {
+      "id": 1628,
+      "name": "Crowhurst Park",
+      "from": "indoor",
+      "to": "family-attraction"
+    },
+    {
+      "id": 13,
+      "name": "Beach Cove Adventure Play Area",
+      "from": "indoor",
+      "to": "family-attraction"
+    },
+    {
+      "id": 1224,
+      "name": "The Hive Leisure Park",
+      "from": "indoor",
+      "to": "family-attraction"
+    },
+    {
+      "id": 1300,
+      "name": "Urban Playground",
+      "from": "indoor",
+      "to": "family-attraction"
+    },
+    {
+      "id": 1772,
+      "name": "Adventure Village (Haven, Caister-on-Sea Holiday Park)",
+      "from": "indoor",
+      "to": "family-attraction"
+    },
+    {
+      "id": 464,
+      "name": "Conifox Adventure Park",
+      "from": "indoor",
+      "to": "family-attraction"
+    },
+    {
+      "id": 854,
+      "name": "Phoenix Leisure",
+      "from": "indoor",
+      "to": "family-attraction"
+    },
+    {
+      "id": 733,
+      "name": "Don Leisure",
+      "from": "indoor",
+      "to": "family-attraction"
+    }
+  ],
+  "merge": [
+    {
+      "keep": 1692,
+      "keep_name": "Whisby Garden Centre Playbarn",
+      "retire": 623,
+      "retire_name": "Whisby Garden Centre",
+      "why": "Whisby Garden Centre playbarn: garden centre listing is the same site"
+    },
+    {
+      "keep": 770,
+      "keep_name": "Romsey Rapids Soft Play",
+      "retire": 1799,
+      "retire_name": "Romsey Rapids Sports Complex",
+      "why": "Romsey Rapids: the soft play is the listing; the sports complex is its building"
+    },
+    {
+      "keep": 1092,
+      "keep_name": "Little Hooligans Soft Play Centre",
+      "retire": 1135,
+      "retire_name": "Toddler Town Nursery @ Little Hooligans Soft Play Centre",
+      "why": "Little Hooligans: nursery listing at the same address"
+    },
+    {
+      "keep": 174,
+      "keep_name": "Flying Legends",
+      "retire": 1180,
+      "retire_name": "Flying Legends Wacky Warehouse",
+      "why": "Flying Legends: the Wacky Warehouse is the play area of this Hungry Horse pub; the pub listing holds the facility data and the guide links"
+    }
+  ],
+  "kept_after_review": [
+    {
+      "id": 20,
+      "name": "Let's Play Hull"
+    },
+    {
+      "id": 71,
+      "name": "Sailmakers"
+    },
+    {
+      "id": 93,
+      "name": "Kids Club House"
+    },
+    {
+      "id": 94,
+      "name": "RugRatz Play Gym"
+    },
+    {
+      "id": 130,
+      "name": "Let's Play"
+    },
+    {
+      "id": 136,
+      "name": "The Bumps"
+    },
+    {
+      "id": 154,
+      "name": "Topcliffe Mill"
+    },
+    {
+      "id": 367,
+      "name": "Little Grandma's Play Gym Ltd"
+    },
+    {
+      "id": 483,
+      "name": "The Den & The Glen"
+    },
+    {
+      "id": 493,
+      "name": "The Wee Gym"
+    },
+    {
+      "id": 672,
+      "name": "The Eden Centre - Blackwood"
+    },
+    {
+      "id": 858,
+      "name": "Adventure Island Play Park"
+    },
+    {
+      "id": 865,
+      "name": "Kidz Fun Place"
+    },
+    {
+      "id": 933,
+      "name": "The Ark"
+    },
+    {
+      "id": 979,
+      "name": "Bright Stars Play Space"
+    },
+    {
+      "id": 1070,
+      "name": "Jump For Joy"
+    },
+    {
+      "id": 1115,
+      "name": "Rainforest Rascals"
+    },
+    {
+      "id": 1186,
+      "name": "Frankie + Lola's Liverpool"
+    },
+    {
+      "id": 1199,
+      "name": "Happy Dayz"
+    },
+    {
+      "id": 1210,
+      "name": "Crazy Club"
+    },
+    {
+      "id": 1231,
+      "name": "Kids Adventure Cabin"
+    },
+    {
+      "id": 1257,
+      "name": "Dan's Den at Christchurch"
+    },
+    {
+      "id": 1317,
+      "name": "Imagination Bay Adventure Play"
+    },
+    {
+      "id": 1337,
+      "name": "Play and fun"
+    },
+    {
+      "id": 1402,
+      "name": "Play Pit"
+    },
+    {
+      "id": 1447,
+      "name": "Play Bradford"
+    },
+    {
+      "id": 1558,
+      "name": "Kids Little Kingdom"
+    },
+    {
+      "id": 1771,
+      "name": "Funfort Kids Play Area"
+    }
+  ]
+}

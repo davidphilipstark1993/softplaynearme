@@ -99,14 +99,21 @@ const redirects = new Map(read('data/redirects.json').map((r) => [r.source, r.de
 const venues = read('data/generated/venues.json')
 const live = new Set([...venues.map((v) => `/soft-play/${v.townSlug}/${v.slug}`), ...venues.map((v) => `/soft-play/${v.townSlug}`)])
 const byId = new Map(venues.map((v) => [v.id, v]))
+// Retired on purpose later (phase18-01: playgrounds, hire, off-category). Its URL, and any
+// old URL that 301ed to it, answers 410 Gone (lib/redirects.ts goneFor).
+const gone = new Set(read('data/gone.json').map((g) => g.path))
 const RETIRED_AFTER_MOVE = new Set([1612])
 // Merged into another listing after its move (25 Nov 2026, phase16-01 duplicate merge): both
 // its phase-13 URLs 301 straight to the surviving listing.
-const MERGED_AFTER_MOVE = new Map([[1894, '/soft-play/mossley/tumbles-play-place-2']])
+const MERGED_AFTER_MOVE = new Map([
+  [1894, '/soft-play/mossley/tumbles-play-place-2'],
+  // phase18-01 (27 Nov 2026): the sports complex is the building the Romsey Rapids soft play is in.
+  [1799, '/soft-play/romsey/romsey-rapids-soft-play'],
+])
 // Refiled again after phase 13 onto a smaller town hub (19 Nov 2026 Hampshire batch: Romsey/Winchester
 // split off Southampton). Their phase-13 URLs now 301 on to the town hub.
 const REFILED_AFTER_MOVE = new Map([
-  [657, 'romsey'], [767, 'romsey'], [770, 'romsey'], [1799, 'romsey'], [1801, 'romsey'],
+  [657, 'romsey'], [767, 'romsey'], [770, 'romsey'], [1801, 'romsey'],
   [784, 'winchester'], [1067, 'winchester'],
 ])
 const finalUrl = (m) => (REFILED_AFTER_MOVE.has(m.id) ? `/soft-play/${REFILED_AFTER_MOVE.get(m.id)}/${m.to_slug}` : `/soft-play/${m.to_city}/${m.to_slug}`)
@@ -134,11 +141,12 @@ test('every approved move: old URL 301s once to the new URL, which is live in th
       assert.equal(redirects.get(oldUrl), finalU, oldUrl)
       assert.equal(redirects.get(newUrl), finalU, newUrl)
       assert.ok(!redirects.has(finalU), `${finalU} is itself redirected`)
-      assert.ok(live.has(finalU), `${finalU} not in static export`)
+      assert.ok(live.has(finalU) || gone.has(finalU), `${finalU} not in static export`)
       continue
     }
     assert.equal(redirects.get(oldUrl), newUrl, oldUrl)
     assert.ok(!redirects.has(newUrl), `${newUrl} is itself redirected`)
+    if (gone.has(newUrl)) continue
     assert.ok(live.has(newUrl), `${newUrl} not in static export`)
     if (byId.has(m.id)) assert.equal(byId.get(m.id).townSlug, m.to_city)
   }
@@ -159,13 +167,13 @@ test('held-back moves are untouched', () => {
   }
 })
 
-test('every GSC wrong-city URL (Nov 2026) resolves to a live page in at most one hop', () => {
+test('every GSC wrong-city URL (Nov 2026) resolves in at most one hop to a live page or a deliberate 410', () => {
   // URL column only of the GSC export (seo-data/ itself stays out of the public repo)
   const urls = fs.readFileSync(path.join(ROOT, 'scripts/fixtures/gsc-2026-11-wrong-city-urls.txt'), 'utf8').trim().split('\n')
   assert.equal(urls.length, 49)
   for (const p of urls) {
     const dest = redirects.get(p) ?? p
-    assert.ok(live.has(dest), `${p} -> ${dest} is not live`)
+    assert.ok(live.has(dest) || gone.has(dest), `${p} -> ${dest} is neither live nor deliberately gone`)
     assert.ok(!redirects.has(dest), `${p} chains`)
   }
 })

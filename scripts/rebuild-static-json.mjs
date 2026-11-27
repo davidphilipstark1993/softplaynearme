@@ -34,6 +34,12 @@ if (!DB_URL) {
 // of truth for what counts as genuine soft play).
 const VISIBLE_VENUE_TYPES = ['indoor', 'pub']
 
+// Importer junk that must never come back from the previous export ("nan", Google's
+// placeholder icons stored as photos). See scripts/migrations/phase18-01-adsense-cleanup.mjs.
+const JUNK = new Set(['nan', 'https://nan', 'http://nan', 'undefined', 'null', 'none', 'n/a'])
+const PLACEHOLDER_IMAGE = /ssl\.gstatic\.com\/local\/servicebusiness\/default_user|maps\.gstatic\.com\/tactile\/pane\/result-no-thumbnail/
+const real = (v) => (typeof v === 'string' && JUNK.has(v.trim().toLowerCase()) ? '' : v)
+
 function slugify(text) {
   return text.toString().toLowerCase().trim()
     .replace(/&/g, 'and').replace(/[^\w\s-]/g, '')
@@ -108,13 +114,13 @@ async function main() {
       // scripts/migrations/phase2-06-clean-corrupted-addresses.mjs had
       // explicitly nulled them in the DB, defeating the cleanup on every
       // subsequent rebuild.
-      address: v.address || '',
-      postcode: v.postcode || existing.postcode || '',
+      address: real(v.address) || '',
+      postcode: real(v.postcode) || real(existing.postcode) || '',
       lat: v.lat || null,
       lng: v.lng || null,
-      phone: v.phone || existing.phone || '',
-      website: v.website || existing.website || '',
-      mapsUrl: existing.mapsUrl || v.google_maps_url || '',
+      phone: real(v.phone) || real(existing.phone) || '',
+      website: real(v.website) || real(existing.website) || '',
+      mapsUrl: real(existing.mapsUrl) || real(v.google_maps_url) || '',
       googlePlaceId: v.google_place_id || '',
       category: v.category || existing.category || 'Indoor playground',
       description: v.description || '',
@@ -140,7 +146,7 @@ async function main() {
       priceTo: v.price_to || null,
       pricingHint: v.pricing_hint || '',
       // Images
-      mainImageUrl: v.main_image_url || null,
+      mainImageUrl: real(v.main_image_url) && !PLACEHOLDER_IMAGE.test(v.main_image_url) ? v.main_image_url : null,
       featured: Boolean(v.featured),
       // See lib/venueTypes.ts — null/'indoor' means genuine soft play.
       venueType: v.venue_type || 'indoor',

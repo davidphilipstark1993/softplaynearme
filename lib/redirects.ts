@@ -10,10 +10,19 @@
  * 301 to its final page even if two migrations touched it.
  */
 import entries from '@/data/redirects.json'
+import goneEntries from '@/data/gone.json'
 
 type Entry = { source: string; destination: string }
 
 const raw = new Map((entries as Entry[]).map((e) => [e.source, e.destination]))
+
+/**
+ * Venue URLs retired on purpose (data/gone.json: off-category listings removed in
+ * phase18-01). They answer 410 Gone, which tells Google the page was removed
+ * deliberately and drops it faster than a 404. A URL that earned clicks is 301'd to its
+ * hub instead (the migration decides, from a GSC export), so it is never in this list.
+ */
+const GONE: ReadonlySet<string> = new Set((goneEntries as Array<{ path: string }>).map((g) => g.path))
 
 function finalDestination(source: string): string | null {
   const seen = new Set([source])
@@ -26,14 +35,23 @@ function finalDestination(source: string): string | null {
   return dest ?? null
 }
 
-/** source path -> final destination path, chains already collapsed. */
+const resolved = [...raw.keys()].map((s) => [s, finalDestination(s)] as const)
+
+/** source path -> final destination path, chains already collapsed. A redirect whose
+ *  final page is gone is not a redirect: its source is gone too (see goneFor). */
 export const REDIRECTS: ReadonlyMap<string, string> = new Map(
-  [...raw.keys()]
-    .map((s) => [s, finalDestination(s)] as const)
-    .filter((pair): pair is readonly [string, string] => !!pair[1] && pair[1] !== pair[0]),
+  resolved.filter((pair): pair is readonly [string, string] => !!pair[1] && pair[1] !== pair[0] && !GONE.has(pair[1])),
 )
 
+const GONE_VIA_REDIRECT: ReadonlySet<string> = new Set(resolved.filter(([, d]) => d && GONE.has(d)).map(([s]) => s))
+
 const stripSlash = (p: string) => (p.length > 1 ? p.replace(/\/+$/, '') : p)
+
+/** True when this path was removed on purpose and should answer 410. */
+export function goneFor(pathname: string): boolean {
+  const p = stripSlash(pathname)
+  return GONE.has(p) || GONE_VIA_REDIRECT.has(p)
+}
 
 /** Where this path permanently lives now, or null if it is not redirected. */
 export function redirectFor(pathname: string): string | null {

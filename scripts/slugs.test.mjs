@@ -59,8 +59,10 @@ test('slugs are unique within each hub and never shadow a filter route', () => {
   }
 })
 
-test('redirects: no chains, no loops, every destination is a live page', () => {
+test('redirects: no chains, no loops, every destination is a live page (or retired on purpose: 410)', () => {
+  const gone = new Set(readJson('data/gone.json').map((g) => g.path))
   for (const [source, destination] of bySource) {
+    if (gone.has(destination)) continue // lib/redirects.ts serves the source as 410 too
     assert.notEqual(source, destination, `self-redirect ${source}`)
     assert.ok(!bySource.has(destination), `chain ${source} -> ${destination} -> ${bySource.get(destination)}`)
     assert.ok(live.has(destination), `${source} redirects to ${destination}, which is not a live page`)

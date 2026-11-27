@@ -856,7 +856,7 @@
   },
   {
     "source": "/soft-play/portsmouth/romsey-rapids-sports-complex-portsmouth",
-    "destination": "/soft-play/romsey/romsey-rapids-sports-complex",
+    "destination": "/soft-play/romsey/romsey-rapids-soft-play",
     "permanent": true
   },
   {
@@ -2731,7 +2731,7 @@
   },
   {
     "source": "/soft-play/york/flying-legends-wacky-warehouse-hull",
-    "destination": "/soft-play/york/flying-legends-wacky-warehouse",
+    "destination": "/soft-play/york/flying-legends-york",
     "permanent": true
   },
   {
@@ -4081,7 +4081,7 @@
   },
   {
     "source": "/soft-play/southend/romsey-rapids-sports-complex-portsmouth",
-    "destination": "/soft-play/romsey/romsey-rapids-sports-complex",
+    "destination": "/soft-play/romsey/romsey-rapids-soft-play",
     "permanent": true
   },
   {
@@ -5626,7 +5626,7 @@
   },
   {
     "source": "/soft-play/birmingham/toddler-town-nursery-little-hooligans-soft-play-centre-birmingham",
-    "destination": "/soft-play/walsall/toddler-town-nursery-little-hooligans-soft-play-centre-birmingham",
+    "destination": "/soft-play/walsall/little-hooligans-soft-play-centre-birmingham",
     "permanent": true
   },
   {
@@ -6671,7 +6671,7 @@
   },
   {
     "source": "/soft-play/southend/romsey-rapids-sports-complex",
-    "destination": "/soft-play/romsey/romsey-rapids-sports-complex",
+    "destination": "/soft-play/romsey/romsey-rapids-soft-play",
     "permanent": true
   },
   {
@@ -6996,7 +6996,7 @@
   },
   {
     "source": "/soft-play/southampton/romsey-rapids-sports-complex",
-    "destination": "/soft-play/romsey/romsey-rapids-sports-complex",
+    "destination": "/soft-play/romsey/romsey-rapids-soft-play",
     "permanent": true
   },
   {
@@ -8377,6 +8377,26 @@
   {
     "source": "/blog/best-soft-play-in-norwich",
     "destination": "/soft-play/norwich",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/lincoln/whisby-garden-centre-lincoln",
+    "destination": "/soft-play/lincoln/whisby-garden-centre-playbarn-lincoln",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/romsey/romsey-rapids-sports-complex",
+    "destination": "/soft-play/romsey/romsey-rapids-soft-play",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/walsall/toddler-town-nursery-little-hooligans-soft-play-centre-birmingham",
+    "destination": "/soft-play/walsall/little-hooligans-soft-play-centre-birmingham",
+    "permanent": true
+  },
+  {
+    "source": "/soft-play/york/flying-legends-wacky-warehouse",
+    "destination": "/soft-play/york/flying-legends-york",
     "permanent": true
   }
 ]
