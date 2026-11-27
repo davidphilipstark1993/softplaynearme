@@ -44,6 +44,9 @@ export function ReviewSection({ initialReviews, venueId, citySlug, venueSlug, go
   const [submitting, setSubmitting] = useState(false)
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
+  // The form opens on request: printed on every venue page, its labels were the same
+  // ~20 words on 1,400 pages before anyone wanted to write a review.
+  const [open, setOpen] = useState(false)
 
   const average = useMemo(() => {
     if (reviews.length === 0) return 0
@@ -78,6 +81,7 @@ export function ReviewSection({ initialReviews, venueId, citySlug, venueSlug, go
       }
 
       setMessage(payload.message || 'Review submitted successfully')
+      setOpen(false)
       setName('')
       setEmail('')
       setRating(5)
@@ -114,16 +118,7 @@ export function ReviewSection({ initialReviews, venueId, citySlug, venueSlug, go
           </div>
           <p className="text-sm text-slate-600 mt-1">Based on {reviews.length} review{reviews.length === 1 ? '' : 's'}.</p>
         </div>
-      ) : (
-        <div className="text-center py-4">
-          <p className="text-slate-500">No reviews yet on Soft Play Near Me. Be the first to review.</p>
-          {googleReviewCount != null && googleReviewCount > 0 && (
-            <p className="text-slate-400 text-sm mt-1">
-              (The rating above is from {googleReviewCount.toLocaleString('en-GB')} Google reviews — separate from reviews left here.)
-            </p>
-          )}
-        </div>
-      )}
+      ) : null}
 
       {reviews.length > 0 && (
         <div className="space-y-4 mb-8">
@@ -146,7 +141,15 @@ export function ReviewSection({ initialReviews, venueId, citySlug, venueSlug, go
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-4 border-t border-slate-100 pt-6">
+      {!open && !message && (
+        <Button type="button" variant="outline" onClick={() => setOpen(true)} className="mt-2">
+          {reviews.length > 0 ? 'Leave a review' : 'Write the first review'}
+        </Button>
+      )}
+      {message && !open && <p className="text-sm text-green-700 mt-2">{message}</p>}
+
+      {open && (
+      <form onSubmit={handleSubmit} className="space-y-4 border-t border-slate-100 pt-6 mt-4">
         <h3 className="font-semibold text-slate-900">Leave a review</h3>
 
         <div>
@@ -210,6 +213,7 @@ export function ReviewSection({ initialReviews, venueId, citySlug, venueSlug, go
           {submitting ? 'Submitting...' : 'Submit review'}
         </Button>
       </form>
+      )}
     </div>
   )
 }

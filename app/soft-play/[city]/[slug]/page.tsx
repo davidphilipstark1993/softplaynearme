@@ -1023,13 +1023,6 @@ export default async function VenuePage({ params }: PageProps) {
                     ) : (
                       <ClaimCta citySlug={city} slug={slug} placement="about" className="text-purple-600 hover:text-purple-700 underline">Update this listing</ClaimCta>
                     )}
-                    {' · '}
-                    <a
-                      href={`mailto:info@softplaynearme.co.uk?subject=Correction%20for%20${encodeURIComponent(venue.name)}`}
-                      className="text-purple-600 hover:text-purple-700 underline"
-                    >
-                      Report a mistake
-                    </a>
                   </p>
                 </div>
               </section>
@@ -1316,19 +1309,7 @@ export default async function VenuePage({ params }: PageProps) {
                   googlePlaceId={venue.google_place_id}
                 />
 
-                {/* CTA Buttons (full version for sidebar) */}
-                <CTAButtons
-                  venueId={typeof venue.id === 'number' ? venue.id : undefined}
-                  name={venue.name}
-                  address={venue.address}
-                  postcode={venue.postcode}
-                  lat={venue.lat}
-                  lng={venue.lng}
-                  phone={venue.phone}
-                  website={venue.website}
-                  bookingUrl={venue.booking_url}
-                  googlePlaceId={venue.google_place_id}
-                />
+                {/* Call / website / directions: the header's buttons (not repeated here) */}
 
                 {/* Enquiry form — only for venues that exist in our DB (have a real id) */}
                 {typeof venue.id === 'number' && (
@@ -1386,8 +1367,8 @@ export default async function VenuePage({ params }: PageProps) {
                     </CardHeader>
                     <CardContent>
                       <p className="text-sm text-slate-500 mb-3">
-                        Opening hours not confirmed &mdash; check {venue.name}&apos;s
-                        {venue.website ? (
+                        We don&apos;t hold opening hours for {venue.name} yet.
+                        {venue.website && (
                           <>
                             {' '}
                             <a
@@ -1396,13 +1377,10 @@ export default async function VenuePage({ params }: PageProps) {
                               rel="noopener noreferrer"
                               className="text-purple-600 hover:text-purple-700 underline"
                             >
-                              own website
+                              Venue website
                             </a>
                           </>
-                        ) : (
-                          ' own website'
-                        )}{' '}
-                        or Facebook page before visiting.
+                        )}
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {venue.phone && (

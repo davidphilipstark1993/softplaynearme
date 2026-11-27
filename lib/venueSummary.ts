@@ -89,10 +89,13 @@ export function streetOf(address: string | null | undefined, town: string): stri
   return null
 }
 
+const ROAD = /\b(road|rd|street|st|lane|ln|way|avenue|ave|drive|dr|close|place|pl|crescent|cres|terrace|grove|hill|row|walk|parade|square|sq|gardens|gdns|mews|court|ct|boulevard|blvd|highway|bypass|green)\.?$/i
+
 function lead(i: SummaryInput): string {
   const street = streetOf(i.address, i.town)
   const place = i.area && i.area.toLowerCase() !== i.town.toLowerCase() ? `${i.area}, ${i.town}` : i.town
-  const where = street ? `on ${street} in ${place}` : `in ${place}`
+  // "on Mill Lane", but "at Birkenshaw Community Hall" / "at Kingsway Retail Park"
+  const where = street ? `${ROAD.test(street) ? 'on' : 'at'} ${street} in ${place}` : `in ${place}`
   return `${i.name} is ${article(i.kind)} ${i.kind} ${where}.`
 }
 
@@ -133,13 +136,13 @@ function sessionsAndParties(i: SummaryInput): string | null {
   return parts.length ? `It ${list(parts)}.` : null
 }
 
-function rating(i: SummaryInput): string | null {
+export function ratingSentence(i: SummaryInput): string | null {
   const r = Number(i.rating), n = Number(i.reviewCount)
   if (!(r > 0) || !(n > 0)) return null
   return `Google reviewers rate it ${r.toFixed(1)} out of 5 from ${n.toLocaleString('en-GB')} review${n === 1 ? '' : 's'}.`
 }
 
-function nearby(i: SummaryInput): string | null {
+export function nearbySentence(i: SummaryInput): string | null {
   const list = i.nearby ?? []
   if (!list.length) return null
   const [first, ...rest] = list
@@ -151,14 +154,14 @@ function nearby(i: SummaryInput): string | null {
 }
 
 /**
- * Paragraphs for the About section. First: what and where, plus whatever the venue is
- * confirmed to have. Second: rating and the nearest alternatives. Never empty: the lead
- * sentence only needs a name and a town.
+ * The About paragraph: what and where, plus whatever the venue is confirmed to have.
+ * Never empty: the lead sentence only needs a name and a town. `nearbySentence` is kept
+ * for pages with no nearby list of their own.
  */
 export function buildVenueSummary(i: SummaryInput): string[] {
-  const first = [lead(i), facilities(i), ages(i), price(i), sessionsAndParties(i)].filter(Boolean).join(' ')
-  const second = [rating(i), nearby(i)].filter(Boolean).join(' ')
-  return [first, second].filter(Boolean)
+  // The Google rating (header, Quick facts) and the nearest venues (the list below the
+  // About section) are shown elsewhere on the page, so they aren't repeated here.
+  return [[lead(i), facilities(i), ages(i), price(i), sessionsAndParties(i)].filter(Boolean).join(' ')]
 }
 
 /** How many facts beyond name/place the summary could state (0 = the short version). */

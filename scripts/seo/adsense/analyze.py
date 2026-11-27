@@ -152,10 +152,13 @@ for p in sorted(P, key=lambda x: x['path']):
         segs, tpls = p['segs'], p['tpl']
         main_words = sum(wc(s) for s in segs)
         uniq = sum(wc(s) for s, tp in zip(segs, tpls) if tpl_by_type[t][tp] < TPL_MIN)
+        # page-specific: exact text on fewer than TPL_MIN pages (venue names and distances
+        # count, unlike the template measure, which tokenises them away)
+        exact_uniq = sum(wc(s) for s in segs if exact_by_type[t][s] < TPL_MIN)
         long = [(s, tp) for s, tp in zip(segs, tpls) if wc(s) >= 4]
         exact = sum(1 for s, _ in long if exact_by_type[t][s] > 1)
         templ = sum(1 for _, tp in long if tpl_by_type[t][tp] >= TPL_MIN)
-        row.update(main_words=main_words, unique_main_words=uniq,
+        row.update(main_words=main_words, unique_main_words=uniq, page_specific_words=exact_uniq,
                    pct_sentences_shared_exact=round(100 * exact / len(long), 1) if long else '',
                    pct_sentences_templated=round(100 * templ / len(long), 1) if long else '')
         p['_uniq'], p['_templ_pct'] = uniq, (100 * templ / len(long) if long else 0)
@@ -174,7 +177,7 @@ for p in sorted(P, key=lambda x: x['path']):
         row['gsc_clicks'], row['gsc_impressions'] = (c if c else (0, 0))
     rows.append(row)
 
-cols = ['url', 'page_type', 'status', 'indexable', 'in_sitemap', 'robots', 'canonical', 'main_words', 'unique_main_words',
+cols = ['url', 'page_type', 'status', 'indexable', 'in_sitemap', 'robots', 'canonical', 'main_words', 'unique_main_words', 'page_specific_words',
         'pct_sentences_shared_exact', 'pct_sentences_templated', 'venues_listed', 'venue_type', 'category',
         'fields_populated', 'facts_beyond_places', 'fields_list'] + (['gsc_clicks', 'gsc_impressions'] if gsc else [])
 with open(f'{OUTDIR}/{PREFIX}page-inventory.csv', 'w', newline='') as f:
@@ -193,6 +196,7 @@ for t in sorted({r['page_type'] for r in rows}):
         'in_sitemap': sum(1 for r in rows if r['page_type'] == t and r['in_sitemap'] == 'yes'),
         'median_main_words': med([r['main_words'] for r in rs]),
         'median_unique_words_indexable': med([r['unique_main_words'] for r in idx if 'unique_main_words' in r]),
+        'median_page_specific_words_indexable': med([r['page_specific_words'] for r in idx if 'page_specific_words' in r]),
         'mean_pct_templated_indexable': round(sum(r.get('pct_sentences_templated') or 0 for r in idx) / len(idx), 1) if idx else None,
         'mean_pct_shared_exact_indexable': round(sum(r.get('pct_sentences_shared_exact') or 0 for r in idx) / len(idx), 1) if idx else None,
     }
