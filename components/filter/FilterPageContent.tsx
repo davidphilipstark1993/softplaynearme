@@ -17,7 +17,8 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { isOpenNow } from '@/lib/utils'
 import { hasStructuredHours } from '@/lib/venueFacts'
 import { isVisibleVenueType, visibleVenueTypeSql } from '@/lib/venueTypes'
-import { splitByLocality, groupNearbyByLocality } from '@/lib/localities'
+import { splitByLocality, groupNearbyByLocality, getLocality } from '@/lib/localities'
+import { buildFilterSections } from '@/lib/filterIntro'
 import { getHubState, getHubStates, isFilterIndexable, filterIndexableFromCounts, hubHref } from '@/lib/indexing'
 import { getVenueCounts } from '@/lib/venueCounts'
 import { buildFilterMeta, isDataFilter } from '@/lib/filterMeta'
@@ -53,6 +54,9 @@ interface FilterVenue {
   age_ranges?: string[] | null
   website?: string
   venue_type?: string | null
+  has_party_rooms?: boolean | null
+  has_sen_sessions?: boolean | null
+  wheelchair_access?: boolean | null
 }
 
 interface FilteredVenues {
@@ -115,7 +119,7 @@ async function getFilteredVenues(citySlug: string, filterSlug: FilterSlug): Prom
   else if (filterSlug === 'sen-friendly') filtered = staticVenues.filter((v) => v.senFriendly)
 
   const venues = filtered.map((v) => ({
-    id: 0,
+    id: v.id ?? 0,
     name: v.name,
     slug: v.slug,
     address: v.address,
@@ -134,6 +138,11 @@ async function getFilteredVenues(citySlug: string, filterSlug: FilterSlug): Prom
     opening_hours_text: v.openingHoursText || null,
     price_from: v.priceFrom ?? null,
     price_to: v.priceTo ?? null,
+    age_range_min: v.ageRangeMin ?? null,
+    age_range_max: v.ageRangeMax ?? null,
+    has_party_rooms: v.hasPartyRooms ?? false,
+    has_sen_sessions: v.hasSenSessions ?? false,
+    wheelchair_access: v.wheelchairAccess ?? false,
   }))
   return { venues, hoursDataAvailable: true }
 }
@@ -178,11 +187,14 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
   const h1 = filterConfig.h1Template.replace('{city}', cityName)
   // Short, data-driven intro (counts and best-rated names for THIS city) for the
   // data filters; the time-dependent "open now" page keeps its template.
-  const intro = isDataFilter(filterSlug)
-    ? buildFilterMeta(filterSlug, cityName, cityConfig.county, venues.map(toStatsVenue), await getCityVenueCount(citySlug)).intro
-    : filterConfig.introTemplate.replace('{city}', cityName)
-  const faqs = content.faqs(cityName)
-  const advice = content.advice(cityName)
+  // Category pages: intro, details and FAQs from the matching venues' own data
+  // (lib/filterIntro.ts). "Open now" keeps its template: its list changes by the minute.
+  const sections = isDataFilter(filterSlug)
+    ? buildFilterSections(filterSlug, cityName, venues.map((v) => ({ ...v, area: getLocality(v) })), await getCityVenueCount(citySlug))
+    : null
+  const intro = sections?.intro ?? filterConfig.introTemplate.replace('{city}', cityName)
+  const faqs = sections ? sections.faqs : content.faqs(cityName)
+  const advice = sections ? null : content.advice(cityName)
 
   const baseUrl = 'https://www.softplaynearme.co.uk'
   const canonicalUrl = `${baseUrl}/soft-play/${citySlug}/${filterSlug}`
@@ -354,7 +366,7 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
   return (
     <>
       <JsonLd data={breadcrumbSchema} />
-      <JsonLd data={faqSchema} />
+      {faqSchema && <JsonLd data={faqSchema} />}
       <JsonLd data={itemListSchema} />
       <JsonLd data={collectionPageSchema} />
 
@@ -436,34 +448,49 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
             </section>
           )}
 
-          {/* Helpful Advice Section */}
-          <section aria-labelledby="advice-heading" className="mt-12 bg-white rounded-xl border border-slate-200 p-8">
-            <div className="flex items-center gap-2 mb-4">
-              <Info className="w-5 h-5 text-purple-600 flex-shrink-0" />
-              <h2 id="advice-heading" className="text-xl font-semibold">{advice.heading}</h2>
-            </div>
-            <ul className="space-y-3">
-              {advice.tips.map((tip, i) => (
-                <li key={i} className="flex items-start gap-3 text-slate-700">
-                  <CheckCircle2 className="w-5 h-5 text-purple-500 flex-shrink-0 mt-0.5" />
-                  <span>{tip}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
+          {/* What the matching venues confirm (lib/filterIntro.ts), or the open-now tips */}
+          {sections && sections.details.length > 0 && (
+            <section aria-labelledby="details-heading" className="mt-12 bg-white rounded-xl border border-slate-200 p-8">
+              <div className="flex items-center gap-2 mb-4">
+                <Info className="w-5 h-5 text-purple-600 flex-shrink-0" />
+                <h2 id="details-heading" className="text-xl font-semibold">What these {cityName} venues confirm</h2>
+              </div>
+              <div className="space-y-3 text-slate-700">
+                {sections.details.map((p, i) => <p key={i}>{p}</p>)}
+              </div>
+            </section>
+          )}
+          {advice && (
+            <section aria-labelledby="advice-heading" className="mt-12 bg-white rounded-xl border border-slate-200 p-8">
+              <div className="flex items-center gap-2 mb-4">
+                <Info className="w-5 h-5 text-purple-600 flex-shrink-0" />
+                <h2 id="advice-heading" className="text-xl font-semibold">{advice.heading}</h2>
+              </div>
+              <ul className="space-y-3">
+                {advice.tips.map((tip, i) => (
+                  <li key={i} className="flex items-start gap-3 text-slate-700">
+                    <CheckCircle2 className="w-5 h-5 text-purple-500 flex-shrink-0 mt-0.5" />
+                    <span>{tip}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
 
-          {/* FAQ Section */}
-          <section aria-labelledby="filter-faq-heading" className="mt-12">
-            <h2 id="filter-faq-heading" className="text-xl font-semibold mb-6">{content.faqHeading}</h2>
-            <dl className="space-y-4">
-              {faqs.map((faq, i) => (
-                <div key={i} className="bg-white p-6 rounded-lg border border-slate-200">
-                  <dt className="font-semibold text-base mb-2">{faq.question}</dt>
-                  <dd className="text-slate-600 text-sm leading-relaxed">{faq.answer}</dd>
-                </div>
-              ))}
-            </dl>
-          </section>
+          {/* FAQ Section: only questions this page's own data answers */}
+          {faqs.length > 0 && (
+            <section aria-labelledby="filter-faq-heading" className="mt-12">
+              <h2 id="filter-faq-heading" className="text-xl font-semibold mb-6">{content.faqHeading}</h2>
+              <dl className="space-y-4">
+                {faqs.map((faq, i) => (
+                  <div key={i} className="bg-white p-6 rounded-lg border border-slate-200">
+                    <dt className="font-semibold text-base mb-2">{faq.question}</dt>
+                    <dd className="text-slate-600 text-sm leading-relaxed">{faq.answer}</dd>
+                  </div>
+                ))}
+              </dl>
+            </section>
+          )}
 
           {/* Nearby cities */}
           {nearbyCities.length > 0 && (

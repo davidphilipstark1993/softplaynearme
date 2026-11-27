@@ -21,6 +21,7 @@ import { JsonLd } from '@/components/seo/JsonLd'
 import { getLocationContent } from '@/lib/locationContent'
 import { getPostForCity, getPostsForCity } from '@/lib/blogPosts'
 import { LocationIntro } from '@/components/location/LocationIntro'
+import { dropUnsupportedClaims } from '@/lib/introClaims'
 import { CuratedVenueSection } from '@/components/location/CuratedVenueSections'
 import { HULL_CURATED_VENUES } from '@/data/hullCuratedVenues'
 import { getCityOgImage } from '@/lib/cityImages'
@@ -1377,7 +1378,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
           {guide && !hasActiveFilters && pageNum === 1 && <NearbyHubs hubs={guide.nearbyHubs} cityName={displayName} />}
 
           {/* Location Intro (template SEO copy) — not on hand-written guide hubs, whose guide covers it */}
-          {!verifiedGuide && <LocationIntro content={intro} locationName={displayName} />}
+          {!verifiedGuide && <LocationIntro content={dropUnsupportedClaims(intro, cityStatsForSchema)} locationName={displayName} />}
 
           {/* Hand-curated, fact-checked venue lists — Hull only, see data/hullCuratedVenues.ts */}
           {city === 'hull' && (
