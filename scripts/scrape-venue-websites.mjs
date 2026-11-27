@@ -1,4 +1,8 @@
 /**
+ * DEPRECATED (27 Nov 2026): writes keyword matches straight to live venue rows, and its
+ * keywords are loose ('park', 'food', 'accessible', 'sen'). Use the review-queue pipeline
+ * instead: scripts/enrichment/scrape-venue-facts.mjs -> scripts/enrichment/review-queue.mjs.
+ *
  * Scrape venue websites for amenity information
  *
  * Usage: npm run scrape:amenities

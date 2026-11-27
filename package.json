@@ -33,7 +33,9 @@
     "extract:emails:dry": "node scripts/extract-contact-emails.mjs --dry-run",
     "outreach:sync": "node scripts/outreach/backlink-outreach.mjs sync",
     "outreach:send": "node scripts/outreach/backlink-outreach.mjs send",
-    "test": "node --test scripts/*.test.mjs"
+    "test": "node --test scripts/*.test.mjs",
+    "enrich:facts": "node scripts/enrichment/scrape-venue-facts.mjs",
+    "enrich:review": "node scripts/enrichment/review-queue.mjs"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",
