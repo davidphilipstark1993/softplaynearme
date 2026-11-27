@@ -22,6 +22,10 @@ export function VenueMap({
   googlePlaceId,
 }: VenueMapProps) {
   const hasCoordinates = lat && lng
+  // Address text for the fallback search, without "undefined" or a dangling comma.
+  const textQuery = [address, postcode].map((p) => (p ?? '').trim()).filter(Boolean).join(', ')
+  // Nothing to point a map at: no card rather than a Maps search for "undefined".
+  if (!googlePlaceId && !hasCoordinates && !textQuery) return null
 
   // Google Maps URL for directions
   const getDirectionsUrl = () => {
@@ -31,7 +35,7 @@ export function VenueMap({
     if (hasCoordinates) {
       return `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`
     }
-    return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${address}, ${postcode}`)}`
+    return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${name}, ${textQuery}`)}`
   }
 
   // Google Maps URL for viewing the location
@@ -42,7 +46,7 @@ export function VenueMap({
     if (hasCoordinates) {
       return `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`
     }
-    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${name}, ${postcode}`)}`
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${name}, ${textQuery}`)}`
   }
 
   // Static map embed URL (no API key needed for basic embed)
@@ -50,7 +54,7 @@ export function VenueMap({
     if (hasCoordinates) {
       return `https://maps.google.com/maps?q=${lat},${lng}&z=15&output=embed`
     }
-    return `https://maps.google.com/maps?q=${encodeURIComponent(`${address}, ${postcode}`)}&z=15&output=embed`
+    return `https://maps.google.com/maps?q=${encodeURIComponent(textQuery)}&z=15&output=embed`
   }
 
   return (

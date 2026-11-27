@@ -1,0 +1,421 @@
+{
+  "generated": "2026-11-27",
+  "rule": "Stored description has no sentence from the old bulk generators and at least 70% of its sentences (min 2) appear on fewer than 3 venues once names, places and numbers are tokenised (scripts/seo/adsense/common.py). Checked by reading a sample.",
+  "researched": [
+    {
+      "id": 791,
+      "name": "Monkey Bizness Lewes",
+      "starts": "Monkey Bizness is an indoor play centre on the Cliffe Indust"
+    },
+    {
+      "id": 866,
+      "name": "Flying Fortress",
+      "starts": "Flying Fortress is an indoor play centre on the Ford Airfiel"
+    },
+    {
+      "id": 874,
+      "name": "Space Station Soft Play Ltd",
+      "starts": "Space Station is an indoor play centre in Lancing for childr"
+    },
+    {
+      "id": 886,
+      "name": "Palace Play",
+      "starts": "Palace Play is the children’s soft play on Brighton Palace P"
+    },
+    {
+      "id": 894,
+      "name": "The Lighthouse Soft Play and Cafe",
+      "starts": "The Lighthouse is a volunteer-staffed soft play and communit"
+    },
+    {
+      "id": 897,
+      "name": "Sharky's",
+      "starts": "Sharky’s Soft Play & Café is at Henfield Leisure Centre, Nor"
+    },
+    {
+      "id": 900,
+      "name": "Funplex.",
+      "starts": "Funplex is an indoor play centre at Unit 2b, The Hyde Busine"
+    },
+    {
+      "id": 903,
+      "name": "Jumpin Fun Inflatable Park Burgess Hill",
+      "starts": "Jumpin Fun Burgess Hill is a 25,000 sq ft inflatable theme p"
+    },
+    {
+      "id": 907,
+      "name": "Harbour Park Indoor Soft Play",
+      "starts": "Harbour Park’s soft play area in Littlehampton is for childr"
+    },
+    {
+      "id": 914,
+      "name": "FunPlay Leisure",
+      "starts": "FunPlay Leisure is a family leisure venue at Brighton Marina"
+    },
+    {
+      "id": 919,
+      "name": "The Doves Play Barn",
+      "starts": "The Doves Play Barn is an indoor play barn at Heaven Farm, F"
+    },
+    {
+      "id": 1449,
+      "name": "Washbrooks Family Farm",
+      "starts": "Washbrooks Family Farm is a family farm at Brighton Road, Hu"
+    },
+    {
+      "id": 1458,
+      "name": "Playcafe",
+      "starts": "Playcafé is a not-for-profit community café run by St Matthi"
+    },
+    {
+      "id": 1935,
+      "name": "Little Jungle Soft Play",
+      "starts": "Jungle-themed indoor soft play on the first floor of Rialto "
+    },
+    {
+      "id": 1936,
+      "name": "Jam Jam Boomerang",
+      "starts": "Coventry's large indoor play and party centre for children u"
+    },
+    {
+      "id": 1937,
+      "name": "Riverside Hub",
+      "starts": "Large indoor play centre behind the Mercedes-Benz dealership"
+    },
+    {
+      "id": 1938,
+      "name": "Roar and Explore Dairy Farm",
+      "starts": "Indoor soft play for under-10s inside Dairy Farm Shopping Ce"
+    },
+    {
+      "id": 1939,
+      "name": "Kidzworld Cornwall",
+      "starts": "Indoor adventure play at Stadium Retail Park in St Austell, "
+    },
+    {
+      "id": 1940,
+      "name": "Wild Things Play Project Drake Circus",
+      "starts": "City-centre play cafe on the upper level of Drake Circus, ne"
+    },
+    {
+      "id": 1941,
+      "name": "iPlay Exeter",
+      "starts": "Large indoor play centre in Marsh Barton with Jurassic and I"
+    },
+    {
+      "id": 1942,
+      "name": "Wonderland Play Exeter",
+      "starts": "Session-based soft play in Marsh Barton, Exeter, open four d"
+    },
+    {
+      "id": 1943,
+      "name": "Fuzzy Ed's Weavers Mill",
+      "starts": "Soft play fun house attached to the Weavers Mill family pub "
+    },
+    {
+      "id": 1944,
+      "name": "Zippy's Playworld",
+      "starts": "Family-run soft play and party centre in Chester, with parki"
+    },
+    {
+      "id": 1945,
+      "name": "Infinity Parks Derby",
+      "starts": "City-centre indoor play park at Riverlights, next to the bus"
+    },
+    {
+      "id": 1946,
+      "name": "Kidz Town",
+      "starts": "Role-play town for children up to about 9, rather than a cla"
+    },
+    {
+      "id": 1947,
+      "name": "360 Play Milton Keynes",
+      "starts": "Large 360 Play indoor centre in Knowlhill with soft play, ri"
+    },
+    {
+      "id": 1948,
+      "name": "Little Sharks Soft Play",
+      "starts": "Underwater-themed soft play and sensory room for ages 0-12. "
+    },
+    {
+      "id": 1949,
+      "name": "Active Zone at Leys Pools",
+      "starts": "Soft play inside Leys Pools & Leisure Centre in Blackbird Le"
+    },
+    {
+      "id": 1950,
+      "name": "Meridian Mayhem",
+      "starts": "Meridian Mayhem is a new multi-level indoor play and soft pl"
+    },
+    {
+      "id": 1951,
+      "name": "Level Up Soft Play",
+      "starts": "Level Up is the soft play at Withdean Sports Complex in Brig"
+    },
+    {
+      "id": 1952,
+      "name": "Magic Castle Soft Play, Peacehaven Leisure Centre",
+      "starts": "Magic Castle is the soft play at Peacehaven Leisure Centre i"
+    },
+    {
+      "id": 1953,
+      "name": "Soft Play at Hangleton Community Centre",
+      "starts": "Hangleton Community Centre in Hove runs a children’s soft pl"
+    },
+    {
+      "id": 1954,
+      "name": "Soft Play at Old Boat Corner Community Centre",
+      "starts": "Old Boat Corner Community Centre in Hollingbury, Brighton, r"
+    },
+    {
+      "id": 1956,
+      "name": "Paradise Park",
+      "starts": "Paradise Park in Newhaven is a family attraction with garden"
+    },
+    {
+      "id": 1957,
+      "name": "Goddenwick Farm Play Barn",
+      "starts": "The Play Barn at Goddenwick Farm, Lindfield, is an indoor pl"
+    },
+    {
+      "id": 1958,
+      "name": "Blackberry Farm Park",
+      "starts": "Blackberry Farm Park, near Lewes, is a family farm park with"
+    },
+    {
+      "id": 1974,
+      "name": "Dinotropolis Soft Play",
+      "starts": "Dinotropolis at Bluewater is a dinosaur-themed soft play cen"
+    },
+    {
+      "id": 1975,
+      "name": "Kassiopi Cove Indoor Soft Play",
+      "starts": "Kassiopi Cove is a pirate-themed indoor soft play centre in "
+    },
+    {
+      "id": 1976,
+      "name": "Cookie Island Ilford",
+      "starts": "Cookie Island is a soft play centre on the third floor of Th"
+    },
+    {
+      "id": 1977,
+      "name": "The Den at Fox & Kit",
+      "starts": "The Den at Fox & Kit in Midsomer Norton is a spacious soft p"
+    },
+    {
+      "id": 1978,
+      "name": "Brocksbushes Play Barn",
+      "starts": "The Play Barn at Brocksbushes Farm Shop, Stocksfield, has fo"
+    },
+    {
+      "id": 1979,
+      "name": "Play Patch Community Soft Play",
+      "starts": "Play Patch is a community soft play centre run by Lockleaze "
+    },
+    {
+      "id": 1980,
+      "name": "The Pod Soft Play at YMCA Hawker",
+      "starts": "The Pod is a two-storey soft play centre at YMCA Hawker, Low"
+    },
+    {
+      "id": 1981,
+      "name": "Soft Play at Hilton Community Centre",
+      "starts": "Hilton Community Centre in Inverness has a jungle-themed ind"
+    },
+    {
+      "id": 1982,
+      "name": "Soft Play at Musselburgh Sports Centre",
+      "starts": "Musselburgh Sports Centre has a soft play area for little on"
+    },
+    {
+      "id": 1983,
+      "name": "The Ark PlayCentre",
+      "starts": "The Ark PlayCentre in Cwmbran offers soft play sessions for "
+    },
+    {
+      "id": 1984,
+      "name": "Discovery Village",
+      "starts": "Discovery Village in Christchurch is an indoor role play cen"
+    },
+    {
+      "id": 1985,
+      "name": "Thistles & Tykes",
+      "starts": "Thistles & Tykes in Renfrew is a role-play café and play cen"
+    },
+    {
+      "id": 2113,
+      "name": "Airtastic Entertainment Centre Belfast",
+      "starts": "Airtastic Entertainment Centre Belfast is a soft play and fa"
+    },
+    {
+      "id": 2114,
+      "name": "Happy Littles Play Cafe",
+      "starts": "Happy Littles Play Cafe is a soft play and family entertainm"
+    },
+    {
+      "id": 2115,
+      "name": "Geo-Play",
+      "starts": "Geo-Play is an indoor soft play centre at Prestatyn Business"
+    },
+    {
+      "id": 2116,
+      "name": "Little Rascals at Ego",
+      "starts": "Little Rascals at Ego is a charity-run indoor soft play cent"
+    },
+    {
+      "id": 2117,
+      "name": "Giggles Play and Adventure",
+      "starts": "Giggles Play and Adventure is a family-run indoor soft play "
+    },
+    {
+      "id": 2118,
+      "name": "WonderWorld Perth",
+      "starts": "WonderWorld Perth is an indoor soft play and children's part"
+    },
+    {
+      "id": 2119,
+      "name": "Rock Up Birmingham",
+      "starts": "Rock Up Birmingham is an indoor climbing and soft play centr"
+    },
+    {
+      "id": 2120,
+      "name": "360 Play Birmingham",
+      "starts": "360 Play Birmingham is a new family entertainment centre at "
+    },
+    {
+      "id": 2121,
+      "name": "360 Play Redditch",
+      "starts": "360 Play Redditch is an indoor family entertainment centre i"
+    },
+    {
+      "id": 2122,
+      "name": "Imagination Street",
+      "starts": "Imagination Street is a children's activity centre in Astwoo"
+    },
+    {
+      "id": 2123,
+      "name": "Grapevine Day Nursery & Soft Play",
+      "starts": "Grapevine in Great Barr is a soft play centre that shares it"
+    },
+    {
+      "id": 2124,
+      "name": "Monster Mayhem Redditch",
+      "starts": "Monster Mayhem Redditch is a monster-themed indoor play cent"
+    },
+    {
+      "id": 2125,
+      "name": "Wacky Warehouse at The Broadway",
+      "starts": "Wacky Warehouse at The Broadway is an indoor soft play area "
+    },
+    {
+      "id": 2126,
+      "name": "Pippatopia",
+      "starts": "Pippatopia is a children's role-play café in Smethwick for c"
+    },
+    {
+      "id": 2127,
+      "name": "Fuzzy Ed's at Hare & Hounds",
+      "starts": "Fuzzy Ed's is the indoor soft play area at the Hare & Hounds"
+    },
+    {
+      "id": 2128,
+      "name": "Fuzzy Ed's at St Bernards Grange",
+      "starts": "Fuzzy Ed's Fun House is the indoor soft play area at St Bern"
+    },
+    {
+      "id": 2129,
+      "name": "Cheeky Chimps Soft Play and Cafe",
+      "starts": "Cheeky Chimps Soft Play and Cafe is a soft play centre and c"
+    },
+    {
+      "id": 2138,
+      "name": "Honeybees Playtown",
+      "starts": "Honeybees Playtown is a family-run indoor play centre on Pen"
+    },
+    {
+      "id": 2139,
+      "name": "Jumpin Fun Activity Park Selby",
+      "starts": "Jumpin Fun Activity Park Selby is an indoor activity park on"
+    },
+    {
+      "id": 2140,
+      "name": "Tigers Indoor Play Kettering",
+      "starts": "Tigers Indoor Play Kettering is a large indoor play centre a"
+    },
+    {
+      "id": 2141,
+      "name": "Kids World Bedford",
+      "starts": "Kids World Bedford is an indoor soft play centre at 9 Kingsw"
+    },
+    {
+      "id": 2142,
+      "name": "Play Den by Clip 'n Climb Gloucester",
+      "starts": "Play Den by Clip 'n Climb is a four-level soft play on the G"
+    },
+    {
+      "id": 2143,
+      "name": "Monkey Bizz",
+      "starts": "Monkey Bizz is an indoor soft play centre on Medway City Est"
+    },
+    {
+      "id": 2144,
+      "name": "Kidspace Croydon",
+      "starts": "Kidspace Croydon is a 30,000 sq ft indoor soft play and adve"
+    },
+    {
+      "id": 2145,
+      "name": "Banana Ben's Wrexham",
+      "starts": "Banana Ben's is an independent indoor play centre at Central"
+    },
+    {
+      "id": 2146,
+      "name": "Tiny Rebels Soft Play",
+      "starts": "Tiny Rebels is a Shakespeare-themed indoor soft play in Bell"
+    },
+    {
+      "id": 2147,
+      "name": "Little Subs",
+      "starts": "Little Subs is an indoor play centre on Rawlinson Street in "
+    },
+    {
+      "id": 2148,
+      "name": "Dragonflies Durham",
+      "starts": "Dragonflies is a family play centre on Mandale Business Park"
+    },
+    {
+      "id": 2149,
+      "name": "Sandcastle Softplay",
+      "starts": "Sandcastle Softplay is a seaside-themed indoor play centre o"
+    },
+    {
+      "id": 2150,
+      "name": "Treehouse Soft Play Centre",
+      "starts": "Treehouse is a soft play centre at Quarry Business Park on t"
+    },
+    {
+      "id": 2151,
+      "name": "Fun Factory Wakefield",
+      "starts": "Fun Factory is an indoor soft play centre at the Back of the"
+    },
+    {
+      "id": 2152,
+      "name": "Cheeky Monkees Corby",
+      "starts": "Cheeky Monkees is an independent indoor play centre at Curie"
+    },
+    {
+      "id": 2153,
+      "name": "360 Play Stevenage",
+      "starts": "360 Play Stevenage is a family entertainment centre at Steve"
+    },
+    {
+      "id": 2154,
+      "name": "Jungle Kingdom",
+      "starts": "Jungle Kingdom is an indoor soft play and party centre on Cr"
+    },
+    {
+      "id": 2155,
+      "name": "Mini Mayhem",
+      "starts": "Mini Mayhem is a family-run soft and role play centre in the"
+    }
+  ]
+}

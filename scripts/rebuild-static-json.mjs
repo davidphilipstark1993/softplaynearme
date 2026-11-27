@@ -66,7 +66,8 @@ async function main() {
       has_sen_sessions, has_role_play, has_multi_level_play,
       google_maps_url, google_place_id, category, notes,
       last_verified_at, price_from, price_to, pricing_hint,
-      main_image_url, featured, venue_type
+      main_image_url, featured, venue_type,
+      age_range_min, age_range_max, description_source, has_soft_play
     FROM venues
     WHERE status IS DISTINCT FROM 'closed_permanently'
       AND is_active = true
@@ -150,6 +151,12 @@ async function main() {
       featured: Boolean(v.featured),
       // See lib/venueTypes.ts — null/'indoor' means genuine soft play.
       venueType: v.venue_type || 'indoor',
+      // Facts and provenance read by lib/indexing.ts and lib/venueSummary.ts
+      // (columns added by scripts/migrations/phase18-02-enrichment-schema.mjs).
+      ageRangeMin: v.age_range_min ?? null,
+      ageRangeMax: v.age_range_max ?? null,
+      descriptionSource: v.description_source || null,
+      hasSoftPlay: v.has_soft_play ?? null,
       lastVerified: v.last_verified_at
         ? localDate(v.last_verified_at)
         : (existing.lastVerified || ''),

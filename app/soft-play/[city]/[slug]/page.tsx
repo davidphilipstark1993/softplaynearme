@@ -8,17 +8,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { getCityBySlug, getAllCitySlugs, getNearbyCities } from '@/lib/venues'
-import {
-  MapPin,
-  Star,
-  Navigation,
-  Camera,
-  Clock,
-  Phone,
-  CheckCircle2,
-  ChevronDown,
-  ChevronUp,
-} from 'lucide-react'
+import { MapPin, Star, Navigation, Clock, Phone, CheckCircle2, ChevronDown, ChevronUp } from 'lucide-react'
 import type { Metadata } from 'next'
 import { getPool, STATIC_BUILD } from '@/lib/pool'
 import { getHubGuide } from '@/lib/hubGuides'
@@ -37,10 +27,7 @@ import { isVerified } from '@/lib/plans'
 import { ReviewSection } from '@/components/venue/ReviewSection'
 import { cleanAddressForDisplay, formatAddressLine } from '@/lib/sanitize'
 import { isUsablePhotoUrl } from '@/lib/imageUtils'
-import {
-  generateVenueDescription,
-  generateVenueFAQs,
-} from '@/lib/venueContent'
+import { buildVenueSummary, buildVenueFaqs, type SummaryInput } from '@/lib/venueSummary'
 import { isVenueIndexable, getHubStates, type VenueFacts as IndexFacts } from '@/lib/indexing'
 
 import { PhotoGallery } from '@/components/venue/PhotoGallery'
@@ -50,10 +37,8 @@ import { VenueMap } from '@/components/venue/VenueMap'
 import { FacilitiesGrid, FacilitiesBadges } from '@/components/venue/FacilitiesGrid'
 import { SpecialSessions } from '@/components/venue/SpecialSessions'
 import { CTAButtons } from '@/components/venue/CTAButtons'
-import { QuickFactsPanel } from '@/components/venue/QuickFactsPanel'
 import { EnquiryForm } from '@/components/venue/EnquiryForm'
 import { ReportIssueLink } from '@/components/venue/ReportIssueLink'
-import { NewsletterSignup } from '@/components/newsletter/NewsletterSignup'
 import { AdSlot } from '@/components/ads/AdSlot'
 import { VenueViewTracking } from '@/components/venue/VenueViewTracking'
 import { cleanHoursText, hasOpeningHours, hasStructuredHours } from '@/lib/venueFacts'
@@ -122,6 +107,8 @@ interface Venue {
   membership_available?: boolean
   // Visitor info
   description_short?: string
+  /** 'researched': written from the venue's own sources (phase18-02). */
+  description_source?: string | null
   what_to_expect?: string
   tips_before_visiting?: string
   session_info?: string
@@ -297,6 +284,7 @@ function staticToVenue(sv: StaticVenue): Venue {
     pricing_hint: sv.pricingHint || undefined,
     age_range_min: sv.ageRangeMin ?? undefined,
     age_range_max: sv.ageRangeMax ?? undefined,
+    description_source: sv.descriptionSource ?? null,
     main_image_url: sv.mainImageUrl ?? undefined,
     featured: sv.featured ?? false,
     venue_type: sv.venueType,
@@ -757,19 +745,33 @@ export default async function VenuePage({ params }: PageProps) {
   const descLead = descAddress && !cleanedDescription.startsWith(venue.name)
     ? `${venue.name} is ${/^[aeiou]/i.test(kind) ? 'an' : 'a'} ${kind} at ${descAddress}.`
     : ''
-  const displayDescription = cleanedDescription
+  // Facts the About text and FAQs may state: only what this page shows (lib/venueSummary.ts).
+  const summaryInput: SummaryInput = {
+    name: venue.name, kind, address: venue.address, town: homeTown,
+    cafe: venueContentInput.cafe, parking: venueContentInput.parking, freeParking: venue.free_parking,
+    parties: venue.parties, partyRooms: venue.has_party_rooms || venue.party_rooms,
+    toddlerArea: venue.toddler_area, babyArea: venue.baby_area || venue.has_under_1s,
+    senFriendly: venue.sen_friendly, senSessions: venue.has_sen_sessions,
+    wheelchairAccess: venue.wheelchair_access || venue.disabled_access, outdoorPlay: venue.has_outdoor_play,
+    ageMin: venue.age_range_min, ageMax: venue.age_range_max, priceFrom: venue.price_from, priceTo: venue.price_to,
+    rating: (venue as { rating?: number }).rating, reviewCount: (venue as { reviews_count?: number }).reviews_count,
+    nearby: withinVenues.map((nv) => ({ name: nv.name, miles: nv.miles, area: nv.area })), nearbyMore: facts.nearbyMore, nearbyMiles: NEARBY_MILES,
+  }
+  // Shown as written: an owner's own text, or a description researched from the venue's own
+  // sources (description_source = 'researched'). Everything else was bulk-generated
+  // boilerplate, so the page states the facts instead.
+  const storedIsReal = !!venue._owner?.owner_description || venue.description_source === 'researched'
+  const displayDescription = storedIsReal && cleanedDescription
     ? [descLead, cleanedDescription].filter(Boolean).join(cleanedDescription.includes('\n\n') ? '\n\n' : ' ')
-    : generateVenueDescription(venueContentInput)
+    : buildVenueSummary(summaryInput).join('\n\n')
   const expect = cleanWhatToExpect(venue.what_to_expect)
   const tips = cleanVenueTips(venue.tips_before_visiting)
   // National category hubs this venue is listed on (lib/categoryHubs.ts).
   const venueHubs = HUB_SLUGS.filter((h) => HUBS[h].matches(venue as unknown as HubVenue))
 
-  // FAQs: prefer stored faq_json, otherwise generate from structured data
-  const faqs: Array<{ question: string; answer: string }> =
-    (venue.faq_json && venue.faq_json.length > 0)
-      ? venue.faq_json
-      : generateVenueFAQs(venueContentInput)
+  // FAQs only for facts we hold (lib/venueSummary.ts). The stored faq_json was bulk-generated
+  // and the old fallback answered most questions with "not confirmed".
+  const faqs: Array<{ question: string; answer: string }> = buildVenueFaqs(summaryInput)
 
   const faqSchema = buildFAQSchema(faqs)
 
@@ -916,54 +918,10 @@ export default async function VenuePage({ params }: PageProps) {
           </div>
         </div>
 
-        {/* Quick facts: the same facts the meta description states (lib/venueSnippet.ts),
-            so the snippet always matches what the page shows. */}
-        {(factRows.length > 0 || compareLine) && (
-          <section aria-labelledby="quick-facts-heading" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
-            <div className="bg-white rounded-lg border border-slate-200 p-4 sm:p-5">
-              <h2 id="quick-facts-heading" className="font-semibold text-base mb-3">Quick facts: {venue.name}</h2>
-              {factRows.length > 0 && (
-                <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-2 text-sm">
-                  {factRows.map((r) => (
-                    <div key={r.key} className="flex gap-2 min-w-0">
-                      <dt className="text-slate-500 flex-shrink-0">{r.label}:</dt>
-                      <dd className="font-medium text-slate-800 min-w-0">{r.value}</dd>
-                    </div>
-                  ))}
-                </dl>
-              )}
-              {compareLine && (
-                <a href="#nearby-soft-play" className="inline-block mt-3 text-sm font-medium text-purple-700 hover:text-purple-800">
-                  {compareLine} &darr;
-                </a>
-              )}
-            </div>
-          </section>
-        )}
-
-        {/* Photo Gallery / Placeholder */}
-        {galleryPhotos.length > 0 ? (
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-4 relative z-10">
+        {/* Photo gallery, when we hold real photos (no placeholder: the owner link is in About) */}
+        {galleryPhotos.length > 0 && (
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 relative z-10">
             <PhotoGallery photos={galleryPhotos} venueName={venue.name} />
-          </div>
-        ) : (
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <div className="bg-slate-100 border-2 border-dashed border-slate-300 rounded-xl p-8 text-center">
-              <Camera className="w-12 h-12 mx-auto text-slate-400 mb-3" />
-              <p className="font-semibold text-slate-700 mb-2">No photos yet</p>
-              <p className="text-sm text-slate-500 mb-4">
-                Are you the owner of {venue.name}? Add photos to help families choose your venue.
-              </p>
-              <Button variant="outline" asChild>
-                {venue.claimed_by_owner ? (
-                  <Link href="/owner/login">Owner sign in to add photos</Link>
-                ) : (
-                  <ClaimCta citySlug={city} slug={slug} placement="photos">
-                    Claim this listing to add photos
-                  </ClaimCta>
-                )}
-              </Button>
-            </div>
           </div>
         )}
 
@@ -972,26 +930,30 @@ export default async function VenuePage({ params }: PageProps) {
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Main Column */}
             <article className="lg:col-span-2 space-y-6">
-              {/* Quick Facts Panel — structured summary with graceful fallbacks */}
-              <QuickFactsPanel
-                ageRangeMin={venue.age_range_min}
-                ageRangeMax={venue.age_range_max}
-                ageRanges={venue.age_ranges}
-                acceptsWalkIns={undefined}
-                prebookingRequired={venue.prebooking_required}
-                priceFrom={venue.price_from}
-                priceTo={venue.price_to}
-                priceRange={venue.price_range}
-                hasOpeningHours={hasOpeningHours(venue)}
-                cafe={venue.cafe}
-                parking={venue.parking}
-                parties={venue.parties}
-                toddlerArea={venue.toddler_area}
-                babyArea={venue.baby_area}
-                senFriendly={venue.sen_friendly}
-                wheelchairAccess={venue.wheelchair_access}
-                disabledAccess={venue.disabled_access}
-              />
+              {/* Quick facts: the same facts the meta description states (lib/venueSnippet.ts),
+                  so the snippet always matches what the page shows. */}
+              {(factRows.length > 0 || compareLine) && (
+                <section aria-labelledby="quick-facts-heading" className="bg-white rounded-lg border border-slate-200 p-4 sm:p-5">
+                  <div>
+                    <h2 id="quick-facts-heading" className="font-semibold text-base mb-3">Quick facts: {venue.name}</h2>
+                    {factRows.length > 0 && (
+                      <dl className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-2 text-sm">
+                        {factRows.map((r) => (
+                          <div key={r.key} className="flex gap-2 min-w-0">
+                            <dt className="text-slate-500 flex-shrink-0">{r.label}:</dt>
+                            <dd className="font-medium text-slate-800 min-w-0">{r.value}</dd>
+                          </div>
+                        ))}
+                      </dl>
+                    )}
+                    {compareLine && (
+                      <a href="#nearby-soft-play" className="inline-block mt-3 text-sm font-medium text-purple-700 hover:text-purple-800">
+                        {compareLine} &darr;
+                      </a>
+                    )}
+                  </div>
+                </section>
+              )}
 
               {/* From the owner: only what a verified owner has added (venue_owner_data) */}
               {(() => {
@@ -1045,35 +1007,34 @@ export default async function VenuePage({ params }: PageProps) {
                     <p key={i} className="text-slate-600 leading-relaxed">{para}</p>
                   ))}
                 </div>
-                {!cleanedDescription && (
-                  <p className="mt-3 text-xs text-slate-400 italic">
-                    This description was generated from available listing data. Contact the venue to confirm details.
-                  </p>
-                )}
-                <div className="mt-4 pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2">
-                  <p className="text-sm text-slate-500">
-                    Is this information correct?{' '}
-                    <a
-                      href={`mailto:info@softplaynearme.co.uk?subject=Update%20for%20${encodeURIComponent(venue.name)}`}
-                      className="text-purple-600 hover:text-purple-700 underline"
-                    >
-                      Send us updates
-                    </a>
-                  </p>
+                <div className="mt-4 pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-x-4 gap-y-2 text-sm">
                   {venue.last_verified_at && (
-                    <p className="text-xs text-slate-400">
-                      Last updated:{' '}
-                      {new Date(venue.last_verified_at).toLocaleDateString('en-GB', {
-                        day: 'numeric',
-                        month: 'long',
-                        year: 'numeric',
-                      })}
+                    <p className="text-slate-600">
+                      Last verified:{' '}
+                      <time dateTime={String(venue.last_verified_at).slice(0, 10)}>
+                        {new Date(venue.last_verified_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}
+                      </time>
                     </p>
                   )}
+                  <p className="text-slate-600">
+                    Venue owner?{' '}
+                    {venue.claimed_by_owner ? (
+                      <Link href="/owner/login" className="text-purple-600 hover:text-purple-700 underline">Update this listing</Link>
+                    ) : (
+                      <ClaimCta citySlug={city} slug={slug} placement="about" className="text-purple-600 hover:text-purple-700 underline">Update this listing</ClaimCta>
+                    )}
+                    {' · '}
+                    <a
+                      href={`mailto:info@softplaynearme.co.uk?subject=Correction%20for%20${encodeURIComponent(venue.name)}`}
+                      className="text-purple-600 hover:text-purple-700 underline"
+                    >
+                      Report a mistake
+                    </a>
+                  </p>
                 </div>
               </section>
 
-              {/* Facilities Grid – showEmptyState ensures something renders */}
+              {/* Facilities: confirmed ones only; nothing confirmed, no card (the "still gathering" text was on every page) */}
               <section aria-label="Facilities & Features">
                 <FacilitiesGrid
                   facilities={venue.facilities}
@@ -1085,7 +1046,6 @@ export default async function VenuePage({ params }: PageProps) {
                   senFriendly={venue.sen_friendly}
                   wheelchairAccess={venue.wheelchair_access}
                   freeWifi={venue.free_wifi}
-                  showEmptyState
                 />
               </section>
 
@@ -1341,41 +1301,6 @@ export default async function VenuePage({ params }: PageProps) {
                 </section>
               )}
 
-              {/* Venue Owner Section (unclaimed listings only) */}
-              {!venue.claimed_by_owner && (
-              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg border border-green-200 p-6">
-                <h2 className="font-semibold text-lg text-green-800 mb-3">
-                  Venue Owners: Manage Your Listing
-                </h2>
-                <p className="text-sm text-green-700 mb-4">
-                  Soft Play Near Me helps thousands of parents find venues like yours every month.
-                  Claim your free listing to:
-                </p>
-                <ul className="text-sm text-green-700 space-y-2 mb-4">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-600 flex-shrink-0" />
-                    Update opening hours and pricing
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-600 flex-shrink-0" />
-                    Add photos and descriptions
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-600 flex-shrink-0" />
-                    Highlight special sessions (SEN, toddler, parties)
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-600 flex-shrink-0" />
-                    Respond to reviews
-                  </li>
-                </ul>
-                <Button asChild className="bg-green-600 hover:bg-green-700">
-                  <ClaimCta citySlug={city} slug={slug} placement="owner-section">
-                    Claim Your Free Listing
-                  </ClaimCta>
-                </Button>
-              </div>
-              )}
             </article>
 
             {/* Sidebar */}
@@ -1417,11 +1342,11 @@ export default async function VenuePage({ params }: PageProps) {
                 )}
 
                 {/* Pricing */}
+                {/* Only when we hold prices: the empty "not yet confirmed" card was on every page. */}
                 <PricingTable
                   pricing={pricing}
                   priceFrom={venue.price_from}
                   priceTo={venue.price_to}
-                  showEmptyState
                 />
 
                 {/* Opening Hours */}
@@ -1500,42 +1425,12 @@ export default async function VenuePage({ params }: PageProps) {
                   </Card>
                 )}
 
-                {/* Claim Venue CTA (unclaimed listings only) */}
-                {!venue.claimed_by_owner && (
-                <Card className="border-green-200 bg-green-50">
-                  <CardHeader className="pb-3">
-                    <CardTitle className="text-lg text-green-800">Own this venue?</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-3">
-                    <p className="text-sm text-green-700">
-                      Claim your free listing to update information, add photos,
-                      and manage your venue profile.
-                    </p>
-                    <Button asChild className="w-full bg-green-600 hover:bg-green-700">
-                      <ClaimCta citySlug={city} slug={slug} placement="sidebar">
-                        Claim This Venue (Free)
-                      </ClaimCta>
-                    </Button>
-                    <p className="text-xs text-green-600 text-center">
-                      No cost, no obligation
-                    </p>
-                  </CardContent>
-                </Card>
-                )}
               </div>
             </div>
           </div>
 
           <AdSlot placement="venue_page" city={city} className="max-w-4xl mx-auto px-4 pb-10" />
 
-          <div className="max-w-2xl mx-auto px-4 pb-12">
-            <NewsletterSignup
-              source="venue_page"
-              offer="both"
-              heading="Never miss a new soft play venue"
-              subtext={`Get new venue alerts for ${cityName} and weekly family day-out ideas.`}
-            />
-          </div>
         </main>
 
         <Footer />

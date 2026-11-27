@@ -56,6 +56,8 @@ export interface VenueFacts {
   has_outdoor_play?: boolean | null
   /** Set by the enrichment review queue (scripts/enrichment/) once a source confirms it. */
   has_soft_play?: boolean | null
+  /** 'researched': the stored description was written from the venue's own sources. */
+  description_source?: string | null
   /** Rows in venue_pricing / venue_sessions (owner-entered or verified). */
   price_rows?: number | null
   session_rows?: number | null
@@ -79,6 +81,7 @@ export function verifiedFacts(v: VenueFacts): string[] {
   if (v.sen_friendly || v.has_sen_sessions) out.push('SEN sessions')
   if (v.wheelchair_access) out.push('wheelchair access')
   if (v.has_outdoor_play) out.push('outdoor play')
+  if (v.description_source === 'researched') out.push('researched description')
   return out
 }
 
@@ -97,7 +100,7 @@ export function staticVenueFacts(sv: {
   name?: string; venueType?: string | null; priceFrom?: number | null; pricingHint?: string | null
   ageRangeMin?: number | null; ageRangeMax?: number | null; cafe?: boolean; parking?: boolean; parties?: boolean
   hasPartyRooms?: boolean; toddlerArea?: boolean; babyArea?: boolean; senFriendly?: boolean; hasSenSessions?: boolean
-  wheelchairAccess?: boolean; hasOutdoorPlay?: boolean; hasSoftPlay?: boolean | null
+  wheelchairAccess?: boolean; hasOutdoorPlay?: boolean; hasSoftPlay?: boolean | null; descriptionSource?: string | null
 }): VenueFacts {
   return {
     name: sv.name, venue_type: sv.venueType, price_from: sv.priceFrom, pricing_hint: sv.pricingHint,
@@ -105,13 +108,15 @@ export function staticVenueFacts(sv: {
     cafe: sv.cafe, parking: sv.parking, parties: sv.parties, has_party_rooms: sv.hasPartyRooms,
     toddler_area: sv.toddlerArea, baby_area: sv.babyArea, sen_friendly: sv.senFriendly, has_sen_sessions: sv.hasSenSessions,
     wheelchair_access: sv.wheelchairAccess, has_outdoor_play: sv.hasOutdoorPlay, has_soft_play: sv.hasSoftPlay ?? null,
+    description_source: sv.descriptionSource ?? null,
   }
 }
 
 /** Every column isVenueIndexable reads, for SELECTs (DB column names). */
 export const VENUE_FACT_COLUMNS =
   'v.name, v.venue_type, v.price_from, v.pricing_hint, v.age_range_min, v.age_range_max, v.cafe, v.parking, v.parties, v.has_party_rooms, ' +
-  'v.toddler_area, v.baby_area, v.sen_friendly, v.has_sen_sessions, v.wheelchair_access, v.has_outdoor_play'
+  'v.toddler_area, v.baby_area, v.sen_friendly, v.has_sen_sessions, v.wheelchair_access, v.has_outdoor_play, ' +
+  'v.description_source, v.has_soft_play'
 
 /** SELECT fragment adding price_rows / session_rows (needs the venues table aliased `v`). */
 export const VENUE_FACT_COUNTS_SQL =

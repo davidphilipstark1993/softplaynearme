@@ -51,6 +51,9 @@ export interface StaticVenue {
   // Ages (DB age_range_min / age_range_max)
   ageRangeMin?: number | null
   ageRangeMax?: number | null
+  /** 'researched' when the stored description was written from the venue's own sources. */
+  descriptionSource?: string | null
+  hasSoftPlay?: boolean | null
   mainImageUrl?: string | null
   featured?: boolean
   venueType?: string
