@@ -160,7 +160,7 @@ export function PremiumSignupForm({
         )}
       </button>
 
-      <p className="text-center text-xs text-slate-400">
+      <p className="text-center text-xs text-slate-500">
         {interval === 'year'
           ? '£249/year, billed annually — cancel any time.'
           : '£24.99/month, rolling month-to-month — no fixed term, cancel any time.'}{' '}
@@ -182,13 +182,15 @@ function Field({
   children: React.ReactNode
 }) {
   return (
-    <div>
-      <label className="mb-1.5 block text-sm font-medium text-slate-700">
+    // Wrapping the control in the <label> ties the two together for screen readers
+    // and makes the label text a tap target, without having to thread ids through.
+    <label className="block">
+      <span className="mb-1.5 block text-sm font-medium text-slate-700">
         {label}
-        {required && <span className="ml-1 text-red-500">*</span>}
-        {hint && <span className="ml-1 font-normal text-slate-400">— {hint}</span>}
-      </label>
+        {required && <span className="ml-1 text-red-500" aria-hidden="true">*</span>}
+        {hint && <span className="ml-1 font-normal text-slate-500">— {hint}</span>}
+      </span>
       {children}
-    </div>
+    </label>
   )
 }

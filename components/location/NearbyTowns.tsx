@@ -71,7 +71,7 @@ export function NearbyTowns({ cityName, citySlug, groups, hubSlugFor }: NearbyTo
                         <div className="flex items-center gap-1 text-xs text-slate-600">
                           <Star className="w-3 h-3 text-yellow-400 fill-current" aria-hidden="true" />
                           <span className="font-medium">{rating.toFixed(1)}</span>
-                          {Number(venue.review_count) > 0 && <span className="text-slate-400">({Number(venue.review_count).toLocaleString()})</span>}
+                          {Number(venue.review_count) > 0 && <span className="text-slate-500">({Number(venue.review_count).toLocaleString()})</span>}
                         </div>
                       )}
                     </Card>

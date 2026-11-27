@@ -106,7 +106,7 @@ export function BespokeEnquiryForm() {
             rows={4}
             maxLength={1000}
             placeholder="Tell us a bit about what you're looking for so we can put together the right quote"
-            className="flex w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm shadow-sm placeholder:text-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
+            className="flex w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm shadow-sm placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400"
           />
         </Field>
       </div>
@@ -140,7 +140,7 @@ export function BespokeEnquiryForm() {
         )}
       </button>
 
-      <p className="text-center text-xs text-slate-400">
+      <p className="text-center text-xs text-slate-500">
         No commitment. We&apos;ll reply with a tailored quote within 1 working day.
       </p>
     </form>
@@ -159,13 +159,15 @@ function Field({
   children: React.ReactNode
 }) {
   return (
-    <div>
-      <label className="mb-1.5 block text-sm font-medium text-slate-700">
+    // Wrapping the control in the <label> ties the two together for screen readers
+    // and makes the label text a tap target, without having to thread ids through.
+    <label className="block">
+      <span className="mb-1.5 block text-sm font-medium text-slate-700">
         {label}
-        {required && <span className="ml-1 text-red-500">*</span>}
-        {hint && <span className="ml-1 font-normal text-slate-400">— {hint}</span>}
-      </label>
+        {required && <span className="ml-1 text-red-500" aria-hidden="true">*</span>}
+        {hint && <span className="ml-1 font-normal text-slate-500">— {hint}</span>}
+      </span>
       {children}
-    </div>
+    </label>
   )
 }

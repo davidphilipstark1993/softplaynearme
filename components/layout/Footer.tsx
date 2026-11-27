@@ -141,6 +141,9 @@ export function Footer({ minimal = false }: FooterProps) {
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link href="/soft-play" className="hover:text-white transition-colors">All towns and cities</Link>
+              </li>
             </ul>
           </div>
           <div>

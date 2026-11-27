@@ -17,6 +17,7 @@ import { Footer } from '@/components/layout/Footer'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 import { buildBreadcrumbSchema, buildFAQSchema, buildItemListSchema, buildCollectionPageSchema } from '@/lib/schema'
 import { JsonLd } from '@/components/seo/JsonLd'
+import { TrackPageEvent } from '@/components/analytics/TrackPageEvent'
 import { getLocationContent } from '@/lib/locationContent'
 import { getPostForCity, getPostsForCity } from '@/lib/blogPosts'
 import { LocationIntro } from '@/components/location/LocationIntro'
@@ -656,7 +657,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
   // Use reusable schema builders from lib/schema.ts
   const breadcrumbSchema = buildBreadcrumbSchema([
     { name: 'Home', url: baseUrl },
-    ...(guide ? [{ name: 'Soft Play', url: `${baseUrl}/soft-play` }] : []),
+    { name: 'Soft Play', url: `${baseUrl}/soft-play` },
     { name: `Soft Play in ${displayName}`, url: `${baseUrl}/soft-play/${city}` },
   ])
 
@@ -759,11 +760,12 @@ export default async function CityPage({ params, searchParams }: PageProps) {
       <JsonLd data={faqSchema} />
       <JsonLd data={itemListSchema} />
       <JsonLd data={collectionPageSchema} />
+      <TrackPageEvent name="city_view" params={{ city_slug: city, page: pageNum }} />
 
       <div className="min-h-screen bg-slate-50">
         <Header />
 
-        <Breadcrumbs items={[...(guide ? [{ label: 'Soft Play', href: '/soft-play' }] : []), { label: `Soft Play in ${displayName}` }]} />
+        <Breadcrumbs items={[{ label: 'Soft Play', href: '/soft-play' }, { label: `Soft Play in ${displayName}` }]} />
 
         {/* Hero */}
         <div className="bg-gradient-to-br from-purple-600 to-pink-500 text-white py-10 sm:py-12 px-4">
@@ -802,26 +804,26 @@ export default async function CityPage({ params, searchParams }: PageProps) {
 
 
         {/* Sticky Filters */}
-        <div className="bg-white border-b border-slate-200 py-3 sticky top-16 z-40">
+        {/* Sticky from tablet up only: on a phone a second sticky bar under the
+            header would hold ~18% of the screen while scrolling the list. */}
+        <div className="bg-white border-b border-slate-200 py-3 md:sticky md:top-16 z-40">
           <div className="max-w-7xl mx-auto px-4 overflow-x-auto">
             <div className="flex gap-2 min-w-max">
-              <Link href={`/soft-play/${city}`}>
-                <Button variant={!filter ? 'default' : 'outline'} size="sm" className={!filter ? 'bg-purple-600' : ''}>
+              <Button asChild variant={!filter ? 'default' : 'outline'} size="sm" className={!filter ? 'bg-purple-600' : ''}>
+                <Link href={`/soft-play/${city}`}>
                   All Venues
-                </Button>
-              </Link>
-              {visibleFilters.map((f) => (
-                <Link key={f.slug} href={`/soft-play/${city}/${f.slug}`}>
-                  <Button variant="outline" size="sm">
-                    {f.name}
-                  </Button>
                 </Link>
-              ))}
-              <Link href={`/soft-play/${city}?filter=other`}>
-                <Button variant={filter === 'other' ? 'default' : 'outline'} size="sm" className={filter === 'other' ? 'bg-purple-600' : ''}>
-                  Other Family Activities
+              </Button>
+              {visibleFilters.map((f) => (
+                <Button key={f.slug} asChild variant="outline" size="sm">
+                  <Link href={`/soft-play/${city}/${f.slug}`}>{f.name}</Link>
                 </Button>
-              </Link>
+              ))}
+              <Button asChild variant={filter === 'other' ? 'default' : 'outline'} size="sm" className={filter === 'other' ? 'bg-purple-600' : ''}>
+                <Link href={`/soft-play/${city}?filter=other`}>
+                  Other Family Activities
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
@@ -888,7 +890,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                     <span className="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-wide text-amber-700 bg-amber-100 border border-amber-200 rounded-full px-2.5 py-1">
                       Sponsored
                     </span>
-                    <span className="text-xs text-slate-400">Placed by our Bespoke partners</span>
+                    <span className="text-xs text-slate-500">Placed by our Bespoke partners</span>
                   </div>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                     {sponsoredVenues.map((venue) => (
@@ -995,7 +997,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
             <h2 className="text-lg font-semibold text-slate-700">
               {showCurated ? `All Soft Play in ${displayName} ` : ''}{headlineCount} {headlineCount === 1 ? 'venue' : 'venues'}{!showCurated ? ' found' : ''}
               {totalPages > 1 && (
-                <span className="text-slate-400 font-normal">
+                <span className="text-slate-500 font-normal">
                   {' '}&mdash; showing {(pageNum - 1) * VENUES_PER_PAGE + 1}&ndash;{Math.min(pageNum * VENUES_PER_PAGE, venues.length)}
                 </span>
               )}
@@ -1008,9 +1010,9 @@ export default async function CityPage({ params, searchParams }: PageProps) {
               <MapPin className="w-12 h-12 mx-auto text-slate-300 mb-4" />
               <h3 className="text-xl font-semibold text-slate-700 mb-2">No venues found yet</h3>
               <p className="text-slate-500 mb-6">We&apos;re still building our directory for {displayName}.</p>
-              <Link href="/add-venue">
-                <Button className="bg-purple-600 hover:bg-purple-700">Add a Venue</Button>
-              </Link>
+              <Button asChild className="bg-purple-600 hover:bg-purple-700">
+                <Link href="/add-venue">Add a Venue</Link>
+              </Button>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -1074,7 +1076,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                           <Star className="w-3 h-3 text-yellow-400 fill-current" />
                           <span className="text-slate-800">{Number(venue.avg_rating).toFixed(1)}</span>
                           {venue.review_count && venue.review_count > 0 && (
-                            <span className="text-slate-400 font-normal">({venue.review_count.toLocaleString()})</span>
+                            <span className="text-slate-500 font-normal">({venue.review_count.toLocaleString()})</span>
                           )}
                         </div>
                       ) : null}
@@ -1146,7 +1148,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                     )}
 
                     {verifiedOn && (
-                      <p className="text-xs text-slate-400 mt-2">
+                      <p className="text-xs text-slate-500 mt-2">
                         Verified {verifiedOn}
                       </p>
                     )}
@@ -1195,27 +1197,27 @@ export default async function CityPage({ params, searchParams }: PageProps) {
           {totalPages > 1 && (
             <nav aria-label="Venue list pages" className="flex flex-wrap items-center justify-center gap-2 mt-8">
               {pageNum > 1 && (
-                <Link href={buildPageHref(pageNum - 1)} rel="prev">
-                  <Button variant="outline" size="sm">Previous</Button>
-                </Link>
+                <Button asChild variant="outline" size="sm">
+                  <Link href={buildPageHref(pageNum - 1)} rel="prev">Previous</Link>
+                </Button>
               )}
               {pageWindow(pageNum, totalPages).map((p, i) =>
                 p === null ? (
-                  <span key={`gap-${i}`} className="px-1 text-slate-400" aria-hidden="true">&hellip;</span>
+                  <span key={`gap-${i}`} className="px-1 text-slate-500" aria-hidden="true">&hellip;</span>
                 ) : p === pageNum ? (
                   <span key={p} aria-current="page" className="inline-flex h-8 min-w-8 items-center justify-center rounded-md bg-purple-600 px-2 text-sm font-medium text-white">
                     {p}
                   </span>
                 ) : (
-                  <Link key={p} href={buildPageHref(p)} aria-label={`Page ${p}`}>
-                    <Button variant="outline" size="sm" className="min-w-8 px-2">{p}</Button>
-                  </Link>
+                  <Button key={p} asChild variant="outline" size="sm" className="min-w-8 px-2">
+                    <Link href={buildPageHref(p)} aria-label={`Page ${p}`}>{p}</Link>
+                  </Button>
                 )
               )}
               {pageNum < totalPages && (
-                <Link href={buildPageHref(pageNum + 1)} rel="next">
-                  <Button variant="outline" size="sm">Next</Button>
-                </Link>
+                <Button asChild variant="outline" size="sm">
+                  <Link href={buildPageHref(pageNum + 1)} rel="next">Next</Link>
+                </Button>
               )}
             </nav>
           )}
@@ -1292,7 +1294,7 @@ export default async function CityPage({ params, searchParams }: PageProps) {
                             : 'hover:bg-purple-50 hover:border-purple-300 cursor-pointer py-1.5 px-3'
                         }
                       >
-                        {a.name}{count > 0 && <span className={isActive ? 'text-purple-100' : 'text-slate-400'}> ({count})</span>}
+                        {a.name}{count > 0 && <span className={isActive ? 'text-purple-100' : 'text-slate-500'}> ({count})</span>}
                       </Badge>
                     </Link>
                   )

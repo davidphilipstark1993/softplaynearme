@@ -22,18 +22,18 @@ export function VenueCardFacts({ venue }: VenueCardFactsProps) {
   return (
     <ul className="mb-3 space-y-1 text-xs text-slate-600">
       <li className="flex items-center gap-1.5">
-        <Clock className="w-3.5 h-3.5 flex-shrink-0 text-slate-400" aria-hidden="true" />
-        {hoursLabel ? <span>{hoursLabel}</span> : <span className="text-slate-400">Hours not available</span>}
+        <Clock className="w-3.5 h-3.5 flex-shrink-0 text-slate-500" aria-hidden="true" />
+        {hoursLabel ? <span>{hoursLabel}</span> : <span className="text-slate-500">Hours not available</span>}
       </li>
       {ageLabel && (
         <li className="flex items-center gap-1.5">
-          <Users className="w-3.5 h-3.5 flex-shrink-0 text-slate-400" aria-hidden="true" />
+          <Users className="w-3.5 h-3.5 flex-shrink-0 text-slate-500" aria-hidden="true" />
           <span>{ageLabel}</span>
         </li>
       )}
       {priceFrom !== null && (
         <li className="flex items-center gap-1.5">
-          <PoundSterling className="w-3.5 h-3.5 flex-shrink-0 text-slate-400" aria-hidden="true" />
+          <PoundSterling className="w-3.5 h-3.5 flex-shrink-0 text-slate-500" aria-hidden="true" />
           <span>
             {priceTo !== null && priceTo !== priceFrom
               ? `${formatPrice(priceFrom)}–${formatPrice(priceTo)} per child`

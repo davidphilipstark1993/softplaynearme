@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { Search } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 interface HeaderProps {
@@ -20,37 +21,35 @@ export function Header({ backLink }: HeaderProps) {
             className="h-9 w-auto"
             priority
           />
-          <span className="font-bold text-xl text-purple-600">Soft Play Near Me</span>
+          <span className="font-bold text-base sm:text-xl text-purple-600 whitespace-nowrap">Soft Play Near Me</span>
         </Link>
-        <div className="flex gap-2 sm:gap-4">
+        <div className="flex gap-1 sm:gap-4 min-w-0">
           {backLink ? (
-            <Link href={backLink.href}>
-              <Button variant="ghost" size="sm" className="sm:text-base">
-                Back to {backLink.label}
-              </Button>
-            </Link>
+            <Button asChild variant="ghost" size="sm" className="h-10 sm:h-8 sm:text-base min-w-0">
+              <Link href={backLink.href}>
+                <span className="truncate"><span className="hidden sm:inline">Back to </span>{backLink.label}</span>
+              </Link>
+            </Button>
           ) : (
             <>
-              <Link href="/search">
-                <Button variant="ghost" size="sm">
-                  <span className="hidden sm:inline">Find </span>Soft Play
-                </Button>
-              </Link>
-              <Link href="/blog" className="hidden sm:block">
-                <Button variant="ghost" size="sm">
-                  Blog
-                </Button>
-              </Link>
-              <Link href="/pricing" className="hidden sm:block">
-                <Button variant="ghost" size="sm">
-                  Pricing
-                </Button>
-              </Link>
-              <Link href="/pricing">
-                <Button size="sm" className="bg-green-600 text-white hover:bg-green-700 font-semibold">
-                  <span className="hidden sm:inline">Free </span>Listing
-                </Button>
-              </Link>
+              <Button asChild variant="ghost" size="sm" className="h-10 sm:h-8">
+                <Link href="/search" aria-label="Find soft play near you">
+                  <Search className="size-5 sm:hidden" aria-hidden="true" />
+                  <span className="hidden sm:inline">Find Soft Play</span>
+                </Link>
+              </Button>
+              <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
+                <Link href="/blog">Blog</Link>
+              </Button>
+              <Button asChild variant="ghost" size="sm" className="hidden sm:inline-flex">
+                <Link href="/pricing">Pricing</Link>
+              </Button>
+              <Button asChild size="sm" className="h-10 sm:h-8 bg-green-600 text-white hover:bg-green-700 font-semibold">
+                <Link href="/pricing">
+                  <span className="hidden sm:inline">Free Listing</span>
+                  <span className="sm:hidden">List venue</span>
+                </Link>
+              </Button>
             </>
           )}
         </div>

@@ -155,6 +155,30 @@ export async function geocodePostcode(postcode: string): Promise<GeocodeResult> 
   }
 }
 
+const UK_OUTCODE_REGEX = /^[A-Z]{1,2}[0-9][0-9A-Z]?$/i
+
+/** An outward code on its own (HU5, SW1A, M1): what people type when they don't know the full postcode. */
+export function isUKOutcode(input: string): boolean {
+  return UK_OUTCODE_REGEX.test(input.trim())
+}
+
+/** Centre of a postcode district (postcodes.io /outcodes), for "soft play near HU5" searches. */
+export async function geocodeOutcode(outcode: string): Promise<GeocodeResult> {
+  const formatted = outcode.replace(/\s/g, '').toUpperCase()
+  const fail = (error: string): GeocodeResult => ({ postcode: formatted, lat: 0, lng: 0, error })
+  if (!isUKOutcode(formatted)) return fail('Invalid UK postcode district')
+  try {
+    const response = await fetch(`https://api.postcodes.io/outcodes/${encodeURIComponent(formatted)}`)
+    if (response.status === 404) return fail('Postcode district not found')
+    if (!response.ok) throw new Error(`HTTP ${response.status}`)
+    const data = await response.json()
+    if (data.status !== 200 || !data.result || data.result.latitude == null) return fail('Postcode district not found')
+    return { postcode: formatted, lat: data.result.latitude, lng: data.result.longitude }
+  } catch (error) {
+    return fail(error instanceof Error ? error.message : 'Geocoding failed')
+  }
+}
+
 /**
  * Get bounding box for a coordinate with radius
  * Used for initial filtering before precise distance calculation

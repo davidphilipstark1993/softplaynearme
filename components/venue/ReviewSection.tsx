@@ -118,7 +118,7 @@ export function ReviewSection({ initialReviews, venueId, citySlug, venueSlug, go
         <div className="text-center py-4">
           <p className="text-slate-500">No reviews yet on Soft Play Near Me. Be the first to review.</p>
           {googleReviewCount != null && googleReviewCount > 0 && (
-            <p className="text-slate-400 text-sm mt-1">
+            <p className="text-slate-500 text-sm mt-1">
               (The rating above is from {googleReviewCount.toLocaleString('en-GB')} Google reviews — separate from reviews left here.)
             </p>
           )}
@@ -134,7 +134,7 @@ export function ReviewSection({ initialReviews, venueId, citySlug, venueSlug, go
                 <Stars value={review.rating} />
               </div>
               <p className="text-slate-600 text-sm">{review.comment}</p>
-              <p className="text-slate-400 text-xs mt-2">
+              <p className="text-slate-500 text-xs mt-2">
                 {new Date(review.created_at).toLocaleDateString('en-GB', {
                   day: 'numeric',
                   month: 'long',

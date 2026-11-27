@@ -88,7 +88,7 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
             <span className="text-slate-500 text-base">In the meantime, get your listing ready to go live.</span>
           </p>
           {token && (
-            <p className="mt-4 text-sm text-slate-400 flex items-center justify-center gap-1.5">
+            <p className="mt-4 text-sm text-slate-500 flex items-center justify-center gap-1.5">
               <Mail className="w-3.5 h-3.5" />
               We&apos;ve emailed you a link to your dashboard — check your inbox.
             </p>
@@ -124,7 +124,7 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
             />
           </div>
 
-          <div className="mt-3 flex items-center justify-between text-xs text-slate-400">
+          <div className="mt-3 flex items-center justify-between text-xs text-slate-500">
             <span>Basic info submitted</span>
             <span>{remaining}% remaining</span>
           </div>
@@ -158,7 +158,7 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
                   </div>
                   <p className="text-sm text-slate-500 leading-relaxed">{item.desc}</p>
                 </div>
-                <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-purple-500 group-hover:translate-x-0.5 transition-all mt-1 flex-shrink-0" />
+                <ArrowRight className="w-4 h-4 text-slate-500 group-hover:text-purple-500 group-hover:translate-x-0.5 transition-all mt-1 flex-shrink-0" />
               </Link>
             )
           })}
@@ -174,7 +174,7 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
               Open My Dashboard
               <ArrowRight className="w-4 h-4" />
             </Link>
-            <p className="mt-3 text-xs text-slate-400">
+            <p className="mt-3 text-xs text-slate-500">
               Bookmark your dashboard URL — it&apos;s also in your welcome email
             </p>
           </div>

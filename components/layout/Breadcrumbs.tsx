@@ -21,7 +21,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
           </Link>
           {items.map((item, i) => (
             <span key={i} className="flex items-center gap-1.5 min-w-0">
-              <ChevronRight className="w-3.5 h-3.5 flex-shrink-0 text-slate-400" />
+              <ChevronRight className="w-3.5 h-3.5 flex-shrink-0 text-slate-500" />
               {item.href ? (
                 <Link href={item.href} className="hover:text-purple-600 truncate">
                   {item.label}

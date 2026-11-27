@@ -14,6 +14,7 @@ import { Footer } from '@/components/layout/Footer'
 import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 import { buildBreadcrumbSchema, buildFAQSchema, buildItemListSchema, buildCollectionPageSchema } from '@/lib/schema'
 import { JsonLd } from '@/components/seo/JsonLd'
+import { TrackPageEvent } from '@/components/analytics/TrackPageEvent'
 import { isOpenNow } from '@/lib/utils'
 import { hasStructuredHours } from '@/lib/venueFacts'
 import { isVisibleVenueType, visibleVenueTypeSql } from '@/lib/venueTypes'
@@ -182,7 +183,8 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
 
   const breadcrumbSchema = buildBreadcrumbSchema([
     { name: 'Home', url: baseUrl },
-    { name: `Soft Play in ${cityName}`, url: `${baseUrl}/soft-play/${citySlug}` },
+    { name: 'Soft Play', url: `${baseUrl}/soft-play` },
+    { name: cityName, url: `${baseUrl}/soft-play/${citySlug}` },
     { name: filterConfig.name, url: canonicalUrl },
   ])
   const faqSchema = buildFAQSchema(faqs)
@@ -251,7 +253,7 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
                     <Star className="w-3 h-3 text-yellow-400 fill-current" />
                     <span className="text-slate-800">{Number(venue.avg_rating).toFixed(1)}</span>
                     {venue.review_count && Number(venue.review_count) > 0 && (
-                      <span className="text-slate-400 font-normal">({Number(venue.review_count).toLocaleString()})</span>
+                      <span className="text-slate-500 font-normal">({Number(venue.review_count).toLocaleString()})</span>
                     )}
                   </div>
                 ) : null}
@@ -322,7 +324,7 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
               </div>
 
               {formatLastVerified(venue.last_verified_at) && (
-                <p className="text-xs text-slate-400 mt-2">
+                <p className="text-xs text-slate-500 mt-2">
                   Verified {formatLastVerified(venue.last_verified_at)}
                 </p>
               )}
@@ -353,7 +355,9 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
 
       <div className="min-h-screen bg-slate-50">
         <Header />
+        <TrackPageEvent name="filter_view" params={{ city_slug: citySlug, filter: filterSlug }} />
         <Breadcrumbs items={[
+          { label: 'Soft Play', href: '/soft-play' },
           { label: cityName, href: `/soft-play/${citySlug}` },
           { label: filterConfig.name },
         ]} />
@@ -372,9 +376,9 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
             <h2 className="text-xl font-semibold text-slate-800">
               {venues.length} {venues.length === 1 ? 'venue' : 'venues'} found
             </h2>
-            <Link href={`/soft-play/${citySlug}`}>
-              <Button variant="outline" size="sm">View All in {cityName}</Button>
-            </Link>
+            <Button asChild variant="outline" size="sm">
+              <Link href={`/soft-play/${citySlug}`}>View All in {cityName}</Link>
+            </Button>
           </div>
 
           {/* Venue Grid */}
@@ -382,7 +386,7 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
             <div className="text-center py-16 bg-white rounded-xl border border-slate-200">
               <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-slate-100 flex items-center justify-center">
                 {primaryBadgeIcon
-                  ? <span className="text-slate-400 scale-[3]">{primaryBadgeIcon}</span>
+                  ? <span className="text-slate-500 scale-[3]">{primaryBadgeIcon}</span>
                   : <MapPin className="w-8 h-8 text-slate-300" />}
               </div>
               {filterSlug === 'open-now' && !hoursDataAvailable ? (
@@ -401,9 +405,9 @@ export async function FilterPageContent({ citySlug, filterSlug }: FilterPageCont
                   </p>
                 </>
               )}
-              <Link href={`/soft-play/${citySlug}`}>
-                <Button className="bg-purple-600 hover:bg-purple-700">View All Venues in {cityName}</Button>
-              </Link>
+              <Button asChild className="bg-purple-600 hover:bg-purple-700">
+                <Link href={`/soft-play/${citySlug}`}>View All Venues in {cityName}</Link>
+              </Button>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

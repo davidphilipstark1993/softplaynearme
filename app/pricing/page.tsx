@@ -95,14 +95,14 @@ export default function PricingPage() {
               <Sparkles className="w-4 h-4 text-purple-600" />
               <h2 className="font-bold text-lg text-slate-900">Premium</h2>
             </div>
-            <p className="text-3xl font-bold text-slate-900 mb-1">£24.99<span className="text-base font-normal text-slate-400">/mo</span></p>
+            <p className="text-3xl font-bold text-slate-900 mb-1">£24.99<span className="text-base font-normal text-slate-500">/mo</span></p>
             <p className="text-sm text-slate-700 mb-1 flex items-center gap-1.5">
               or <span className="font-semibold">£249/year</span>
               <span className="inline-flex items-center text-xs font-bold text-green-700 bg-green-50 border border-green-200 rounded-full px-2 py-0.5">
                 Save ~17%
               </span>
             </p>
-            <p className="text-xs text-slate-400 mb-4">Monthly is a rolling contract — cancel any time, no fixed term. Annual is billed once a year.</p>
+            <p className="text-xs text-slate-500 mb-4">Monthly is a rolling contract — cancel any time, no fixed term. Annual is billed once a year.</p>
             <Link
               href="/premium"
               className="block text-center bg-purple-600 hover:bg-purple-700 text-white text-sm font-semibold px-4 py-2.5 rounded-lg transition-colors"
@@ -116,7 +116,7 @@ export default function PricingPage() {
               <Building2 className="w-4 h-4 text-amber-600" />
               <h2 className="font-bold text-lg text-slate-900">Bespoke</h2>
             </div>
-            <p className="text-3xl font-bold text-slate-900 mb-1">From £59<span className="text-base font-normal text-slate-400">/mo</span></p>
+            <p className="text-3xl font-bold text-slate-900 mb-1">From £59<span className="text-base font-normal text-slate-500">/mo</span></p>
             <p className="text-sm text-slate-500 mb-5">custom quote</p>
             <Link
               href="/pricing/bespoke"
@@ -153,7 +153,7 @@ export default function PricingPage() {
           </div>
         </div>
 
-        <p className="text-center text-sm text-slate-400 mt-8">
+        <p className="text-center text-sm text-slate-500 mt-8">
           Already claimed your venue?{' '}
           <span className="text-slate-500">Log in from the link in your welcome email to upgrade.</span>
         </p>

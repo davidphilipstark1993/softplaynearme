@@ -10,7 +10,7 @@ import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 const TITLE = 'Free Parent-Built Soft Play Directory'
 const SOCIAL_TITLE = 'Free Parent-Built Soft Play Directory | Soft Play Near Me'
 const DESCRIPTION =
-  "Soft Play Near Me is a free UK directory of indoor soft play centres, built by parents for parents. Meet the team and see how to claim or fix a listing."
+  "Soft Play Near Me is a free UK directory of indoor soft play centres, built by parents for parents. How listings are sourced, checked and corrected."
 const URL = 'https://www.softplaynearme.co.uk/about'
 
 export const metadata: Metadata = {
@@ -56,12 +56,33 @@ export default function AboutPage() {
 
           <h2 className="text-xl font-semibold mt-8">Why we built this</h2>
           <p className="text-slate-600">
-            As parents ourselves, we know how frustrating it can be to find reliable information about soft play centres. Opening times change, facilities vary, and it can be hard to know which venue is right for your child&apos;s age and needs. We built Soft Play Near Me to solve this problem — a single, up-to-date resource where families can find everything they need in one place.
+            As parents ourselves, we know how frustrating it can be to find reliable information about soft play centres. Opening times change, facilities vary, and it can be hard to know which venue is right for your child&apos;s age and needs. We built Soft Play Near Me to put the basics for every centre in one place, and to be clear about what we know and what we don&apos;t.
           </p>
 
           <h2 className="text-xl font-semibold mt-8">What we offer</h2>
           <p className="text-slate-600">
-            Every listing on our directory includes the venue&apos;s address, contact details, facilities, and directions. We highlight important features like toddler areas, SEN-friendly sessions, birthday party options, on-site cafes, and free parking. Our search lets you find venues by postcode so you can see what&apos;s closest to you.
+            Every listing shows the venue&apos;s address and directions, and its contact details and facilities where we have them. We highlight features like toddler areas, SEN-friendly sessions, birthday parties, on-site cafés and parking when a venue offers them. Our search lets you find venues by postcode so you can see what&apos;s closest to you.
+          </p>
+
+          <h2 id="how-listings-work" className="text-xl font-semibold mt-8">How our listings work</h2>
+          <ul className="list-disc pl-5 space-y-2 text-slate-600">
+            <li>
+              <strong>Where the information comes from.</strong> Listings start from public sources: Google Places data (address, phone, rating and number of reviews) and the venue&apos;s own website. Where a page shows prices, opening hours or age ranges, they are the ones the venue has published.
+            </li>
+            <li>
+              <strong>What we don&apos;t do.</strong> We don&apos;t estimate prices, opening hours or age ranges, and we don&apos;t write reviews. If a page says something isn&apos;t listed, we don&apos;t know it yet. It doesn&apos;t mean the venue lacks it. Ratings are shown with the number of reviews behind them.
+            </li>
+            <li>
+              <strong>Checks and dates.</strong> Venue pages show the date their details were last updated. Listings claimed by the venue itself are marked &quot;Verified by owner&quot;.
+            </li>
+            <li>
+              <strong>Payment never changes the facts.</strong> Premium venues can be shown as Featured, and that placement is labelled. Paying never changes a venue&apos;s rating, reviews or facilities.
+            </li>
+          </ul>
+
+          <h2 id="corrections" className="text-xl font-semibold mt-8">Corrections</h2>
+          <p className="text-slate-600">
+            If something on a listing is wrong, or a venue has closed, use the &quot;Report an issue&quot; link at the bottom of the venue&apos;s page, or <Link href="/contact" className="text-purple-600 hover:underline">contact us</Link> and choose &quot;Report an error&quot;. We check reports against the venue&apos;s own website or with the venue, then update the page. Venue owners can fix their own listing straight away by claiming it (below).
           </p>
 
           <h2 className="text-xl font-semibold mt-8">For venue owners</h2>

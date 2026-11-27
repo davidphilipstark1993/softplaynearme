@@ -22,7 +22,7 @@ export default function BespokeSuccessPage() {
         <p className="text-slate-600 text-lg mb-6">
           We&apos;ll put together a tailored Bespoke quote and get back to you within 1 working day.
         </p>
-        <p className="text-sm text-slate-400 flex items-center justify-center gap-1.5 mb-10">
+        <p className="text-sm text-slate-500 flex items-center justify-center gap-1.5 mb-10">
           <Mail className="w-3.5 h-3.5" />
           Keep an eye on your inbox — reply directly to that email with any questions.
         </p>

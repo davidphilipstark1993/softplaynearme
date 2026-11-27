@@ -53,13 +53,13 @@ function FactRow({ icon: Icon, label, value, confirmed }: FactRowProps) {
   return (
     <div className="flex items-start gap-3 py-2.5 border-b border-slate-100 last:border-0">
       <div className="flex-shrink-0 mt-0.5">
-        <Icon className="w-4 h-4 text-slate-400" />
+        <Icon className="w-4 h-4 text-slate-500" />
       </div>
       <div className="flex-1 min-w-0">
         <span className="text-xs font-medium text-slate-500 uppercase tracking-wide block mb-0.5">
           {label}
         </span>
-        <span className={`text-sm ${confirmed ? 'text-slate-800 font-medium' : 'text-slate-400 italic'}`}>
+        <span className={`text-sm ${confirmed ? 'text-slate-800 font-medium' : 'text-slate-500 italic'}`}>
           {value}
         </span>
       </div>
