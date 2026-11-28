@@ -426,6 +426,12 @@
     "avgRating": "4.9"
   },
   {
+    "name": "Gillingham",
+    "slug": "gillingham",
+    "venueCount": 1,
+    "avgRating": null
+  },
+  {
     "name": "Glasgow",
     "slug": "glasgow",
     "venueCount": 18,
